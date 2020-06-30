@@ -4,11 +4,8 @@ const fs = require('fs')
 const fileLocation = 'C:\\Users\\Sergei\\Documents\\'
     + 'my games\\company of heroes 2\\warnings.log'
 
-let lastTimeModified = undefined
 let lastPlayers = undefined
 let extraInfo = undefined
-
-
 
 function getLines(data) {
     let lines = data.split('\n')
@@ -67,7 +64,6 @@ function getPlayersInfo(arr) {
                 faction,
             }
         }
-
     }
     //combine into one obj
     return Object.keys(players).map(key => {
@@ -147,46 +143,46 @@ function getExtraInfo(players) {
 
     let leaderboard = undefined
     let cohTitles = undefined
-    axios.get(url)
-        .then(function (response) {
-            if (response.status === 200) {
-                leaderboard = response.data
-                if (leaderboard && cohTitles) {
-                    refactorData(leaderboard, cohTitles, ids)
-                }
-            }
-        })
-        .catch(function (error) {
-            // handle error
-            console.log(error);
-        })
-        .then(function () {
-            // always executed
-        })
+
+    const fetch1 = axios.get(url)
 
     const url2 = "https://coh2-api.reliclink.com/"
         + "community/leaderboard/GetAvailableLeaderboards?title=coh2"
 
-    axios.get(url2)
-        .then(function (response) {
-            if (response.status === 200) {
-                cohTitles = response.data
-                if (leaderboard && cohTitles) {
-                    refactorData(leaderboard, cohTitles, ids)
-                }
-            }
-        })
-        .catch(function (error) {
-            // handle error
-            console.log(error);
-        })
-        .then(function () {
-            // always executed
-        })
+    const fetch2 = axios.get(url2)
+
+    Promise.all([fetch1, fetch2])
+    .then(values => {
+        if (values[0].status === 200 && values[1].status === 200) {
+            leaderboard = values[0].data
+            cohTitles = values[1].data
+            extraInfo = refactorData(leaderboard, cohTitles, ids)
+            showExtraInfo()
+        }
+    })
+    .catch(error => {
+        console.log(error)
+    })
 }
 
-function refactorData(leaderboard, cohTitles, ids) {
+function showExtraInfo() {
+    // console.log(extraInfo)
+    // console.log(lastPlayers)
+    let teams = [[], []]
+    for (const p of lastPlayers) {
+        if (extraInfo[p.id]) {
+            let temp = p
+            temp.ranks = extraInfo[p.id].ranks.sort(
+                (a, b) => a.rank > b.rank ? 1 : -1
+            )
+            teams[temp.slot % 2].push(temp)
+        }
+    }
+    // console.log(teams)
+}
 
+
+function refactorData(leaderboard, cohTitles, ids) {
     // leaderboard:
     //         -leaderboardStats: []
     //                  - statGroup_id
@@ -198,7 +194,6 @@ function refactorData(leaderboard, cohTitles, ids) {
     //                              - name (steam id)
     //                              - alias
     //                              - personal_statgroup_id
-
 
     // cohTitles:
     //         -leaderboards: []
@@ -212,11 +207,6 @@ function refactorData(leaderboard, cohTitles, ids) {
         }
     }
 
-    // let leaderboardStats = {}
-    // for (const x of leaderboard.leaderboardStats)  {
-    //     leaderboardStats[x.leaderboard_id] = x
-    // }
-
     let statGroups = {}
     for (const x of leaderboard.statGroups)  {
         statGroups[x.id] = x
@@ -228,7 +218,6 @@ function refactorData(leaderboard, cohTitles, ids) {
     }
 
     for (const x of leaderboard.leaderboardStats.filter(l => l.rank > -1))  {
-
         // check members
         for (const member of statGroups[x.statGroup_id].members) {
             let steam_id = member.name.substring(7)
@@ -246,10 +235,7 @@ function refactorData(leaderboard, cohTitles, ids) {
             }
         }
     }
-
-    extraInfo = pls
-    console.log(lastPlayers)
-
+    return pls
 }
 
 function readLog() {
@@ -262,9 +248,6 @@ function readLog() {
             console.log('showBasicInfo')
             showBasicInfo(players)
         }
-
-        // let ids = players.filter(p => p.id != undefined).map(p => p.id)
-        // let extraInfo = getExtraInfo(ids)
     })
 }
 
