@@ -81,24 +81,28 @@ function getPlayersInfo(arr) {
 
 }
 
+function addButton(text, parent, fun) {
+    let div = document.createElement('div')
+    div.classList.add('navbar')
+    let button = document.createElement('button')
+    button.textContent = text
+    button.classList.add('button')
+    button.onclick = () => {
+        fun(lastPlayers)
+    }
+    div.appendChild(button)
+    parent.appendChild(div)
+}
 
 function showBasicInfo(players) {
     let divInfo = document.querySelector('#info')
     divInfo.innerHTML = ''
-    let button = document.createElement('button')
-    button.textContent = 'Fetch extra info'
-    button.classList.add('button')
-    button.onclick = () => {
-        getExtraInfo(lastPlayers)
-    }
-    divInfo.appendChild(button)
-
+    addButton('Extra info', divInfo, getExtraInfo)
 
     let team1 = document.createElement('div')
     team1.classList.add('team')
     let team2 = document.createElement('div')
     team2.classList.add('team')
-
 
     let table1 = document.createElement('table')
     let table2 = document.createElement('table')
@@ -112,7 +116,7 @@ function showBasicInfo(players) {
 
         let tds = `
         <td class="ranking">${ranking}</td>
-        <td class="faction">${faction}</td>
+        <td class="faction">${getFactionName(faction)}</td>
         <td class="name">${name}</td>
         `
         tr.innerHTML = tds
@@ -131,7 +135,85 @@ function showBasicInfo(players) {
     divInfo.appendChild(team2)
 }
 
+function getFactionName(str) {
+    switch (str) {
+        case 'british':
+            return 'Brits'
+        case 'aef':
+            return 'USA'
+        case 'soviet':
+            return 'Soviet'
+        case 'west_german':
+            return 'OKW'
+        case 'german':
+            return 'Wer'
+        default:
+            return '?????';
+    }
+
+}
+
+function showExtraInfo() {
+    // console.log(extraInfo)
+    // console.log(lastPlayers)
+    let teams = [[], []]
+    console.log(lastPlayers)
+    for (const p of lastPlayers) {
+        let temp = Object.assign({}, p) // assign is for copying
+        if (extraInfo[p.id]) {
+            temp.ranks = extraInfo[p.id].ranks.sort(
+                (a, b) => a.rank > b.rank ? 1 : -1
+            )
+        } else {
+            temp.ranks = []
+        }
+        teams[temp.slot % 2].push(temp)
+    }
+    console.log(teams)
+
+    let divInfo = document.querySelector('#info')
+    divInfo.innerHTML = ''
+    addButton('Basic info', divInfo, showBasicInfo)
+
+    for (let i = 0; i < teams.length; i++) {
+        let team = teams[i]
+
+        let div = document.createElement('div')
+        div.classList.add('team')
+
+
+        let list = `<h3>Team ${i + 1}</h3>
+        <hr>
+        <table>
+            <tr>
+                <th>name</th>
+                <th>rank</th>
+                <th>mode</th>
+            </tr>
+           ${team.map(p => `
+                <tr>
+                    <td class="name">${p.name} (${getFactionName(p.faction)})</td>
+                        ${p.ranks.map(r => `
+                            <tr>
+                                <td></td>
+                                <td>${r.rank}</td>
+                                <td>${r.name}</td>
+                            </tr>
+                        `).join('')}
+                </tr>
+            `).join('')} 
+        </table>`
+        div.innerHTML = list
+        divInfo.appendChild(div)
+    }
+}
+
 function getExtraInfo(players) {
+    if (extraInfo) {
+        showExtraInfo()
+        return
+    }
+
     let ids = players.filter(p => p.id != undefined).map(p => p.id)
     const strIds = ids.map(x => '%22%2Fsteam%2F' + x + '%22').join(',')
 
@@ -165,22 +247,6 @@ function getExtraInfo(players) {
     })
 }
 
-function showExtraInfo() {
-    // console.log(extraInfo)
-    // console.log(lastPlayers)
-    let teams = [[], []]
-    for (const p of lastPlayers) {
-        if (extraInfo[p.id]) {
-            let temp = p
-            temp.ranks = extraInfo[p.id].ranks.sort(
-                (a, b) => a.rank > b.rank ? 1 : -1
-            )
-            teams[temp.slot % 2].push(temp)
-        }
-    }
-    // console.log(teams)
-}
-
 
 function refactorData(leaderboard, cohTitles, ids) {
     // leaderboard:
@@ -200,9 +266,10 @@ function refactorData(leaderboard, cohTitles, ids) {
     //             - id
     //             - name
 
-    let pls = {}
+
+    let players = {}
     for (const id of ids)  {
-        pls[id] = {
+        players[id] = {
             ranks: [],
         }
     }
@@ -222,30 +289,38 @@ function refactorData(leaderboard, cohTitles, ids) {
         for (const member of statGroups[x.statGroup_id].members) {
             let steam_id = member.name.substring(7)
             if (
-                pls[steam_id]
-                && !pls[steam_id].ranks.find(y => y.id === x.id)
+                players[steam_id]
+                && !players[steam_id].ranks.find(y => 
+                    y.statGroup_id === x.statGroup_id
+                    && y.leaderboard_id === x.leaderboard_id
+                )
             ) {
-                pls[steam_id].ranks.push({
-                    id: x.statGroup_id,
+                players[steam_id].ranks.push({
+                    statGroup_id: x.statGroup_id,
                     rank: x.rank,
                     members: statGroups[x.statGroup_id].members,
                     name: names[x.leaderboard_id],
+                    leaderboard_id: x.leaderboard_id,
                 })
                 break
             }
         }
     }
-    return pls
+    console.log(players)
+    return players
 }
 
 function readLog() {
     fs.readFile(fileLocation, "utf-8", (err, data) => {
         let arr = getLines(data)
         let players = getPlayersInfo(arr)
-        if (JSON.stringify(players) !== JSON.stringify(lastPlayers)){
+        if (
+            JSON.stringify(players) 
+            !== JSON.stringify(lastPlayers)
+        ) {
             lastPlayers = players
             extraInfo = undefined
-            console.log('showBasicInfo')
+            console.log('new log')
             showBasicInfo(players)
         }
     })

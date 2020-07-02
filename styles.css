@@ -4,45 +4,88 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.navbar {
+    background-color: lightgray;
+    overflow: hidden;
+    position: fixed; /* Set the navbar to fixed position */
+    top: 0; /* Position the navbar at the top of the page */
+    width: 100%; /* Full width */
+}
 
+.button {
+    display: block;
+    width: 100%;
+    background-color: gray;
+    border:none;
+    padding: 1rem;
+    color:white;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
 
-li, ul {
-  list-style-type: none;
+hr {
+    border: 1px solid gray;
+}
+
+ul {
+    margin-left: 1.5rem;
+}
+
+ul > ul {
+    margin-left: 1.5rem;
 }
 
 .team {
     background-color: lightsteelblue;
-    padding: 1em;
-    margin-bottom: 2em;
+    padding: 1rem;
+    margin-bottom: 2rem;
 }
 
 #info {
-    padding: 1em;
+    margin-top: 3rem;
 }
 
 body {
     background-color: lightgray;
+    font-size: 16px;
+}
+
+table {
+    width: 100%;
+    font-size: 1rem;
+}
+th {
+    width: 10rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    text-align: left;
+    font-size: 70%;
 }
 
 td {
-    width: 7em;
-    font-size: 1em;
-    font-weight: bold;
+    font-weight: normal;
 }
 td.ranking {
-    width: 5em;
+    width: 5rem;
 }
 
 td.faction {
-    width: 9em;
+    width: 9rem;
 }
 
-.button {
-    background-color: gray;
-    border:none;
-    padding: 1em 2em;
-    color:white;
-    margin: auto;
-    margin-bottom: 1em;
+td.rank-name {
+    width: 10rem;
 }
+
+td.rank {
+    width: 5rem;
+    font-size: 90%;
+}
+
+td.name {
+    font-weight: bold;
+    width: 13rem;
+}
+
+
 
