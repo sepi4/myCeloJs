@@ -1,8 +1,24 @@
 const axios = require('axios')
 const fs = require('fs')
+const config = require('./config.json')
 
-const fileLocation = 'C:\\Users\\Sergei\\Documents\\'
-    + 'my games\\company of heroes 2\\warnings.log'
+let fileLocation
+if (config.logLocation.length < 1) {
+    fileLocation = 'C:\\Users\\Sergei\\Documents\\'
+        + 'my games\\company of heroes 2\\warnings.log'
+    config.logLocation = fileLocation
+    fs.writeFile(
+        './config.json', 
+        JSON.stringify(config, null, 4), 
+        "utf-8", 
+        (err, data) => {
+
+        }
+    )
+} else {
+    fileLocation = config.logLocation
+}
+
 
 let lastPlayers = undefined
 let extraInfo = undefined
@@ -81,6 +97,11 @@ function getPlayersInfo(arr) {
 
 }
 
+function el(node) {
+    let body = `<${node}></${node}>`
+    return el
+}
+
 function addButton(text, parent, fun) {
     let div = document.createElement('div')
     div.classList.add('navbar')
@@ -106,6 +127,8 @@ function showBasicInfo(players) {
 
     let table1 = document.createElement('table')
     let table2 = document.createElement('table')
+    let str1 = ''
+    let str2 = ''
     for (let i = 0; i < players.length; i++) {
         let tr = document.createElement('tr')
         const name = players[i].name
@@ -123,8 +146,10 @@ function showBasicInfo(players) {
 
         if (slot % 2 === 0) {
             table1.appendChild(tr)
+            str1 += `${ranking.padEnd(5)}   ${faction.padEnd(15)}   ${name}\n`
         } else {
             table2.appendChild(tr)
+            str2 += `${ranking.padEnd(5)}   ${faction.padEnd(15)}   ${name}\n`
         }
     }
 
@@ -133,20 +158,31 @@ function showBasicInfo(players) {
 
     divInfo.appendChild(team1)
     divInfo.appendChild(team2)
+    fs.writeFile(
+        './ranking.txt', 
+        str1 + '\n' + str2, 
+        "utf-8", 
+        (err, data) => {
+
+        }
+    )
 }
 
 function getFactionName(str) {
+    function img(s) {
+        return `<img class="flag" src="./img/${s}.png" alt="${s}">`
+    }
     switch (str) {
         case 'british':
-            return 'Brits'
+            return img('uk')
         case 'aef':
-            return 'USA'
+            return img('usa')
         case 'soviet':
-            return 'Soviet'
+            return img('sov')
         case 'west_german':
-            return 'OKW'
+            return img('okw')
         case 'german':
-            return 'Wer'
+            return img('wer')
         default:
             return '?????';
     }
@@ -192,7 +228,9 @@ function showExtraInfo() {
             </tr>
            ${team.map(p => `
                 <tr>
-                    <td class="name">${p.name} (${getFactionName(p.faction)})</td>
+                    <td class="name">
+                        ${p.name} ${getFactionName(p.faction)}
+                    </td>
                         ${p.ranks.map(r => `
                             <tr>
                                 <td></td>
