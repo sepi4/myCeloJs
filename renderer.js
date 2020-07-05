@@ -97,10 +97,6 @@ function getPlayersInfo(arr) {
 
 }
 
-function el(node) {
-    let body = `<${node}></${node}>`
-    return el
-}
 
 function addButton(text, parent, fun) {
     let div = document.createElement('div')
@@ -139,17 +135,17 @@ function showBasicInfo(players) {
 
         let tds = `
         <td class="ranking">${ranking}</td>
-        <td class="faction">${getFactionName(faction)}</td>
+        <td class="faction">${getFactionFlag(faction)}</td>
         <td class="name">${name}</td>
         `
         tr.innerHTML = tds
 
         if (slot % 2 === 0) {
             table1.appendChild(tr)
-            str1 += `${ranking.padEnd(5)}   ${faction.padEnd(15)}   ${name}\n`
+            str1 += `${ranking.padEnd(5)}   ${obsFaction(faction).padEnd(5)}   ${name}\n`
         } else {
             table2.appendChild(tr)
-            str2 += `${ranking.padEnd(5)}   ${faction.padEnd(15)}   ${name}\n`
+            str2 += `${ranking.padEnd(5)}   ${obsFaction(faction).padEnd(5)}   ${name}\n`
         }
     }
 
@@ -168,26 +164,34 @@ function showBasicInfo(players) {
     )
 }
 
-function getFactionName(str) {
+function getFactionFlag(str) {
     function img(s) {
         return `<img class="flag" src="./img/${s}.png" alt="${s}">`
     }
+    return commonName(str, img)
+}
+
+function obsFaction(str) {
+    return commonName(str)
+}
+
+function commonName(str, img) {
     switch (str) {
         case 'british':
-            return img('uk')
+            return img ? img('uk') : 'uk'
         case 'aef':
-            return img('usa')
+            return img ? img('usa') : 'usa'
         case 'soviet':
-            return img('sov')
+            return img ? img('sov') : 'sov'
         case 'west_german':
-            return img('okw')
+            return img ? img('okw') : 'okw'
         case 'german':
-            return img('wer')
+            return img ? img('wer') : 'wer'
         default:
             return '?????';
     }
-
 }
+
 
 function showExtraInfo() {
     // console.log(extraInfo)
@@ -229,7 +233,7 @@ function showExtraInfo() {
            ${team.map(p => `
                 <tr>
                     <td class="name">
-                        ${p.name} ${getFactionName(p.faction)}
+                        ${p.name} ${getFactionFlag(p.faction)}
                     </td>
                         ${p.ranks.map(r => `
                             <tr>

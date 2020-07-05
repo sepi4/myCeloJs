@@ -39,8 +39,16 @@
     cursor: pointer;
 }
 
+button:disabled,
+button[disabled]{
+  /* border: 1px solid #4e4e4e; */
+  background-color: #838383;
+  color: #4e4e4e;
+}
+
 hr {
     border: 1px solid #0C1B3E;
+    margin-bottom: 1rem;
 }
 
 ul {
@@ -54,6 +62,13 @@ ul > ul {
 main {
     width: 90%;
     margin: 0 auto;
+}
+
+.noInfo {
+    margin-top: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .team {
