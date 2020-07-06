@@ -1,16 +1,58 @@
-import { readLog, getExtraInfo, writeRankings } from './logic'
+import { readLog, getExtraInfo, writeRankings, commonName } from './logic'
 const { useEffect, useState } = React
 
 
-function Player({ player }) {
-    return <tr>
-        <td className="ranking">{player.ranking}</td>
-        <td className="faction">{player.faction}</td>
-        <td className="name">{player.name}</td>
-    </tr>
+function Player({ player, extraInfo }) {
+    let rankings = []
+    let rows = []
+    console.log('extraInfo', extraInfo)
+    if (extraInfo) {
+        rows.push(<tr key={player.id + 'extra'}>
+            <td className="name">{player.name} <img
+                style={{ margin: '0 0 0 1rem' }}
+                className="flag"
+                src={`./img/${commonName(player.faction)}.png`}
+                alt={`${player.faction}`}>
+            </img>
+            </td>
+            <td></td>
+            <td></td>
+        </tr >)
+
+        if (extraInfo[player.id] && extraInfo[player.id].ranks.length > 0) {
+            extraInfo[player.id].ranks
+                .sort((a, b) => a.rank - b.rank)
+                .forEach((r, i) => {
+                    rows.push(<tr key={player.id + i}>
+                        <td className="ranking"></td>
+                        <td className="faction">{r.rank}</td>
+                        <td className="name">{r.name}</td>
+                    </tr>)
+                })
+        }
+    } else {
+        rows.push(
+            <tr key={player.id + 'noextra'}>
+                <td className="ranking">
+                    {player.ranking === '-1' ? '-' : player.ranking}
+                </td>
+                <td className="faction">
+                    <img
+                        className="flag"
+                        src={`./img/${commonName(player.faction)}.png`}
+                        alt={`${player.faction}`}>
+                    </img>
+                </td>
+                <td className="name">{player.name}</td>
+            </tr>
+        )
+    }
+
+    // console.log(rows)
+    return rows.map(r => r)
 }
 
-function Team({ players, title }) {
+function Team({ players, title, extraInfo }) {
     return <div className="team">
         {title && <div>
             <p>
@@ -21,7 +63,11 @@ function Team({ players, title }) {
         }
         <table>
             <tbody>
-                {players.map((p) => <Player key={p.id} player={p} />)}
+                {players.map((p, i) => <Player
+                    extraInfo={title ? extraInfo : null}
+                    key={p.id + i}
+                    player={p}
+                />)}
             </tbody>
         </table>
     </div>
@@ -47,10 +93,12 @@ function Teams({ players, extraInfo, extraView }) {
         <Team
             title={extraView ? 'Team 1' : null}
             players={team1}
+            extraInfo={extraInfo}
         />
         <Team
             title={extraView ? 'Team 2' : null}
             players={team2}
+            extraInfo={extraInfo}
         />
     </div>
 }
@@ -103,6 +151,7 @@ function App() {
 
     console.log('render App')
     console.log(extraInfo)
+    console.log(players)
     return (
         <main id="info">
             {players && players.length > 0

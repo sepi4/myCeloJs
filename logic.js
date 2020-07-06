@@ -188,18 +188,18 @@ function obsFaction(str) {
     return commonName(str)
 }
 
-function commonName(str, img) {
+function commonName(str) {
     switch (str) {
         case 'british':
-            return img ? img('uk') : 'uk'
+            return 'uk'
         case 'aef':
-            return img ? img('usa') : 'usa'
+            return 'usa'
         case 'soviet':
-            return img ? img('sov') : 'sov'
+            return 'sov'
         case 'west_german':
-            return img ? img('okw') : 'okw'
+            return 'okw'
         case 'german':
-            return img ? img('wer') : 'wer'
+            return 'wer'
         default:
             return '?????';
     }
@@ -246,4 +246,6 @@ module.exports = {
     getPlayersInfo,
     getExtraInfo,
     writeRankings,
+    getFactionFlag,
+    commonName,
 }

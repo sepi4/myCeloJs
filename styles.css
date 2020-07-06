@@ -4,14 +4,6 @@
   font-family: "Work Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif ;
 }
 
-/* .navbar {
-    background-color: lightgray;
-    overflow: hidden;
-    position: fixed; 
-    top: 0; 
-    width: 100%;
-} 
-*/
 .navbar {
   position: fixed;
   top: 0;
@@ -35,7 +27,7 @@
     padding: 1rem;
     color:white;
     font-weight: bold;
-    margin: 0 auto;
+    margin: 0.5rem auto 0 auto;
     cursor: pointer;
 }
 

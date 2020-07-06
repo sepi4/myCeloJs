@@ -8,9 +8,9 @@ if (config.logLocation.length < 1) {
         + 'my games\\company of heroes 2\\warnings.log'
     config.logLocation = fileLocation
     fs.writeFile(
-        './config.json', 
-        JSON.stringify(config, null, 4), 
-        "utf-8", 
+        './config.json',
+        JSON.stringify(config, null, 4),
+        "utf-8",
         (err, data) => {
 
         }
@@ -155,9 +155,9 @@ function showBasicInfo(players) {
     divInfo.appendChild(team1)
     divInfo.appendChild(team2)
     fs.writeFile(
-        './ranking.txt', 
-        str1 + '\n' + str2, 
-        "utf-8", 
+        './ranking.txt',
+        str1 + '\n' + str2,
+        "utf-8",
         (err, data) => {
 
         }
@@ -276,17 +276,17 @@ function getExtraInfo(players) {
     const fetch2 = axios.get(url2)
 
     Promise.all([fetch1, fetch2])
-    .then(values => {
-        if (values[0].status === 200 && values[1].status === 200) {
-            leaderboard = values[0].data
-            cohTitles = values[1].data
-            extraInfo = refactorData(leaderboard, cohTitles, ids)
-            showExtraInfo()
-        }
-    })
-    .catch(error => {
-        console.log(error)
-    })
+        .then(values => {
+            if (values[0].status === 200 && values[1].status === 200) {
+                leaderboard = values[0].data
+                cohTitles = values[1].data
+                extraInfo = refactorData(leaderboard, cohTitles, ids)
+                showExtraInfo()
+            }
+        })
+        .catch(error => {
+            console.log(error)
+        })
 }
 
 
@@ -310,29 +310,29 @@ function refactorData(leaderboard, cohTitles, ids) {
 
 
     let players = {}
-    for (const id of ids)  {
+    for (const id of ids) {
         players[id] = {
             ranks: [],
         }
     }
 
     let statGroups = {}
-    for (const x of leaderboard.statGroups)  {
+    for (const x of leaderboard.statGroups) {
         statGroups[x.id] = x
     }
 
     let names = {}
-    for (const x of cohTitles.leaderboards)  {
+    for (const x of cohTitles.leaderboards) {
         names[x.id] = x.name
     }
 
-    for (const x of leaderboard.leaderboardStats.filter(l => l.rank > -1))  {
+    for (const x of leaderboard.leaderboardStats.filter(l => l.rank > -1)) {
         // check members
         for (const member of statGroups[x.statGroup_id].members) {
             let steam_id = member.name.substring(7)
             if (
                 players[steam_id]
-                && !players[steam_id].ranks.find(y => 
+                && !players[steam_id].ranks.find(y =>
                     y.statGroup_id === x.statGroup_id
                     && y.leaderboard_id === x.leaderboard_id
                 )
@@ -357,7 +357,7 @@ function readLog() {
         let arr = getLines(data)
         let players = getPlayersInfo(arr)
         if (
-            JSON.stringify(players) 
+            JSON.stringify(players)
             !== JSON.stringify(lastPlayers)
         ) {
             lastPlayers = players
