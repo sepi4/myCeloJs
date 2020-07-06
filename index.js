@@ -53,6 +53,15 @@ function Player({ player, extraInfo }) {
 }
 
 function Team({ players, title, extraInfo }) {
+
+    const playersArr = players.map((p, i) => (
+        <Player
+            extraInfo={title ? extraInfo : null}
+            key={p.id + i}
+            player={p}
+        />)
+    )
+
     return <div className="team">
         {title && <div>
             <p>
@@ -63,19 +72,13 @@ function Team({ players, title, extraInfo }) {
         }
         <table>
             <tbody>
-                {players.map((p, i) => <Player
-                    extraInfo={title ? extraInfo : null}
-                    key={p.id + i}
-                    player={p}
-                />)}
+                {playersArr}
             </tbody>
         </table>
     </div>
 }
 
 function Teams({ players, extraInfo, extraView }) {
-
-
     let team1 = []
     let team2 = []
     if (players) {
@@ -87,7 +90,6 @@ function Teams({ players, extraInfo, extraView }) {
             }
         }
     }
-
 
     return <div>
         <Team
