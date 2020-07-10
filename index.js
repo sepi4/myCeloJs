@@ -106,6 +106,11 @@ function PlayerBasic({ style, player, link, img }) {
         margin: "0 0 1rem 0",
     }}>
         <div style={style}>
+            <i
+                style={{ marginRight: '1rem', cursor: 'pointer' }}
+                className="fa fa-caret-right"
+                onClick={() => console.log('kissa')}
+            />
             {player.ranking === '-1' ? '-' : player.ranking}
         </div>
         <div style={style}>
@@ -181,9 +186,10 @@ function Navbar({
         display: "flex",
         justifyContent: "space-evenly",
         alignItems: "center",
+        zIndex: "99999",
     }
 
-    const text = extraView ? 'Basic' : 'Extra'
+    const text = extraView ? 'Current' : 'All'
     return <div style={styleNavbar}>
         {!settingsView && extraInfo
             && <button
