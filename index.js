@@ -5,7 +5,6 @@ const user = require('os').userInfo()
 const { dialog } = require('electron').remote
 const { shell } = require('electron')
 const fs = require('fs')
-// const { Button } = ReactBootstrap
 
 function Settings({ settings, handleLogLocation }) {
 
@@ -61,18 +60,33 @@ function Player({ player, extraInfo, filterModes }) {
         alt={`${player.faction}`}>
     </img>
 
-    if (extraInfo) {
-        return <PlayerExtra {...{
+    const [showExtra, setShowExtra] = useState(false)
+
+    const handleSetShowExtra = () => {
+        console.log('handleSetShowExtra')
+        setShowExtra(!showExtra)
+    }
+
+    return <div>
+        <PlayerBasic {...{
             style,
             player,
             link,
             img,
-            extraInfo,
-            filterModes
+            handleSetShowExtra,
+            showExtra,
         }} />
-    } else {
-        return <PlayerBasic {...{ style, player, link, img }} />
-    }
+        {showExtra
+            && <PlayerExtra {...{
+                style,
+                player,
+                link,
+                img,
+                extraInfo,
+                filterModes
+            }} />
+        }
+    </div>
 }
 
 function PlayerExtra({ style, player, link, img, extraInfo, filterModes }) {
@@ -85,7 +99,6 @@ function PlayerExtra({ style, player, link, img, extraInfo, filterModes }) {
         .sort((a, b) => a.rank - b.rank)
 
     return <div>
-        <PlayerBasic {...{ style, player, link, img }} />
         <hr />
         {
             ranksArr && <div style={{ margin: '1rem 0 1.5rem 0' }}>
@@ -101,15 +114,22 @@ function PlayerExtra({ style, player, link, img, extraInfo, filterModes }) {
     </div>
 }
 
-function PlayerBasic({ style, player, link, img }) {
+function PlayerBasic({
+    style,
+    player,
+    link,
+    img,
+    handleSetShowExtra,
+    showExtra,
+}) {
     return <div style={{
         margin: "0 0 1rem 0",
     }}>
         <div style={style}>
             <i
                 style={{ marginRight: '1rem', cursor: 'pointer' }}
-                className="fa fa-caret-right"
-                onClick={() => console.log('kissa')}
+                className={`fa fa-lg fa-caret-${showExtra ? 'down' : 'right'}`}
+                onClick={handleSetShowExtra}
             />
             {player.ranking === '-1' ? '-' : player.ranking}
         </div>
@@ -142,7 +162,7 @@ function Team({ filterModes, players, extraInfo }) {
     </div>
 }
 
-function Teams({ filterModes, players, extraInfo, extraView }) {
+function Teams({ filterModes, players, extraInfo, }) {
     let teams = [[], []]
     if (players) {
         players.forEach((p, i) => { teams[p.slot % 2].push(p) })
@@ -153,12 +173,12 @@ function Teams({ filterModes, players, extraInfo, extraView }) {
             <Team
                 players={teams[0]}
                 filterModes={filterModes}
-                extraInfo={extraView ? extraInfo : null}
+                extraInfo={extraInfo}
             />
             <Team
                 players={teams[1]}
                 filterModes={filterModes}
-                extraInfo={extraView ? extraInfo : null}
+                extraInfo={extraInfo}
             />
         </div>
         : <div className="noInfo">
@@ -167,9 +187,6 @@ function Teams({ filterModes, players, extraInfo, extraView }) {
 }
 
 function Navbar({
-    extraInfo,
-    extraView,
-    setExtraView,
     setSettingsView,
     settingsView,
     setFilterModes,
@@ -189,31 +206,19 @@ function Navbar({
         zIndex: "99999",
     }
 
-    const text = extraView ? 'Current' : 'All'
     return <div style={styleNavbar}>
-        {!settingsView && extraInfo
-            && <button
-                className="button"
-                onClick={setExtraView}
-            >
-                {text}
-            </button>
-        }
-        {!settingsView && extraView
+        {!settingsView
             && <Filter
                 filterModes={filterModes}
                 setFilterModes={setFilterModes}
             />
         }
-        <img
+        <i
+            className="fa fa-2x fa-cogs"
             style={{
-                height: '60%',
-                padding: '2px',
-                border: '2px solid white',
-                borderRadius: '5px',
+                color: 'white',
                 cursor: 'pointer',
             }}
-            src='./img/settings.png'
             onClick={setSettingsView}
         />
     </div>
@@ -244,7 +249,6 @@ function App() {
 
     const [players, setPlayers] = useState(null)
     const [extraInfo, setExtraInfo] = useState(null)
-    const [extraView, setExtraView] = useState(false)
     const [settingsView, setSettingsView] = useState(false)
     const [settings, setSettings] = useState(settingsJson)
     const [filterModes, setFilterModes] = useState('')
@@ -272,7 +276,7 @@ function App() {
         }, READ_LOG_INTERVAL)
 
         return () => clearInterval(intervalId)
-    }, [players, extraInfo, extraView, settings])
+    }, [players, extraInfo, settings])
 
 
     const handleLogLocation = () => {
@@ -307,8 +311,6 @@ function App() {
             marginTop: '4rem',
         }}>
             <Navbar
-                extraView={extraView}
-                setExtraView={() => setExtraView(!extraView)}
                 extraInfo={extraInfo}
                 settingsView={settingsView}
                 setSettingsView={() => setSettingsView(!settingsView)}
@@ -324,7 +326,6 @@ function App() {
                 : <Teams
                     players={players}
                     extraInfo={extraInfo}
-                    extraView={extraView}
                     filterModes={filterModes}
                 />
             }

@@ -1,5 +1,5 @@
-674     sov     Kantiq | DrG
-674     usa     Kantiq | NRK
+938     okw     WuhanBatSoup
+493     wer     ANT
 
-324     okw     LeaKciM
-272     wer     sepi
+498     sov     sepi
+498     usa     4SAD
