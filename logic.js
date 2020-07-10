@@ -1,9 +1,9 @@
 const fs = require('fs')
 const axios = require('axios')
 
-const fileLocation =
-    'C:\\Users\\Sergei\\Documents\\' +
-    'my games\\company of heroes 2\\warnings.log'
+// const fileLocation =
+//     'C:\\Users\\Sergei\\Documents\\' +
+//     'my games\\company of heroes 2\\warnings.log'
 
 function getLines(data) {
     let lines = data.split('\n')
@@ -227,14 +227,15 @@ function writeRankings(players) {
         str1 + '\n' + str2,
         "utf-8",
         (err, data) => {
-
         }
     )
 }
 
-function readLog(callback) {
+function readLog(fileLocation, callback) {
     console.log('readLog')
+    fileLocation = fileLocation.replace(/\\/, '\\\\')
     fs.readFile(fileLocation, 'utf-8', (err, data) => {
+        if (err) return
         let arr = getLines(data)
         callback(getPlayersInfo(arr))
     })
