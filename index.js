@@ -1,117 +1,205 @@
 import { readLog, getExtraInfo, writeRankings, commonName } from './logic'
-const { useEffect, useState } = React
 import settingsJson from './settings.json'
-const user = require('os').userInfo()
+const { useEffect, useState } = React
 const { dialog } = require('electron').remote
 const { shell } = require('electron')
 const fs = require('fs')
 
 function Settings({ settings, handleLogLocation }) {
+    const buttonStyle = {
+        padding: '0',
+        margin: '0',
+        width: '25vw',
+        border: '2px solid white',
+        fontWeight: 'bold',
+        cursor: 'pointer',
+        borderRadius: '5px',
+        backgroundColor: '#181818',
+        color: 'white',
+        height: '2rem',
+    }
 
-    const logExists = settings.logLocation.length > 0
-    return <div style={{ marginTop: '4rem' }}>
-        <div style={{
-            fontWeight: 'bold',
-            borderBottom: '2px solid black',
-        }}>
-            Log location:
-        </div>
-
-        <div style={{
-            margin: '0.5rem 0',
-        }}>
-            {settings.logLocation}
-        </div>
-
-        <div>
-            <button
-                className="button"
+    return (
+        <div style={{ marginTop: '4rem' }}>
+            <div
                 style={{
-                    height: '2rem',
+                    fontWeight: 'bold',
+                    borderBottom: '2px solid black',
                 }}
-                onClick={handleLogLocation}
-            >Select</button>
+            >
+                Log location:
+            </div>
+
+            <div
+                style={{
+                    margin: '0.5rem 0',
+                }}
+            >
+                {settings.logLocation}
+            </div>
+
+            <div>
+                <button style={buttonStyle} onClick={handleLogLocation}>
+                    Select
+                </button>
+            </div>
         </div>
-    </div>
+    )
 }
 
 function Player({ player, extraInfo, filterModes }) {
-
-    const link = 'http://www.companyofheroes.com/'
-        + 'leaderboards#profile/steam/'
-        + player.id
-        + '/standings'
+    const link =
+        'http://www.companyofheroes.com/' +
+        'leaderboards#profile/steam/' +
+        player.id +
+        '/standings'
 
     const style = {
-        width: "33.3%",
-        display: "inline-block",
+        width: '33.3%',
+        display: 'inline-block',
         color: 'white',
         fontWeight: 'bold',
     }
 
-    const img = <img
-        style={{
-            width: '2rem',
-            height: '2rem',
-            position: 'relative',
-            top: '0.6rem',
-        }}
-        src={`./img/${commonName(player.faction)}.png`}
-        alt={`${player.faction}`}>
-    </img>
+    const img = (
+        <img
+            style={{
+                width: '2rem',
+                height: '2rem',
+                position: 'relative',
+                top: '0.6rem',
+            }}
+            src={`./img/${commonName(player.faction)}.png`}
+            alt={`${player.faction}`}
+        ></img>
+    )
 
     const [showExtra, setShowExtra] = useState(false)
 
     const handleSetShowExtra = () => {
-        console.log('handleSetShowExtra')
         setShowExtra(!showExtra)
     }
 
-    return <div>
-        <PlayerBasic {...{
-            style,
-            player,
-            link,
-            img,
-            handleSetShowExtra,
-            showExtra,
-        }} />
-        {showExtra
-            && <PlayerExtra {...{
-                style,
-                player,
-                link,
-                img,
-                extraInfo,
-                filterModes
-            }} />
-        }
-    </div>
+    return (
+        <div>
+            <PlayerBasic
+                {...{
+                    style,
+                    player,
+                    link,
+                    img,
+                    handleSetShowExtra,
+                    showExtra,
+                }}
+            />
+            {showExtra && (
+                <PlayerExtra
+                    {...{
+                        style,
+                        player,
+                        link,
+                        img,
+                        extraInfo,
+                        filterModes,
+                    }}
+                />
+            )}
+        </div>
+    )
 }
 
-function PlayerExtra({ style, player, link, img, extraInfo, filterModes }) {
-    const ranksArr = extraInfo && extraInfo.ranks
-        .filter(x => {
-            const a = x.name.toLowerCase()
-            const b = filterModes.toLowerCase()
-            return a.search(b) > -1
-        })
-        .sort((a, b) => a.rank - b.rank)
+function Members({ members }) {
+    return (
+        <div style={{ margin: '0.5rem 0' }}>
+            <hr />
+            {members.map(m => (
+                <div
+                    style={{
+                        marginLeft: '1rem',
+                        fontSize: '0.9rem',
+                        cursor: 'pointer',
+                        color: 'lime',
+                    }}
+                    key={m.name}
+                    onClick={() =>
+                        shell.openExternal(
+                            'http://www.companyofheroes.com/' +
+                                'leaderboards#profile/steam/' +
+                                m.name.substring(7) +
+                                '/standings',
+                        )
+                    }
+                >
+                    {m.alias}
+                </div>
+            ))}
+        </div>
+    )
+}
 
-    return <div>
-        <hr />
-        {
-            ranksArr && <div style={{ margin: '1rem 0 1.5rem 0' }}>
-                {ranksArr
-                    .map((r, i) => <div key={i}>
-                        <div style={style}>{r.rank}</div>
-                        <div style={style}>{r.name}</div>
-                        <div style={style}></div>
-                    </div>)
-                }
-            </div>
-        }
-    </div>
+function Rank({ style, r }) {
+    const [showMembers, setShowMembers] = useState(false)
+
+    return (
+        <div style={style}>
+            {r.members.length > 1 ? (
+                <div>
+                    <i
+                        style={{
+                            color: 'lime',
+                            marginRight: '1rem',
+                            cursor: 'pointer',
+                        }}
+                        className={`fa fa-lg fa-caret-${
+                            showMembers ? 'down' : 'right'
+                        }`}
+                        onClick={() => setShowMembers(!showMembers)}
+                    />
+                    {r.name}
+                    {showMembers && <Members members={r.members} />}
+                </div>
+            ) : (
+                <div>{r.name}</div>
+            )}
+        </div>
+    )
+}
+
+function PlayerExtra({ style, extraInfo, filterModes }) {
+    const ranksArr =
+        extraInfo &&
+        extraInfo.ranks
+            .filter(x => {
+                const a = x.name.toLowerCase()
+                const b = filterModes.toLowerCase()
+                return a.search(b) > -1
+            })
+            .sort((a, b) => a.rank - b.rank)
+
+    return (
+        <div>
+            {ranksArr && (
+                <div style={{ margin: '1rem 0 1.5rem 0' }}>
+                    <hr />
+                    <div style={{ marginTop: '1rem' }}>
+                        {ranksArr.map((r, i) => (
+                            <div
+                                key={i}
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'flex-start',
+                                }}
+                            >
+                                <div style={style}>{r.rank}</div>
+                                <Rank style={style} r={r} />
+                                <div style={style}></div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+        </div>
+    )
 }
 
 function PlayerBasic({
@@ -122,54 +210,67 @@ function PlayerBasic({
     handleSetShowExtra,
     showExtra,
 }) {
-    return <div style={{
-        margin: "0 0 1rem 0",
-    }}>
-        <div style={style}>
-            <i
-                style={{ marginRight: '1rem', cursor: 'pointer' }}
-                className={`fa fa-lg fa-caret-${showExtra ? 'down' : 'right'}`}
-                onClick={handleSetShowExtra}
-            />
-            {player.ranking === '-1' ? '-' : player.ranking}
-        </div>
-        <div style={style}>
-            {img}
-        </div>
+    return (
         <div
-            style={player.id ? { ...style, cursor: "pointer" } : { ...style }}
-            onClick={() => player.id ? shell.openExternal(link) : null}
+            style={{
+                margin: '0 0 1rem 0',
+            }}
         >
-            {player.name}
+            <div style={style}>
+                <i
+                    style={{ marginRight: '1rem', cursor: 'pointer' }}
+                    className={`fa fa-lg fa-caret-${
+                        showExtra ? 'down' : 'right'
+                    }`}
+                    onClick={handleSetShowExtra}
+                />
+                {player.ranking === '-1' ? '-' : player.ranking}
+            </div>
+            <div style={style}>{img}</div>
+            <div
+                style={
+                    player.id ? { ...style, cursor: 'pointer' } : { ...style }
+                }
+                onClick={() => (player.id ? shell.openExternal(link) : null)}
+            >
+                {player.name}
+            </div>
         </div>
-    </div>
+    )
 }
 
 function Team({ filterModes, players, extraInfo }) {
-    return <div style={{
-        background: "#181818",
-        padding: '0.5rem 1.5rem',
-        borderRadius: '0.5rem',
-        margin: '1rem 0',
-    }}>
-        {players.map((p, i) => <Player
-            key={p.id + i}
-            player={p}
-            filterModes={filterModes}
-            extraInfo={extraInfo && p.id ? extraInfo[p.id] : null}
-
-        />)}
-    </div>
+    return (
+        <div
+            style={{
+                background: '#181818',
+                padding: '0.5rem 1.5rem',
+                borderRadius: '0.5rem',
+                margin: '1rem 0',
+            }}
+        >
+            {players.map((p, i) => (
+                <Player
+                    key={p.id + i}
+                    player={p}
+                    filterModes={filterModes}
+                    extraInfo={extraInfo && p.id ? extraInfo[p.id] : null}
+                />
+            ))}
+        </div>
+    )
 }
 
-function Teams({ filterModes, players, extraInfo, }) {
+function Teams({ filterModes, players, extraInfo }) {
     let teams = [[], []]
     if (players) {
-        players.forEach((p, i) => { teams[p.slot % 2].push(p) })
+        players.forEach(p => {
+            teams[p.slot % 2].push(p)
+        })
     }
 
-    return players && players.length > 0
-        ? <div>
+    return players && players.length > 0 ? (
+        <div>
             <Team
                 players={teams[0]}
                 filterModes={filterModes}
@@ -181,67 +282,73 @@ function Teams({ filterModes, players, extraInfo, }) {
                 extraInfo={extraInfo}
             />
         </div>
-        : <div className="noInfo">
+    ) : (
+        <div className="noInfo">
             <h1>no info in log file</h1>
         </div>
+    )
 }
 
 function Navbar({
     setSettingsView,
     settingsView,
     setFilterModes,
-    filterModes
+    filterModes,
 }) {
     const styleNavbar = {
-        backgroundColor: "#181818",
-        position: "fixed",
-        top: "0",
-        left: "0",
-        height: "3rem",
-        width: "100vw",
-        borderBottom: "2px solid black",
-        display: "flex",
-        justifyContent: "space-evenly",
-        alignItems: "center",
-        zIndex: "99999",
+        backgroundColor: '#181818',
+        position: 'fixed',
+        top: '0',
+        left: '0',
+        height: '3rem',
+        width: '100vw',
+        borderBottom: '2px solid black',
+        display: 'flex',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        zIndex: '99999',
     }
 
-    return <div style={styleNavbar}>
-        {!settingsView
-            && <Filter
-                filterModes={filterModes}
-                setFilterModes={setFilterModes}
+    return (
+        <div style={styleNavbar}>
+            {!settingsView && (
+                <Filter
+                    filterModes={filterModes}
+                    setFilterModes={setFilterModes}
+                />
+            )}
+            <i
+                className="fa fa-2x fa-cogs"
+                style={{
+                    color: 'white',
+                    cursor: 'pointer',
+                }}
+                onClick={setSettingsView}
             />
-        }
-        <i
-            className="fa fa-2x fa-cogs"
-            style={{
-                color: 'white',
-                cursor: 'pointer',
-            }}
-            onClick={setSettingsView}
-        />
-    </div>
+        </div>
+    )
 }
 
 function Filter({ setFilterModes, filterModes }) {
-    const filterHandler = (e) => {
+    const filterHandler = e => {
         const text = e.target.value.trim()
         setFilterModes(text)
     }
-    return <input
-        style={{
-            height: '2rem',
-            background: "#181818",
-            border: 'none',
-            borderBottom: '1px solid white',
-            color: 'white',
-            fontWeight: 'bold',
-        }}
-        placeholder='filter modes'
-        onChange={filterHandler}
-        value={filterModes}
-    />
+    return (
+        <input
+            style={{
+                height: '2rem',
+                background: '#181818',
+                border: 'none',
+                borderBottom: '1px solid white',
+                color: 'white',
+                fontWeight: 'bold',
+            }}
+            placeholder="filter modes"
+            onChange={filterHandler}
+            value={filterModes}
+        />
+    )
 }
 
 function App() {
@@ -253,20 +360,20 @@ function App() {
     const [settings, setSettings] = useState(settingsJson)
     const [filterModes, setFilterModes] = useState('')
 
-    const checkLogData = (data) => {
-        if (JSON.stringify(players) !== JSON.stringify(data)) {
-            setPlayers(data)
-            setExtraInfo(null)
-            writeRankings(data)
-        }
-    }
-
     useEffect(() => {
+        const checkLogData = data => {
+            if (JSON.stringify(players) !== JSON.stringify(data)) {
+                setPlayers(data)
+                setExtraInfo(null)
+                writeRankings(data)
+            }
+        }
+
         // initial readLog
         if (players === null) {
             readLog(settings.logLocation, checkLogData)
         } else if (extraInfo === null && players.length > 0) {
-            getExtraInfo(players, (data) => {
+            getExtraInfo(players, data => {
                 setExtraInfo(data)
             })
         }
@@ -276,18 +383,18 @@ function App() {
         }, READ_LOG_INTERVAL)
 
         return () => clearInterval(intervalId)
-    }, [players, extraInfo, settings])
-
+    })
 
     const handleLogLocation = () => {
-        dialog.showOpenDialog({
-            properties: ['openFile'],
-            filters: [
-                { name: 'Logs', extensions: ['log'], },
-                { name: 'All Files', extensions: ['*'] }
-            ]
-        }).then(
-            function (file) {
+        dialog
+            .showOpenDialog({
+                properties: ['openFile'],
+                filters: [
+                    { name: 'Logs', extensions: ['log'] },
+                    { name: 'All Files', extensions: ['*'] },
+                ],
+            })
+            .then(function(file) {
                 if (file !== undefined && file.filePaths[0]) {
                     const newSetting = {
                         ...settings,
@@ -296,20 +403,23 @@ function App() {
                     fs.writeFile(
                         './settings.json',
                         JSON.stringify(newSetting, null, 4),
-                        "utf-8",
-                        (err, data) => {
+                        'utf-8',
+                        // (err, data) => {
+                        () => {
                             setSettings(newSetting)
-                        }
+                        },
                     )
                 }
-            }
-        )
+            })
     }
 
+    console.log({ players, extraInfo, settingsView, settings, filterModes })
     return (
-        <main style={{
-            marginTop: '4rem',
-        }}>
+        <main
+            style={{
+                marginTop: '4rem',
+            }}
+        >
             <Navbar
                 extraInfo={extraInfo}
                 settingsView={settingsView}
@@ -318,18 +428,18 @@ function App() {
                 filterModes={filterModes}
             />
 
-            {settingsView
-                ? <Settings
+            {settingsView ? (
+                <Settings
                     settings={settings}
                     handleLogLocation={handleLogLocation}
                 />
-                : <Teams
+            ) : (
+                <Teams
                     players={players}
                     extraInfo={extraInfo}
                     filterModes={filterModes}
                 />
-            }
-
+            )}
         </main>
     )
 }

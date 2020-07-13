@@ -25,7 +25,7 @@ function getLines(data) {
 }
 
 function getPlayersInfo(arr) {
-    arr = arr.map((row) => {
+    arr = arr.map(row => {
         let splited = row.split(':')
         return splited[splited.length - 1].trim()
     })
@@ -60,7 +60,7 @@ function getPlayersInfo(arr) {
         }
     }
     //combine into one obj
-    return Object.keys(players).map((key) => {
+    return Object.keys(players).map(key => {
         if (steamIds.hasOwnProperty(key)) {
             p = players[key]
             p.ranking = steamIds[key].ranking
@@ -83,19 +83,21 @@ function getExtraInfo(players, callback) {
     let ids = players.filter(p => p.id != undefined).map(p => p.id)
     const strIds = ids.map(x => '%22%2Fsteam%2F' + x + '%22').join(',')
 
-    const url = "https://coh2-api.reliclink.com/community/"
-        + "leaderboard/GetPersonalStat?title=coh2&profile_names=["
-        + strIds
+    const url =
+        'https://coh2-api.reliclink.com/community/' +
+        'leaderboard/GetPersonalStat?title=coh2&profile_names=[' +
+        strIds +
         // + "%22%2Fsteam%2F76561198006675368%22,%22%2Fsteam%2F76561198370394140%22,%22%2Fsteam%2F76561198370394140%22,%22%2Fsteam%2F76561198021193151%22,%22%2Fsteam%2F76561198072062361%22"
-        + "]"
+        ']'
 
     let leaderboard = undefined
     let cohTitles = undefined
 
     const fetch1 = axios.get(url)
 
-    const url2 = "https://coh2-api.reliclink.com/"
-        + "community/leaderboard/GetAvailableLeaderboards?title=coh2"
+    const url2 =
+        'https://coh2-api.reliclink.com/' +
+        'community/leaderboard/GetAvailableLeaderboards?title=coh2'
 
     const fetch2 = axios.get(url2)
 
@@ -105,7 +107,7 @@ function getExtraInfo(players, callback) {
                 leaderboard = values[0].data
                 cohTitles = values[1].data
                 let result = refactorData(leaderboard, cohTitles, ids)
-                console.log("FETCHED DATA!!!", result)
+                // console.log("FETCHED DATA!!!", result)
                 callback(result)
 
                 // showExtraInfo()
@@ -134,7 +136,6 @@ function refactorData(leaderboard, cohTitles, ids) {
     //             - id
     //             - name
 
-
     let players = {}
     for (const id of ids) {
         players[id] = {
@@ -157,10 +158,11 @@ function refactorData(leaderboard, cohTitles, ids) {
         for (const member of statGroups[x.statGroup_id].members) {
             let steam_id = member.name.substring(7)
             if (
-                players[steam_id]
-                && !players[steam_id].ranks.find(y =>
-                    y.statGroup_id === x.statGroup_id
-                    && y.leaderboard_id === x.leaderboard_id
+                players[steam_id] &&
+                !players[steam_id].ranks.find(
+                    y =>
+                        y.statGroup_id === x.statGroup_id &&
+                        y.leaderboard_id === x.leaderboard_id,
                 )
             ) {
                 players[steam_id].ranks.push({
@@ -201,7 +203,7 @@ function commonName(str) {
         case 'german':
             return 'wer'
         default:
-            return '?????';
+            return '?????'
     }
 }
 
@@ -216,18 +218,21 @@ function writeRankings(players) {
         const slot = Number(players[i].slot)
 
         if (slot % 2 === 0) {
-            str1 += `${ranking.padEnd(5)}   ${obsFaction(faction).padEnd(5)}   ${name}\n`
+            str1 += `${ranking.padEnd(5)}   ${obsFaction(faction).padEnd(
+                5,
+            )}   ${name}\n`
         } else {
-            str2 += `${ranking.padEnd(5)}   ${obsFaction(faction).padEnd(5)}   ${name}\n`
+            str2 += `${ranking.padEnd(5)}   ${obsFaction(faction).padEnd(
+                5,
+            )}   ${name}\n`
         }
     }
 
     fs.writeFile(
         './ranking.txt',
         str1 + '\n' + str2,
-        "utf-8",
-        (err, data) => {
-        }
+        'utf-8',
+        (err, data) => {},
     )
 }
 

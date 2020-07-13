@@ -19,21 +19,9 @@ main {
     margin: 0 auto;
 }
 
-.button {
-    padding: 0;
-    margin: 0;
-    width: 25vw;
-    height: 70%;
-    border: 2px solid white;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 5px;
-    background-color: #181818;
-    color: white;
-}
 
-button:disabled,
-button[disabled] {
-    border: 2px solid #4e4e4e;
-    color: #4e4e4e;
-}
+/* button:disabled, */
+/* button[disabled] { */
+/*     border: 2px solid #4e4e4e; */
+/*     color: #4e4e4e; */
+/* } */
