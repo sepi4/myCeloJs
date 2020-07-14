@@ -71,7 +71,7 @@ function Player({ player, extraInfo, filterModes }) {
             }}
             src={`./img/${commonName(player.faction)}.png`}
             alt={`${player.faction}`}
-        ></img>
+        />
     )
 
     const [showExtra, setShowExtra] = useState(false)
@@ -82,7 +82,7 @@ function Player({ player, extraInfo, filterModes }) {
 
     return (
         <div>
-            <PlayerBasic
+            <PlayerCurrentRank
                 {...{
                     style,
                     player,
@@ -93,7 +93,7 @@ function Player({ player, extraInfo, filterModes }) {
                 }}
             />
             {showExtra && (
-                <PlayerExtra
+                <PlayerOtherRanks
                     {...{
                         style,
                         player,
@@ -144,18 +144,21 @@ function Rank({ style, r }) {
         <div style={style}>
             {r.members.length > 1 ? (
                 <div>
-                    <i
-                        style={{
-                            color: 'lime',
-                            marginRight: '1rem',
-                            cursor: 'pointer',
-                        }}
-                        className={`fa fa-lg fa-caret-${
-                            showMembers ? 'down' : 'right'
-                        }`}
+                    <span
                         onClick={() => setShowMembers(!showMembers)}
-                    />
-                    {r.name}
+                        style={{ cursor: 'pointer' }}
+                    >
+                        <i
+                            style={{
+                                color: 'lime',
+                                marginRight: '1rem',
+                            }}
+                            className={`fa fa-lg fa-caret-${
+                                showMembers ? 'down' : 'right'
+                            }`}
+                        />
+                        {r.name}
+                    </span>
                     {showMembers && <Members members={r.members} />}
                 </div>
             ) : (
@@ -165,7 +168,7 @@ function Rank({ style, r }) {
     )
 }
 
-function PlayerExtra({ style, extraInfo, filterModes }) {
+function PlayerOtherRanks({ style, extraInfo, filterModes }) {
     const ranksArr =
         extraInfo &&
         extraInfo.ranks
@@ -191,8 +194,11 @@ function PlayerExtra({ style, extraInfo, filterModes }) {
                                 }}
                             >
                                 <div style={style}>{r.rank}</div>
-                                <Rank style={style} r={r} />
-                                <div style={style}></div>
+                                <Rank
+                                    style={{ ...style, width: '66%' }}
+                                    r={r}
+                                />
+                                {/* <div style={style}></div> */}
                             </div>
                         ))}
                     </div>
@@ -202,7 +208,7 @@ function PlayerExtra({ style, extraInfo, filterModes }) {
     )
 }
 
-function PlayerBasic({
+function PlayerCurrentRank({
     style,
     player,
     link,
@@ -310,7 +316,13 @@ function Navbar({
     }
 
     return (
-        <div style={styleNavbar}>
+        <div
+            style={
+                !settingsView
+                    ? styleNavbar
+                    : { ...styleNavbar, justifyContent: 'flex-end' }
+            }
+        >
             {!settingsView && (
                 <Filter
                     filterModes={filterModes}
@@ -318,10 +330,14 @@ function Navbar({
                 />
             )}
             <i
-                className="fa fa-2x fa-cogs"
+                className={
+                    !settingsView ? 'fa fa-2x fa-cogs' : 'fa fa-2x fa-times'
+                }
                 style={{
                     color: 'white',
                     cursor: 'pointer',
+                    // marginRight: '1rem',
+                    marginRight: '5%',
                 }}
                 onClick={setSettingsView}
             />
@@ -360,15 +376,15 @@ function App() {
     const [settings, setSettings] = useState(settingsJson)
     const [filterModes, setFilterModes] = useState('')
 
-    useEffect(() => {
-        const checkLogData = data => {
-            if (JSON.stringify(players) !== JSON.stringify(data)) {
-                setPlayers(data)
-                setExtraInfo(null)
-                writeRankings(data)
-            }
+    const checkLogData = data => {
+        if (JSON.stringify(players) !== JSON.stringify(data)) {
+            setPlayers(data)
+            setExtraInfo(null)
+            writeRankings(data)
         }
+    }
 
+    useEffect(() => {
         // initial readLog
         if (players === null) {
             readLog(settings.logLocation, checkLogData)
@@ -413,6 +429,11 @@ function App() {
             })
     }
 
+    const handleSetSettingsView = () => {
+        setSettingsView(!settingsView)
+        readLog(settings.logLocation, checkLogData)
+    }
+
     console.log({ players, extraInfo, settingsView, settings, filterModes })
     return (
         <main
@@ -423,7 +444,7 @@ function App() {
             <Navbar
                 extraInfo={extraInfo}
                 settingsView={settingsView}
-                setSettingsView={() => setSettingsView(!settingsView)}
+                setSettingsView={handleSetSettingsView}
                 setFilterModes={setFilterModes}
                 filterModes={filterModes}
             />
