@@ -19,9 +19,9 @@ main {
     margin: 0 auto;
 }
 
-
-/* button:disabled, */
-/* button[disabled] { */
-/*     border: 2px solid #4e4e4e; */
-/*     color: #4e4e4e; */
-/* } */
+@media only screen and (min-width: 1000px) {
+    body {
+        /* background-color: lightblue; */
+        font-size: 32px;
+    }
+}

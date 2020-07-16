@@ -10,7 +10,7 @@ function Settings({ settings, handleLogLocation }) {
         padding: '0',
         margin: '0',
         width: '25vw',
-        border: '2px solid white',
+        border: '0.1rem solid white',
         fontWeight: 'bold',
         cursor: 'pointer',
         borderRadius: '5px',
@@ -24,7 +24,7 @@ function Settings({ settings, handleLogLocation }) {
             <div
                 style={{
                     fontWeight: 'bold',
-                    borderBottom: '2px solid black',
+                    borderBottom: '0.2rem solid black',
                 }}
             >
                 Log location:
@@ -59,15 +59,16 @@ function Player({ player, extraInfo, filterModes }) {
         display: 'inline-block',
         color: 'white',
         fontWeight: 'bold',
+        // fontSize: '1em',
     }
 
     const img = (
         <img
             style={{
-                width: '2rem',
-                height: '2rem',
+                width: '2em',
+                height: '2em',
                 position: 'relative',
-                top: '0.6rem',
+                top: '0.6em',
             }}
             src={`./img/${commonName(player.faction)}.png`}
             alt={`${player.faction}`}
@@ -115,8 +116,8 @@ function Members({ members }) {
             {members.map(m => (
                 <div
                     style={{
-                        marginLeft: '1rem',
-                        fontSize: '0.9rem',
+                        marginLeft: '1em',
+                        fontSize: '0.9em',
                         cursor: 'pointer',
                         color: 'lime',
                     }}
@@ -306,7 +307,7 @@ function Navbar({
         position: 'fixed',
         top: '0',
         left: '0',
-        height: '3rem',
+        height: '3em',
         width: '100vw',
         borderBottom: '2px solid black',
         display: 'flex',
@@ -359,6 +360,7 @@ function Filter({ setFilterModes, filterModes }) {
                 borderBottom: '1px solid white',
                 color: 'white',
                 fontWeight: 'bold',
+                fontSize: '0.8em',
             }}
             placeholder="filter modes"
             onChange={filterHandler}
@@ -438,7 +440,7 @@ function App() {
     return (
         <main
             style={{
-                marginTop: '4rem',
+                marginTop: '4em',
             }}
         >
             <Navbar
