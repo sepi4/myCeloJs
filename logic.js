@@ -107,10 +107,7 @@ function getExtraInfo(players, callback) {
                 leaderboard = values[0].data
                 cohTitles = values[1].data
                 let result = refactorData(leaderboard, cohTitles, ids)
-                // console.log("FETCHED DATA!!!", result)
                 callback(result)
-
-                // showExtraInfo()
             }
         })
         .catch(error => {

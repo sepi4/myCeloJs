@@ -1,27 +1,27 @@
 * {
-    margin: 0;
-    padding: 0;
-    font-family: 'Work Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial,
-        sans-serif;
+  margin: 0;
+  padding: 0;
+  font-family: 'Work Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial,
+  sans-serif;
 }
 
 *:focus {
-    outline: none;
+  outline: none;
 }
 
 body {
-    background: gray;
-    font-size: 16px;
+  background-color: gray;
+  font-size: 16px;
 }
 
 main {
-    width: 90%;
-    margin: 0 auto;
+  width: 90%;
+  margin: 0 auto;
 }
 
 @media only screen and (min-width: 1000px) {
-    body {
-        /* background-color: lightblue; */
-        font-size: 32px;
-    }
+  body {
+    /* background-color: lightblue; */
+    font-size: 32px;
+  }
 }
