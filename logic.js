@@ -75,11 +75,6 @@ function getPlayersInfo(arr) {
 }
 
 function getExtraInfo(players, callback) {
-    // if (extraInfo) {
-    //     showExtraInfo()
-    //     return
-    // }
-
     let ids = players.filter(p => p.id != undefined).map(p => p.id)
     const strIds = ids.map(x => '%22%2Fsteam%2F' + x + '%22').join(',')
 
@@ -209,19 +204,14 @@ function writeRankings(players) {
     let str2 = ''
     for (let i = 0; i < players.length; i++) {
         const name = players[i].name
-        // const id = players[i].id ? players[i].id : ''
         const ranking = players[i].ranking === '-1' ? '-' : players[i].ranking
         const faction = players[i].faction
         const slot = Number(players[i].slot)
 
         if (slot % 2 === 0) {
-            str1 += `${ranking.padEnd(5)}   ${obsFaction(faction).padEnd(
-                5,
-            )}   ${name}\n`
+            str1 += `${ranking.padEnd(5)} ${obsFaction(faction).padEnd(5)} ${name}\n`
         } else {
-            str2 += `${ranking.padEnd(5)}   ${obsFaction(faction).padEnd(
-                5,
-            )}   ${name}\n`
+            str2 += `${ranking.padEnd(5)} ${obsFaction(faction).padEnd(5)} ${name}\n`
         }
     }
 
@@ -229,7 +219,7 @@ function writeRankings(players) {
         './ranking.txt',
         str1 + '\n' + str2,
         'utf-8',
-        (err, data) => {},
+        (err, data) => { },
     )
 }
 
