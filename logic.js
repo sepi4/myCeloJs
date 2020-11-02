@@ -26,8 +26,13 @@ function getLines(data) {
 
 function getPlayersInfo(arr) {
     arr = arr.map(row => {
-        let splited = row.split(':')
-        return splited[splited.length - 1].trim()
+        if (row.match(/GAME --.* Player:/)) {
+            let splited = row.split(':')
+            return splited.slice(3).join(':').trim()
+        } else {
+            let splited = row.split(':')
+            return splited[splited.length - 1].trim()
+        }
     })
 
     let steamIds = {}
