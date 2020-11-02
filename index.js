@@ -335,7 +335,10 @@ function Teams({ filterModes, players, extraInfo }) {
     let teams = [[], []]
     if (players) {
         players.forEach(p => {
-            teams[p.slot % 2].push(p)
+            let teamIndex = p.slot % 2
+            if (Number.isInteger(teamIndex)) {
+                teams[teamIndex].push(p)
+            }
         })
     }
 
