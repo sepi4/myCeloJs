@@ -37,7 +37,7 @@ function getPlayersInfo(arr) {
 
     let steamIds = {}
     let players = {}
-    for (row of arr) {
+    for (let row of arr) {
         let id = row.match(/^.*\/steam\/(\d+).+/)
         let slot = row.match(/, slot = +(\d), ranking/)
         let ranking = row.match(/, ranking = +(-?\d+)/)
@@ -67,12 +67,12 @@ function getPlayersInfo(arr) {
     //combine into one obj
     return Object.keys(players).map(key => {
         if (steamIds.hasOwnProperty(key)) {
-            p = players[key]
+            let p = players[key]
             p.ranking = steamIds[key].ranking
             p.id = steamIds[key].id
             return p
         } else {
-            p = players[key]
+            let p = players[key]
             p.ranking = '-1'
             return p
         }
@@ -224,7 +224,9 @@ function writeRankings(players) {
         './ranking.txt',
         str1 + '\n' + str2,
         'utf-8',
-        (err, data) => { },
+        (err) => {
+            console.log('Error in writing rankings.txt file: ', err)
+        },
     )
 }
 
@@ -246,4 +248,6 @@ module.exports = {
     writeRankings,
     getFactionFlag,
     commonName,
+    React,
+    ReactDOM,
 }

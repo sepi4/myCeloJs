@@ -1,10 +1,18 @@
-import { readLog, getExtraInfo, writeRankings, commonName } from './logic'
+import {
+    readLog,
+    getExtraInfo,
+    writeRankings,
+    commonName,
+    React,
+    ReactDOM
+} from './logic'
 // import settingsJson from './settings.json'
 
 const { useEffect, useState } = React
 const { dialog } = require('electron').remote
 const { shell } = require('electron')
 const fs = require('fs')
+
 
 function readSettings(fileLocation, callback) {
     console.log('readSettings')
@@ -31,32 +39,21 @@ function Settings({ settings, handleLogLocation }) {
         height: '2rem',
     }
 
-    return (
-        <div style={{ marginTop: '4rem' }}>
-            <div
-                style={{
-                    fontWeight: 'bold',
-                    borderBottom: '0.2rem solid black',
-                }}
-            >
-                Log location:
-      </div>
+    return <div style={{ marginTop: '4rem' }}>
+        <div style={{
+            fontWeight: 'bold',
+            borderBottom: '0.2rem solid black',
+        }}>Log location:</div>
 
-            <div
-                style={{
-                    margin: '0.5rem 0',
-                }}
-            >
-                {settings ? settings.logLocation : ''}
-            </div>
-
-            <div>
-                <button style={buttonStyle} onClick={handleLogLocation}>
-                    Select
-        </button>
-            </div>
+        <div style={{ margin: '0.5rem 0' }} >
+            {settings ? settings.logLocation : ''}
         </div>
-    )
+
+        <button style={buttonStyle} onClick={handleLogLocation} >
+            Select
+        </button>
+    </div>
+
 }
 
 function Player({ player, extraInfo, filterModes }) {
@@ -410,27 +407,26 @@ function Navbar({
     )
 }
 
-function Filter({ setFilterModes, filterModes, color }) {
+function Filter({ setFilterModes, filterModes }) {
     const filterHandler = e => {
         const text = e.target.value.trim()
         setFilterModes(text)
     }
-    return (
-        <input
-            style={{
-                height: '2rem',
-                background: '#181818',
-                border: 'none',
-                borderBottom: '1px solid white',
-                color: 'white',
-                fontWeight: 'bold',
-                fontSize: '0.8em',
-            }}
-            placeholder="filter modes"
-            onChange={filterHandler}
-            value={filterModes}
-        />
-    )
+    return <input
+        style={{
+            height: '2rem',
+            background: '#181818',
+            border: 'none',
+            borderBottom: '1px solid white',
+            color: 'white',
+            fontWeight: 'bold',
+            fontSize: '0.8em',
+        }}
+        placeholder="filter modes"
+        onChange={filterHandler}
+        value={filterModes}
+    />
+    
 }
 
 function App() {
@@ -509,33 +505,28 @@ function App() {
         }
     }
 
-    return (
-        <main
-            style={{
-                marginTop: '4em',
-            }}
-        >
-            <Navbar
+    return <main style={{ marginTop: '4em' }} >
+        <Navbar
+            extraInfo={extraInfo}
+            settingsView={settingsView}
+            setSettingsView={handleSetSettingsView}
+            setFilterModes={setFilterModes}
+            filterModes={filterModes}
+        />
+
+        {settingsView
+            ? <Settings
+                settings={settings}
+                handleLogLocation={handleLogLocation}
+            />
+            : <Teams
+                players={players}
                 extraInfo={extraInfo}
-                settingsView={settingsView}
-                setSettingsView={handleSetSettingsView}
-                setFilterModes={setFilterModes}
                 filterModes={filterModes}
             />
-
-            {settingsView
-                ? <Settings
-                    settings={settings}
-                    handleLogLocation={handleLogLocation}
-                />
-                : <Teams
-                    players={players}
-                    extraInfo={extraInfo}
-                    filterModes={filterModes}
-                />
-            }
-        </main>
-    )
+        }
+    </main>
+    
 }
 
 ReactDOM.render(<App />, document.getElementById('root'))
