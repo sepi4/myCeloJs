@@ -204,7 +204,7 @@ function commonName(str) {
     }
 }
 
-function writeRankings(players) {
+function writeRankings(players, fileLocation) {
     let str1 = ''
     let str2 = ''
     for (let i = 0; i < players.length; i++) {
@@ -220,8 +220,9 @@ function writeRankings(players) {
         }
     }
 
+    console.log('writeRankings: ', fileLocation)
     fs.writeFile(
-        './ranking.txt',
+        fileLocation,
         str1 + '\n' + str2,
         'utf-8',
         (err) => {

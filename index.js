@@ -25,35 +25,57 @@ function readSettings(fileLocation, callback) {
     })
 }
 
-function Settings({ settings, handleLogLocation }) {
+function Settings({ settings, handleLogLocation, handleRankingFileLocation }) {
+    return <div style={{ marginTop: '4em' }}>
+        <SettingsInputDiv
+            text="Log location:"
+            settings={settings}
+            settingsKey="logLocation"
+            clickFun={handleLogLocation}
+        />
+        <SettingsInputDiv
+            text="Ranking file location (for OBS):"
+            settings={settings}
+            settingsKey="rankingFileLocation"
+            clickFun={handleRankingFileLocation}
+        />
+    </div>
+
+}
+
+function SettingsInputDiv({text, settings, settingsKey, clickFun}) {
     const buttonStyle = {
         padding: '0',
-        margin: '0',
+        margin: '0.2em 0',
         width: '25vw',
-        border: '0.1rem solid white',
-        fontWeight: 'bold',
         cursor: 'pointer',
         borderRadius: '5px',
         backgroundColor: '#181818',
+        border: '2px solid #181818',
         color: 'white',
-        height: '2rem',
+        height: '1.5em',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
     }
-
-    return <div style={{ marginTop: '4rem' }}>
-        <div style={{
-            fontWeight: 'bold',
-            borderBottom: '0.2rem solid black',
-        }}>Log location:</div>
-
-        <div style={{ margin: '0.5rem 0' }} >
-            {settings ? settings.logLocation : ''}
+    const inputStyle = {
+        margin: '0.4em 0',
+        borderRadius: '5px',
+        border: '0.1em solid white',
+        padding: '.2em',
+        minWidth: '100%',
+        minHeight: '1em',
+    }
+    return <div style={{ margin: '1rem 0' }}>
+        <div style={{ fontWeight: 'bold' }} >{text}</div>
+        <div style={inputStyle} >
+            {settings && settings[settingsKey]
+                ? settings[settingsKey]
+                : ''
+            }
         </div>
-
-        <button style={buttonStyle} onClick={handleLogLocation} >
-            Select
-        </button>
+        <div style={buttonStyle} onClick={clickFun} >Select </div>
     </div>
-
 }
 
 function Player({ player, extraInfo, filterModes }) {
@@ -88,34 +110,32 @@ function Player({ player, extraInfo, filterModes }) {
         setShowExtra(!showExtra)
     }
 
-    // console.log('extraInfo', extraInfo)
-    return (
-        <div>
-            <PlayerCurrentRank
+    return <div>
+        <PlayerCurrentRank
+            {...{
+                style,
+                player,
+                link,
+                img,
+                handleSetShowExtra,
+                showExtra,
+                extraInfo,
+            }}
+        />
+        {showExtra && (
+            <PlayerOtherRanks
                 {...{
                     style,
                     player,
                     link,
                     img,
-                    handleSetShowExtra,
-                    showExtra,
                     extraInfo,
+                    filterModes,
                 }}
             />
-            {showExtra && (
-                <PlayerOtherRanks
-                    {...{
-                        style,
-                        player,
-                        link,
-                        img,
-                        extraInfo,
-                        filterModes,
-                    }}
-                />
-            )}
-        </div>
-    )
+        )}
+    </div>
+
 }
 
 function PlayerCurrentRank({
@@ -142,44 +162,41 @@ function PlayerCurrentRank({
         }
     }
 
-    return (
-        <div
-            style={{
-                display: 'flex',
-                alignItems: 'center',
-            }}
-        >
-            <span style={style}>
-                <i
-                    style={{ marginRight: '1rem', cursor: 'pointer' }}
-                    className={`fa fa-lg fa-caret-${showExtra ? 'down' : 'right'}`}
-                    onClick={handleSetShowExtra}
+    return <div style={{
+        display: 'flex',
+        alignItems: 'center',
+    }}>
+        <span style={style}>
+            <i
+                style={{ marginRight: '1rem', cursor: 'pointer' }}
+                className={`fa fa-lg fa-caret-${showExtra ? 'down' : 'right'}`}
+                onClick={handleSetShowExtra}
+            />
+            {player.ranking === '-1' ? '-' : player.ranking}
+        </span>
+
+        <span style={style}>{img}</span>
+
+        <span style={style}>
+            {country !== undefined ? (
+                <img
+                    style={{
+                        width: '2em',
+                    }}
+                    src={`./img/contryFlags/${country}.png`}
+                    alt={`${country}`}
                 />
-                {player.ranking === '-1' ? '-' : player.ranking}
-            </span>
+            ) : null}
+        </span>
 
-            <span style={style}>{img}</span>
+        <span
+            style={player.id ? { ...style, cursor: 'pointer' } : { ...style }}
+            onClick={() => (player.id ? shell.openExternal(link) : null)}
+        >
+            {player.name}
+        </span>
+    </div>
 
-            <span style={style}>
-                {country !== undefined ? (
-                    <img
-                        style={{
-                            width: '2em',
-                        }}
-                        src={`./img/contryFlags/${country}.png`}
-                        alt={`${country}`}
-                    />
-                ) : null}
-            </span>
-
-            <span
-                style={player.id ? { ...style, cursor: 'pointer' } : { ...style }}
-                onClick={() => (player.id ? shell.openExternal(link) : null)}
-            >
-                {player.name}
-            </span>
-        </div>
-    )
 }
 
 function PlayerOtherRanks({ style, extraInfo, filterModes }) {
@@ -193,66 +210,61 @@ function PlayerOtherRanks({ style, extraInfo, filterModes }) {
             })
             .sort((a, b) => a.rank - b.rank)
 
-    return (
-        <div>
-            {ranksArr && (
-                <div style={{ margin: '1rem 0 1.5rem 0' }}>
-                    <hr />
-                    <div style={{ marginTop: '1rem' }}>
-                        {ranksArr.map((r, i) => (
-                            <div
-                                key={i}
-                                style={{
-                                    display: 'flex',
-                                    alignItems: 'flex-start',
-                                }}
-                            >
-                                <div style={style}>{r.rank}</div>
-                                <Rank style={{ ...style, width: '66%' }} rank={r} />
-                            </div>
-                        ))}
-                    </div>
+    return <div>
+        {ranksArr && (
+            <div style={{ margin: '1rem 0 1.5rem 0' }}>
+                <hr />
+                <div style={{ marginTop: '1rem' }}>
+                    {ranksArr.map((r, i) => (
+                        <div key={i} style={{
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                        }}>
+                            <div style={style}>{r.rank}</div>
+                            <Rank style={{ ...style, width: '66%' }} rank={r} />
+                        </div>
+                    ))}
                 </div>
-            )}
-        </div>
-    )
+            </div>
+        )}
+    </div>
+    
 }
 
 function Members({ members }) {
-    return (
-        <div style={{ margin: '0.5rem 0' }}>
-            <hr />
-            {members.map(m => (
-                <div
+    return <div style={{ margin: '0.5rem 0' }}>
+        <hr />
+        {members.map(m => (
+            <div
+                style={{
+                    marginLeft: '1em',
+                    fontSize: '0.9em',
+                    cursor: 'pointer',
+                    color: 'lime',
+                }}
+                key={m.name}
+                onClick={() =>
+                    shell.openExternal(
+                        'http://www.companyofheroes.com/' +
+                        'leaderboards#profile/steam/' +
+                        m.name.substring(7) +
+                        '/standings',
+                    )
+                }
+            >
+                <img
                     style={{
-                        marginLeft: '1em',
-                        fontSize: '0.9em',
-                        cursor: 'pointer',
-                        color: 'lime',
+                        width: '1em',
+                        marginRight: '1em',
                     }}
-                    key={m.name}
-                    onClick={() =>
-                        shell.openExternal(
-                            'http://www.companyofheroes.com/' +
-                            'leaderboards#profile/steam/' +
-                            m.name.substring(7) +
-                            '/standings',
-                        )
-                    }
-                >
-                    <img
-                        style={{
-                            width: '1em',
-                            marginRight: '1em',
-                        }}
-                        src={`./img/contryFlags/${m.country}.png`}
-                        alt={`${m.country}`}
-                    />
-                    {m.alias}
-                </div>
-            ))}
-        </div>
-    )
+                    src={`./img/contryFlags/${m.country}.png`}
+                    alt={`${m.country}`}
+                />
+                {m.alias}
+            </div>
+        ))}
+    </div>
+
 }
 
 function Rank({ style, rank }) {
@@ -275,57 +287,51 @@ function Rank({ style, rank }) {
     }
     function betterRankName(rn) {
         let m = rn.match(/^\dv\d/)
-        console.log(m)
         rn = rn.replace(/^(\dv\d)/, '')
         return m + ' ' + sw(rn)
     }
 
-    return (
-        <div style={style}>
-            {rank.members.length > 1 ? (
-                <div>
-                    <span
-                        onClick={() => setShowMembers(!showMembers)}
-                        style={{ cursor: 'pointer' }}
-                    >
-                        <i
-                            style={{
-                                color: 'lime',
-                                marginRight: '1rem',
-                            }}
-                            className={`fa fa-lg fa-caret-${showMembers ? 'down' : 'right'}`}
-                        />
-                        {rank.name}
-                    </span>
-                    {showMembers && <Members members={rank.members} />}
-                </div>
-            ) : (
-                    <div>{betterRankName(rank.name)}</div>
-                )}
-        </div>
-    )
+    return <div style={style}>
+        {rank.members.length > 1
+            ? <div>
+                <span
+                    onClick={() => setShowMembers(!showMembers)}
+                    style={{ cursor: 'pointer' }}
+                >
+                    <i
+                        style={{
+                            color: 'lime',
+                            marginRight: '1rem',
+                        }}
+                        className={`fa fa-lg fa-caret-${showMembers ? 'down' : 'right'}`}
+                    />
+                    {rank.name}
+                </span>
+                {showMembers && <Members members={rank.members} />}
+            </div>
+            : <div>{betterRankName(rank.name)}</div>
+        }
+    </div>
+
 }
 
 function Team({ filterModes, players, extraInfo }) {
-    return (
-        <div
-            style={{
-                background: '#181818',
-                padding: '0.5rem 1.5rem',
-                borderRadius: '0.5rem',
-                margin: '1rem 0',
-            }}
-        >
-            {players.map((p, i) => (
-                <Player
-                    key={p.id + i}
-                    player={p}
-                    filterModes={filterModes}
-                    extraInfo={extraInfo && p.id ? extraInfo[p.id] : null}
-                />
-            ))}
-        </div>
-    )
+    return <div style={{
+        background: '#181818',
+        padding: '0.5rem 1.5rem',
+        borderRadius: '0.5rem',
+        margin: '1rem 0',
+    }} >
+        {players.map((p, i) => (
+            <Player
+                key={p.id + i}
+                player={p}
+                filterModes={filterModes}
+                extraInfo={extraInfo && p.id ? extraInfo[p.id] : null}
+            />
+        ))}
+    </div>
+    
 }
 
 function Teams({ filterModes, players, extraInfo }) {
@@ -339,8 +345,8 @@ function Teams({ filterModes, players, extraInfo }) {
         })
     }
 
-    return players && players.length > 0 ? (
-        <div>
+    return players && players.length > 0
+        ? <div>
             <Team
                 players={teams[0]}
                 filterModes={filterModes}
@@ -352,11 +358,10 @@ function Teams({ filterModes, players, extraInfo }) {
                 extraInfo={extraInfo}
             />
         </div>
-    ) : (
-            <div className="noInfo">
-                <h1>no info in log file</h1>
-            </div>
-        )
+        : <div className="noInfo">
+            <h1>no info in log file</h1>
+        </div>
+
 }
 
 function Navbar({
@@ -379,32 +384,28 @@ function Navbar({
         zIndex: '99999',
     }
 
-    return (
-        <div
-            style={
-                !settingsView
-                    ? styleNavbar
-                    : { ...styleNavbar, justifyContent: 'flex-end' }
-            }
-        >
-            {!settingsView && (
-                <Filter
-                    filterModes={filterModes}
-                    setFilterModes={setFilterModes}
-                />
-            )}
-            <i
-                className={!settingsView ? 'fa fa-2x fa-cogs' : 'fa fa-2x fa-times'}
-                style={{
-                    color: 'white',
-                    cursor: 'pointer',
-                    // marginRight: '1rem',
-                    marginRight: '5%',
-                }}
-                onClick={setSettingsView}
+    return <div style={
+        !settingsView
+            ? styleNavbar
+            : { ...styleNavbar, justifyContent: 'flex-end' }
+    }>
+        {!settingsView && (
+            <Filter
+                filterModes={filterModes}
+                setFilterModes={setFilterModes}
             />
-        </div>
-    )
+        )}
+        <i
+            className={!settingsView ? 'fa fa-2x fa-cogs' : 'fa fa-2x fa-times'}
+            style={{
+                color: 'white',
+                cursor: 'pointer',
+                // marginRight: '1rem',
+                marginRight: '5%',
+            }}
+            onClick={setSettingsView}
+        />
+    </div>
 }
 
 function Filter({ setFilterModes, filterModes }) {
@@ -443,7 +444,7 @@ function App() {
         if (JSON.stringify(players) !== JSON.stringify(data)) {
             setPlayers(data)
             setExtraInfo(null)
-            writeRankings(data)
+            writeRankings(data, settings.rankingFileLocation)
         }
     }
 
@@ -471,31 +472,54 @@ function App() {
     })
 
     const handleLogLocation = () => {
-        dialog
-            .showOpenDialog({
-                properties: ['openFile'],
-                filters: [
-                    { name: 'Logs', extensions: ['log'] },
-                    { name: 'All Files', extensions: ['*'] },
-                ],
-            })
-            .then(function (file) {
-                if (file !== undefined && file.filePaths[0]) {
-                    const newSetting = {
-                        ...settings,
-                        logLocation: file.filePaths[0],
-                    }
-                    fs.writeFile(
-                        './settings.json',
-                        JSON.stringify(newSetting, null, 4),
-                        'utf-8',
-                        // (err, data) => {
-                        () => {
-                            setSettings(newSetting)
-                        },
-                    )
+        dialog.showOpenDialog({
+            properties: ['openFile'],
+            filters: [
+                { name: 'Logs', extensions: ['log'] },
+                { name: 'All Files', extensions: ['*'] },
+            ],
+        }).then(function (file) {
+            if (file !== undefined && file.filePaths[0]) {
+                const newSetting = {
+                    ...settings,
+                    logLocation: file.filePaths[0],
                 }
-            })
+                fs.writeFile(
+                    './settings.json',
+                    JSON.stringify(newSetting, null, 4),
+                    'utf-8',
+                    // (err, data) => {
+                    () => {
+                        setSettings(newSetting)
+                    },
+                )
+            }
+        })
+    }
+
+    const handleRankingFileLocation = () => {
+        dialog.showOpenDialog({
+            properties: ['openFile'],
+            filters: [
+                { name: 'txt', extensions: ['txt'] },
+                { name: 'All Files', extensions: ['*'] },
+            ],
+        }).then((obj) => {
+            if (obj !== undefined && obj.filePaths[0]) {
+                const newSetting = {
+                    ...settings,
+                    rankingFileLocation: obj.filePaths[0],
+                }
+                fs.writeFile(
+                    './settings.json',
+                    JSON.stringify(newSetting, null, 4),
+                    'utf-8',
+                    () => {
+                        setSettings(newSetting)
+                    },
+                )
+            }
+        })
     }
 
     const handleSetSettingsView = () => {
@@ -518,6 +542,7 @@ function App() {
             ? <Settings
                 settings={settings}
                 handleLogLocation={handleLogLocation}
+                handleRankingFileLocation={handleRankingFileLocation}
             />
             : <Teams
                 players={players}
