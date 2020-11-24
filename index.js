@@ -82,11 +82,6 @@ function SettingsInputDiv({text, settings, settingsKey, clickFun}) {
 }
 
 function Player({ player, extraInfo, filterModes }) {
-    const link =
-        'http://www.companyofheroes.com/' +
-        'leaderboards#profile/steam/' +
-        player.id +
-        '/standings'
 
     const style = {
         width: '25%',
@@ -118,7 +113,6 @@ function Player({ player, extraInfo, filterModes }) {
             {...{
                 style,
                 player,
-                link,
                 img,
                 handleSetShowExtra,
                 showExtra,
@@ -130,7 +124,6 @@ function Player({ player, extraInfo, filterModes }) {
                 {...{
                     style,
                     player,
-                    link,
                     img,
                     extraInfo,
                     filterModes,
@@ -144,18 +137,19 @@ function Player({ player, extraInfo, filterModes }) {
 function PlayerCurrentRank({
     style,
     player,
-    link,
     img,
     handleSetShowExtra,
     showExtra,
     extraInfo,
 }) {
     let country
-    if (extraInfo && player.id) {
+    let steamId
+    if (extraInfo && player.profileId) {
         for (const rank of extraInfo.ranks) {
             for (const member of rank.members) {
-                if (member.name.substring(7) === player.id) {
+                if (member.profile_id == player.profileId) {
                     country = member.country
+                    steamId = member.name.substring(7)
                     break
                 }
             }
@@ -164,6 +158,12 @@ function PlayerCurrentRank({
             }
         }
     }
+
+    const link =
+        'http://www.companyofheroes.com/'
+        + 'leaderboards#profile/steam/'
+        + steamId
+        + '/standings'
 
     return <div style={{
         display: 'flex',
@@ -193,8 +193,8 @@ function PlayerCurrentRank({
         </span>
 
         <span
-            style={player.id ? { ...style, cursor: 'pointer' } : { ...style }}
-            onClick={() => (player.id ? shell.openExternal(link) : null)}
+            style={steamId ? { ...style, cursor: 'pointer' } : { ...style }}
+            onClick={() => (steamId ? shell.openExternal(link) : null)}
         >
             {player.name}
         </span>
@@ -319,6 +319,7 @@ function Rank({ style, rank }) {
 }
 
 function Team({ filterModes, players, extraInfo }) {
+
     return <div style={{
         background: '#181818',
         padding: '0.5rem 1.5rem',
@@ -327,10 +328,10 @@ function Team({ filterModes, players, extraInfo }) {
     }} >
         {players.map((p, i) => (
             <Player
-                key={p.id + i}
+                key={p.profileId + i}
                 player={p}
                 filterModes={filterModes}
-                extraInfo={extraInfo && p.id ? extraInfo[p.id] : null}
+                extraInfo={extraInfo && p.profileId ? extraInfo[p.profileId] : null}
             />
         ))}
     </div>
@@ -338,6 +339,7 @@ function Team({ filterModes, players, extraInfo }) {
 }
 
 function Teams({ filterModes, players, extraInfo }) {
+
     let teams = [[], []]
     if (players) {
         players.forEach(p => {
@@ -467,7 +469,8 @@ function App() {
         } else if (players === null) {
             readLog(settings.logLocation, checkLogData)
         } else if (extraInfo === null && players.length > 0) {
-            getExtraInfo(players, data => {
+            getExtraInfo(players, (data, isReplay) => {
+                console.log(isReplay, isReplay, isReplay)
                 setExtraInfo(data)
             })
         }

@@ -1,5 +1,6 @@
 const fs = require('fs')
 const axios = require('axios')
+let isReplay = true
 
 // const fileLocation =
 //     'C:\\Users\\Sergei\\Documents\\' +
@@ -11,6 +12,7 @@ function getLines(data) {
     let stop = false
     let wasGame = false
     let wasNone = false
+    isReplay = true
 
     for (let i = lines.length - 1; i >= 0; i--) {
         const row = lines[i]
@@ -21,6 +23,7 @@ function getLines(data) {
             }
             arr.push(row)
         } else if (row.match('Match Started.*steam.*slot.*ranking')) {
+            isReplay = false
             stop = true
             arr.push(row)
         } else if (stop) {
@@ -45,7 +48,6 @@ function getPlayersInfo(arr) {
 
     let steamIds = {}
     let players = {}
-    console.log('arr:', arr)
     for (let row of arr) {
         let id = row.match(/^.*\/steam\/(\d+).+/)
         let slot = row.match(/, slot = +(\d), ranking/)
@@ -75,7 +77,6 @@ function getPlayersInfo(arr) {
             }
         }
     }
-    console.log('players:', players)
     //combine into one obj
     return Object.keys(players).map(key => {
         if (steamIds.hasOwnProperty(key)) {
@@ -101,22 +102,18 @@ function getExtraInfo(players, callback) {
     //     // + "%22%2Fsteam%2F76561198006675368%22,%22%2Fsteam%2F76561198370394140%22,%22%2Fsteam%2F76561198370394140%22,%22%2Fsteam%2F76561198021193151%22,%22%2Fsteam%2F76561198072062361%22"
     //     ']'
 
-    console.log('in getExtraInfo', players)
-    let ids = players
-        .filter(p => p.profileId != undefined)
+    let ids = players.filter(p => p.profileId != undefined)
         .map(p => p.profileId)
-        .join(',')
-    const url =
-        'https://coh2-api.reliclink.com/community/' +
-        'leaderboard/GetPersonalStat?title=coh2&profile_ids=[' + ids + ']'
-    console.log('address: ', url)
+        
+    const url = 'https://coh2-api.reliclink.com/community/'
+        + 'leaderboard/GetPersonalStat?title=coh2&profile_ids=['
+        + ids.join(',') + ']'
 
 
     let leaderboard = undefined
     let cohTitles = undefined
 
     const fetch1 = axios.get(url)
-    console.log('fetch1: ', fetch1)
 
     const url2 =
         'https://coh2-api.reliclink.com/' +
@@ -128,10 +125,9 @@ function getExtraInfo(players, callback) {
         .then(values => {
             if (values[0].status === 200 && values[1].status === 200) {
                 leaderboard = values[0].data
-                console.log('leaderboard:', leaderboard)
                 cohTitles = values[1].data
                 let result = refactorData(leaderboard, cohTitles, ids)
-                callback(result)
+                callback(result, isReplay)
             }
         })
         .catch(error => {
@@ -158,12 +154,12 @@ function refactorData(leaderboard, cohTitles, ids) {
     //             - name
 
     let players = {}
-    console.log('ids: ', ids)
     for (const id of ids) {
         players[id] = {
             ranks: [],
         }
     }
+    // console.log('players:', players)
 
     let statGroups = {}
     for (const x of leaderboard.statGroups) {
@@ -178,7 +174,9 @@ function refactorData(leaderboard, cohTitles, ids) {
     for (const x of leaderboard.leaderboardStats.filter(l => l.rank > -1)) {
         // check members
         for (const member of statGroups[x.statGroup_id].members) {
-            let steam_id = member.name.substring(7)
+            // console.log('member:', member)
+            // let steam_id = member.name.substring(7)
+            let steam_id = member.profile_id
             if (
                 players[steam_id] &&
                 !players[steam_id].ranks.find(
