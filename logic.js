@@ -9,16 +9,24 @@ function getLines(data) {
     let lines = data.split('\n')
     let arr = []
     let stop = false
+    let wasGame = false
+    let wasNone = false
 
     for (let i = lines.length - 1; i >= 0; i--) {
         const row = lines[i]
         if (row.match('GAME --.* Player:')) {
+            wasGame = true
+            if (wasGame && wasNone) {
+                break
+            }
             arr.push(row)
         } else if (row.match('Match Started.*steam.*slot.*ranking')) {
             stop = true
             arr.push(row)
         } else if (stop) {
             break
+        } else if (wasGame) {
+            wasNone = true
         }
     }
     return arr
@@ -37,6 +45,7 @@ function getPlayersInfo(arr) {
 
     let steamIds = {}
     let players = {}
+    console.log('arr:', arr)
     for (let row of arr) {
         let id = row.match(/^.*\/steam\/(\d+).+/)
         let slot = row.match(/, slot = +(\d), ranking/)
@@ -54,16 +63,19 @@ function getPlayersInfo(arr) {
             let playerArr = row.split(' ')
             slot = playerArr.shift()
             let faction = playerArr.pop()
-            playerArr.pop()
-            playerArr.pop()
+            let teamSlot = playerArr.pop()
+            let profileId = playerArr.pop()
             let name = playerArr.join(' ')
             players[slot] = {
+                teamSlot,
+                profileId,
                 name,
                 slot,
                 faction,
             }
         }
     }
+    console.log('players:', players)
     //combine into one obj
     return Object.keys(players).map(key => {
         if (steamIds.hasOwnProperty(key)) {
@@ -80,20 +92,31 @@ function getPlayersInfo(arr) {
 }
 
 function getExtraInfo(players, callback) {
-    let ids = players.filter(p => p.id != undefined).map(p => p.id)
-    const strIds = ids.map(x => '%22%2Fsteam%2F' + x + '%22').join(',')
+    // let ids = players.filter(p => p.id != undefined).map(p => p.id)
+    // const strIds = ids.map(x => '%22%2Fsteam%2F' + x + '%22').join(',')
+    // const url =
+    //     'https://coh2-api.reliclink.com/community/' +
+    //     'leaderboard/GetPersonalStat?title=coh2&profile_names=[' +
+    //     strIds +
+    //     // + "%22%2Fsteam%2F76561198006675368%22,%22%2Fsteam%2F76561198370394140%22,%22%2Fsteam%2F76561198370394140%22,%22%2Fsteam%2F76561198021193151%22,%22%2Fsteam%2F76561198072062361%22"
+    //     ']'
 
+    console.log('in getExtraInfo', players)
+    let ids = players
+        .filter(p => p.profileId != undefined)
+        .map(p => p.profileId)
+        .join(',')
     const url =
         'https://coh2-api.reliclink.com/community/' +
-        'leaderboard/GetPersonalStat?title=coh2&profile_names=[' +
-        strIds +
-        // + "%22%2Fsteam%2F76561198006675368%22,%22%2Fsteam%2F76561198370394140%22,%22%2Fsteam%2F76561198370394140%22,%22%2Fsteam%2F76561198021193151%22,%22%2Fsteam%2F76561198072062361%22"
-        ']'
+        'leaderboard/GetPersonalStat?title=coh2&profile_ids=[' + ids + ']'
+    console.log('address: ', url)
+
 
     let leaderboard = undefined
     let cohTitles = undefined
 
     const fetch1 = axios.get(url)
+    console.log('fetch1: ', fetch1)
 
     const url2 =
         'https://coh2-api.reliclink.com/' +
@@ -105,6 +128,7 @@ function getExtraInfo(players, callback) {
         .then(values => {
             if (values[0].status === 200 && values[1].status === 200) {
                 leaderboard = values[0].data
+                console.log('leaderboard:', leaderboard)
                 cohTitles = values[1].data
                 let result = refactorData(leaderboard, cohTitles, ids)
                 callback(result)
@@ -134,6 +158,7 @@ function refactorData(leaderboard, cohTitles, ids) {
     //             - name
 
     let players = {}
+    console.log('ids: ', ids)
     for (const id of ids) {
         players[id] = {
             ranks: [],

@@ -44,6 +44,11 @@ function Settings({ settings, handleLogLocation, handleRankingFileLocation }) {
 }
 
 function SettingsInputDiv({text, settings, settingsKey, clickFun}) {
+    const locationStyle = {
+        margin: '.2em 0 0 .2em',
+        minWidth: '100%',
+        minHeight: '1em',
+    }
     const buttonStyle = {
         padding: '0',
         margin: '0.2em 0',
@@ -58,17 +63,15 @@ function SettingsInputDiv({text, settings, settingsKey, clickFun}) {
         alignItems: 'center',
         justifyContent: 'center',
     }
-    const inputStyle = {
-        margin: '0.4em 0',
+    const divStyle = { 
+        margin: '1rem 0',
+        backgroundColor: '#616161',
+        padding: '1em',
         borderRadius: '5px',
-        border: '0.1em solid white',
-        padding: '.2em',
-        minWidth: '100%',
-        minHeight: '1em',
     }
-    return <div style={{ margin: '1rem 0' }}>
+    return <div style={divStyle}>
         <div style={{ fontWeight: 'bold' }} >{text}</div>
-        <div style={inputStyle} >
+        <div style={locationStyle} >
             {settings && settings[settingsKey]
                 ? settings[settingsKey]
                 : ''
@@ -436,7 +439,6 @@ function App() {
     const [players, setPlayers] = useState(null)
     const [extraInfo, setExtraInfo] = useState(null)
     const [settingsView, setSettingsView] = useState(false)
-    // const [settings, setSettings] = useState(settingsJson)
     const [settings, setSettings] = useState(null)
     const [filterModes, setFilterModes] = useState('')
 
@@ -448,6 +450,12 @@ function App() {
         }
     }
 
+    const writeNewRankingsFile = data => {
+        setPlayers(data)
+        setExtraInfo(null)
+        writeRankings(data, settings.rankingFileLocation)
+    }
+
     useEffect(() => {
         // initial readSettings location of log file
         if (settings === null) {
@@ -455,7 +463,7 @@ function App() {
                 setSettings(JSON.parse(data))
             })
             return
-            // initial readLog
+        // initial readLog
         } else if (players === null) {
             readLog(settings.logLocation, checkLogData)
         } else if (extraInfo === null && players.length > 0) {
@@ -470,6 +478,13 @@ function App() {
 
         return () => clearInterval(intervalId)
     })
+
+    useEffect(() => {
+        console.log('settings changed')
+        if (settings) {
+            readLog(settings.logLocation, writeNewRankingsFile)
+        }
+    }, [settings])
 
     const handleLogLocation = () => {
         dialog.showOpenDialog({
@@ -498,17 +513,17 @@ function App() {
     }
 
     const handleRankingFileLocation = () => {
-        dialog.showOpenDialog({
-            properties: ['openFile'],
-            filters: [
-                { name: 'txt', extensions: ['txt'] },
-                { name: 'All Files', extensions: ['*'] },
-            ],
+        dialog.showSaveDialog({
+            filters: [{
+                name: 'txt',
+                extensions: ['txt']
+            }]
         }).then((obj) => {
-            if (obj !== undefined && obj.filePaths[0]) {
+            console.log(obj)
+            if (obj !== undefined && obj.filePath) {
                 const newSetting = {
                     ...settings,
-                    rankingFileLocation: obj.filePaths[0],
+                    rankingFileLocation: obj.filePath,
                 }
                 fs.writeFile(
                     './settings.json',

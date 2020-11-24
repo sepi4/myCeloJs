@@ -3,6 +3,10 @@
     "version": "1.0.1",
     "description": "",
     "main": "main.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sepi4/myCeloJs.git"
+    },
     "scripts": {
         "p": "parcel index.html",
         "start": "electron .",
@@ -20,6 +24,7 @@
     },
     "dependencies": {
         "axios": "^0.19.2",
-        "react": "^16.13.1"
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1"
     }
 }
