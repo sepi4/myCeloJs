@@ -1,3 +1,4 @@
+import { is } from './assets/babel'
 import {
     readLog,
     getExtraInfo,
@@ -435,6 +436,8 @@ function Filter({ setFilterModes, filterModes }) {
     
 }
 
+// function getMode
+
 function App() {
     const READ_LOG_INTERVAL = 3000
 
@@ -443,6 +446,7 @@ function App() {
     const [settingsView, setSettingsView] = useState(false)
     const [settings, setSettings] = useState(null)
     const [filterModes, setFilterModes] = useState('')
+
 
     const checkLogData = data => {
         if (JSON.stringify(players) !== JSON.stringify(data)) {
@@ -470,8 +474,11 @@ function App() {
             readLog(settings.logLocation, checkLogData)
         } else if (extraInfo === null && players.length > 0) {
             getExtraInfo(players, (data, isReplay) => {
-                console.log(isReplay, isReplay, isReplay)
                 setExtraInfo(data)
+                // writeRankings(data, settings.rankingFileLocation)
+                // if (isReplay) {
+                //     console.log(isReplay, isReplay, isReplay)
+                // }
             })
         }
 

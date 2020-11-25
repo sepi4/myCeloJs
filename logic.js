@@ -196,8 +196,17 @@ function refactorData(leaderboard, cohTitles, ids) {
             }
         }
     }
+
+    // if (isReplay) {
+    //     console.log('isReplay')
+    //     console.log(players)
+    // } else {
+    //     console.log('NO Replay')
+    //     console.log(players)
+    // }
     return players
 }
+
 
 function getFactionFlag(str) {
     function img(s) {
