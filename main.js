@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, } = require('electron')
 
 function createWindow() {
     // Create the browser window.
@@ -17,8 +17,9 @@ function createWindow() {
     win.loadFile('index.html')
 
     // Open the DevTools.
-
     // win.webContents.openDevTools()
+
+    // remove menu
     win.setMenu(null)
 }
 

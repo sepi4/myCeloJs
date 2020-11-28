@@ -123,6 +123,7 @@ function getExtraInfo(players, callback) {
 
     Promise.all([fetch1, fetch2])
         .then(values => {
+            // console.log('logic, PROMISE ALL, then')
             if (values[0].status === 200 && values[1].status === 200) {
                 leaderboard = values[0].data
                 cohTitles = values[1].data

@@ -1,11 +1,15 @@
 {
     "name": "sepi-celo",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "description": "",
     "main": "main.js",
     "repository": {
         "type": "git",
-        "url": "https://github.com/sepi4/myCeloJs.git"
+        "url": "https://github.com/sepi4/myCeloJs/"
+    },
+    "publish": {
+        "provider": "github",
+        "releaseType": "release"
     },
     "scripts": {
         "p": "parcel index.html",
@@ -14,7 +18,7 @@
         "electron-dist": "electron-builder",
         "electron-packer": "electron-builder --dir"
     },
-    "author": "",
+    "author": "Sergei Polishsuk",
     "license": "ISC",
     "devDependencies": {
         "electron": "^9.3.2",

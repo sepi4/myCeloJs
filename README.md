@@ -4,7 +4,7 @@ This is electron app for viewing ranks of current connected game
 of Company of Heroes 2 and display ranks in OBS.
 
 
-<a id="raw-url" href="https://github.com/sepi4/myCeloJs/raw/master/sepi-celo%20Setup%201.1.0.exe">Download setup file</a>
+<a id="raw-url" href="https://github.com/sepi4/myCeloJs/releases/download/1.2.0/sepi-celo.Setup.1.2.0.exe">Download setup file</a>
 
 
 ### install and setup:
@@ -25,6 +25,8 @@ of Company of Heroes 2 and display ranks in OBS.
     - Custom ranking file for OBS can be added now in settings.    
     - Partially works with replays. All ranks can be easily viewed in drop 
         down menu.
+* version 1.2.0. 
+    - Update panel to download updated version.
 
 
 

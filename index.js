@@ -1,4 +1,3 @@
-import { is } from './assets/babel'
 import {
     readLog,
     getExtraInfo,
@@ -10,10 +9,13 @@ import {
 // import settingsJson from './settings.json'
 
 const { useEffect, useState } = React
-const { dialog } = require('electron').remote
+const { dialog, clipboard } = require('electron').remote
+
 const { shell } = require('electron')
+const axios = require('axios')
 const fs = require('fs')
 
+let updateCheckNotDone = true
 
 function readSettings(fileLocation, callback) {
     console.log('readSettings')
@@ -50,6 +52,12 @@ function SettingsInputDiv({text, settings, settingsKey, clickFun}) {
         minWidth: '100%',
         minHeight: '1em',
     }
+    const divStyle = { 
+        margin: '1rem 0',
+        backgroundColor: '#616161',
+        padding: '1em',
+        borderRadius: '5px',
+    }
     const buttonStyle = {
         padding: '0',
         margin: '0.2em 0',
@@ -63,12 +71,6 @@ function SettingsInputDiv({text, settings, settingsKey, clickFun}) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-    }
-    const divStyle = { 
-        margin: '1rem 0',
-        backgroundColor: '#616161',
-        padding: '1em',
-        borderRadius: '5px',
     }
     return <div style={divStyle}>
         <div style={{ fontWeight: 'bold' }} >{text}</div>
@@ -436,8 +438,6 @@ function Filter({ setFilterModes, filterModes }) {
     
 }
 
-// function getMode
-
 function App() {
     const READ_LOG_INTERVAL = 3000
 
@@ -476,9 +476,9 @@ function App() {
             getExtraInfo(players, (data, isReplay) => {
                 setExtraInfo(data)
                 // writeRankings(data, settings.rankingFileLocation)
-                // if (isReplay) {
-                //     console.log(isReplay, isReplay, isReplay)
-                // }
+                if (isReplay) {
+                    console.log(isReplay, isReplay, isReplay)
+                }
             })
         }
 
@@ -575,8 +575,95 @@ function App() {
                 filterModes={filterModes}
             />
         }
+        <UpdateBar />
+
     </main>
     
+}
+
+function UpdateBar() {
+    const [updateLink, setUpdateLink] = useState(null)
+
+    if (updateCheckNotDone) {
+        updateCheckNotDone = false
+        console.log('CHECK UPDATE')
+
+        axios.get('https://api.github.com/repos/sepi4/myCeloJs/releases/latest')
+            .then(x => {
+                // console.log('CHECK UPDATE, axios then!')
+
+                var appVersion = require('electron').remote.app.getVersion();
+                if (x && x.data) {
+                    if (x.data.tag_name !== appVersion) {
+                        const data = x.data
+                        if (data.assets[0]) {
+                            setUpdateLink(data.assets[0].browser_download_url)
+                        }
+                        // let options = {
+                        //     buttons: ['Download', 'Cancel'],
+                        //     message: "Update can be downloaded",
+                        //     detail: 'from: https://github.com/sepi4/myCeloJs'
+                        // }
+                        // dialog.showMessageBox(null, options)
+                        //     .then((response) => {
+                        //         if (response.response === 0) {
+                        //             // shell.openExternal('https://github.com/sepi4/myCeloJs')
+                        //             shell.openExternal(data.assets[0].browser_download_url)
+                        //         }
+                        //     })
+                    }
+                }
+            })
+    }
+
+    const style = {
+        height: '2em',
+        width: '100%',
+        backgroundColor: 'purple',
+        position: 'fixed',
+        bottom: 0,
+        left: 0,
+        color: 'white',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: '80%',
+    }
+
+    const buttonStyle={
+        display: 'inline',
+        backgroundColor: 'purple',
+        border: '.1em solid white',
+        marginLeft: '1em',
+        borderRadius: '5px',
+        padding: '.1em .3em',
+        color: 'white',
+        cursor: 'pointer',
+        fontSize: '1em',
+    }
+
+    return <div>
+        {updateLink
+            ? <div style={style}>
+                <span>update is available</span>
+
+                <button
+                    style={buttonStyle}
+                    onClick={() => {
+                        shell.openExternal(updateLink)
+                    }}
+                >download</button>
+
+                <button
+                    style={buttonStyle}
+                    onClick={() => {
+                        clipboard.writeText(updateLink)
+                    }}
+                >copy link</button>
+            </div>
+            : null
+        }
+    </div> 
 }
 
 ReactDOM.render(<App />, document.getElementById('root'))
