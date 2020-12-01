@@ -450,6 +450,7 @@ function App() {
 
     const checkLogData = data => {
         if (JSON.stringify(players) !== JSON.stringify(data)) {
+            console.log(JSON.stringify(data))
             setPlayers(data)
             setExtraInfo(null)
             writeRankings(data, settings.rankingFileLocation)

@@ -120,6 +120,8 @@ function getExtraInfo(players, callback) {
         'community/leaderboard/GetAvailableLeaderboards?title=coh2'
 
     const fetch2 = axios.get(url2)
+    console.log(url)
+    console.log(url2)
 
     Promise.all([fetch1, fetch2])
         .then(values => {
