@@ -121,7 +121,7 @@ function getExtraInfo(players, callback) {
                 cohTitles = values[1].data
                 let result = refactorData(leaderboard, cohTitles, ids)
                 const teams = guessRankings(players, leaderboard, cohTitles)
-                // console.log('players:', players)
+                // console.log('teams:', teams)
 
                 callback(result, isReplay, teams)
             }
@@ -235,7 +235,7 @@ function formatToStr(arr) {
 }
 
 function writeRankings(players, fileLocation, from) {
-    console.log('writeRankings:', from)
+    console.log('writeRankings from:', from)
     players = formatToStr(players)
     let str1 = ''
     let str2 = ''
@@ -258,16 +258,21 @@ function writeRankings(players, fileLocation, from) {
         str1 + '\n' + str2,
         'utf-8',
         (err) => {
-            console.log('Error in writing rankings.txt file: ', err)
+            if (err) {
+                console.log('Error in writing rankings.txt file: ', err)
+            }
         },
     )
 }
 
 function readLog(fileLocation, callback) {
     console.log('readLog')
+    // console.log('readLog, fileLocation:', fileLocation)
     fileLocation = fileLocation.replace(/\\/, '\\\\')
     fs.readFile(fileLocation, 'utf-8', (err, data) => {
-        if (err) return
+        if (err) {
+            console.log('Error in reading logfile: ', err)
+        }
         let arr = getLines(data)
         callback(getPlayersInfo(arr))
     })

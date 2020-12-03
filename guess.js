@@ -118,9 +118,12 @@ function getTitlesLeaderboardId(name, titles) {
 }
 
 function getPlayerStatGroupId(playerId, data) {
-    return data.statGroups.find(obj => ( obj.type === 1
+    let p = data.statGroups.find(obj => ( obj.type === 1
         && obj.members[0].profile_id === playerId
-    )).id
+    ))
+    if (p) {
+        return p.id
+    }
 }
 
 function getPlayerLeaderboardStat(statGroupId, leaderboardId, data) {
@@ -164,8 +167,9 @@ function guessRankings(playersArr, data, titles) {
                 let playerStatGroupId = getPlayerStatGroupId(playerId, data)
                 let pls = getPlayerLeaderboardStat(
                     playerStatGroupId, leaderboardId, data)
-                let rank = pls.rank
-                player.ranking = rank
+                if (pls && pls.rank) {
+                    player.ranking = pls.rank
+                }
             }
         }
         // console.log(team)
