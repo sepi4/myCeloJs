@@ -6,6 +6,8 @@ import {
     React,
     ReactDOM
 } from './logic'
+let appVersion = require('electron').remote.app.getVersion();
+document.title = 'sepi-celo ' + appVersion
 
 // import settingsJson from './settings.json'
 
@@ -491,21 +493,20 @@ function App() {
                 setExtraInfo(data)
                 // writeRankings(data, settings.rankingFileLocation)
                 if (isReplay) {
+                    console.log('if isReplay')
                     let newPlayers = []
                     teams.forEach(team => {
                         team.forEach(player => {                                
                             newPlayers.push(player)
                         })
                     })
+
                     setInfo({
                         players: newPlayers,
                         fromFile: info.fromFile,
                     })
                     writeRankings(newPlayers, settings.rankingFileLocation, 'useEffect')
 
-                    // console.log('getExtraInfo:', data)
-                    // console.log('players:', info.players)
-                    // console.log(isReplay, isReplay, isReplay)
                 }
             })
         }
@@ -619,7 +620,6 @@ function UpdateBar() {
         axios.get('https://api.github.com/repos/sepi4/myCeloJs/releases/latest')
             .then(x => {
                 // console.log('CHECK UPDATE, axios then!')
-                var appVersion = require('electron').remote.app.getVersion();
                 if (x && x.data) {
                     if (x.data.tag_name !== appVersion) {
                         const data = x.data
