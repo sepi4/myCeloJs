@@ -6,6 +6,7 @@ import {
     React,
     ReactDOM
 } from './logic'
+
 // import settingsJson from './settings.json'
 
 const { useEffect, useState } = React
@@ -178,7 +179,10 @@ function PlayerCurrentRank({
                 className={`fa fa-lg fa-caret-${showExtra ? 'down' : 'right'}`}
                 onClick={handleSetShowExtra}
             />
-            {player.ranking === '-1' ? '-' : player.ranking}
+            {player.ranking === '-1' || player.ranking === -1
+                ? '-'
+                : player.ranking
+            }
         </span>
 
         <span style={style}>{img}</span>
@@ -441,7 +445,11 @@ function Filter({ setFilterModes, filterModes }) {
 function App() {
     const READ_LOG_INTERVAL = 3000
 
-    const [players, setPlayers] = useState(null)
+
+    const [info, setInfo] = useState({
+        players: null,
+        fromFile: null,
+    })
     const [extraInfo, setExtraInfo] = useState(null)
     const [settingsView, setSettingsView] = useState(false)
     const [settings, setSettings] = useState(null)
@@ -449,18 +457,23 @@ function App() {
 
 
     const checkLogData = data => {
-        if (JSON.stringify(players) !== JSON.stringify(data)) {
-            console.log(JSON.stringify(data))
-            setPlayers(data)
+        if (JSON.stringify(info.fromFile) !== JSON.stringify(data)) {
+            setInfo({
+                players: data,
+                fromFile: data,
+            })
             setExtraInfo(null)
-            writeRankings(data, settings.rankingFileLocation)
+            writeRankings(data, settings.rankingFileLocation, 'checkLogData')
         }
     }
 
     const writeNewRankingsFile = data => {
-        setPlayers(data)
+        setInfo({
+            players: data,
+            fromFile: data,
+        })
         setExtraInfo(null)
-        writeRankings(data, settings.rankingFileLocation)
+        writeRankings(data, settings.rankingFileLocation, 'writeNewRankingsFile')
     }
 
     useEffect(() => {
@@ -471,14 +484,28 @@ function App() {
             })
             return
         // initial readLog
-        } else if (players === null) {
+        } else if (info.players === null) {
             readLog(settings.logLocation, checkLogData)
-        } else if (extraInfo === null && players.length > 0) {
-            getExtraInfo(players, (data, isReplay) => {
+        } else if (extraInfo === null && info.players.length > 0) {
+            getExtraInfo(info.players, (data, isReplay, teams) => {
                 setExtraInfo(data)
                 // writeRankings(data, settings.rankingFileLocation)
                 if (isReplay) {
-                    console.log(isReplay, isReplay, isReplay)
+                    let newPlayers = []
+                    teams.forEach(team => {
+                        team.forEach(player => {                                
+                            newPlayers.push(player)
+                        })
+                    })
+                    setInfo({
+                        players: newPlayers,
+                        fromFile: info.fromFile,
+                    })
+                    writeRankings(newPlayers, settings.rankingFileLocation, 'useEffect')
+
+                    // console.log('getExtraInfo:', data)
+                    // console.log('players:', info.players)
+                    // console.log(isReplay, isReplay, isReplay)
                 }
             })
         }
@@ -571,7 +598,7 @@ function App() {
                 handleRankingFileLocation={handleRankingFileLocation}
             />
             : <Teams
-                players={players}
+                players={(info && info.players) ? info.players : null}
                 extraInfo={extraInfo}
                 filterModes={filterModes}
             />
@@ -592,7 +619,6 @@ function UpdateBar() {
         axios.get('https://api.github.com/repos/sepi4/myCeloJs/releases/latest')
             .then(x => {
                 // console.log('CHECK UPDATE, axios then!')
-
                 var appVersion = require('electron').remote.app.getVersion();
                 if (x && x.data) {
                     if (x.data.tag_name !== appVersion) {

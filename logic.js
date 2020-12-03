@@ -1,6 +1,7 @@
 const fs = require('fs')
 const axios = require('axios')
 let isReplay = true
+const { guessRankings } = require('./guess')
 
 // const fileLocation =
 //     'C:\\Users\\Sergei\\Documents\\' +
@@ -93,14 +94,6 @@ function getPlayersInfo(arr) {
 }
 
 function getExtraInfo(players, callback) {
-    // let ids = players.filter(p => p.id != undefined).map(p => p.id)
-    // const strIds = ids.map(x => '%22%2Fsteam%2F' + x + '%22').join(',')
-    // const url =
-    //     'https://coh2-api.reliclink.com/community/' +
-    //     'leaderboard/GetPersonalStat?title=coh2&profile_names=[' +
-    //     strIds +
-    //     // + "%22%2Fsteam%2F76561198006675368%22,%22%2Fsteam%2F76561198370394140%22,%22%2Fsteam%2F76561198370394140%22,%22%2Fsteam%2F76561198021193151%22,%22%2Fsteam%2F76561198072062361%22"
-    //     ']'
 
     let ids = players.filter(p => p.profileId != undefined)
         .map(p => p.profileId)
@@ -108,7 +101,6 @@ function getExtraInfo(players, callback) {
     const url = 'https://coh2-api.reliclink.com/community/'
         + 'leaderboard/GetPersonalStat?title=coh2&profile_ids=['
         + ids.join(',') + ']'
-
 
     let leaderboard = undefined
     let cohTitles = undefined
@@ -120,8 +112,6 @@ function getExtraInfo(players, callback) {
         'community/leaderboard/GetAvailableLeaderboards?title=coh2'
 
     const fetch2 = axios.get(url2)
-    console.log(url)
-    console.log(url2)
 
     Promise.all([fetch1, fetch2])
         .then(values => {
@@ -130,7 +120,10 @@ function getExtraInfo(players, callback) {
                 leaderboard = values[0].data
                 cohTitles = values[1].data
                 let result = refactorData(leaderboard, cohTitles, ids)
-                callback(result, isReplay)
+                const teams = guessRankings(players, leaderboard, cohTitles)
+                // console.log('players:', players)
+
+                callback(result, isReplay, teams)
             }
         })
         .catch(error => {
@@ -177,8 +170,6 @@ function refactorData(leaderboard, cohTitles, ids) {
     for (const x of leaderboard.leaderboardStats.filter(l => l.rank > -1)) {
         // check members
         for (const member of statGroups[x.statGroup_id].members) {
-            // console.log('member:', member)
-            // let steam_id = member.name.substring(7)
             let steam_id = member.profile_id
             if (
                 players[steam_id] &&
@@ -200,13 +191,6 @@ function refactorData(leaderboard, cohTitles, ids) {
         }
     }
 
-    // if (isReplay) {
-    //     console.log('isReplay')
-    //     console.log(players)
-    // } else {
-    //     console.log('NO Replay')
-    //     console.log(players)
-    // }
     return players
 }
 
@@ -239,7 +223,20 @@ function commonName(str) {
     }
 }
 
-function writeRankings(players, fileLocation) {
+function formatToStr(arr) {
+    for (let obj of arr) {
+        for (let key of Object.keys(obj)) {
+            if (typeof(obj[key]) === 'number') {
+                obj[key] = obj[key].toString()
+            }
+        }
+    }
+    return arr
+}
+
+function writeRankings(players, fileLocation, from) {
+    console.log('writeRankings:', from)
+    players = formatToStr(players)
     let str1 = ''
     let str2 = ''
     for (let i = 0; i < players.length; i++) {
@@ -255,7 +252,7 @@ function writeRankings(players, fileLocation) {
         }
     }
 
-    console.log('writeRankings: ', fileLocation)
+    // console.log('writeRankings: ', fileLocation)
     fs.writeFile(
         fileLocation,
         str1 + '\n' + str2,

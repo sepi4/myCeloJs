@@ -1,13 +1,3 @@
-const { data, titles } = require('./data')
-
-let arr = [
-    { "teamSlot": "0", "profileId": "42102", "name": "SlayeR", "slot": "0", "faction": "soviet", "ranking": "-1" },
-    { "teamSlot": "1", "profileId": "163073", "name": "Ping me always please", "slot": "1", "faction": "german", "ranking": "-1" },
-    { "teamSlot": "0", "profileId": "580525", "name": "sepi", "slot": "2", "faction": "aef", "ranking": "-1" },
-    { "teamSlot": "1", "profileId": "106866", "name": "StephennJF", "slot": "3", "faction": "german", "ranking": "-1" }
-]
-
-
 function separateTeams(arr) {
     let teams = [[], []]
     for (let obj of arr) {
@@ -18,6 +8,10 @@ function separateTeams(arr) {
         }
     }
     return teams
+}
+
+function copyObj(obj) {
+    return JSON.parse(JSON.stringify(obj))
 }
 
 function formatToNums(arr) {
@@ -123,45 +117,63 @@ function getTitlesLeaderboardId(name, titles) {
     return obj.id
 }
 
-function getPlayerLeaderboardStat(leaderboardId, playerId, data) {
-    let obj = data.leaderboardStats.find(obj => (
+function getPlayerStatGroupId(playerId, data) {
+    return data.statGroups.find(obj => ( obj.type === 1
+        && obj.members[0].profile_id === playerId
+    )).id
+}
 
+function getPlayerLeaderboardStat(statGroupId, leaderboardId, data) {
+    return data.leaderboardStats.find(obj => (
+        obj.statGroup_id === statGroupId
+        && obj.leaderboard_id === leaderboardId
     ))
-    return obj.id
 }
 
+function guessRankings(playersArr, data, titles) {
+    console.log('guessing')
+    let arr = formatToNums(copyObj(playersArr))
+    let teams = separateTeams(arr)
+    for (const team of teams) {
+        const side = factionSide(team)
+        const titleName = getTitleName(team, side)
+        const statGroup = findTeamStatGroup(team, data)
+        if (statGroup && team.length > 1) {
+            const titleId = getTitleId(titleName, titles)
+            let teamLeaderboardStats = findTeamLeaderboardStats(statGroup, data)
+            teamLeaderboardStats = filterDublicateLeaderboardStats(
+                teamLeaderboardStats)
+            let teamCurrentLeaderboardStat = teamLeaderboardStats
+                .find(x => x.leaderboard_id === titleId)
+            if (teamCurrentLeaderboardStat && teamCurrentLeaderboardStat.rank) {
+                team.forEach(
+                    obj => obj.ranking = teamCurrentLeaderboardStat.rank)
+            }
+        } else {
+            for (let player of team) {
+                let s = team.length
+                let fn = getFactionName(player.faction)
+                let matchTypeName = `${s}v${s}${fn}`
+                let leaderboardId = getTitlesLeaderboardId(
+                    matchTypeName, titles)
 
-arr = formatToNums(arr)
-const teams = separateTeams(arr)
-for (const team of teams) {
-    const side = factionSide(team)
-    const titleName = getTitleName(team, side)
-    const statGroup = findTeamStatGroup(team, data)
-    if (statGroup) {
-        const titleId = getTitleId(titleName, titles)
-        let teamLeaderboardStats = findTeamLeaderboardStats(statGroup, data)
-        teamLeaderboardStats = filterDublicateLeaderboardStats(
-            teamLeaderboardStats)
-        let teamCurrentLeaderboardStat = teamLeaderboardStats
-            .find(x => x.leaderboard_id === titleId)
-        const rank = teamCurrentLeaderboardStat.rank
-        if (rank) {
-            team.forEach(obj => obj.ranking = rank)
+                let playerId = player.profileId
+                if (playerId === undefined) {
+                    continue
+                }
+                let playerStatGroupId = getPlayerStatGroupId(playerId, data)
+                let pls = getPlayerLeaderboardStat(
+                    playerStatGroupId, leaderboardId, data)
+                let rank = pls.rank
+                player.ranking = rank
+            }
         }
-    } else {
-        // TODO: if not team
-        for (const player of team) {
-            let s = team.length
-            let fn = getFactionName(player.faction)
-            let matchTypeName = `${s}v${s}${fn}`
-            let leaderboardId = getTitlesLeaderboardId(matchTypeName, titles)
-
-            console.log(player)
-            console.log(matchTypeName)
-            console.log(leaderboardId)
-        }
+        // console.log(team)
     }
-    // console.log(team)
+    return teams
 }
 
+module.exports = {
+    guessRankings
+}
 
