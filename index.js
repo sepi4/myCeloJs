@@ -84,6 +84,7 @@ function getPlayersInfo(arr) {
             }
         }
     }
+
     //combine into one obj
     return Object.keys(players).map(key => {
         // if (steamIds.hasOwnProperty(key)) {
@@ -104,7 +105,7 @@ function getExtraInfo(players, callback) {
 
     let ids = players.filter(p => p.profileId != undefined)
         .map(p => p.profileId)
-        
+
     const url = 'https://coh2-api.reliclink.com/community/'
         + 'leaderboard/GetPersonalStat?title=coh2&profile_ids=['
         + ids.join(',') + ']'
@@ -244,12 +245,15 @@ function writeRankings(players, fileLocation, from) {
     let str2 = ''
     for (let i = 0; i < players.length; i++) {
         const name = players[i].name
-        const ranking = players[i].ranking === '-1' ? '-' : players[i].ranking
+        let ranking = players[i].ranking === '-1' ? '-' : players[i].ranking
+        if (!isNaN(ranking)) {
+            ranking = (+ranking + 1).toString()
+        }
         const faction = players[i].faction
         const slot = Number(players[i].slot)
 
-        const text = ranking.padEnd(5) 
-            + " " + obsFaction(faction).padEnd(5) 
+        const text = ranking.padEnd(5)
+            + " " + obsFaction(faction).padEnd(5)
             + " " + name + " \n"
 
         if (slot % 2 === 0) {
@@ -355,7 +359,7 @@ function factionSide(team) {
     const isAxis = team.every(p => (
         p.faction === 'west_german'
         || p.faction === 'german'))
-    
+
     if (isAllies) {
         return 'allies'
     } else if (isAxis) {
@@ -506,7 +510,7 @@ function SettingsInputDiv({text, settings, settingsKey, clickFun}) {
         minWidth: '100%',
         minHeight: '1em',
     }
-    const divStyle = { 
+    const divStyle = {
         margin: '1rem 0',
         backgroundColor: '#616161',
         padding: '1em',
@@ -634,7 +638,7 @@ function PlayerCurrentRank({
             />
             {player.ranking === '-1' || player.ranking === -1
                 ? '-'
-                : player.ranking
+                : Number(player.ranking) + 1
             }
         </span>
 
@@ -662,40 +666,63 @@ function PlayerCurrentRank({
 
 }
 
-function TitlesExtraInfo({style}) {
+function Sorter({ style, text, sort, setSort }) {
+    return <div
+        style={{
+            ...style,
+            color: sort === text ? 'yellow' : 'gray',
+        }}
+        onClick={() => setSort(text)}
+    >
+        {text}
+    </div>
+}
+
+function TitlesExtraInfo({style, sort, setSort}) {
     style = {
         ...style,
         fontSize: '80%',
         marginBottom: '0.5em',
         color: 'gray',
+        cursor: 'pointer',
     }
+
+    const arr = ['rank', 'type', 'win %', 'total games']
 
     return <div style={{
         display: 'flex',
         alignItems: 'flex-start',
     }}>
-        <div style={style}>rank</div>
-        <div style={style}>type</div>
-        <div style={style}>win %</div>
-        <div style={style}>games played</div>
+        {arr.map(s => <Sorter
+                key={s}
+                style={style}
+                text={s}
+                sort={sort}
+                setSort={setSort}
+            />
+        )}
     </div>
 }
 
 function PlayerExtraInfo({ style, extraInfo, filterModes }) {
+    const [sort, setSort] = useState('rank')
     const ranksArr = extraInfo && extraInfo.ranks
         .filter(x => {
             const a = x.name.toLowerCase()
             // console.log('x: ', x)
             const b = filterModes.toLowerCase()
 
-            // search returns  index of the first match between the regular 
+            // search returns  index of the first match between the regular
             // expression and the given string, or -1 if no match was found.
+            //
             return a.search(b) > -1 && x.rank > -1
+            // return a.search(b) > -1
         })
         .sort((a, b) => a.rank - b.rank)
 
     style = {
-        ...style, 
+        ...style,
+        fontSize: '90%',
         marginRight: '0.5em',
     }
     return <div>
@@ -704,10 +731,14 @@ function PlayerExtraInfo({ style, extraInfo, filterModes }) {
                 <hr />
                 <div style={{ marginTop: '1rem' }}>
 
-                    <TitlesExtraInfo style={style} />
+                    <TitlesExtraInfo
+                        style={style}
+                        sort={sort}
+                        setSort={setSort}
+                    />
 
                     {ranksArr.map((r, i) => {
-                        let per = r.wins / (r.wins + r.losses) * 100 
+                        let per = r.wins / (r.wins + r.losses) * 100
                         per = per.toFixed(0) + '%'
                         let totalGames = r.wins + r.losses
 
@@ -717,13 +748,13 @@ function PlayerExtraInfo({ style, extraInfo, filterModes }) {
                                 alignItems: 'flex-start',
                             }}>
                                 <div style={style}>{r.rank}</div>
-                                <Rank 
-                                    style={{ 
+                                <Rank
+                                    style={{
                                         ...style,
                                         overflow: 'hidden',
                                         whiteSpace: 'nowrap',
-                                    }} 
-                                    rank={r} 
+                                    }}
+                                    rank={r}
                                 />
                                 <div style={style}>{per}</div>
                                 <div style={style}>{totalGames}</div>
@@ -734,7 +765,6 @@ function PlayerExtraInfo({ style, extraInfo, filterModes }) {
             </div>
         )}
     </div>
-    
 }
 
 function Members({ members }) {
@@ -797,6 +827,8 @@ function Rank({ style, rank }) {
         return m + ' ' + sw(rn)
     }
 
+    const cl = `fa fa-lg fa-caret-${showMembers ? 'down' : 'right'}`
+
     return <div style={style}>
         {rank.members.length > 1
             ? <div>
@@ -807,9 +839,9 @@ function Rank({ style, rank }) {
                     <i
                         style={{
                             color: 'lime',
-                            marginRight: '1rem',
+                            marginRight: '.2em',
                         }}
-                        className={`fa fa-lg fa-caret-${showMembers ? 'down' : 'right'}`}
+                        className={cl}
                     />
                     {rank.name}
                 </span>
@@ -834,12 +866,11 @@ function Team({ filterModes, players, extraInfo }) {
                 key={p.profileId + i}
                 player={p}
                 filterModes={filterModes}
-                extraInfo={extraInfo 
+                extraInfo={extraInfo
                         && p.profileId ? extraInfo[p.profileId] : null}
             />
         ))}
     </div>
-    
 }
 
 function Teams({ filterModes, players, extraInfo }) {
@@ -905,8 +936,8 @@ function Navbar({
             />
         )}
         <i
-            className={!settingsView 
-                ? 'fa fa-2x fa-cogs' 
+            className={!settingsView
+                ? 'fa fa-2x fa-cogs'
                 : 'fa fa-2x fa-times'
             }
             style={{
@@ -939,7 +970,6 @@ function Filter({ setFilterModes, filterModes }) {
         onChange={filterHandler}
         value={filterModes}
     />
-    
 }
 
 function UpdateBar() {
@@ -1029,7 +1059,7 @@ function UpdateBar() {
             </div>
             : null
         }
-    </div> 
+    </div>
 }
 
 function MainView({
@@ -1041,6 +1071,7 @@ function MainView({
     extraInfo,
     filterModes,
 }) {
+
     return <div>
         {!settingsView
             ? <Teams
@@ -1086,8 +1117,8 @@ function App() {
         })
         setExtraInfo(null)
         writeRankings(
-            data, 
-            settings.rankingFileLocation, 
+            data,
+            settings.rankingFileLocation,
             'writeNewRankingsFile'
         )
     }
@@ -1111,7 +1142,7 @@ function App() {
                 if (isReplay) {
                     let newPlayers = []
                     teams.forEach(team => {
-                        team.forEach(player => {                                
+                        team.forEach(player => {
                             newPlayers.push(player)
                         })
                     })
@@ -1120,8 +1151,8 @@ function App() {
                         fromFile: info.fromFile,
                     })
                     writeRankings(
-                        newPlayers, 
-                        settings.rankingFileLocation, 
+                        newPlayers,
+                        settings.rankingFileLocation,
                         'useEffect'
                     )
 
@@ -1203,8 +1234,6 @@ function App() {
         }
     }
 
-    
-
     return <main style={{ marginTop: '4em' }} >
         <Navbar
             extraInfo={extraInfo}
@@ -1224,7 +1253,6 @@ function App() {
         />
         <UpdateBar />
     </main>
-    
 }
 
 ReactDOM.render(<App />, document.getElementById('root'))

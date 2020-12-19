@@ -1,0 +1,1325 @@
+RELICCOH2 started at 2020-12-03 08:29
+OS Win 10.0 (sp0.0) x64, 16316MB Physical Memory, 10369 Physical Available, 4095 Virtual Total, 3914 Virtual Available, 2432 Page file.
+RUN-OPTIONS [-nomovies -window -forceactive -lockMouse]
+WORKING-DIR [C:\Program Files (x86)\Steam\steamapps\common\Company of Heroes 2]
+USER [Sergei]
+LOCALE [FIN]
+
+08:29:28.75   GAME -- Current Steam name is [sepi]
+08:29:28.75   GAME -- steam returned language 'english'
+08:29:28.76   Primary CPU is a 3200MHz [AMD Ryzen 5 1600 Six-Core Processor            ]
+08:29:28.76   Architecture [0], Level [23], Revision [257].
+08:29:28.76   12 logical processor(s) detected.
+08:29:28.76   6 physical processor(s) detected.
+08:29:28.76   1 processor(s) nodes detected.
+08:29:28.76   MATHBOX -- Version=6, Mode=SSE
+08:29:28.76   Using [C:\Users\Sergei\Documents\My Games\Company of Heroes 2\] as base writable folder
+08:29:28.76   Game -- System temp path is [C:\Temp\]
+08:29:28.78   MOD -- Initializing mod 'RelicCoH2'.
+08:29:28.83   ARC -- CoH2\Archives\Data.sga 934868737 B [ID:3f9691c3371ee5335e5869d3a0d93406] [Ver:9304c8dbf1724fdbb9b880043a5872ea] [Sig:1138031775656209991]
+08:29:28.86   ARC -- CoH2\Archives\Sound.sga 228830651 B [ID:9246d5cc8bf2de31ead8251719e1e576] [Ver:5d538532f09a12ba850fc138604d90f6] [Sig:8524121488149815030]
+08:29:28.88   ARC -- CoH2\Archives\SoundXP1.sga 21693342 B [ID:9246d5cc8bf2de31ead8251719e1e576] [Ver:9d448119eea20f8d46d7ca91ec744b64] [Sig:11623608031005062619]
+08:29:28.89   ARC -- CoH2\Archives\ArtArmies.sga 57561496 B [ID:d4ab83d0ba0afd4850bbc4c68b0de2be] [Ver:4d35d45e0ca25883ffd101f6e7756a75] [Sig:15971162909323790790]
+08:29:28.91   ARC -- CoH2\Archives\ArtEnvironment.sga 1261847418 B [ID:4f6a38d9c40d3e11956b769b00d6e689] [Ver:1e466317017b89b3b6abc1e660158aca] [Sig:2987429791343530539]
+08:29:28.92   ARC -- CoH2\Archives\ArtGermanEF.sga 2933248568 B [ID:fb66b7917c474a33e86456a40dbf2c3a] [Ver:1ce5e722b2b1083d1fda20d6d27d8138] [Sig:17163876218381474211]
+08:29:28.94   ARC -- CoH2\Archives\ArtSovietEF.sga 3874094760 B [ID:b0e52e8ac61727b4a5101571c7e7110f] [Ver:b900563d3d67bc75519fe3f06ae97c87] [Sig:8123542430233781353]
+08:29:28.95   ARC -- CoH2\Archives\ArtAEF.sga 1140832185 B [ID:fd7aa5f8e53fa6a558246d44bedd4cfe] [Ver:dae4ef071b679ada5ef7da57f1650576] [Sig:6869274613505808193]
+08:29:28.96   ARC -- CoH2\Archives\ArtAEFSkins.sga 4286146719 B [ID:ab441482fcc7ddcd25e040085b81d68f] [Ver:a97f86ebe2bfa48123a111b0684b6190] [Sig:10657079685989519814]
+08:29:28.97   ARC -- CoH2\Archives\ArtWestGerman.sga 3677233788 B [ID:9ff4d0503a24bdca4dbe1104f7ff37f2] [Ver:5184b7dedf3b1306a11fdd7c4eddaecf] [Sig:11965138268928265446]
+08:29:28.99   ARC -- CoH2\Archives\SoundXP2.sga 199001 B [ID:9246d5cc8bf2de31ead8251719e1e576] [Ver:f366468fa94af97a5c1162b6e2d15048] [Sig:10774136334522067768]
+08:29:29.00   ARC -- CoH2\Archives\ArtBritish.sga 1881461665 B [ID:391ad53485bf023c2e0f5d508470e0ef] [Ver:fe39aed086974b887b0226f3a27b02ff] [Sig:9116098201042581152]
+08:29:29.00   Archive 'CoH2\Archives\Autotest' is missing! Skipping.
+08:29:29.01   ARC -- CoH2\Archives\MPScenarios.sga 1759948512 B [ID:f361bb544d19f9ad0702abba3ec58d36] [Ver:3a1c9ad50a7856504ce0edd99239b64c] [Sig:6775182361582889461]
+08:29:29.03   ARC -- CoH2\Archives\MPXP1Scenarios.sga 269790819 B [ID:8a2c949c3e230925cf294a12321e9211] [Ver:5ac22a7e5353206a3a22a1dc55c2b390] [Sig:17297509811321721924]
+08:29:29.04   ARC -- CoH2\Archives\SPScenariosEF.sga 340823058 B [ID:4a2cbc10218aac5e8be4aa494ef1f3ca] [Ver:8d5319d7d263dc71b339d0e9eb0749e6] [Sig:2663722838476071541]
+08:29:29.06   ARC -- CoH2\Archives\TOWScenarios.sga 202972788 B [ID:035c09486ef2563f69e781962b46c2e4] [Ver:4af5f9991f7439515903c4e823eb6d5b] [Sig:15664664613644561291]
+08:29:29.07   ARC -- CoH2\Archives\DLC1Scenarios.sga 57382901 B [ID:afbdc084e5c98c193cae218ca8e468c8] [Ver:835075f6a5f1e80e222870afaa2dba63] [Sig:2003273899295354318]
+08:29:29.09   ARC -- CoH2\Archives\DLC2Scenarios.sga 77535344 B [ID:61eefbc53442d10441d77bbd23b1bc36] [Ver:2a89f0387fad0a4511b4cff6e31dad70] [Sig:7602096073382315002]
+08:29:29.10   ARC -- CoH2\Archives\DLC3Scenarios.sga 47253904 B [ID:48c74893c09599be2d61b911563bcab9] [Ver:0d32db24ed4fe982dd70a7b408127123] [Sig:14104588085748238941]
+08:29:29.10   Archive 'CoH2\Archives\SPScenariosAA' is missing! Skipping.
+08:29:29.11   ARC -- CoH2\Archives\UIHigh.sga 70319893 B [ID:097c8294ec5ed0723b16d8e06f606718] [Ver:638410e4c3c38b38b923ebfbf5d53ea5] [Sig:12202169395001433784]
+08:29:29.14   ARC -- CoH2\Archives\ArtHigh.sga 315847340 B [ID:d3bf60728712cf58911b326bde74de8f] [Ver:847622c90833749464691f53f5551808] [Sig:5409437059135526689]
+08:29:29.15   ARC -- CoH2\Archives\ArtHighXP1.sga 38526653 B [ID:d3bf60728712cf58911b326bde74de8f] [Ver:492a236c5c9b8d70491763cec03b4772] [Sig:3557666920090964639]
+08:29:29.16   ARC -- CoH2\Archives\ArtHighXP2.sga 19687049 B [ID:d3bf60728712cf58911b326bde74de8f] [Ver:06478f3805ceebd8fb602339a6ba9c37] [Sig:15122607373192102247]
+08:29:29.18   ARC -- CoH2\Archives\SoundHigh.sga 1031467146 B [ID:3730f31a8f731e6cbc26a00244f571cc] [Ver:a12e581cdaa369cbc269c9ecce6390f7] [Sig:18214921420031089867]
+08:29:29.19   ARC -- CoH2\Archives\SoundHighXP1.sga 89990965 B [ID:3730f31a8f731e6cbc26a00244f571cc] [Ver:1cc1bf361529d9db2191610baac4fa3e] [Sig:5801087545420265863]
+08:29:29.20   ARC -- CoH2\Archives\SoundHighXP2.sga 37088744 B [ID:3730f31a8f731e6cbc26a00244f571cc] [Ver:4cfa3cc7075c50a459ea894027042002] [Sig:10443542780852497330]
+08:29:29.23   ARC -- CoH2\Archives\SoundSpeechEnglish.sga 560293192 B [ID:527dd6c09d9403281e2886d358abf509] [Ver:9a7462132b8b852d1d72cb0b257d179c] [Sig:1825285703711461]
+08:29:29.25   ARC -- CoH2\Archives\SoundSPSpeechEFEnglish.sga 156636969 B [ID:9347118f8eb48257082ac67d7e00c15b] [Ver:54dde0af87a44506b2be5ba79188c95a] [Sig:1272187853708733765]
+08:29:29.26   ARC -- CoH2\Archives\SoundSpeechDLCEnglish.sga 32966778 B [ID:d37d3bfe48368bcdb2c411ff42ef8710] [Ver:b433112008e82a573ba71d453775932d] [Sig:334711823410206087]
+08:29:29.29   ARC -- CoH2\Archives\SoundSpeechXP1English.sga 707027968 B [ID:a1f1b169de1b782d9d5b7311ab866728] [Ver:1b2ae23d21ac080b04a8e4d3583b3243] [Sig:850014712724766770]
+08:29:29.29   Archive 'CoH2\Archives\SoundSpeechAAEnglish' is missing! Skipping.
+08:29:29.31   ARC -- CoH2\Archives\SoundSpeechXP2English.sga 153241711 B [ID:8bb786e9b6bc36e64e1a83cb83e26f4a] [Ver:3e936bc4ca5d3d43ac80ba8a1b0a5d80] [Sig:2614238819969098953]
+08:29:29.34   ARC -- CoH2\Archives\AttribArchive.sga 28511327 B [ID:abe931d3adfbab4e871d2dacd29916d3] [Ver:3cfd986f20fa84263831bf1bf89fd62e] [Sig:17172531547763164683]
+08:29:29.48   GAME -- Resetting fp control word.
+08:29:31.38   WW2Mod -- PropertyBagManager Loaded in 1.891000s
+08:29:31.39   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\scenarios\subscriptions\205676637.sga 5347930 B [ID:4efb99ce08b791f380f0954ad428d309] [Ver:cf6378a6d5bf272758071a90b4b28a62] [Sig:0]
+08:29:31.39   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\scenarios\subscriptions\274345728.sga 20144410 B [ID:9ca44e4db6f8a4156f7c13e553653b21] [Ver:1e5fb6e262beccb8a026919f148498b4] [Sig:0]
+08:29:31.40   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\scenarios\subscriptions\379622197.sga 16593772 B [ID:4b46f16b864057e76f80b1351527eddf] [Ver:33e9a118544f4e0934c8b6e5e3e6cd1c] [Sig:0]
+08:29:31.41   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\scenarios\subscriptions\551682347.sga 15762009 B [ID:83def636bd8dea6c6492cca0d510ef59] [Ver:98798226d99ec6060a1a51b8828f5479] [Sig:0]
+08:29:31.42   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\tuning\subscriptions\1188134341.sga 12460636 B [ID:32d542de1479464f922dff46e65be6e2] [Ver:136a9a042060cfa435783426e808a8a0] [Sig:0]
+08:29:31.73   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\gamemode\subscriptions\333763272.sga 1255795 B [ID:77d2aff43aa04b05857ed9e310a0c1e0] [Ver:8d4dc2298f9487cf2f88ad3a577386d4] [Sig:0]
+08:29:31.76   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\gamemode\subscriptions\340863372.sga 1031659 B [ID:9f17d0228db14a9b8bf62d96a29116ef] [Ver:121417a399c531e015fc7df455709be6] [Sig:0]
+08:29:31.77   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\gamemode\subscriptions\394197460.sga 637320 B [ID:1045455c41364bb286b5accc00b07504] [Ver:bf5a22a147f0cc421ebeb44dd77e3389] [Sig:0]
+08:29:31.78   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\gamemode\subscriptions\692412438.sga 3351007 B [ID:5ed2ead7bbf94c01833685dfa1f23ac1] [Ver:60ff095ec12e8b8dfa71a870acc1238d] [Sig:0]
+08:29:31.79   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\skins\subscriptions\480561877.sga 102381303 B [ID:7657c36032eb4e4fbb4c92578d6efce1] [Ver:4f0d5de481fb9b56095f6b9b26a2b675] [Sig:0]
+08:29:31.80   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\skins\subscriptions\482561139.sga 54140431 B [ID:152282cabf6946828716c6c2b52dc7d4] [Ver:934cd437642717266817f35f2550ba6f] [Sig:0]
+08:29:31.81   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\skins\subscriptions\491532663.sga 49195745 B [ID:aae494d0ef4746549ecd36b8be4ae86e] [Ver:e4b58c31879fb57676cdf07e87f203fb] [Sig:0]
+08:29:31.82   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\skins\subscriptions\493340820.sga 22362429 B [ID:606ec6d745d84f7da2bf299b6277f5be] [Ver:6bd222b87d0208887d5f195b7a3b0669] [Sig:0]
+08:29:31.83   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\skins\subscriptions\494028110.sga 45773825 B [ID:60217b0e7d554ef49ecdb89f45f5d793] [Ver:5843087a13d043a1cf22d3155a77d78b] [Sig:0]
+08:29:31.84   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\skins\subscriptions\525871988.sga 65357224 B [ID:6e9686bcda67440ab494fc73693a3910] [Ver:d3a181aede035678b53036ab82ff4be1] [Sig:0]
+08:29:31.84   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\skins\subscriptions\533181507.sga 62716414 B [ID:195b763a225048eda72ac85eab111201] [Ver:b76bb78de99781b4d7c2f140950f7f1c] [Sig:0]
+08:29:31.85   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\skins\subscriptions\547696960.sga 56336358 B [ID:77b7b31488ba4f72bca553b4a60c5cb6] [Ver:8b44835262e7d0eff7be4bcabd323faa] [Sig:0]
+08:29:31.86   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\skins\subscriptions\550217153.sga 57454560 B [ID:dbe94fa2241345d7be672096f9ce433b] [Ver:8adb4582a01678f47cf62b580d69a194] [Sig:0]
+08:29:31.87   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\skins\subscriptions\611481052.sga 23746600 B [ID:d8183fb4885a473bbc10b9409f254164] [Ver:bb8522dac6a032b2eb663e5d663388d8] [Sig:0]
+08:29:31.88   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\skins\subscriptions\731960136.sga 72176254 B [ID:63ae594215e3493dbe7f4928a9a33690] [Ver:93fac6742e1a1464038392f2f7556f7c] [Sig:0]
+08:29:31.90   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\464056305.sga 174486 B [ID:892006aaef4645f0af4e83024c18367a] [Ver:d95c7d7e1f4391e884c2d6e96041ec73] [Sig:0]
+08:29:31.90   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\467913090.sga 2064606 B [ID:7b6666c094464d38a8d11f71c305fb1a] [Ver:94f9b61c4aef8c8693778b16a9f97ffe] [Sig:0]
+08:29:31.91   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\467917878.sga 1164069 B [ID:d7a4ccb12c1d47f18b0aa95c1e1aafc2] [Ver:d8c509c5186c04b9346bff64ffa1bc2d] [Sig:0]
+08:29:31.92   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\467951411.sga 1384753 B [ID:377c96ffe8484d1980d7781ea5e1ae60] [Ver:c63f5c704539fc30d9a606017cf2e31e] [Sig:0]
+08:29:31.93   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\468071873.sga 1005717 B [ID:cc55389ea2704661ae0e6bc121ce3bc3] [Ver:b39702bccc8e14aa9c49d526da630fcc] [Sig:0]
+08:29:31.94   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\468439899.sga 162810 B [ID:0b194c262900407db742f19658f56f9a] [Ver:8ecd1a7a247662e059412150ec7ec305] [Sig:0]
+08:29:31.95   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\470379141.sga 1505207 B [ID:38eba702bb8c4e0d93b31cb9547eba38] [Ver:450245451b7f958645094a3dcdf95253] [Sig:0]
+08:29:31.96   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\470894049.sga 2559977 B [ID:db6ec4ab20f04ac9bf84c55ee9e77af7] [Ver:3bc658a7f8a6d12ee98adcee22c24933] [Sig:0]
+08:29:31.97   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\470936393.sga 327260 B [ID:4dda4c334fd942f18db25d38e0a3addb] [Ver:6afbaab53280d6850ed3991a1128893f] [Sig:0]
+08:29:31.98   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\478277657.sga 1255708 B [ID:a93258fadd2f442f94a1fec3e24b8723] [Ver:86e0830c53f56f5201bef23867178185] [Sig:0]
+08:29:32.05   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\485828861.sga 2790341 B [ID:391fc609b2ec4438ae24ee8135eb60cd] [Ver:a5062cfaa9e6c0f1a43f3672577e89bf] [Sig:0]
+08:29:32.07   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\511323957.sga 216944 B [ID:b955bd0241874347b3f36fe36542c50c] [Ver:b20841560efea435965abdb628550d8c] [Sig:0]
+08:29:32.08   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\514117740.sga 330853 B [ID:e2a94ba909c84452a77f6e744ad0cd2b] [Ver:c09e40c8b7c000db03048af67e1d6759] [Sig:0]
+08:29:32.09   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\514183955.sga 1501458 B [ID:4b4868f0ce91423c91cc5b62d15af56a] [Ver:43854a0523ad4e6ba6a831658a636228] [Sig:0]
+08:29:32.10   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\528670556.sga 117188 B [ID:b15d4a3abe1146139ff6b3b8b7323b9a] [Ver:ec4108ed495d26aebbe6e8ecb919168b] [Sig:0]
+08:29:32.11   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\faceplates\subscriptions\1262553764.sga 63756 B [ID:9c4e4403b18940cdb7f41a0362a853c5] [Ver:bee491054d3cb974cdcc5842ca5960f8] [Sig:0]
+08:29:32.12   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\faceplates\subscriptions\468128411.sga 126968 B [ID:9c96eb338bd64adca6739a9777493250] [Ver:a7f590d6c97726068c304b449a918b9b] [Sig:0]
+08:29:32.13   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\faceplates\subscriptions\470402623.sga 69209 B [ID:b9e9629fad114176840815e9c20fc456] [Ver:10e854a1293772bad29bd0db1b25db3c] [Sig:0]
+08:29:32.14   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\faceplates\subscriptions\470600676.sga 95630 B [ID:13325c05ee4347f38744129854f95fe7] [Ver:8254244c3e53d25e095120720a81cccd] [Sig:0]
+08:29:32.15   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\faceplates\subscriptions\472383614.sga 101331 B [ID:7b816b0bd87449bc8576eae559b447db] [Ver:3e203993857bb81542178b87a77abf96] [Sig:0]
+08:29:32.16   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\faceplates\subscriptions\507222103.sga 49327 B [ID:72b276432f0e41e889b1c9d005ac8cba] [Ver:89b473f592fc23561a0d23910d01196e] [Sig:0]
+08:29:32.17   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\faceplates\subscriptions\516763618.sga 83920 B [ID:2273fd2797954a56b06d2d7e65fc96f6] [Ver:72a6ad53414aa39b0c61672df7f7db7d] [Sig:0]
+08:29:32.18   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\faceplates\subscriptions\630257845.sga 201488 B [ID:1ac42354c5774bcc835626b472223c1a] [Ver:4845896039175230974e14a2a9ee0043] [Sig:0]
+08:29:32.19   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\fatalities\subscriptions\468071960.sga 58371 B [ID:f400fbf051fd4135a79db6dd4caf2b52] [Ver:a7a38694d48372d190046d04441bb87f] [Sig:0]
+08:29:32.20   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\fatalities\subscriptions\468188799.sga 43531 B [ID:ac2f6e1927ef4cc3be8e244cc3207c18] [Ver:37d1824db192802c3b80913c229ca017] [Sig:0]
+08:29:32.21   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\fatalities\subscriptions\503270226.sga 52608 B [ID:21371f92502b4a079bdc4e64ad60ac8e] [Ver:117e5459beb0b0d0053f2a9166f8a53f] [Sig:0]
+08:29:32.24   GameApp::InitSteam: steam already initialized
+08:29:32.24   SteamApps->BGetDLCDataByIndex - failed, index: 1/76
+08:29:32.25   SteamApps->BGetDLCDataByIndex - failed, index: 42/76
+08:29:32.25   SteamApps->BGetDLCDataByIndex - failed, index: 44/76
+08:29:32.25   SteamApps->BGetDLCDataByIndex - failed, index: 45/76
+08:29:32.25   SteamApps->BGetDLCDataByIndex - failed, index: 46/76
+08:29:32.25   SteamApps->BGetDLCDataByIndex - failed, index: 47/76
+08:29:32.25   SteamApps->BGetDLCDataByIndex - failed, index: 48/76
+08:29:32.25   SteamApps->BGetDLCDataByIndex - failed, index: 49/76
+08:29:32.25   SteamApps->BGetDLCDataByIndex - failed, index: 50/76
+08:29:32.25   SteamApps->BGetDLCDataByIndex - failed, index: 51/76
+08:29:32.25   SteamApps->BGetDLCDataByIndex - failed, index: 52/76
+08:29:32.25   SteamApps->BGetDLCDataByIndex - failed, index: 57/76
+08:29:32.25   SteamApps->BGetDLCDataByIndex - failed, index: 58/76
+08:29:32.25   SteamApps->BGetDLCDataByIndex - failed, index: 59/76
+08:29:32.25   SteamApps->BGetDLCDataByIndex - failed, index: 60/76
+08:29:32.25   SteamApps->BGetDLCDataByIndex - failed, index: 62/76
+08:29:32.25   SteamApps->BGetDLCDataByIndex - failed, index: 63/76
+08:29:32.25   NetworkManager::Create - creating network manager
+08:29:33.32   WorldwideLoginService::WorldwideLoginService - initializing
+08:29:33.33   Opened the CA system store.
+08:29:33.33   Certificate for Microsoft Root Certificate Authority has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for Thawte Timestamping CA has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for Microsoft Root Authority has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for Symantec Enterprise Mobile Root for Microsoft has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for Microsoft Root Certificate Authority 2011 has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for Microsoft Authenticode(tm) Root Authority has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for Microsoft Root Certificate Authority 2010 has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for Microsoft ECC TS Root Certificate Authority 2018 has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for Copyright (c) 1997 Microsoft Corp. has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for NO LIABILITY ACCEPTED, (c)97 VeriSign, Inc. has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for DESKTOP-2VKVKQ2 has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for Microsoft ECC Product Root Certificate Authority 2018 has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for Blizzard Battle.net Local Cert has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for Microsoft Time Stamp Root Certificate Authority 2014 has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for thawte Primary Root CA - G3 has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for UTN-USERFirst-Object has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for DigiCert Global Root G2 has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for DST Root CA X3 has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for GlobalSign has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for Baltimore CyberTrust Root has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for AAA Certificate Services has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for USERTrust ECC Certification Authority has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for Entrust Root Certification Authority has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for GlobalSign Root CA has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for COMODO RSA Certification Authority has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for Starfield Class 2 Certification Authority has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for DigiCert Global Root CA has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for Entrust Root Certification Authority - G2 has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for SecureTrust CA has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for DigiCert Global Root G3 has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for GlobalSign has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for Class 3 Public Primary Certification Authority has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for Certum CA has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for DigiCert High Assurance EV Root CA has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for T-TeleSec GlobalRoot Class 2 has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for D-TRUST Root Class 3 CA 2 2009 has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for Hotspot 2.0 Trust Root CA - 03 has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for VeriSign Class 3 Public Primary Certification Authority - G5 has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for Go Daddy Root Certificate Authority - G2 has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for TeliaSonera Root CA v1 has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for VeriSign Universal Root Certification Authority has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for USERTrust RSA Certification Authority has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for Go Daddy Class 2 Certification Authority has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for GlobalSign has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for QuoVadis Root CA 2 G3 has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for Certum Trusted Network CA has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for DigiCert Assured ID Root CA has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   Certificate for AddTrust External CA Root has been retrieved.
+08:29:33.33   successfully decoded into x509
+08:29:33.33   48 certificates loaded
+08:29:33.33   WinTransport - CreateSocket exclusive broadcast socket was available.
+08:29:33.33   WinTransport - CreateSocket listening for broadcasts on default port
+08:29:33.33   RLink::WorldwideLoginService::LongPoller::ThreadFunction - Entering network thread function...
+08:29:33.34   WinTransport - Host Name: DESKTOP-2VKVKQ2, aliases: , type=AF_INET, len=4
+08:29:33.34   WinTransport - Host IP Address #0: 172.24.160.1
+08:29:33.34   WinTransport - Host IP Address #1: 192.168.56.1
+08:29:33.34   WinTransport - Host IP Address #2: 172.31.160.1
+08:29:33.34   WinTransport - Host IP Address #3: 192.168.1.2
+08:29:33.34   WinTransport - WARNING, MultipleNetwork adapters may cause problems
+08:29:33.34   WinTransport - Interface #0: ip:127.0.0.1, broadcast:127.0.0.1, flags=IFF_UP IFF_LOOPBACK IFF_MULTICAST
+08:29:33.34   WinTransport - Interface #1: ip:192.168.1.2, broadcast:192.168.1.2, flags=IFF_UP IFF_BROADCAST IFF_MULTICAST
+08:29:33.34   WinTransport - Interface #2: ip:172.31.160.1, broadcast:172.31.160.1, flags=IFF_UP IFF_BROADCAST IFF_MULTICAST
+08:29:33.34   WinTransport - Interface #3: ip:192.168.56.1, broadcast:192.168.56.1, flags=IFF_UP IFF_BROADCAST IFF_MULTICAST
+08:29:33.34   WinTransport - Interface #4: ip:172.24.160.1, broadcast:172.24.160.1, flags=IFF_UP IFF_BROADCAST IFF_MULTICAST
+08:29:33.34   Transport::OpenInternal request to WINaddr:255.255.255.255:6112;
+08:29:33.34   SessionManager - Peer Header Size = 15 bytes
+08:29:33.34   SessionManager - Game Data overhead = 4 bytes
+08:29:33.34   SessionManager - Proxy overhead = 7 bytes
+08:29:33.34   RLink::ThreadFunction - Entering network thread function...
+08:29:33.37   Not able to open the offline items file
+08:29:33.37   AutomatchInternal: Instantiating
+08:29:33.37   MessageInternal::CreateChannel: Created channel fffffffe
+08:29:33.37   MessageInternal::CreateChannel: Created channel fffffffb
+08:29:33.37   MessageInternal::CreateChannel: Created channel fffffffd
+08:29:33.37   Not able to open the offline items file
+08:29:33.37   MessageInternal::CreateChannel: Created channel 00000001
+08:29:33.37   MessageInternal::CreateChannel: Created channel 00000002
+08:29:33.37   MessageInternal::CreateChannel: Created channel 00000003
+08:29:33.37   MessageInternal::CreateChannel: Created channel 00000004
+08:29:33.37   MessageInternal::CreateChannel: Created channel 00000005
+08:29:33.37   MessageInternal::CreateChannel: Created channel 00000006
+08:29:33.37   MessageInternal::CreateChannel: Created channel 00000007
+08:29:33.37   MessageInternal::CreateChannel: Created channel 00000008
+08:29:33.37   MessageInternal::CreateChannel: Created channel 00000009
+08:29:33.37   MessageInternal::CreateChannel: Created channel 0000000a
+08:29:33.56   GAME -- Company Of Heroes 2, Build [4.0.0.23468], Language [english]
+08:29:33.56   Plat::Win32  -- Desktop PPI 96,  DPI Scaling: 1.000000
+08:29:34.06   SPDx11 -- Adapter [NVIDIA GeForce GTX 1060 3GB]: 2988MB dedicated video memory, 0MB dedicated system memory and 1107MB shared system memory.
+08:29:34.06   OPTION -- effectsdensity: 0
+08:29:34.06   OPTION -- effectsfidelity: 0
+08:29:34.06   OPTION -- modeldetail: 0
+08:29:34.06   OPTION -- postprocessing: 0
+08:29:34.06   OPTION -- raindetail: 0
+08:29:34.06   OPTION -- reflections: 0
+08:29:34.06   OPTION -- ambocclquality: 0
+08:29:34.06   OPTION -- shadows: 0
+08:29:34.06   OPTION -- shrubsdetail: 0
+08:29:34.06   OPTION -- terraindetail: 0
+08:29:34.06   OPTION -- snowdetail: 1
+08:29:34.06   OPTION -- antialiasing: 0
+08:29:34.06   OPTION -- verticalsync: 1
+08:29:34.06   OPTION -- physics: 0
+08:29:34.06   OPTION -- texturedetail: 3
+08:29:34.06   OPTION -- worldviewquality: 2
+08:29:34.06   OPTION -- modelanimationdetail: 1
+08:29:34.07   SPOOGE - Driver[DirectX11_Rendering_Device] version[4,37]
+08:29:34.07   GAME -- Desktop refresh rate is 60.000000Hz
+08:29:34.07   GAME -- Configuration selected refresh rate is (60.000000Hz) 60000/1000
+08:29:34.07   GAME -- Final selected refresh rate 60.000000Hz
+08:29:34.07   GAME -- Resolution set to 1920x1080 (windowed) it will be @ (60.000000Hz) 60000/1000 in fullscreen
+08:29:34.17   SPDx11 -- New Device RefCount [2], New DeviceContext RefCount [1]
+08:29:34.17   SPDx11 -- Adapter Description = NVIDIA GeForce GTX 1060 3GB
+08:29:34.17   SPDx11 -- Driver Vendor = 0x000010de  Device = 0x00001c02  SubSys = 0x11c210de  Rev = 0x000000a1
+08:29:34.17   SPDx11 -- Driver Version  Product = 27  Version = 21  SubVersion = 0  Build = 451.48
+08:29:34.17   SPDx11 -- Driver LUID = 0x00000000-0x0000a014
+08:29:34.17   SPDx11 -- 2988MB dedicated video memory, 0MB dedicated system memory and 1107MB shared system memory available.
+08:29:34.17   SPDx11 -- [1] GPUs found.
+08:29:34.17   ShaderDatabase: using shader profile [ps50]
+08:29:34.24   Unable to load shader [coh2_impostor_billboard] so replacing with [defaultshader]
+08:29:34.38   SPDx11 -- CreateSwapChain: 1920x1080 @ 60000/1000Hz (60.000000Hz). Sample count/quality: 1/0. Back buffers: 2.
+08:29:34.38   SPDx11 -- Actual SwapChain buffer set by DXGI: 1920x1080 @ 60000/1000Hz = Refresh Rate: 60.00
+08:29:34.38   SPDx11 -- ResizeTarget: 1920x1080 @ 60000/1000Hz = Refresh Rate: 60.00
+08:29:34.38   SPDx11 -- Setting SwapChain State to: WINDOW
+08:29:34.38   SPDx11 -- Actual SwapChain buffer set by DXGI: 1920x1080 @ 60000/1000Hz = Refresh Rate: 60.00
+08:29:34.38   SPDx11 -- Resizing target to make sure Refresh rate is set properly after FullScreen mode change
+08:29:34.38   SPDx11 -- ResizeTarget: 1920x1080 @ 0/0Hz = Refresh Rate: 0.00
+08:29:34.38   SPDx11 -- Actual SwapChain buffer set by DXGI: 1920x1080 @ 60000/1000Hz = Refresh Rate: 60.00
+08:29:34.42   SPDx11 -- device requires no additional virtual address space textures.
+08:29:34.42   SPDx11 -- Setting SwapChain State to: WINDOW
+08:29:34.42   SPDx11 -- Actual SwapChain buffer set by DXGI: 1920x1080 @ 60000/1000Hz = Refresh Rate: 60.00
+08:29:34.42   SPDx11 -- Resizing target to make sure Refresh rate is set properly after FullScreen mode change
+08:29:34.42   SPDx11 -- ResizeTarget: 1920x1080 @ 0/0Hz = Refresh Rate: 0.00
+08:29:34.42   SPDx11 -- Actual SwapChain buffer set by DXGI: 1920x1080 @ 60000/1000Hz = Refresh Rate: 60.00
+08:29:34.48   SPDx11 -- GPU can do [21491] pixels per usecond.  At [1920x1080x1] this is [10364] screens per second. with a CPU overhead of [0.000000] ms, GPU Usage Time [4.631328] ms, QueryWaitCPU time [6.000000] ms
+08:29:34.86   SPDx11 -- GPU can do [187] pixels per usecond.  At [1024x1024x1] this is [178] screens per second. with a CPU overhead of [0.000000] ms, GPU Usage Time [22.421503] ms, QueryWaitCPU time [24.000000] ms
+08:29:34.86   FILESYSTEM -- filepath failure, missing alias 'TOOLSDATA:autoloddecimator.lua'
+08:29:35.00   SOUND -- Initializing ...
+08:29:35.10   INNIMapDCA Key not found: tiger_radio_fuzz::objectdistance
+08:29:35.11   INNIMapDCA Key not found: Reverb_Forest_Subtle::Distance
+08:29:35.13   INNIMapDCA Key not found: metamap_result
+08:29:35.32   INNIMapDCA Key not found: rudders_rotation
+08:29:35.63   SOUND -- Initialization completed!
+08:29:35.72   SCENARIO -- Failed to open stream for Scenario 'DATA:scenarios\tow\challenges\1942_airfield\allied_airfield.info'
+08:29:35.74   SCENARIO -- Failed to open stream for Scenario 'DATA:scenarios\tow\scenarios\1941_moscow\1941_moscow_art_v1_ro.info'
+08:29:35.75   SCENARIO -- Failed to open stream for Scenario 'DATA:scenarios\sp\coh2_campaign\m02-scorched_earth\scorched_earth_02_03nis.info'
+08:29:35.77   SCENARIO -- Failed to open stream for Scenario 'DATA:scenarios\mp\2p_cheneux\2p_cheneux_temp.info'
+08:29:35.85   SCENARIO -- Failed to open stream for Scenario 'DATA:scenarios\mp\4p_gelsenkirchen_refinery\4p_gelsenkirchen_refinery_temp.info'
+08:29:35.89   SCENARIO -- Failed to open stream for Scenario 'DATA:scenarios\mp\6p_across_the_rhine\6p_across_the_rhine_temp.info'
+08:29:35.92   SCENARIO -- Failed to open stream for Scenario 'DATA:scenarios\mp\8p_port_of_hamburg\8p_port_of_hamburg_2.info'
+08:29:35.94   SCENARIO -- Failed to open stream for Scenario 'DATA:scenarios\mp\outsourcing_winter\outsourcing_winter.info'
+08:29:39.08   GameObjLoader 12998400 - resetting counters
+08:29:39.08   GameObjLoader 12998400 - Created loader
+08:29:39.08   GameObjLoader 129983c0 - resetting counters
+08:29:39.08   GameObjLoader 129983c0 - Created loader
+08:29:39.78   CRC & Version Info : exe 0x00005bac:data 0xb87e630b
+08:29:39.78   Initializing Scaleform D3D11 HAL
+08:29:43.29   SFLoader -- UI DATA:UI\Bin\COH2UI.gfx loaded in 3.500000s
+08:29:43.30   MUTING SOUNDS
+08:29:44.09   NetworkManager::DispatchEvents() - Warning - Time between calls was 8388 ms
+08:29:44.09   Requesting ticket
+08:29:44.09   SteamAuthManager::GetAuthToken state ID : 1
+08:29:44.41   SteamAuthManager::GetAuthToken state ID : 1
+08:29:44.50   OnRequest app ticket returned N
+08:29:44.50   SteamAuth received ticket at t=11159
+08:29:44.50   SteamAuthManager::GetAuthToken state ID : 2
+08:29:47.36   Found 1 profiles for account /steam/76561198006675368
+08:29:47.36   Found profile: /steam/76561198006675368
+08:29:47.36   RelicLinkListener::OnAccountEvent - AET_Login - Result [0]
+08:29:52.22   NetworkManager::DispatchEvents() - Warning - Time between calls was 2639 ms
+08:29:52.22   ExtensionDoExternalCallEvent (https://garry.sgaas.net:443/event) - response good: 0 bytes,
+08:29:53.84   GetAutomatchMaps: Got [467] maps
+08:29:54.03   FormatInternal - Unable to proceed formatting string [https://ingame.companyofheroes.com/promotions/home#?profile_name=%1PROFILE_NAME%&profile_alias=%2PROFILE_ALIAS%&currency=%3CURRENCY%&country=%4COUNTRY%&lang=%5LANGUAGE%&supply=%6FIRST_PERMANENT_ITEM_1000_DURABILITY%]
+08:29:54.03   FormatInternal - Unable to proceed formatting string [https://ingame.companyofheroes.com/twitch/home#?profile_name=%1PROFILE_NAME%&profile_alias=%2PROFILE_ALIAS%&currency=%3CURRENCY%&country=%4COUNTRY%&lang=%5LANGUAGE%&supply=%6FIRST_PERMANENT_ITEM_1000_DURABILITY%]
+08:29:58.82   Some of the ItemPrices received from the server were removed. Size changed from 9135395440722 to 4621540529029410220
+08:30:00.69   Some of the ItemPrices received from the server were removed. Size changed from 9135395440722 to 4621540529029410220
+08:30:05.46   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\scenarios\subscriptions\205676637.sga 5347930 B [ID:4efb99ce08b791f380f0954ad428d309] [Ver:cf6378a6d5bf272758071a90b4b28a62] [Sig:0]
+08:30:05.67   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\scenarios\subscriptions\274345728.sga 20144410 B [ID:9ca44e4db6f8a4156f7c13e553653b21] [Ver:1e5fb6e262beccb8a026919f148498b4] [Sig:0]
+08:30:06.25   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\gamemode\subscriptions\340863372.sga 1031659 B [ID:9f17d0228db14a9b8bf62d96a29116ef] [Ver:121417a399c531e015fc7df455709be6] [Sig:0]
+08:30:06.42   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\gamemode\subscriptions\692412438.sga 3351007 B [ID:5ed2ead7bbf94c01833685dfa1f23ac1] [Ver:60ff095ec12e8b8dfa71a870acc1238d] [Sig:0]
+08:30:06.72   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\skins\subscriptions\482561139.sga 54140431 B [ID:152282cabf6946828716c6c2b52dc7d4] [Ver:934cd437642717266817f35f2550ba6f] [Sig:0]
+08:30:06.84   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\skins\subscriptions\493340820.sga 22362429 B [ID:606ec6d745d84f7da2bf299b6277f5be] [Ver:6bd222b87d0208887d5f195b7a3b0669] [Sig:0]
+08:30:07.09   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\skins\subscriptions\525871988.sga 65357224 B [ID:6e9686bcda67440ab494fc73693a3910] [Ver:d3a181aede035678b53036ab82ff4be1] [Sig:0]
+08:30:07.34   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\skins\subscriptions\731960136.sga 72176254 B [ID:63ae594215e3493dbe7f4928a9a33690] [Ver:93fac6742e1a1464038392f2f7556f7c] [Sig:0]
+08:30:07.69   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\464056305.sga 174486 B [ID:892006aaef4645f0af4e83024c18367a] [Ver:d95c7d7e1f4391e884c2d6e96041ec73] [Sig:0]
+08:30:07.75   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\467917878.sga 1164069 B [ID:d7a4ccb12c1d47f18b0aa95c1e1aafc2] [Ver:d8c509c5186c04b9346bff64ffa1bc2d] [Sig:0]
+08:30:07.82   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\467951411.sga 1384753 B [ID:377c96ffe8484d1980d7781ea5e1ae60] [Ver:c63f5c704539fc30d9a606017cf2e31e] [Sig:0]
+08:30:08.23   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\468071873.sga 1005717 B [ID:cc55389ea2704661ae0e6bc121ce3bc3] [Ver:b39702bccc8e14aa9c49d526da630fcc] [Sig:0]
+08:30:08.58   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\468439899.sga 162810 B [ID:0b194c262900407db742f19658f56f9a] [Ver:8ecd1a7a247662e059412150ec7ec305] [Sig:0]
+08:30:08.65   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\470379141.sga 1505207 B [ID:38eba702bb8c4e0d93b31cb9547eba38] [Ver:450245451b7f958645094a3dcdf95253] [Sig:0]
+08:30:08.74   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\470894049.sga 2559977 B [ID:db6ec4ab20f04ac9bf84c55ee9e77af7] [Ver:3bc658a7f8a6d12ee98adcee22c24933] [Sig:0]
+08:30:09.08   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\470936393.sga 327260 B [ID:4dda4c334fd942f18db25d38e0a3addb] [Ver:6afbaab53280d6850ed3991a1128893f] [Sig:0]
+08:30:09.13   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\478277657.sga 1255708 B [ID:a93258fadd2f442f94a1fec3e24b8723] [Ver:86e0830c53f56f5201bef23867178185] [Sig:0]
+08:30:09.58   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\485828861.sga 2790341 B [ID:391fc609b2ec4438ae24ee8135eb60cd] [Ver:a5062cfaa9e6c0f1a43f3672577e89bf] [Sig:0]
+08:30:09.94   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\511323957.sga 216944 B [ID:b955bd0241874347b3f36fe36542c50c] [Ver:b20841560efea435965abdb628550d8c] [Sig:0]
+08:30:10.30   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\514117740.sga 330853 B [ID:e2a94ba909c84452a77f6e744ad0cd2b] [Ver:c09e40c8b7c000db03048af67e1d6759] [Sig:0]
+08:30:10.35   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\514183955.sga 1501458 B [ID:4b4868f0ce91423c91cc5b62d15af56a] [Ver:43854a0523ad4e6ba6a831658a636228] [Sig:0]
+08:30:10.66   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\decals\subscriptions\528670556.sga 117188 B [ID:b15d4a3abe1146139ff6b3b8b7323b9a] [Ver:ec4108ed495d26aebbe6e8ecb919168b] [Sig:0]
+08:30:11.01   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\faceplates\subscriptions\468128411.sga 126968 B [ID:9c96eb338bd64adca6739a9777493250] [Ver:a7f590d6c97726068c304b449a918b9b] [Sig:0]
+08:30:11.33   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\faceplates\subscriptions\470402623.sga 69209 B [ID:b9e9629fad114176840815e9c20fc456] [Ver:10e854a1293772bad29bd0db1b25db3c] [Sig:0]
+08:30:11.68   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\faceplates\subscriptions\470600676.sga 95630 B [ID:13325c05ee4347f38744129854f95fe7] [Ver:8254244c3e53d25e095120720a81cccd] [Sig:0]
+08:30:12.01   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\faceplates\subscriptions\472383614.sga 101331 B [ID:7b816b0bd87449bc8576eae559b447db] [Ver:3e203993857bb81542178b87a77abf96] [Sig:0]
+08:30:12.33   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\faceplates\subscriptions\507222103.sga 49327 B [ID:72b276432f0e41e889b1c9d005ac8cba] [Ver:89b473f592fc23561a0d23910d01196e] [Sig:0]
+08:30:12.68   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\faceplates\subscriptions\516763618.sga 83920 B [ID:2273fd2797954a56b06d2d7e65fc96f6] [Ver:72a6ad53414aa39b0c61672df7f7db7d] [Sig:0]
+08:30:13.03   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\fatalities\subscriptions\468188799.sga 43531 B [ID:ac2f6e1927ef4cc3be8e244cc3207c18] [Ver:37d1824db192802c3b80913c229ca017] [Sig:0]
+08:30:13.38   ARC -- C:\Users\Sergei\Documents\My Games\Company of Heroes 2\mods\fatalities\subscriptions\503270226.sga 52608 B [ID:21371f92502b4a079bdc4e64ad60ac8e] [Ver:117e5459beb0b0d0053f2a9166f8a53f] [Sig:0]
+08:30:34.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:31:35.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:32:36.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:33:37.01   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:34:38.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:35:39.01   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:36:40.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:37:41.01   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:38:42.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:39:43.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:40:44.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:41:45.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:42:46.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:43:47.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:44:48.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:45:49.02   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:46:50.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:47:51.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:48:52.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:49:53.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:50:54.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:51:55.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:52:23.51   BT! - SockInit: SOCK_FD_SET_SIZE = 64
+08:52:23.51   DBG - SockConnect: 0/s->stHandle=11356
+08:52:23.51   DBG - SockConnect: 0/11356 connect deferred (in progress)
+08:52:23.66   DBG - SockAnimateAll: socket 0/11356 connection complete.
+08:52:23.87   battleserverrelay - Connected: 
+Connection [ 1/ 1] - local=192.168.1.2:49166, remote=54.84.62.182:27024, type=CONNECT, timeTookToConnectMS=360, silentTimeMS=0, lastSockError=0
+08:52:23.97   starting offline hosting
+08:52:24.04   OnlineHostAsync success
+08:52:24.04   Session::Initialize - info, initializing session object, using threads.
+08:52:24.04   SessionManager::RegisterSession - Registering RL_NEW session 4c5c5788
+08:52:24.04   Created Matchinfo for sessionID 18446744073709551614
+08:52:24.04   OnJoinAdvertisementSuccess - joined online match, server leave notification required
+08:52:24.04   starting local hosting
+08:52:24.04   Transport::OpenInternal request to WINaddr:255.255.255.255:6112;
+08:52:24.04   Allocated route ID=0 for PeerID 1 at WINaddr:172.24.160.1:6112;
+08:52:24.04   Transport::OpenInternal request to WINaddr:172.24.160.1:6112;
+08:52:24.04   Session::Host sid = FFFFFFFFFFFFFFFE, hostURL = , local addresses = WINaddr:172.24.160.1:6112;
+08:52:24.04   Session::GetState - info, session [-2]'s state changed to [2:STATE_CONNECTING].
+08:52:24.04   ValidateCustomData: called with 2195 bytes of custom data
+08:52:24.04   Host accepted Peer 1 into the match at address list=WINaddr:172.24.160.1:6112;, routes=WINaddr:172.24.160.1:6112;
+08:52:24.04   WorldwideAdvertisementService::Process - EVENT_NEWPEER
+08:52:24.07   local host PeerID 1 CONN ack=  0 (  0ms~0) unack=  0, retry=  0, highwaterOOS=0 @WINaddr:172.24.160.1:6112; (ping=0ms) 100.00%, pending=0, dead=0, RS#=0/0
+08:52:24.07   MessageCounts: inval=0/0, seek=0/0, join=0/0, ichk=0/0, sk_r=0/0, deny=0/0, Padd=0/0, Pdel=0/0, drop=0/0, data=0/0, mdat=0/0, voip=0/0, rchk=0/0, nudg=0/0, Thdr=0/0, Peer=0/0, PPrx=0/0, ping=0/0, Pfrg=0/0, rely=0/0, lb_p=0/0, lb_c=0/0, cast=0/0, cdat=0/0, sorq1=0/0, sorp=0/0, acto=0/0, spob=0/0, sorq2=0/0, setp=0/0, actr=0/0, lsim=0/0
+08:52:24.07   Session::GetState - info, session [-2]'s state changed to [3:STATE_CONNECTED].
+08:52:24.07   Sending matchinfo change #2
+08:52:24.07   Session Connection Event - ReasonID: 0 ReasonDebug: SessionOperationInfo::SUCCESS
+08:52:24.07   HostAsync - got operation info 0:SessionOperationInfo::SUCCESS
+08:52:24.11   hosting - Session is connected
+08:52:24.14   HostAsync - completed with HostResult = 0
+08:52:24.14   WorldwideAutomatch2Service::OnHostComplete - we're not polling at the moment, ignoring
+08:52:24.14   WorldwideAutomatchService::OnHostComplete - automatcher is no longer active - stopPollPending 0 automatchPollID 18446744073709551615
+08:52:24.18   BattleServerRelay::Process - 305 ms between calls!
+08:52:24.46   Session Connection Event - ReasonID: 0 ReasonDebug: Succeeded to start observing
+08:52:24.46   WorldwideStartObservingAsync - got operation info 0:Succeeded to start observing
+08:52:24.51   WorldwideStartObservingAsync - completed with result 0, extended error -1
+08:52:24.61   MOD - Setting player (0) race to: 0
+08:52:24.61   MOD - Setting player (1) race to: 0
+08:52:24.61   MOD - Setting player (2) race to: 0
+08:52:24.61   MOD - Setting player (3) race to: 0
+08:52:24.61   GAME -- Scenario: DATA:scenarios\mp\4p_semois_winter\4p_semois_winter
+08:52:24.61   GAME -- Win Condition Qualified Name: 00000000000000000000000000000000:16123440
+08:52:24.61   GAME -- Win Condition Name: victory_point
+08:52:24.61   GAME -- Human Player: 0 Прощай! Ле́нин 3736212 0 british
+08:52:24.61   GAME -- AI Player: 1 CPU - Standard -1 1 west_german
+08:52:24.61   GAME -- Human Player: 2 13865949014 3665697 0 british
+08:52:24.61   GAME -- AI Player: 3 CPU - Standard -1 1 west_german
+08:52:28.94   NetworkManager::DispatchEvents() - Warning - Time between calls was 3838 ms
+08:52:29.36   GameObj::StartGameObj - info, network session GUID set to [948106949].
+08:52:29.85   OBJECTSCAR -- Initialization failed - could not load scar type BP list.
+08:52:31.27   INNIMapDCA Key not found: tinitus::time
+08:52:31.52   PHYSICS -- Created node factory 'HVOK'
+08:52:31.52   PHYSICS -- Created node factory 'DMMY'
+08:52:31.53   GameObjLoader - upgrading load_count from 0 to 2551
+08:52:36.94   Dx11Program : Unable to find shader script for 'max_alphablend' in the ShaderDatabase.
+08:52:36.94   Unable to load shader [max_alphablend] so replacing with [defaultshader]
+08:52:39.61   Dx11Program : Unable to find shader script for 'dx9_unit_team_tint_dirt_norm_oclu_spec_1bit' in the ShaderDatabase.
+08:52:39.61   Unable to load shader [dx9_unit_team_tint_dirt_norm_oclu_spec_1bit] so replacing with [defaultshader]
+08:52:42.79   GameObjLoader 12998400 - resetting counters
+08:52:42.79   GameObjLoader 12998400 - LOAD_DONE
+08:52:47.21   GAME - SessionSetup
+08:52:47.21   MUTING SOUNDS
+08:52:47.35   TChunkManagerIO::Load version 2001l
+08:52:47.36   TERRAINTEXTURE -- compositor added RenderTarget of size 3360 x 1890
+08:52:48.58   GAME - CreateGEWorld in 1365 ms
+08:52:48.60   GAME - SessionSetup finished in 1391 ms
+08:52:48.62   GAME - WaterReflectionManagerSetup
+08:52:48.62   GAME - WaterReflectionManagerSetup finished in 0 ms
+08:52:48.68   GAME -- Recording game
+08:52:48.79   SimWorld::LoadWinCondition: - [DATA:Scar/WinConditions/VictoryPointPlusAnnihilate.scar] succeeded.
+08:52:49.05   MOD -- Player  (unused player) (frame 0) (KillPlayer)
+08:52:49.05   MOD -- Player  (unused player) (frame 0) (KillPlayer)
+08:52:49.05   MOD -- Player  (unused player) (frame 0) (KillPlayer)
+08:52:49.05   MOD -- Player  (unused player) (frame 0) (KillPlayer)
+08:52:49.35   SPEECHMANAGER -- Loaded in 0.031422 seconds
+08:52:49.40   TwoPop sound file 'dev/440hz' not loaded
+08:52:49.67   GameObjLoader - upgrading load_count from 0 to 2627
+08:52:52.51   GameObjLoader 129983c0 - resetting counters
+08:52:52.51   GameObjLoader 129983c0 - LOAD_DONE
+08:52:52.64   Releasing [128]MB of Staging texture data
+08:52:52.64   PreloadResources took 0ms.
+08:52:52.73   SIM -- Setting SyncErrorChecking level to Low
+08:52:52.86   DeferredView - Start creating view [ WaterView ] textures
+08:52:52.86   SPDx11 -- 2988MB dedicated video memory, 0MB dedicated system memory and 1107MB shared system memory available.
+08:52:52.87   SPDx11 -- 2988MB dedicated video memory, 0MB dedicated system memory and 1107MB shared system memory available.
+08:52:52.87   DeferredView - Finished creating view [ WaterView ] textures
+08:52:52.87   DeferredView - Start creating view [ WorldView ] textures
+08:52:52.87   SPDx11 -- 2988MB dedicated video memory, 0MB dedicated system memory and 1107MB shared system memory available.
+08:52:52.87   SPDx11 -- 2988MB dedicated video memory, 0MB dedicated system memory and 1107MB shared system memory available.
+08:52:52.87   DeferredView - Finished creating view [ WorldView ] textures
+08:52:52.87   UN MUTING SOUNDS
+08:52:52.87   PerformanceRecorder::StartRecording for game size 4
+08:52:52.87   GAME -- Starting mission: DATA:scenarios\mp\4p_semois_winter\4p_semois_winter
+08:52:53.10   MEM -- heap use 1648 mb, heap uncommitted 29 mb, heap total 1677 mb, available virtual 1632 mb, total virtual 4095 mb
+08:52:53.12   BattleServerRelay::Process - 180 ms between calls!
+08:52:56.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:53:25.01   local host PeerID 1 LOCL ack=  0 (  0ms~0) unack=  0, retry=  0, highwaterOOS=0 (ip=WINaddr:172.24.160.1:6112;), pending=0, dead=0, RS#=0/0
+08:53:25.01   MessageCounts: inval=0/0, seek=0/0, join=0/0, ichk=0/0, sk_r=0/0, deny=0/0, Padd=0/0, Pdel=0/0, drop=0/0, data=0/0, mdat=0/0, voip=0/0, rchk=0/0, nudg=0/0, Thdr=0/0, Peer=0/0, PPrx=0/0, ping=0/0, Pfrg=0/0, rely=0/0, lb_p=17/17, lb_c=0/0, cast=0/0, cdat=0/0, sorq1=0/0, sorp=0/1, acto=1/0, spob=0/0, sorq2=1/0, setp=0/0, actr=0/1, lsim=0/0
+08:53:56.64   GAME -- SimulationController::Pause 0
+08:53:56.64   MUTING SOUNDS
+08:53:57.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:54:01.03   SessionID : fffffffffffffffe - Disconnect called with reasonID 1000 - ObserverMatchSetup::Disconnect
+08:54:01.03   SessionID : fffffffffffffffe - Disconnect called with reasonID 1000 - ObserverMatchSetup::Disconnect
+08:54:01.04   Disconnect process already running
+08:54:01.04   SetVisible called while !IsConnected
+08:54:01.09   Session::SchedulePeerRemove - Scheduling peerID: 1 to disconnect, reasonCode:1000, reason:ObserverMatchSetup::Disconnect
+08:54:01.09   Session Destroy Peer Event - ReasonID: 1000 ReasonDebug: ObserverMatchSetup::Disconnect
+08:54:01.09   Session::GetEvent DestroyPeer success Peer 1 removed, reasonCode 1000, reasonDebug ObserverMatchSetup::Disconnect
+08:54:01.09   Session::DestroyPeer - deallocating peer 1
+08:54:01.09   Session - Requested Disconnect for connectionID 1
+08:54:01.09   Deallocated route ID=2 for PeerID 1 at WINaddr:172.24.160.1:6112;
+08:54:01.09   Session - Requested Disconnect for connectionID 2
+08:54:01.09   Closed route 2<>2 for PeerID 1 at WINaddr:172.24.160.1:6112;
+08:54:01.09   WorldwideAdvertisementService::Process - EVENT_DESTROYPEER
+08:54:01.09   peerremove - peerIDRemoved=[00000000:0008dbad], reasonID=1000, reason debug hint - ObserverMatchSetup::Disconnect
+08:54:01.10   Transport - Largest sent is now 8
+08:54:01.11   Session::GetState - info, session [-2]'s state changed to [1:STATE_DISCONNECTED].
+08:54:01.11   PeerRemoveAll - flushing local session peer data
+08:54:01.11   Session::Reset with reason WorldwidePartyService::PeerRemoveAll
+08:54:01.11   LeaveSessionInternal - no action taken, needLeave=0, service=2
+08:54:01.11   Destroyed Matchinfo
+08:54:01.11   DBG - _SockFree: socket 0/11356 sending graceful shutdown request. reason: SockCollection::DisconnectAll forceFree
+08:54:01.11   DBG - _SockClose: socket 0/11356 initiating close
+08:54:01.11   DBG - _SockClose: socket 0/11356 close complete. debugReason SockCollection::DisconnectAll forceFree
+08:54:01.11   DBG - _SockFree: socket 0/11356 _SockFree complete
+08:54:01.21   BT! - SockUnInit - sending shutdown notification & close with linger for all 0 active sockets
+08:54:01.21   SessionManager::UnregisterSession - Unregistering session 4c5c5788
+08:54:01.21   OnDestroyPartyNotification - partyID = [ffffffff:fffffffe], prevID = [ffffffff:ffffffff]
+08:54:01.21   OnDestroyPartyNotification - partyID = -2, prevID = -1
+08:54:01.21   Transport - Largest received is now 8
+08:54:01.60   GAME -- SimulationController::Pause 1
+08:54:01.60   UN MUTING SOUNDS
+08:54:03.84   GameObj::ShutdownGameObj
+08:54:03.84   GetMaxFrameTimeFromProfile: players=4 expected FPS=100.000000, bars=0, max avg=0.000, sd=0.000, 0 samples =
+08:54:03.84   PerformanceRecorder::EndRecording - game size=4, max average=0.016708, worst frame=0.010000
+08:54:03.84    Recording: No [4 players]
+08:54:03.84    Max/Avg: 0.02, 0.01 sec (fps=59.85, 89.81) (3 samples)
+08:54:03.84    Bars: 0
+08:54:03.92   SOUND -- Shutting down ...
+08:54:03.97   SOUND -- Shark Thread - Shutdown received
+08:54:04.02   SOUND -- Shutdown completed!
+08:54:04.07   SOUND -- Initializing ...
+08:54:04.15   SOUND -- Initialization completed!
+08:54:04.17   GameObjLoader 129983c0 - Unload
+08:54:04.17   GameObjLoader 129983c0 - resetting counters
+08:54:04.18   MOD -- Game Over at frame 0
+08:54:04.58   GameObjLoader 12998400 - Unload
+08:54:04.58   GameObjLoader 12998400 - resetting counters
+08:54:17.94   NetworkManager::DispatchEvents() - Warning - Time between calls was 4111 ms
+08:54:58.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:55:59.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:57:00.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:58:01.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:59:02.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+08:59:45.62   BT! - SockInit: SOCK_FD_SET_SIZE = 64
+08:59:45.62   DBG - SockConnect: 1/s->stHandle=14408
+08:59:45.62   DBG - SockConnect: 1/14408 connect deferred (in progress)
+08:59:45.77   DBG - SockAnimateAll: socket 1/14408 connection complete.
+08:59:45.92   battleserverrelay - Connected: 
+Connection [ 1/ 1] - local=192.168.1.2:49242, remote=3.81.245.57:27023, type=CONNECT, timeTookToConnectMS=293, silentTimeMS=0, lastSockError=0
+08:59:46.07   starting offline hosting
+08:59:46.15   OnlineHostAsync success
+08:59:46.15   Session::Initialize - info, initializing session object, using threads.
+08:59:46.15   SessionManager::RegisterSession - Registering RL_NEW session 7db72888
+08:59:46.15   Created Matchinfo for sessionID 18446744073709551613
+08:59:46.15   OnJoinAdvertisementSuccess - joined online match, server leave notification required
+08:59:46.15   starting local hosting
+08:59:46.15   Transport::OpenInternal request to WINaddr:255.255.255.255:6112;
+08:59:46.15   Allocated route ID=0 for PeerID 1 at WINaddr:172.24.160.1:6112;
+08:59:46.15   Transport::OpenInternal request to WINaddr:172.24.160.1:6112;
+08:59:46.15   Session::Host sid = FFFFFFFFFFFFFFFD, hostURL = , local addresses = WINaddr:172.24.160.1:6112;
+08:59:46.15   Session::GetState - info, session [-3]'s state changed to [2:STATE_CONNECTING].
+08:59:46.15   ValidateCustomData: called with 2195 bytes of custom data
+08:59:46.15   Host accepted Peer 1 into the match at address list=WINaddr:172.24.160.1:6112;, routes=WINaddr:172.24.160.1:6112;
+08:59:46.15   WorldwideAdvertisementService::Process - EVENT_NEWPEER
+08:59:46.19   local host PeerID 1 CONN ack=  0 (  0ms~0) unack=  0, retry=  0, highwaterOOS=0 @WINaddr:172.24.160.1:6112; (ping=0ms) 100.00%, pending=0, dead=0, RS#=0/0
+08:59:46.19   MessageCounts: inval=0/0, seek=0/0, join=0/0, ichk=0/0, sk_r=0/0, deny=0/0, Padd=0/0, Pdel=0/0, drop=0/0, data=0/0, mdat=0/0, voip=0/0, rchk=0/0, nudg=0/0, Thdr=0/0, Peer=0/0, PPrx=0/0, ping=0/0, Pfrg=0/0, rely=0/0, lb_p=0/0, lb_c=0/0, cast=0/0, cdat=0/0, sorq1=0/0, sorp=0/0, acto=0/0, spob=0/0, sorq2=0/0, setp=0/0, actr=0/0, lsim=0/0
+08:59:46.20   Session::GetState - info, session [-3]'s state changed to [3:STATE_CONNECTED].
+08:59:46.20   Sending matchinfo change #2
+08:59:46.20   Session Connection Event - ReasonID: 0 ReasonDebug: SessionOperationInfo::SUCCESS
+08:59:46.20   HostAsync - got operation info 0:SessionOperationInfo::SUCCESS
+08:59:46.25   hosting - Session is connected
+08:59:46.30   HostAsync - completed with HostResult = 0
+08:59:46.30   WorldwideAutomatch2Service::OnHostComplete - we're not polling at the moment, ignoring
+08:59:46.30   WorldwideAutomatchService::OnHostComplete - automatcher is no longer active - stopPollPending 0 automatchPollID 18446744073709551615
+08:59:46.36   BattleServerRelay::Process - 445 ms between calls!
+08:59:46.75   Session Connection Event - ReasonID: 0 ReasonDebug: Succeeded to start observing
+08:59:46.75   WorldwideStartObservingAsync - got operation info 0:Succeeded to start observing
+08:59:46.82   WorldwideStartObservingAsync - completed with result 0, extended error -1
+08:59:46.93   MOD - Setting player (0) race to: 0
+08:59:46.93   MOD - Setting player (1) race to: 0
+08:59:46.93   MOD - Setting player (2) race to: 0
+08:59:46.93   MOD - Setting player (3) race to: 0
+08:59:46.93   MOD - Setting player (4) race to: 0
+08:59:46.93   MOD - Setting player (5) race to: 0
+08:59:46.93   MOD - Setting player (6) race to: 0
+08:59:46.93   MOD - Setting player (7) race to: 0
+08:59:46.93   GAME -- Scenario: DATA:scenarios\mp\8p_port_of_hamburg\8p_port_of_hamburg
+08:59:46.93   GAME -- Win Condition Qualified Name: 00000000000000000000000000000000:16123440
+08:59:46.93   GAME -- Win Condition Name: victory_point
+08:59:46.93   GAME -- Human Player: 0 skyHigh 159839 0 aef
+08:59:46.93   GAME -- AI Player: 1 CPU - Expert -1 1 german
+08:59:46.93   GAME -- Human Player: 2 Mabelcorn 3051650 0 soviet
+08:59:46.93   GAME -- AI Player: 3 CPU - Expert -1 1 west_german
+08:59:46.93   GAME -- Human Player: 4 sire 3144726 0 british
+08:59:46.93   GAME -- AI Player: 5 CPU - Expert -1 1 west_german
+08:59:46.93   GAME -- Human Player: 6 [爬爬娘]NOOB Ranger 2637325 0 british
+08:59:46.93   GAME -- AI Player: 7 CPU - Expert -1 1 german
+08:59:52.07   NetworkManager::DispatchEvents() - Warning - Time between calls was 4688 ms
+08:59:52.69   GameObj::StartGameObj - info, network session GUID set to [948108369].
+08:59:52.86   OBJECTSCAR -- Initialization failed - could not load scar type BP list.
+08:59:55.20   GameObjLoader - upgrading load_count from 0 to 2991
+09:00:03.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+09:00:09.96   GameObjLoader 12998400 - resetting counters
+09:00:09.96   GameObjLoader 12998400 - LOAD_DONE
+09:00:18.24   GAME - SessionSetup
+09:00:18.24   MUTING SOUNDS
+09:00:18.36   TChunkManagerIO::Load version 2001l
+09:00:18.37   TERRAINTEXTURE -- compositor added RenderTarget of size 3360 x 1890
+09:00:19.81   GAME - CreateGEWorld in 1571 ms
+09:00:19.83   GAME - SessionSetup finished in 1590 ms
+09:00:19.85   GAME - WaterReflectionManagerSetup
+09:00:19.85   GAME - WaterReflectionManagerSetup finished in 0 ms
+09:00:19.90   GAME -- Recording game
+09:00:20.01   SimWorld::LoadWinCondition: - [DATA:Scar/WinConditions/VictoryPointPlusAnnihilate.scar] succeeded.
+09:00:20.73   SPEECHMANAGER -- Loaded in 0.028748 seconds
+09:00:20.80   TwoPop sound file 'dev/440hz' not loaded
+09:00:21.12   GameObjLoader - upgrading load_count from 0 to 3067
+09:00:22.33   GameObjLoader 129983c0 - resetting counters
+09:00:22.33   GameObjLoader 129983c0 - LOAD_DONE
+09:00:22.67   Releasing [62]MB of Staging texture data
+09:00:22.67   PreloadResources took 1ms.
+09:00:22.76   SIM -- Setting SyncErrorChecking level to Low
+09:00:22.93   DeferredView - Start creating view [ WaterView ] textures
+09:00:22.93   SPDx11 -- 2988MB dedicated video memory, 0MB dedicated system memory and 1107MB shared system memory available.
+09:00:22.93   SPDx11 -- 2988MB dedicated video memory, 0MB dedicated system memory and 1107MB shared system memory available.
+09:00:22.93   DeferredView - Finished creating view [ WaterView ] textures
+09:00:22.93   DeferredView - Start creating view [ WorldView ] textures
+09:00:22.93   SPDx11 -- 2988MB dedicated video memory, 0MB dedicated system memory and 1107MB shared system memory available.
+09:00:22.93   SPDx11 -- 2988MB dedicated video memory, 0MB dedicated system memory and 1107MB shared system memory available.
+09:00:22.93   DeferredView - Finished creating view [ WorldView ] textures
+09:00:22.94   UN MUTING SOUNDS
+09:00:22.94   PerformanceRecorder::StartRecording for game size 8
+09:00:22.94   GAME -- Starting mission: DATA:scenarios\mp\8p_port_of_hamburg\8p_port_of_hamburg
+09:00:23.32   MEM -- heap use 2015 mb, heap uncommitted 31 mb, heap total 2046 mb, available virtual 1281 mb, total virtual 4095 mb
+09:00:47.00   local host PeerID 1 LOCL ack=  0 (  0ms~0) unack=  0, retry=  0, highwaterOOS=0 (ip=WINaddr:172.24.160.1:6112;), pending=0, dead=0, RS#=0/0
+09:00:47.00   MessageCounts: inval=0/0, seek=0/0, join=0/0, ichk=0/0, sk_r=0/0, deny=0/0, Padd=0/0, Pdel=0/0, drop=0/0, data=0/0, mdat=0/0, voip=0/0, rchk=0/0, nudg=0/0, Thdr=0/0, Peer=0/0, PPrx=0/0, ping=0/0, Pfrg=0/0, rely=0/0, lb_p=18/17, lb_c=0/0, cast=0/0, cdat=0/0, sorq1=0/0, sorp=0/1, acto=1/0, spob=0/0, sorq2=1/0, setp=0/0, actr=0/1, lsim=0/0
+09:01:04.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+09:01:37.53   GAME -- SimulationController::Pause 0
+09:01:37.53   MUTING SOUNDS
+09:01:39.99   SessionID : fffffffffffffffd - Disconnect called with reasonID 1000 - ObserverMatchSetup::Disconnect
+09:01:39.99   SessionID : fffffffffffffffd - Disconnect called with reasonID 1000 - ObserverMatchSetup::Disconnect
+09:01:40.01   Disconnect process already running
+09:01:40.01   SetVisible called while !IsConnected
+09:01:40.05   Session::SchedulePeerRemove - Scheduling peerID: 1 to disconnect, reasonCode:1000, reason:ObserverMatchSetup::Disconnect
+09:01:40.05   Session Destroy Peer Event - ReasonID: 1000 ReasonDebug: ObserverMatchSetup::Disconnect
+09:01:40.05   Session::GetEvent DestroyPeer success Peer 1 removed, reasonCode 1000, reasonDebug ObserverMatchSetup::Disconnect
+09:01:40.05   Session::DestroyPeer - deallocating peer 1
+09:01:40.05   Session - Requested Disconnect for connectionID 3
+09:01:40.05   Deallocated route ID=4 for PeerID 1 at WINaddr:172.24.160.1:6112;
+09:01:40.05   Session - Requested Disconnect for connectionID 4
+09:01:40.05   Closed route 4<>4 for PeerID 1 at WINaddr:172.24.160.1:6112;
+09:01:40.05   WorldwideAdvertisementService::Process - EVENT_DESTROYPEER
+09:01:40.05   peerremove - peerIDRemoved=[00000000:0008dbad], reasonID=1000, reason debug hint - ObserverMatchSetup::Disconnect
+09:01:40.07   Session::GetState - info, session [-3]'s state changed to [1:STATE_DISCONNECTED].
+09:01:40.07   PeerRemoveAll - flushing local session peer data
+09:01:40.07   Session::Reset with reason WorldwidePartyService::PeerRemoveAll
+09:01:40.07   LeaveSessionInternal - no action taken, needLeave=0, service=2
+09:01:40.07   Destroyed Matchinfo
+09:01:40.07   DBG - _SockFree: socket 1/14408 sending graceful shutdown request. reason: SockCollection::DisconnectAll forceFree
+09:01:40.07   DBG - _SockClose: socket 1/14408 initiating close
+09:01:40.07   DBG - _SockClose: socket 1/14408 close complete. debugReason SockCollection::DisconnectAll forceFree
+09:01:40.07   DBG - _SockFree: socket 1/14408 _SockFree complete
+09:01:40.17   BT! - SockUnInit - sending shutdown notification & close with linger for all 0 active sockets
+09:01:40.17   SessionManager::UnregisterSession - Unregistering session 7db72888
+09:01:40.17   OnDestroyPartyNotification - partyID = [ffffffff:fffffffd], prevID = [ffffffff:ffffffff]
+09:01:40.17   OnDestroyPartyNotification - partyID = -3, prevID = -1
+09:01:40.57   GAME -- SimulationController::Pause 1
+09:01:40.57   UN MUTING SOUNDS
+09:01:42.49   GameObj::ShutdownGameObj
+09:01:42.49   GetMaxFrameTimeFromProfile: players=8 expected FPS=100.000000, bars=0, max avg=0.000, sd=0.000, 0 samples =
+09:01:42.49   PerformanceRecorder::EndRecording - game size=8, max average=0.016695, worst frame=0.010000
+09:01:42.49    Recording: No [8 players]
+09:01:42.49    Max/Avg: 0.02, 0.01 sec (fps=59.90, 89.89) (3 samples)
+09:01:42.49    Bars: 0
+09:01:42.50   SOUND -- Shutting down ...
+09:01:42.54   SOUND -- Shark Thread - Shutdown received
+09:01:42.60   SOUND -- Shutdown completed!
+09:01:42.66   SOUND -- Initializing ...
+09:01:42.74   SOUND -- Initialization completed!
+09:01:42.75   GameObjLoader 129983c0 - Unload
+09:01:42.75   GameObjLoader 129983c0 - resetting counters
+09:01:42.78   MOD -- Game Over at frame 0
+09:01:43.41   GameObjLoader 12998400 - Unload
+09:01:43.41   GameObjLoader 12998400 - resetting counters
+09:01:45.37   NetworkManager::DispatchEvents() - Warning - Time between calls was 2885 ms
+09:01:52.17   NetworkManager::DispatchEvents() - Warning - Time between calls was 2840 ms
+09:01:57.02   NetworkManager::DispatchEvents() - Warning - Time between calls was 3138 ms
+09:02:04.58   NetworkManager::DispatchEvents() - Warning - Time between calls was 5356 ms
+09:02:05.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+09:02:07.69   NetworkManager::DispatchEvents() - Warning - Time between calls was 3112 ms
+09:03:06.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+09:04:07.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+09:05:08.01   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+09:06:09.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+09:07:10.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+09:08:11.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+09:09:12.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+09:10:13.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+09:11:14.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+09:12:15.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+09:13:16.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+09:14:17.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+09:14:28.03   starting online hosting
+09:14:28.27   SlotManager::GetStringFromSlots: compressed = 32 bytes / 414 bytes
+09:14:30.67   BT! - SockInit: SOCK_FD_SET_SIZE = 64
+09:14:30.67   DBG - SockConnect: 2/s->stHandle=16380
+09:14:30.67   DBG - SockConnect: 2/16380 connect deferred (in progress)
+09:14:30.82   DBG - SockAnimateAll: socket 2/16380 connection complete.
+09:14:31.01   battleserverrelay - Connected: 
+Connection [ 1/ 1] - local=192.168.1.2:49452, remote=54.84.62.182:27026, type=CONNECT, timeTookToConnectMS=334, silentTimeMS=0, lastSockError=0
+09:14:31.09   OnlineHostAsync success
+09:14:31.09   Session::Initialize - info, initializing session object, using threads.
+09:14:31.09   SessionManager::RegisterSession - Registering RL_NEW session 9a1078d8
+09:14:31.09   Created Matchinfo for sessionID 237028021
+09:14:31.09   OnJoinAdvertisementSuccess - joined online match, server leave notification required
+09:14:31.09   starting local hosting
+09:14:31.09   Transport::OpenInternal request to WINaddr:255.255.255.255:6112;
+09:14:31.09   Allocated route ID=0 for PeerID 1 at WINaddr:172.24.160.1:6112;
+09:14:31.09   Transport::OpenInternal request to WINaddr:172.24.160.1:6112;
+09:14:31.09   Session::Host sid = E20C2B5, hostURL = , local addresses = WINaddr:172.24.160.1:6112;
+09:14:31.09   Session::GetState - info, session [237028021]'s state changed to [2:STATE_CONNECTING].
+09:14:31.09   ValidateCustomData: called with 2889 bytes of custom data
+09:14:31.09   Host accepted Peer 1 into the match at address list=WINaddr:172.24.160.1:6112;, routes=WINaddr:172.24.160.1:6112;
+09:14:31.09   WorldwideAdvertisementService::Process - EVENT_NEWPEER
+09:14:31.13   local host PeerID 1 LOCL ack=  0 (  0ms~0) unack=  2, retry=  0, highwaterOOS=0 (ip=WINaddr:172.24.160.1:6112;), pending=0, dead=0, RS#=0/1
+09:14:31.13   MessageCounts: inval=0/0, seek=0/0, join=1/0, ichk=0/0, sk_r=0/0, deny=0/0, Padd=1/0, Pdel=0/0, drop=0/0, data=0/0, mdat=0/0, voip=0/0, rchk=0/0, nudg=0/0, Thdr=0/0, Peer=2/0, PPrx=0/0, ping=0/0, Pfrg=0/0, rely=2/0, lb_p=0/0, lb_c=0/0, cast=0/0, cdat=0/0, sorq1=0/0, sorp=0/0, acto=0/0, spob=0/0, sorq2=0/0, setp=1/0, actr=0/0, lsim=0/0
+09:14:31.14   Session::GetState - info, session [237028021]'s state changed to [3:STATE_CONNECTED].
+09:14:31.14   Sending matchinfo change #2
+09:14:31.14   Session Connection Event - ReasonID: 0 ReasonDebug: SessionOperationInfo::SUCCESS
+09:14:31.14   HostAsync - got operation info 0:SessionOperationInfo::SUCCESS
+09:14:31.19   hosting - Session is connected
+09:14:31.23   Session - rcv'd Join request - address noaddr/relay/PID=B0792BCEC7034F5 in use by existing peer (ignoring)
+09:14:31.23   Session::PollTransportEvents AddPeerMessage ignored, peer 1 already in m_peers
+09:14:31.24   HostAsync - completed with HostResult = 0
+09:14:31.24   Party::SetHostJoinResult - 0
+09:14:31.24   Party::SetStatus - S_CONFIGURING
+09:14:31.24   WorldwideAutomatch2Service::OnHostComplete - we're not polling at the moment, ignoring
+09:14:31.24   WorldwideAutomatchService::OnHostComplete - automatcher is no longer active - stopPollPending 0 automatchPollID 18446744073709551615
+09:14:31.24   SlotManager::GetStringFromSlots: compressed = 169 bytes / 761 bytes
+09:14:31.51   Sending matchinfo change #14
+09:14:31.51   Rejecting packet type 0 that claims to come from ourself
+09:14:32.34   Rejecting packet type 0 that claims to come from ourself
+09:14:35.79   Sending matchinfo change #15
+09:14:35.79   SlotManager::GetStringFromSlots: compressed = 239 bytes / 913 bytes
+09:14:36.04   Rejecting packet type 0 that claims to come from ourself
+09:14:39.73   Sending matchinfo change #16
+09:14:39.73   SlotManager::GetStringFromSlots: compressed = 244 bytes / 913 bytes
+09:14:40.04   Rejecting packet type 0 that claims to come from ourself
+09:14:41.22   Party::SetStatus - S_NEGOTIATING
+09:14:41.27   Sending matchinfo change #17
+09:14:41.27   SlotManager::GetStringFromSlots: compressed = 244 bytes / 913 bytes
+09:14:41.27   Party::SetNegotiatingStatus - NS_Hosting
+09:14:41.34   Party::SetNegotiatingStatus - NS_Configuring
+09:14:41.45   starting offline hosting
+09:14:41.51   Rejecting packet type 0 that claims to come from ourself
+09:14:41.56   OnlineHostAsync success
+09:14:41.56   Session::Initialize - info, initializing session object, using threads.
+09:14:41.56   SessionManager::RegisterSession - Registering RL_NEW session 9a109890
+09:14:41.56   Created Matchinfo for sessionID 18446744073709551612
+09:14:41.56   OnJoinAdvertisementSuccess - joined online match, server leave notification required
+09:14:41.56   starting local hosting
+09:14:41.56   Transport::OpenInternal request to WINaddr:255.255.255.255:6112;
+09:14:41.56   Allocated route ID=0 for PeerID 1 at WINaddr:172.24.160.1:6112;
+09:14:41.56   Transport::OpenInternal request to WINaddr:172.24.160.1:6112;
+09:14:41.56   Session::Host sid = FFFFFFFFFFFFFFFC, hostURL = , local addresses = WINaddr:172.24.160.1:6112;
+09:14:41.56   Sending matchinfo change #18
+09:14:41.56   Session::GetState - info, session [-4]'s state changed to [2:STATE_CONNECTING].
+09:14:41.56   ValidateCustomData: called with 2889 bytes of custom data
+09:14:41.56   Host accepted Peer 1 into the match at address list=WINaddr:172.24.160.1:6112;, routes=WINaddr:172.24.160.1:6112;
+09:14:41.56   WorldwideAdvertisementService::Process - EVENT_NEWPEER
+09:14:41.60   local host PeerID 1 CONN ack=  0 (  0ms~0) unack=  0, retry=  0, highwaterOOS=0 @WINaddr:172.24.160.1:6112; (ping=0ms) 100.00%, pending=0, dead=0, RS#=0/0
+09:14:41.60   MessageCounts: inval=0/0, seek=0/0, join=0/0, ichk=0/0, sk_r=0/0, deny=0/0, Padd=0/0, Pdel=0/0, drop=0/0, data=1/0, mdat=0/0, voip=0/0, rchk=0/0, nudg=0/0, Thdr=0/0, Peer=0/0, PPrx=1/0, ping=0/0, Pfrg=0/0, rely=0/0, lb_p=0/0, lb_c=0/0, cast=0/0, cdat=0/0, sorq1=0/0, sorp=0/0, acto=0/0, spob=0/0, sorq2=0/0, setp=0/0, actr=0/0, lsim=0/0
+09:14:41.61   Session::GetState - info, session [-4]'s state changed to [3:STATE_CONNECTED].
+09:14:41.61   Sending matchinfo change #2
+09:14:41.61   Session Connection Event - ReasonID: 0 ReasonDebug: SessionOperationInfo::SUCCESS
+09:14:41.61   HostAsync - got operation info 0:SessionOperationInfo::SUCCESS
+09:14:41.66   hosting - Session is connected
+09:14:41.71   HostAsync - completed with HostResult = 0
+09:14:41.71   WorldwidePartyService::SetMatchState - state 0 unchanged ignoring
+09:14:41.71   WorldwideAutomatch2Service::OnHostComplete - we're not polling at the moment, ignoring
+09:14:41.71   WorldwideAutomatchService::OnHostComplete - automatcher is no longer active - stopPollPending 0 automatchPollID 18446744073709551615
+09:14:41.71   Party::SetNegotiatingStatus - NS_Communicating
+09:14:41.76   Sending matchinfo change #11
+09:14:41.76   Party::SetNegotiatingStatus - NS_WaitingForPlayers
+09:14:41.81   Rejecting packet type 0 that claims to come from ourself
+09:14:41.81   Party::SetNegotiatingStatus - NS_WaitingForAck
+09:14:41.86   Party::SetNegotiatingStatus - NS_Completing
+09:14:41.91   Sending matchinfo change #13
+09:14:41.91   Party::SetNegotiatingStatus - NS_None
+09:14:41.91   Party::SetStatus - S_PLAYING
+09:14:41.91   WorldwidePartyService::SetMatchState - state 1 not an online game, no server call necessary
+09:14:41.96   Sending matchinfo change #19
+09:14:42.06   Sending matchinfo change #14
+09:14:42.06   WorldwideAutomatchService::OnStartComplete - detected successful game start
+09:14:42.06   Match Started - [00000000:0008dbad /steam/76561198006675368], slot =  0, ranking =   -1
+09:14:42.16   Rejecting packet type 0 that claims to come from ourself
+09:14:43.22   SlotManager::GetStringFromSlots: compressed = 244 bytes / 913 bytes
+09:14:43.83   Sending matchinfo change #15
+09:14:43.83   MOD - Setting player (0) race to: 0
+09:14:43.83   MOD - Setting player (1) race to: 0
+09:14:43.83   GAME -- Scenario: DATA:scenarios\mp\lost_glider\lost_glider
+09:14:43.83   GAME -- Win Condition Qualified Name: 00000000000000000000000000000000:16123440
+09:14:43.83   GAME -- Win Condition Name: victory_point
+09:14:43.83   GAME -- Human Player: 0 sepi 580525 0 german
+09:14:43.83   GAME -- AI Player: 1 CPU - Easy -1 1 aef
+09:14:50.00   NetworkManager::DispatchEvents() - Warning - Time between calls was 5661 ms
+09:14:50.70   GameObj::StartGameObj - info, network session GUID set to [701308058].
+09:14:50.90   OBJECTSCAR -- Initialization failed - could not load scar type BP list.
+09:14:52.13   GameObjLoader - upgrading load_count from 0 to 2660
+09:15:00.87   Linear size 16384 does not match expected linear size 1024 in [Data:art\environment\objects\walls\metal\shared_textures\barbedwire_fence_s_01_alp.dds].
+09:15:01.15   GameObjLoader 12998400 - resetting counters
+09:15:01.15   GameObjLoader 12998400 - LOAD_DONE
+09:15:06.02   GAME - SessionSetup
+09:15:06.02   MUTING SOUNDS
+09:15:06.18   TChunkManagerIO::Load version 2001l
+09:15:06.19   TERRAINTEXTURE -- compositor added RenderTarget of size 3360 x 1890
+09:15:07.94   GAME - CreateGEWorld in 1919 ms
+09:15:07.95   GAME - SessionSetup finished in 1934 ms
+09:15:07.97   GAME - WaterReflectionManagerSetup
+09:15:07.97   GAME - WaterReflectionManagerSetup finished in 0 ms
+09:15:09.31   GAME -- Recording game
+09:15:09.43   SimWorld::LoadWinCondition: - [DATA:Scar/WinConditions/VictoryPointPlusAnnihilate.scar] succeeded.
+09:15:09.59   MOD -- Player  (unused player) (frame 0) (KillPlayer)
+09:15:09.59   MOD -- Player  (unused player) (frame 0) (KillPlayer)
+09:15:09.59   MOD -- Player  (unused player) (frame 0) (KillPlayer)
+09:15:09.59   MOD -- Player  (unused player) (frame 0) (KillPlayer)
+09:15:09.59   MOD -- Player  (unused player) (frame 0) (KillPlayer)
+09:15:09.59   MOD -- Player  (unused player) (frame 0) (KillPlayer)
+09:15:09.76   SPEECHMANAGER -- Loaded in 0.029439 seconds
+09:15:09.81   TwoPop sound file 'dev/440hz' not loaded
+09:15:10.08   GameObjLoader - upgrading load_count from 0 to 1828
+09:15:10.58   GameObjLoader 129983c0 - resetting counters
+09:15:10.58   GameObjLoader 129983c0 - LOAD_DONE
+09:15:10.78   Releasing [58]MB of Staging texture data
+09:15:10.78   PreloadResources took 0ms.
+09:15:10.85   SIM -- Setting SyncErrorChecking level to None
+09:15:18.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+09:15:32.00   local host PeerID 1 LOCL ack= 12 (499ms~96) unack=  0, retry=  0, highwaterOOS=0 (ip=WINaddr:172.24.160.1:6112;), pending=0, dead=0, RS#=11/11
+09:15:32.00   MessageCounts: inval=0/0, seek=0/0, join=0/0, ichk=0/0, sk_r=0/0, deny=0/0, Padd=0/0, Pdel=0/0, drop=0/0, data=3/4, mdat=0/0, voip=0/0, rchk=0/0, nudg=0/0, Thdr=0/0, Peer=6/6, PPrx=4/12, ping=0/0, Pfrg=0/0, rely=0/0, lb_p=15/15, lb_c=0/0, cast=0/0, cdat=0/0, sorq1=0/0, sorp=0/0, acto=0/0, spob=0/0, sorq2=0/0, setp=0/0, actr=0/0, lsim=0/0
+09:15:42.01   local host PeerID 1 CONN ack=  0 (  0ms~0) unack=  0, retry=  0, highwaterOOS=0 @WINaddr:172.24.160.1:6112; (ping=0ms) 100.00%, pending=0, dead=0, RS#=0/0
+09:15:42.01   MessageCounts: inval=0/0, seek=0/0, join=0/0, ichk=0/0, sk_r=0/0, deny=0/0, Padd=0/0, Pdel=0/0, drop=0/0, data=0/0, mdat=0/0, voip=0/0, rchk=0/0, nudg=0/0, Thdr=0/0, Peer=0/0, PPrx=0/0, ping=0/0, Pfrg=0/0, rely=0/0, lb_p=3/3, lb_c=0/0, cast=0/0, cdat=0/0, sorq1=0/0, sorp=0/0, acto=0/0, spob=0/0, sorq2=0/0, setp=0/0, actr=0/0, lsim=0/0
+09:16:02.60   DeferredView - Start creating view [ WaterView ] textures
+09:16:02.60   SPDx11 -- 2988MB dedicated video memory, 0MB dedicated system memory and 1107MB shared system memory available.
+09:16:02.60   SPDx11 -- 2988MB dedicated video memory, 0MB dedicated system memory and 1107MB shared system memory available.
+09:16:02.60   DeferredView - Finished creating view [ WaterView ] textures
+09:16:02.60   DeferredView - Start creating view [ WorldView ] textures
+09:16:02.60   SPDx11 -- 2988MB dedicated video memory, 0MB dedicated system memory and 1107MB shared system memory available.
+09:16:02.61   SPDx11 -- 2988MB dedicated video memory, 0MB dedicated system memory and 1107MB shared system memory available.
+09:16:02.61   DeferredView - Finished creating view [ WorldView ] textures
+09:16:02.61   UN MUTING SOUNDS
+09:16:02.61   PerformanceRecorder::StartRecording for game size 2
+09:16:02.61   GAME -- Starting mission: DATA:scenarios\mp\lost_glider\lost_glider
+09:16:02.93   MEM -- heap use 1718 mb, heap uncommitted 286 mb, heap total 2005 mb, available virtual 1294 mb, total virtual 4095 mb
+09:16:03.09   MOD -- Player CPU - Easy set to AI Type: AI Player (frame 1) (CmdAI)
+09:16:07.76   GAME -- SimulationController::Pause 0
+09:16:07.76   MUTING SOUNDS
+09:16:16.06   SessionID : fffffffffffffffc - Disconnect called with reasonID 1000 - MatchSetup::Disconnect
+09:16:16.06   GAME -- Frame 35 - SimKillPlayer - Destroying SimPlayer 1001, reason 3
+09:16:16.06   MOD -- Player sepi (network abort) (frame 35) (KillPlayer)
+09:16:16.06   GAME -- Frame 35 - SimKillPlayer - Destroying SimPlayer 1000, reason 3
+09:16:16.06   MOD -- Player CPU - Easy (network abort) (frame 35) (KillPlayer)
+09:16:16.06   SessionID : fffffffffffffffc - Disconnect called with reasonID 1000 - MatchSetup::Disconnect
+09:16:16.08   Disconnect process already running
+09:16:16.08   SetVisible called while !IsConnected
+09:16:16.08   SessionID : fffffffffffffffc - Disconnect called with reasonID 1000 - MatchSetup::Disconnect
+09:16:16.11   Disconnect process already running
+09:16:16.11   Party::SetStatus - S_CONFIGURING
+09:16:16.13   Session::SchedulePeerRemove - Scheduling peerID: 1 to disconnect, reasonCode:1000, reason:MatchSetup::Disconnect
+09:16:16.13   Sending matchinfo change #20
+09:16:16.13   SlotManager::GetStringFromSlots: compressed = 246 bytes / 913 bytes
+09:16:16.13   Session Destroy Peer Event - ReasonID: 1000 ReasonDebug: MatchSetup::Disconnect
+09:16:16.13   Session::GetEvent DestroyPeer success Peer 1 removed, reasonCode 1000, reasonDebug MatchSetup::Disconnect
+09:16:16.13   Session::DestroyPeer - deallocating peer 1
+09:16:16.13   Session - Requested Disconnect for connectionID 7
+09:16:16.13   Deallocated route ID=8 for PeerID 1 at WINaddr:172.24.160.1:6112;
+09:16:16.13   Session - Requested Disconnect for connectionID 8
+09:16:16.13   Closed route 8<>8 for PeerID 1 at WINaddr:172.24.160.1:6112;
+09:16:16.13   WorldwideAdvertisementService::Process - EVENT_DESTROYPEER
+09:16:16.13   peerremove - peerIDRemoved=[00000000:0008dbad], reasonID=1000, reason debug hint - MatchSetup::Disconnect
+09:16:16.14   Session::GetState - info, session [-4]'s state changed to [1:STATE_DISCONNECTED].
+09:16:16.14   PeerRemoveAll - flushing local session peer data
+09:16:16.14   Session::Reset with reason WorldwidePartyService::PeerRemoveAll
+09:16:16.14   LeaveSessionInternal - no action taken, needLeave=0, service=2
+09:16:16.14   Destroyed Matchinfo
+09:16:16.14   SessionManager::UnregisterSession - Unregistering session 9a109890
+09:16:16.14   OnDestroyPartyNotification - partyID = [ffffffff:fffffffc], prevID = [ffffffff:ffffffff]
+09:16:16.14   OnDestroyPartyNotification - partyID = -4, prevID = -1
+09:16:16.44   Rejecting packet type 0 that claims to come from ourself
+09:16:18.41   GameObj::ShutdownGameObj
+09:16:18.41   GetMaxFrameTimeFromProfile: players=2 expected FPS=100.000000, bars=0, max avg=0.000, sd=0.000, 0 samples =
+09:16:18.41   PerformanceRecorder::EndRecording - game size=2, max average=0.000000, worst frame=0.010000
+09:16:18.41    Recording: No [2 players]
+09:16:18.41    Max/Avg: 0.00, 0.00 sec (fps=0.00, 0.00) (0 samples)
+09:16:18.41    Bars: 0
+09:16:18.66   SOUND -- Shutting down ...
+09:16:18.68   SOUND -- Shark Thread - Shutdown received
+09:16:18.73   SOUND -- Shutdown completed!
+09:16:18.78   SOUND -- Initializing ...
+09:16:18.86   SOUND -- Initialization completed!
+09:16:18.88   GameObjLoader 129983c0 - Unload
+09:16:18.88   GameObjLoader 129983c0 - resetting counters
+09:16:18.89   MOD -- Game Over at frame 35
+09:16:19.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+09:16:19.52   GameObjLoader 12998400 - Unload
+09:16:19.53   GameObjLoader 12998400 - resetting counters
+09:16:21.24   NetworkManager::DispatchEvents() - Warning - Time between calls was 2835 ms
+09:16:27.01   NetworkManager::DispatchEvents() - Warning - Time between calls was 2527 ms
+09:16:32.29   NetworkManager::DispatchEvents() - Warning - Time between calls was 3502 ms
+09:16:33.02   local host PeerID 1 LOCL ack= 13 (534ms~83) unack=  0, retry=  0, highwaterOOS=0 (ip=WINaddr:172.24.160.1:6112;), pending=0, dead=0, RS#=12/12
+09:16:33.02   MessageCounts: inval=0/0, seek=0/0, join=0/0, ichk=0/0, sk_r=0/0, deny=0/0, Padd=0/0, Pdel=0/0, drop=0/0, data=0/1, mdat=0/0, voip=0/0, rchk=0/0, nudg=0/0, Thdr=0/1, Peer=2/2, PPrx=2/4, ping=0/0, Pfrg=0/0, rely=0/0, lb_p=5/5, lb_c=0/0, cast=0/0, cdat=0/0, sorq1=0/0, sorp=0/0, acto=0/0, spob=0/0, sorq2=0/0, setp=0/0, actr=0/0, lsim=0/0
+09:16:39.79   NetworkManager::DispatchEvents() - Warning - Time between calls was 5302 ms
+09:16:42.85   NetworkManager::DispatchEvents() - Warning - Time between calls was 3063 ms
+09:17:06.48   Sending matchinfo change #28
+09:17:06.48   SlotManager::GetStringFromSlots: compressed = 251 bytes / 913 bytes
+09:17:06.88   Rejecting packet type 0 that claims to come from ourself
+09:17:13.42   Sending matchinfo change #29
+09:17:13.42   SlotManager::GetStringFromSlots: compressed = 293 bytes / 1065 bytes
+09:17:13.62   Rejecting packet type 0 that claims to come from ourself
+09:17:16.30   Sending matchinfo change #30
+09:17:16.30   SlotManager::GetStringFromSlots: compressed = 326 bytes / 1217 bytes
+09:17:16.61   Rejecting packet type 0 that claims to come from ourself
+09:17:18.26   Party::SetStatus - S_NEGOTIATING
+09:17:18.31   Sending matchinfo change #31
+09:17:18.31   SlotManager::GetStringFromSlots: compressed = 324 bytes / 1217 bytes
+09:17:18.31   Party::SetNegotiatingStatus - NS_Hosting
+09:17:18.38   Party::SetNegotiatingStatus - NS_Configuring
+09:17:18.49   starting offline hosting
+09:17:18.60   OnlineHostAsync success
+09:17:18.60   Session::Initialize - info, initializing session object, using threads.
+09:17:18.60   SessionManager::RegisterSession - Registering RL_NEW session 936b9ab0
+09:17:18.60   Created Matchinfo for sessionID 18446744073709551611
+09:17:18.60   OnJoinAdvertisementSuccess - joined online match, server leave notification required
+09:17:18.60   starting local hosting
+09:17:18.60   Transport::OpenInternal request to WINaddr:255.255.255.255:6112;
+09:17:18.60   Allocated route ID=0 for PeerID 1 at WINaddr:172.24.160.1:6112;
+09:17:18.60   Transport::OpenInternal request to WINaddr:172.24.160.1:6112;
+09:17:18.60   Session::Host sid = FFFFFFFFFFFFFFFB, hostURL = , local addresses = WINaddr:172.24.160.1:6112;
+09:17:18.60   Sending matchinfo change #32
+09:17:18.60   Session::GetState - info, session [-5]'s state changed to [2:STATE_CONNECTING].
+09:17:18.60   Rejecting packet type 0 that claims to come from ourself
+09:17:18.60   ValidateCustomData: called with 2889 bytes of custom data
+09:17:18.60   Host accepted Peer 1 into the match at address list=WINaddr:172.24.160.1:6112;, routes=WINaddr:172.24.160.1:6112;
+09:17:18.60   WorldwideAdvertisementService::Process - EVENT_NEWPEER
+09:17:18.63   local host PeerID 1 CONN ack=  0 (  0ms~0) unack=  0, retry=  0, highwaterOOS=0 @WINaddr:172.24.160.1:6112; (ping=0ms) 100.00%, pending=0, dead=0, RS#=0/0
+09:17:18.63   MessageCounts: inval=0/0, seek=0/0, join=0/0, ichk=0/0, sk_r=0/0, deny=0/0, Padd=0/0, Pdel=0/0, drop=0/0, data=1/0, mdat=0/0, voip=0/0, rchk=0/0, nudg=0/0, Thdr=0/0, Peer=0/0, PPrx=1/0, ping=0/0, Pfrg=0/0, rely=0/0, lb_p=0/0, lb_c=0/0, cast=0/0, cdat=0/0, sorq1=0/0, sorp=0/0, acto=0/0, spob=0/0, sorq2=0/0, setp=0/0, actr=0/0, lsim=0/0
+09:17:18.66   Session::GetState - info, session [-5]'s state changed to [3:STATE_CONNECTED].
+09:17:18.66   Sending matchinfo change #2
+09:17:18.66   Session Connection Event - ReasonID: 0 ReasonDebug: SessionOperationInfo::SUCCESS
+09:17:18.66   HostAsync - got operation info 0:SessionOperationInfo::SUCCESS
+09:17:18.71   hosting - Session is connected
+09:17:18.76   HostAsync - completed with HostResult = 0
+09:17:18.76   WorldwidePartyService::SetMatchState - state 0 unchanged ignoring
+09:17:18.76   WorldwideAutomatch2Service::OnHostComplete - we're not polling at the moment, ignoring
+09:17:18.76   WorldwideAutomatchService::OnHostComplete - automatcher is no longer active - stopPollPending 0 automatchPollID 18446744073709551615
+09:17:18.76   Party::SetNegotiatingStatus - NS_Communicating
+09:17:18.81   Sending matchinfo change #9
+09:17:18.81   Party::SetNegotiatingStatus - NS_WaitingForPlayers
+09:17:18.86   Rejecting packet type 0 that claims to come from ourself
+09:17:18.86   Party::SetNegotiatingStatus - NS_WaitingForAck
+09:17:18.91   Party::SetNegotiatingStatus - NS_Completing
+09:17:18.96   Sending matchinfo change #13
+09:17:18.96   Party::SetNegotiatingStatus - NS_None
+09:17:18.96   Party::SetStatus - S_PLAYING
+09:17:18.96   WorldwidePartyService::SetMatchState - state 1 not an online game, no server call necessary
+09:17:19.01   Sending matchinfo change #33
+09:17:19.11   Sending matchinfo change #14
+09:17:19.11   WorldwideAutomatchService::OnStartComplete - detected successful game start
+09:17:19.11   Match Started - [00000000:0008dbad /steam/76561198006675368], slot =  0, ranking =   -1
+09:17:19.11   SlotManager::GetStringFromSlots: compressed = 325 bytes / 1217 bytes
+09:17:19.26   Rejecting packet type 0 that claims to come from ourself
+09:17:19.72   Sending matchinfo change #15
+09:17:19.72   MOD - Setting player (0) race to: 0
+09:17:19.72   MOD - Setting player (1) race to: 0
+09:17:19.72   MOD - Setting player (2) race to: 0
+09:17:19.72   MOD - Setting player (3) race to: 0
+09:17:19.72   GAME -- Scenario: DATA:scenarios\mp\hamlet\hamlet
+09:17:19.72   GAME -- Win Condition Qualified Name: 00000000000000000000000000000000:16123440
+09:17:19.72   GAME -- Win Condition Name: victory_point
+09:17:19.72   GAME -- Human Player: 0 sepi 580525 0 german
+09:17:19.72   GAME -- AI Player: 1 CPU - Easy -1 1 aef
+09:17:19.72   GAME -- AI Player: 2 CPU - Easy -1 0 soviet
+09:17:19.72   GAME -- AI Player: 3 CPU - Easy -1 1 german
+09:17:20.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+09:17:24.40   NetworkManager::DispatchEvents() - Warning - Time between calls was 4175 ms
+09:17:25.09   GameObj::StartGameObj - info, network session GUID set to [701308486].
+09:17:25.30   OBJECTSCAR -- Initialization failed - could not load scar type BP list.
+09:17:27.42   GameObjLoader - upgrading load_count from 0 to 2881
+09:17:34.01   local host PeerID 1 LOCL ack= 22 (515ms~97) unack=  0, retry=  0, highwaterOOS=0 (ip=WINaddr:172.24.160.1:6112;), pending=0, dead=0, RS#=21/21
+09:17:34.01   MessageCounts: inval=0/0, seek=0/0, join=0/0, ichk=0/0, sk_r=0/0, deny=0/0, Padd=0/0, Pdel=0/0, drop=0/0, data=3/4, mdat=0/0, voip=0/0, rchk=0/0, nudg=0/0, Thdr=0/0, Peer=6/6, PPrx=4/12, ping=0/0, Pfrg=0/0, rely=0/0, lb_p=4/4, lb_c=0/0, cast=0/0, cdat=0/0, sorq1=0/0, sorp=0/0, acto=0/0, spob=0/0, sorq2=0/0, setp=0/0, actr=0/0, lsim=0/0
+09:17:37.85   GameObjLoader 12998400 - resetting counters
+09:17:37.85   GameObjLoader 12998400 - LOAD_DONE
+09:17:44.65   GAME - SessionSetup
+09:17:44.65   MUTING SOUNDS
+09:17:44.76   TChunkManagerIO::Load version 2001l
+09:17:44.77   TERRAINTEXTURE -- compositor added RenderTarget of size 3360 x 1890
+09:17:45.51   Warning: RenderCompositeStrips AddStripSegment : time == FLT_MAX
+09:17:45.51   Warning: RenderCompositeStrips AddStripSegment : time == FLT_MAX
+09:17:45.52   Warning: RenderCompositeStrips AddStripSegment : time == FLT_MAX
+09:17:45.52   Warning: RenderCompositeStrips AddStripSegment : time == FLT_MAX
+09:17:45.52   Warning: RenderCompositeStrips AddStripSegment : time == FLT_MAX
+09:17:46.20   GAME - CreateGEWorld in 1547 ms
+09:17:46.21   GAME - SessionSetup finished in 1557 ms
+09:17:46.23   GAME - WaterReflectionManagerSetup
+09:17:46.23   GAME - WaterReflectionManagerSetup finished in 0 ms
+09:17:46.28   GAME -- Recording game
+09:17:46.39   SimWorld::LoadWinCondition: - [DATA:Scar/WinConditions/VictoryPointPlusAnnihilate.scar] succeeded.
+09:17:46.57   MOD -- Player  (unused player) (frame 0) (KillPlayer)
+09:17:46.57   MOD -- Player  (unused player) (frame 0) (KillPlayer)
+09:17:46.57   MOD -- Player  (unused player) (frame 0) (KillPlayer)
+09:17:46.57   MOD -- Player  (unused player) (frame 0) (KillPlayer)
+09:17:46.77   SPEECHMANAGER -- Loaded in 0.028987 seconds
+09:17:46.83   TwoPop sound file 'dev/440hz' not loaded
+09:17:47.14   GameObjLoader - upgrading load_count from 0 to 2260
+09:17:47.66   GameObjLoader 129983c0 - resetting counters
+09:17:47.66   GameObjLoader 129983c0 - LOAD_DONE
+09:17:47.78   Releasing [58]MB of Staging texture data
+09:17:47.78   PreloadResources took 0ms.
+09:17:47.86   SIM -- Setting SyncErrorChecking level to None
+09:18:11.89   DeferredView - Start creating view [ WaterView ] textures
+09:18:11.89   SPDx11 -- 2988MB dedicated video memory, 0MB dedicated system memory and 1107MB shared system memory available.
+09:18:11.89   SPDx11 -- 2988MB dedicated video memory, 0MB dedicated system memory and 1107MB shared system memory available.
+09:18:11.89   DeferredView - Finished creating view [ WaterView ] textures
+09:18:11.89   DeferredView - Start creating view [ WorldView ] textures
+09:18:11.89   SPDx11 -- 2988MB dedicated video memory, 0MB dedicated system memory and 1107MB shared system memory available.
+09:18:11.90   SPDx11 -- 2988MB dedicated video memory, 0MB dedicated system memory and 1107MB shared system memory available.
+09:18:11.90   DeferredView - Finished creating view [ WorldView ] textures
+09:18:11.90   UN MUTING SOUNDS
+09:18:11.90   PerformanceRecorder::StartRecording for game size 4
+09:18:11.90   GAME -- Starting mission: DATA:scenarios\mp\hamlet\hamlet
+09:18:12.29   MEM -- heap use 1829 mb, heap uncommitted 160 mb, heap total 1990 mb, available virtual 1357 mb, total virtual 4095 mb
+09:18:12.31   BattleServerRelay::Process - 388 ms between calls!
+09:18:12.46   MOD -- Player CPU - Easy set to AI Type: AI Player (frame 1) (CmdAI)
+09:18:12.46   MOD -- Player CPU - Easy set to AI Type: AI Player (frame 1) (CmdAI)
+09:18:12.46   MOD -- Player CPU - Easy set to AI Type: AI Player (frame 1) (CmdAI)
+09:18:19.00   local host PeerID 1 CONN ack=  0 (  0ms~0) unack=  0, retry=  0, highwaterOOS=0 @WINaddr:172.24.160.1:6112; (ping=0ms) 100.00%, pending=0, dead=0, RS#=0/0
+09:18:19.00   MessageCounts: inval=0/0, seek=0/0, join=0/0, ichk=0/0, sk_r=0/0, deny=0/0, Padd=0/0, Pdel=0/0, drop=0/0, data=0/0, mdat=0/0, voip=0/0, rchk=0/0, nudg=0/0, Thdr=0/0, Peer=0/0, PPrx=0/0, ping=0/0, Pfrg=0/0, rely=0/0, lb_p=14/14, lb_c=0/0, cast=0/0, cdat=0/0, sorq1=0/0, sorp=0/0, acto=0/0, spob=0/0, sorq2=0/0, setp=0/0, actr=0/0, lsim=0/0
+09:18:21.00   Transport - median kBPS [hi/cur] sent = 0.0/0.0, recvd = 0.0/0.0, #p/sec[s/r] = 0.0/0.0, max unsent 0, version err 0, merge 0
+09:18:22.08   GAME -- SimulationController::Pause 0
+09:18:22.08   MUTING SOUNDS
+09:18:28.81   SessionID : fffffffffffffffb - Disconnect called with reasonID 1000 - MatchSetup::Disconnect
+09:18:28.81   GAME -- Frame 74 - SimKillPlayer - Destroying SimPlayer 1003, reason 3
+09:18:28.81   MOD -- Player sepi (network abort) (frame 74) (KillPlayer)
+09:18:28.82   GAME -- Frame 74 - SimKillPlayer - Destroying SimPlayer 1000, reason 3
+09:18:28.82   MOD -- Player CPU - Easy (network abort) (frame 74) (KillPlayer)
+09:18:28.83   GAME -- Frame 74 - SimKillPlayer - Destroying SimPlayer 1002, reason 3
+09:18:28.83   MOD -- Player CPU - Easy (network abort) (frame 74) (KillPlayer)
+09:18:28.83   GAME -- Frame 74 - SimKillPlayer - Destroying SimPlayer 1001, reason 3
+09:18:28.83   MOD -- Player CPU - Easy (network abort) (frame 74) (KillPlayer)
+09:18:28.84   SetVisible called while !IsConnected
+09:18:28.84   SessionID : fffffffffffffffb - Disconnect called with reasonID 1000 - MatchSetup::Disconnect
+09:18:28.88   Disconnect process already running
+09:18:28.89   SessionID : fffffffffffffffb - Disconnect called with reasonID 1000 - MatchSetup::Disconnect
+09:18:28.90   Session::SchedulePeerRemove - Scheduling peerID: 1 to disconnect, reasonCode:1000, reason:MatchSetup::Disconnect
+09:18:28.90   Disconnect process already running
+09:18:28.91   Session Destroy Peer Event - ReasonID: 1000 ReasonDebug: MatchSetup::Disconnect
+09:18:28.91   Session::GetEvent DestroyPeer success Peer 1 removed, reasonCode 1000, reasonDebug MatchSetup::Disconnect
+09:18:28.91   Session::DestroyPeer - deallocating peer 1
+09:18:28.91   Session - Requested Disconnect for connectionID 9
+09:18:28.91   Deallocated route ID=10 for PeerID 1 at WINaddr:172.24.160.1:6112;
+09:18:28.91   Session - Requested Disconnect for connectionID 10
+09:18:28.91   Closed route 10<>10 for PeerID 1 at WINaddr:172.24.160.1:6112;
+09:18:28.91   WorldwideAdvertisementService::Process - EVENT_DESTROYPEER
+09:18:28.91   peerremove - peerIDRemoved=[00000000:0008dbad], reasonID=1000, reason debug hint - MatchSetup::Disconnect
+09:18:28.91   Party::SetStatus - S_CONFIGURING
+09:18:28.92   Session::GetState - info, session [-5]'s state changed to [1:STATE_DISCONNECTED].
+09:18:28.92   PeerRemoveAll - flushing local session peer data
+09:18:28.92   Session::Reset with reason WorldwidePartyService::PeerRemoveAll
+09:18:28.92   LeaveSessionInternal - no action taken, needLeave=0, service=2
+09:18:28.92   Destroyed Matchinfo
+09:18:28.92   SessionManager::UnregisterSession - Unregistering session 936b9ab0
+09:18:28.92   OnDestroyPartyNotification - partyID = [ffffffff:fffffffb], prevID = [ffffffff:ffffffff]
+09:18:28.92   OnDestroyPartyNotification - partyID = -5, prevID = -1
+09:18:28.92   Sending matchinfo change #34
+09:18:28.92   SlotManager::GetStringFromSlots: compressed = 326 bytes / 1217 bytes
+09:18:29.13   Rejecting packet type 0 that claims to come from ourself
+09:18:31.31   GameObj::ShutdownGameObj
+09:18:31.31   GetMaxFrameTimeFromProfile: players=4 expected FPS=100.000000, bars=0, max avg=0.000, sd=0.000, 0 samples =
+09:18:31.31   PerformanceRecorder::EndRecording - game size=4, max average=0.000000, worst frame=0.010000
+09:18:31.31    Recording: No [4 players]
+09:18:31.31    Max/Avg: 0.00, 0.00 sec (fps=0.00, 0.00) (0 samples)
+09:18:31.31    Bars: 0
+09:18:31.55   SOUND -- Shutting down ...
+09:18:31.56   SOUND -- Shark Thread - Shutdown received
+09:18:31.61   SOUND -- Shutdown completed!
+09:18:31.66   SOUND -- Initializing ...
+09:18:31.74   SOUND -- Initialization completed!
+09:18:31.76   GameObjLoader 129983c0 - Unload
+09:18:31.76   GameObjLoader 129983c0 - resetting counters
+09:18:31.78   MOD -- Game Over at frame 74
+09:18:32.44   GameObjLoader 12998400 - Unload
+09:18:32.44   GameObjLoader 12998400 - resetting counters
+09:18:34.25   NetworkManager::DispatchEvents() - Warning - Time between calls was 2936 ms
+09:18:35.01   local host PeerID 1 LOCL ack= 23 (489ms~73) unack=  0, retry=  0, highwaterOOS=0 (ip=WINaddr:172.24.160.1:6112;), pending=0, dead=0, RS#=22/22
+09:18:35.01   MessageCounts: inval=0/0, seek=0/0, join=0/0, ichk=0/0, sk_r=0/0, deny=0/0, Padd=0/0, Pdel=0/0, drop=0/0, data=1/1, mdat=0/0, voip=0/0, rchk=0/0, nudg=0/0, Thdr=0/0, Peer=2/2, PPrx=2/4, ping=0/0, Pfrg=0/0, rely=0/0, lb_p=1/1, lb_c=0/0, cast=0/0, cdat=0/0, sorq1=0/0, sorp=0/0, acto=0/0, spob=0/0, sorq2=0/0, setp=0/0, actr=0/0, lsim=0/0
+09:18:35.96   SessionID : e20c2b5 - Disconnect called with reasonID 1000 - Destroying Party
+09:18:38.13   SOUND -- Shutting down ...
+09:18:38.15   SOUND -- Shark Thread - Shutdown received
+09:18:38.18   SOUND -- Shutdown completed!
+09:18:38.25   Purging: Resource [Shark: ContainerBP]-[sound\ui\interaction_ui\mouse_over_primary] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: ContainerBP]-[sound\ui\interaction_ui\mouse_over_portraits] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: ContainerBP]-[sound\ui\interaction_ui\button_click_secondary] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: ContainerBP]-[sound\ui\interaction_ui\menu_drop_down] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: ContainerBP]-[sound\ui\in_game\event_cues\blizzard_clock_tick] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: ContainerBP]-[sound\ui\interaction_ui\add_ai_opponent] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: ContainerBP]-[sound\ui\interaction_ui\button_click_primary] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: ContainerBP]-[sound\ui\interaction_ui\screen_transition_primary] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: ContainerBP]-[sound\ui\interaction_ui\mouse_over_secondary] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: ContainerBP]-[sound\ui\interaction_ui\start_begin_button] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: Sample]-[ui\gun_foley_ui_sfx\x_x_ui_gunfoley_16] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: Sample]-[ui\gun_foley_ui_sfx\x_x_ui_gunfoley_04] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: Sample]-[ui\gun_foley_ui_sfx\x_x_ui_gunfoley_15] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: Sample]-[ui\gun_foley_ui_sfx\x_x_ui_gunfoley_02] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: Sample]-[ui\gun_foley_ui_sfx\x_x_ui_gunfoley_09] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: Sample]-[ui\new_button_clicks\big_hit_start_game] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: Sample]-[ui\in_game\add_ai_opponent_br] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: Sample]-[ui\new_button_clicks\mouse_over\mouse_over_whoosh_02] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: Sample]-[ui\new_button_clicks\mouse_over\mouse_over_whoosh_03] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: Sample]-[ui\new_button_clicks\mouse_over\mouse_over_whoosh_01] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: Sample]-[ui\artillery_ui\pe_sector_artillery_marker_01] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: Sample]-[foley\weapons\mg42\mg42_mech_click_lav_21] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: Sample]-[ui\new_button_clicks\start_begin_button] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: Sample]-[ui\fe_ui_musical\snare_pattern_w_hit] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: Sample]-[weapons\distanceboom\classb\distant_gun_04] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: Sample]-[ui\new_button_clicks\button_click_primary] still referenced! [visible]
+09:18:38.25   Purging: Resource [Shark: Sample]-[ui\new_button_clicks\mouse_over\mouse_over_primary] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i390] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i16] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i359] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i397] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[\art\armies\soviet\badges\default_dif] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|43:ui\assets\textures\1ac42354c5774bcc835626b472223c1a_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i264] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[\art\armies\common\badges\default_dif] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|17:ui\assets\textures\77b7b31488ba4f72bca553b4a60c5cb6_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|27:ui\assets\textures\38eba702bb8c4e0d93b31cb9547eba38_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|23:ui\assets\textures\d7a4ccb12c1d47f18b0aa95c1e1aafc2_i3] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|44:ui\assets\textures\f400fbf051fd4135a79db6dd4caf2b52_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|37:ui\assets\textures\9c96eb338bd64adca6739a9777493250_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|24:ui\assets\textures\377c96ffe8484d1980d7781ea5e1ae60_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|25:ui\assets\textures\cc55389ea2704661ae0e6bc121ce3bc3_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|38:ui\assets\textures\b9e9629fad114176840815e9c20fc456_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i468] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_ia00] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|16:ui\assets\textures\195b763a225048eda72ac85eab111201_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|34:ui\assets\textures\4b4868f0ce91423c91cc5b62d15af56a_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|45:ui\assets\textures\ac2f6e1927ef4cc3be8e244cc3207c18_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i71f] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i71d] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|42:ui\assets\textures\2273fd2797954a56b06d2d7e65fc96f6_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i71b] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|29:ui\assets\textures\4dda4c334fd942f18db25d38e0a3addb_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i721] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i719] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i7a7] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i717] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|35:ui\assets\textures\b15d4a3abe1146139ff6b3b8b7323b9a_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[scenarios\mp\hamlet\hamlet_mm_low] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|33:ui\assets\textures\e2a94ba909c84452a77f6e744ad0cd2b_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|11:ui\assets\textures\152282cabf6946828716c6c2b52dc7d4_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i16a] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_ia] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i28c] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|31:ui\assets\textures\391fc609b2ec4438ae24ee8135eb60cd_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[scenarios\mp\hamlet\hamlet_loading_background] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_ib56] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i171] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|39:ui\assets\textures\13325c05ee4347f38744129854f95fe7_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i1782] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i15c] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[\art\armies\aef\badges\default_dif] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|12:ui\assets\textures\aae494d0ef4746549ecd36b8be4ae86e_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i15f] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i55] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i3f3] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i54] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i27] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|26:ui\assets\textures\0b194c262900407db742f19658f56f9a_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i2fb] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i8b] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_ia4] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_ia6] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i47] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|46:ui\assets\textures\21371f92502b4a079bdc4e64ad60ac8e_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i42] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|40:ui\assets\textures\7b816b0bd87449bc8576eae559b447db_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_idb5] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i41] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i34e] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|21:ui\assets\textures\892006aaef4645f0af4e83024c18367a_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|15:ui\assets\textures\6e9686bcda67440ab494fc73693a3910_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i9e] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[\art\armies\german\badges\default_dif] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|28:ui\assets\textures\db6ec4ab20f04ac9bf84c55ee9e77af7_i3] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i17f] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|41:ui\assets\textures\72b276432f0e41e889b1c9d005ac8cba_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i68a] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|22:ui\assets\textures\7b6666c094464d38a8d11f71c305fb1a_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i444] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|10:ui\assets\textures\7657c36032eb4e4fbb4c92578d6efce1_i3] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i3] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i83a] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|30:ui\assets\textures\a93258fadd2f442f94a1fec3e24b8723_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|20:ui\assets\textures\63ae594215e3493dbe7f4928a9a33690_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i1a] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|14:ui\assets\textures\60217b0e7d554ef49ecdb89f45f5d793_i3] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|19:ui\assets\textures\d8183fb4885a473bbc10b9409f254164_i3] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i993] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i5ff] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|36:ui\assets\textures\9c4e4403b18940cdb7f41a0362a853c5_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i3a2] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|18:ui\assets\textures\dbe94fa2241345d7be672096f9ce433b_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i36] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i52c] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i2def] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|13:ui\assets\textures\606ec6d745d84f7da2bf299b6277f5be_i1] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i39] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[ui\assets\textures\coh2ui_i240] still referenced! [visible]
+09:18:38.25   Purging: Resource [TextureSet]-[data|32:ui\assets\textures\b955bd0241874347b3f36fe36542c50c_i1] still referenced! [visible]
+09:18:38.25   Dx11DynamicBuffer [atmospheric_sky] stats : allocations=[2/4096] elements=[2/4096]
+09:18:38.25   Dx11DynamicBuffer [coh2_building_panel] stats : allocations=[69/1024] elements=[69/1024]
+09:18:38.25   Dx11DynamicBuffer [coh2_building_ribbon] stats : allocations=[69/1365] elements=[69/1365]
+09:18:38.25   Dx11DynamicBuffer [coh2_foliage] stats : allocations=[1569/2048] elements=[1569/2048]
+09:18:38.25   Dx11DynamicBuffer [coh2_gameplay] stats : allocations=[11/1024] elements=[11/1024]
+09:18:38.25   Dx11DynamicBuffer [coh2_impostor] stats : allocations=[0/2048] elements=[0/2048]
+09:18:38.25   Dx11DynamicBuffer [coh2_object] stats : allocations=[4130/5460] elements=[4130/5460]
+09:18:38.26   Dx11DynamicBuffer [coh2_object_uvanim] stats : allocations=[966/1365] elements=[966/1365]
+09:18:38.26   Dx11DynamicBuffer [coh2_soldier] stats : allocations=[159/1365] elements=[159/1365]
+09:18:38.26   Dx11DynamicBuffer [coh2_terrainblend] stats : allocations=[62/2048] elements=[62/2048]
+09:18:38.26   Dx11DynamicBuffer [coh2_vehicle] stats : allocations=[53/1024] elements=[53/1024]
+09:18:38.26   Dx11DynamicBuffer [coh2_vehicle_uvanim] stats : allocations=[0/1365] elements=[0/1365]
+09:18:38.26   Dx11DynamicBuffer [deferred_ambientocclusion_pass] stats : allocations=[0/1365] elements=[0/1365]
+09:18:38.26   Dx11DynamicBuffer [deferred_combiner_pass] stats : allocations=[0/4096] elements=[0/4096]
+09:18:38.26   Dx11DynamicBuffer [deferred_depth_to_linear_z] stats : allocations=[0/682] elements=[0/682]
+09:18:38.26   Dx11DynamicBuffer [deferred_depth_to_sky_mask] stats : allocations=[0/1024] elements=[0/1024]
+09:18:38.26   Dx11DynamicBuffer [deferred_lighting_pass] stats : allocations=[0/682] elements=[0/682]
+09:18:38.26   Dx11DynamicBuffer [depth_erode_filter] stats : allocations=[0/455] elements=[0/455]
+09:18:38.26   Dx11DynamicBuffer [depth_lao_filter] stats : allocations=[0/32] elements=[0/32]
+09:18:38.26   Dx11DynamicBuffer [font] stats : allocations=[0/4096] elements=[0/4096]
+09:18:38.26   Dx11DynamicBuffer [fxmesh] stats : allocations=[0/4096] elements=[0/4096]
+09:18:38.26   Dx11DynamicBuffer [fxmesh_additive] stats : allocations=[0/4096] elements=[0/4096]
+09:18:38.26   Dx11DynamicBuffer [fxmesh_additive_falloff] stats : allocations=[0/4096] elements=[0/4096]
+09:18:38.26   Dx11DynamicBuffer [fxmesh_alpha] stats : allocations=[0/4096] elements=[0/4096]
+09:18:38.26   Dx11DynamicBuffer [fxmesh_alpha_falloff] stats : allocations=[0/4096] elements=[0/4096]
+09:18:38.26   Dx11DynamicBuffer [fxshader_displacement] stats : allocations=[0/4096] elements=[0/4096]
+09:18:38.26   Dx11DynamicBuffer [litter] stats : allocations=[0/4096] elements=[0/4096]
+09:18:38.26   Dx11DynamicBuffer [pp_hdr] stats : allocations=[0/240] elements=[0/240]
+09:18:38.26   Dx11DynamicBuffer [pp_simple] stats : allocations=[0/4096] elements=[0/4096]
+09:18:38.26   Dx11DynamicBuffer [rain] stats : allocations=[0/1024] elements=[0/1024]
+09:18:38.26   Dx11DynamicBuffer [simple_blend_tex] stats : allocations=[0/1365] elements=[0/1365]
+09:18:38.26   Dx11DynamicBuffer [simple_cube_face] stats : allocations=[0/1365] elements=[0/1365]
+09:18:38.26   Dx11DynamicBuffer [snowtracks_blur] stats : allocations=[0/4096] elements=[0/4096]
+09:18:38.26   Dx11DynamicBuffer [terrainbasemesh] stats : allocations=[3/4096] elements=[3/4096]
+09:18:38.26   Dx11DynamicBuffer [terraindecal] stats : allocations=[0/1365] elements=[0/1365]
+09:18:38.26   Dx11DynamicBuffer [terraintileblend] stats : allocations=[0/60] elements=[0/60]
+09:18:38.26   Dx11DynamicBuffer [ui] stats : allocations=[0/4096] elements=[0/4096]
+09:18:38.26   Dx11DynamicBuffer [MatrixArray] stats : allocations=[4989/5000] elements=[37908/60000]
+09:18:38.50   DLLDriverLinker -- 0 DLL drivers found.
+09:18:38.55   MessageInternal::DestroyChannel: Destroyed channel 00000001
+09:18:38.55   MessageInternal::DestroyChannel: Destroyed channel 00000002
+09:18:38.55   MessageInternal::DestroyChannel: Destroyed channel 00000003
+09:18:38.55   MessageInternal::DestroyChannel: Destroyed channel 00000004
+09:18:38.55   MessageInternal::DestroyChannel: Destroyed channel 00000005
+09:18:38.55   MessageInternal::DestroyChannel: Destroyed channel 00000006
+09:18:38.55   MessageInternal::DestroyChannel: Destroyed channel 00000007
+09:18:38.55   MessageInternal::DestroyChannel: Destroyed channel 00000008
+09:18:38.55   MessageInternal::DestroyChannel: Destroyed channel 00000009
+09:18:38.55   MessageInternal::DestroyChannel: Destroyed channel 0000000a
+09:18:38.55   NetworkManager::Destroy - exit allocation counts Network (cur/max) = 50794 / 91162, Session = 15 / 36
+09:18:38.55   SessionID : e20c2b5 - Disconnect called with reasonID 116 - NetworkManagerInternal::Uninitalize()
+09:18:38.55   NetworkManager::DispatchEvents() - Warning - Time between calls was 2633 ms
+09:18:38.55   Disconnect process already running
+09:18:38.55   SetVisible called while !IsConnected
+09:18:38.80   ExtensionDoExternalCallEvent (https://garry.sgaas.net:443/event) - response good: 0 bytes,
+09:18:38.89   SessionID : e20c2b5 - Disconnect called with reasonID 117 - WorldwideAccountService::OnDeselectProfile
+09:18:38.90   Disconnect process already running
+09:18:39.21   WorldwideLeaveAdvertisementAsync - response was failure: -9 We are not connected
+09:18:39.21   WorldwideCallContext::LogFailure - WorldwideLeaveAdvertisementAsync : WorldwideLeaveAdvertisementAsync
+09:18:39.21   Session::SchedulePeerRemove - Scheduling peerID: 1 to disconnect, reasonCode:116, reason:NetworkManagerInternal::Uninitalize()
+09:18:39.21   WorldwideGetUserNameAsync - response was failure: -9 We are not connected
+09:18:39.21   WorldwideCallContext::LogFailure - WorldwideGetUserNameAsync : RLink::WorldwideGetUserNameAsync - () failed
+09:18:39.22   Session Destroy Peer Event - ReasonID: 116 ReasonDebug: NetworkManagerInternal::Uninitalize()
+09:18:39.22   Session::GetEvent DestroyPeer success Peer 1 removed, reasonCode 116, reasonDebug NetworkManagerInternal::Uninitalize()
+09:18:39.22   Session::DestroyPeer - deallocating peer 1
+09:18:39.22   Session - Requested Disconnect for connectionID 5
+09:18:39.22   Deallocated route ID=6 for PeerID 1 at WINaddr:172.24.160.1:6112;
+09:18:39.22   Session - Requested Disconnect for connectionID 6
+09:18:39.22   Closed route 6<>6 for PeerID 1 at WINaddr:172.24.160.1:6112;
+09:18:39.22   WorldwideAdvertisementService::Process - EVENT_DESTROYPEER
+09:18:39.22   peerremove - peerIDRemoved=[00000000:0008dbad], reasonID=116, reason debug hint - NetworkManagerInternal::Uninitalize()
+09:18:39.22   Session::GetState - info, session [237028021]'s state changed to [1:STATE_DISCONNECTED].
+09:18:39.22   PeerRemoveAll - flushing local session peer data
+09:18:39.22   Session::Reset with reason WorldwidePartyService::PeerRemoveAll
+09:18:39.22   LeaveSessionInternal - no action taken, needLeave=0, service=0
+09:18:39.22   Destroyed Matchinfo
+09:18:39.22   DBG - _SockFree: socket 2/16380 sending graceful shutdown request. reason: SockCollection::DisconnectAll forceFree
+09:18:39.22   DBG - _SockClose: socket 2/16380 initiating close
+09:18:39.22   DBG - _SockClose: socket 2/16380 close complete. debugReason SockCollection::DisconnectAll forceFree
+09:18:39.22   DBG - _SockFree: socket 2/16380 _SockFree complete
+09:18:39.32   BT! - SockUnInit - sending shutdown notification & close with linger for all 0 active sockets
+09:18:39.32   SessionManager::UnregisterSession - Unregistering session 9a1078d8
+09:18:39.32   OnDestroyPartyNotification - partyID = [00000000:0e20c2b5], prevID = [ffffffff:ffffffff]
+09:18:39.32   OnDestroyPartyNotification - partyID = 237028021, prevID = -1
+09:18:39.32   MessageInternal::DestroyChannel: Destroyed channel fffffffd
+09:18:39.32   Automatch2Internal: Fade to black
+09:18:39.32   AutomatchInternal: Fade to black
+09:18:39.33   AsyncJobDriver::~AsyncJobDriver() - dynamically allocated job ChatChannelCache is still running
+09:18:39.33   SessionManager::~SessionManager - uninitializing
+09:18:39.34   RLink::ThreadFunction - Returning from the network thread function...
+09:18:39.35   Transport::~Transport - shutting down transport
+09:18:39.35   Transport::~Connection - closing WINaddr:255.255.255.255:6112;,WINaddr:255.255.255.255:6112;
+09:18:39.35   Transport::~Connection - closing WINaddr:172.24.160.1:6112;,WINaddr:172.24.160.1:6112;
+09:18:39.35   WorldwideLoginService::~WorldwideLoginService - uninitializing
+09:18:39.40   RLink::WorldwideLoginService::LongPoller::ThreadFunction - Returning from the network thread function...
+09:18:39.40   AsyncJobDriver::~AsyncJobDriver() - dynamically allocated job HttpRequestAsync is still running
+09:18:39.40   AsyncJobDriver::~AsyncJobDriver() - dynamically allocated job HttpRequestAsync is still running
+09:18:39.42   MOD -- Shutting down mod.
+09:18:39.55   FILESYSTEM -- filepath failed to remove alias, missing alias 'stats'
+
+Application closed without errors
