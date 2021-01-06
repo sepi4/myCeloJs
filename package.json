@@ -27,7 +27,7 @@
         "eslint-plugin-react": "^7.21.5"
     },
     "dependencies": {
-        "axios": "^0.19.2",
+        "axios": "^0.21.1",
         "react": "^17.0.1",
         "react-dom": "^17.0.1"
     }
