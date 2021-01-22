@@ -180,7 +180,14 @@ function refactorData(leaderboard, cohTitles, ids) {
     // for (const x of leaderboard.leaderboardStats.filter(l => l.rank > -1)) {
     for (const x of leaderboard.leaderboardStats) {
         // check members
+
+        console.log('BUG: start')
+        console.log('x:',x)
+        console.log('x.statGroup_id:',x.statGroup_id)
+        console.log(statGroups)
+
         for (const member of statGroups[x.statGroup_id].members) {
+            console.log('BUG: if')
             let steam_id = member.profile_id
             if (
                 players[steam_id]
@@ -201,6 +208,8 @@ function refactorData(leaderboard, cohTitles, ids) {
                 break
             }
         }
+
+        console.log('BUG: after')
     }
 
     return players
