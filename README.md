@@ -1,10 +1,7 @@
 # COH2 LAGGER BUG VERSION
-Use 
-<a id="raw-url" 
-href="https://github.com/sepi4/myCeloJs/raw/ladderBug/sepi-celo%20Setup%20666.666.666.exe">
-THIS
-</a>
-version untill relic haven't fixed ladder bugs. 
+Use <a id="raw-url" 
+href="https://github.com/sepi4/myCeloJs/raw/ladderBug/sepi-celo%20Setup%20666.666.666.exe"
+> THIS </a> version untill relic haven't fixed ladder bugs. 
 
 
 # About
