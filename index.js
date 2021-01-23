@@ -1,7 +1,7 @@
 import { React, ReactDOM } from './importReact'
 
 let appVersion = require('electron').remote.app.getVersion();
-document.title = 'sepi-celo ' + appVersion
+document.title = 'sepi-celo LADDER BUG VERSION' + appVersion
 
 const { useEffect, useState } = React
 const { dialog, clipboard } = require('electron').remote
@@ -123,13 +123,13 @@ function getExtraInfo(players, callback) {
 
     Promise.all([fetch1, fetch2])
         .then(values => {
+
             // console.log('logic, PROMISE ALL, then')
             if (values[0].status === 200 && values[1].status === 200) {
                 leaderboard = values[0].data
                 cohTitles = values[1].data
                 let result = refactorData(leaderboard, cohTitles, ids)
                 const teams = guessRankings(players, leaderboard, cohTitles)
-                // console.log('teams:', teams)
 
                 callback(result, isReplay, teams)
             }
@@ -181,24 +181,21 @@ function refactorData(leaderboard, cohTitles, ids) {
     for (const x of leaderboard.leaderboardStats) {
         // check members
 
-        console.log('BUG: start')
-        console.log('x:',x)
-        console.log('x.statGroup_id:',x.statGroup_id)
-        console.log(statGroups)
+        let group = statGroups[x.statgroup_id]
 
-        for (const member of statGroups[x.statGroup_id].members) {
-            console.log('BUG: if')
-            let steam_id = member.profile_id
+
+        for (const member of group.members) {
+            let id = member.profile_id
             if (
-                players[steam_id]
-                && !players[steam_id].ranks.find(y =>
-                    y.statGroup_id === x.statGroup_id &&
+                players[id]
+                && !players[id].ranks.find(y =>
+                    y.statgroup_id === x.statgroup_id &&
                     y.leaderboard_id === x.leaderboard_id
                 )
                 && names[x.leaderboard_id]
             ) {
-                players[steam_id].ranks.push({
-                    members: statGroups[x.statGroup_id].members,
+                players[id].ranks.push({
+                    members: group.members,
                     name: names[x.leaderboard_id],
                     ...x,
                     // statGroup_id: x.statGroup_id,
@@ -209,7 +206,7 @@ function refactorData(leaderboard, cohTitles, ids) {
             }
         }
 
-        console.log('BUG: after')
+        // console.log('BUG: after')
     }
 
     return players
@@ -344,7 +341,7 @@ function findTeamStatGroup(team, data) {
 }
 
 function findTeamLeaderboardStats(sg, data) {
-    return data.leaderboardStats.filter(ls => ls.statGroup_id === sg.id )
+    return data.leaderboardStats.filter(ls => ls.statgroup_id === sg.id )
 }
 
 function filterDublicateLeaderboardStats(arr) {
@@ -430,23 +427,27 @@ function getPlayerStatGroupId(playerId, data) {
 
 function getPlayerLeaderboardStat(statGroupId, leaderboardId, data) {
     return data.leaderboardStats.find(obj => (
-        obj.statGroup_id === statGroupId
+        obj.statgroup_id === statGroupId
         && obj.leaderboard_id === leaderboardId
     ))
 }
 
 function guessRankings(playersArr, data, titles) {
-    console.log('guessing')
+    console.log('GUESSING RANKINGS')
+    // debugger
     let arr = formatToNums(copyObj(playersArr))
     let teams = separateTeams(arr)
     for (const team of teams) {
         const side = factionSide(team)
         const titleName = getTitleName(team, side)
         const statGroup = findTeamStatGroup(team, data)
+        // debugger
         if (statGroup && team.length > 1) {
             const titleId = getTitleId(titleName, titles)
             let teamLeaderboardStats = findTeamLeaderboardStats(
-                statGroup, data)
+                statGroup, 
+                data,
+            )
             teamLeaderboardStats = filterDublicateLeaderboardStats(
                 teamLeaderboardStats)
             let teamCurrentLeaderboardStat = teamLeaderboardStats
@@ -467,6 +468,7 @@ function guessRankings(playersArr, data, titles) {
                 if (playerId === undefined) {
                     continue
                 }
+                // debugger
                 let playerStatGroupId = getPlayerStatGroupId(playerId, data)
                 let pls = getPlayerLeaderboardStat(
                     playerStatGroupId, leaderboardId, data)
@@ -477,6 +479,7 @@ function guessRankings(playersArr, data, titles) {
         }
         // console.log(team)
     }
+    console.log(teams)
     return teams
 }
 
@@ -718,12 +721,10 @@ function PlayerExtraInfo({ style, extraInfo, filterModes }) {
     const ranksArr = extraInfo && extraInfo.ranks
         .filter(x => {
             const a = x.name.toLowerCase()
-            // console.log('x: ', x)
             const b = filterModes.toLowerCase()
 
             // search returns  index of the first match between the regular
             // expression and the given string, or -1 if no match was found.
-            //
             return a.search(b) > -1 && x.rank > -1
             // return a.search(b) > -1
         })
@@ -1108,6 +1109,7 @@ function App() {
     const [filterModes, setFilterModes] = useState('')
 
 
+    console.log("info", info)
     const checkLogData = data => {
         if (JSON.stringify(info.fromFile) !== JSON.stringify(data)) {
             setInfo({
@@ -1218,7 +1220,6 @@ function App() {
                 extensions: ['txt']
             }]
         }).then((obj) => {
-            console.log(obj)
             if (obj !== undefined && obj.filePath) {
                 const newSetting = {
                     ...settings,
