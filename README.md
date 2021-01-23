@@ -1,19 +1,14 @@
 # COH2 LAGGER BUG VERSION
-Use 
-<a id="raw-url" 
-href="https://github.com/sepi4/myCeloJs/raw/ladderBug/sepi-celo%20Setup%20666.666.666.exe">
-THIS
-</a>
-version untill relic haven't fixed ladder bugs. 
-
+Use <a id="raw-url" href="https://github.com/sepi4/myCeloJs/raw/ladderBug/sepi-celo%20Setup%20666.666.666.exe" > THIS </a> version untill relic haven't fixed ladder bugs. 
 
 # About
 
 This is electron app for viewing ranks of current connected game
 of Company of Heroes 2 and display ranks in OBS.
 
-
+<!--
 <a id="raw-url" href="https://github.com/sepi4/myCeloJs/releases/download/1.3.0/sepi-celo.Setup.1.3.0.exe">Download setup file</a>
+-->
 
 
 ## Install and setup:
