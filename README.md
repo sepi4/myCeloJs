@@ -6,6 +6,9 @@ Use <a id="raw-url" href="https://github.com/sepi4/myCeloJs/raw/ladderBug/sepi-c
 This is electron app for viewing ranks of current connected game
 of Company of Heroes 2 and display ranks in OBS.
 
+Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone/MakoCelo</a> for ideas. It's also rank displayer for COH2, check it out, maybe you like it better. 
+
+
 <!--
 <a id="raw-url" href="https://github.com/sepi4/myCeloJs/releases/download/1.3.0/sepi-celo.Setup.1.3.0.exe">Download setup file</a>
 -->
