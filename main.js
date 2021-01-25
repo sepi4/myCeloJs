@@ -6,7 +6,8 @@ function createWindow() {
         width: 800,
         height: 600,
         webPreferences: {
-            nodeIntegration: true
+            nodeIntegration: true,
+            nativeWindowOpen: true,
         },
         center: true,
         // transparent:true,
@@ -16,11 +17,28 @@ function createWindow() {
     // and load the index.html of the app.
     win.loadFile('index.html')
 
-    // // Open the DevTools.
-    // win.webContents.openDevTools()
+    // Open the DevTools.
+    win.webContents.openDevTools()
 
     // remove menu
     win.setMenu(null)
+
+
+    // win.webContents.on('new-window', (event, url, frameName, disposition, options) => {
+    //     if (frameName === 'modal') {
+    //         // open window as modal
+    //         event.preventDefault()
+    //         Object.assign(options, {
+    //             modal: true,
+    //             parent: win,
+    //             width: 100,
+    //             height: 100
+    //         })
+    //         event.newGuest = new
+    //             BrowserWindow(options)
+    //     }
+    // })
+
 }
 
 

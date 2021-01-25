@@ -13,6 +13,8 @@ const fs = require('fs')
 let updateCheckNotDone = true
 let isReplay = true
 
+// let modal
+
 function getLines(data) {
     let lines = data.split('\n')
     let arr = []
@@ -295,8 +297,6 @@ function readLog(fileLocation, callback) {
     })
 }
 
-// ======= guess.js =======
-
 function separateTeams(arr) {
     let teams = [[], []]
     for (let obj of arr) {
@@ -483,8 +483,6 @@ function guessRankings(playersArr, data, titles) {
     return teams
 }
 
-// ======== index.js=========
-
 function readSettings(fileLocation, callback) {
     // console.log('readSettings, fileLocation:', fileLocation)
     fileLocation = fileLocation.replace(/\\/, '\\\\')
@@ -554,7 +552,8 @@ function SettingsInputDiv({text, settings, settingsKey, clickFun}) {
     </div>
 }
 
-function Player({ player, extraInfo, filterModes }) {
+function Player({ player, extraInfo, navSettings }) {
+    const [showExtra, setShowExtra] = useState(false)
 
     const style = {
         width: '25%',
@@ -575,8 +574,6 @@ function Player({ player, extraInfo, filterModes }) {
         />
     )
 
-    const [showExtra, setShowExtra] = useState(false)
-
     const handleSetShowExtra = () => {
         setShowExtra(!showExtra)
     }
@@ -592,17 +589,19 @@ function Player({ player, extraInfo, filterModes }) {
                 extraInfo,
             }}
         />
-        {showExtra && (
-            <PlayerExtraInfo
+        {showExtra 
+            ?  <PlayerExtraInfo
                 {...{
                     style,
                     player,
                     img,
                     extraInfo,
-                    filterModes,
+                    navSettings,
                 }}
             />
-        )}
+            : null
+
+        }
     </div>
 
 }
@@ -646,7 +645,7 @@ function PlayerCurrentRank({
             <i
                 style={{ marginRight: '1rem', cursor: 'pointer' }}
                 className={`fa fa-lg fa-caret-${showExtra ? 'down' : 'right'}`}
-                onClick={handleSetShowExtra}
+                onClick={extraInfo ? handleSetShowExtra: undefined}
             />
             {player.ranking === '-1' || player.ranking === -1
                 ? '-'
@@ -671,6 +670,7 @@ function PlayerCurrentRank({
         <span
             style={steamId ? { ...style, cursor: 'pointer' } : { ...style }}
             onClick={() => (steamId ? shell.openExternal(link) : null)}
+            // onClick={() => window.open(link, '_blank')}
         >
             {player.name}
         </span>
@@ -678,103 +678,234 @@ function PlayerCurrentRank({
 
 }
 
-function Sorter({ style, text, sort, setSort }) {
-    return <div
-        style={{
-            ...style,
-            color: sort === text ? 'yellow' : 'gray',
-        }}
-        onClick={() => setSort(text)}
-    >
-        {text}
-    </div>
-}
-
-function TitlesExtraInfo({style, sort, setSort}) {
-    style = {
-        ...style,
-        fontSize: '80%',
-        marginBottom: '0.5em',
-        color: 'gray',
-        cursor: 'pointer',
+function SoloDiv({ ranksArr, }) {
+    // solo ranking --------
+    let ranksObj = {
+        solo: {
+            sov: {},
+            usa: {},
+            uk: {},
+            wer: {},
+            okw: {},
+        },
+        team: [],
     }
 
-    const arr = ['rank', 'type', 'win %', 'total games']
+    for (const r of ranksArr) {
+        let groups = r.name.match(/^(\d)v\d(.+)/)
 
-    return <div style={{
-        display: 'flex',
-        alignItems: 'flex-start',
-    }}>
-        {arr.map(s => <Sorter
-                key={s}
-                style={style}
-                text={s}
-                sort={sort}
-                setSort={setSort}
-            />
-        )}
-    </div>
+        if (groups) {
+            if (groups[2] === 'Soviet') {
+                ranksObj.solo.sov[+groups[1]] = r
+            } else if (groups[2] === 'AEF') {
+                ranksObj.solo.usa[+groups[1]] = r
+            } else if (groups[2] === 'British') {
+                ranksObj.solo.uk[+groups[1]] = r
+            } else if (groups[2] === 'German') {
+                ranksObj.solo.wer[+groups[1]] = r
+            } else if (groups[2] === 'WestGerman') {
+                ranksObj.solo.okw[+groups[1]] = r
+            }
+        }
+    }
+    let solo = []
+    let names = ['sov', 'wer', 'usa', 'okw', 'uk']
+    for (let key of names) {
+        for (let i = 1; i < 5; i++) {
+            let o = ranksObj.solo[key][i]
+            if (o) {
+                solo.push(o)
+            } else {
+                solo.push(undefined)
+            }
+        }
+    }
+
+    let index = 0
+    let s = {
+        width: '20%',
+        display: 'inline-block',
+    }
+
+    let soloDiv = names.map((name, i) => {
+        return <div 
+            key={i+name}
+            style={{
+                display: 'inline-block',
+                width: '50%',
+
+
+                fontSize: '0.7em',
+                margin: '0.6em 0',
+            }}
+        >
+            <div
+                style={{
+                    display: 'inline-block',
+                    width: '20%',
+                }}
+            >
+                <img
+                    style={{
+                        width: '2em',
+                        height: '2em',
+                    }}
+                    src={`./img/${name}.png`}
+                    alt={`${name}`}
+                />
+            </div>
+            <div
+                style={{
+                    display: 'inline-block',
+                    width: '80%',
+                }}
+            >
+                {[0,1,2,3].map(x => {
+                    let d = x + 1
+                    let r = solo[index]
+                    index++
+                    let per = '-'
+                    let totalGames = 0
+                    let rank = '-'
+                    let streak = '-'
+                    if (r) {
+                        per = r.wins / (r.wins + r.losses) * 100
+                        per = per.toFixed(0) + '%'
+                        totalGames = r.wins + r.losses
+                        if (r.rank > 0) {
+                            rank = r.rank
+                        }
+                        streak = r.streak
+                    }
+
+                    return <div key={x+i+'rank'}>
+                        <span style={s}>{rank}</span>
+                        <span style={s}>{d}v{d}</span>
+                        <span style={s}>{per}</span>
+                        <span style={{
+                            ...s,
+                            color: Number(streak) 
+                                ?  streak > 0 
+                                    ? 'lime' 
+                                    : 'red'
+                                    : 'white',
+                        }}>
+                            {streak > 0 
+                                ? '+' + streak
+                                : streak
+                            }
+                        </span>
+                        <span style={s}>{totalGames}</span>
+                    </div>
+                })}
+            </div>
+        </div>
+    })
+
+    return soloDiv
 }
 
-function PlayerExtraInfo({ style, extraInfo, filterModes }) {
-    const [sort, setSort] = useState('rank')
-    const ranksArr = extraInfo && extraInfo.ranks
-        .filter(x => {
-            const a = x.name.toLowerCase()
-            const b = filterModes.toLowerCase()
+function TeamsDiv({ ranksArr, style, navSettings }) {
+    // team ranking ------
+    let reg = navSettings.list ? /^./ : /^Team/
+    let rankedOnly = navSettings.ranked
+    ranksArr = ranksArr
+        .filter(r => r.name.match(reg))
+        .filter(r => rankedOnly ? r.rank > 0 : true)
 
-            // search returns  index of the first match between the regular
-            // expression and the given string, or -1 if no match was found.
-            return a.search(b) > -1 && x.rank > -1
-            // return a.search(b) > -1
-        })
-        .sort((a, b) => a.rank - b.rank)
+    let pos = []
+    let neg = []
+    for (const r of ranksArr) {
+        if (r.rank < 0) {
+            neg.push(r)
+        } else {
+            pos.push(r)
+        }
+    }
+    neg = neg.sort((a, b) => {
+        let aTotal = a.wins + a.losses
+        let bTotal = b.wins + b.losses
+        return bTotal - aTotal
+    })
+
+    pos = pos.sort((a, b) => {
+        let rankDiff = a.rank - b.rank
+        let aTotal = a.wins + a.losses
+        let bTotal = b.wins + b.losses
+        if (rankDiff === 0) {
+            return aTotal - bTotal
+        } else {
+            return rankDiff
+        }
+    })
+    ranksArr = pos.concat(neg)
+
+    let teamsDiv = ranksArr && <div style={{ 
+        margin: '1rem 0 1.5rem 0',
+        fontSize: '90%',
+    }}>
+        <div style={{ marginTop: '1rem' }}> 
+            {
+                ranksArr
+                    .map((r, i) => {
+                        let per = r.wins / (r.wins + r.losses) * 100
+                        per = per.toFixed(0) + '%'
+                        let totalGames = r.wins + r.losses
+                        let rank = r.rank <= 0 ? '-' : r.rank
+
+                        return <div key={i} style={{
+                            display: 'flex',
+                            alignItems: 'flex-start',
+                        }}>
+                            <div style={style}>{rank}</div>
+                            <Rank
+                                style={{
+                                    ...style,
+                                    overflow: 'hidden',
+                                    whiteSpace: 'nowrap',
+                                }}
+                                rank={r}
+                            />
+                            <div style={style}>{per}</div>
+                            <div style={style}>{totalGames}</div>
+                        </div>
+                    })
+            }
+        </div>
+    </div>
+
+        return teamsDiv
+}
+
+function PlayerExtraInfo({ 
+    style, 
+    extraInfo, 
+    navSettings,
+}) {
+    let ranksArr = extraInfo && extraInfo.ranks
 
     style = {
         ...style,
         fontSize: '90%',
         marginRight: '0.5em',
     }
-    return <div>
-        {ranksArr && (
-            <div style={{ margin: '1rem 0 1.5rem 0' }}>
-                <hr />
-                <div style={{ marginTop: '1rem' }}>
 
-                    <TitlesExtraInfo
-                        style={style}
-                        sort={sort}
-                        setSort={setSort}
-                    />
 
-                    {ranksArr.map((r, i) => {
-                        let per = r.wins / (r.wins + r.losses) * 100
-                        per = per.toFixed(0) + '%'
-                        let totalGames = r.wins + r.losses
+    return <div style={{
+        color: 'white',
+    }}>
+        {
+            !navSettings.list 
+                && <SoloDiv ranksArr={ranksArr} />
+        } 
 
-                        return (
-                            <div key={i} style={{
-                                display: 'flex',
-                                alignItems: 'flex-start',
-                            }}>
-                                <div style={style}>{r.rank}</div>
-                                <Rank
-                                    style={{
-                                        ...style,
-                                        overflow: 'hidden',
-                                        whiteSpace: 'nowrap',
-                                    }}
-                                    rank={r}
-                                />
-                                <div style={style}>{per}</div>
-                                <div style={style}>{totalGames}</div>
-                            </div>
-                        )
-                    } )}
-                </div>
-            </div>
-        )}
+        <TeamsDiv 
+            ranksArr={ranksArr} 
+            style={style} 
+            navSettings={navSettings}
+        />
     </div>
+
 }
 
 function Members({ members }) {
@@ -863,7 +994,11 @@ function Rank({ style, rank }) {
 
 }
 
-function Team({ filterModes, players, extraInfo }) {
+function Team({ 
+    players, 
+    extraInfo,
+    navSettings,
+}) {
 
     return <div style={{
         background: '#181818',
@@ -875,7 +1010,7 @@ function Team({ filterModes, players, extraInfo }) {
             <Player
                 key={p.profileId + i}
                 player={p}
-                filterModes={filterModes}
+                navSettings={navSettings}
                 extraInfo={extraInfo
                         && p.profileId ? extraInfo[p.profileId] : null}
             />
@@ -883,7 +1018,7 @@ function Team({ filterModes, players, extraInfo }) {
     </div>
 }
 
-function Teams({ filterModes, players, extraInfo }) {
+function Teams({ players, extraInfo, navSettings }) {
 
     let teams = [[], []]
     if (players) {
@@ -899,13 +1034,13 @@ function Teams({ filterModes, players, extraInfo }) {
         ? <div>
             <Team
                 players={teams[0]}
-                filterModes={filterModes}
                 extraInfo={extraInfo}
+                navSettings={navSettings}
             />
             <Team
                 players={teams[1]}
-                filterModes={filterModes}
                 extraInfo={extraInfo}
+                navSettings={navSettings}
             />
         </div>
         : <div className="noInfo">
@@ -917,8 +1052,8 @@ function Teams({ filterModes, players, extraInfo }) {
 function Navbar({
     setSettingsView,
     settingsView,
-    setFilterModes,
-    filterModes,
+    navSettings,
+    setNavSettings,
 }) {
     const styleNavbar = {
         backgroundColor: '#181818',
@@ -934,52 +1069,72 @@ function Navbar({
         zIndex: '99999',
     }
 
-    return <div style={
-        !settingsView
-            ? styleNavbar
-            : { ...styleNavbar, justifyContent: 'flex-end' }
-    }>
-        {!settingsView && (
-            <Filter
-                filterModes={filterModes}
-                setFilterModes={setFilterModes}
-            />
-        )}
+    const styleCheckbox = {
+        display: 'flex',
+        alignItems: 'center',
+        fontSize: '80%',
+    }
+
+    return <div style={{ 
+        ...styleNavbar, 
+        justifyContent: 'space-between', 
+        color: 'white',
+    }}>
+
+        <div style={{
+            marginLeft: '5%',
+        }}>
+            <div style={styleCheckbox} >
+                <input 
+                    type="checkbox" 
+                    id="list" 
+                    name="list" 
+                    checked={navSettings.list} 
+                    onChange={() => setNavSettings({
+                        ...navSettings, 
+                        list: !navSettings.list,
+                    })}
+                />
+                <label 
+                    htmlFor="list" 
+                    style={{
+                        marginLeft: '0.5em',
+                    }}
+                >list view</label>
+            </div>
+
+            <div style={styleCheckbox} >
+                <input 
+                    type="checkbox" 
+                    id="ranked" 
+                    name="ranked" 
+                    checked={navSettings.ranked} 
+                    onChange={() => setNavSettings({
+                        ...navSettings, 
+                        ranked: !navSettings.ranked,
+                    })}
+                />
+                <label 
+                    htmlFor="ranked" 
+                    style={{
+                        marginLeft: '0.5em',
+                    }}
+                >ranked only</label>
+            </div>
+        </div>
+
         <i
             className={!settingsView
                 ? 'fa fa-2x fa-cogs'
                 : 'fa fa-2x fa-times'
             }
             style={{
-                color: 'white',
                 cursor: 'pointer',
-                // marginRight: '1rem',
                 marginRight: '5%',
             }}
             onClick={setSettingsView}
         />
     </div>
-}
-
-function Filter({ setFilterModes, filterModes }) {
-    const filterHandler = e => {
-        const text = e.target.value.trim()
-        setFilterModes(text)
-    }
-    return <input
-        style={{
-            height: '2rem',
-            background: '#181818',
-            border: 'none',
-            borderBottom: '1px solid white',
-            color: 'white',
-            fontWeight: 'bold',
-            fontSize: '0.8em',
-        }}
-        placeholder="filter modes"
-        onChange={filterHandler}
-        value={filterModes}
-    />
 }
 
 function UpdateBar() {
@@ -1079,7 +1234,7 @@ function MainView({
     handleRankingFileLocation,
     info,
     extraInfo,
-    filterModes,
+    navSettings,
 }) {
 
     return <div>
@@ -1087,7 +1242,7 @@ function MainView({
             ? <Teams
                 players={(info && info.players) ? info.players : null}
                 extraInfo={extraInfo}
-                filterModes={filterModes}
+                navSettings={navSettings}
             />
             : <Settings
                 settings={settings}
@@ -1106,7 +1261,10 @@ function App() {
     const [extraInfo, setExtraInfo] = useState(null)
     const [settingsView, setSettingsView] = useState(false)
     const [settings, setSettings] = useState(null)
-    const [filterModes, setFilterModes] = useState('')
+    const [navSettings, setNavSettings] = useState({
+        ranked: true,
+        list: true,
+    })
 
 
     console.log("info", info)
@@ -1249,8 +1407,8 @@ function App() {
             extraInfo={extraInfo}
             settingsView={settingsView}
             setSettingsView={handleSetSettingsView}
-            setFilterModes={setFilterModes}
-            filterModes={filterModes}
+            navSettings={navSettings}
+            setNavSettings={setNavSettings}
         />
         <MainView
             settingsView={settingsView}
@@ -1259,7 +1417,7 @@ function App() {
             handleRankingFileLocation={handleRankingFileLocation}
             info={info}
             extraInfo={extraInfo}
-            filterModes={filterModes}
+            navSettings={navSettings}
         />
         <UpdateBar />
     </main>
