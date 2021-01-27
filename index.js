@@ -1287,8 +1287,6 @@ function MainView({
 function App() {
     const READ_LOG_INTERVAL = 3000
 
-    const [settings, setSettings] = useState(null)
-
     const dispatch = useDispatch()
     const state = useSelector(state => state)
 
@@ -1299,7 +1297,13 @@ function App() {
                 type: 'SET_NEW_PLAYERS',
                 data,
             })
-            writeRankings(data, settings.rankingFileLocation, 'checkLogData')
+            if (state.settings && state.settings.rankingFileLocation) {
+                writeRankings(
+                    data,
+                    state.settings.rankingFileLocation,
+                    'checkLogData'
+                )
+            }
         }
     }
 
@@ -1308,18 +1312,19 @@ function App() {
             type: 'SET_EXTRA_INFO',
             data: null,
         })
-        writeRankings(
-            data,
-            settings.rankingFileLocation,
-            'writeNewRankingsFile'
-        )
+        if (state.settings && state.settings.rankingFileLocation) {
+            writeRankings(
+                data,
+                state.settings.rankingFileLocation,
+                'writeNewRankingsFile'
+            )
+        }
     }
 
     useEffect(() => {
         // initial readSettings location of log file
-        if (settings === null) {
+        if (state.settings === null) {
             readSettings('./settings.json', (data) => {
-                setSettings(JSON.parse(data))
                 dispatch({
                     type: 'SET_SETTINGS', 
                     data: JSON.parse(data),
@@ -1328,8 +1333,8 @@ function App() {
             return
         // initial readLog
         } else if (state.players === null) {
-            if (settings && settings.logLocation) {
-                readLog(settings.logLocation, checkLogData)
+            if (state.settings && state.settings.logLocation) {
+                readLog(state.settings.logLocation, checkLogData)
             }
         } else if (state.extraInfo === null && state.players.length > 0) {
             getExtraInfo(state.players, (data, isReplay, teams) => {
@@ -1354,7 +1359,7 @@ function App() {
 
                     writeRankings(
                         newPlayers,
-                        settings.rankingFileLocation,
+                        state.settings.rankingFileLocation,
                         'useEffect'
                     )
 
@@ -1363,8 +1368,8 @@ function App() {
         }
 
         const intervalId = setInterval(() => {
-            if (settings && settings.logLocation) {
-                readLog(settings.logLocation, checkLogData)
+            if (state.settings && state.settings.logLocation) {
+                readLog(state.settings.logLocation, checkLogData)
             }
         }, READ_LOG_INTERVAL)
 
@@ -1373,10 +1378,10 @@ function App() {
 
     useEffect(() => {
         console.log('settings changed')
-        if (settings && settings.logLocation) {
-            readLog(settings.logLocation, writeNewRankingsFile)
+        if (state.settings && state.settings.logLocation) {
+            readLog(state.settings.logLocation, writeNewRankingsFile)
         }
-    }, [settings])
+    }, [state.settings])
 
     const handleLogLocation = () => {
         dialog.showOpenDialog({
@@ -1397,7 +1402,6 @@ function App() {
                     'utf-8',
                     // (err, data) => {
                     () => {
-                        setSettings(newSettings)
                         dispatch({
                             type: 'SET_SETTINGS',
                             data: newSettings,
@@ -1425,7 +1429,6 @@ function App() {
                     JSON.stringify(newSettings, null, 4),
                     'utf-8',
                     () => {
-                        setSettings(newSettings)
                         dispatch({
                             type: 'SET_SETTINGS',
                             data: newSettings,
@@ -1442,6 +1445,7 @@ function App() {
         }
     }
 
+    // TODO remove unnecessary props passing
     return <main style={{ marginTop: '4em' }} >
         <Navbar {...{handleSetSettingsView}} />
         <div 
