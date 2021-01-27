@@ -1,4 +1,71 @@
-import { React, ReactDOM } from './importReact'
+import { 
+    React, 
+    ReactDOM, 
+    Redux, 
+    ReactRedux,
+} from './importReact'
+
+const { createStore, } = Redux
+const { Provider, useDispatch, useSelector, } = ReactRedux
+
+// Reducer
+function counter(
+    state,
+    action,
+) {
+    switch (action.type) {
+        case 'TOGGLE_LIST':
+            return { 
+                ...state, 
+                tableView: !state.tableView, 
+            }
+        case 'TOGGLE_SETTINGS_VIEW':
+            return { 
+                ...state, 
+                settingsView: !state.settingsView,
+            }
+        case 'SET_PLAYERS':
+            return { 
+                ...state, 
+                players: action.data,
+            }
+        case 'SET_FROM_FILE':
+            return { 
+                ...state, 
+                fromFile: action.data,
+            }
+        case 'SET_EXTRA_INFO':
+            return { 
+                ...state, 
+                extraInfo: action.data,
+            }
+        case 'SET_NEW_PLAYERS':
+            return { 
+                ...state, 
+                extraInfo: null,
+                fromFile: action.data,
+                players: action.data,
+            }
+        case 'SET_SETTINGS':
+            return { 
+                ...state, 
+                settings: action.data,
+            }
+        default:
+            return state
+    }
+}
+
+// Optional - you can pass `initialState` as a second arg
+let store = createStore(counter, { 
+    tableView: false,
+    settingsView: false,
+    settings: null,
+
+    players: null,
+    fromFile: null, 
+    extraInfo: null,
+})
 
 let appVersion = require('electron').remote.app.getVersion();
 document.title = 'sepi-celo LADDER BUG VERSION' + appVersion
@@ -12,8 +79,6 @@ const fs = require('fs')
 
 let updateCheckNotDone = true
 let isReplay = true
-
-// let modal
 
 function getLines(data) {
     let lines = data.split('\n')
@@ -433,7 +498,6 @@ function getPlayerLeaderboardStat(statGroupId, leaderboardId, data) {
 }
 
 function guessRankings(playersArr, data, titles) {
-    console.log('GUESSING RANKINGS')
     // debugger
     let arr = formatToNums(copyObj(playersArr))
     let teams = separateTeams(arr)
@@ -479,7 +543,6 @@ function guessRankings(playersArr, data, titles) {
         }
         // console.log(team)
     }
-    console.log(teams)
     return teams
 }
 
@@ -496,7 +559,11 @@ function readSettings(fileLocation, callback) {
 
 // react components
 
-function Settings({ settings, handleLogLocation, handleRankingFileLocation }) {
+function Settings({ 
+    settings, 
+    handleLogLocation, 
+    handleRankingFileLocation,
+}) {
     return <div style={{ marginTop: '4em' }}>
         <SettingsInputDiv
             text="Log location:"
@@ -514,7 +581,12 @@ function Settings({ settings, handleLogLocation, handleRankingFileLocation }) {
 
 }
 
-function SettingsInputDiv({text, settings, settingsKey, clickFun}) {
+function SettingsInputDiv({
+    text, 
+    settings, 
+    settingsKey, 
+    clickFun,
+}) {
     const locationStyle = {
         margin: '.2em 0 0 .2em',
         minWidth: '100%',
@@ -524,14 +596,12 @@ function SettingsInputDiv({text, settings, settingsKey, clickFun}) {
         margin: '1rem 0',
         backgroundColor: '#616161',
         padding: '1em',
-        borderRadius: '5px',
     }
     const buttonStyle = {
         padding: '0',
         margin: '0.2em 0',
         width: '25vw',
         cursor: 'pointer',
-        borderRadius: '5px',
         backgroundColor: '#181818',
         border: '2px solid #181818',
         color: 'white',
@@ -552,7 +622,7 @@ function SettingsInputDiv({text, settings, settingsKey, clickFun}) {
     </div>
 }
 
-function Player({ player, extraInfo, navSettings }) {
+function Player({ player, extraInfo, }) {
     const [showExtra, setShowExtra] = useState(false)
 
     const style = {
@@ -596,7 +666,6 @@ function Player({ player, extraInfo, navSettings }) {
                     player,
                     img,
                     extraInfo,
-                    navSettings,
                 }}
             />
             : null
@@ -805,10 +874,15 @@ function SoloDiv({ ranksArr, }) {
     return soloDiv
 }
 
-function TeamsDiv({ ranksArr, style, navSettings }) {
+function TeamsDiv({ 
+    ranksArr, 
+    style, 
+}) {
+
     // team ranking ------
-    let reg = navSettings.list ? /^./ : /^Team/
-    let rankedOnly = navSettings.ranked
+    const tableView = useSelector(state => state.tableView)
+    let reg = tableView ? /^Team/ : /^./ 
+    let rankedOnly = true // navSettings.ranked
     ranksArr = ranksArr
         .filter(r => r.name.match(reg))
         .filter(r => rankedOnly ? r.rank > 0 : true)
@@ -841,10 +915,9 @@ function TeamsDiv({ ranksArr, style, navSettings }) {
     ranksArr = pos.concat(neg)
 
     let teamsDiv = ranksArr && <div style={{ 
-        margin: '1rem 0 1.5rem 0',
         fontSize: '90%',
     }}>
-        <div style={{ marginTop: '1rem' }}> 
+        <div> 
             {
                 ranksArr
                     .map((r, i) => {
@@ -873,14 +946,12 @@ function TeamsDiv({ ranksArr, style, navSettings }) {
             }
         </div>
     </div>
-
-        return teamsDiv
+    return teamsDiv
 }
 
 function PlayerExtraInfo({ 
     style, 
     extraInfo, 
-    navSettings,
 }) {
     let ranksArr = extraInfo && extraInfo.ranks
 
@@ -890,19 +961,18 @@ function PlayerExtraInfo({
         marginRight: '0.5em',
     }
 
+    const tableView = useSelector(state => state.tableView)
 
     return <div style={{
         color: 'white',
+        padding: '0.5em 0em 0.5em 1em',
     }}>
-        {
-            !navSettings.list 
-                && <SoloDiv ranksArr={ranksArr} />
-        } 
+
+        { tableView && <SoloDiv ranksArr={ranksArr} /> } 
 
         <TeamsDiv 
             ranksArr={ranksArr} 
             style={style} 
-            navSettings={navSettings}
         />
     </div>
 
@@ -994,33 +1064,28 @@ function Rank({ style, rank }) {
 
 }
 
-function Team({ 
-    players, 
-    extraInfo,
-    navSettings,
-}) {
-
+function Team({ players }) {
+    const extraInfo = useSelector(state => state.extraInfo)
     return <div style={{
         background: '#181818',
         padding: '0.5rem 1.5rem',
-        borderRadius: '0.5rem',
         margin: '1rem 0',
     }} >
         {players.map((p, i) => (
             <Player
                 key={p.profileId + i}
                 player={p}
-                navSettings={navSettings}
                 extraInfo={extraInfo
-                        && p.profileId ? extraInfo[p.profileId] : null}
+                    && p.profileId ? extraInfo[p.profileId] : null}
             />
         ))}
     </div>
 }
 
-function Teams({ players, extraInfo, navSettings }) {
-
+function Teams() {
     let teams = [[], []]
+    let players = useSelector(state => state.players)
+
     if (players) {
         players.forEach(p => {
             let teamIndex = p.slot % 2
@@ -1032,16 +1097,8 @@ function Teams({ players, extraInfo, navSettings }) {
 
     return players && players.length > 0
         ? <div>
-            <Team
-                players={teams[0]}
-                extraInfo={extraInfo}
-                navSettings={navSettings}
-            />
-            <Team
-                players={teams[1]}
-                extraInfo={extraInfo}
-                navSettings={navSettings}
-            />
+            <Team players={teams[0]} />
+            <Team players={teams[1]} />
         </div>
         : <div className="noInfo">
             <h1>no info in log file</h1>
@@ -1049,12 +1106,7 @@ function Teams({ players, extraInfo, navSettings }) {
 
 }
 
-function Navbar({
-    setSettingsView,
-    settingsView,
-    navSettings,
-    setNavSettings,
-}) {
+function Navbar({ handleSetSettingsView }) {
     const styleNavbar = {
         backgroundColor: '#181818',
         position: 'fixed',
@@ -1075,6 +1127,12 @@ function Navbar({
         fontSize: '80%',
     }
 
+    const state = useSelector(state => state)
+    const dispatch =  useDispatch()
+
+    const settingsIcon = 'fa fa-2x fa-cogs'
+    const crossIcon = 'fa fa-2x fa-times'
+
     return <div style={{ 
         ...styleNavbar, 
         justifyContent: 'space-between', 
@@ -1087,52 +1145,31 @@ function Navbar({
             <div style={styleCheckbox} >
                 <input 
                     type="checkbox" 
-                    id="list" 
-                    name="list" 
-                    checked={navSettings.list} 
-                    onChange={() => setNavSettings({
-                        ...navSettings, 
-                        list: !navSettings.list,
-                    })}
+                    id="tableView" 
+                    name="tableView" 
+                    checked={state.tableView}
+                    onChange={() => dispatch({ type: 'TOGGLE_LIST' })}
                 />
                 <label 
-                    htmlFor="list" 
+                    htmlFor="tableView" 
                     style={{
                         marginLeft: '0.5em',
                     }}
-                >list view</label>
+                >table view</label>
             </div>
 
-            <div style={styleCheckbox} >
-                <input 
-                    type="checkbox" 
-                    id="ranked" 
-                    name="ranked" 
-                    checked={navSettings.ranked} 
-                    onChange={() => setNavSettings({
-                        ...navSettings, 
-                        ranked: !navSettings.ranked,
-                    })}
-                />
-                <label 
-                    htmlFor="ranked" 
-                    style={{
-                        marginLeft: '0.5em',
-                    }}
-                >ranked only</label>
-            </div>
         </div>
 
         <i
-            className={!settingsView
-                ? 'fa fa-2x fa-cogs'
-                : 'fa fa-2x fa-times'
-            }
+            className={!state.settingsView ? settingsIcon : crossIcon }
             style={{
                 cursor: 'pointer',
                 marginRight: '5%',
             }}
-            onClick={setSettingsView}
+            onClick={() => {
+                dispatch({ type: 'TOGGLE_SETTINGS_VIEW' })
+                handleSetSettingsView()
+            }}
         />
     </div>
 }
@@ -1196,7 +1233,7 @@ function UpdateBar() {
         backgroundColor: 'purple',
         border: '.1em solid white',
         marginLeft: '1em',
-        borderRadius: '5px',
+        // borderRadius: '5px',
         padding: '.1em .3em',
         color: 'white',
         cursor: 'pointer',
@@ -1228,22 +1265,16 @@ function UpdateBar() {
 }
 
 function MainView({
-    settingsView,
     settings,
     handleLogLocation,
     handleRankingFileLocation,
-    info,
-    extraInfo,
-    navSettings,
 }) {
+    const settingsView = useSelector(state => state.settingsView)
 
+    console.log('MainView')
     return <div>
         {!settingsView
-            ? <Teams
-                players={(info && info.players) ? info.players : null}
-                extraInfo={extraInfo}
-                navSettings={navSettings}
-            />
+            ? <Teams />
             : <Settings
                 settings={settings}
                 handleLogLocation={handleLogLocation}
@@ -1251,40 +1282,32 @@ function MainView({
             />
         }
     </div>
-
 }
 
 function App() {
     const READ_LOG_INTERVAL = 3000
 
-    const [info, setInfo] = useState({ players: null, fromFile: null, })
-    const [extraInfo, setExtraInfo] = useState(null)
-    const [settingsView, setSettingsView] = useState(false)
     const [settings, setSettings] = useState(null)
-    const [navSettings, setNavSettings] = useState({
-        ranked: true,
-        list: true,
-    })
 
+    const dispatch = useDispatch()
+    const state = useSelector(state => state)
 
-    console.log("info", info)
     const checkLogData = data => {
-        if (JSON.stringify(info.fromFile) !== JSON.stringify(data)) {
-            setInfo({
-                players: data,
-                fromFile: data,
+        if (JSON.stringify(state.fromFile) !== JSON.stringify(data)) {
+
+            dispatch({
+                type: 'SET_NEW_PLAYERS',
+                data,
             })
-            setExtraInfo(null)
             writeRankings(data, settings.rankingFileLocation, 'checkLogData')
         }
     }
 
     const writeNewRankingsFile = data => {
-        setInfo({
-            players: data,
-            fromFile: data,
+        dispatch({
+            type: 'SET_EXTRA_INFO',
+            data: null,
         })
-        setExtraInfo(null)
         writeRankings(
             data,
             settings.rankingFileLocation,
@@ -1297,16 +1320,24 @@ function App() {
         if (settings === null) {
             readSettings('./settings.json', (data) => {
                 setSettings(JSON.parse(data))
+                dispatch({
+                    type: 'SET_SETTINGS', 
+                    data: JSON.parse(data),
+                })
             })
             return
         // initial readLog
-        } else if (info.players === null) {
+        } else if (state.players === null) {
             if (settings && settings.logLocation) {
                 readLog(settings.logLocation, checkLogData)
             }
-        } else if (extraInfo === null && info.players.length > 0) {
-            getExtraInfo(info.players, (data, isReplay, teams) => {
-                setExtraInfo(data)
+        } else if (state.extraInfo === null && state.players.length > 0) {
+            getExtraInfo(state.players, (data, isReplay, teams) => {
+                dispatch({
+                    type: 'SET_EXTRA_INFO',
+                    data,
+                })
+
                 // writeRankings(data, settings.rankingFileLocation)
                 if (isReplay) {
                     let newPlayers = []
@@ -1315,10 +1346,12 @@ function App() {
                             newPlayers.push(player)
                         })
                     })
-                    setInfo({
-                        players: newPlayers,
-                        fromFile: info.fromFile,
+
+                    dispatch({
+                        type: 'SET_PLAYERS',
+                        data: newPlayers,
                     })
+
                     writeRankings(
                         newPlayers,
                         settings.rankingFileLocation,
@@ -1354,17 +1387,21 @@ function App() {
             ],
         }).then(function (file) {
             if (file !== undefined && file.filePaths[0]) {
-                const newSetting = {
-                    ...settings,
+                const newSettings = {
+                    ...state.settings,
                     logLocation: file.filePaths[0],
                 }
                 fs.writeFile(
                     './settings.json',
-                    JSON.stringify(newSetting, null, 4),
+                    JSON.stringify(newSettings, null, 4),
                     'utf-8',
                     // (err, data) => {
                     () => {
-                        setSettings(newSetting)
+                        setSettings(newSettings)
+                        dispatch({
+                            type: 'SET_SETTINGS',
+                            data: newSettings,
+                        })
                     },
                 )
             }
@@ -1379,16 +1416,20 @@ function App() {
             }]
         }).then((obj) => {
             if (obj !== undefined && obj.filePath) {
-                const newSetting = {
-                    ...settings,
+                const newSettings = {
+                    ...state.settings,
                     rankingFileLocation: obj.filePath,
                 }
                 fs.writeFile(
                     './settings.json',
-                    JSON.stringify(newSetting, null, 4),
+                    JSON.stringify(newSettings, null, 4),
                     'utf-8',
                     () => {
-                        setSettings(newSetting)
+                        setSettings(newSettings)
+                        dispatch({
+                            type: 'SET_SETTINGS',
+                            data: newSettings,
+                        })
                     },
                 )
             }
@@ -1396,31 +1437,29 @@ function App() {
     }
 
     const handleSetSettingsView = () => {
-        setSettingsView(!settingsView)
-        if (settings && settings.logLocation) {
-            readLog(settings.logLocation, checkLogData)
+        if (state.settings && state.settings.logLocation) {
+            readLog(state.settings.logLocation, checkLogData)
         }
     }
 
     return <main style={{ marginTop: '4em' }} >
-        <Navbar
-            extraInfo={extraInfo}
-            settingsView={settingsView}
-            setSettingsView={handleSetSettingsView}
-            navSettings={navSettings}
-            setNavSettings={setNavSettings}
-        />
+        <Navbar {...{handleSetSettingsView}} />
+        <div 
+            onClick={() => console.log(state) }
+            style={{ backgroundColor: 'red', }}
+        >readState</div>
         <MainView
-            settingsView={settingsView}
-            settings={settings}
+            settings={state.settings}
             handleLogLocation={handleLogLocation}
             handleRankingFileLocation={handleRankingFileLocation}
-            info={info}
-            extraInfo={extraInfo}
-            navSettings={navSettings}
         />
         <UpdateBar />
     </main>
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(
+    <Provider store={store} >
+        <App /> 
+    </Provider>,
+    document.getElementById('root')
+)
