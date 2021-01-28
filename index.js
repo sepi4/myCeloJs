@@ -559,21 +559,75 @@ function readSettings(fileLocation, callback) {
 
 // react components
 
-function Settings({ 
-    settings, 
-    handleLogLocation, 
-    handleRankingFileLocation,
-}) {
+function Settings() {
+
+    const dispatch = useDispatch()
+    const state = useSelector(state => state)
+
+    const handleLogLocation = () => {
+        dialog.showOpenDialog({
+            properties: ['openFile'],
+            filters: [
+                { name: 'Logs', extensions: ['log'] },
+                { name: 'All Files', extensions: ['*'] },
+            ],
+        }).then(function (file) {
+            if (file !== undefined && file.filePaths[0]) {
+                const newSettings = {
+                    ...state.settings,
+                    logLocation: file.filePaths[0],
+                }
+                fs.writeFile(
+                    './settings.json',
+                    JSON.stringify(newSettings, null, 4),
+                    'utf-8',
+                    // (err, data) => {
+                    () => {
+                        dispatch({
+                            type: 'SET_SETTINGS',
+                            data: newSettings,
+                        })
+                    },
+                )
+            }
+        })
+    }
+
+    const handleRankingFileLocation = () => {
+        dialog.showSaveDialog({
+            filters: [{
+                name: 'txt',
+                extensions: ['txt']
+            }]
+        }).then((obj) => {
+            if (obj !== undefined && obj.filePath) {
+                const newSettings = {
+                    ...state.settings,
+                    rankingFileLocation: obj.filePath,
+                }
+                fs.writeFile(
+                    './settings.json',
+                    JSON.stringify(newSettings, null, 4),
+                    'utf-8',
+                    () => {
+                        dispatch({
+                            type: 'SET_SETTINGS',
+                            data: newSettings,
+                        })
+                    },
+                )
+            }
+        })
+    }
+
     return <div style={{ marginTop: '4em' }}>
         <SettingsInputDiv
             text="Log location:"
-            settings={settings}
             settingsKey="logLocation"
             clickFun={handleLogLocation}
         />
         <SettingsInputDiv
             text="Ranking file location (for OBS):"
-            settings={settings}
             settingsKey="rankingFileLocation"
             clickFun={handleRankingFileLocation}
         />
@@ -583,7 +637,6 @@ function Settings({
 
 function SettingsInputDiv({
     text, 
-    settings, 
     settingsKey, 
     clickFun,
 }) {
@@ -593,7 +646,7 @@ function SettingsInputDiv({
         minHeight: '1em',
     }
     const divStyle = {
-        margin: '1rem 0',
+        margin: '1em 0',
         backgroundColor: '#616161',
         padding: '1em',
     }
@@ -610,6 +663,7 @@ function SettingsInputDiv({
         alignItems: 'center',
         justifyContent: 'center',
     }
+    const settings = useSelector(state => state.settings)
     return <div style={divStyle}>
         <div style={{ fontWeight: 'bold' }} >{text}</div>
         <div style={locationStyle} >
@@ -710,6 +764,7 @@ function PlayerCurrentRank({
         display: 'flex',
         alignItems: 'center',
     }}>
+        {/* ranking number */}
         <span style={style}>
             <i
                 style={{ marginRight: '1rem', cursor: 'pointer' }}
@@ -722,8 +777,10 @@ function PlayerCurrentRank({
             }
         </span>
 
+        {/* faction flag */}
         <span style={style}>{img}</span>
 
+        {/* country flag */}
         <span style={style}>
             {country !== undefined ? (
                 <img
@@ -736,18 +793,17 @@ function PlayerCurrentRank({
             ) : null}
         </span>
 
+        {/* nickname */}
         <span
             style={steamId ? { ...style, cursor: 'pointer' } : { ...style }}
             onClick={() => (steamId ? shell.openExternal(link) : null)}
-            // onClick={() => window.open(link, '_blank')}
         >
             {player.name}
         </span>
     </div>
-
 }
 
-function SoloDiv({ ranksArr, }) {
+function TableDiv({ ranksArr, }) {
     // solo ranking --------
     let ranksObj = {
         solo: {
@@ -796,14 +852,12 @@ function SoloDiv({ ranksArr, }) {
         display: 'inline-block',
     }
 
-    let soloDiv = names.map((name, i) => {
+    let tableDiv = names.map((name, i) => {
         return <div 
             key={i+name}
             style={{
                 display: 'inline-block',
                 width: '50%',
-
-
                 fontSize: '0.7em',
                 margin: '0.6em 0',
             }}
@@ -870,11 +924,10 @@ function SoloDiv({ ranksArr, }) {
             </div>
         </div>
     })
-
-    return soloDiv
+    return tableDiv
 }
 
-function TeamsDiv({ 
+function ListDiv({ 
     ranksArr, 
     style, 
 }) {
@@ -914,7 +967,7 @@ function TeamsDiv({
     })
     ranksArr = pos.concat(neg)
 
-    let teamsDiv = ranksArr && <div style={{ 
+    let listDiv = ranksArr && <div style={{ 
         fontSize: '90%',
     }}>
         <div> 
@@ -946,7 +999,7 @@ function TeamsDiv({
             }
         </div>
     </div>
-    return teamsDiv
+    return listDiv
 }
 
 function PlayerExtraInfo({ 
@@ -968,9 +1021,9 @@ function PlayerExtraInfo({
         padding: '0.5em 0em 0.5em 1em',
     }}>
 
-        { tableView && <SoloDiv ranksArr={ranksArr} /> } 
+        { tableView && <TableDiv ranksArr={ranksArr} /> } 
 
-        <TeamsDiv 
+        <ListDiv 
             ranksArr={ranksArr} 
             style={style} 
         />
@@ -1068,8 +1121,8 @@ function Team({ players }) {
     const extraInfo = useSelector(state => state.extraInfo)
     return <div style={{
         background: '#181818',
-        padding: '0.5rem 1.5rem',
-        margin: '1rem 0',
+        padding: '0.5em 1.5em',
+        margin: '1em 0',
     }} >
         {players.map((p, i) => (
             <Player
@@ -1264,22 +1317,14 @@ function UpdateBar() {
     </div>
 }
 
-function MainView({
-    settings,
-    handleLogLocation,
-    handleRankingFileLocation,
-}) {
+function MainView() {
     const settingsView = useSelector(state => state.settingsView)
 
     console.log('MainView')
     return <div>
         {!settingsView
             ? <Teams />
-            : <Settings
-                settings={settings}
-                handleLogLocation={handleLogLocation}
-                handleRankingFileLocation={handleRankingFileLocation}
-            />
+            : <Settings />
         }
     </div>
 }
@@ -1292,7 +1337,6 @@ function App() {
 
     const checkLogData = data => {
         if (JSON.stringify(state.fromFile) !== JSON.stringify(data)) {
-
             dispatch({
                 type: 'SET_NEW_PLAYERS',
                 data,
@@ -1383,61 +1427,7 @@ function App() {
         }
     }, [state.settings])
 
-    const handleLogLocation = () => {
-        dialog.showOpenDialog({
-            properties: ['openFile'],
-            filters: [
-                { name: 'Logs', extensions: ['log'] },
-                { name: 'All Files', extensions: ['*'] },
-            ],
-        }).then(function (file) {
-            if (file !== undefined && file.filePaths[0]) {
-                const newSettings = {
-                    ...state.settings,
-                    logLocation: file.filePaths[0],
-                }
-                fs.writeFile(
-                    './settings.json',
-                    JSON.stringify(newSettings, null, 4),
-                    'utf-8',
-                    // (err, data) => {
-                    () => {
-                        dispatch({
-                            type: 'SET_SETTINGS',
-                            data: newSettings,
-                        })
-                    },
-                )
-            }
-        })
-    }
 
-    const handleRankingFileLocation = () => {
-        dialog.showSaveDialog({
-            filters: [{
-                name: 'txt',
-                extensions: ['txt']
-            }]
-        }).then((obj) => {
-            if (obj !== undefined && obj.filePath) {
-                const newSettings = {
-                    ...state.settings,
-                    rankingFileLocation: obj.filePath,
-                }
-                fs.writeFile(
-                    './settings.json',
-                    JSON.stringify(newSettings, null, 4),
-                    'utf-8',
-                    () => {
-                        dispatch({
-                            type: 'SET_SETTINGS',
-                            data: newSettings,
-                        })
-                    },
-                )
-            }
-        })
-    }
 
     const handleSetSettingsView = () => {
         if (state.settings && state.settings.logLocation) {
@@ -1446,17 +1436,17 @@ function App() {
     }
 
     // TODO remove unnecessary props passing
-    return <main style={{ marginTop: '4em' }} >
+    return <main style={{ 
+        marginTop: '4em',
+    }} >
         <Navbar {...{handleSetSettingsView}} />
-        <div 
+
+        {/* <div 
             onClick={() => console.log(state) }
             style={{ backgroundColor: 'red', }}
-        >readState</div>
-        <MainView
-            settings={state.settings}
-            handleLogLocation={handleLogLocation}
-            handleRankingFileLocation={handleRankingFileLocation}
-        />
+        >readState</div> */}
+
+        <MainView />
         <UpdateBar />
     </main>
 }
