@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from 'react-dom'
 import App from './components/App'
-import './App.css'
+import './index.css'
 
 function importAll(r) {
   return r.keys().map(r);
@@ -15,7 +15,6 @@ const images = importAll(
     )
 )
 
-console.log('images:', images)
 let countryFlags = {}
 images.forEach(x => {
     countryFlags[x.default.substring(4,6)] = x.default
@@ -90,9 +89,9 @@ let store = createStore(counter, {
 root.id = 'root'
 document.body.appendChild(root)
 
-// Now we can render our application into it
 render(
     <Provider store={store} >
         <App />
     </Provider>,
-    document.getElementById('root'))
+    document.getElementById('root')
+)

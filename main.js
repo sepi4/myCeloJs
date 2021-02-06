@@ -18,7 +18,8 @@ function createMainWindow() {
         width: 800,
         height: 600,
         show: false,
-        icon: `${__dirname}/assets/icon.png`,
+        icon: `${__dirname}/icon/icon.png`,
+        // icon: `${__dirname}/assets/icon.ico`,
         webPreferences: {
             nodeIntegration: true,
             nativeWindowOpen: true,
@@ -45,6 +46,7 @@ function createMainWindow() {
     }
 
     mainWindow.loadURL(indexPath)
+    mainWindow.setMenu(null)
 
     // Don't show until we are ready and loaded
     mainWindow.once('ready-to-show', () => {

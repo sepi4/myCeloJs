@@ -15,7 +15,7 @@ function Navbar({ handleSetSettingsView }) {
         width: '100vw',
         borderBottom: '2px solid black',
         display: 'flex',
-        justifyContent: 'space-evenly',
+        // justifyContent: 'space-evenly',
         alignItems: 'center',
         zIndex: '99999',
         justifyContent: 'space-between', 
