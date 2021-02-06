@@ -1,55 +1,74 @@
-const { app, BrowserWindow, } = require('electron')
+const path = require('path')
+const url = require('url')
+const { app, BrowserWindow } = require('electron')
 
-function createWindow() {
-    // Create the browser window.
-    const win = new BrowserWindow({
+let mainWindow
+
+let isDev = false
+
+if (
+    process.env.NODE_ENV !== undefined &&
+    process.env.NODE_ENV === 'development'
+) {
+    isDev = true
+}
+
+function createMainWindow() {
+    mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
+        show: false,
+        icon: `${__dirname}/assets/icon.png`,
         webPreferences: {
             nodeIntegration: true,
             nativeWindowOpen: true,
+            webSecurity: false,
         },
         center: true,
-        // transparent:true,
-        // frame: false,
     })
 
-    // and load the index.html of the app.
-    win.loadFile('index.html')
+    let indexPath
 
-    // Open the DevTools.
-    win.webContents.openDevTools()
+    if (isDev && process.argv.indexOf('--noDevServer') === -1) {
+        indexPath = url.format({
+            protocol: 'http:',
+            host: 'localhost:8080',
+            pathname: 'index.html',
+            slashes: true,
+        })
+    } else {
+        indexPath = url.format({
+            protocol: 'file:',
+            pathname: path.join(__dirname, 'dist', 'index.html'),
+            slashes: true,
+        })
+    }
 
-    // remove menu
-    win.setMenu(null)
+    mainWindow.loadURL(indexPath)
 
+    // Don't show until we are ready and loaded
+    mainWindow.once('ready-to-show', () => {
+        mainWindow.show()
 
-    // win.webContents.on('new-window', (event, url, frameName, disposition, options) => {
-    //     if (frameName === 'modal') {
-    //         // open window as modal
-    //         event.preventDefault()
-    //         Object.assign(options, {
-    //             modal: true,
-    //             parent: win,
-    //             width: 100,
-    //             height: 100
-    //         })
-    //         event.newGuest = new
-    //             BrowserWindow(options)
-    //     }
-    // })
+        // Open devtools if dev
+        if (isDev) {
+            const {
+                default: installExtension,
+                REACT_DEVELOPER_TOOLS,
+            } = require('electron-devtools-installer')
 
+            installExtension(REACT_DEVELOPER_TOOLS).catch((err) =>
+                console.log('Error loading React DevTools: ', err)
+            )
+            mainWindow.webContents.openDevTools()
+        }
+    })
+
+    mainWindow.on('closed', () => (mainWindow = null))
 }
 
+app.on('ready', createMainWindow)
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.whenReady().then(createWindow)
-
-// Quit when all windows are closed, except on macOS. There, it's common
-// for applications and their menu bar to stay active until the user quits
-// explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {
         app.quit()
@@ -57,9 +76,10 @@ app.on('window-all-closed', () => {
 })
 
 app.on('activate', () => {
-    // On macOS it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) {
-        createWindow()
+    if (mainWindow === null) {
+        createMainWindow()
     }
 })
+
+// Stop error
+app.allowRendererProcessReuse = true

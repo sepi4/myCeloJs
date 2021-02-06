@@ -1,84 +1,54 @@
-import { 
-    React, 
-    ReactDOM, 
-    Redux, 
-    ReactRedux,
-} from './importReact'
+import React from 'react'
 
-let appVersion = require('electron').remote.app.getVersion();
+import Navbar from './Navbar'
+
+import e from 'electron'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { 
+    faCaretRight, 
+    faCaretDown,
+    faCogs,
+    faTimes,
+} from '@fortawesome/free-solid-svg-icons'
+
+import flagOkw from '../img/okw.png'
+import flagSov from '../img/sov.png'
+import flagUk from '../img/uk.png'
+import flagUsa from '../img/usa.png'
+import flagWer from '../img/wer.png'
+
+function getFactionFlagLocation(code) {
+    switch (code) {
+        case 'okw':
+            return flagOkw
+        case 'sov':
+            return flagSov
+        case 'uk':
+            return flagUk
+        case 'usa':
+            return flagUsa
+        case 'wer':
+            return flagWer
+    }
+}
+
+let appVersion = e.remote.app.getVersion()
+const { dialog, clipboard } = e.remote
+const { shell } = e
+
+
 document.title = 'sepi-celo LADDER BUG VERSION' + appVersion
 
-const { useEffect, useState } = React
-const { dialog, clipboard } = require('electron').remote
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import fs from 'fs'
 
-const { shell } = require('electron')
-const axios = require('axios')
-const fs = require('fs')
 
 let updateCheckNotDone = true
 let isReplay = true
 
 // ======= redux ========
-const { createStore } = Redux
-const { Provider, useDispatch, useSelector, } = ReactRedux
-
-// Reducer
-function counter(
-    state,
-    action,
-) {
-    switch (action.type) {
-        case 'TOGGLE_LIST':
-            return { 
-                ...state, 
-                tableView: !state.tableView, 
-            }
-        case 'TOGGLE_SETTINGS_VIEW':
-            return { 
-                ...state, 
-                settingsView: !state.settingsView,
-            }
-        case 'SET_PLAYERS':
-            return { 
-                ...state, 
-                players: action.data,
-            }
-        case 'SET_FROM_FILE':
-            return { 
-                ...state, 
-                fromFile: action.data,
-            }
-        case 'SET_EXTRA_INFO':
-            return { 
-                ...state, 
-                extraInfo: action.data,
-            }
-        case 'SET_NEW_PLAYERS':
-            return { 
-                ...state, 
-                extraInfo: null,
-                fromFile: action.data,
-                players: action.data,
-            }
-        case 'SET_SETTINGS':
-            return { 
-                ...state, 
-                settings: action.data,
-            }
-        default:
-            return state
-    }
-}
-
-let store = createStore(counter, { 
-    tableView: false,
-    settingsView: false,
-    settings: null,
-
-    players: null,
-    fromFile: null, 
-    extraInfo: null,
-})
+import { useDispatch, useSelector, } from 'react-redux'
 
 // =========== functions ============
 function getLines(data) {
@@ -322,6 +292,8 @@ function writeRankings(players, fileLocation, from) {
     let str1 = ''
     let str2 = ''
     for (let i = 0; i < players.length; i++) {
+
+        console.log('country:', players[i])
         const country = players[i].country ? players[i].country : ''
         const name = players[i].name
         let ranking = players[i].ranking === '-1' ? '-' : players[i].ranking
@@ -805,7 +777,8 @@ function Player({ player, extraInfo, }) {
                 width: '2em',
                 height: '2em',
             }}
-            src={`./img/${commonName(player.faction)}.png`}
+            // src={`./img/${commonName(player.faction)}.png`}
+            src={getFactionFlagLocation(commonName(player.faction))}
             alt={`${player.faction}`}
         />
     )
@@ -870,17 +843,28 @@ function PlayerCurrentRank({
         + steamId
         + '/standings'
 
+    const countryFlagLocation = useSelector(
+        state => state.countryFlags[country]
+    )
+
     return <div style={{
         display: 'flex',
         alignItems: 'center',
     }}>
         {/* ranking number */}
         <span style={style}>
-            <i
-                style={{ marginRight: '1rem', cursor: 'pointer' }}
-                className={`fa fa-lg fa-caret-${showExtra ? 'down' : 'right'}`}
+
+            <FontAwesomeIcon 
+                icon={showExtra ? faCaretDown : faCaretRight} 
+                size='lg'
+                style={{ 
+                    color: 'white',
+                    marginRight: '1em',
+                    cursor: 'pointer',
+                }} 
                 onClick={extraInfo ? handleSetShowExtra: undefined}
             />
+
             {player.ranking === '-1' || player.ranking === -1
                 ? '-'
                 : Number(player.ranking) + 1
@@ -897,8 +881,8 @@ function PlayerCurrentRank({
                     style={{
                         width: '2em',
                     }}
-                    src={`./img/contryFlags/${country}.png`}
-                    alt={`${country}`}
+                    src={countryFlagLocation}
+                    alt={country}
                 />
             ) : null}
         </span>
@@ -983,7 +967,7 @@ function TableDiv({ ranksArr, }) {
                         width: '2em',
                         height: '2em',
                     }}
-                    src={`./img/${name}.png`}
+                    src={getFactionFlagLocation(name)}
                     alt={`${name}`}
                 />
             </div>
@@ -1142,6 +1126,9 @@ function PlayerExtraInfo({
 }
 
 function Members({ members }) {
+    const countryFlags = useSelector(
+        state => state.countryFlags
+    )
     return <div style={{ margin: '0.5rem 0' }}>
         <hr />
         {members.map(m => (
@@ -1167,9 +1154,10 @@ function Members({ members }) {
                         width: '1em',
                         marginRight: '1em',
                     }}
-                    src={`./img/contryFlags/${m.country}.png`}
+                    src={countryFlags[m.country]}
                     alt={`${m.country}`}
                 />
+
                 {m.alias}
             </div>
         ))}
@@ -1201,8 +1189,6 @@ function Rank({ style, rank }) {
         return m + ' ' + sw(rn)
     }
 
-    const cl = `fa fa-lg fa-caret-${showMembers ? 'down' : 'right'}`
-
     return <div style={style}>
         {rank.members.length > 1
             ? <div>
@@ -1210,13 +1196,15 @@ function Rank({ style, rank }) {
                     onClick={() => setShowMembers(!showMembers)}
                     style={{ cursor: 'pointer' }}
                 >
-                    <i
+                    <FontAwesomeIcon
+                        icon={showMembers ? faCaretDown : faCaretRight}
+                        size='lg'
                         style={{
                             color: 'lime',
                             marginRight: '.2em',
                         }}
-                        className={cl}
                     />
+
                     {rank.name}
                 </span>
                 {showMembers && <Members members={rank.members} />}
@@ -1269,88 +1257,6 @@ function Teams() {
 
 }
 
-function Navbar({ handleSetSettingsView }) {
-    const styleNavbar = {
-        backgroundColor: '#181818',
-        position: 'fixed',
-        top: '0',
-        left: '0',
-        height: '3em',
-        width: '100vw',
-        borderBottom: '2px solid black',
-        display: 'flex',
-        justifyContent: 'space-evenly',
-        alignItems: 'center',
-        zIndex: '99999',
-    }
-
-    const styleRadiobutton = {
-        display: 'flex',
-        alignItems: 'center',
-        fontSize: '80%',
-    }
-
-    const state = useSelector(state => state)
-    const dispatch =  useDispatch()
-
-    const settingsIcon = 'fa fa-2x fa-cogs'
-    const crossIcon = 'fa fa-2x fa-times'
-
-    return <div style={{ 
-        ...styleNavbar, 
-        justifyContent: 'space-between', 
-        color: 'white',
-    }}>
-
-        <div style={{
-            marginLeft: '5%',
-        }}>
-
-            <div style={styleRadiobutton}>
-                <input
-                    type="radio"
-                    name="list"
-                    id="list"
-                    defaultChecked
-                    onChange={() => dispatch({ type: 'TOGGLE_LIST' })}
-                />
-                <label
-                    htmlFor="list"
-                    style={{
-                        marginLeft: '0.5em',
-                    }}
-                >list</label>
-            </div>
-            <div style={styleRadiobutton}>
-                <input
-                    type="radio"
-                    name="list"
-                    id="table"
-                    onChange={() => dispatch({ type: 'TOGGLE_LIST' })}
-                />
-                <label
-                    htmlFor="table"
-                    style={{
-                        marginLeft: '0.5em',
-                    }}
-                >table</label>
-            </div>
-
-        </div>
-
-        <i
-            className={!state.settingsView ? settingsIcon : crossIcon }
-            style={{
-                cursor: 'pointer',
-                marginRight: '5%',
-            }}
-            onClick={() => {
-                dispatch({ type: 'TOGGLE_SETTINGS_VIEW' })
-                handleSetSettingsView()
-            }}
-        />
-    </div>
-}
 
 function UpdateBar() {
     const [update, setUpdate] = useState(null)
@@ -1560,34 +1466,14 @@ function App() {
         }
     }
 
-    // TODO remove unnecessary props passing
-    return <main style={{ 
+    console.log('state flags:', state)
+    return <main style={{
         marginTop: '4em',
     }} >
-        <Navbar {...{handleSetSettingsView}} />
-
-        {/* <div 
-            onClick={() => console.log(state) }
-            style={{ backgroundColor: 'red', }}
-        >
-            kissa : {__dirname}
-        </div>
-
-        <div 
-            onClick={() => console.log(state) }
-            style={{ backgroundColor: 'green', }}
-        >
-            kissa : {process.cwd()} 
-        </div> */}
-
+        <Navbar {...{ handleSetSettingsView }} />
         <MainView />
         <UpdateBar />
     </main>
 }
 
-ReactDOM.render(
-    <Provider store={store} >
-        <App /> 
-    </Provider>,
-    document.getElementById('root')
-)
+export default App

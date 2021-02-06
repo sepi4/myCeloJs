@@ -1,0 +1,36 @@
+{
+    "name": "sepi-celo",
+    "version": "666.666.666",
+    "description": "",
+    "main": "main.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sepi4/myCeloJs/"
+    },
+    "publish": {
+        "provider": "github",
+        "releaseType": "release"
+    },
+    "scripts": {
+        "p": "parcel index.html",
+        "start": "electron .",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "electron-dist": "electron-builder",
+        "electron-packer": "electron-builder --dir"
+    },
+    "author": "Sergei Polishsuk",
+    "license": "ISC",
+    "devDependencies": {
+        "electron": "^9.3.2",
+        "electron-builder": "^22.7.0",
+        "eslint": "^7.12.1",
+        "eslint-plugin-react": "^7.21.5"
+    },
+    "dependencies": {
+        "axios": "^0.21.1",
+        "react": "^16.13.1",
+        "react-dom": "^16.13.1",
+        "react-redux": "^7.2.2",
+        "redux": "^4.0.5"
+    }
+}
