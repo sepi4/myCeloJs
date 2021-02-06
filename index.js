@@ -5,7 +5,6 @@ import {
     ReactRedux,
 } from './importReact'
 
-
 let appVersion = require('electron').remote.app.getVersion();
 document.title = 'sepi-celo LADDER BUG VERSION' + appVersion
 
@@ -836,10 +835,8 @@ function Player({ player, extraInfo, }) {
                 }}
             />
             : null
-
         }
     </div>
-
 }
 
 function PlayerCurrentRank({
@@ -1572,7 +1569,16 @@ function App() {
         {/* <div 
             onClick={() => console.log(state) }
             style={{ backgroundColor: 'red', }}
-        >readState</div> */}
+        >
+            kissa : {__dirname}
+        </div>
+
+        <div 
+            onClick={() => console.log(state) }
+            style={{ backgroundColor: 'green', }}
+        >
+            kissa : {process.cwd()} 
+        </div> */}
 
         <MainView />
         <UpdateBar />
