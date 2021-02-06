@@ -1,5 +1,4 @@
 import React from 'react'
-
 import Navbar from './Navbar'
 
 import e from 'electron'
@@ -7,8 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { 
     faCaretRight, 
     faCaretDown,
-    faCogs,
-    faTimes,
 } from '@fortawesome/free-solid-svg-icons'
 
 import flagOkw from '../img/okw.png'

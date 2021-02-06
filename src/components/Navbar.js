@@ -2,12 +2,8 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { 
-    faCaretRight, 
-    faCaretDown,
-    faCogs,
-    faTimes,
-} from '@fortawesome/free-solid-svg-icons'
+import { faCogs, faTimes, } from '@fortawesome/free-solid-svg-icons'
+import RadioButton from './RadioButton'
 
 function Navbar({ handleSetSettingsView }) {
     const styleNavbar = {
@@ -22,67 +18,23 @@ function Navbar({ handleSetSettingsView }) {
         justifyContent: 'space-evenly',
         alignItems: 'center',
         zIndex: '99999',
-    }
-
-    const styleRadiobutton = {
-        display: 'flex',
-        alignItems: 'center',
-        fontSize: '80%',
+        justifyContent: 'space-between', 
+        color: 'white',
     }
 
     const state = useSelector(state => state)
     const dispatch =  useDispatch()
 
-    const settingsIcon = 'fa fa-2x fa-cogs'
-    const crossIcon = 'fa fa-2x fa-times'
+    return <div style={{ ...styleNavbar, }}>
 
-    return <div style={{ 
-        ...styleNavbar, 
-        justifyContent: 'space-between', 
-        color: 'white',
-    }}>
-
-        <div style={{
-            marginLeft: '5%',
-        }}>
-
-            <div style={styleRadiobutton}>
-                <input
-                    type="radio"
-                    name="list"
-                    id="list"
-                    defaultChecked
-                    onChange={() => dispatch({ type: 'TOGGLE_LIST' })}
-                />
-                <label
-                    htmlFor="list"
-                    style={{
-                        marginLeft: '0.5em',
-                    }}
-                >list</label>
-            </div>
-            <div style={styleRadiobutton}>
-                <input
-                    type="radio"
-                    name="list"
-                    id="table"
-                    onChange={() => dispatch({ type: 'TOGGLE_LIST' })}
-                />
-                <label
-                    htmlFor="table"
-                    style={{
-                        marginLeft: '0.5em',
-                    }}
-                >table</label>
-            </div>
-
+        <div style={{ marginLeft: '5%', }}>
+            <RadioButton text='list' checked={true} />
+            <RadioButton text='table' checked={false} />
         </div>
-        
 
         <FontAwesomeIcon
             icon={!state.settingsView ? faCogs : faTimes }
             size='2x'
-            // className={!state.settingsView ? settingsIcon : crossIcon }
             style={{
                 cursor: 'pointer',
                 marginRight: '5%',
@@ -92,18 +44,6 @@ function Navbar({ handleSetSettingsView }) {
                 handleSetSettingsView()
             }}
         />
-
-        {/* <i
-            className={!state.settingsView ? settingsIcon : crossIcon }
-            style={{
-                cursor: 'pointer',
-                marginRight: '5%',
-            }}
-            onClick={() => {
-                dispatch({ type: 'TOGGLE_SETTINGS_VIEW' })
-                handleSetSettingsView()
-            }}
-        /> */}
     </div>
 }
 
