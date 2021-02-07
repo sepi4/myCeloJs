@@ -1,9 +1,6 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
 
-
-function RadioButton({ text, checked }) {
-    const dispatch =  useDispatch()
+function RadioButton({ text, checked, handler }) {
 
     const styleRadiobutton = {
         display: 'flex',
@@ -17,7 +14,7 @@ function RadioButton({ text, checked }) {
             name="list"
             id={text}
             defaultChecked={checked}
-            onChange={() => dispatch({ type: 'TOGGLE_LIST' })}
+            onChange={handler}
         />
         <label
             htmlFor={text}

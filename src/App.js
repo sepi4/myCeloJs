@@ -16,7 +16,7 @@ import { readLog } from './functions/readLog'
 import electron from 'electron'
 const appVersion = electron.remote.app.getVersion()
 
-document.title = 'sepi-celo LADDER BUG VERSION ' + appVersion
+document.title = 'myCelo ' + appVersion
 
 let updateCheckNotDone = true
 
@@ -31,10 +31,10 @@ function App() {
                 type: 'SET_NEW_PLAYERS',
                 data,
             })
-            if (state.settings && state.settings.rankingFileLocation) {
+            if (state.settings) {
                 writeRankings(
                     data,
-                    state.settings.rankingFileLocation,
+                    state.settings.rankingsHtml,
                     'checkLogData'
                 )
             }
@@ -46,10 +46,10 @@ function App() {
             type: 'SET_EXTRA_INFO',
             data: null,
         })
-        if (state.settings && state.settings.rankingFileLocation) {
+        if (state.settings) {
             writeRankings(
                 data,
-                state.settings.rankingFileLocation,
+                state.settings.rankingsHtml,
                 'writeNewRankingsFile'
             )
         }
@@ -91,7 +91,7 @@ function App() {
 
                 writeRankings(
                     newPlayers,
-                    state.settings.rankingFileLocation,
+                    state.settings.rankingsHtml,
                     'useEffect'
                 )
 

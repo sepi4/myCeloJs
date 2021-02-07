@@ -1,10 +1,10 @@
 import React from 'react'
-import { useSelector, } from 'react-redux'
 
-function SettingsInputDiv({
-    text, 
-    settingsKey, 
-    clickFun,
+function SettingsDiv({
+    title, 
+    handler,
+    children,
+    buttonText,
 }) {
     const locationStyle = {
         margin: '.2em 0 0 .2em',
@@ -22,24 +22,26 @@ function SettingsInputDiv({
         width: '25vw',
         cursor: 'pointer',
         backgroundColor: '#181818',
-        border: '2px solid #181818',
+        // border: '2px solid #181818',
         color: 'white',
         height: '1.5em',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
     }
-    const settings = useSelector(state => state.settings)
+
+
     return <div style={divStyle}>
-        <div style={{ fontWeight: 'bold' }} >{text}</div>
+        {title
+            && <div style={{ fontWeight: 'bold' }} >{title}</div>
+        }
         <div style={locationStyle} >
-            {settings && settings[settingsKey]
-                ? settings[settingsKey]
-                : ''
-            }
+            {children}
         </div>
-        <div style={buttonStyle} onClick={clickFun} >Select </div>
+        {buttonText 
+            && <div style={buttonStyle} onClick={handler} >{buttonText} </div>
+        }
     </div>
 }
 
-export default SettingsInputDiv
+export default SettingsDiv

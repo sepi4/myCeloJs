@@ -1,9 +1,8 @@
 import fs from 'fs'
 import { commonName, formatToStr, } from '../functions/simpleFunctions'
 
-const rankingsInHtml = true
 
-export function writeRankings(players, fileLocation, from) {
+export function writeRankings(players, rankingsInHtml, from) {
 
     let arr1 = []
     let arr2 = []

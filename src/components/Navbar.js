@@ -27,8 +27,16 @@ function Navbar({ handleSetSettingsView }) {
     return <div style={{ ...styleNavbar, }}>
 
         <div style={{ marginLeft: '5%', }}>
-            <RadioButton text='list' checked={true} />
-            <RadioButton text='table' checked={false} />
+            <RadioButton 
+                text='list' 
+                checked={true} 
+                handler={() => dispatch({ type: 'TOGGLE_LIST' })} 
+            />
+            <RadioButton
+                text='table'
+                checked={false}
+                handler={() => dispatch({ type: 'TOGGLE_LIST' })}
+            />
         </div>
 
         <FontAwesomeIcon

@@ -1,7 +1,7 @@
 {
     "name": "mycelo",
     "productName": "myCelo",
-    "version": "6.6.6",
+    "version": "1.4.0",
     "description": "COH2 ranking displayer",
     "license": "MIT",
     "engines": {
@@ -22,12 +22,13 @@
     },
     "main": "main.js",
     "scripts": {
-        "electron-dist": "electron-builder",
+        "make": "npm run build && npm run postpackage && npm run cp-img",
+        "cp-img": "@powershell Copy-Item \"./img\" \"./release-builds/myCelo-win32-x64\" -Recurse",
         "prod": "cross-env NODE_ENV=production webpack --mode production --config webpack.build.config.js && electron --noDevServer .",
         "start": "cross-env NODE_ENV=development webpack-dev-server --hot --host 0.0.0.0 --config=./webpack.dev.config.js --mode development",
         "build": "cross-env NODE_ENV=production webpack --config webpack.build.config.js --mode production",
         "package": "npm run build",
-        "postpackage": "electron-packager ./ --out=./release-builds --overwrite"
+        "postpackage": "electron-packager ./ --out=./release-builds --overwrite --icon=./img/icon/icon.ico"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^1.2.34",
