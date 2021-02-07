@@ -23,7 +23,6 @@ let appVersion = electron.remote.app.getVersion()
 document.title = 'sepi-celo LADDER BUG VERSION ' + appVersion
 
 let updateCheckNotDone = true
-let isReplay = true
 
 // =========== functions ============
 // GLOBAL
@@ -33,7 +32,6 @@ function getLines(data) {
     let stop = false
     let wasGame = false
     let wasNone = false
-    isReplay = true
 
     for (let i = lines.length - 1; i >= 0; i--) {
         const row = lines[i]
@@ -44,7 +42,6 @@ function getLines(data) {
             }
             arr.push(row)
         } else if (row.match('Match Started.*steam.*slot.*ranking')) {
-            isReplay = false
             stop = true
             arr.push(row)
         } else if (stop) {
@@ -85,7 +82,7 @@ function getExtraInfo(players, callback) {
                 let result = refactorData(leaderboard, cohTitles, ids)
                 const teams = guessRankings(players, leaderboard, cohTitles)
 
-                callback(result, isReplay, teams)
+                callback(result, teams)
             }
         })
         .catch(error => {
@@ -158,32 +155,30 @@ function App() {
                 readLog(state.settings.logLocation, checkLogData)
             }
         } else if (state.extraInfo === null && state.players.length > 0) {
-            getExtraInfo(state.players, (data, isReplay, teams) => {
+            getExtraInfo(state.players, (data, teams) => {
                 dispatch({
                     type: 'SET_EXTRA_INFO',
                     data,
                 })
 
-                if (isReplay) {
-                    let newPlayers = []
-                    teams.forEach(team => {
-                        team.forEach(player => {
-                            newPlayers.push(player)
-                        })
+                let newPlayers = []
+                teams.forEach(team => {
+                    team.forEach(player => {
+                        newPlayers.push(player)
                     })
+                })
 
-                    dispatch({
-                        type: 'SET_PLAYERS',
-                        data: newPlayers,
-                    })
+                dispatch({
+                    type: 'SET_PLAYERS',
+                    data: newPlayers,
+                })
 
-                    writeRankings(
-                        newPlayers,
-                        state.settings.rankingFileLocation,
-                        'useEffect'
-                    )
+                writeRankings(
+                    newPlayers,
+                    state.settings.rankingFileLocation,
+                    'useEffect'
+                )
 
-                }
             })
         }
 
