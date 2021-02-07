@@ -73,10 +73,11 @@ function PlayerCurrentRank({
             {country !== undefined ? (
                 <img
                     style={{
-                        width: '2em',
+                        height: '1.2em',
                     }}
                     src={countryFlagLocation}
                     alt={country}
+                    title={country}
                 />
             ) : null}
         </span>

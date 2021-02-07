@@ -4,21 +4,21 @@ import { useDispatch, useSelector, } from 'react-redux'
 
 import axios from 'axios'
 import fs from 'fs'
-import e from 'electron'
+import electron from 'electron'
 
 // components
-import Navbar from './Navbar'
-import UpdateBar from './UpdateBar'
-import MainView from './MainView'
+import Navbar from './components/Navbar'
+import UpdateBar from './components/UpdateBar'
+import MainView from './components/MainView'
 
 // functions
-import { refactorData } from '../functions/refactorData'
-import { getPlayersInfo } from '../functions/getPlayersInfo'
-import { writeRankings } from '../functions/writeRankings'
-import { readSettings } from '../functions/readSettings'
-import { guessRankings } from '../functions/guessRankings'
+import { refactorData } from './functions/refactorData'
+import { getPlayersInfo } from './functions/getPlayersInfo'
+import { writeRankings } from './functions/writeRankings'
+import { readSettings } from './functions/readSettings'
+import { guessRankings } from './functions/guessRankings'
 
-let appVersion = e.remote.app.getVersion()
+let appVersion = electron.remote.app.getVersion()
 
 document.title = 'sepi-celo LADDER BUG VERSION ' + appVersion
 
@@ -107,10 +107,8 @@ function readLog(fileLocation, callback) {
     })
 }
 
-// =========== components ============
 function App() {
     const READ_LOG_INTERVAL = 3000
-
     const dispatch = useDispatch()
     const state = useSelector(state => state)
 

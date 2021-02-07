@@ -1,6 +1,8 @@
 import fs from 'fs'
 import { commonName, formatToStr, } from '../functions/simpleFunctions'
 
+const rankingsInHtml = false
+
 export function writeRankings(players, fileLocation, from) {
 
 
@@ -117,7 +119,6 @@ color:white;
 `
 
     const text = str1 + '\n' + str2
-    const rankingsInHtml = true
     // console.log('writeRankings: ', fileLocation)
     fs.writeFile(
         fileLocation,
