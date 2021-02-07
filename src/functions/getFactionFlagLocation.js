@@ -1,9 +1,9 @@
 // images
-import flagOkw from '../img/okw.png'
-import flagSov from '../img/sov.png'
-import flagUk from '../img/uk.png'
-import flagUsa from '../img/usa.png'
-import flagWer from '../img/wer.png'
+import flagOkw from '../../img/okw.png'
+import flagSov from '../../img/sov.png'
+import flagUk from '../../img/uk.png'
+import flagUsa from '../../img/usa.png'
+import flagWer from '../../img/wer.png'
 
 export function getFactionFlagLocation(code) {
     switch (code) {

@@ -1,10 +1,9 @@
 import fs from 'fs'
 import { commonName, formatToStr, } from '../functions/simpleFunctions'
 
-const rankingsInHtml = false
+const rankingsInHtml = true
 
 export function writeRankings(players, fileLocation, from) {
-
 
     let arr1 = []
     let arr2 = []
@@ -69,7 +68,7 @@ align-items: center;
     <span style="${rankingStyle}">${ranking}</span>
     <div style="${countryDivStyle}">
         ${country ?
-            `<img src="./img/contryFlags/${country}.png" width="100%" height="100%" />`
+            `<img src="./img/countryFlags/${country}.png" width="100%" height="100%" />`
             : ''
         }
     </div>
@@ -83,8 +82,6 @@ align-items: center;
         }
     }
 
-// font-family: Consolas,monaco,monospace;
-// font-family: Monaco;
     const bodyStyle = `
 font-family: 'Work Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
 margin: 0.2em;
@@ -119,9 +116,8 @@ color:white;
 `
 
     const text = str1 + '\n' + str2
-    // console.log('writeRankings: ', fileLocation)
     fs.writeFile(
-        fileLocation,
+        rankingsInHtml ? './rankings.html' : './rankings.txt',
         rankingsInHtml ? html : text,
         'utf-8',
         (err) => {

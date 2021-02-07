@@ -18,8 +18,8 @@ function createMainWindow() {
         width: 800,
         height: 600,
         show: false,
-        icon: `${__dirname}/icon/icon.png`,
-        // icon: `${__dirname}/assets/icon.ico`,
+        icon: `${__dirname}/img/icon/icon.png`,
+        // icon: `${__dirname}/img/icon/icon2.png`,
         webPreferences: {
             nodeIntegration: true,
             nativeWindowOpen: true,

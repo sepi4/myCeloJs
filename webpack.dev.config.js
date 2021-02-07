@@ -48,7 +48,7 @@ module.exports = {
                 env: process.env,
                 stdio: 'inherit',
             })
-                .on('close', (code) => process.exit(0))
+                .on('close', () => process.exit(0))
                 .on('error', (spawnError) => console.error(spawnError))
         },
     },
