@@ -2,107 +2,23 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector, } from 'react-redux'
 
-import axios from 'axios'
-import fs from 'fs'
-import electron from 'electron'
-
 // components
 import Navbar from './components/Navbar'
 import UpdateBar from './components/UpdateBar'
 import MainView from './components/MainView'
 
 // functions
-import { refactorData } from './functions/refactorData'
-import { getPlayersInfo } from './functions/getPlayersInfo'
 import { writeRankings } from './functions/writeRankings'
 import { readSettings } from './functions/readSettings'
-import { guessRankings } from './functions/guessRankings'
+import { getExtraInfo } from './functions/getExtraInfo'
+import { readLog } from './functions/readLog'
 
-let appVersion = electron.remote.app.getVersion()
+import electron from 'electron'
+const appVersion = electron.remote.app.getVersion()
 
 document.title = 'sepi-celo LADDER BUG VERSION ' + appVersion
 
 let updateCheckNotDone = true
-
-// =========== functions ============
-// GLOBAL
-function getLines(data) {
-    let lines = data.split('\n')
-    let arr = []
-    let stop = false
-    let wasGame = false
-    let wasNone = false
-
-    for (let i = lines.length - 1; i >= 0; i--) {
-        const row = lines[i]
-        if (row.match('GAME --.* Player:')) {
-            wasGame = true
-            if (wasGame && wasNone) {
-                break
-            }
-            arr.push(row)
-        } else if (row.match('Match Started.*steam.*slot.*ranking')) {
-            stop = true
-            arr.push(row)
-        } else if (stop) {
-            break
-        } else if (wasGame) {
-            wasNone = true
-        }
-    }
-    return arr
-}
-
-// GLOBAL
-function getExtraInfo(players, callback) {
-
-    let ids = players.filter(p => p.profileId != undefined)
-        .map(p => p.profileId)
-
-    const url = 'https://coh2-api.reliclink.com/community/'
-        + 'leaderboard/GetPersonalStat?title=coh2&profile_ids=['
-        + ids.join(',') + ']'
-
-    let leaderboard = undefined
-    let cohTitles = undefined
-
-    const fetch1 = axios.get(url)
-
-    const url2 =
-        'https://coh2-api.reliclink.com/' +
-        'community/leaderboard/GetAvailableLeaderboards?title=coh2'
-
-    const fetch2 = axios.get(url2)
-
-    Promise.all([fetch1, fetch2])
-        .then(values => {
-            if (values[0].status === 200 && values[1].status === 200) {
-                leaderboard = values[0].data
-                cohTitles = values[1].data
-                let result = refactorData(leaderboard, cohTitles, ids)
-                const teams = guessRankings(players, leaderboard, cohTitles)
-
-                callback(result, teams)
-            }
-        })
-        .catch(error => {
-            console.log(error)
-        })
-}
-
-// GLOBAL
-function readLog(fileLocation, callback) {
-    console.log('readLog')
-    // console.log('readLog, fileLocation:', fileLocation)
-    fileLocation = fileLocation.replace(/\\/, '\\\\')
-    fs.readFile(fileLocation, 'utf-8', (err, data) => {
-        if (err) {
-            console.log('Error in reading logfile: ', err)
-        }
-        let arr = getLines(data)
-        callback(getPlayersInfo(arr))
-    })
-}
 
 function App() {
     const READ_LOG_INTERVAL = 3000
