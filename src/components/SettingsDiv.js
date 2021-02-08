@@ -1,4 +1,30 @@
 import React from 'react'
+import styled from 'styled-components'
+
+const Button = styled.button`
+    margin: 0.2em 0;
+    width: 25vw;
+    color: white;
+    cursor: pointer;
+    background-color: ${({ buttonColor }) => buttonColor || '#181818'};
+    padding: .2em 0;
+    font-size: 1em;
+    border: 0;
+    &:active {
+        color: black;
+        background-color: white;
+    }
+`
+const ContentDiv = styled.div`
+    margin: .2em 0 0 .2em;
+    min-width: 100%;
+    min-height: 1em;
+`
+const Div = styled.div`
+    margin: 1em 0;
+    background-color: #616161;
+    padding: 1em;
+`
 
 function SettingsDiv({
     title, 
@@ -7,42 +33,24 @@ function SettingsDiv({
     buttonText,
     buttonColor,
 }) {
-    const locationStyle = {
-        margin: '.2em 0 0 .2em',
-        minWidth: '100%',
-        minHeight: '1em',
-    }
-    const divStyle = {
-        margin: '1em 0',
-        backgroundColor: '#616161',
-        padding: '1em',
-    }
-    const buttonStyle = {
-        padding: '0',
-        margin: '0.2em 0',
-        width: '25vw',
-        cursor: 'pointer',
-        backgroundColor: buttonColor ? buttonColor : '#181818',
-        // border: '2px solid #181818',
-        color: 'white',
-        height: '1.5em',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    }
 
 
-    return <div style={divStyle}>
-        {title
-            && <div style={{ fontWeight: 'bold' }} >{title}</div>
+    return <Div>
+        {title && 
+            <div style={{ fontWeight: 'bold' }} >{title}</div>
         }
-        <div style={locationStyle} >
-            {children}
-        </div>
-        {buttonText 
-            && <div style={buttonStyle} onClick={handler} >{buttonText} </div>
+
+        <ContentDiv>{children}</ContentDiv>
+
+        {buttonText && 
+            <Button
+                onClick={handler}
+                buttonColor={buttonColor}
+            >
+                {buttonText}
+            </Button>
         }
-    </div>
+    </Div>
 }
 
 export default SettingsDiv
