@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCogs, faTimes, } from '@fortawesome/free-solid-svg-icons'
-import RadioButton from './RadioButton'
 
 function Navbar({ handleSetSettingsView }) {
     const styleNavbar = {
@@ -17,7 +16,7 @@ function Navbar({ handleSetSettingsView }) {
         display: 'flex',
         alignItems: 'center',
         zIndex: '99999',
-        justifyContent: 'space-between', 
+        justifyContent: 'flex-end', 
         color: 'white',
     }
 
@@ -26,25 +25,12 @@ function Navbar({ handleSetSettingsView }) {
 
     return <div style={{ ...styleNavbar, }}>
 
-        <div style={{ marginLeft: '5%', }}>
-            <RadioButton 
-                text='list' 
-                checked={true} 
-                handler={() => dispatch({ type: 'TOGGLE_LIST' })} 
-            />
-            <RadioButton
-                text='table'
-                checked={false}
-                handler={() => dispatch({ type: 'TOGGLE_LIST' })}
-            />
-        </div>
-
         <FontAwesomeIcon
             icon={!state.settingsView ? faCogs : faTimes }
             size='2x'
             style={{
                 cursor: 'pointer',
-                marginRight: '5%',
+                marginRight: '0.5em',
             }}
             onClick={() => {
                 dispatch({ type: 'TOGGLE_SETTINGS_VIEW' })

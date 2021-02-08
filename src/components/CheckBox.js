@@ -1,6 +1,6 @@
 import React from 'react'
 
-function RadioButton({ checked, handler, labelText }) {
+function CheckBox({ checked, handler, labelText }) {
     const id = Math.random().toString()
     return <span style={{
         display: 'flex',
@@ -10,7 +10,7 @@ function RadioButton({ checked, handler, labelText }) {
     }} >
         <input
             style={{ marginRight: '.5em' }}
-            type='radio'
+            type='checkbox'
             id={id}
             checked={checked}
             onChange={handler}
@@ -19,4 +19,4 @@ function RadioButton({ checked, handler, labelText }) {
     </span>
 }
 
-export default RadioButton
+export default CheckBox

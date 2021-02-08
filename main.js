@@ -19,7 +19,6 @@ function createMainWindow() {
         height: 600,
         show: false,
         icon: `${__dirname}/img/icon/icon.ico`,
-        // icon: `${__dirname}/img/icon/icon2.png`,
         webPreferences: {
             nodeIntegration: true,
             nativeWindowOpen: true,

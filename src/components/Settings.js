@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector, } from 'react-redux'
 
 import fs from 'fs'
@@ -7,10 +7,12 @@ import e from 'electron'
 const { dialog, clipboard } = e.remote
 
 import SettingsDiv from './SettingsDiv'
+import RadioButton from './RadioButton'
 
 function Settings() {
     const dispatch = useDispatch()
     const settings = useSelector(state => state.settings)
+    const [copied, setCopied] = useState(false)
 
     const changeLogLocation = () => {
         dialog.showOpenDialog({
@@ -41,9 +43,13 @@ function Settings() {
     }
 
     const handleRankingsType = () => {
+        console.log('handleRankingsType')
         const newSettings = {
             ...settings,
             rankingsHtml: !settings.rankingsHtml,
+            rankingsFile: !settings.rankingsHtml 
+                ? process.cwd() + '\\rankings.html'
+                : process.cwd() + '\\rankings.txt'
         }
         fs.writeFile(
             './settings.json',
@@ -59,11 +65,11 @@ function Settings() {
     }
 
     const copyRankingsFileLocation = () => {
-        if (settings.rankingsHtml) {
-            clipboard.writeText(process.cwd() + '\\rankings.html')
-        } else {
-            clipboard.writeText(process.cwd() + '\\rankings.txt')
-        }
+        if (settings.rankingsFile) {
+            clipboard.writeText(settings.rankingsFile)
+            setCopied(true)
+            setTimeout(() => setCopied(false), 500)
+        }     
     }
 
     return <div style={{ marginTop: '4em' }}>
@@ -82,63 +88,55 @@ function Settings() {
             ? <SettingsDiv
                 title="Rankings file type (OBS-studio):"
                 handler={copyRankingsFileLocation}
-                buttonText='Copy'
+                buttonText={settings && settings.rankingsFile 
+                    ? 'Copy'
+                    : null
+                }
             >
 
-                <div style={{
+
+                <form style={{
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'space-around',
+                    justifyContent: 'flex-start',
+
                     padding: '0.2em 0',
                     margin: '0 0 0.2em 0',
-                    // backgroundColor: '#777777',
-                    fontWeight: '600',
                 }}>
+                    <RadioButton
+                        checked={settings['rankingsHtml'] !== undefined
+                            && settings['rankingsHtml']
+                        }
+                        handler={handleRankingsType}
+                        labelText={'html'}
+                    />
+                    <RadioButton
+                        checked={settings['rankingsHtml'] !== undefined
+                            && !settings['rankingsHtml']
+                        }
+                        handler={handleRankingsType}
+                        labelText={'txt'}
+                    />
 
-                    <span style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                    }} >
-                        <input
-                            style={{ marginRight: '1em' }}
-                            type='checkbox'
-                            id='html'
-                            checked={settings && settings.rankingsHtml}
-                            onChange={handleRankingsType}
-                        />
-                        <label htmlFor='html'>html</label>
-                    </span>
+                </form>
 
-                    <span style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                    }} >
-                        <input
-                            style={{ marginRight: '1em' }}
-                            type='checkbox'
-                            id='txt'
-                            checked={settings && !settings.rankingsHtml}
-                            onChange={handleRankingsType}
-                        />
-                        <label htmlFor='txt'>txt</label>
-                    </span>
-                </div>
-                <div>
-                    {settings && settings.rankingsHtml
-                        ? process.cwd() + '\\rankings.html'
-                        : process.cwd() + '\\rankings.txt'
-                    }
-                </div>
+                {settings.rankingsFile}
+                {copied
+                    ? <span style={{
+                        backgroundColor: 'darkred',
+                        color: 'white',
+                        marginLeft: '.5em',
+                        padding: '.2em',
+                        borderRadius: '.5em',
+                    }}>copied</span>
+                    : null
+                }
             </SettingsDiv>
+
             : <SettingsDiv
                 title="Rankings file type (OBS-studio):"
             >
-                <p style={{color: 'red'}}>
-                    Add log location file first
-                </p>
-
+                <p style={{ color: 'darkred' }}>Add log location file first</p>
             </SettingsDiv>
         }
 

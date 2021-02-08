@@ -5,6 +5,7 @@ function SettingsDiv({
     handler,
     children,
     buttonText,
+    buttonColor,
 }) {
     const locationStyle = {
         margin: '.2em 0 0 .2em',
@@ -21,7 +22,7 @@ function SettingsDiv({
         margin: '0.2em 0',
         width: '25vw',
         cursor: 'pointer',
-        backgroundColor: '#181818',
+        backgroundColor: buttonColor ? buttonColor : '#181818',
         // border: '2px solid #181818',
         color: 'white',
         height: '1.5em',
