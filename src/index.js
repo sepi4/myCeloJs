@@ -30,11 +30,6 @@ import { Provider } from 'react-redux'
 // Reducer
 function reducer( state, action) {
     switch (action.type) {
-        case 'TOGGLE_LIST':
-            return { 
-                ...state, 
-                tableView: !state.tableView, 
-            }
         case 'TOGGLE_SETTINGS_VIEW':
             return { 
                 ...state, 
@@ -67,21 +62,15 @@ function reducer( state, action) {
                 ...state, 
                 settings: action.data,
             }
-        case 'TOGGLE_NAVSETTING':
+        case 'TOGGLE_ALL':
             return { 
                 ...state, 
-                settings: {
-                    ...state.settings,
-                    navSettings: state.settings.navSettings 
-                        .map(obj => obj.text === action.data.text
-                            ? {
-                                text: obj.text,
-                                value: !obj.value
-                            }
-                            : obj
-                        )
-                    
-                }
+                all: !state.all,
+            }
+        case 'TOGGLE_TABLE':
+            return { 
+                ...state, 
+                table: !state.table, 
             }
 
         default:
@@ -90,13 +79,15 @@ function reducer( state, action) {
 }
 
 let store = createStore(reducer, { 
-    tableView: false,
     settingsView: false,
     settings: null,
 
     players: null,
     fromFile: null, 
     extraInfo: null,
+
+    all: false,
+    table: false,
 
     countryFlags,
 })

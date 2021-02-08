@@ -51,9 +51,9 @@ function TableDiv({ ranksArr, }) {
         display: 'inline-block',
     }
 
-    let tableDiv = names.map((name, i) => {
-        return <div 
-            key={i+name}
+    let tableDiv = <div style={{ marginBottom: '0.5em' }}>{names.map((name, i) =>
+        <div
+            key={i + name}
             style={{
                 display: 'inline-block',
                 width: '50%',
@@ -82,7 +82,7 @@ function TableDiv({ ranksArr, }) {
                     width: '80%',
                 }}
             >
-                {[0,1,2,3].map(x => {
+                {[0, 1, 2, 3].map(x => {
                     let d = x + 1
                     let r = solo[index]
                     index++
@@ -100,19 +100,19 @@ function TableDiv({ ranksArr, }) {
                         streak = r.streak
                     }
 
-                    return <div key={x+i+'rank'}>
+                    return <div key={x + i + 'rank'}>
                         <span style={s}>{rank}</span>
                         <span style={s}>{d}v{d}</span>
                         <span style={s}>{per}</span>
                         <span style={{
                             ...s,
-                            color: Number(streak) 
-                                ?  streak > 0 
-                                    ? 'lime' 
+                            color: Number(streak)
+                                ? streak > 0
+                                    ? 'lime'
                                     : 'red'
-                                    : 'white',
+                                : 'white',
                         }}>
-                            {streak > 0 
+                            {streak > 0
                                 ? '+' + streak
                                 : streak
                             }
@@ -122,7 +122,7 @@ function TableDiv({ ranksArr, }) {
                 })}
             </div>
         </div>
-    })
+    )}</div> 
     return tableDiv
 }
 

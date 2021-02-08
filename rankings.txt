@@ -1,9 +1,9 @@
 wer   -     us    Takeshi Kovacs 
-okw   1104  de    Tony Rayt 
+okw   1114  de    Tony Rayt 
 okw   -     us    Dirk Deagler 
 okw   1358  fi    sepi 
 
-sov   1107  us    Jamez69 
-uk    989   ro    1234 
-usa   894   gb    Jeff (Former Jihadi) 
-sov   1114  cn    Tsai 
+sov   1108  us    Jamez69 
+uk    944   ro    1234 
+usa   895   gb    Jeff (Former Jihadi) 
+sov   1021  cn    Tsai 

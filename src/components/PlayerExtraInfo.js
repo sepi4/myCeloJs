@@ -16,7 +16,7 @@ function PlayerExtraInfo({
         marginRight: '0.5em',
     }
 
-    const tableView = useSelector(state => state.tableView)
+    const tableView = useSelector(state => state.table)
 
     return <div style={{
         color: 'white',

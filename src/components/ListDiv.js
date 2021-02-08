@@ -8,10 +8,15 @@ function ListDiv({
     style, 
 }) {
 
+
     // team ranking ------
-    const tableView = useSelector(state => state.tableView)
+    const tableView = useSelector(state => state.table)
+    const showAll = useSelector(state => state.all)
     let reg = tableView ? /^Team/ : /^./ 
-    let rankedOnly = true // navSettings.ranked
+
+
+    // let rankedOnly = true // navSettings.ranked
+    let rankedOnly = !showAll
     ranksArr = ranksArr
         .filter(r => r.name.match(reg))
         .filter(r => rankedOnly ? r.rank > 0 : true)

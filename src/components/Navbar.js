@@ -17,7 +17,9 @@ function Navbar({ handleSetSettingsView }) {
         display: 'flex',
         alignItems: 'center',
         zIndex: '99999',
-        justifyContent: 'flex-end', 
+        justifyContent: state && !state.settingsView
+            ? 'space-between'
+            : 'flex-end', 
         color: 'white',
     }
 
@@ -29,20 +31,23 @@ function Navbar({ handleSetSettingsView }) {
     }
 
     return <div style={{ ...styleNavbar, }}>
-        <NavCheckboxes />
+        {!state.settingsView && <NavCheckboxes /> }
 
-        <FontAwesomeIcon
-            icon={!state.settingsView ? faCogs : faTimes }
-            size='2x'
+        <span
             style={{
                 cursor: 'pointer',
-                marginRight: '0.5em',
+                marginRight: '1em',
             }}
             onClick={() => {
                 dispatch({ type: 'TOGGLE_SETTINGS_VIEW' })
                 handleSetSettingsView()
             }}
-        />
+        >
+            <FontAwesomeIcon
+                icon={!state.settingsView ? faCogs : faTimes}
+                size='2x'
+            />
+        </span>
     </div>
 }
 

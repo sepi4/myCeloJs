@@ -5,7 +5,7 @@ function CheckBox({ checked, handler, labelText }) {
     return <span style={{
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center',
+        // justifyContent: 'center',
         marginRight: '1em',
     }} >
         <input
