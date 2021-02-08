@@ -26,10 +26,11 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
         - (html) Sources > Add (plus) > Text. Select checkbox 'local file', select location of rankings output file (copied above). Select checkbox 'Use custom frame rate', put 2 FPS (same rate as ranking html file will update), this will remove flickering. Modify size of new window. Test in game vs AI. 
         - (txt) Sources > Add (plus) > Text. Select checkbox 'read from file', select location of rankings output file. Modify size of output, font, etc.  Test in game vs AI.
 
-<!-- ## Установка и настройка:
+## Установка и настройка:
 
-<a id="raw-url" href="https://youtu.be/1DmWfQZv-kQ">видео инструкция (rus)</a>
-- скачайте установочный файл (Download setup file)
+<a id="raw-url" href="https://www.youtube.com/watch?v=F9ayHIY1jTI">видео инструкция (rus)</a>
+
+<!-- - скачайте установочный файл (Download setup file)
 - установите
 - в настройках укажите местонахождение 'warnings.log' файла (тоже место куда 
 сохраняются реплеи, обычно в C:\Users\USERNAME\Documents\my games\company of heroes 2\)
