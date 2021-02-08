@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCogs, faTimes, } from '@fortawesome/free-solid-svg-icons'
+import NavCheckboxes from './NavCheckboxes'
 
 function Navbar({ handleSetSettingsView }) {
     const styleNavbar = {
@@ -23,7 +24,12 @@ function Navbar({ handleSetSettingsView }) {
     const state = useSelector(state => state)
     const dispatch =  useDispatch()
 
+    if (!state.settings) {
+        return null
+    }
+
     return <div style={{ ...styleNavbar, }}>
+        <NavCheckboxes />
 
         <FontAwesomeIcon
             icon={!state.settingsView ? faCogs : faTimes }

@@ -28,10 +28,7 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 
 // Reducer
-function counter(
-    state,
-    action,
-) {
+function reducer( state, action) {
     switch (action.type) {
         case 'TOGGLE_LIST':
             return { 
@@ -70,12 +67,29 @@ function counter(
                 ...state, 
                 settings: action.data,
             }
+        case 'TOGGLE_NAVSETTING':
+            return { 
+                ...state, 
+                settings: {
+                    ...state.settings,
+                    navSettings: state.settings.navSettings 
+                        .map(obj => obj.text === action.data.text
+                            ? {
+                                text: obj.text,
+                                value: !obj.value
+                            }
+                            : obj
+                        )
+                    
+                }
+            }
+
         default:
             return state
     }
 }
 
-let store = createStore(counter, { 
+let store = createStore(reducer, { 
     tableView: false,
     settingsView: false,
     settings: null,

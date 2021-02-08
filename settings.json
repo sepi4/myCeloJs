@@ -1,5 +1,11 @@
 {
     "logLocation": "C:\\Users\\Sergei\\Documents\\my games\\company of heroes 2\\warnings.log",
     "rankingsHtml": false,
-    "rankingsFile": "D:\\tutorials\\myCeloJs\\rankings.txt"
+    "rankingsFile": "D:\\tutorials\\myCeloJs\\rankings.txt",
+    "navSettings": [
+        {
+            "value": false,
+            "text": "all"
+        }
+    ]
 }

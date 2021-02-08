@@ -1,3 +1,5 @@
 {
-    "showAll": false
+    "navSettings": {
+        "showAll": false
+    }
 }
