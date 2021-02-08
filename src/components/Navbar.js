@@ -26,10 +26,6 @@ function Navbar({ handleSetSettingsView }) {
     const state = useSelector(state => state)
     const dispatch =  useDispatch()
 
-    if (!state.settings) {
-        return null
-    }
-
     return <div style={{ ...styleNavbar, }}>
         {!state.settingsView && <NavCheckboxes /> }
 
