@@ -70,15 +70,62 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 
 <a id="raw-url" href="https://www.youtube.com/watch?v=F9ayHIY1jTI">видео инструкция (rus)</a>
 
-<!-- - скачайте установочный файл (Download setup file)
-- установите
-- в настройках укажите местонахождение 'warnings.log' файла (тоже место куда 
-сохраняются реплеи, обычно в C:\Users\USERNAME\Documents\my games\company of heroes 2\)
-- (необязательно) простой метод для OBS studio показывать ранги участников
-    - в настройках выберите местонахождение выходного текстового файла куда будут писаться ранги (может находиться где угодно)
-    - сделать так, чтобы OBS studio отображала этот текстовый файл с рейтингами
-        - Источники > Добавить (плюс) > Текст (укажите место нахождение выше
-         созданного файла). Настроите размер текста, фонт... -->
+- скачайте zip-файл (<a id="raw-url" href="https://github.com/sepi4/myCeloJs/releases/latest">latest release</a>)
+- распакуйте zip-файл
+- откройте 'myCelo.exe'
+- в настройках ![alt text](./readmeImages/settingsIcon.png "settings icon") 
+    выберите местонахождение 'warnings.log'-файла (тоже место куда сохраняются 
+    риплеи, обычно в C:\Users\USERNAME\Documents\my games\company of heroes 2\) <hr>
+
+- **ДЛЯ СТРИМЕРОВ**, простой метод для OBS studio показывать ранги участников
+    - в формате html 
+    
+        ![alt text](./readmeImages/htmlOutput.png "html") 
+
+    - или в формате txt 
+    
+        ![alt text](./readmeImages/txtOutput.png "txt") 
+    
+    - Выберите формат. Скопируйте адрес нажав кнопку 'Copy'.
+
+        ![alt text](./readmeImages/locationCopied.png "location copied")
+
+    - **Настойки в OBS-studio**:
+        - для формата **HTML**:
+            - Источники > Добавить(плюс) > Браузер 
+        
+                ![alt text](./readmeImages/plusBrowserRus.png "+ browser"). 
+
+            - поставьте галочку на 'локальный файл'
+            - выберите местонахождение файла (скопировали его из настроек myCelo)
+            
+                ![alt text](./readmeImages/localFileRus.png "local file") 
+
+            - поставьте галочку на 'настраиваемую частоту кадров' и введите туда 
+            цифру 2 (с этой же скоростью обновляется html-файл созданный myCelo), это должно предотвратить дерганье картинки. 
+
+                ![alt text](./readmeImages/frameRateRus.png "frame rate")
+
+            - сделайте новое окно подходящего размера и поместите куда хотите 
+            на экране
+            - проверьте установку в игре против компьютера 
+
+        - для формата **TXT**:
+            - Источники > Добавить(плюс) > Текст 
+        
+                ![alt text](./readmeImages/plusTextRus.png "+ text")
+
+            - поставьте галочку на 'чтение из файла' 
+            - выберите местонахождение файла (скопировали его из настроек myCelo)
+
+                ![alt text](./readmeImages/readFromFileRus.png "read from file")
+
+            - сделайте новое окно подходящего размера, выберите подходящий фонт 
+            и поместите окно куда хотите на экране
+            - проверьте установку в игре против компьютера 
+
+
+
 
 
 ## Updates:
