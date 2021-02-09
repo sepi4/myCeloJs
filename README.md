@@ -1,7 +1,15 @@
 <!-- # COH2 LAGGER BUG VERSION
 Use <a id="raw-url" href="https://github.com/sepi4/myCeloJs/raw/ladderBug/sepi-celo%20Setup%20666.666.666.exe" > THIS </a> version untill relic haven't fixed ladder bugs.  -->
 
-# About
+- [About](#about)
+- [Install and setup](#install)
+- [Установка и настройка](#installRus)
+- [Updates](#updates)
+
+
+<a name="about"></a>
+
+## About
 
 This is electron app for viewing ranks of current connected game
 of Company of Heroes 2 and display ranks in OBS.
@@ -9,10 +17,9 @@ of Company of Heroes 2 and display ranks in OBS.
 Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone/MakoCelo</a> for ideas. It's also rank displayer for COH2, check it out, maybe you like it better. 
 
 
-<!--
-<a id="raw-url" href="https://github.com/sepi4/myCeloJs/releases/download/1.3.0/sepi-celo.Setup.1.3.0.exe">Download setup file</a>
--->
 
+
+<a name="install"></a>
 
 ## Install and setup:
 
@@ -66,6 +73,8 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
             - modify size of output, font, etc.  
             - test in game vs AI.
 
+<a name="installRus"></a>
+
 ## Установка и настройка:
 
 <a id="raw-url" href="https://www.youtube.com/watch?v=F9ayHIY1jTI">видео инструкция (rus)</a>
@@ -77,7 +86,7 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
     выберите местонахождение 'warnings.log'-файла (тоже место куда сохраняются 
     риплеи, обычно в C:\Users\USERNAME\Documents\my games\company of heroes 2\) <hr>
 
-- **ДЛЯ СТРИМЕРОВ**, простой метод для OBS studio показывать ранги участников
+- **ДЛЯ СТРИМЕРОВ**, отображение рангов на стриме через OBS-studio:
     - в формате html 
     
         ![alt text](./readmeImages/htmlOutput.png "html") 
@@ -128,7 +137,10 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 
 
 
+<a name="updates"></a>
+
 ## Updates:
+
 * **version 1.4.0.** 
     - Now in OBS-studio ranking display is possible in html. This will show flag pictures
     - Player ranking can be view in table mode (navbar checkboxes)
