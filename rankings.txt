@@ -1,9 +1,3 @@
-wer   -     us    Takeshi Kovacs 
-okw   1115  de    Tony Rayt 
-okw   -     us    Dirk Deagler 
-okw   1359  fi    sepi 
+okw   -     fi    sepi 
 
-sov   1108  us    Jamez69 
-uk    944   ro    1234 
-usa   895   gb    Jeff (Former Jihadi) 
-sov   1021  cn    Tsai 
+sov   -           CPU - Easy 

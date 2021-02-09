@@ -17,7 +17,7 @@ export function writeRankings(players, rankingsInHtml, from) {
         const name = players[i].name
         let ranking = players[i].ranking === '-1' ? '-' : players[i].ranking
         if (!isNaN(ranking)) {
-            ranking = (+ranking + 1).toString()
+            ranking = (+ranking).toString()
         }
         const faction = players[i].faction
         const slot = Number(players[i].slot)

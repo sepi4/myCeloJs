@@ -8,6 +8,7 @@ import { getFactionFlagLocation } from '../functions/getFactionFlagLocation'
 import { commonName, } from '../functions/simpleFunctions'
 
 function Player({ player, extraInfo, }) {
+    
     const [showExtra, setShowExtra] = useState(false)
 
     const style = {

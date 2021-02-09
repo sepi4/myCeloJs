@@ -61,7 +61,7 @@ function PlayerCurrentRank({
 
             {player.ranking === '-1' || player.ranking === -1
                 ? '-'
-                : Number(player.ranking) + 1
+                : Number(player.ranking)
             }
         </span>
 

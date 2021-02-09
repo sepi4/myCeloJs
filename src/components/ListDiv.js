@@ -3,16 +3,16 @@ import { useSelector } from 'react-redux'
 
 import Rank from './Rank'
 
-function ListDiv({ 
-    ranksArr, 
-    style, 
+function ListDiv({
+    ranksArr,
+    style,
 }) {
 
 
     // team ranking ------
     const tableView = useSelector(state => state.table)
     const showAll = useSelector(state => state.all)
-    let reg = tableView ? /^Team/ : /^./ 
+    let reg = tableView ? /^Team/ : /^./
 
 
     // let rankedOnly = true // navSettings.ranked
@@ -48,33 +48,62 @@ function ListDiv({
     })
     ranksArr = pos.concat(neg)
 
-    let listDiv = ranksArr && <div style={{ 
+    let listDiv = ranksArr && <div style={{
         fontSize: '90%',
     }}>
-        <div> 
+        <div>
             {
                 ranksArr
                     .map((r, i) => {
                         let per = r.wins / (r.wins + r.losses) * 100
                         per = per.toFixed(0) + '%'
-                        let totalGames = r.wins + r.losses
-                        let rank = r.rank <= 0 ? '-' : r.rank
+                        const totalGames = r.wins + r.losses
+                        const rank = r.rank <= 0 ? '-' : r.rank
+                        const pos = r.streak > 0
+                        const streak = pos
+                            ? `+${r.streak}`
+                            : `${r.streak}`
+                        // debugger
 
                         return <div key={i} style={{
                             display: 'flex',
                             alignItems: 'flex-start',
                         }}>
-                            <div style={style}>{rank}</div>
+                            <div 
+                                style={{
+                                    ...style,
+                                    width: '20%',
+                                }} 
+                                title={rank + ' of ' + r.ranktotal}
+                            >
+                                {rank}
+                            </div>
                             <Rank
                                 style={{
                                     ...style,
+                                    width: '40%',
                                     overflow: 'hidden',
                                     whiteSpace: 'nowrap',
                                 }}
                                 rank={r}
                             />
-                            <div style={style}>{per}</div>
-                            <div style={style}>{totalGames}</div>
+                            <div 
+                                style={{
+                                    ...style,
+                                    color: '#FFFF66',
+                                    width: '20%',
+                                }} 
+                            >{per}</div>
+                            <div style={{
+                                ...style,
+                                color: pos ? 'green' : 'red',    
+                            }}>{streak}</div>
+                            <div 
+                                style={{
+                                    ...style,
+                                    width: '20%',
+                                }} 
+                            >{totalGames}</div>
                         </div>
                     })
             }
