@@ -16,15 +16,55 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 
 ## Install and setup:
 
-- download zip file
+- download zip file (<a id="raw-url" href="https://github.com/sepi4/myCeloJs/releases/latest">latest release</a>)
 - extract
 - double click 'myCelo.exe'
-- in settings select location of 'warnings.log' file (Same folder where are replays saved, usually in C:\Users\USERNAME\Documents\my games\company of heroes 2\ )
-- (optional) simple way for OBS studio to display ranking
-    - select format of rankings output  file, html (will show flags in pictures) or txt. Location can be copied to clipboard by pressing 'copy' button.
+- in settings ![alt text](./readmeImages/settingsIcon.png "settings icon") select 
+    location of 'warnings.log' file (Same folder where are replays saved, usually 
+    in "C:\Users\USERNAME\Documents\my games\company of heroes 2\") <hr>
+- **OPTIONAL (for streamers)**, simple way for OBS studio to display ranking:
+    - select format of rankings output  file, html 
+    
+    ![alt text](./readmeImages/htmlOutput.png "html") 
+
+    or txt 
+    
+    ![alt text](./readmeImages/txtOutput.png "txt") 
+
+    Location can be copied to clipboard by pressing 'copy' button.
+
+    ![alt text](./readmeImages/locationCopied.png "location copied"). 
+
     - make OBS studio to display rankings file info:
-        - (html) Sources > Add (plus) > Text. Select checkbox 'local file', select location of rankings output file (copied above). Select checkbox 'Use custom frame rate', put 2 FPS (same rate as ranking html file will update), this will remove flickering. Modify size of new window. Test in game vs AI. 
-        - (txt) Sources > Add (plus) > Text. Select checkbox 'read from file', select location of rankings output file. Modify size of output, font, etc.  Test in game vs AI.
+        - for **HTML**:
+            - Sources > Add (plus) > Browser 
+        
+                ![alt text](./readmeImages/plusBrowser.png "+ browser"). 
+
+            - Select checkbox 'local file', select location of rankings output file 
+            (copied above)
+            
+                ![alt text](./readmeImages/localFile.png "local file") 
+
+            - Select checkbox 'Use custom frame rate', put 2 FPS (same rate as ranking html 
+            file will update), this will remove flickering. 
+
+                ![alt text](./readmeImages/frameRate.png "frame rate")
+
+            - Modify size of new window. Test in game vs AI. 
+
+        - for **TXT**:
+            - Sources > Add (plus) > Text. 
+
+                ![alt text](./readmeImages/plusText.png "+ text")
+
+            - select checkbox 'read from file' 
+            - select location of rankings output file 
+
+                ![alt text](./readmeImages/readFromFile.png "read from file")
+
+            - modify size of output, font, etc.  
+            - test in game vs AI.
 
 ## Установка и настройка:
 
