@@ -2,8 +2,20 @@ import fs from 'fs'
 
 import { getPlayersInfo } from './getPlayersInfo'
 
+function getCurrentUser(lines) {
+    for (let i = 0; i < lines.length; i++) {
+        const row = lines[i]
+        const m = row.match(/GAME -- Current user name is \[(.+)\]/)
+        if (m) {
+            return m[1]
+        }
+    }
+}
+
 function getLines(data) {
     let lines = data.split('\n')
+    let currentUser = getCurrentUser(lines)
+    // console.log('currentUser:', currentUser)
     let arr = []
     let stop = false
     let wasGame = false
@@ -31,7 +43,6 @@ function getLines(data) {
 
 export function readLog(fileLocation, callback) {
     console.log('readLog')
-    // console.log('readLog, fileLocation:', fileLocation)
     fileLocation = fileLocation.replace(/\\/, '\\\\')
     fs.readFile(fileLocation, 'utf-8', (err, data) => {
         if (err) {

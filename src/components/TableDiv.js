@@ -47,24 +47,35 @@ function TableDiv({ ranksArr, }) {
 
     let index = 0
     let s = {
+        display: 'flex',
+        justifyContent: 'center',
         width: '20%',
-        display: 'inline-block',
     }
 
-    let tableDiv = <div style={{ marginBottom: '0.5em' }}>{names.map((name, i) =>
+    let tableDiv = <div
+        style={{ 
+            display: 'flex',
+            flexWrap: 'wrap',
+            marginBottom: '0.5em', 
+        }}
+    >{names.map((name, i) =>
         <div
             key={i + name}
             style={{
-                display: 'inline-block',
-                width: '50%',
+                width: '49%',
+                display: 'grid',
+                gridTemplate: '1fr / repeat(6, 1fr)',
                 fontSize: '0.7em',
-                margin: '0.6em 0',
+                padding: '0.6em 0',
+                borderRight: i % 2 === 0 ? '0.1em solid gray' : null,
+                borderBottom: i < names.length - 1 ? '0.1em solid gray' : null,
             }}
         >
+
             <div
                 style={{
-                    display: 'inline-block',
-                    width: '20%',
+                    display: 'grid',
+                    placeItems: 'center',
                 }}
             >
                 <img
@@ -78,8 +89,7 @@ function TableDiv({ ranksArr, }) {
             </div>
             <div
                 style={{
-                    display: 'inline-block',
-                    width: '80%',
+                    gridColumn: '2 / 7',
                 }}
             >
                 {[0, 1, 2, 3].map(x => {
@@ -100,7 +110,12 @@ function TableDiv({ ranksArr, }) {
                         streak = r.streak
                     }
 
-                    return <div key={x + i + 'rank'}>
+                    return <div 
+                        key={x + i + 'rank'}
+                        style={{
+                            display: 'flex',
+                        }}
+                    >
                         <span style={s}>{rank}</span>
                         <span style={s}>{d}v{d}</span>
                         <span style={s}>{per}</span>

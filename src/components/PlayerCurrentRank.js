@@ -2,17 +2,29 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 import { shell } from 'electron'
+import styled from 'styled-components'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretRight, faCaretDown, } from '@fortawesome/free-solid-svg-icons'
 
+const Span = styled.span`
+    width: ${({width}) => width};
+    display: flex;
+    align-items: center;
+    justify-content: ${({justifyContent}) => justifyContent 
+        ? justifyContent
+        : 'center'
+    };
+    color: white;
+    font-weight: bold;
+`
+
 function PlayerCurrentRank({
-    style,
     player,
     img,
     handleSetShowExtra,
-    showExtra,
     extraInfo,
+    showExtra,
 }) {
     let country
     let steamId
@@ -46,8 +58,10 @@ function PlayerCurrentRank({
         alignItems: 'center',
     }}>
         {/* ranking number */}
-        <span style={style}>
-
+        <Span 
+            width='20%'
+            justifyContent='flex-start'
+        >
             <FontAwesomeIcon 
                 icon={showExtra ? faCaretDown : faCaretRight} 
                 size='lg'
@@ -63,15 +77,15 @@ function PlayerCurrentRank({
                 ? '-'
                 : Number(player.ranking)
             }
-        </span>
+        </Span>
 
         {/* faction flag */}
-        <span style={style}>{img}</span>
+        <Span width='15%'>{img}</Span>
 
         {/* country flag */}
-        <span style={style}>
-            {country !== undefined ? (
-                <img
+        <Span width='15%'>
+            {country !== undefined 
+                ? <img
                     style={{
                         height: '1.2em',
                     }}
@@ -79,16 +93,18 @@ function PlayerCurrentRank({
                     alt={country}
                     title={country}
                 />
-            ) : null}
-        </span>
+                : null
+            }
+        </Span>
 
         {/* nickname */}
-        <span
-            style={steamId ? { ...style, cursor: 'pointer' } : { ...style }}
+        <Span
+            width='50%'
+            style={steamId ? {  cursor: 'pointer' } : null}
             onClick={() => (steamId ? shell.openExternal(link) : null)}
         >
             {player.name}
-        </span>
+        </Span>
     </div>
 }
 

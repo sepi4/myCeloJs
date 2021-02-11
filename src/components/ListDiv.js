@@ -1,19 +1,41 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
+import styled from 'styled-components'
+
 import Rank from './Rank'
+
+const Div20 = styled.div`
+    cursor: default;
+    display: flex;
+    justify-content: center;
+    width: 20%;
+    color: ${({color}) => color || 'white'};
+`
+const Div40 = styled.div`
+    cursor: default;
+    display: flex;
+    justify-content: center;
+    width: 40%;
+    overflow: hidden;
+    white-space: nowrap;
+`
+
+const Row = styled.div`
+    font-size: 90%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+`
 
 function ListDiv({
     ranksArr,
-    style,
 }) {
-
 
     // team ranking ------
     const tableView = useSelector(state => state.table)
     const showAll = useSelector(state => state.all)
     let reg = tableView ? /^Team/ : /^./
-
 
     // let rankedOnly = true // navSettings.ranked
     let rankedOnly = !showAll
@@ -51,63 +73,40 @@ function ListDiv({
     let listDiv = ranksArr && <div style={{
         fontSize: '90%',
     }}>
-        <div>
-            {
-                ranksArr
-                    .map((r, i) => {
-                        let per = r.wins / (r.wins + r.losses) * 100
-                        per = per.toFixed(0) + '%'
-                        const totalGames = r.wins + r.losses
-                        const rank = r.rank <= 0 ? '-' : r.rank
-                        const pos = r.streak > 0
-                        const streak = pos
-                            ? `+${r.streak}`
-                            : `${r.streak}`
-                        // debugger
+        {ranksArr
+            .map((r, i) => {
+                let per = r.wins / (r.wins + r.losses) * 100
+                per = per.toFixed(0) + '%'
+                const totalGames = r.wins + r.losses
+                const rank = r.rank <= 0 ? '-' : r.rank
+                const pos = r.streak > 0
+                const streak = pos
+                    ? `+${r.streak}`
+                    : `${r.streak}`
 
-                        return <div key={i} style={{
-                            display: 'flex',
-                            alignItems: 'flex-start',
-                        }}>
-                            <div 
-                                style={{
-                                    ...style,
-                                    width: '20%',
-                                }} 
-                                title={rank + ' of ' + r.ranktotal}
-                            >
-                                {rank}
-                            </div>
-                            <Rank
-                                style={{
-                                    ...style,
-                                    width: '40%',
-                                    overflow: 'hidden',
-                                    whiteSpace: 'nowrap',
-                                }}
-                                rank={r}
-                            />
-                            <div 
-                                style={{
-                                    ...style,
-                                    color: '#FFFF66',
-                                    width: '20%',
-                                }} 
-                            >{per}</div>
-                            <div style={{
-                                ...style,
-                                color: pos ? 'green' : 'red',    
-                            }}>{streak}</div>
-                            <div 
-                                style={{
-                                    ...style,
-                                    width: '20%',
-                                }} 
-                            >{totalGames}</div>
-                        </div>
-                    })
-            }
-        </div>
+                return <Row key={i}>
+                    <Div20
+                        title={rank + ' of ' + r.ranktotal}
+                    >
+                        {rank}
+                    </Div20>
+
+                    <Div40>
+                        <Rank rank={r} />
+                    </Div40>
+
+                    <Div20
+                        color={'#FFFF66'}
+                    >{per}</Div20>
+
+                    <Div20
+                        color={pos ? 'green' : 'red'}
+                    >{streak}</Div20>
+
+                    <Div20>{totalGames}</Div20>
+                </Row>
+            })
+        }
     </div>
     return listDiv
 }

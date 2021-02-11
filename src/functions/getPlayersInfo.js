@@ -44,7 +44,6 @@ export function getPlayersInfo(arr) {
 
     //combine into one obj
     return Object.keys(players).map(key => {
-        // if (steamIds.hasOwnProperty(key)) {
         if (steamIds[key]) {
             let p = players[key]
             p.ranking = steamIds[key].ranking

@@ -63,14 +63,36 @@ function reducer( state, action) {
                 settings: action.data,
             }
         case 'TOGGLE_ALL':
+            localStorage.setItem('all', !state.all)
             return { 
                 ...state, 
                 all: !state.all,
             }
         case 'TOGGLE_TABLE':
+            localStorage.setItem('table', !state.table)
             return { 
                 ...state, 
                 table: !state.table, 
+            }
+        case 'TOGGLE_EXTRA':
+            return { 
+                ...state, 
+                openInfos: state.openInfos
+                    .map((t, i) => i === action.data.teamIndex
+                        ? t.map((p, j) => j === action.data.playerIndex
+                            ? !p
+                            : p
+                        )
+                        : t
+                    )
+            }
+        case 'CLOSE_ALL_EXTRAS':
+            return { 
+                ...state, 
+                openInfos: [
+                    [false, false, false, false],
+                    [false, false, false, false],
+                ]
             }
 
         default:
@@ -86,8 +108,27 @@ let store = createStore(reducer, {
     fromFile: null, 
     extraInfo: null,
 
-    all: false,
-    table: false,
+    all: localStorage.getItem('all') !== undefined 
+        ? localStorage.getItem('all') 
+        : false,
+    table: localStorage.getItem('table') !== undefined 
+        ? localStorage.getItem('table') 
+        : false,
+    
+    openInfos: [
+        [
+            false,
+            false,
+            false,
+            false,
+        ],
+        [
+            false,
+            false,
+            false,
+            false,
+        ],
+    ],
 
     countryFlags,
 })

@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector, } from 'react-redux'
 
+
 // components
 import Navbar from './components/Navbar'
 import UpdateBar from './components/UpdateBar'
@@ -20,6 +21,8 @@ document.title = 'myCelo ' + appVersion
 
 let updateCheckNotDone = true
 
+// TODO: table, all not using localStorage
+// TODO: smaller components
 function App() {
     const READ_LOG_INTERVAL = 3000
     const dispatch = useDispatch()
@@ -29,6 +32,10 @@ function App() {
         if (JSON.stringify(state.fromFile) !== JSON.stringify(data)) {
             dispatch({
                 type: 'SET_NEW_PLAYERS',
+                data,
+            })
+            dispatch({
+                type: 'CLOSE_ALL_EXTRAS',
                 data,
             })
             if (state.settings) {
@@ -128,6 +135,8 @@ function App() {
         return false
     }
 
+
+
     return <main style={{
         marginTop: '4em',
     }} >
@@ -137,6 +146,7 @@ function App() {
             updateCheckNotDone={checkUpdate()}
             appVersion={appVersion}
         />
+
     </main>
 }
 

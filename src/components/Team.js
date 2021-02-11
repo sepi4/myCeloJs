@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 import Player from './Player'
 
-function Team({ players }) {
+function Team({ players, teamIndex }) {
     const extraInfo = useSelector(state => state.extraInfo)
     return <div style={{
         background: '#181818',
@@ -16,6 +16,8 @@ function Team({ players }) {
                 player={p}
                 extraInfo={extraInfo
                     && p.profileId ? extraInfo[p.profileId] : null}
+                playerIndex={i}
+                teamIndex={teamIndex}
             />
         ))}
     </div>
