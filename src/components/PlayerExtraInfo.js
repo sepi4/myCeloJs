@@ -15,10 +15,10 @@ function PlayerExtraInfo({
     extraInfo, 
 }) {
     let ranksArr = extraInfo && extraInfo.ranks
-    const tableView = useSelector(state => state.table)
+    const navButtons = useSelector(state => state.navButtons)
 
     return <Div>
-        {tableView && ranksArr &&
+        {navButtons.table && ranksArr &&
             <TableDiv ranksArr={ranksArr} />
         }
         <ListDiv ranksArr={ranksArr} />

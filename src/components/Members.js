@@ -16,7 +16,7 @@ function Members({ members }) {
                     marginLeft: '1em',
                     fontSize: '0.9em',
                     cursor: 'pointer',
-                    color: 'lime',
+                    color: 'green',
                 }}
                 key={m.name}
                 onClick={() =>

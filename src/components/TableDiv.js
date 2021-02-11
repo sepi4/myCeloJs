@@ -1,65 +1,24 @@
 import React from 'react'
 
-import { getFactionFlagLocation } from '../functions/getFactionFlagLocation'
+import { refactronTableInfo } from '../functions/refactorTableInfo'
+import TableRanksDiv from './TableRanksDiv'
 
 function TableDiv({ ranksArr, }) {
-    // solo ranking --------
-    let ranksObj = {
-        solo: {
-            sov: {},
-            usa: {},
-            uk: {},
-            wer: {},
-            okw: {},
-        },
-        team: [],
-    }
-
-    for (const r of ranksArr) {
-        let groups = r.name.match(/^(\d)v\d(.+)/)
-
-        if (groups) {
-            if (groups[2] === 'Soviet') {
-                ranksObj.solo.sov[+groups[1]] = r
-            } else if (groups[2] === 'AEF') {
-                ranksObj.solo.usa[+groups[1]] = r
-            } else if (groups[2] === 'British') {
-                ranksObj.solo.uk[+groups[1]] = r
-            } else if (groups[2] === 'German') {
-                ranksObj.solo.wer[+groups[1]] = r
-            } else if (groups[2] === 'WestGerman') {
-                ranksObj.solo.okw[+groups[1]] = r
-            }
-        }
-    }
-    let solo = []
-    let names = ['sov', 'wer', 'usa', 'okw', 'uk']
-    for (let key of names) {
-        for (let i = 1; i < 5; i++) {
-            let o = ranksObj.solo[key][i]
-            if (o) {
-                solo.push(o)
-            } else {
-                solo.push(undefined)
-            }
-        }
-    }
-
+    const [solo, names] = refactronTableInfo(ranksArr)
     let index = 0
-    let s = {
-        display: 'flex',
-        justifyContent: 'center',
-        width: '20%',
-    }
 
-    let tableDiv = <div
+    return <div
         style={{ 
             display: 'flex',
             flexWrap: 'wrap',
             marginBottom: '0.5em', 
         }}
-    >{names.map((name, i) =>
-        <div
+    >{names.map((name, i) => {
+
+        const ii = index
+        index += 4
+
+        return <div
             key={i + name}
             style={{
                 width: '49%',
@@ -71,74 +30,14 @@ function TableDiv({ ranksArr, }) {
                 borderBottom: i < names.length - 1 ? '0.1em solid gray' : null,
             }}
         >
-
-            <div
-                style={{
-                    display: 'grid',
-                    placeItems: 'center',
-                }}
-            >
-                <img
-                    style={{
-                        width: '2em',
-                        height: '2em',
-                    }}
-                    src={getFactionFlagLocation(name)}
-                    alt={`${name}`}
-                />
-            </div>
-            <div
-                style={{
-                    gridColumn: '2 / 7',
-                }}
-            >
-                {[0, 1, 2, 3].map(x => {
-                    let d = x + 1
-                    let r = solo[index]
-                    index++
-                    let per = '-'
-                    let totalGames = 0
-                    let rank = '-'
-                    let streak = '-'
-                    if (r) {
-                        per = r.wins / (r.wins + r.losses) * 100
-                        per = per.toFixed(0) + '%'
-                        totalGames = r.wins + r.losses
-                        if (r.rank > 0) {
-                            rank = r.rank
-                        }
-                        streak = r.streak
-                    }
-
-                    return <div 
-                        key={x + i + 'rank'}
-                        style={{
-                            display: 'flex',
-                        }}
-                    >
-                        <span style={s}>{rank}</span>
-                        <span style={s}>{d}v{d}</span>
-                        <span style={s}>{per}</span>
-                        <span style={{
-                            ...s,
-                            color: Number(streak)
-                                ? streak > 0
-                                    ? 'lime'
-                                    : 'red'
-                                : 'white',
-                        }}>
-                            {streak > 0
-                                ? '+' + streak
-                                : streak
-                            }
-                        </span>
-                        <span style={s}>{totalGames}</span>
-                    </div>
-                })}
-            </div>
+            <TableRanksDiv 
+                solo={solo}
+                name={name}
+                index={ii}
+            />
         </div>
-    )}</div> 
-    return tableDiv
+
+    })}</div> 
 }
 
 export default TableDiv

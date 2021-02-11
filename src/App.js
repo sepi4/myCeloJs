@@ -21,8 +21,6 @@ document.title = 'myCelo ' + appVersion
 
 let updateCheckNotDone = true
 
-// TODO: table, all not using localStorage
-// TODO: smaller components
 function App() {
     const READ_LOG_INTERVAL = 3000
     const dispatch = useDispatch()

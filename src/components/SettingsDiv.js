@@ -19,7 +19,7 @@ const ContentDiv = styled.div`
     margin: .2em 0 0 .2em;
     min-width: 100%;
     min-height: 1em;
-    color: white;
+    color: black;
 `
 const Div = styled.div`
     margin: 1em 0;

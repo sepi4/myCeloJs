@@ -9,12 +9,12 @@ function MainView() {
     const settingsView = useSelector(state => state.settingsView)
 
     console.log('MainView')
-    return <div>
+    return <>
         {!settingsView
             ? <Teams />
             : <Settings />
         }
-    </div>
+    </>
 }
 
 export default MainView

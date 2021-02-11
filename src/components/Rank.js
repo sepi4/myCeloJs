@@ -41,7 +41,7 @@ function Rank({ style, rank }) {
                         icon={showMembers ? faCaretDown : faCaretRight}
                         size='lg'
                         style={{
-                            color: 'lime',
+                            color: 'green',
                             marginRight: '.2em',
                         }}
                     />

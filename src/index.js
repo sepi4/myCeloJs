@@ -3,6 +3,8 @@ import { render } from 'react-dom'
 import App from './App'
 import './index.css'
 
+import { copyObj } from './functions/simpleFunctions'
+
 function importAll(r) {
   return r.keys().map(r);
 }
@@ -62,17 +64,18 @@ function reducer( state, action) {
                 ...state, 
                 settings: action.data,
             }
-        case 'TOGGLE_ALL':
-            localStorage.setItem('all', !state.all)
+
+        case 'TOGGLE_NAVBUTTON':
+            // eslint-disable-next-line no-case-declarations
+            let obj = copyObj(state.navButtons)
+            obj[action.key] = !obj[action.key]
+            localStorage.setItem(
+                'navButtons', 
+                JSON.stringify(obj),
+            )
             return { 
                 ...state, 
-                all: !state.all,
-            }
-        case 'TOGGLE_TABLE':
-            localStorage.setItem('table', !state.table)
-            return { 
-                ...state, 
-                table: !state.table, 
+                navButtons: obj,
             }
         case 'TOGGLE_EXTRA':
             return { 
@@ -100,6 +103,12 @@ function reducer( state, action) {
     }
 }
 
+// console.log(
+//     'before createStore:',
+//     localStorage.getItem('all'),
+//     JSON.parse(localStorage.getItem('all')),
+// )
+
 let store = createStore(reducer, { 
     settingsView: false,
     settings: null,
@@ -108,12 +117,23 @@ let store = createStore(reducer, {
     fromFile: null, 
     extraInfo: null,
 
-    all: localStorage.getItem('all') !== undefined 
-        ? localStorage.getItem('all') 
+    all: localStorage.getItem('all')
+        ? JSON.parse(localStorage.getItem('all'))
         : false,
-    table: localStorage.getItem('table') !== undefined 
-        ? localStorage.getItem('table') 
+    table: localStorage.getItem('table')
+        ? JSON.parse(localStorage.getItem('table'))
         : false,
+    
+    navButtons: function(){
+        const str = localStorage.getItem('navButtons')
+        if (str) {
+            return JSON.parse(str)
+        }
+        return {
+            all: false,
+            table: false,
+        }
+    }(),
     
     openInfos: [
         [

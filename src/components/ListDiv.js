@@ -20,7 +20,6 @@ const Div40 = styled.div`
     overflow: hidden;
     white-space: nowrap;
 `
-
 const Row = styled.div`
     font-size: 90%;
     display: flex;
@@ -33,8 +32,8 @@ function ListDiv({
 }) {
 
     // team ranking ------
-    const tableView = useSelector(state => state.table)
-    const showAll = useSelector(state => state.all)
+    const tableView = useSelector(state => state.navButtons.table)
+    const showAll = useSelector(state => state.navButtons.all)
     let reg = tableView ? /^Team/ : /^./
 
     // let rankedOnly = true // navSettings.ranked
@@ -85,24 +84,12 @@ function ListDiv({
                     : `${r.streak}`
 
                 return <Row key={i}>
-                    <Div20
-                        title={rank + ' of ' + r.ranktotal}
-                    >
-                        {rank}
-                    </Div20>
-
+                    <Div20 title={rank + ' of ' + r.ranktotal}>{rank}</Div20>
                     <Div40>
                         <Rank rank={r} />
                     </Div40>
-
-                    <Div20
-                        color={'#FFFF66'}
-                    >{per}</Div20>
-
-                    <Div20
-                        color={pos ? 'green' : 'red'}
-                    >{streak}</Div20>
-
+                    <Div20 color={'#FFFF66'} >{per}</Div20>
+                    <Div20 color={pos ? 'green' : 'red'} >{streak}</Div20>
                     <Div20>{totalGames}</Div20>
                 </Row>
             })
