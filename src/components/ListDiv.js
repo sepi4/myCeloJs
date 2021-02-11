@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 
 import styled from 'styled-components'
 
-import Rank from './Rank'
+import Rank from './Player/Rank'
 
 const Div20 = styled.div`
     cursor: default;

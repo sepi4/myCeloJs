@@ -1,8 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-import Teams from './Teams'
-import Settings from './Settings'
+import Teams from './Teams/Teams'
+import Settings from './Settings/Settings'
 
 
 function MainView() {

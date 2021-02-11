@@ -4,7 +4,7 @@ import { useDispatch, useSelector, } from 'react-redux'
 
 
 // components
-import Navbar from './components/Navbar'
+import Navbar from './components/Navbar/Navbar'
 import UpdateBar from './components/UpdateBar'
 import MainView from './components/MainView'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 
-import Members from './Members'
+import Members from '../Player/Members'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons'

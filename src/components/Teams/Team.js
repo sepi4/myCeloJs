@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-import Player from './Player'
+import Player from '../Player/Player'
 
 function Team({ players, teamIndex }) {
     const extraInfo = useSelector(state => state.extraInfo)

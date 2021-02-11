@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { refactronTableInfo } from '../functions/refactorTableInfo'
+import { refactronTableInfo } from '../../functions/refactorTableInfo'
 import TableRanksDiv from './TableRanksDiv'
 
 function TableDiv({ ranksArr, }) {

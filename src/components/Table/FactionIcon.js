@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { getFactionFlagLocation } from '../functions/getFactionFlagLocation'
+import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation'
 
 function FactionIcon({faction, size}) {
     return <div
