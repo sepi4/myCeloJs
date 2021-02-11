@@ -141,6 +141,8 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 
 ## Updates:
 
+* **version 1.4.2.** 
+    - Bug fixing
 * **version 1.4.0.** 
     - Now in OBS-studio ranking display is possible in html. This will show flag pictures
     - Player ranking can be view in table mode (navbar checkboxes)
