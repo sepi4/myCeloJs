@@ -28,7 +28,6 @@ function Navbar({ handleSetSettingsView }) {
 
     return <div style={{ ...styleNavbar, }}>
         {!state.settingsView && <NavButtons /> }
-
         <div
             style={{
                 cursor: 'pointer',

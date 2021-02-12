@@ -85,3 +85,21 @@ app.on('activate', () => {
 
 // Stop error
 app.allowRendererProcessReuse = true
+
+const http =  require('http')
+const fs = require('fs')
+const port = '2837'
+function serveJson() {
+    http.createServer(function (request, response) {
+        response.writeHead(200, {
+            'Content-Type': 'text/json',
+            'Access-Control-Allow-Origin': '*',
+            'X-Powered-By': 'nodejs'
+        })
+        fs.readFile('./rankings.json', function (err, content) {
+            response.write(content)
+            response.end()
+        })
+    }).listen(port)
+}
+serveJson()

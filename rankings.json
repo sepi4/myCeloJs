@@ -1,0 +1,18 @@
+{
+    "team1": [
+        {
+            "name": "sepi",
+            "ranking": "-",
+            "country": "fi",
+            "faction": "usa"
+        }
+    ],
+    "team2": [
+        {
+            "name": "CPU - Easy",
+            "ranking": "-",
+            "country": "",
+            "faction": "wer"
+        }
+    ]
+}

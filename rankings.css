@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Work Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial,
+    sans-serif;
+    font-size: 36px;
+}
+.bodyStyle {
+    font-family: 'Work Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+    margin: 0.2em;
+    color:white; 
+}
+.teamStyle {
+    margin-bottom: 1em;
+}
+.playerStyle {
+    display: flex;
+    align-items: center;
+}
+.factionStyle {
+    width: 64px;
+    height: 64px;
+    display: inline-block;
+}
+.rankingStyle {
+    margin-left: 1em;
+    width: 3.5em;
+}
+.countryStyle {
+    width: 50px;
+    display: inline-block;
+    display: flex;
+    align-items: center;
+}
+.nameStyle {
+    margin-left: 1em;
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+}
