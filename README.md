@@ -11,8 +11,7 @@ Use <a id="raw-url" href="https://github.com/sepi4/myCeloJs/raw/ladderBug/sepi-c
 
 ## About
 
-This is electron app for viewing ranks of current connected game
-of Company of Heroes 2 and display ranks in OBS.
+This is electron app for viewing ranks of current connected game of Company of Heroes 2 and display ranks in OBS.
 
 Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone/MakoCelo</a> for ideas. It's also rank displayer for COH2, check it out, maybe you like it better. 
 
@@ -26,9 +25,9 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 - download zip file (<a id="raw-url" href="https://github.com/sepi4/myCeloJs/releases/latest">latest release</a>)
 - extract
 - double click 'myCelo.exe'
-- in settings ![alt text](./readmeImages/settingsIcon.png "settings icon") select 
-    location of 'warnings.log' file (Same folder where are replays saved, usually 
-    in "C:\Users\USERNAME\Documents\my games\company of heroes 2\") <hr>
+- allow in firewall if asked
+
+- in settings ![alt text](./readmeImages/settingsIcon.png "settings icon") select location of 'warnings.log' file (Same folder where are replays saved, usually in "C:\Users\USERNAME\Documents\my games\company of heroes 2\") <hr>
 - **OPTIONAL (for streamers)**, simple way for OBS studio to display ranking:
     - select format of rankings output  file, html 
     
@@ -48,17 +47,17 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
         
                 ![alt text](./readmeImages/plusBrowser.png "+ browser"). 
 
-            - Select checkbox 'local file', select location of rankings output file 
-            (copied above)
+            - Select checkbox 'local file', select location of rankings output file (copied above)
             
                 ![alt text](./readmeImages/localFile.png "local file") 
 
-            - Select checkbox 'Use custom frame rate', put 2 FPS (same rate as ranking html 
-            file will update), this will remove flickering. 
+            - Select checkbox 'Refresh browser when scene becomes active' 
 
-                ![alt text](./readmeImages/frameRate.png "frame rate")
+                ![alt text](./readmeImages/refreshBrowser.png "refresh browser")
 
             - Modify size of new window. Test in game vs AI. 
+
+
 
         - for **TXT**:
             - Sources > Add (plus) > Text. 
@@ -77,14 +76,12 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 
 ## Установка и настройка:
 
-<a id="raw-url" href="https://www.youtube.com/watch?v=F9ayHIY1jTI">видео инструкция (rus)</a>
-
 - скачайте zip-файл (<a id="raw-url" href="https://github.com/sepi4/myCeloJs/releases/latest">latest release</a>)
 - распакуйте zip-файл
 - откройте 'myCelo.exe'
-- в настройках ![alt text](./readmeImages/settingsIcon.png "settings icon") 
-    выберите местонахождение 'warnings.log'-файла (тоже место куда сохраняются 
-    риплеи, обычно в C:\Users\USERNAME\Documents\my games\company of heroes 2\) <hr>
+- если файрвол попросит разрешения дайте разрешение
+
+- в настройках ![alt text](./readmeImages/settingsIcon.png "settings icon") выберите местонахождение 'warnings.log'-файла (тоже место куда сохраняются риплеи, обычно в C:\Users\USERNAME\Documents\my games\company of heroes 2\) <hr>
 
 - **ДЛЯ СТРИМЕРОВ**, отображение рангов на стриме через OBS-studio:
     - в формате html 
@@ -110,13 +107,11 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
             
                 ![alt text](./readmeImages/localFileRus.png "local file") 
 
-            - поставьте галочку на 'настраиваемую частоту кадров' и введите туда 
-            цифру 2 (с этой же скоростью обновляется html-файл созданный myCelo), это должно предотвратить дерганье картинки. 
+            - поставьте галочку на 'Обновить браузер, когда сцена становится активной'                
+            
+                ![alt text](./readmeImages/refreshBrowserRus.png "frame rate")
 
-                ![alt text](./readmeImages/frameRateRus.png "frame rate")
-
-            - сделайте новое окно подходящего размера и поместите куда хотите 
-            на экране
+            - сделайте новое окно подходящего размера и поместите куда хотите на экране
             - проверьте установку в игре против компьютера 
 
         - для формата **TXT**:
@@ -129,8 +124,7 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 
                 ![alt text](./readmeImages/readFromFileRus.png "read from file")
 
-            - сделайте новое окно подходящего размера, выберите подходящий фонт 
-            и поместите окно куда хотите на экране
+            - сделайте новое окно подходящего размера, выберите подходящий фонт и поместите окно куда хотите на экране
             - проверьте установку в игре против компьютера 
 
 
@@ -142,6 +136,8 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 ## Updates:
 
 * **version 1.4.2.** 
+    - Ranking file is now updating from json file - no flickering
+    - Slight visual modification
     - Bug fixing
 * **version 1.4.0.** 
     - Now in OBS-studio ranking display is possible in html. This will show flag pictures
@@ -150,15 +146,12 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
     - Source code: separated React component in to separate files
 * **version 1.3.0.** 
     - Added rankings display in replays
-        - _Rankings can be in some cases incorrect (team games), because log file is not 
-        provading information of teams struction. Program is trying to make educated guess
-        of a rankings_
+        - _Rankings can be in some cases incorrect (team games), because log file is not provading information of teams struction. Program is trying to make educated guess of a rankings_
 * **version 1.2.0.** 
     - Update panel to download updated version of an app.
 * **version 1.1.0.** 
     - Custom ranking file for OBS can be added now in settings.    
-    - Partially works with replays. All ranks can be easily viewed in drop 
-        down menu.
+    - Partially works with replays. All ranks can be easily viewed in drop down menu.
 
 
 
