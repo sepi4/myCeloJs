@@ -28,7 +28,6 @@ function ColumnTitle({children, width, click, style, active, reversed}) {
                 justifyContent: 'center',
                 overflow: 'hidden',
                 whiteSpace: 'nowrap',
-                cursor: 'pointer',
 
                 ...activeStyle,
             }}
@@ -37,6 +36,7 @@ function ColumnTitle({children, width, click, style, active, reversed}) {
                 onClick={click}
                 style={{
                     ...style,
+                    cursor: 'pointer',
                 }}
             >{caret}{children}</span>
         </div>

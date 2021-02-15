@@ -66,6 +66,14 @@ function PlayerMainRow({
         state => state.countryFlags[country]
     )
 
+    const getTotalGames = () => {
+        let sum = 0
+        for (const rankObj of extraInfo.ranks) {
+            sum += rankObj.wins + rankObj.losses
+        }
+        return sum
+    }
+
     return <div style={{
         display: 'flex',
         alignItems: 'center',
@@ -74,24 +82,16 @@ function PlayerMainRow({
             width='20%'
             justifyContent='flex-start'
         >
-            <span
-                style={{
-                    width: '2em'
-                }}
-            >
-
-                { +player.profileId > 0 
-                && <FontAwesomeIcon
-                        icon={showExtra ? faCaretDown : faCaretRight}
-                        size='lg'
-                        style={{
-                            color: 'white',
-                            cursor: 'pointer',
-                        }}
-                        onClick={extraInfo ? handleSetShowExtra : undefined}
-                    />
-
-
+            <span style={{ width: '2em', }} >
+                {+player.profileId > 0 && <FontAwesomeIcon
+                    icon={showExtra ? faCaretDown : faCaretRight}
+                    size='lg'
+                    style={{
+                        color: 'white',
+                        cursor: 'pointer',
+                    }}
+                    onClick={extraInfo ? handleSetShowExtra : undefined}
+                />
                 }
             </span>
 
@@ -100,10 +100,13 @@ function PlayerMainRow({
                 : Number(player.ranking)
             }
         </StyledSpan>
-        <StyledSpan 
-            width='15%'
-            title={commonName(player.faction)}
-        >{factionImage}</StyledSpan>
+
+        <StyledSpan width='15%' >
+            <span title={commonName(player.faction)} >
+                {factionImage}
+            </span>
+        </StyledSpan>
+
         <StyledSpan width='15%'>
             {country !== undefined 
                 ? <img
@@ -117,12 +120,21 @@ function PlayerMainRow({
                 : null
             }
         </StyledSpan>
+
         <StyledSpan
             width='50%'
-            style={steamId ? {  cursor: 'pointer' } : null}
             onClick={() => (steamId ? shell.openExternal(link) : null)}
         >
-            {player.name}
+            <span 
+                style={{ cursor: steamId ? 'pointer' : null, }} 
+                title={
+                    extraInfo && player.profileId
+                        ? getTotalGames(player) + ' games played'
+                        : null
+                }
+            >
+                {player.name}
+            </span>
         </StyledSpan>
     </div>
 }

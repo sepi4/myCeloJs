@@ -113,7 +113,7 @@ function App() {
     })
 
     useEffect(() => {
-        console.log('settings changed')
+        // console.log('settings changed')
         if (state.settings && state.settings.logLocation) {
             readLog(state.settings.logLocation, writeNewRankingsFile)
         }

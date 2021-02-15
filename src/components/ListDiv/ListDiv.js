@@ -27,7 +27,6 @@ function ListDiv({ ranksArr }) {
     const setSorter = (fun, name) => {
         return {
             click: () => {
-                console.log('state:', state)
                 dispatch({
                     type: 'SET_SORTER',
                     data: {

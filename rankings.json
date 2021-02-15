@@ -1,53 +1,29 @@
 {
     "team1": [
         {
-            "name": "ELITE NOOB IS HERE",
-            "ranking": "-",
-            "country": "ca",
-            "faction": "usa"
-        },
-        {
-            "name": "BOGDAN",
-            "ranking": "6244",
-            "country": "ca",
+            "name": "Crateruss",
+            "ranking": "580",
+            "country": "fi",
             "faction": "sov"
         },
         {
-            "name": "*(:DIDACTIC:)*",
-            "ranking": "2872",
-            "country": "ca",
+            "name": "sepi",
+            "ranking": "580",
+            "country": "fi",
             "faction": "sov"
-        },
-        {
-            "name": "megaMIDGET666",
-            "ranking": "6263",
-            "country": "gb",
-            "faction": "uk"
         }
     ],
     "team2": [
         {
-            "name": "DEADyIIIka ChuviS",
-            "ranking": "-",
-            "country": "ru",
-            "faction": "wer"
+            "name": "ratfis",
+            "ranking": "302",
+            "country": "cz",
+            "faction": "okw"
         },
         {
-            "name": "HSRometh",
-            "ranking": "-",
-            "country": "ru",
-            "faction": "wer"
-        },
-        {
-            "name": "sepi",
-            "ranking": "-",
+            "name": "oootto92",
+            "ranking": "302",
             "country": "fi",
-            "faction": "wer"
-        },
-        {
-            "name": "mmg1337",
-            "ranking": "3610",
-            "country": "ru",
             "faction": "wer"
         }
     ]

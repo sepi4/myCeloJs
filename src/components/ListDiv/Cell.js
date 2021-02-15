@@ -3,7 +3,6 @@ import React from 'react'
 function Cell({children, title, color, width, cursor}) {
     return (
         <div
-            title={title}
             style={{
                 color,
                 width: width || '20%',
@@ -15,7 +14,9 @@ function Cell({children, title, color, width, cursor}) {
                 whiteSpace: 'nowrap',
             }}
         >
-            {children}
+            <span title={title} >
+                {children}
+            </span>
         </div>
     ) 
 }

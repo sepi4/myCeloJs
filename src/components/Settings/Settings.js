@@ -43,7 +43,6 @@ function Settings() {
     }
 
     const handleRankingsType = () => {
-        console.log('handleRankingsType')
         const newSettings = {
             ...settings,
             rankingsHtml: !settings.rankingsHtml,

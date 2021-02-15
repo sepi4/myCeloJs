@@ -1,9 +1,5 @@
-usa   -     ca    ELITE NOOB IS HERE 
-sov   6244  ca    BOGDAN 
-sov   2872  ca    *(:DIDACTIC:)* 
-uk    6263  gb    megaMIDGET666 
+sov   580   fi    Crateruss 
+sov   580   fi    sepi 
 
-wer   -     ru    DEADyIIIka ChuviS 
-wer   -     ru    HSRometh 
-wer   -     fi    sepi 
-wer   3610  ru    mmg1337 
+okw   302   cz    ratfis 
+wer   302   fi    oootto92 

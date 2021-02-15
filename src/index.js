@@ -12,7 +12,6 @@ function importAll(r) {
   return r.keys().map(r);
 }
 
-console.log('index.js running')
 const images = importAll(
     require.context(
         '../img/countryFlags/',
