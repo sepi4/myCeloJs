@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 import styled from 'styled-components'
 
 import TableDiv from '../Table/TableDiv'
-import ListDiv from '../ListDiv'
+import ListDiv from '../ListDiv/ListDiv'
 
 const Div = styled.div`
     color: white;

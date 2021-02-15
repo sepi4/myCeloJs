@@ -5,6 +5,9 @@ import './index.css'
 
 import { copyObj } from './functions/simpleFunctions'
 
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+
 function importAll(r) {
   return r.keys().map(r);
 }
@@ -23,11 +26,9 @@ images.forEach(x => {
     countryFlags[x.default.substring(4,6)] = x.default
 })
 
-// Since we are using HtmlWebpackPlugin WITHOUT a template, we should create our own root node in the body element before rendering into it
+// Since we are using HtmlWebpackPlugin WITHOUT a template, we should create 
+// our own root node in the body element before rendering into it
 let root = document.createElement('div')
-
-import { createStore } from 'redux'
-import { Provider } from 'react-redux'
 
 // Reducer
 function reducer( state, action) {
@@ -98,16 +99,26 @@ function reducer( state, action) {
                 ]
             }
 
+        case 'SET_SORTER':
+            return {
+                ...state,
+                sorter: state.sorter.name === action.data.name
+                    ? {
+                        fun: action.data.fun,
+                        name: action.data.name,
+                        reversed: !state.sorter.reversed,
+                    }
+                    : {
+                        fun: action.data.fun,
+                        name: action.data.name,
+                        reversed: false,
+                    }, 
+            }
+
         default:
             return state
     }
 }
-
-// console.log(
-//     'before createStore:',
-//     localStorage.getItem('all'),
-//     JSON.parse(localStorage.getItem('all')),
-// )
 
 let store = createStore(reducer, { 
     settingsView: false,
@@ -117,13 +128,6 @@ let store = createStore(reducer, {
     fromFile: null, 
     extraInfo: null,
 
-    all: localStorage.getItem('all')
-        ? JSON.parse(localStorage.getItem('all'))
-        : false,
-    table: localStorage.getItem('table')
-        ? JSON.parse(localStorage.getItem('table'))
-        : false,
-    
     navButtons: function(){
         const str = localStorage.getItem('navButtons')
         if (str) {
@@ -151,6 +155,12 @@ let store = createStore(reducer, {
     ],
 
     countryFlags,
+
+    sorter: {
+        fun: (a, b) => a.rank - b.rank,
+        name: 'byRank',
+        reversed: false,
+    }, 
 })
 
 root.id = 'root'

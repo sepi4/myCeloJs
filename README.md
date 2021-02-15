@@ -1,5 +1,5 @@
 <!-- # COH2 LAGGER BUG VERSION
-Use <a id="raw-url" href="https://github.com/sepi4/myCeloJs/raw/ladderBug/sepi-celo%20Setup%20666.666.666.exe" > THIS </a> version untill relic haven't fixed ladder bugs.  -->
+Use <a id="raw-url" href="https://github.com/sepi4/myCeloJs/raw/ladderBug/sepi-celo%20Setup%20666.666.666.exe" > THIS </a> version until relic haven't fixed ladder bugs.  -->
 
 - [About](#about)
 - [Install and setup](#install)
@@ -13,7 +13,7 @@ Use <a id="raw-url" href="https://github.com/sepi4/myCeloJs/raw/ladderBug/sepi-c
 
 This is electron app for viewing ranks of current connected game of Company of Heroes 2 and display ranks in OBS.
 
-Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone/MakoCelo</a> for ideas. It's also rank displayer for COH2, check it out, maybe you like it better. 
+Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone/MakoCelo</a> for ideas. It's also rank display for COH2, check it out, maybe you like it better. 
 
 
 
@@ -25,7 +25,7 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 - download zip file (<a id="raw-url" href="https://github.com/sepi4/myCeloJs/releases/latest">latest release</a>)
 - extract
 - double click 'myCelo.exe'
-- allow in firewall if asked
+- allow in firewall if asked *(permission is needed because app is serving ranking.json file to localhost, so that it can read by javascript in ranking.html file every second and update it if needed)*
 
 - in settings ![alt text](./readmeImages/settingsIcon.png "settings icon") select location of 'warnings.log' file (Same folder where are replays saved, usually in "C:\Users\USERNAME\Documents\my games\company of heroes 2\") <hr>
 - **OPTIONAL (for streamers)**, simple way for OBS studio to display ranking:
@@ -47,9 +47,9 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
         
                 ![alt text](./readmeImages/plusBrowser.png "+ browser"). 
 
-            - Select checkbox 'local file', select location of rankings output file (copied above)
+            - Paste rankings.html file location (copied above) to URL input 
             
-                ![alt text](./readmeImages/localFile.png "local file") 
+                ![alt text](./readmeImages/urlPaste.png "url") 
 
             - Select checkbox 'Refresh browser when scene becomes active' 
 
@@ -78,8 +78,8 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 
 - скачайте zip-файл (<a id="raw-url" href="https://github.com/sepi4/myCeloJs/releases/latest">latest release</a>)
 - распакуйте zip-файл
-- откройте 'myCelo.exe'
-- если файрвол попросит разрешения дайте разрешение
+- откройте "myCelo.exe"
+- если фаервол попросит разрешения дайте разрешите *(программа использует localhost чтобы rankings.json можно было прочитать с помощью javascript и обновлять rankings.html если это необходимо)*
 
 - в настройках ![alt text](./readmeImages/settingsIcon.png "settings icon") выберите местонахождение 'warnings.log'-файла (тоже место куда сохраняются риплеи, обычно в C:\Users\USERNAME\Documents\my games\company of heroes 2\) <hr>
 
@@ -102,12 +102,11 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
         
                 ![alt text](./readmeImages/plusBrowserRus.png "+ browser"). 
 
-            - поставьте галочку на 'локальный файл'
-            - выберите местонахождение файла (скопировали его из настроек myCelo)
+            - вставьте в "Адрес URL" местонахождение файла rankings.html (скопировали из настроек myCelo)
             
-                ![alt text](./readmeImages/localFileRus.png "local file") 
+                ![alt text](./readmeImages/urlPasteRus.png "url") 
 
-            - поставьте галочку на 'Обновить браузер, когда сцена становится активной'                
+            - поставьте галочку на "Обновить браузер, когда сцена становится активной"
             
                 ![alt text](./readmeImages/refreshBrowserRus.png "frame rate")
 
@@ -119,7 +118,7 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
         
                 ![alt text](./readmeImages/plusTextRus.png "+ text")
 
-            - поставьте галочку на 'чтение из файла' 
+            - поставьте галочку на "чтение из файла" 
             - выберите местонахождение файла (скопировали его из настроек myCelo)
 
                 ![alt text](./readmeImages/readFromFileRus.png "read from file")
@@ -146,7 +145,7 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
     - Source code: separated React component in to separate files
 * **version 1.3.0.** 
     - Added rankings display in replays
-        - _Rankings can be in some cases incorrect (team games), because log file is not provading information of teams struction. Program is trying to make educated guess of a rankings_
+        - _Rankings can be in some cases incorrect (team games), because log file is not providing information of teams structure. Program is trying to make educated guess of a rankings_
 * **version 1.2.0.** 
     - Update panel to download updated version of an app.
 * **version 1.1.0.** 

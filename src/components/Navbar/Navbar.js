@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCogs, faTimes, } from '@fortawesome/free-solid-svg-icons'
+
 import NavButtons from './NavButtons'
 
 function Navbar({ handleSetSettingsView }) {
@@ -17,10 +18,11 @@ function Navbar({ handleSetSettingsView }) {
         display: 'flex',
         alignItems: 'center',
         zIndex: '99999',
+        color: 'white',
         justifyContent: state && !state.settingsView
             ? 'space-between'
             : 'flex-end', 
-        color: 'white',
+        
     }
 
     const state = useSelector(state => state)
@@ -32,7 +34,7 @@ function Navbar({ handleSetSettingsView }) {
             style={{
                 cursor: 'pointer',
                 marginRight: '1em',
-                display: 'inline-block',
+                display: 'block',
             }}
             onClick={() => {
                 dispatch({ type: 'TOGGLE_SETTINGS_VIEW' })

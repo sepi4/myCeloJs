@@ -1,17 +1,53 @@
 {
     "team1": [
         {
-            "name": "sepi",
+            "name": "ELITE NOOB IS HERE",
             "ranking": "-",
-            "country": "fi",
+            "country": "ca",
             "faction": "usa"
+        },
+        {
+            "name": "BOGDAN",
+            "ranking": "6244",
+            "country": "ca",
+            "faction": "sov"
+        },
+        {
+            "name": "*(:DIDACTIC:)*",
+            "ranking": "2872",
+            "country": "ca",
+            "faction": "sov"
+        },
+        {
+            "name": "megaMIDGET666",
+            "ranking": "6263",
+            "country": "gb",
+            "faction": "uk"
         }
     ],
     "team2": [
         {
-            "name": "CPU - Easy",
+            "name": "DEADyIIIka ChuviS",
             "ranking": "-",
-            "country": "",
+            "country": "ru",
+            "faction": "wer"
+        },
+        {
+            "name": "HSRometh",
+            "ranking": "-",
+            "country": "ru",
+            "faction": "wer"
+        },
+        {
+            "name": "sepi",
+            "ranking": "-",
+            "country": "fi",
+            "faction": "wer"
+        },
+        {
+            "name": "mmg1337",
+            "ranking": "3610",
+            "country": "ru",
             "faction": "wer"
         }
     ]

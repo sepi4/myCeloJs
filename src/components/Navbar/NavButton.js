@@ -10,8 +10,16 @@ function NavButton({text}) {
             backgroundColor: navButtons[text] ? 'gray' : '#181818',
             color: navButtons[text] ? 'black' : 'gray',
             fontWeight: navButtons[text] ? 'bold' : null,
-            fontSize: '1em',
+            outline: navButtons[text] ? '0.1em solid black' : null,
+            outlineOffset: navButtons[text] ? '-0.2em' : null,
             border: '0.1em solid gray',
+
+            // backgroundColor: '#181818',
+            // color: navButtons[text] ? 'white' : 'gray',
+            // fontWeight: navButtons[text] ? 'bold' : null,
+            // border: navButtons[text] ? '0.15em solid white' : '0.1em solid gray',
+
+            fontSize: '1em',
             width: '5em',
             height: '1.5em',
             margin: '.4em',

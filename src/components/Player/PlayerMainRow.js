@@ -4,10 +4,13 @@ import { useSelector } from 'react-redux'
 import { shell } from 'electron'
 import styled from 'styled-components'
 
+import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation'
+import { commonName } from '../../functions/simpleFunctions'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretRight, faCaretDown, } from '@fortawesome/free-solid-svg-icons'
 
-const Span = styled.span`
+const StyledSpan = styled.span`
     width: ${({width}) => width};
     display: flex;
     align-items: center;
@@ -19,9 +22,8 @@ const Span = styled.span`
     font-weight: bold;
 `
 
-function PlayerCurrentRank({
+function PlayerMainRow({
     player,
-    img,
     handleSetShowExtra,
     extraInfo,
     showExtra,
@@ -43,6 +45,17 @@ function PlayerCurrentRank({
         }
     }
 
+    const factionImage = (
+        <img
+            style={{
+                width: '2em',
+                height: '2em',
+            }}
+            src={getFactionFlagLocation(commonName(player.faction))}
+            alt={`${player.faction}`}
+        />
+    )
+
     const link =
         'http://www.companyofheroes.com/'
         + 'leaderboards#profile/steam/'
@@ -57,33 +70,41 @@ function PlayerCurrentRank({
         display: 'flex',
         alignItems: 'center',
     }}>
-        {/* ranking number */}
-        <Span 
+        <StyledSpan 
             width='20%'
             justifyContent='flex-start'
         >
-            <FontAwesomeIcon 
-                icon={showExtra ? faCaretDown : faCaretRight} 
-                size='lg'
-                style={{ 
-                    color: 'white',
-                    marginRight: '1em',
-                    cursor: 'pointer',
-                }} 
-                onClick={extraInfo ? handleSetShowExtra: undefined}
-            />
+            <span
+                style={{
+                    width: '2em'
+                }}
+            >
+
+                { +player.profileId > 0 
+                && <FontAwesomeIcon
+                        icon={showExtra ? faCaretDown : faCaretRight}
+                        size='lg'
+                        style={{
+                            color: 'white',
+                            cursor: 'pointer',
+                        }}
+                        onClick={extraInfo ? handleSetShowExtra : undefined}
+                    />
+
+
+                }
+            </span>
 
             {player.ranking === '-1' || player.ranking === -1
                 ? '-'
                 : Number(player.ranking)
             }
-        </Span>
-
-        {/* faction flag */}
-        <Span width='15%'>{img}</Span>
-
-        {/* country flag */}
-        <Span width='15%'>
+        </StyledSpan>
+        <StyledSpan 
+            width='15%'
+            title={commonName(player.faction)}
+        >{factionImage}</StyledSpan>
+        <StyledSpan width='15%'>
             {country !== undefined 
                 ? <img
                     style={{
@@ -95,17 +116,15 @@ function PlayerCurrentRank({
                 />
                 : null
             }
-        </Span>
-
-        {/* nickname */}
-        <Span
+        </StyledSpan>
+        <StyledSpan
             width='50%'
             style={steamId ? {  cursor: 'pointer' } : null}
             onClick={() => (steamId ? shell.openExternal(link) : null)}
         >
             {player.name}
-        </Span>
+        </StyledSpan>
     </div>
 }
 
-export default PlayerCurrentRank
+export default PlayerMainRow

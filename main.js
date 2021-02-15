@@ -64,6 +64,7 @@ function createMainWindow() {
             )
             mainWindow.webContents.openDevTools()
         }
+        // mainWindow.webContents.openDevTools() // TODO DELETE
     })
 
     mainWindow.on('closed', () => (mainWindow = null))
