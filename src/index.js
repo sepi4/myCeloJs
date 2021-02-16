@@ -50,14 +50,25 @@ function reducer( state, action) {
         case 'SET_EXTRA_INFO':
             return { 
                 ...state, 
-                extraInfo: action.data,
+                extraInfo: action.data.extraInfo,
+                players: action.data.newPlayers,
             }
+        case 'CLEAR_EXTRA_INFO':
+            return { 
+                ...state, 
+                extraInfo: null,
+            }
+
         case 'SET_NEW_PLAYERS':
             return { 
                 ...state, 
                 extraInfo: null,
                 fromFile: action.data,
                 players: action.data,
+                openInfos: [
+                    [false, false, false, false],
+                    [false, false, false, false],
+                ],
             }
         case 'SET_SETTINGS':
             return { 
@@ -88,14 +99,6 @@ function reducer( state, action) {
                         )
                         : t
                     )
-            }
-        case 'CLOSE_ALL_EXTRAS':
-            return { 
-                ...state, 
-                openInfos: [
-                    [false, false, false, false],
-                    [false, false, false, false],
-                ]
             }
 
         case 'SET_SORTER':
@@ -139,18 +142,8 @@ let store = createStore(reducer, {
     }(),
     
     openInfos: [
-        [
-            false,
-            false,
-            false,
-            false,
-        ],
-        [
-            false,
-            false,
-            false,
-            false,
-        ],
+        [ false, false, false, false, ],
+        [ false, false, false, false, ],
     ],
 
     countryFlags,

@@ -32,10 +32,6 @@ function App() {
                 type: 'SET_NEW_PLAYERS',
                 data,
             })
-            dispatch({
-                type: 'CLOSE_ALL_EXTRAS',
-                data,
-            })
             if (state.settings) {
                 writeRankings(
                     data,
@@ -48,8 +44,7 @@ function App() {
 
     const writeNewRankingsFile = data => {
         dispatch({
-            type: 'SET_EXTRA_INFO',
-            data: null,
+            type: 'CLEAR_EXTRA_INFO',
         })
         if (state.settings) {
             writeRankings(
@@ -77,11 +72,6 @@ function App() {
             }
         } else if (state.extraInfo === null && state.players.length > 0) {
             getExtraInfo(state.players, (data, teams) => {
-                dispatch({
-                    type: 'SET_EXTRA_INFO',
-                    data,
-                })
-
                 let newPlayers = []
                 teams.forEach(team => {
                     team.forEach(player => {
@@ -90,8 +80,11 @@ function App() {
                 })
 
                 dispatch({
-                    type: 'SET_PLAYERS',
-                    data: newPlayers,
+                    type: 'SET_EXTRA_INFO',
+                    data: {
+                        extraInfo: data,
+                        newPlayers,
+                    },
                 })
 
                 writeRankings(
@@ -132,8 +125,6 @@ function App() {
         }
         return false
     }
-
-
 
     return <main style={{
         marginTop: '4em',

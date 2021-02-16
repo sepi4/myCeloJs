@@ -134,6 +134,10 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 
 ## Updates:
 
+* **version 1.4.3.** 
+    - Add dropdown info sorting possibility by clicking column title
+    - Fix nickname width bug
+    - Code refactoring and optimization 
 * **version 1.4.2.** 
     - Ranking file is now updating from json file - no flickering
     - Slight visual modification

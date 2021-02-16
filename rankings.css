@@ -34,7 +34,6 @@
 }
 .nameStyle {
     margin-left: 1em;
-    max-width: 100px;
     white-space: nowrap;
     overflow: hidden;
 }
