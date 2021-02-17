@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector, } from 'react-redux'
 
-import fs from 'fs'
 import e from 'electron'
 
 const { dialog, clipboard } = e.remote
@@ -9,6 +8,8 @@ const { dialog, clipboard } = e.remote
 import SettingsDiv from './SettingsDiv'
 import RadioButton from './RadioButton'
 import RadioButtonsDiv from './RadioButtonsDiv'
+
+import writeSettings from '../../functions/writeSettings'
 
 function Settings() {
     const dispatch = useDispatch()
@@ -28,17 +29,7 @@ function Settings() {
                     ...settings,
                     logLocation: file.filePaths[0],
                 }
-                fs.writeFile(
-                    './settings.json',
-                    JSON.stringify(newSettings, null, 4),
-                    'utf-8',
-                    () => {
-                        dispatch({
-                            type: 'SET_SETTINGS',
-                            data: newSettings,
-                        })
-                    },
-                )
+                writeSettings(newSettings, dispatch)
             }
         })
     }
@@ -51,17 +42,7 @@ function Settings() {
                 ? process.cwd() + '\\rankings.html'
                 : process.cwd() + '\\rankings.txt'
         }
-        fs.writeFile(
-            './settings.json',
-            JSON.stringify(newSettings, null, 4),
-            'utf-8',
-            () => {
-                dispatch({
-                    type: 'SET_SETTINGS',
-                    data: newSettings,
-                })
-            },
-        )
+        writeSettings(newSettings, dispatch)
     }
 
     const handleRankingsOrientation = () => {
@@ -70,17 +51,7 @@ function Settings() {
             ...settings,
             rankingsHorizontal: !settings.rankingsHorizontal,
         }
-        fs.writeFile(
-            './settings.json',
-            JSON.stringify(newSettings, null, 4),
-            'utf-8',
-            () => {
-                dispatch({
-                    type: 'SET_SETTINGS',
-                    data: newSettings,
-                })
-            },
-        )
+        writeSettings(newSettings, dispatch)
     }
 
     const copyRankingsFileLocation = () => {

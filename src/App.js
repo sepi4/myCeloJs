@@ -16,6 +16,7 @@ import { readLog } from './functions/readLog'
 
 import electron from 'electron'
 const appVersion = electron.remote.app.getVersion()
+const settingsDir = electron.remote.app.getPath('userData')
 
 document.title = 'myCelo ' + appVersion
 
@@ -60,7 +61,9 @@ function App() {
     useEffect(() => {
         // initial readSettings location of log file
         if (state.settings === null) {
-            readSettings('./settings.json', (data) => {
+
+            // readSettings('./settings.json', (data) => {
+            readSettings(settingsDir + '/settings.json', (data) => {
                 dispatch({
                     type: 'SET_SETTINGS', 
                     data: JSON.parse(data),
