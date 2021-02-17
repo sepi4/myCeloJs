@@ -3,37 +3,68 @@
     padding: 0;
     font-family: 'Work Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial,
     sans-serif;
-    font-size: 36px;
+    font-size: 32px;
+    color:white; 
 }
 .bodyStyle {
     font-family: 'Work Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-    margin: 0.2em;
-    color:white; 
+}
+.bodyStyleHorizontal {
+    font-family: 'Work Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+    display: flex;
 }
 .teamStyle {
     margin-bottom: 1em;
+}
+.teamStyleHorizontal {
+    width: 50%;
+}
+.reversed {
+    display: flex;
+    justify-content: flex-end;
 }
 .playerStyle {
     display: flex;
     align-items: center;
 }
 .factionStyle {
-    width: 64px;
-    height: 64px;
+    width: 2em;
+    min-width: 2em;
+    height: 2em;
     display: inline-block;
 }
 .rankingStyle {
-    margin-left: 1em;
+    /* margin-left: 1em; */
     width: 3.5em;
+    min-width: 3.5em;
+    display: flex;
+    justify-content: center;
 }
 .countryStyle {
-    width: 50px;
+    width: 1.6em;
+    min-width: 1.6em;
     display: inline-block;
     display: flex;
     align-items: center;
 }
 .nameStyle {
-    margin-left: 1em;
+    /* margin-left: 1em; */
+    /* max-width: 66%; */
     white-space: nowrap;
     overflow: hidden;
+}
+.textRight {
+    text-align: right;
+}
+.marginLeft1 {
+    margin-left: 1em;
+}
+.marginLeft3 {
+    margin-left: 3em;
+}
+.marginRight1 {
+    margin-right: 1em;
+}
+.marginRight3 {
+    margin-right: 3em;
 }

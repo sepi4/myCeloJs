@@ -10,6 +10,8 @@ import { commonName } from '../../functions/simpleFunctions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretRight, faCaretDown, } from '@fortawesome/free-solid-svg-icons'
 
+import countries from '../../../countries.json'
+
 const StyledSpan = styled.span`
     width: ${({width}) => width};
     display: flex;
@@ -18,7 +20,7 @@ const StyledSpan = styled.span`
         ? justifyContent
         : 'center'
     };
-    color: white;
+    color: #ddd;
     font-weight: bold;
 `
 
@@ -87,7 +89,7 @@ function PlayerMainRow({
                     icon={showExtra ? faCaretDown : faCaretRight}
                     size='lg'
                     style={{
-                        color: 'white',
+                        color: '#ddd',
                         cursor: 'pointer',
                     }}
                     onClick={extraInfo ? handleSetShowExtra : undefined}
@@ -115,7 +117,7 @@ function PlayerMainRow({
                     }}
                     src={countryFlagLocation}
                     alt={country}
-                    title={country}
+                    title={countries[country] ? countries[country]['name'] : null}
                 />
                 : null
             }

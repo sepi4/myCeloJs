@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const Button = styled.button`
     margin: 0.2em 0;
     width: 25vw;
-    color: white;
+    color: #ddd;
     cursor: pointer;
     background-color: ${({ buttonColor }) => buttonColor || '#181818'};
     padding: .2em 0;
@@ -12,11 +12,11 @@ const Button = styled.button`
     border: 0;
     &:active {
         color: black;
-        background-color: white;
+        background-color: #ddd;
     }
 `
 const ContentDiv = styled.div`
-    margin: .2em 0 0 .2em;
+    margin: .2em 0 0 0;
     min-width: 100%;
     min-height: 1em;
     color: black;
@@ -38,8 +38,10 @@ function SettingsDiv({
 
     return <Div>
         {title && 
-            <div style={{ fontWeight: 'bold' }} >{title}</div>
-        }
+            <div style={{ 
+                fontWeight: 'bold',
+                fontSize: '120%',
+            }} >{title}</div>}
 
         <ContentDiv>{children}</ContentDiv>
 

@@ -12,10 +12,11 @@ function MainView() {
 
     if (players) {
         players.forEach(p => {
-            let teamIndex = p.slot % 2
-            if (Number.isInteger(teamIndex)) {
-                teams[teamIndex].push(p)
-            }
+            // let teamIndex = p.slot % 2
+            // if (Number.isInteger(teamIndex)) {
+            //     teams[teamIndex].push(p)
+            // }
+            teams[p.teamSlot].push(p)
         })
     }
 

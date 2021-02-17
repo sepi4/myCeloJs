@@ -51,7 +51,7 @@ function UpdateBar({ updateCheckNotDone, appVersion }) {
         position: 'fixed',
         bottom: 0,
         left: 0,
-        color: 'white',
+        color: '#ddd',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -61,10 +61,10 @@ function UpdateBar({ updateCheckNotDone, appVersion }) {
     const buttonStyle={
         display: 'inline',
         backgroundColor: 'purple',
-        border: '.1em solid white',
+        border: '.1em solid #ddd',
         marginLeft: '1em',
         padding: '.1em .3em',
-        color: 'white',
+        color: '#ddd',
         cursor: 'pointer',
         fontSize: '1em',
     }

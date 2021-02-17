@@ -7,7 +7,7 @@ import TableDiv from '../Table/TableDiv'
 import ListDiv from '../ListDiv/ListDiv'
 
 const Div = styled.div`
-    color: white;
+    color: #ddd;
     padding: 0.5em 0;
 `
 

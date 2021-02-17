@@ -1,54 +1,33 @@
 {
-    "team1": [
-        {
-            "name": "ANIME IS SHIET",
-            "ranking": "570",
-            "country": "lt",
-            "faction": "uk"
-        },
-        {
-            "name": "[DK] KrigerKris",
-            "ranking": "1990",
-            "country": "dk",
-            "faction": "sov"
-        },
-        {
-            "name": "[DK] Ma'd'sturbator",
-            "ranking": "1135",
-            "country": "dk",
-            "faction": "uk"
-        },
-        {
-            "name": "Warzywo",
-            "ranking": "1125",
-            "country": "pl",
-            "faction": "usa"
-        }
-    ],
-    "team2": [
-        {
-            "name": "3m0tic0n",
-            "ranking": "1065",
-            "country": "at",
-            "faction": "wer"
-        },
-        {
-            "name": "t0k",
-            "ranking": "585",
-            "country": "hr",
-            "faction": "wer"
-        },
-        {
-            "name": "sepi",
-            "ranking": "1321",
-            "country": "fi",
-            "faction": "okw"
-        },
-        {
-            "name": "no7549",
-            "ranking": "666",
-            "country": "kr",
-            "faction": "okw"
-        }
-    ]
+    "teams": {
+        "team1": [
+            {
+                "name": "S E A K I N G",
+                "ranking": "28",
+                "country": "de",
+                "faction": "sov"
+            },
+            {
+                "name": "RUKAclKimbo",
+                "ranking": "28",
+                "country": "pl",
+                "faction": "sov"
+            }
+        ],
+        "team2": [
+            {
+                "name": "Pantherfame",
+                "ranking": "84",
+                "country": "pe",
+                "faction": "okw"
+            },
+            {
+                "name": "Caffly",
+                "ranking": "223",
+                "country": "ru",
+                "faction": "okw"
+            }
+        ]
+    },
+    "horizontal": true
 }

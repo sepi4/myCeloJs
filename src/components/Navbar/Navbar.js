@@ -18,7 +18,7 @@ function Navbar({ handleSetSettingsView }) {
         display: 'flex',
         alignItems: 'center',
         zIndex: '99999',
-        color: 'white',
+        color: '#ddd',
         justifyContent: state && !state.settingsView
             ? 'space-between'
             : 'flex-end', 

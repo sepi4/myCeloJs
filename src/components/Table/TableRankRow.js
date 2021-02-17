@@ -21,7 +21,7 @@ function TableRankRow({rank, d, per, streak, totalGames}) {
                 ? streak > 0
                     ? 'green'
                     : 'red'
-                : 'white',
+                : '#ddd',
         }}>
             {streak > 0
                 ? '+' + streak

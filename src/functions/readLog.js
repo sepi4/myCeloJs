@@ -12,10 +12,8 @@ function getCurrentUser(lines) {
     }
 }
 
-function getLines(data) {
-    let lines = data.split('\n')
-    let currentUser = getCurrentUser(lines)
-    // console.log('currentUser:', currentUser)
+function getLines(lines) {
+
     let arr = []
     let stop = false
     let wasGame = false
@@ -41,6 +39,33 @@ function getLines(data) {
     return arr
 }
 
+function switchTeams(info, currentUser) {
+    const arr = info.filter(p => p.name === currentUser && p.profileId)
+
+    if (arr.length !== 1 || arr[0].teamSlot === 0) {
+        return info
+    }
+
+    // faction: "west_german"
+    // name: "sepi"
+    // profileId: "580525"
+    // ranking: "-1"
+    // slot: "5"
+    // teamSlot: "1"
+
+    // console.log('info before:', JSON.stringify(info, null, 2))
+
+    // const first = info.shift()
+    // info.push(first)
+
+    for (let p of info) {
+        p.teamSlot = p.teamSlot === '1' ? '0' : '1'
+    }
+    // console.log('info after:', JSON.stringify(info, null, 2))
+
+    return info
+}
+
 export function readLog(fileLocation, callback) {
     console.log('readLog')
     fileLocation = fileLocation.replace(/\\/, '\\\\')
@@ -48,7 +73,19 @@ export function readLog(fileLocation, callback) {
         if (err) {
             console.log('Error in reading logfile: ', err)
         }
-        let arr = getLines(data)
-        callback(getPlayersInfo(arr))
+
+        let lines = data.split('\n')
+
+        // TODO use currentUser, currentUser need to be in team 1
+        // TODO make horizontal rankings.html
+
+        let currentUser = getCurrentUser(lines) 
+        let arr = getLines(lines)
+        let info = getPlayersInfo(arr)
+
+        if (currentUser) {
+            info = switchTeams(info, currentUser)
+        }
+        callback(info)
     })
 }

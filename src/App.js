@@ -36,6 +36,7 @@ function App() {
                 writeRankings(
                     data,
                     state.settings.rankingsHtml,
+                    state.settings.rankingsHorizontal,
                     'checkLogData'
                 )
             }
@@ -50,6 +51,7 @@ function App() {
             writeRankings(
                 data,
                 state.settings.rankingsHtml,
+                state.settings.rankingsHorizontal,
                 'writeNewRankingsFile'
             )
         }
@@ -72,6 +74,7 @@ function App() {
             }
         } else if (state.extraInfo === null && state.players.length > 0) {
             getExtraInfo(state.players, (data, teams) => {
+                // debugger
                 let newPlayers = []
                 teams.forEach(team => {
                     team.forEach(player => {
@@ -90,6 +93,7 @@ function App() {
                 writeRankings(
                     newPlayers,
                     state.settings.rankingsHtml,
+                    state.settings.rankingsHorizontal,
                     'useEffect'
                 )
 

@@ -8,6 +8,7 @@ const { dialog, clipboard } = e.remote
 
 import SettingsDiv from './SettingsDiv'
 import RadioButton from './RadioButton'
+import RadioButtonsDiv from './RadioButtonsDiv'
 
 function Settings() {
     const dispatch = useDispatch()
@@ -63,6 +64,25 @@ function Settings() {
         )
     }
 
+    const handleRankingsOrientation = () => {
+        console.log('handleRankingsOrientation')
+        const newSettings = {
+            ...settings,
+            rankingsHorizontal: !settings.rankingsHorizontal,
+        }
+        fs.writeFile(
+            './settings.json',
+            JSON.stringify(newSettings, null, 4),
+            'utf-8',
+            () => {
+                dispatch({
+                    type: 'SET_SETTINGS',
+                    data: newSettings,
+                })
+            },
+        )
+    }
+
     const copyRankingsFileLocation = () => {
         if (settings.rankingsFile) {
             clipboard.writeText(settings.rankingsFile)
@@ -85,7 +105,7 @@ function Settings() {
 
         {settings && settings.logLocation
             ? <SettingsDiv
-                title="Rankings file type (OBS-studio):"
+                title="Rankings file (for OBS-studio):"
                 handler={copyRankingsFileLocation}
                 buttonText={settings && settings.rankingsFile 
                     ? 'Copy'
@@ -93,37 +113,47 @@ function Settings() {
                 }
             >
 
-
-                <form style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'flex-start',
-
-                    padding: '0.2em 0',
-                    margin: '0 0 0.2em 0',
-                }}>
+                <RadioButtonsDiv title='Type:' >
                     <RadioButton
-                        checked={settings['rankingsHtml'] !== undefined
-                            && settings['rankingsHtml']
-                        }
+                        checked={settings.rankingsHtml !== undefined
+                            && settings.rankingsHtml}
                         handler={handleRankingsType}
                         labelText={'html'}
                     />
                     <RadioButton
-                        checked={settings['rankingsHtml'] !== undefined
-                            && !settings['rankingsHtml']
+                        checked={
+                            settings.rankingsHtml !== undefined
+                            && !settings.rankingsHtml
                         }
                         handler={handleRankingsType}
                         labelText={'txt'}
                     />
+                </RadioButtonsDiv>
 
-                </form>
+
+                <RadioButtonsDiv title='Oriantation:' >
+                    <RadioButton
+                        checked={settings.rankingsHorizontal !== undefined
+                            && settings.rankingsHorizontal}
+                        handler={handleRankingsOrientation}
+                        labelText={'horizontal'}
+                    />
+                    <RadioButton
+                        checked={
+                            settings.rankingsHorizontal !== undefined
+                            && !settings.rankingsHorizontal
+                        }
+                        handler={handleRankingsOrientation}
+                        labelText={'vertical'}
+                    />
+                </RadioButtonsDiv>
 
                 {settings.rankingsFile}
+
                 {copied
                     ? <span style={{
                         backgroundColor: 'darkred',
-                        color: 'white',
+                        color: '#ddd',
                         marginLeft: '.5em',
                         padding: '.2em',
                         borderRadius: '.5em',
