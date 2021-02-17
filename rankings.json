@@ -2,29 +2,29 @@
     "teams": {
         "team1": [
             {
-                "name": "S E A K I N G",
-                "ranking": "28",
-                "country": "de",
-                "faction": "sov"
+                "name": "pfc",
+                "ranking": "10",
+                "country": "kr",
+                "faction": "usa"
             },
             {
-                "name": "RUKAclKimbo",
-                "ranking": "28",
-                "country": "pl",
+                "name": "makke",
+                "ranking": "15",
+                "country": "fi",
                 "faction": "sov"
             }
         ],
         "team2": [
             {
-                "name": "Pantherfame",
-                "ranking": "84",
-                "country": "pe",
-                "faction": "okw"
+                "name": "Brosras",
+                "ranking": "17",
+                "country": "ru",
+                "faction": "wer"
             },
             {
-                "name": "Caffly",
-                "ranking": "223",
-                "country": "ru",
+                "name": "AshaBlois",
+                "ranking": "17",
+                "country": "kr",
                 "faction": "okw"
             }
         ]

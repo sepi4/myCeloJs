@@ -27,19 +27,29 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 - double click 'myCelo.exe'
 - allow in firewall if asked *(permission is needed because app is serving ranking.json file to localhost, so that it can read by javascript in ranking.html file every second and update it if needed)*
 
-- in settings ![alt text](./readmeImages/settingsIcon.png "settings icon") select location of 'warnings.log' file (Same folder where are replays saved, usually in "C:\Users\USERNAME\Documents\my games\company of heroes 2\") <hr>
+- in settings ![alt text](./readmeImages/settingsIcon.png "settings icon") select location of 'warnings.log' file (Same folder where are replays saved, usually in "C:\Users\USERNAME\Documents\my games\company of heroes 2\")
+- test installation by opening game in SPECTATE MODE or game vs AI.
+ <hr>
+
 - **OPTIONAL (for streamers)**, simple way for OBS studio to display ranking:
-    - select format of rankings output  file, html 
+    - select rankings output  file format and orientations, **html**:
     
+        **horizontal**:
+    ![alt text](./readmeImages/htmlOutputHorizontal.png "html") 
+
+        **vertical**:
     ![alt text](./readmeImages/htmlOutput.png "html") 
 
-    or txt 
-    
-    ![alt text](./readmeImages/txtOutput.png "txt") 
+        or **txt**:
+        **horizontal**:
+    ![alt text](./readmeImages/txtOutputHorizontal.png "html") 
 
-    Location can be copied to clipboard by pressing 'copy' button.
+        **vertical**:
+    ![alt text](./readmeImages/txtOutput.png "html") 
 
-    ![alt text](./readmeImages/locationCopied.png "location copied"). 
+    - Location can be copied to clipboard by pressing 'copy' button.
+
+        ![alt text](./readmeImages/locationCopied.png "location copied"). 
 
     - make OBS studio to display rankings file info:
         - for **HTML**:
@@ -48,7 +58,7 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
                 ![alt text](./readmeImages/plusBrowser.png "+ browser"). 
 
             - Paste rankings.html file location (copied above) to URL input 
-            
+            - Set the same width and height that your display screen resolution is
                 ![alt text](./readmeImages/urlPaste.png "url") 
 
             - Select checkbox 'Refresh browser when scene becomes active' 
@@ -70,7 +80,6 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
                 ![alt text](./readmeImages/readFromFile.png "read from file")
 
             - modify size of output, font, etc.  
-            - test in game vs AI.
 
 <a name="installRus"></a>
 
@@ -81,16 +90,23 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 - откройте "myCelo.exe"
 - если фаервол попросит разрешения дайте разрешите *(программа использует localhost чтобы rankings.json можно было прочитать с помощью javascript и обновлять rankings.html если это необходимо)*
 
-- в настройках ![alt text](./readmeImages/settingsIcon.png "settings icon") выберите местонахождение 'warnings.log'-файла (тоже место куда сохраняются риплеи, обычно в C:\Users\USERNAME\Documents\my games\company of heroes 2\) <hr>
+- в настройках ![alt text](./readmeImages/settingsIcon.png "settings icon") выберите местонахождение 'warnings.log'-файла (тоже место куда сохраняются риплеи, обычно в C:\Users\USERNAME\Documents\my games\company of heroes 2\) 
+- проверьте установку в игре против компьютера или в режиме просмотра
+<hr>
 
 - **ДЛЯ СТРИМЕРОВ**, отображение рангов на стриме через OBS-studio:
-    - в формате html 
-    
-        ![alt text](./readmeImages/htmlOutput.png "html") 
+    - выберите формат и ориентацию:    
+       **html горизонтально**:
+    ![alt text](./readmeImages/htmlOutputHorizontal.png "html") 
 
-    - или в формате txt 
-    
-        ![alt text](./readmeImages/txtOutput.png "txt") 
+       **html вертикально**:
+    ![alt text](./readmeImages/htmlOutput.png "html") 
+
+       **txt горизонтально**:
+    ![alt text](./readmeImages/txtOutputHorizontal.png "html") 
+
+       **txt вертикально**:
+    ![alt text](./readmeImages/txtOutput.png "html") 
     
     - Выберите формат. Скопируйте адрес нажав кнопку 'Copy'.
 
@@ -103,7 +119,8 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
                 ![alt text](./readmeImages/plusBrowserRus.png "+ browser"). 
 
             - вставьте в "Адрес URL" местонахождение файла rankings.html (скопировали из настроек myCelo)
-            
+            - вставьте такую же ширину и высоту, что резолюция вашего монитора
+
                 ![alt text](./readmeImages/urlPasteRus.png "url") 
 
             - поставьте галочку на "Обновить браузер, когда сцена становится активной"
@@ -111,7 +128,6 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
                 ![alt text](./readmeImages/refreshBrowserRus.png "frame rate")
 
             - сделайте новое окно подходящего размера и поместите куда хотите на экране
-            - проверьте установку в игре против компьютера 
 
         - для формата **TXT**:
             - Источники > Добавить(плюс) > Текст 
