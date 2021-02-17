@@ -25,7 +25,7 @@
         "make-zip": "npm run make && npm run rm-zip && npm run zip",
         "make": "npm run build && npm run postpackage && npm run cp-img && npm run cp-ranking-files",
         "rm-zip": "@powershell del \"./release-builds/*.zip\"",
-        "zip": "@powershell Compress-Archive -Path \"./release-builds/myCelo-win32-x64/*\" -DestinationPath \"./release-builds/myCelo.zip\" -CompressionLevel Optimal",
+        "zip": "@powershell Compress-Archive -Path \"./release-builds/myCelo-win32-x64/*\" -DestinationPath \"./release-builds/myCelo.zip\" -CompressionLevel Fastest",
         "cp-ranking-files": "@powershell Copy-Item \"./rankings.*\" -Destination \"./release-builds/myCelo-win32-x64/\" -PassThru",
         "cp-img": "@powershell Copy-Item \"./img\" \"./release-builds/myCelo-win32-x64\" -Recurse",
         "prod": "cross-env NODE_ENV=production webpack --mode production --config webpack.build.config.js && electron --noDevServer .",
