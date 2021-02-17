@@ -152,6 +152,7 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 
 * **version 1.5.0.** 
     - Add horizontal and vertical rankings display possibility for html/txt
+    - User settings should now presist after update app
 * **version 1.4.3.** 
     - Add dropdown info sorting possibility by clicking column title
     - Fix nickname width bug
