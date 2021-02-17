@@ -2,30 +2,18 @@
     "teams": {
         "team1": [
             {
-                "name": "pfc",
-                "ranking": "10",
-                "country": "kr",
-                "faction": "usa"
-            },
-            {
-                "name": "makke",
-                "ranking": "15",
-                "country": "fi",
-                "faction": "sov"
+                "name": "UA | babrich",
+                "ranking": "323",
+                "country": "ua",
+                "faction": "okw"
             }
         ],
         "team2": [
             {
-                "name": "Brosras",
-                "ranking": "17",
-                "country": "ru",
-                "faction": "wer"
-            },
-            {
-                "name": "AshaBlois",
-                "ranking": "17",
-                "country": "kr",
-                "faction": "okw"
+                "name": "Vikich",
+                "ranking": "345",
+                "country": "hr",
+                "faction": "sov"
             }
         ]
     },
