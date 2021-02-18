@@ -28,9 +28,9 @@
     align-items: center;
 }
 .factionStyle {
-    width: 2em;
-    min-width: 2em;
-    height: 2em;
+    width: 1.6em;
+    height: 1.6em;
+    min-width: 1.6em;
     display: inline-block;
 }
 .rankingStyle {
@@ -41,8 +41,8 @@
     justify-content: center;
 }
 .countryStyle {
-    width: 1.6em;
-    min-width: 1.6em;
+    width: 1.4em;
+    min-width: 1.4em;
     display: inline-block;
     display: flex;
     align-items: center;

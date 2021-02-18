@@ -1,0 +1,57 @@
+{
+    "teams": {
+        "team1": [
+            {
+                "name": "Daredevil",
+                "ranking": "183",
+                "country": "de",
+                "faction": "okw"
+            },
+            {
+                "name": "Perun777",
+                "ranking": "289",
+                "country": "pl",
+                "faction": "wer"
+            },
+            {
+                "name": "༼虎༽༼贲༽斗鱼小游联盟狐狸72073",
+                "ranking": "103",
+                "country": "cn",
+                "faction": "wer"
+            },
+            {
+                "name": "我小叮当今晚要搞事！",
+                "ranking": "314",
+                "country": "cn",
+                "faction": "okw"
+            }
+        ],
+        "team2": [
+            {
+                "name": "༼虎༽༼贲༽ 斗鱼2608290 汉唐",
+                "ranking": "455",
+                "country": "cn",
+                "faction": "uk"
+            },
+            {
+                "name": "Song Jiashen",
+                "ranking": "1032",
+                "country": "cn",
+                "faction": "uk"
+            },
+            {
+                "name": "Indische Legion",
+                "ranking": "232",
+                "country": "in",
+                "faction": "uk"
+            },
+            {
+                "name": "Doom",
+                "ranking": "329",
+                "country": "in",
+                "faction": "uk"
+            }
+        ]
+    },
+    "horizontal": true
+}

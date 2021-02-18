@@ -20,7 +20,8 @@ function RadioButton({ checked, handler, labelText }) {
             type='radio'
             id={id}
             checked={checked}
-            onChange={handler}
+            value={labelText}
+            onChange={e => handler(e)}
         />
         <label htmlFor={id}>{labelText}</label>
     </Span>

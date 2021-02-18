@@ -89,18 +89,96 @@ app.allowRendererProcessReuse = true
 
 const http =  require('http')
 const fs = require('fs')
-const port = '2837'
-function serveJson() {
+
+function serveJson(port) {
     http.createServer(function (request, response) {
         response.writeHead(200, {
             'Content-Type': 'text/json',
             'Access-Control-Allow-Origin': '*',
             'X-Powered-By': 'nodejs'
         })
-        fs.readFile('./rankings.json', function (err, content) {
+        fs.readFile('./localhostFiles/rankings.json', function (err, content) {
             response.write(content)
             response.end()
         })
-    }).listen(port)
+    }).listen(port, null, () => {
+        // console.log('after listen')
+    })
 }
-serveJson()
+
+
+const portfinder = require('portfinder');
+
+portfinder.getPortPromise({
+    port: 2222,
+    stopPort: 3333,
+}).then((port) => {
+    console.log('portfinder free port:', port)
+    serveJson(port.toString())
+    fs.writeFile(
+        './localhostFiles/port.js',
+        'let port = ' + port,
+        'utf-8',
+        (err) => {
+            if (err) {
+                console.log('portfinder writing port.js file error:', err)
+            }
+        },
+    )
+
+}).catch((err) => {
+    console.log('portfinder err:', err)
+});
+
+
+// const from = './localhostFiles/'
+// const to = app.getPath('userData') + '/localhostFiles/'
+// copyFiles(from, to)
+
+// TODO: add ranking to settings
+// that multiple version of program whould use same rankings files.
+
+// function copyFiles(from, to) {
+//     fs.readdir(from, (err, files) => {
+//         if (err) {
+//             console.log('error in readdir:', err)
+//             return
+//         }
+//         if (files.length === 0) {
+//             return
+//         }
+
+//         try {
+//             fs.mkdirSync(to, { recursive: true })
+//         } catch (err) {
+//             if (err.code !== 'EEXIST') throw err
+//         }
+
+//         // console.log(files)
+
+//         files.forEach(fileName => {
+//             fs.readFile(
+//                 from + fileName,
+//                 (err, content) => {
+//                     if (err) {
+//                         console.log('error in readFile:', err)
+//                         return
+//                     }
+
+//                     fs.writeFile(
+//                         to + fileName,
+//                         content,
+//                         'utf-8',
+//                         (err) => {
+//                             if (err) {
+//                                 console.log('error in writeFile:', err)
+//                             }
+//                         },
+//                     )
+//                 }
+
+//             )
+
+//         })
+//     })
+// }

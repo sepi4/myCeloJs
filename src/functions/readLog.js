@@ -46,22 +46,9 @@ function switchTeams(info, currentUser) {
         return info
     }
 
-    // faction: "west_german"
-    // name: "sepi"
-    // profileId: "580525"
-    // ranking: "-1"
-    // slot: "5"
-    // teamSlot: "1"
-
-    // console.log('info before:', JSON.stringify(info, null, 2))
-
-    // const first = info.shift()
-    // info.push(first)
-
     for (let p of info) {
         p.teamSlot = p.teamSlot === '1' ? '0' : '1'
     }
-    // console.log('info after:', JSON.stringify(info, null, 2))
 
     return info
 }
@@ -75,9 +62,6 @@ export function readLog(fileLocation, callback) {
         }
 
         let lines = data.split('\n')
-
-        // TODO use currentUser, currentUser need to be in team 1
-        // TODO make horizontal rankings.html
 
         let currentUser = getCurrentUser(lines) 
         let arr = getLines(lines)

@@ -1,6 +1,7 @@
 import fs from 'fs'
 import { commonName, formatToStr, } from '../functions/simpleFunctions'
 import countries from '../../countries.json'
+import stringWidth from 'string-width'
 
 export function writeRankings(
     players, 
@@ -33,6 +34,27 @@ export function writeRankings(
         return x
     }
 
+    function getLimitedWord(str, limit, padLeft) {
+        let sum = 0
+        let newStr = ''
+        for (const x of str) {
+            const sw = stringWidth(x)
+            // console.log(x, sw)
+            if (sum + sw <= limit) {
+                sum += sw
+                newStr += x
+            } else {
+                break
+            }
+        }
+        if (padLeft) {
+            newStr = ' '.repeat(limit - sum) + newStr
+            return newStr
+        }
+        return newStr + ' '.repeat(limit - sum)
+
+    }
+
     let rowsLeft = []
     let rowsRight = []
     for (let i = 0; i < players.length; i++) {
@@ -46,11 +68,10 @@ export function writeRankings(
         const faction = players[i].faction
         const slot = Number(players[i].slot)
 
-
-        // console.log(countries[country]['alpha-3'])
+        const maxNameLength = 20
         if (rankingsHorizontal) {
             if (slot % 2 === 0) {
-                const text = name.substring(0, 20).padStart(20)
+                const text = getLimitedWord(name, maxNameLength, true)
                     + " " + countryText(country, true, 5)
                     + " " + ranking.padStart(5)
                     + " " + commonName(faction).padStart(5).toUpperCase()
@@ -59,8 +80,7 @@ export function writeRankings(
                 const text = commonName(faction).padEnd(5).toUpperCase()
                     + " " + ranking.padEnd(5)
                     + " " + countryText(country, false, 5)
-                    // + " " + country && countries[country] ? (countries[country]['alpha-3']).padEnd(5) : ''.padEnd(5)
-                    + " " + name.substring(0, 20).padEnd(20)
+                    + " " + getLimitedWord(name, maxNameLength, false)
                 rowsRight.push(text)
             }
 
@@ -69,8 +89,7 @@ export function writeRankings(
             const text = commonName(faction).padEnd(5).toUpperCase()
                 + " " + ranking.padEnd(5)
                 + " " + countryText(country, false, 5)
-                // + " " + country && countries[country] ? (countries[country]['alpha-3']).padEnd(5) : ''.padEnd(5)
-                + " " + name.substring(0, 20)
+                + " " + getLimitedWord(name, maxNameLength, false)
 
             if (slot % 2 === 0) {
                 rowsRight.push(text)
@@ -118,7 +137,7 @@ export function writeRankings(
     }
 
     fs.writeFile(
-        './rankings.json',
+        './localhostFiles/rankings.json',
         JSON.stringify(json, null, 4),
         'utf-8',
         (err) => {
@@ -128,7 +147,7 @@ export function writeRankings(
         },
     )
     fs.writeFile(
-        './rankings.txt',
+        './localhostFiles/rankings.txt',
         text,
         'utf-8',
         (err) => {

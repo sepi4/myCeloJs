@@ -1,8 +1,11 @@
+// eslint-disable-next-line no-undef
+let PORT = port 
+
 let preJson = {}
 function factionImage(faction, reversed) {
     return `
     <div class="factionStyle ${reversed ? 'marginRight3' : 'marginLeft3'}">
-        <img src="./img/${faction}.png" width="100%" height="100%" />
+        <img src="../img/${faction}.png" width="100%" height="100%" />
     </div>
     `
 }
@@ -15,7 +18,7 @@ function country(country) {
     return `
     <div class="countryStyle">
         ${country 
-            ? `<img src="./img/countryFlags/${country}.png" width="100%" height="100%" />`
+            ? `<img src="../img/countryFlags/${country}.png" width="100%" height="100%" />`
             : ''
         }
     </div>
@@ -59,9 +62,9 @@ function makeBody(json) {
     </div>
     `
 }
-setInterval(async () => {
+setInterval(() => {
     const body = document.querySelector('body')
-    fetch('http://localhost:2837')
+    fetch('http://localhost:' + PORT)
         .then(response => response.json())
         .then(json => {
             const strJson = JSON.stringify(json, null, 4)
