@@ -1,20 +1,21 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useDispatch, useSelector, } from 'react-redux'
 
 import electron from 'electron'
-
-const { dialog, clipboard } = electron.remote
+const { dialog, app } = electron.remote
 
 import SettingsDiv from './SettingsDiv'
 import RadioButton from './RadioButton'
 import RadioButtonsDiv from './RadioButtonsDiv'
+import CopyDiv from './CopyDiv'
 
 import writeSettings from '../../functions/writeSettings'
+
+import { StyledTextDiv, StyledButton } from '../styled/styledSettings'
 
 function Settings() {
     const dispatch = useDispatch()
     const settings = useSelector(state => state.settings)
-    const [copied, setCopied] = useState(false)
 
     const changeLogLocation = () => {
         dialog.showOpenDialog({
@@ -35,7 +36,6 @@ function Settings() {
     }
 
     const handleRankingsType = (e) => {
-        // console.log(e.target.value)
         const newFormat = e.target.value
         const loc = process.cwd() + '\\localhostFiles\\rankings.' + newFormat
         const newSettings = {
@@ -55,38 +55,30 @@ function Settings() {
         writeSettings(newSettings, dispatch)
     }
 
-    const copyRankingsFileLocation = () => {
-        if (settings.rankingsFile) {
-            clipboard.writeText(settings.rankingsFile)
-            setCopied(true)
-            setTimeout(() => setCopied(false), 500)
-        }     
-    }
 
-    const fileTypeSet = settings && settings.rankingsFile
+    const fileTypeSet = settings 
+        && settings.rankingsFile
         && settings.rankingsHorizontal !== undefined
         && settings.rankingsHtml !== undefined
+    
 
     return <div style={{ marginTop: '4em' }}>
-        <SettingsDiv
-            title="Log location:"
-            handler={changeLogLocation}
-            buttonText='Select'
-        >
-            {settings && settings.logLocation
-                ? settings.logLocation
-                : ''
-            }
+        <SettingsDiv title="Log location:" >
+            <StyledTextDiv>
+                {settings && settings.logLocation
+                    ? settings.logLocation
+                    : ''
+                }
+            </StyledTextDiv>
+            <StyledButton
+                onClick={changeLogLocation}
+                buttonColor='black'
+            >Select</StyledButton>
         </SettingsDiv>
 
-        {settings && settings.logLocation ?
-            <>
-                <SettingsDiv
-                    title="Rankings file (for OBS-studio):"
-                    handler={copyRankingsFileLocation}
-                    buttonText={fileTypeSet ? 'Copy' : null }
-                >
-
+        {settings && settings.logLocation 
+            ? <div>
+                <SettingsDiv title="Rankings file (for OBS-studio):" >
                     <RadioButtonsDiv title='Type:' >
                         <RadioButton
                             checked={settings.rankingsHtml !== undefined
@@ -105,46 +97,35 @@ function Settings() {
 
                     <RadioButtonsDiv title='Oriantation:' >
                         <RadioButton
-                            checked={settings.rankingsHorizontal !== undefined 
+                            checked={settings.rankingsHorizontal !== undefined
                                 && settings.rankingsHorizontal}
                             handler={handleRankingsOrientation}
                             labelText={'horizontal'}
                         />
                         <RadioButton
-                            checked={settings.rankingsHorizontal !== undefined 
+                            checked={settings.rankingsHorizontal !== undefined
                                 && !settings.rankingsHorizontal}
                             handler={handleRankingsOrientation}
                             labelText={'vertical'}
                         />
                     </RadioButtonsDiv>
 
-                    {fileTypeSet 
-                        && (
-                            < div style={{ overflowWrap: 'break-word' }}>
-                                {settings.rankingsFile}
-                            </div>
-                        )
-                    }
-
-                    {copied
-                        ? <span style={{
-                            backgroundColor: 'darkred',
-                            color: '#ddd',
-                            marginLeft: '.5em',
-                            padding: '.2em',
-                            borderRadius: '.5em',
-                        }}>copied</span>
-                        : null
-                    }
+                    <CopyDiv 
+                        text={fileTypeSet ? settings.rankingsFile : null}
+                    />
                 </SettingsDiv>
 
-            </>
+                <SettingsDiv title='Settings file location:' >
+                    <CopyDiv 
+                        text={app.getPath('userData') + '\\settings.json'}
+                    />
+                </SettingsDiv>
 
+            </div>
             : <SettingsDiv title="Rankings file type (OBS-studio):">
                 <p style={{ color: 'darkred' }}>Add log location file first</p>
             </SettingsDiv>
         }
-
     </div>
 
 }

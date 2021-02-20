@@ -2,56 +2,56 @@
     "teams": {
         "team1": [
             {
-                "name": "Daredevil",
-                "ranking": "183",
-                "country": "de",
-                "faction": "okw"
+                "name": "Rosbone",
+                "ranking": "796",
+                "country": "us",
+                "faction": "sov"
             },
             {
-                "name": "Perun777",
-                "ranking": "289",
-                "country": "pl",
-                "faction": "wer"
+                "name": "Big Rudy",
+                "ranking": "1124",
+                "country": "ca",
+                "faction": "sov"
             },
             {
-                "name": "༼虎༽༼贲༽斗鱼小游联盟狐狸72073",
-                "ranking": "103",
-                "country": "cn",
-                "faction": "wer"
+                "name": "Stixx",
+                "ranking": "636",
+                "country": "ca",
+                "faction": "uk"
             },
             {
-                "name": "我小叮当今晚要搞事！",
-                "ranking": "314",
-                "country": "cn",
-                "faction": "okw"
+                "name": "打着桥牌 解放两淮",
+                "ranking": "1660",
+                "country": "ar",
+                "faction": "sov"
             }
         ],
         "team2": [
             {
-                "name": "༼虎༽༼贲༽ 斗鱼2608290 汉唐",
-                "ranking": "455",
-                "country": "cn",
-                "faction": "uk"
+                "name": "Etiennie",
+                "ranking": "1896",
+                "country": "nl",
+                "faction": "wer"
             },
             {
-                "name": "Song Jiashen",
-                "ranking": "1032",
-                "country": "cn",
-                "faction": "uk"
+                "name": "Stefan",
+                "ranking": "1340",
+                "country": "is",
+                "faction": "okw"
             },
             {
-                "name": "Indische Legion",
-                "ranking": "232",
-                "country": "in",
-                "faction": "uk"
+                "name": "b.fritz1",
+                "ranking": "1688",
+                "country": "de",
+                "faction": "wer"
             },
             {
-                "name": "Doom",
-                "ranking": "329",
-                "country": "in",
-                "faction": "uk"
+                "name": "sepi",
+                "ranking": "1417",
+                "country": "fi",
+                "faction": "okw"
             }
         ]
     },
-    "horizontal": true
+    "horizontal": false
 }

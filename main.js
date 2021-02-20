@@ -25,6 +25,7 @@ function createMainWindow() {
             webSecurity: false,
         },
         center: true,
+        // enableRemoteModule: true,
     })
 
     let indexPath

@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux'
 import Team from './Teams/Team'
 import Settings from './Settings/Settings'
 
-
 function MainView() {
     const settingsView = useSelector(state => state.settingsView)
     let teams = [[], []]
@@ -12,10 +11,6 @@ function MainView() {
 
     if (players) {
         players.forEach(p => {
-            // let teamIndex = p.slot % 2
-            // if (Number.isInteger(teamIndex)) {
-            //     teams[teamIndex].push(p)
-            // }
             teams[p.teamSlot].push(p)
         })
     }

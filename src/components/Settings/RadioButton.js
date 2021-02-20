@@ -7,7 +7,7 @@ const Span = styled.span`
     justify-content: center;
     margin-right: 1em;
     &:hover {
-        color: blue;
+        color: #ddd;
     }
 `
 
