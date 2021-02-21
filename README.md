@@ -28,10 +28,12 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 - allow in firewall if asked *(permission is needed because app is serving ranking.json file to localhost, so that it can read by javascript in ranking.html file every second and update it if needed)*
 
 - in settings ![alt text](./readmeImages/settingsIcon.png "settings icon") select location of 'warnings.log' file (Same folder where are replays saved, usually in "C:\Users\USERNAME\Documents\my games\company of heroes 2\")
-- test installation by opening game in SPECTATE MODE or game vs AI.
+- done (test installation by opening game in SPECTATE MODE or game vs AI.)
  <hr>
 
-- **OPTIONAL (for streamers)**, simple way for OBS studio to display ranking:
+**ONLY FOR STREAMERS** 
+
+- simple way for OBS studio to display ranking:
     - select rankings output  file format and orientations, **html**:
     
         **horizontal**:
@@ -79,7 +81,7 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 
                 ![alt text](./readmeImages/readFromFile.png "read from file")
 
-            - modify size of output, font, etc.  
+            - modify size of output, font (for horizontal view you have to find monospace font, Consolas worked for me), etc.  
 
 <a name="installRus"></a>
 
@@ -94,7 +96,9 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 - проверьте установку в игре против компьютера или в режиме просмотра
 <hr>
 
-- **ДЛЯ СТРИМЕРОВ**, отображение рангов на стриме через OBS-studio:
+**ТОЛЬКО ДЛЯ СТРИМЕРОВ** 
+
+- отображение рангов на стриме через OBS-studio:
     - выберите формат и ориентацию:    
        **html горизонтально**:
     ![alt text](./readmeImages/htmlOutputHorizontal.png "html") 
@@ -139,7 +143,7 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 
                 ![alt text](./readmeImages/readFromFileRus.png "read from file")
 
-            - сделайте новое окно подходящего размера, выберите подходящий фонт и поместите окно куда хотите на экране
+            - сделайте новое окно подходящего размера, выберите подходящий фонт и поместите окно куда хотите на экране (для горизанльного формата, вам надо найти подходящий фонт, например Consolas)
             - проверьте установку в игре против компьютера 
 
 
@@ -154,6 +158,7 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
     - Add horizontal and vertical rankings display possibility for html/txt
     - User settings should now presist after updating app
     - User can skip update version, by pushing 'ignore this version'
+    - Little visual updates
 * **version 1.4.3.** 
     - Add dropdown info sorting possibility by clicking column title
     - Fix nickname width bug
