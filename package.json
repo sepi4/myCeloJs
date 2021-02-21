@@ -1,7 +1,7 @@
 {
     "name": "mycelo",
     "productName": "myCelo",
-    "version": "1.3.0",
+    "version": "1.5.0",
     "description": "COH2 ranking displayer",
     "license": "MIT",
     "engines": {

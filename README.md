@@ -154,6 +154,7 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
     - Add horizontal and vertical rankings display possibility for html/txt
     - User settings should now presist after updating app
     - User can skip update version, by pushing 'ignore this version'
+    - Little visual updates
 * **version 1.4.3.** 
     - Add dropdown info sorting possibility by clicking column title
     - Fix nickname width bug
