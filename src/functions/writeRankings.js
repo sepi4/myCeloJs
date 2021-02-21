@@ -4,9 +4,9 @@ import countries from '../../countries.json'
 import stringWidth from 'string-width'
 
 export function writeRankings(
-    players, 
-    rankingsInHtml, 
-    rankingsHorizontal, 
+    players,
+    rankingsInHtml,
+    rankingsHorizontal,
     from
 ) {
 
@@ -137,7 +137,7 @@ export function writeRankings(
     }
 
     fs.writeFile(
-        './localhostFiles/rankings.json',
+        process.cwd() + '/localhostFiles/rankings.json',
         JSON.stringify(json, null, 4),
         'utf-8',
         (err) => {
@@ -147,7 +147,7 @@ export function writeRankings(
         },
     )
     fs.writeFile(
-        './localhostFiles/rankings.txt',
+        process.cwd() + '/localhostFiles/rankings.txt',
         text,
         'utf-8',
         (err) => {

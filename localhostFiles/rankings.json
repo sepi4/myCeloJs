@@ -1,57 +1,7 @@
 {
     "teams": {
-        "team1": [
-            {
-                "name": "Rosbone",
-                "ranking": "796",
-                "country": "us",
-                "faction": "sov"
-            },
-            {
-                "name": "Big Rudy",
-                "ranking": "1124",
-                "country": "ca",
-                "faction": "sov"
-            },
-            {
-                "name": "Stixx",
-                "ranking": "636",
-                "country": "ca",
-                "faction": "uk"
-            },
-            {
-                "name": "打着桥牌 解放两淮",
-                "ranking": "1660",
-                "country": "ar",
-                "faction": "sov"
-            }
-        ],
-        "team2": [
-            {
-                "name": "Etiennie",
-                "ranking": "1896",
-                "country": "nl",
-                "faction": "wer"
-            },
-            {
-                "name": "Stefan",
-                "ranking": "1340",
-                "country": "is",
-                "faction": "okw"
-            },
-            {
-                "name": "b.fritz1",
-                "ranking": "1688",
-                "country": "de",
-                "faction": "wer"
-            },
-            {
-                "name": "sepi",
-                "ranking": "1417",
-                "country": "fi",
-                "faction": "okw"
-            }
-        ]
+        "team1": [],
+        "team2": []
     },
     "horizontal": false
 }

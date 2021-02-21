@@ -1,42 +1,30 @@
 import { copyObj } from './functions/simpleFunctions'
 
 // Reducer
-function reducer( state, action) {
+function reducer(state, action) {
     switch (action.type) {
         case 'TOGGLE_SETTINGS_VIEW':
-            return { 
-                ...state, 
+            return {
+                ...state,
                 settingsView: !state.settingsView,
             }
 
-        // case 'SET_PLAYERS':
-        //     return { 
-        //         ...state, 
-        //         players: action.data,
-        //     }
-
-        // case 'SET_FROM_FILE':
-        //     return { 
-        //         ...state, 
-        //         fromFile: action.data,
-        //     }
-
         case 'SET_EXTRA_INFO':
-            return { 
-                ...state, 
+            return {
+                ...state,
                 extraInfo: action.data.extraInfo,
                 players: action.data.newPlayers,
             }
 
         case 'CLEAR_EXTRA_INFO':
-            return { 
-                ...state, 
+            return {
+                ...state,
                 extraInfo: null,
             }
 
         case 'SET_NEW_PLAYERS':
-            return { 
-                ...state, 
+            return {
+                ...state,
                 extraInfo: null,
                 fromFile: action.data,
                 players: action.data,
@@ -47,8 +35,8 @@ function reducer( state, action) {
             }
 
         case 'SET_SETTINGS':
-            return { 
-                ...state, 
+            return {
+                ...state,
                 settings: action.data,
             }
 
@@ -57,17 +45,17 @@ function reducer( state, action) {
             let obj = copyObj(state.navButtons)
             obj[action.key] = !obj[action.key]
             localStorage.setItem(
-                'navButtons', 
+                'navButtons',
                 JSON.stringify(obj),
             )
-            return { 
-                ...state, 
+            return {
+                ...state,
                 navButtons: obj,
             }
 
         case 'TOGGLE_EXTRA':
-            return { 
-                ...state, 
+            return {
+                ...state,
                 openInfos: state.openInfos
                     .map((t, i) => i === action.data.teamIndex
                         ? t.map((p, j) => j === action.data.playerIndex
@@ -91,7 +79,7 @@ function reducer( state, action) {
                         fun: action.data.fun,
                         name: action.data.name,
                         reversed: false,
-                    }, 
+                    },
             }
 
         default:

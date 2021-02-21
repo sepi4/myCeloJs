@@ -1,9 +1,11 @@
 import React from 'react'
 
 function RadioButtonsDiv({ title, children }) {
-    return <> <div style={{
-        fontSize: '70%',
-    }}>{title}</div>
+    return <>
+        <div style={{
+            fontSize: '70%',
+        }}>{title}</div>
+
         <form style={{
             display: 'flex',
             alignItems: 'center',
@@ -12,9 +14,8 @@ function RadioButtonsDiv({ title, children }) {
 
             padding: '0.2em 0',
             margin: '0 0 0.5em 0',
-        }}>
-            {children}
-        </form>
+
+        }}>{children}</form>
     </>
 }
 

@@ -15,6 +15,7 @@ import { getExtraInfo } from './functions/getExtraInfo'
 import { readLog } from './functions/readLog'
 
 import electron from 'electron'
+import writeSettings from './functions/writeSettings'
 const appVersion = electron.remote.app.getVersion()
 const settingsDir = electron.remote.app.getPath('userData')
 
@@ -64,14 +65,28 @@ function App() {
 
             // readSettings('./settings.json', (data) => {
             readSettings(settingsDir + '/settings.json', (data) => {
-                dispatch({
-                    type: 'SET_SETTINGS', 
-                    data: JSON.parse(data),
-                })
+                if (!data) {
+                    return
+                }
+
+                let newSettings = JSON.parse(data)
+                newSettings.appLocation = state.appLocation
+
+                // update rankingsFile location, for cases where app location is
+                // different
+                if (newSettings.rankingsFile) {
+                    console.log(newSettings, state.appLocation)
+                    newSettings.rankingsFile = state.appLocation
+                        + '\\localhostFiles\\rankings.'
+                        + (newSettings.rankingsHtml ? 'html' : 'txt')
+                    console.log(newSettings.rankingsFile)
+                }
+
+                writeSettings(newSettings, dispatch)
             })
             return
-        // initial readLog
-        } else if (state.players === null) {
+
+        } else if (state.players === null) { // initial readLog
             if (state.settings && state.settings.logLocation) {
                 readLog(state.settings.logLocation, checkLogData)
             }

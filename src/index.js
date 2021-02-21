@@ -8,7 +8,7 @@ import { Provider } from 'react-redux'
 
 
 function importAll(r) {
-  return r.keys().map(r);
+    return r.keys().map(r);
 }
 
 const images = importAll(
@@ -21,7 +21,7 @@ const images = importAll(
 
 let countryFlags = {}
 images.forEach(x => {
-    countryFlags[x.default.substring(4,6)] = x.default
+    countryFlags[x.default.substring(4, 6)] = x.default
 })
 
 // Since we are using HtmlWebpackPlugin WITHOUT a template, we should create 
@@ -31,15 +31,17 @@ let root = document.createElement('div')
 import reducer from './reducer'
 import { byRank } from './functions/sorters'
 
-let store = createStore(reducer, { 
+let store = createStore(reducer, {
     settingsView: false,
     settings: null,
 
+    appLocation: process.cwd(),
+
     players: null,
-    fromFile: null, 
+    fromFile: null,
     extraInfo: null,
 
-    navButtons: function(){
+    navButtons: function () {
         const str = localStorage.getItem('navButtons')
         if (str) {
             return JSON.parse(str)
@@ -49,10 +51,10 @@ let store = createStore(reducer, {
             table: false,
         }
     }(),
-    
+
     openInfos: [
-        [ false, false, false, false, ],
-        [ false, false, false, false, ],
+        [false, false, false, false,],
+        [false, false, false, false,],
     ],
 
     countryFlags,
@@ -61,7 +63,7 @@ let store = createStore(reducer, {
         fun: byRank,
         name: 'byRank',
         reversed: false,
-    }, 
+    },
 })
 
 root.id = 'root'

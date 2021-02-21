@@ -15,6 +15,8 @@ export const StyledDiv = styled.div`
 `
 
 export const StyledTextDiv = styled.div`
+    min-height: 1em;
+    font-size: 90%;
     overflow-wrap: break-word;
     background-color: #999;
     padding: .3em;

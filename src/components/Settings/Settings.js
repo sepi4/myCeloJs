@@ -16,6 +16,7 @@ import { StyledTextDiv, StyledButton } from '../styled/styledSettings'
 function Settings() {
     const dispatch = useDispatch()
     const settings = useSelector(state => state.settings)
+    const state = useSelector(state => state)
 
     const changeLogLocation = () => {
         dialog.showOpenDialog({
@@ -35,9 +36,10 @@ function Settings() {
         })
     }
 
-    const handleRankingsType = (e) => {
+    const handleType = (e) => {
         const newFormat = e.target.value
-        const loc = process.cwd() + '\\localhostFiles\\rankings.' + newFormat
+        const loc = state.appLocation
+            + '\\localhostFiles\\rankings.' + newFormat
         const newSettings = {
             ...settings,
             rankingsHtml: newFormat === 'html',
@@ -46,7 +48,7 @@ function Settings() {
         writeSettings(newSettings, dispatch)
     }
 
-    const handleRankingsOrientation = (e) => {
+    const handleOrientation = (e) => {
         const newOriantation = e.target.value
         const newSettings = {
             ...settings,
@@ -56,11 +58,14 @@ function Settings() {
     }
 
 
-    const fileTypeSet = settings 
+    const fileTypeSet = settings
         && settings.rankingsFile
         && settings.rankingsHorizontal !== undefined
         && settings.rankingsHtml !== undefined
-    
+
+
+    // TODO: add current app location in settings
+    // TODO: need to check app location when open app and settings
 
     return <div style={{ marginTop: '4em' }}>
         <SettingsDiv title="Log location:" >
@@ -76,56 +81,61 @@ function Settings() {
             >Select</StyledButton>
         </SettingsDiv>
 
-        {settings && settings.logLocation 
-            ? <div>
+        {settings && settings.logLocation
+            ? <>
                 <SettingsDiv title="Rankings file (for OBS-studio):" >
                     <RadioButtonsDiv title='Type:' >
                         <RadioButton
                             checked={settings.rankingsHtml !== undefined
                                 && settings.rankingsHtml}
-                            handler={handleRankingsType}
+                            handler={handleType}
                             labelText={'html'}
                         />
                         <RadioButton
                             checked={settings.rankingsHtml !== undefined
                                 && !settings.rankingsHtml}
-                            handler={handleRankingsType}
+                            handler={handleType}
                             labelText={'txt'}
                         />
                     </RadioButtonsDiv>
 
-
-                    <RadioButtonsDiv title='Oriantation:' >
+                    <RadioButtonsDiv title='Orientation:' >
                         <RadioButton
                             checked={settings.rankingsHorizontal !== undefined
                                 && settings.rankingsHorizontal}
-                            handler={handleRankingsOrientation}
+                            handler={handleOrientation}
                             labelText={'horizontal'}
                         />
                         <RadioButton
                             checked={settings.rankingsHorizontal !== undefined
                                 && !settings.rankingsHorizontal}
-                            handler={handleRankingsOrientation}
+                            handler={handleOrientation}
                             labelText={'vertical'}
                         />
                     </RadioButtonsDiv>
 
-                    <CopyDiv 
+                    <CopyDiv
                         text={fileTypeSet ? settings.rankingsFile : null}
                     />
+
                 </SettingsDiv>
 
-                <SettingsDiv title='Settings file location:' >
-                    <CopyDiv 
-                        text={app.getPath('userData') + '\\settings.json'}
-                    />
-                </SettingsDiv>
+                {fileTypeSet &&
+                    <SettingsDiv title='Settings file location:' >
+                        <CopyDiv
+                            text={app.getPath('userData') + '\\settings.json'}
+                        />
+                    </SettingsDiv>
+                }
 
-            </div>
+            </>
+
             : <SettingsDiv title="Rankings file type (OBS-studio):">
                 <p style={{ color: 'darkred' }}>Add log location file first</p>
             </SettingsDiv>
         }
+
+
     </div>
 
 }

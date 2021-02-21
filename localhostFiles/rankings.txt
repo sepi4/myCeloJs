@@ -1,9 +1,1 @@
-WER   1896  NLD   Etiennie            
-OKW   1340  ISL   Stefan              
-WER   1688  DEU   b.fritz1            
-OKW   1417  FIN   sepi                
 
-SOV   796   USA   Rosbone             
-SOV   1124  CAN   Big Rudy            
-UK    636   CAN   Stixx               
-SOV   1660  ARG   打着桥牌 解放两淮   
