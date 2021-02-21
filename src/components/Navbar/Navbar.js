@@ -9,6 +9,7 @@ import NavButtons from './NavButtons'
 function Navbar({ handleSetSettingsView }) {
     const styleNavbar = {
         backgroundColor: '#181818',
+        color: '#ddd',
         position: 'fixed',
         top: '0',
         left: '0',
@@ -18,28 +19,29 @@ function Navbar({ handleSetSettingsView }) {
         display: 'flex',
         alignItems: 'center',
         zIndex: '99999',
-        color: '#ddd',
         justifyContent: state && !state.settingsView
             ? 'space-between'
-            : 'flex-end', 
-        
+            : 'flex-end',
+
     }
 
     const state = useSelector(state => state)
-    const dispatch =  useDispatch()
+    const dispatch = useDispatch()
+
+    const fun = () => {
+        dispatch({ type: 'TOGGLE_SETTINGS_VIEW' })
+        handleSetSettingsView()
+    }
 
     return <div style={{ ...styleNavbar, }}>
-        {!state.settingsView && <NavButtons /> }
+        {!state.settingsView && <NavButtons />}
         <div
             style={{
                 cursor: 'pointer',
                 marginRight: '1em',
                 display: 'block',
             }}
-            onClick={() => {
-                dispatch({ type: 'TOGGLE_SETTINGS_VIEW' })
-                handleSetSettingsView()
-            }}
+            onClick={fun}
         >
             <FontAwesomeIcon
                 icon={!state.settingsView ? faCogs : faTimes}

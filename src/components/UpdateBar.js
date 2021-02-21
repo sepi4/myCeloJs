@@ -1,15 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+
+import writeSettings from '../functions/writeSettings'
 
 import axios from 'axios'
 
-import e from 'electron'
-const { clipboard, shell } = e.remote
+import electron from 'electron'
 
-function UpdateBar({ updateCheckNotDone, appVersion }) {
+const { clipboard, shell, app } = electron.remote
+
+function UpdateBar() {
     const [update, setUpdate] = useState(null)
+    const dispatch = useDispatch()
+    const updateCheckDone = useSelector(state => state.updateCheckDone)
+    const settings = useSelector(state => state.settings)
+    const appVersion = app.getVersion()
 
-    const isHigherVersion = (tag, current)=> {
+    const isHigherVersion = (tag, current) => {
         let arrTag = tag.split('.')
         let arrCurrent = current.split('.')
         for (let i = 0; i < arrCurrent.length; i++) {
@@ -22,51 +30,73 @@ function UpdateBar({ updateCheckNotDone, appVersion }) {
         return false
     }
 
-    if (updateCheckNotDone) {
-        updateCheckNotDone = false
-        console.log('CHECKING UPDATE')
+    useEffect(() => {
+        if (!updateCheckDone && settings) {
+            console.log('CHECKING UPDATE')
+            dispatch({
+                type: 'UPDATE_CHECK_DONE',
+            })
 
-        let url = 'https://api.github.com/repos/sepi4/myCeloJs/releases/latest'
-        axios.get(url)
-            .then(x => {
-                if (x && x.data) {
-                    let newTagName = x.data.tag_name
-                    if (isHigherVersion(newTagName, appVersion)) {
-                        const data = x.data
-                        if (data.assets[0]) {
-                            setUpdate({
-                                url: data.assets[0].browser_download_url,
-                                tagName: newTagName,
-                            })
+
+            let url = 'https://api.github.com/repos/sepi4/myCeloJs/releases/latest'
+            axios.get(url)
+                .then(x => {
+                    if (x && x.data) {
+                        let newTagName = x.data.tag_name
+                        console.log(settings.ignoreUntil)
+                        console.log(newTagName)
+                        if (settings.ignoreUntil === newTagName) {
+                            return
+                        }
+                        if (isHigherVersion(newTagName, appVersion)) {
+                            const data = x.data
+                            if (data.assets[0]) {
+                                setUpdate({
+                                    url: data.assets[0].browser_download_url,
+                                    tagName: newTagName,
+                                })
+                            }
                         }
                     }
-                }
-            })
-    }
+                })
+        }
+
+    }, [])
 
     const style = {
-        height: '2em',
+        backgroundColor: '#181818',
+        color: '#ddd',
+        height: '2.5em',
         width: '100%',
-        backgroundColor: 'purple',
         position: 'fixed',
         bottom: 0,
         left: 0,
-        color: '#ddd',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         fontSize: '80%',
+        borderTop: '2px solid black',
     }
 
-    const buttonStyle={
+    const buttonStyle = {
         display: 'inline',
-        backgroundColor: 'purple',
-        border: '.1em solid #ddd',
+        backgroundColor: '#181818',
+        border: '.1em solid gray',
         marginLeft: '1em',
         padding: '.1em .3em',
-        color: '#ddd',
+        color: 'gray',
         cursor: 'pointer',
         fontSize: '1em',
+    }
+
+    const ignore = () => {
+        console.log('ignore')
+        const newSettings = {
+            ...settings,
+            ignoreUntil: update.tagName
+        }
+        setUpdate(null)
+        writeSettings(newSettings, dispatch)
     }
 
     return <div>
@@ -87,6 +117,11 @@ function UpdateBar({ updateCheckNotDone, appVersion }) {
                         clipboard.writeText(update.url)
                     }}
                 >copy link</button>
+
+                <button
+                    style={buttonStyle}
+                    onClick={ignore}
+                >ignore this version</button>
             </div>
             : null
         }

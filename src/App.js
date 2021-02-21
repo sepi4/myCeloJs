@@ -21,7 +21,6 @@ const settingsDir = electron.remote.app.getPath('userData')
 
 document.title = 'myCelo ' + appVersion
 
-let updateCheckNotDone = true
 
 function App() {
     const READ_LOG_INTERVAL = 3000
@@ -140,23 +139,15 @@ function App() {
         }
     }
 
-    const checkUpdate = () => {
-        if (updateCheckNotDone) {
-            updateCheckNotDone = false
-            return true
-        }
-        return false
-    }
-
     return <main style={{
         marginTop: '4em',
     }} >
         <Navbar {...{ handleSetSettingsView }} />
         <MainView />
-        <UpdateBar
-            updateCheckNotDone={checkUpdate()}
-            appVersion={appVersion}
-        />
+
+        {state.settings &&
+            <UpdateBar appVersion={appVersion} />
+        }
 
     </main>
 }

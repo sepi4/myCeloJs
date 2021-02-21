@@ -22,6 +22,12 @@ function reducer(state, action) {
                 extraInfo: null,
             }
 
+        case 'UPDATE_CHECK_DONE':
+            return {
+                ...state,
+                updateCheckDone: true,
+            }
+
         case 'SET_NEW_PLAYERS':
             return {
                 ...state,

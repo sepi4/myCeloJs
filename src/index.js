@@ -35,6 +35,8 @@ let store = createStore(reducer, {
     settingsView: false,
     settings: null,
 
+    updateCheckDone: false,
+
     appLocation: process.cwd(),
 
     players: null,
@@ -64,6 +66,7 @@ let store = createStore(reducer, {
         name: 'byRank',
         reversed: false,
     },
+
 })
 
 root.id = 'root'
