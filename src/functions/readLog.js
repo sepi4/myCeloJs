@@ -63,7 +63,7 @@ export function readLog(fileLocation, callback) {
 
         let lines = data.split('\n')
 
-        let currentUser = getCurrentUser(lines) 
+        let currentUser = getCurrentUser(lines)
         let arr = getLines(lines)
         let info = getPlayersInfo(arr)
 

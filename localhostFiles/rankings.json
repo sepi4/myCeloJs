@@ -2,53 +2,17 @@
     "teams": {
         "team1": [
             {
-                "name": "听雨轩霹雳",
-                "ranking": "-",
-                "country": "cn",
-                "faction": "usa"
-            },
-            {
-                "name": "S I M P",
-                "ranking": "723",
-                "country": "us",
-                "faction": "uk"
-            },
-            {
-                "name": "651393767",
-                "ranking": "1005",
-                "country": "cn",
-                "faction": "usa"
-            },
-            {
-                "name": "破阵子1945",
-                "ranking": "-",
-                "country": "cn",
-                "faction": "uk"
+                "name": "sepi",
+                "ranking": "173",
+                "country": "fi",
+                "faction": "sov"
             }
         ],
         "team2": [
             {
-                "name": "barron24601",
-                "ranking": "2515",
-                "country": "cn",
-                "faction": "okw"
-            },
-            {
-                "name": "sepi",
-                "ranking": "1343",
-                "country": "fi",
-                "faction": "okw"
-            },
-            {
-                "name": "enfieldsquare",
-                "ranking": "1259",
-                "country": "vn",
-                "faction": "wer"
-            },
-            {
-                "name": "Bgoct",
-                "ranking": "790",
-                "country": "cn",
+                "name": "CPU - Easy",
+                "ranking": "-",
+                "country": "",
                 "faction": "wer"
             }
         ]

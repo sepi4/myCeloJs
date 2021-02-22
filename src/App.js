@@ -74,7 +74,6 @@ function App() {
                 // update rankingsFile location, for cases where app location is
                 // different
                 if (newSettings.rankingsFile) {
-                    console.log(newSettings, state.appLocation)
                     newSettings.rankingsFile = state.appLocation
                         + '\\localhostFiles\\rankings.'
                         + (newSettings.rankingsHtml ? 'html' : 'txt')

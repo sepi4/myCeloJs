@@ -154,6 +154,8 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 
 ## Updates:
 
+* **version 1.5.1.** 
+    - Small bug fix (in horizontal display, current user team position was some times on wrong side)
 * **version 1.5.0.** 
     - Add horizontal and vertical rankings display possibility for html/txt
     - User settings should now presist after updating app

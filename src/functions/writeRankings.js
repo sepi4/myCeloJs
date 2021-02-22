@@ -9,7 +9,6 @@ export function writeRankings(
     rankingsHorizontal,
     from
 ) {
-
     let json = {
         teams: {
             team1: [],
@@ -66,11 +65,11 @@ export function writeRankings(
             ranking = (+ranking).toString()
         }
         const faction = players[i].faction
-        const slot = Number(players[i].slot)
+        const teamSlot = Number(players[i].teamSlot)
 
         const maxNameLength = 20
         if (rankingsHorizontal) {
-            if (slot % 2 === 0) {
+            if (teamSlot % 2 === 0) {
                 const text = getLimitedWord(name, maxNameLength, true)
                     + " " + countryText(country, true, 5)
                     + " " + ranking.padStart(5)
@@ -91,7 +90,7 @@ export function writeRankings(
                 + " " + countryText(country, false, 5)
                 + " " + getLimitedWord(name, maxNameLength, false)
 
-            if (slot % 2 === 0) {
+            if (teamSlot % 2 === 0) {
                 rowsRight.push(text)
             } else {
                 rowsLeft.push(text)
@@ -100,7 +99,7 @@ export function writeRankings(
         }
 
 
-        if (slot % 2 === 0) {
+        if (teamSlot % 2 === 0) {
             json.teams.team1.push({
                 name,
                 ranking,

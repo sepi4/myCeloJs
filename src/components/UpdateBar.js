@@ -43,8 +43,6 @@ function UpdateBar() {
                 .then(x => {
                     if (x && x.data) {
                         let newTagName = x.data.tag_name
-                        console.log(settings.ignoreUntil)
-                        console.log(newTagName)
                         if (settings.ignoreUntil === newTagName) {
                             return
                         }
@@ -90,7 +88,6 @@ function UpdateBar() {
     }
 
     const ignore = () => {
-        console.log('ignore')
         const newSettings = {
             ...settings,
             ignoreUntil: update.tagName
