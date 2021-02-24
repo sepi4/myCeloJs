@@ -2,54 +2,54 @@
     "teams": {
         "team1": [
             {
-                "name": "WeedH#ppy 【GER】凸(◣_◢)凸",
-                "ranking": "809",
-                "country": "de",
+                "name": "sepi",
+                "ranking": "1162",
+                "country": "fi",
+                "faction": "okw"
+            },
+            {
+                "name": "Morbid",
+                "ranking": "934",
+                "country": "us",
                 "faction": "wer"
             },
             {
-                "name": "OKW™Gernhardt Reinlunzen",
-                "ranking": "1077",
-                "country": "de",
+                "name": "El Culo Diablo",
+                "ranking": "1084",
+                "country": "us",
                 "faction": "okw"
             },
             {
-                "name": "SlaveKnightGael",
-                "ranking": "556",
-                "country": "de",
-                "faction": "okw"
-            },
-            {
-                "name": "sepi",
-                "ranking": "1221",
-                "country": "fi",
+                "name": "Emissary",
+                "ranking": "1034",
+                "country": "ua",
                 "faction": "okw"
             }
         ],
         "team2": [
             {
-                "name": "Shouting PIN",
-                "ranking": "1108",
-                "country": "tw",
-                "faction": "sov"
-            },
-            {
-                "name": "GOLDEN's father",
-                "ranking": "432",
-                "country": "cn",
+                "name": "Knight",
+                "ranking": "715",
+                "country": "us",
                 "faction": "usa"
             },
             {
-                "name": "///",
-                "ranking": "543",
-                "country": "cn",
+                "name": "robertojaoming",
+                "ranking": "1583",
+                "country": "mx",
                 "faction": "uk"
             },
             {
-                "name": "rossmcrae",
-                "ranking": "692",
-                "country": "au",
-                "faction": "sov"
+                "name": "TiZot",
+                "ranking": "630",
+                "country": "fr",
+                "faction": "uk"
+            },
+            {
+                "name": "[ITR] NinjaInfame",
+                "ranking": "1642",
+                "country": "it",
+                "faction": "uk"
             }
         ]
     },
