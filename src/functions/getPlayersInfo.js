@@ -1,8 +1,14 @@
 
 export function getPlayersInfo(arr) {
+    let time
     arr = arr.map(row => {
         if (row.match(/GAME --.* Player:/)) {
             let splited = row.split(':')
+            if (time === undefined) {
+                time = [splited[0], splited[1], splited[2].split('   ')[0]]
+                    .join(':')
+            }
+
             return splited.slice(3).join(':').trim()
         } else {
             let splited = row.split(':')
@@ -24,6 +30,7 @@ export function getPlayersInfo(arr) {
                 id,
                 slot,
                 ranking,
+                time,
             }
         } else {
             let playerArr = row.split(' ')
@@ -38,6 +45,7 @@ export function getPlayersInfo(arr) {
                 name,
                 slot,
                 faction,
+                time,
             }
         }
     }

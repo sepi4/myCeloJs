@@ -3,25 +3,25 @@
         "team1": [
             {
                 "name": "WeedH#ppy 【GER】凸(◣_◢)凸",
-                "ranking": "811",
+                "ranking": "809",
                 "country": "de",
                 "faction": "wer"
             },
             {
                 "name": "OKW™Gernhardt Reinlunzen",
-                "ranking": "1079",
+                "ranking": "1077",
                 "country": "de",
                 "faction": "okw"
             },
             {
                 "name": "SlaveKnightGael",
-                "ranking": "663",
+                "ranking": "556",
                 "country": "de",
                 "faction": "okw"
             },
             {
                 "name": "sepi",
-                "ranking": "1223",
+                "ranking": "1221",
                 "country": "fi",
                 "faction": "okw"
             }
@@ -35,22 +35,23 @@
             },
             {
                 "name": "GOLDEN's father",
-                "ranking": "431",
+                "ranking": "432",
                 "country": "cn",
                 "faction": "usa"
             },
             {
                 "name": "///",
-                "ranking": "540",
+                "ranking": "543",
                 "country": "cn",
                 "faction": "uk"
             },
             {
                 "name": "rossmcrae",
-                "ranking": "693",
+                "ranking": "692",
                 "country": "au",
                 "faction": "sov"
             }
         ]
-    }
+    },
+    "horizontal": true
 }

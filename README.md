@@ -154,11 +154,15 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 
 ## Updates:
 
+* **version 1.6.0.** 
+    - Manual possibility to check log file 
+    - Changing interval of auto checking log file
+    - Bug fix same players not updating players object (adding time to players object)
 * **version 1.5.1.** 
     - Small bug fix (in horizontal display, current user team position was some times on wrong side)
 * **version 1.5.0.** 
     - Add horizontal and vertical rankings display possibility for html/txt
-    - User settings should now presist after updating app
+    - User settings should now remain the same after updating app
     - User can skip update version, by pushing 'ignore this version'
     - Little visual updates
 * **version 1.4.3.** 

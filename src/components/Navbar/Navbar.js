@@ -13,11 +13,12 @@ import NavCheckbox from './NavCheckBox'
 
 import { StyledRow } from '../styled/StyledFlex'
 import { StyledColumn } from '../styled/StyledFlex'
+import { StyledInputDiv } from './StyledInputDiv'
 
 const Div = styled.div`
     margin: 0 1.2em;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-evenly;
     height: 100%;
     width: 100%;
     color: gray;
@@ -50,7 +51,7 @@ export default function Navbar({ handleSetSettingsView }) {
         top: '0',
         left: '0',
         height: '3em',
-        width: '100vw',
+        width: '100%',
         borderBottom: '2px solid black',
         display: 'flex',
         alignItems: 'center',
@@ -84,6 +85,7 @@ export default function Navbar({ handleSetSettingsView }) {
         />
     })
 
+
     const inputEl = useRef(null);
     const checkNumbers = e => {
         setError(false)
@@ -105,75 +107,63 @@ export default function Navbar({ handleSetSettingsView }) {
         }
     }
 
+    const intervalInput = (
+        <StyledInputDiv>
+            <input
+                defaultValue={state.logCheckInterval
+                    ? state.logCheckInterval
+                    : ""
+                }
+                ref={inputEl}
+                onBlur={checkNumbers}
+                onKeyDown={e => e.key === 'Enter'
+                    ? checkNumbers(e)
+                    : error
+                        ? setError(false)
+                        : null
+                }
+            />
+            <span>sec</span>
+            {error &&
+                <div className='error'>integer 1-999</div>
+            }
+        </StyledInputDiv>
+    )
+
     return <div style={{ ...styleNavbar, }}>
-        {!state.settingsView && <>
-            <Div>
-                <StyledColumn>
-                    {table}
-                    {all}
-                </StyledColumn>
+        {!state.settingsView && <Div>
+            <StyledColumn>
+                {table}
+                {all}
+            </StyledColumn>
 
-                <StyledRow margin='0 0 0 2em'>
-                    <NavCheckbox
-                        text={'auto'}
-                        checked={state.autoLogChecking
-                            ? state.autoLogChecking
-                            : false
-                        }
-                        handler={() => dispatch({
-                            type: 'TOGGLE_AUTO_LOG_CHECKING'
-                        })}
-                    />
+            <StyledRow>
+                <NavCheckbox
+                    text={'auto'}
+                    checked={state.autoLogChecking
+                        ? state.autoLogChecking
+                        : false
+                    }
+                    handler={() => dispatch({
+                        type: 'TOGGLE_AUTO_LOG_CHECKING'
+                    })}
+                />
 
-                    <div style={{ marginLeft: '.5em' }} >
-                        {state.autoLogChecking
-                            ? <>
-                                <input
-                                    defaultValue={state.logCheckInterval
-                                        ? state.logCheckInterval
-                                        : ""
-                                    }
-                                    ref={inputEl}
-                                    onBlur={checkNumbers}
-                                    onKeyDown={e => e.key === 'Enter'
-                                        ? checkNumbers(e)
-                                        : error
-                                            ? setError(false)
-                                            : null
-                                    }
-                                    style={{
-                                        backgroundColor: '#181818',
-                                        color: '#ddd',
-                                        height: '1.5em',
-                                        width: '3.5em',
-                                        border: 'none',
-                                        borderBottom: 'solid .1em gray',
-                                        fontSize: '110%',
-                                        textAlign: 'center',
-                                    }}
-                                /><span>sec</span>
-                                {error &&
-                                    <div style={{
-                                        position: 'absolute',
-                                        top: '.1em',
-                                        color: 'red',
-                                        fontSize: '70%',
-                                    }}>integer 1-999</div>
-                                }
-                            </>
-                            : <StyledButton
-                                onClick={() => {
-                                    readLog(state.settings.logLocation, data => {
-                                        checkLogData(data, state, dispatch)
-                                    })
-                                }}
-                            >check</StyledButton>
-                        }
-                    </div>
-                </StyledRow>
+                <div style={{ marginLeft: '.5em' }} >
+                    {state.autoLogChecking
+                        ? intervalInput
+                        : <StyledButton
+                            onClick={() => {
+                                readLog(state.settings.logLocation, data => {
+                                    checkLogData(data, state, dispatch)
+                                })
+                            }}
+                        >check</StyledButton>
+                    }
+                </div>
+            </StyledRow>
 
-            </Div>
-        </>
+        </Div>
         }
 
         <div

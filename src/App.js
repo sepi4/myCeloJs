@@ -62,7 +62,6 @@ function App() {
                     newSettings.rankingsFile = state.appLocation
                         + '\\localhostFiles\\rankings.'
                         + (newSettings.rankingsHtml ? 'html' : 'txt')
-                    console.log(newSettings.rankingsFile)
                 }
                 writeSettings(newSettings, dispatch)
             })
