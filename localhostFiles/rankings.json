@@ -2,20 +2,55 @@
     "teams": {
         "team1": [
             {
+                "name": "WeedH#ppy 【GER】凸(◣_◢)凸",
+                "ranking": "811",
+                "country": "de",
+                "faction": "wer"
+            },
+            {
+                "name": "OKW™Gernhardt Reinlunzen",
+                "ranking": "1079",
+                "country": "de",
+                "faction": "okw"
+            },
+            {
+                "name": "SlaveKnightGael",
+                "ranking": "663",
+                "country": "de",
+                "faction": "okw"
+            },
+            {
                 "name": "sepi",
-                "ranking": "173",
+                "ranking": "1223",
                 "country": "fi",
-                "faction": "sov"
+                "faction": "okw"
             }
         ],
         "team2": [
             {
-                "name": "CPU - Easy",
-                "ranking": "-",
-                "country": "",
-                "faction": "wer"
+                "name": "Shouting PIN",
+                "ranking": "1108",
+                "country": "tw",
+                "faction": "sov"
+            },
+            {
+                "name": "GOLDEN's father",
+                "ranking": "431",
+                "country": "cn",
+                "faction": "usa"
+            },
+            {
+                "name": "///",
+                "ranking": "540",
+                "country": "cn",
+                "faction": "uk"
+            },
+            {
+                "name": "rossmcrae",
+                "ranking": "693",
+                "country": "au",
+                "faction": "sov"
             }
         ]
-    },
-    "horizontal": true
+    }
 }

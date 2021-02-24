@@ -31,9 +31,22 @@ let root = document.createElement('div')
 import reducer from './reducer'
 import { byRank } from './functions/sorters'
 
+function getLocal(key, def) {
+    const str = localStorage.getItem(key)
+    if (str !== undefined && str !== null) {
+        return JSON.parse(str)
+    }
+    return def
+}
+
 let store = createStore(reducer, {
+
     settingsView: false,
     settings: null,
+    logCheckInterval: getLocal('logCheckInterval', 3),
+
+
+    autoLogChecking: getLocal('autoLogChecking', true),
 
     updateCheckDone: false,
 
@@ -43,16 +56,10 @@ let store = createStore(reducer, {
     fromFile: null,
     extraInfo: null,
 
-    navButtons: function () {
-        const str = localStorage.getItem('navButtons')
-        if (str) {
-            return JSON.parse(str)
-        }
-        return {
-            all: false,
-            table: false,
-        }
-    }(),
+    navButtons: getLocal(
+        'navButtons',
+        { all: false, table: false }
+    ),
 
     openInfos: [
         [false, false, false, false,],

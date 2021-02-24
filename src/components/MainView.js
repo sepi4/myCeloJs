@@ -22,7 +22,7 @@ function MainView() {
         return <div>
             <Team players={teams[0]} teamIndex={0} />
             <Team players={teams[1]} teamIndex={1} />
-        </div> 
+        </div>
     }
     return <div>
         <h1>no info in log file</h1>

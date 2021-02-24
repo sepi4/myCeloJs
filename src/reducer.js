@@ -9,6 +9,39 @@ function reducer(state, action) {
                 settingsView: !state.settingsView,
             }
 
+        case 'TOGGLE_AUTO_LOG_CHECKING':
+            localStorage.setItem(
+                'autoLogChecking',
+                JSON.stringify(!state.autoLogChecking),
+            )
+            return {
+                ...state,
+                autoLogChecking: !state.autoLogChecking,
+            }
+
+        case 'TOGGLE_NAVBUTTON':
+            // eslint-disable-next-line no-case-declarations
+            let obj = copyObj(state.navButtons)
+            obj[action.key] = !obj[action.key]
+            localStorage.setItem(
+                'navButtons',
+                JSON.stringify(obj),
+            )
+            return {
+                ...state,
+                navButtons: obj,
+            }
+
+        case 'SET_INTERVAL':
+            localStorage.setItem(
+                'logCheckInterval',
+                JSON.stringify(action.data),
+            )
+            return {
+                ...state,
+                logCheckInterval: action.data,
+            }
+
         case 'SET_EXTRA_INFO':
             return {
                 ...state,
@@ -46,18 +79,6 @@ function reducer(state, action) {
                 settings: action.data,
             }
 
-        case 'TOGGLE_NAVBUTTON':
-            // eslint-disable-next-line no-case-declarations
-            let obj = copyObj(state.navButtons)
-            obj[action.key] = !obj[action.key]
-            localStorage.setItem(
-                'navButtons',
-                JSON.stringify(obj),
-            )
-            return {
-                ...state,
-                navButtons: obj,
-            }
 
         case 'TOGGLE_EXTRA':
             return {

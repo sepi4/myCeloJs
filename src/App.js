@@ -2,7 +2,6 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector, } from 'react-redux'
 
-
 // components
 import Navbar from './components/Navbar/Navbar'
 import UpdateBar from './components/UpdateBar'
@@ -13,9 +12,10 @@ import { writeRankings } from './functions/writeRankings'
 import { readSettings } from './functions/readSettings'
 import { getExtraInfo } from './functions/getExtraInfo'
 import { readLog } from './functions/readLog'
+import writeSettings from './functions/writeSettings'
+import checkLogData from './functions/checkLogData'
 
 import electron from 'electron'
-import writeSettings from './functions/writeSettings'
 const appVersion = electron.remote.app.getVersion()
 const settingsDir = electron.remote.app.getPath('userData')
 
@@ -23,26 +23,12 @@ document.title = 'myCelo ' + appVersion
 
 
 function App() {
-    const READ_LOG_INTERVAL = 3000
+    // TODO: add manual log check
+    // TODO: add custom log check interval
+
+
     const dispatch = useDispatch()
     const state = useSelector(state => state)
-
-    const checkLogData = data => {
-        if (JSON.stringify(state.fromFile) !== JSON.stringify(data)) {
-            dispatch({
-                type: 'SET_NEW_PLAYERS',
-                data,
-            })
-            if (state.settings) {
-                writeRankings(
-                    data,
-                    state.settings.rankingsHtml,
-                    state.settings.rankingsHorizontal,
-                    'checkLogData'
-                )
-            }
-        }
-    }
 
     const writeNewRankingsFile = data => {
         dispatch({
@@ -61,7 +47,6 @@ function App() {
     useEffect(() => {
         // initial readSettings location of log file
         if (state.settings === null) {
-
             // readSettings('./settings.json', (data) => {
             readSettings(settingsDir + '/settings.json', (data) => {
                 if (!data) {
@@ -71,22 +56,27 @@ function App() {
                 let newSettings = JSON.parse(data)
                 newSettings.appLocation = state.appLocation
 
-                // update rankingsFile location, for cases where app location is
-                // different
+                // update rankingsFile location, for cases where 
+                // app location is different
                 if (newSettings.rankingsFile) {
                     newSettings.rankingsFile = state.appLocation
                         + '\\localhostFiles\\rankings.'
                         + (newSettings.rankingsHtml ? 'html' : 'txt')
                     console.log(newSettings.rankingsFile)
                 }
-
                 writeSettings(newSettings, dispatch)
             })
             return
 
         } else if (state.players === null) { // initial readLog
+            if (!state.autoLogChecking) {
+                return
+            }
+
             if (state.settings && state.settings.logLocation) {
-                readLog(state.settings.logLocation, checkLogData)
+                readLog(state.settings.logLocation, data => {
+                    checkLogData(data, state, dispatch)
+                })
             }
         } else if (state.extraInfo === null && state.players.length > 0) {
             getExtraInfo(state.players, (data, teams) => {
@@ -116,25 +106,39 @@ function App() {
             })
         }
 
+
+        if (!state.autoLogChecking) {
+            return
+        }
+
         const intervalId = setInterval(() => {
             if (state.settings && state.settings.logLocation) {
-                readLog(state.settings.logLocation, checkLogData)
+                readLog(state.settings.logLocation, data => {
+                    checkLogData(data, state, dispatch)
+                })
             }
-        }, READ_LOG_INTERVAL)
+        }, state.logCheckInterval * 1000)
 
         return () => clearInterval(intervalId)
     })
 
     useEffect(() => {
-        // console.log('settings changed')
+        if (!state.autoLogChecking) {
+            return
+        }
         if (state.settings && state.settings.logLocation) {
             readLog(state.settings.logLocation, writeNewRankingsFile)
         }
     }, [state.settings])
 
     const handleSetSettingsView = () => {
+        if (!state.autoLogChecking) {
+            return
+        }
         if (state.settings && state.settings.logLocation) {
-            readLog(state.settings.logLocation, checkLogData)
+            readLog(state.settings.logLocation, data => {
+                checkLogData(data, state, dispatch)
+            })
         }
     }
 

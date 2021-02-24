@@ -179,9 +179,6 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
         - _Rankings can be in some cases incorrect (team games), because log file is not providing information of teams structure. Program is trying to make educated guess of a rankings_
 * **version 1.2.0.** 
     - Update panel to download updated version of an app.
-* **version 1.1.0.** 
-    - Custom ranking file for OBS can be added now in settings.    
-    - Partially works with replays. All ranks can be easily viewed in drop down menu.
 
 
 
