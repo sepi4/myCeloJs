@@ -42,7 +42,7 @@ function getLines(lines) {
 function switchTeams(info, currentUser) {
     const arr = info.filter(p => p.name === currentUser && p.profileId)
 
-    if (arr.length !== 1 || arr[0].teamSlot === 0) {
+    if (arr.length !== 1 || arr[0].teamSlot === '0') {
         return info
     }
 

@@ -2,54 +2,18 @@
     "teams": {
         "team1": [
             {
-                "name": "sepi",
-                "ranking": "1162",
-                "country": "fi",
-                "faction": "okw"
-            },
-            {
-                "name": "Morbid",
-                "ranking": "935",
-                "country": "us",
-                "faction": "wer"
-            },
-            {
-                "name": "El Culo Diablo",
-                "ranking": "1084",
-                "country": "us",
-                "faction": "okw"
-            },
-            {
-                "name": "Emissary",
-                "ranking": "1035",
+                "name": "UA | babrich",
+                "ranking": "290",
                 "country": "ua",
                 "faction": "okw"
             }
         ],
         "team2": [
             {
-                "name": "Knight",
-                "ranking": "714",
-                "country": "us",
+                "name": "C0LDs44.",
+                "ranking": "427",
+                "country": "de",
                 "faction": "usa"
-            },
-            {
-                "name": "robertojaoming",
-                "ranking": "1583",
-                "country": "mx",
-                "faction": "uk"
-            },
-            {
-                "name": "TiZot",
-                "ranking": "628",
-                "country": "fr",
-                "faction": "uk"
-            },
-            {
-                "name": "[ITR] NinjaInfame",
-                "ranking": "1552",
-                "country": "it",
-                "faction": "uk"
             }
         ]
     },

@@ -1,0 +1,59 @@
+Date : 2021-02-25 18:57:06
+Directory : d:\tutorials\myCeloJs\src\components
+Total : 28 files,  1229 codes, 1 comments, 204 blanks, all 1434 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |         28 |      1,229 |          1 |        204 |      1,434 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                             | files      | code       | comment    | blank      | total      |
++------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                |         28 |      1,229 |          1 |        204 |      1,434 |
+| ListDiv                                                          |          3 |        163 |          0 |         22 |        185 |
+| Navbar                                                           |          5 |        231 |          0 |         44 |        275 |
+| Player                                                           |          5 |        277 |          0 |         44 |        321 |
+| Settings                                                         |          5 |        208 |          0 |         42 |        250 |
+| Table                                                            |          4 |        128 |          0 |         18 |        146 |
+| Teams                                                            |          1 |         23 |          0 |          3 |         26 |
+| styled                                                           |          2 |         50 |          1 |          6 |         57 |
++------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                         | language   | code       | comment    | blank      | total      |
++------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| d:\tutorials\myCeloJs\src\components\ListDiv\Cell.js             | JavaScript |         21 |          0 |          3 |         24 |
+| d:\tutorials\myCeloJs\src\components\ListDiv\ColumnTitle.js      | JavaScript |         39 |          0 |          7 |         46 |
+| d:\tutorials\myCeloJs\src\components\ListDiv\ListDiv.js          | JavaScript |        103 |          0 |         12 |        115 |
+| d:\tutorials\myCeloJs\src\components\MainView.js                 | JavaScript |         27 |          0 |          5 |         32 |
+| d:\tutorials\myCeloJs\src\components\Navbar\NavCheckBox.js       | JavaScript |         26 |          0 |          9 |         35 |
+| d:\tutorials\myCeloJs\src\components\Navbar\Navbar.js            | JavaScript |        155 |          0 |         23 |        178 |
+| d:\tutorials\myCeloJs\src\components\Navbar\NavbarIcon.js        | JavaScript |         14 |          0 |          3 |         17 |
+| d:\tutorials\myCeloJs\src\components\Navbar\StyledInputDiv.js    | JavaScript |         20 |          0 |          6 |         26 |
+| d:\tutorials\myCeloJs\src\components\Navbar\StyledNavbar.js      | JavaScript |         16 |          0 |          3 |         19 |
+| d:\tutorials\myCeloJs\src\components\Notification.js             | JavaScript |         12 |          0 |          2 |         14 |
+| d:\tutorials\myCeloJs\src\components\Player\Members.js           | JavaScript |         40 |          0 |          7 |         47 |
+| d:\tutorials\myCeloJs\src\components\Player\Player.js            | JavaScript |         35 |          0 |          7 |         42 |
+| d:\tutorials\myCeloJs\src\components\Player\PlayerExtraInfo.js   | JavaScript |         22 |          0 |          7 |         29 |
+| d:\tutorials\myCeloJs\src\components\Player\PlayerMainRow.js     | JavaScript |        128 |          0 |         16 |        144 |
+| d:\tutorials\myCeloJs\src\components\Player\Rank.js              | JavaScript |         52 |          0 |          7 |         59 |
+| d:\tutorials\myCeloJs\src\components\Settings\CopyDiv.js         | JavaScript |         30 |          0 |          7 |         37 |
+| d:\tutorials\myCeloJs\src\components\Settings\RadioButton.js     | JavaScript |         26 |          0 |          4 |         30 |
+| d:\tutorials\myCeloJs\src\components\Settings\RadioButtonsDiv.js | JavaScript |         17 |          0 |          6 |         23 |
+| d:\tutorials\myCeloJs\src\components\Settings\Settings.js        | JavaScript |        117 |          0 |         20 |        137 |
+| d:\tutorials\myCeloJs\src\components\Settings\SettingsDiv.js     | JavaScript |         18 |          0 |          5 |         23 |
+| d:\tutorials\myCeloJs\src\components\Table\FactionIcon.js        | JavaScript |         20 |          0 |          3 |         23 |
+| d:\tutorials\myCeloJs\src\components\Table\TableDiv.js           | JavaScript |         36 |          0 |          7 |         43 |
+| d:\tutorials\myCeloJs\src\components\Table\TableRankRow.js       | JavaScript |         32 |          0 |          3 |         35 |
+| d:\tutorials\myCeloJs\src\components\Table\TableRanksDiv.js      | JavaScript |         40 |          0 |          5 |         45 |
+| d:\tutorials\myCeloJs\src\components\Teams\Team.js               | JavaScript |         23 |          0 |          3 |         26 |
+| d:\tutorials\myCeloJs\src\components\UpdateBar.js                | JavaScript |        110 |          0 |         18 |        128 |
+| d:\tutorials\myCeloJs\src\components\styled\StyledFlex.js        | JavaScript |         13 |          1 |          2 |         16 |
+| d:\tutorials\myCeloJs\src\components\styled\styledSettings.js    | JavaScript |         37 |          0 |          4 |         41 |
+| Total                                                            |            |      1,229 |          1 |        204 |      1,434 |
++------------------------------------------------------------------+------------+------------+------------+------------+------------+

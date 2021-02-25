@@ -26,17 +26,20 @@ const Div = styled.div`
     color: gray;
 `
 
-const StyledButton = styled.button`
-    margin: 0.2em 0;
+const StyledButton = styled.div`
+    text-align: center;
+
+    margin: 0;
     width: 6em;
+
     color: black;
     background-color: gray;
     border-radius: 0.2em;
     border: 0;
 
+
     cursor: pointer;
     padding: .2em 0;
-    font-size: 1em;
     &:active {
         background-color: #fff;
     }
@@ -116,7 +119,9 @@ export default function Navbar({ handleSetSettingsView }) {
     )
 
     const checkLogDiv = (
-        <>
+        <div style={{
+            display: 'flex',
+        }}>
             <NavCheckbox
                 text={'auto'}
                 checked={state.autoLogChecking
@@ -143,7 +148,7 @@ export default function Navbar({ handleSetSettingsView }) {
                     >check log</StyledButton>
                 }
             </div>
-        </>
+        </div>
     )
 
     if (state.settingsView) {
@@ -159,8 +164,11 @@ export default function Navbar({ handleSetSettingsView }) {
                     <div style={{ fontSize: '70%' }}>dropdown info</div>
                 </StyledRow>
                 <StyledRow>
+
                     {table}
-                    <span style={{ marginLeft: '1em' }}>{all}</span>
+
+                    <span>{all}</span>
+                    {/* <span style={{ marginLeft: '1em' }}>{all}</span> */}
                 </StyledRow>
             </StyledColumn>
 

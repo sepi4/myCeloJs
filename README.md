@@ -154,6 +154,9 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 
 ## Updates:
 
+* **version 1.6.1.** 
+    - Bug fix (current user team was some times on wrong positions, should always be first)
+    - Small navbar visual changings
 * **version 1.6.0.** 
     - Manual possibility to check log file 
     - Changing interval of auto checking log file
