@@ -13,6 +13,7 @@ export const StyledNavbar = styled.div`
     display: flex;
     align-items: center;
     z-index: 99999;
+    cursor: default;
 
     justify-content: ${({ justifyContent }) => justifyContent}
 `

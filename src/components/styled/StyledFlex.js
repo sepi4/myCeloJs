@@ -2,7 +2,8 @@ import styled from 'styled-components'
 
 export const StyledRow = styled.div`
     display: flex;
-    align-items: center;
+    align-items: ${({ alignItems }) => alignItems || 'center'};
+    justify-content: ${({ justifyContent }) => justifyContent || 'space-evenly'};
     margin: ${({ margin }) => margin || '0'};
 `
 

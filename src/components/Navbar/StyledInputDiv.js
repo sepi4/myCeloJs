@@ -7,7 +7,7 @@ export const StyledInputDiv = styled.div`
     input {
         background-color: #181818;
         color: #ddd;
-        height: 1.5em;
+        height: 1em;
         width: 3.5em;
         border: none;
         border-bottom: solid .1em gray;

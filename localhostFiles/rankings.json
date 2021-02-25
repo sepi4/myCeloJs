@@ -9,7 +9,7 @@
             },
             {
                 "name": "Morbid",
-                "ranking": "934",
+                "ranking": "935",
                 "country": "us",
                 "faction": "wer"
             },
@@ -21,7 +21,7 @@
             },
             {
                 "name": "Emissary",
-                "ranking": "1034",
+                "ranking": "1035",
                 "country": "ua",
                 "faction": "okw"
             }
@@ -29,7 +29,7 @@
         "team2": [
             {
                 "name": "Knight",
-                "ranking": "715",
+                "ranking": "714",
                 "country": "us",
                 "faction": "usa"
             },
@@ -41,13 +41,13 @@
             },
             {
                 "name": "TiZot",
-                "ranking": "630",
+                "ranking": "628",
                 "country": "fr",
                 "faction": "uk"
             },
             {
                 "name": "[ITR] NinjaInfame",
-                "ranking": "1642",
+                "ranking": "1552",
                 "country": "it",
                 "faction": "uk"
             }

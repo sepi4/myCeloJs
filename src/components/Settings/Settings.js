@@ -63,9 +63,6 @@ function Settings() {
         && settings.rankingsHorizontal !== undefined
         && settings.rankingsHtml !== undefined
 
-    // TODO: add current app location in settings
-    // TODO: need to check app location when open app and settings
-
     return <div style={{ marginTop: '4em' }}>
         <SettingsDiv title="Log location:" >
             <StyledTextDiv>

@@ -21,12 +21,7 @@ const settingsDir = electron.remote.app.getPath('userData')
 
 document.title = 'myCelo ' + appVersion
 
-
 function App() {
-    // TODO: add manual log check
-    // TODO: add custom log check interval
-
-
     const dispatch = useDispatch()
     const state = useSelector(state => state)
 
@@ -105,7 +100,6 @@ function App() {
             })
         }
 
-
         if (!state.autoLogChecking) {
             return
         }
@@ -150,7 +144,6 @@ function App() {
         {state.settings &&
             <UpdateBar appVersion={appVersion} />
         }
-
     </main>
 }
 

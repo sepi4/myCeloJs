@@ -115,6 +115,37 @@ export default function Navbar({ handleSetSettingsView }) {
         </StyledInputDiv>
     )
 
+    const checkLogDiv = (
+        <>
+            <NavCheckbox
+                text={'auto'}
+                checked={state.autoLogChecking
+                    ? state.autoLogChecking
+                    : false
+                }
+                handler={() => dispatch({
+                    type: 'TOGGLE_AUTO_LOG_CHECKING'
+                })}
+            />
+
+            <div style={{ marginLeft: '.5em' }} >
+                {state.autoLogChecking
+                    ? intervalInput
+                    : <StyledButton
+                        onClick={() => {
+                            readLog(
+                                state.settings.logLocation,
+                                data => {
+                                    checkLogData(data, state, dispatch)
+                                },
+                            )
+                        }}
+                    >check log</StyledButton>
+                }
+            </div>
+        </>
+    )
+
     if (state.settingsView) {
         return <StyledNavbar justifyContent='flex-end'>
             <NavBarIcon icon={faTimes} fun={fun} />
@@ -124,37 +155,24 @@ export default function Navbar({ handleSetSettingsView }) {
     return <StyledNavbar>
         <Div>
             <StyledColumn>
-                {table}
-                {all}
+                <StyledRow>
+                    <div style={{ fontSize: '70%' }}>dropdown info</div>
+                </StyledRow>
+                <StyledRow>
+                    {table}
+                    <span style={{ marginLeft: '1em' }}>{all}</span>
+                </StyledRow>
             </StyledColumn>
 
-            <StyledRow>
-                <NavCheckbox
-                    text={'auto'}
-                    checked={state.autoLogChecking
-                        ? state.autoLogChecking
-                        : false
-                    }
-                    handler={() => dispatch({
-                        type: 'TOGGLE_AUTO_LOG_CHECKING'
-                    })}
-                />
-
-                <div style={{ marginLeft: '.5em' }} >
-                    {state.autoLogChecking
-                        ? intervalInput
-                        : <StyledButton
-                            onClick={() => {
-                                readLog(state.settings.logLocation, data => {
-                                    checkLogData(data, state, dispatch)
-                                })
-                            }}
-                        >check</StyledButton>
-                    }
-                </div>
-            </StyledRow>
+            <StyledColumn>
+                <StyledRow>
+                    <div style={{ fontSize: '70%' }}>log checking</div>
+                </StyledRow>
+                <StyledRow>
+                    {checkLogDiv}
+                </StyledRow>
+            </StyledColumn>
         </Div>
-
         <NavBarIcon icon={faCogs} fun={fun} />
     </StyledNavbar>
 }
