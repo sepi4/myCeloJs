@@ -2,7 +2,7 @@ import fs from 'fs'
 
 import { getPlayersInfo } from './getPlayersInfo'
 
-function getCurrentUser(lines) {
+export function getCurrentUser(lines) {
     for (let i = 0; i < lines.length; i++) {
         const row = lines[i]
         const m = row.match(/GAME -- Current user name is \[(.+)\]/)
@@ -12,7 +12,7 @@ function getCurrentUser(lines) {
     }
 }
 
-function getLines(lines) {
+export function getLines(lines) {
 
     let arr = []
     let stop = false
@@ -39,7 +39,7 @@ function getLines(lines) {
     return arr
 }
 
-function switchTeams(info, currentUser) {
+export function switchTeams(info, currentUser) {
     const arr = info.filter(p => p.name === currentUser && p.profileId)
 
     if (arr.length !== 1 || arr[0].teamSlot === '0') {

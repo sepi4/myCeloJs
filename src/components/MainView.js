@@ -4,6 +4,9 @@ import { useSelector } from 'react-redux'
 import Team from './Teams/Team'
 import Settings from './Settings/Settings'
 
+// import { remote } from 'electron'
+// const { BrowserWindow } = remote
+
 function MainView() {
     const settingsView = useSelector(state => state.settingsView)
     let teams = [[], []]
@@ -14,6 +17,27 @@ function MainView() {
             teams[p.teamSlot].push(p)
         })
     }
+
+    // return (
+    //     <button
+    //         onClick={() => {
+    //             // window.open('https://github.com', '_blank', 'nodeIntegration=no')
+
+    //             let win = new BrowserWindow({
+    //                 width: 1920,
+    //                 height: 1080,
+    //                 transparent: true,
+    //                 frame: false
+    //             })
+    //             console.log(__dirname, process.cwd())
+    //             win.loadURL(`file://${process.cwd()}/localhostFiles/rankings.html`)
+
+    //             win.setAlwaysOnTop(true, 'screen');
+
+    //             win.show()
+    //         }}
+    //     >button</button>
+    // )
 
     if (settingsView) {
         return <Settings />

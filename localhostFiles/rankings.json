@@ -1,21 +1,7 @@
 {
     "teams": {
-        "team1": [
-            {
-                "name": "UA | babrich",
-                "ranking": "290",
-                "country": "ua",
-                "faction": "okw"
-            }
-        ],
-        "team2": [
-            {
-                "name": "C0LDs44.",
-                "ranking": "427",
-                "country": "de",
-                "faction": "usa"
-            }
-        ]
+        "team1": [],
+        "team2": []
     },
     "horizontal": true
 }
