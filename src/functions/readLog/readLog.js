@@ -65,7 +65,9 @@ export function readLog(fileLocation, callback) {
 
         let currentUser = getCurrentUser(lines)
         let arr = getLines(lines)
+        // console.log('arr:', arr)
         let info = getPlayersInfo(arr)
+        // console.log('info:', info)
 
         if (currentUser) {
             info = switchTeams(info, currentUser)

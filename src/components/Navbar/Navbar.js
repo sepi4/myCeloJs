@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { faCogs, faTimes, } from '@fortawesome/free-solid-svg-icons'
 
 import checkLogData from '../../functions/checkLogData'
-import { readLog } from '../../functions/readLog'
+import { readLog } from '../../functions/readLog/readLog'
 
 import NavCheckbox from './NavCheckBox'
 

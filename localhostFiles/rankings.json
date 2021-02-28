@@ -1,7 +1,57 @@
 {
     "teams": {
-        "team1": [],
-        "team2": []
+        "team1": [
+            {
+                "name": "Crateruss",
+                "ranking": "3534",
+                "country": "fi",
+                "faction": "sov"
+            },
+            {
+                "name": "-syN-",
+                "ranking": "437",
+                "country": "us",
+                "faction": "uk"
+            },
+            {
+                "name": "Volve",
+                "ranking": "825",
+                "country": "gb",
+                "faction": "usa"
+            },
+            {
+                "name": "sepi",
+                "ranking": "534",
+                "country": "fi",
+                "faction": "sov"
+            }
+        ],
+        "team2": [
+            {
+                "name": "vangdeo",
+                "ranking": "1095",
+                "country": "us",
+                "faction": "okw"
+            },
+            {
+                "name": "ModryPotapac",
+                "ranking": "656",
+                "country": "sk",
+                "faction": "wer"
+            },
+            {
+                "name": "酸甜冰柠檬",
+                "ranking": "1269",
+                "country": "cn",
+                "faction": "okw"
+            },
+            {
+                "name": "han_fei",
+                "ranking": "2076",
+                "country": "cn",
+                "faction": "wer"
+            }
+        ]
     },
     "horizontal": true
 }

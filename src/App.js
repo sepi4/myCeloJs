@@ -11,7 +11,7 @@ import MainView from './components/MainView'
 import { writeRankings } from './functions/writeRankings'
 import { readSettings } from './functions/readSettings'
 import { getExtraInfo } from './functions/getExtraInfo'
-import { readLog } from './functions/readLog'
+import { readLog } from './functions/readLog/readLog'
 import writeSettings from './functions/writeSettings'
 import checkLogData from './functions/checkLogData'
 
@@ -82,7 +82,7 @@ function App() {
                     })
                 })
 
-                console.log('extra data', data)
+                // console.log('extra data', data)
 
                 dispatch({
                     type: 'SET_EXTRA_INFO',

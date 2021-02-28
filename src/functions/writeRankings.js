@@ -16,7 +16,6 @@ export function writeRankings(
         }
     }
 
-    console.log('writeRankings from:', from)
     players = formatToStr(players)
     // let str1 = ''
     // let str2 = ''
