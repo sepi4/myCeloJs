@@ -55,7 +55,6 @@
         "@babel/core": "^7.12.13",
         "@babel/preset-env": "^7.12.13",
         "@babel/preset-react": "^7.12.13",
-        "@types/jest": "^26.0.20",
         "babel-loader": "^8.2.2",
         "babili-webpack-plugin": "^0.1.2",
         "cross-env": "^7.0.3",

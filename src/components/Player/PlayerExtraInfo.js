@@ -11,13 +11,19 @@ const Div = styled.div`
     padding: 0.5em 0;
 `
 
-function PlayerExtraInfo({ 
-    extraInfo, 
+function PlayerExtraInfo({
+    extraInfo,
 }) {
     let ranksArr = extraInfo && extraInfo.ranks
     const navButtons = useSelector(state => state.navButtons)
 
     return <Div>
+        <div style={{
+            margin: '1em 0',
+        }}>
+            <button onClick={() => console.log(extraInfo)}>kissa</button>
+        </div>
+
         {navButtons.table && ranksArr &&
             <TableDiv ranksArr={ranksArr} />
         }
