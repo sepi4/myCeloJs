@@ -1,10 +1,10 @@
 {
     "name": "mycelo",
     "productName": "myCelo",
-    "version": "1.6.1",
+    "version": "1.7.0",
     "description": "COH2 ranking display",
     "license": "MIT",
-    "author": "Barney Rubble <b@rubble.com> (http://barnyrubble.tumblr.com/)",
+    "author": "Sergei Polishsuk",
     "engines": {
         "node": ">=9.0.0",
         "npm": ">=5.0.0",
