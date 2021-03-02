@@ -8,10 +8,10 @@ import { useSelector, useDispatch } from 'react-redux'
 function Player({ player, extraInfo, teamIndex, playerIndex }) {
 
     const dispatch = useDispatch()
-    const openInfos = useSelector(state => state.openInfos) 
+    const openInfos = useSelector(state => state.openInfos)
 
     const handleSetShowExtra = () => {
-        dispatch({ 
+        dispatch({
             type: 'TOGGLE_EXTRA',
             data: {
                 teamIndex,
@@ -31,8 +31,9 @@ function Player({ player, extraInfo, teamIndex, playerIndex }) {
             }}
         />
         {showExtra && extraInfo
-            ?  <PlayerExtraInfo 
-                extraInfo={extraInfo} 
+            ? <PlayerExtraInfo
+                player={player}
+                extraInfo={extraInfo}
             />
             : null
         }

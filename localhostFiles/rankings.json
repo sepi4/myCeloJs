@@ -1,7 +1,57 @@
 {
     "teams": {
-        "team1": [],
-        "team2": []
+        "team1": [
+            {
+                "name": "Crateruss",
+                "ranking": "555",
+                "country": "fi",
+                "faction": "sov"
+            },
+            {
+                "name": "Ghost",
+                "ranking": "845",
+                "country": "gb",
+                "faction": "usa"
+            },
+            {
+                "name": "la grosse baguette au chocolat !",
+                "ranking": "973",
+                "country": "fr",
+                "faction": "uk"
+            },
+            {
+                "name": "sepi",
+                "ranking": "555",
+                "country": "fi",
+                "faction": "sov"
+            }
+        ],
+        "team2": [
+            {
+                "name": "...",
+                "ranking": "1749",
+                "country": "at",
+                "faction": "wer"
+            },
+            {
+                "name": "ur boomer dad",
+                "ranking": "535",
+                "country": "ru",
+                "faction": "okw"
+            },
+            {
+                "name": "Non stop",
+                "ranking": "535",
+                "country": "ru",
+                "faction": "wer"
+            },
+            {
+                "name": "Martin",
+                "ranking": "535",
+                "country": "ru",
+                "faction": "okw"
+            }
+        ]
     },
     "horizontal": true
 }
