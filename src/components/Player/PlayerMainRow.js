@@ -13,10 +13,10 @@ import { faCaretRight, faCaretDown, } from '@fortawesome/free-solid-svg-icons'
 import countries from '../../../countries.json'
 
 const StyledSpan = styled.span`
-    width: ${({width}) => width};
+    width: ${({ width }) => width};
     display: flex;
     align-items: center;
-    justify-content: ${({justifyContent}) => justifyContent 
+    justify-content: ${({ justifyContent }) => justifyContent
         ? justifyContent
         : 'center'
     };
@@ -80,7 +80,7 @@ function PlayerMainRow({
         display: 'flex',
         alignItems: 'center',
     }}>
-        <StyledSpan 
+        <StyledSpan
             width='20%'
             justifyContent='flex-start'
         >
@@ -99,7 +99,7 @@ function PlayerMainRow({
 
             {player.ranking === '-1' || player.ranking === -1
                 ? '-'
-                : Number(player.ranking)
+                : player.ranking // Number(player.ranking)
             }
         </StyledSpan>
 
@@ -110,7 +110,7 @@ function PlayerMainRow({
         </StyledSpan>
 
         <StyledSpan width='15%'>
-            {country !== undefined 
+            {country !== undefined
                 ? <img
                     style={{
                         height: '1.2em',
@@ -127,8 +127,8 @@ function PlayerMainRow({
             width='50%'
             onClick={() => (steamId ? shell.openExternal(link) : null)}
         >
-            <span 
-                style={{ cursor: steamId ? 'pointer' : null, }} 
+            <span
+                style={{ cursor: steamId ? 'pointer' : null, }}
                 title={
                     extraInfo && player.profileId
                         ? getTotalGames(player) + ' games played'

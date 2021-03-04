@@ -24,11 +24,12 @@ function getStatGrops(team, data) {
     return []
 }
 
-function findTeamLeaderboardStats(statGroups, data, leaderboardId) {
+function addRankToTeamLeaderboardStats(statGroups, data, leaderboardId) {
     // console.log('statGropus', statGroups)
     // console.log('leaderboardId', leaderboardId)
     // console.log('data.leaderboardStats: ', data.leaderboardStats)
     let arr = []
+    let teamIndex = 1
     data.leaderboardStats.forEach(ls => {
         statGroups.forEach(sg => {
             if (
@@ -40,7 +41,16 @@ function findTeamLeaderboardStats(statGroups, data, leaderboardId) {
                 )
             ) {
                 arr.push(ls)
-                sg.rank = ls.rank
+                // sg.rank = ls.rank + ' :t' + (i + 1)
+                let teamMarker
+                if (teamIndex === 1) {
+                    teamMarker = ' ¹'
+                } else {
+                    teamMarker = ' ²'
+                }
+
+                sg.rank = ls.rank + teamMarker
+                teamIndex++
             }
         })
     })
@@ -85,21 +95,15 @@ function getLeaderboardId(titleName, titles) {
     }
 }
 
-
 function getTitlesLeaderboardId(name, titles) {
     let obj = titles.leaderboards.find(obj => obj.name === name)
     return obj.id
 }
 
-
-function getPlayerStatGroupId(playerId, data) {
-
-    let p = data.statGroups.find(obj => (obj.type === 1
+function getPlayerStatGroup(playerId, data) {
+    return data.statGroups.find(obj => (obj.type === 1
         && obj.members[0].profile_id === playerId
     ))
-    if (p) {
-        return p.id
-    }
 }
 
 function getPlayerLeaderboardStat(statGroupId, leaderboardId, data) {
@@ -120,10 +124,8 @@ function findInStatGroups(statGroups, player) {
     return false
 }
 
-
 export function guessRankings(playersArr, data, titles) {
     function rankToRandomPlayer(team, player) {
-
         let s = team.length
         let fn = getFactionName(player.faction)
         let matchTypeName = `${s}v${s}${fn}`
@@ -131,8 +133,13 @@ export function guessRankings(playersArr, data, titles) {
             matchTypeName, titles)
 
         let playerId = player.profileId
+        let playerStatGroup = getPlayerStatGroup(playerId, data)
 
-        let playerStatGroupId = getPlayerStatGroupId(playerId, data)
+        let playerStatGroupId
+        if (playerStatGroup) {
+            playerStatGroupId = playerStatGroup.id
+        }
+
         let pls = getPlayerLeaderboardStat(
             playerStatGroupId, leaderboardId, data)
         if (pls && pls.rank) {
@@ -140,7 +147,6 @@ export function guessRankings(playersArr, data, titles) {
         }
     }
 
-    // debugger
     let arr = formatToNums(copyObj(playersArr))
     let teams = separateTeams(arr)
     for (const team of teams) {
@@ -149,17 +155,11 @@ export function guessRankings(playersArr, data, titles) {
         if (statGroups.length > 0 && team.length > 1) {
             const modeName = getTitleName(statGroups[0].members.length, side)
             const leaderboardId = getLeaderboardId(modeName, titles)
-            // console.log('modeName: ', modeName)
-            // console.log('leaderboardId: ', leaderboardId)
-            let teamLeaderboardStats = findTeamLeaderboardStats(
+            addRankToTeamLeaderboardStats(
                 statGroups,
                 data,
                 leaderboardId,
             )
-
-            console.log('teamLearboardStats:', teamLeaderboardStats)
-            console.log('statGroups: ', statGroups)
-
             team.forEach(player => {
                 const sg = findInStatGroups(statGroups, player)
                 if (sg) {
@@ -175,7 +175,7 @@ export function guessRankings(playersArr, data, titles) {
         }
     }
 
-    // getting country to player
+    // adding country to player
     for (let t of teams) {
         for (const player of t) {
             if (player.profileId) {
@@ -193,5 +193,6 @@ export function guessRankings(playersArr, data, titles) {
             }
         }
     }
+
     return teams
 }
