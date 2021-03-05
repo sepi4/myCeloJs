@@ -61,7 +61,7 @@ export default function Navbar({ handleSetSettingsView }) {
     const [error, setError] = useState(false)
 
     const navButtons = useSelector(state => state.navButtons)
-    const [all, table] = ['all', 'table'].map(text => {
+    const [all, table, total] = ['all', 'table', 'total'].map(text => {
         return <NavCheckbox
             key={text}
             text={text}
@@ -164,10 +164,9 @@ export default function Navbar({ handleSetSettingsView }) {
                     <div style={{ fontSize: '70%' }}>dropdown info</div>
                 </StyledRow>
                 <StyledRow>
-
                     {table}
-
-                    <span>{all}</span>
+                    {all}
+                    {total}
                     {/* <span style={{ marginLeft: '1em' }}>{all}</span> */}
                 </StyledRow>
             </StyledColumn>

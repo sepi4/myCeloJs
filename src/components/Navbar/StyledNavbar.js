@@ -12,7 +12,7 @@ export const StyledNavbar = styled.div`
     border-bottom: 2px solid black;
     display: flex;
     align-items: center;
-    z-index: 99999;
+    z-index: 100;
     cursor: default;
 
     justify-content: ${({ justifyContent }) => justifyContent}

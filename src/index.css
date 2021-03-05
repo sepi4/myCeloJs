@@ -18,6 +18,26 @@ main {
   margin: 0 1em;
 }
 
+table {
+  border-spacing: 0;
+}
+
+::-webkit-scrollbar {
+  width: .4em;
+}
+/* Track */
+::-webkit-scrollbar-track {
+  background: gray;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(66, 66, 66);
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(50, 50, 50);
+}
+
 
 
 @media only screen and (min-width: 1000px) {

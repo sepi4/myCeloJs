@@ -58,7 +58,11 @@ let store = createStore(reducer, {
 
     navButtons: getLocal(
         'navButtons',
-        { all: false, table: false }
+        {
+            all: false,
+            table: false,
+            total: false,
+        },
     ),
 
     openInfos: [

@@ -2,30 +2,54 @@
     "teams": {
         "team1": [
             {
-                "name": "kkbb1",
-                "ranking": "-",
-                "country": "cn",
-                "faction": "uk"
+                "name": "Akerbeltz",
+                "ranking": "579",
+                "country": "es",
+                "faction": "okw"
             },
             {
-                "name": "Leon",
-                "ranking": "2052",
-                "country": "cl",
-                "faction": "sov"
+                "name": "Stark",
+                "ranking": "675",
+                "country": "us",
+                "faction": "okw"
+            },
+            {
+                "name": "RONIN",
+                "ranking": "194",
+                "country": "ru",
+                "faction": "wer"
+            },
+            {
+                "name": "sepi",
+                "ranking": "897",
+                "country": "fi",
+                "faction": "okw"
             }
         ],
         "team2": [
             {
-                "name": "Thorbjorn",
-                "ranking": "5526 ¹",
-                "country": "cl",
-                "faction": "wer"
+                "name": "Mike",
+                "ranking": "1871",
+                "country": "us",
+                "faction": "usa"
             },
             {
-                "name": "Astarot",
-                "ranking": "5526 ¹",
-                "country": "cl",
-                "faction": "wer"
+                "name": "ECHort55",
+                "ranking": "765",
+                "country": "us",
+                "faction": "usa"
+            },
+            {
+                "name": "Azazel",
+                "ranking": "1416",
+                "country": "it",
+                "faction": "sov"
+            },
+            {
+                "name": "MAYI MAYI",
+                "ranking": "1218",
+                "country": "it",
+                "faction": "usa"
             }
         ]
     },

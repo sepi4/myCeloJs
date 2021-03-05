@@ -60,6 +60,15 @@ export function writeRankings(
         const country = players[i].country ? players[i].country : ''
         const name = players[i].name
         let ranking = players[i].ranking === '-1' ? '-' : players[i].ranking
+
+        // console.log('ranking:', ranking)
+        // console.log('teamSlot:', teamSlot)
+        // console.log('players:', players[i])
+        // console.log()
+
+        if (ranking === undefined) {
+            ranking = '-'
+        }
         if (!isNaN(ranking)) {
             ranking = (+ranking).toString()
         }

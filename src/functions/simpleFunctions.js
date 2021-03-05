@@ -18,7 +18,7 @@ export function commonName(str) {
 export function formatToStr(arr) {
     for (let obj of arr) {
         for (let key of Object.keys(obj)) {
-            if (typeof(obj[key]) === 'number') {
+            if (typeof (obj[key]) === 'number') {
                 obj[key] = obj[key].toString()
             }
         }
@@ -65,6 +65,23 @@ export function getFactionName(x) {
             return 'British'
         case 'west_german':
             return 'WestGerman'
+        default:
+            return undefined
+    }
+}
+
+export function getFactionById(id) {
+    switch (id) {
+        case 0:
+            return 'wer'
+        case 1:
+            return 'sov'
+        case 2:
+            return 'okw'
+        case 3:
+            return 'usa'
+        case 4:
+            return 'uk'
         default:
             return undefined
     }

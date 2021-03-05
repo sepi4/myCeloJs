@@ -49,6 +49,10 @@ function addRankToTeamLeaderboardStats(statGroups, data, leaderboardId) {
                     teamMarker = ' ²'
                 }
 
+                if (!ls.rank || ls.rank < 1) {
+                    ls.rank = '-'
+                }
+
                 sg.rank = ls.rank + teamMarker
                 teamIndex++
             }
