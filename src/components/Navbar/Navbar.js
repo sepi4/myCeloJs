@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import { faCogs, faTimes, } from '@fortawesome/free-solid-svg-icons'
 
-import checkLogData from '../../functions/checkLogData'
+import setPalyersWithoutChecking from '../../functions/setPlayersWithoutChecking'
 import { readLog } from '../../functions/readLog/readLog'
 
 import NavCheckbox from './NavCheckBox'
@@ -140,9 +140,9 @@ export default function Navbar({ handleSetSettingsView }) {
                         onClick={() => {
                             readLog(
                                 state.settings.logLocation,
-                                data => {
-                                    checkLogData(data, state, dispatch)
-                                },
+                                data => setPalyersWithoutChecking(
+                                    data, state, dispatch
+                                ),
                             )
                         }}
                     >check log</StyledButton>
