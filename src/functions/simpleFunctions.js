@@ -18,7 +18,7 @@ export function commonName(str) {
 export function formatToStr(arr) {
     for (let obj of arr) {
         for (let key of Object.keys(obj)) {
-            if (typeof (obj[key]) === 'number') {
+            if (typeof obj[key] === 'number') {
                 obj[key] = obj[key].toString()
             }
         }

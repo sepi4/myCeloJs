@@ -2,54 +2,30 @@
     "teams": {
         "team1": [
             {
-                "name": "Akerbeltz",
-                "ranking": "579",
-                "country": "es",
-                "faction": "okw"
-            },
-            {
-                "name": "Stark",
-                "ranking": "675",
-                "country": "us",
-                "faction": "okw"
-            },
-            {
-                "name": "RONIN",
-                "ranking": "194",
+                "name": "HSRometh",
+                "ranking": "577 ¹",
                 "country": "ru",
-                "faction": "wer"
+                "faction": "uk"
             },
             {
                 "name": "sepi",
-                "ranking": "897",
+                "ranking": "577 ¹",
                 "country": "fi",
-                "faction": "okw"
+                "faction": "sov"
             }
         ],
         "team2": [
             {
-                "name": "Mike",
-                "ranking": "1871",
-                "country": "us",
-                "faction": "usa"
+                "name": "Lars",
+                "ranking": "667 ¹",
+                "country": "de",
+                "faction": "wer"
             },
             {
-                "name": "ECHort55",
-                "ranking": "765",
-                "country": "us",
-                "faction": "usa"
-            },
-            {
-                "name": "Azazel",
-                "ranking": "1416",
-                "country": "it",
-                "faction": "sov"
-            },
-            {
-                "name": "MAYI MAYI",
-                "ranking": "1218",
-                "country": "it",
-                "faction": "usa"
+                "name": "Dr.Dachschaden // nomenestomen",
+                "ranking": "667 ¹",
+                "country": "de",
+                "faction": "wer"
             }
         ]
     },
