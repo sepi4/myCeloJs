@@ -48,6 +48,8 @@ let store = createStore(reducer, {
 
     autoLogChecking: getLocal('autoLogChecking', true),
 
+    alert: getLocal('alert', false),
+
     updateCheckDone: false,
 
     appLocation: process.cwd(),

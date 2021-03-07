@@ -1,5 +1,3 @@
-<!-- # COH2 LAGGER BUG VERSION
-Use <a id="raw-url" href="https://github.com/sepi4/myCeloJs/raw/ladderBug/sepi-celo%20Setup%20666.666.666.exe" > THIS </a> version until relic haven't fixed ladder bugs.  -->
 
 - [About](#about)
 - [Install and setup](#install)
@@ -154,6 +152,9 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 
 ## Updates:
 
+* **version 1.7.0.** 
+    - Add history modal that display history of resent games
+    - Add sound alert when log checking is in auto mode
 * **version 1.6.1.** 
     - Bug fix (current user team was some times on wrong positions, should always be first)
     - Small navbar visual changings

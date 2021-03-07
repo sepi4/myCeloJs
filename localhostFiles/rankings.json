@@ -1,33 +1,7 @@
 {
     "teams": {
-        "team1": [
-            {
-                "name": "HSRometh",
-                "ranking": "577 ¹",
-                "country": "ru",
-                "faction": "uk"
-            },
-            {
-                "name": "sepi",
-                "ranking": "577 ¹",
-                "country": "fi",
-                "faction": "sov"
-            }
-        ],
-        "team2": [
-            {
-                "name": "Lars",
-                "ranking": "667 ¹",
-                "country": "de",
-                "faction": "wer"
-            },
-            {
-                "name": "Dr.Dachschaden // nomenestomen",
-                "ranking": "667 ¹",
-                "country": "de",
-                "faction": "wer"
-            }
-        ]
+        "team1": [],
+        "team2": []
     },
     "horizontal": true
 }

@@ -2,6 +2,10 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector, } from 'react-redux'
 
+
+import useSound from 'use-sound'
+import audioLocation from './bell.mp3'
+
 // components
 import Navbar from './components/Navbar/Navbar'
 import UpdateBar from './components/UpdateBar'
@@ -22,6 +26,8 @@ const settingsDir = electron.remote.app.getPath('userData')
 document.title = 'myCelo ' + appVersion
 
 function App() {
+    const [playAudio] = useSound(audioLocation)
+
     const dispatch = useDispatch()
     const state = useSelector(state => state)
 
@@ -109,7 +115,11 @@ function App() {
         const intervalId = setInterval(() => {
             if (state.settings && state.settings.logLocation) {
                 readLog(state.settings.logLocation, data => {
-                    checkLogData(data, state, dispatch)
+                    if (state.alert) {
+                        checkLogData(data, state, dispatch, playAudio)
+                    } else {
+                        checkLogData(data, state, dispatch)
+                    }
                 })
             }
         }, state.logCheckInterval * 1000)

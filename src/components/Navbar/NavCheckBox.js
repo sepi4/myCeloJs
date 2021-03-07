@@ -4,7 +4,7 @@ export default function NavCheckbox({ text, handler, checked }) {
 
     const id = Math.random().toString()
 
-    return <div style={{
+    return <span style={{
         display: 'flex',
         alignItems: 'center',
     }}>
@@ -29,6 +29,6 @@ export default function NavCheckbox({ text, handler, checked }) {
         >{text}</label>
 
 
-    </div>
+    </span>
 
 }

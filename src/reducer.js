@@ -19,6 +19,16 @@ function reducer(state, action) {
                 autoLogChecking: !state.autoLogChecking,
             }
 
+        case 'TOGGLE_ALERT':
+            localStorage.setItem(
+                'alert',
+                JSON.stringify(!state.alert),
+            )
+            return {
+                ...state,
+                alert: !state.alert,
+            }
+
         case 'TOGGLE_NAVBUTTON':
             // eslint-disable-next-line no-case-declarations
             let obj = copyObj(state.navButtons)

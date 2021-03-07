@@ -1,6 +1,7 @@
 import { writeRankings } from './writeRankings'
 
-export default function checkLogData(data, state, dispatch) {
+export default function checkLogData(data, state, dispatch, playAudio) {
+
     if (JSON.stringify(state.fromFile) !== JSON.stringify(data)) {
         dispatch({
             type: 'SET_NEW_PLAYERS',
@@ -13,6 +14,9 @@ export default function checkLogData(data, state, dispatch) {
                 state.settings.rankingsHorizontal,
                 'checkLogData'
             )
+            if (playAudio && data.length > 0) {
+                playAudio()
+            }
         }
     }
 }

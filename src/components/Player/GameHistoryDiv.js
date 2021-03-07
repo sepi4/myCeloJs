@@ -45,7 +45,8 @@ export default function GameHistoryDiv({ game, profiles }) {
         backgroundColor = 'red'
     }
 
-    const players = game.players.sort((a, b) => b.resulttype - a.resulttype)
+    // const players = game.players.sort((a, b) => b.resulttype - a.resulttype)
+    const players = game.players.sort((a, b) => b.teamid - a.teamid)
 
     const tableHeader = (
         <thead>
@@ -143,7 +144,7 @@ export default function GameHistoryDiv({ game, profiles }) {
         overflow: 'hidden',
         height: '2em',
         margin: '0',
-        flex: '1 1 20%',
+        flex: '1 1 8em',
     }
     return (
         <>
@@ -156,7 +157,7 @@ export default function GameHistoryDiv({ game, profiles }) {
                     alignItems: 'center',
                     justifyContent: 'space-evenly',
                     cursor: 'pointer',
-                    margin: '0.3em',
+                    margin: '0.2em',
                 }}
                 onClick={() => {
                     setModal(true)
@@ -205,6 +206,11 @@ export default function GameHistoryDiv({ game, profiles }) {
                         backgroundColor: '#181818',
                         color: '#ddd',
                     },
+                    overlay: {
+                        backgroundColor: 'rgba(200, 200, 200, 0.5)',
+                    }
+                    // opacity: '50%',
+
                 }}
             >
                 {/* <button onClick={() => setModal(false)}>Close Modal</button> */}

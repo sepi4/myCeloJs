@@ -15,7 +15,7 @@ module.exports = {
                 use: [{ loader: 'babel-loader', query: { compact: false } }],
             },
             {
-                test: /\.(jpe?g|png|gif)$/,
+                test: /\.(jpe?g|png|gif|mp3)$/,
                 use: [{ loader: 'file-loader?name=img/[name]__[hash:base64:5].[ext]' }],
             },
             {

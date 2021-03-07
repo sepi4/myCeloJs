@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import { faCogs, faTimes, } from '@fortawesome/free-solid-svg-icons'
 
-import setPalyersWithoutChecking from '../../functions/setPlayersWithoutChecking'
+import setPlayersWithoutChecking from '../../functions/setPlayersWithoutChecking'
 import { readLog } from '../../functions/readLog/readLog'
 
 import NavCheckbox from './NavCheckBox'
@@ -16,6 +16,7 @@ import { StyledColumn } from '../styled/StyledFlex'
 import { StyledInputDiv } from './StyledInputDiv'
 import { StyledNavbar } from './StyledNavbar'
 import NavBarIcon from './NavbarIcon'
+
 
 const Div = styled.div`
     margin: 0 1.2em;
@@ -49,6 +50,7 @@ const StyledButton = styled.div`
 `
 
 export default function Navbar({ handleSetSettingsView }) {
+
 
     const state = useSelector(state => state)
     const dispatch = useDispatch()
@@ -121,6 +123,9 @@ export default function Navbar({ handleSetSettingsView }) {
     const checkLogDiv = (
         <div style={{
             display: 'flex',
+            justifyContent: 'space-evenly',
+            width: '100%',
+            // backgroundColor: 'pink',
         }}>
             <NavCheckbox
                 text={'auto'}
@@ -133,21 +138,32 @@ export default function Navbar({ handleSetSettingsView }) {
                 })}
             />
 
-            <div style={{ marginLeft: '.5em' }} >
-                {state.autoLogChecking
-                    ? intervalInput
-                    : <StyledButton
-                        onClick={() => {
-                            readLog(
-                                state.settings.logLocation,
-                                data => setPalyersWithoutChecking(
-                                    data, state, dispatch
-                                ),
-                            )
-                        }}
-                    >check log</StyledButton>
-                }
-            </div>
+            {state.autoLogChecking
+                ? <>
+                    {intervalInput}
+                    <NavCheckbox
+                        text={'alert'}
+                        checked={state.alert
+                            ? state.alert
+                            : false
+                        }
+                        handler={() => dispatch({
+                            type: 'TOGGLE_ALERT'
+                        })}
+                    />
+                </>
+                : <StyledButton
+                    onClick={() => {
+
+                        readLog(
+                            state.settings.logLocation,
+                            data => setPlayersWithoutChecking(
+                                data, state, dispatch
+                            ),
+                        )
+                    }}
+                >check log</StyledButton>
+            }
         </div>
     )
 
@@ -167,7 +183,6 @@ export default function Navbar({ handleSetSettingsView }) {
                     {table}
                     {all}
                     {total}
-                    {/* <span style={{ marginLeft: '1em' }}>{all}</span> */}
                 </StyledRow>
             </StyledColumn>
 

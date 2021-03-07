@@ -1,7 +1,7 @@
 
 import styled from 'styled-components'
 
-export const StyledInputDiv = styled.div`
+export const StyledInputDiv = styled.span`
     width: 6em;
 
     input {
