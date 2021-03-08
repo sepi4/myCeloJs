@@ -154,6 +154,7 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 
 * **version 1.7.0.** 
     - Add history modal that display history of resent games
+    - Add indexes to arranged teams
     - Add sound alert when log checking is in auto mode
 * **version 1.6.1.** 
     - Bug fix (current user team was some times on wrong positions, should always be first)
