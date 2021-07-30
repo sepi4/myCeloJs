@@ -31,7 +31,7 @@ export default function History({ player, }) {
 
             Promise.all([fetch1, fetch2])
                 .then((result) => {
-                    console.log('result:', result)
+                    console.log('History fetch result:', result)
 
                     const { data } = result[0]
                     const { matchTypes } = result[1].data
@@ -60,9 +60,6 @@ export default function History({ player, }) {
                         mObj.result = m.matchhistoryreportresults.find((r) => {
                             return r.profile_id.toString() === player.profileId
                         })
-                        // if (!mObj.result) {
-                        //     console.log(mObj)
-                        // }
                         mObj.counters = mObj.result.counters
                         arr.push(mObj)
                     })

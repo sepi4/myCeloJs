@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Modal from 'react-modal'
 import moment from 'moment'
+import { shell } from 'electron'
 
 import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation'
 import { getFactionById } from '../../functions/simpleFunctions'
@@ -58,6 +59,7 @@ export default function GameHistoryDiv({ game, profiles }) {
                 >
                     faction
                 </StyledTh>
+
                 {players.map((p) => (
                     <StyledTh key={p.profile_id} len={players.length}>
                         <img
@@ -82,8 +84,17 @@ export default function GameHistoryDiv({ game, profiles }) {
                 >
                     name
                 </StyledTh>
-                {players.map((p) => (
-                    <StyledTh
+                {players.map((p) => {
+                    // console.log('p:', p)
+                    // console.log('profiles:', profiles)
+
+                    const steamId = profiles[p.profile_id].name.substring(7)
+                    const link =
+                        'https://www.coh2.org/'
+                        + 'ladders/playercard/steamid/'
+                        + steamId
+
+                    return <StyledTh
                         key={p.profile_id}
                         len={players.length}
                         style={{
@@ -93,16 +104,25 @@ export default function GameHistoryDiv({ game, profiles }) {
                                     : p.resulttype === 0
                                         ? 'red'
                                         : 'blue',
+                            cursor: 'pointer',
                         }}
                     >
-                        <span title={profiles[p.profile_id].alias}>
+                        <a
+                            title={profiles[p.profile_id].alias}
+                            onClick={() => (steamId
+                                ? shell.openExternal(link)
+                                : null)
+                            }
+                        >
                             {profiles[p.profile_id].alias}
-                        </span>
+                        </a>
+
                     </StyledTh>
-                ))}
+                })}
             </tr>
         </thead>
     )
+    console.log('players:', players)
 
     const styleTd = {
         overflow: 'hidden',
@@ -146,9 +166,18 @@ export default function GameHistoryDiv({ game, profiles }) {
         margin: '0',
         flex: '1 1 8em',
     }
+
+    let playersNames = ''
+    players.forEach((p, i) => {
+        if (i !== 0 && players.length / i === 2) {
+            playersNames += '\t----- vs -----\t\n'
+        }
+        playersNames += profiles[p.profile_id].alias + '\n'
+    })
     return (
         <>
             <div
+                title={playersNames}
                 style={{
                     ...defaultStyle,
                     // backgroundColor: backgroundColor,
@@ -161,7 +190,6 @@ export default function GameHistoryDiv({ game, profiles }) {
                 }}
                 onClick={() => {
                     setModal(true)
-                    // console.log('game:', game)
                 }}
             >
                 <img
@@ -191,7 +219,7 @@ export default function GameHistoryDiv({ game, profiles }) {
 
             <Modal
                 isOpen={modal}
-                contentLabel='testi'
+                contentLabel='gameHistoryStats'
                 ariaHideApp={false}
                 shouldCloseOnOverlayClick={true}
                 onRequestClose={() => setModal(false)}
@@ -209,7 +237,6 @@ export default function GameHistoryDiv({ game, profiles }) {
                     overlay: {
                         backgroundColor: 'rgba(200, 200, 200, 0.5)',
                     }
-                    // opacity: '50%',
 
                 }}
             >
@@ -228,6 +255,10 @@ export default function GameHistoryDiv({ game, profiles }) {
                     </StyledValue>
                 </div>
                 <div>
+                    <StyledLabel>map:</StyledLabel>
+                    <StyledValue>{game.mapName}</StyledValue>
+                </div>
+                <div>
                     <StyledLabel>duration:</StyledLabel>
                     <StyledValue>
                         {
@@ -237,10 +268,6 @@ export default function GameHistoryDiv({ game, profiles }) {
                             ).asMilliseconds()).format("HH:mm")
                         }
                     </StyledValue>
-                </div>
-                <div>
-                    <StyledLabel>map:</StyledLabel>
-                    <StyledValue>{game.mapName}</StyledValue>
                 </div>
 
 

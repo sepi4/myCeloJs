@@ -4,9 +4,8 @@ import { useSelector } from 'react-redux'
 import e from 'electron'
 const { shell } = e
 
-
 function Members({ members }) {
-    const countryFlags = useSelector( state => state.countryFlags)
+    const countryFlags = useSelector(state => state.countryFlags)
 
     return <div style={{ margin: '0.5rem 0' }}>
         <hr />
@@ -21,10 +20,14 @@ function Members({ members }) {
                 key={m.name}
                 onClick={() =>
                     shell.openExternal(
-                        'http://www.companyofheroes.com/' +
-                        'leaderboards#profile/steam/' +
-                        m.name.substring(7) +
-                        '/standings',
+                        'https://www.coh2.org/'
+                        + 'ladders/playercard/steamid/'
+                        + m.name.substring(7)
+
+                        // 'http://www.companyofheroes.com/' +
+                        // 'leaderboards#profile/steam/' +
+                        // m.name.substring(7) +
+                        // '/standings',
                     )
                 }
             >
@@ -41,7 +44,6 @@ function Members({ members }) {
             </div>
         ))}
     </div>
-
 }
 
 export default Members

@@ -58,11 +58,16 @@ function PlayerMainRow({
         />
     )
 
+    // const link =
+    //     'http://www.companyofheroes.com/'
+    //     + 'leaderboards#profile/steam/'
+    //     + steamId
+    //     + '/standings'
+
     const link =
-        'http://www.companyofheroes.com/'
-        + 'leaderboards#profile/steam/'
+        'https://www.coh2.org/'
+        + 'ladders/playercard/steamid/'
         + steamId
-        + '/standings'
 
     const countryFlagLocation = useSelector(
         state => state.countryFlags[country]
@@ -117,7 +122,10 @@ function PlayerMainRow({
                     }}
                     src={countryFlagLocation}
                     alt={country}
-                    title={countries[country] ? countries[country]['name'] : null}
+                    title={countries[country]
+                        ? countries[country]['name']
+                        : null
+                    }
                 />
                 : null
             }
