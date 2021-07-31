@@ -3,29 +3,29 @@
         "team1": [
             {
                 "name": "12345678910 (china noob)",
-                "ranking": "389 ¹",
+                "ranking": "355 ¹",
                 "country": "ru",
                 "faction": "okw"
             },
             {
                 "name": "sepi",
-                "ranking": "389 ¹",
+                "ranking": "355 ¹",
                 "country": "fi",
                 "faction": "wer"
             }
         ],
         "team2": [
             {
-                "name": "bromanj",
-                "ranking": "217",
-                "country": "ca",
-                "faction": "usa"
+                "name": "Silent",
+                "ranking": "380",
+                "country": "us",
+                "faction": "uk"
             },
             {
-                "name": "pac",
-                "ranking": "115",
-                "country": "us",
-                "faction": "usa"
+                "name": "MOGFN",
+                "ranking": "775",
+                "country": "br",
+                "faction": "sov"
             }
         ]
     },

@@ -14,11 +14,18 @@ if (
 }
 
 function createMainWindow() {
+    let icon
+    if (process.platform !== 'win32') {
+        icon = `${__dirname}/img/icon/icon.png`
+    } else {
+        icon = `${__dirname}/img/icon/icon.ico`
+    }
+
     mainWindow = new BrowserWindow({
         width: 800,
         height: 600,
         show: false,
-        icon: `${__dirname}/img/icon/icon.ico`,
+        icon: icon,
         webPreferences: {
             nodeIntegration: true,
             nativeWindowOpen: true,
@@ -88,7 +95,7 @@ app.on('activate', () => {
 // Stop error
 app.allowRendererProcessReuse = true
 
-const http =  require('http')
+const http = require('http')
 const fs = require('fs')
 
 function serveJson(port) {
