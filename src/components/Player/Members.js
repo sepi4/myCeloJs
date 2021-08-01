@@ -7,6 +7,10 @@ const { shell } = e
 function Members({ members }) {
     const countryFlags = useSelector(state => state.countryFlags)
 
+    const link =
+        'https://coh2stats.com/'
+        + 'players/'
+
     return <div style={{ margin: '0.5rem 0' }}>
         <hr />
         {members.map(m => (
@@ -18,18 +22,7 @@ function Members({ members }) {
                     color: 'green',
                 }}
                 key={m.name}
-                onClick={() =>
-                    shell.openExternal(
-                        'https://www.coh2.org/'
-                        + 'ladders/playercard/steamid/'
-                        + m.name.substring(7)
-
-                        // 'http://www.companyofheroes.com/' +
-                        // 'leaderboards#profile/steam/' +
-                        // m.name.substring(7) +
-                        // '/standings',
-                    )
-                }
+                onClick={() => shell.openExternal(link + m.name.substring(7))}
             >
                 <img
                     style={{

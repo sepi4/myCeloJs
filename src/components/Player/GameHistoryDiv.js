@@ -89,10 +89,15 @@ export default function GameHistoryDiv({ game, profiles }) {
                     // console.log('profiles:', profiles)
 
                     const steamId = profiles[p.profile_id].name.substring(7)
+
                     const link =
-                        'https://www.coh2.org/'
-                        + 'ladders/playercard/steamid/'
+                        'https://coh2stats.com/'
+                        + 'players/'
                         + steamId
+
+                    // 'https://www.coh2.org/'
+                    // + 'ladders/playercard/steamid/'
+                    // + steamId
 
                     return <StyledTh
                         key={p.profile_id}

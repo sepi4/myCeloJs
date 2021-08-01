@@ -2,30 +2,18 @@
     "teams": {
         "team1": [
             {
-                "name": "12345678910 (china noob)",
-                "ranking": "355 ¹",
-                "country": "ru",
-                "faction": "okw"
-            },
-            {
-                "name": "sepi",
-                "ranking": "355 ¹",
-                "country": "fi",
+                "name": "3imWeckla",
+                "ranking": "112",
+                "country": "de",
                 "faction": "wer"
             }
         ],
         "team2": [
             {
-                "name": "Silent",
-                "ranking": "380",
-                "country": "us",
-                "faction": "uk"
-            },
-            {
-                "name": "MOGFN",
-                "ranking": "775",
-                "country": "br",
-                "faction": "sov"
+                "name": "pudding dude",
+                "ranking": "70",
+                "country": "ru",
+                "faction": "usa"
             }
         ]
     },

@@ -64,9 +64,14 @@ function PlayerMainRow({
     //     + steamId
     //     + '/standings'
 
+    // const link =
+    //     'https://www.coh2.org/'
+    //     + 'ladders/playercard/steamid/'
+    //     + steamId
+
     const link =
-        'https://www.coh2.org/'
-        + 'ladders/playercard/steamid/'
+        'https://coh2stats.com/'
+        + 'players/'
         + steamId
 
     const countryFlagLocation = useSelector(
