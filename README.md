@@ -1,8 +1,8 @@
 
 - [About](#about)
-- [Install and setup](#install)
-- [Установка и настройка](#installRus)
-- [Updates](#updates)
+- [Install and setup:](#install-and-setup)
+- [Установка и настройка:](#установка-и-настройка)
+- [Updates:](#updates)
 
 
 <a name="about"></a>
@@ -152,6 +152,8 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 
 ## Updates:
 
+* **version 1.7.1.** 
+    - updated links to https://coh2stats.com
 * **version 1.7.0.** 
     - Add history modal that display history of resent games
     - Add indexes to arranged teams
