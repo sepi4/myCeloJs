@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import Modal from 'react-modal'
 import moment from 'moment'
 import { shell } from 'electron'
+import { useSelector } from 'react-redux'
+import getText from '../../functions/getText'
 
 import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation'
 import { getFactionById } from '../../functions/simpleFunctions'
@@ -37,6 +39,8 @@ const StyledTable = styled.table`
 
 export default function GameHistoryDiv({ game, profiles }) {
     const [modal, setModal] = useState(false)
+    const settings = useSelector(state => state.settings)
+    const lg = settings ? settings.language : 'en'
 
     let backgroundColor = 'blue'
     if (game.result.resulttype === 1) {
@@ -57,7 +61,7 @@ export default function GameHistoryDiv({ game, profiles }) {
                         textAlign: 'left',
                     }}
                 >
-                    faction
+                    {getText('faction', lg)}
                 </StyledTh>
 
                 {players.map((p) => (
@@ -82,7 +86,7 @@ export default function GameHistoryDiv({ game, profiles }) {
                         textAlign: 'left',
                     }}
                 >
-                    name
+                    {getText('name', lg)}
                 </StyledTh>
                 {players.map((p) => {
                     // console.log('p:', p)
@@ -163,7 +167,7 @@ export default function GameHistoryDiv({ game, profiles }) {
     )
 
     const matchType = game.matchType ? game.matchType.name : '???'
-    const timeAgo = moment(game.endGameTime).fromNow()
+    const timeAgo = moment(game.endGameTime).locale(lg).fromNow()
 
     const defaultStyle = {
         overflow: 'hidden',
@@ -248,29 +252,29 @@ export default function GameHistoryDiv({ game, profiles }) {
                 {/* <button onClick={() => setModal(false)}>Close Modal</button> */}
 
                 <div>
-                    <StyledLabel>game start time:</StyledLabel>
+                    <StyledLabel>{getText('game_start_time', lg)}:</StyledLabel>
                     <StyledValue>
-                        {moment(game.startGameTime).format('lll')}
+                        {moment(game.startGameTime).locale(lg).format('lll')}
                     </StyledValue>
                 </div>
                 <div>
-                    <StyledLabel>game end time:</StyledLabel>
+                    <StyledLabel>{getText('game_end_time', lg)}:</StyledLabel>
                     <StyledValue>
-                        {moment(game.endGameTime).format('lll')}
+                        {moment(game.endGameTime).locale(lg).format('lll')}
                     </StyledValue>
                 </div>
                 <div>
-                    <StyledLabel>map:</StyledLabel>
+                    <StyledLabel>{getText('map', lg)}:</StyledLabel>
                     <StyledValue>{game.mapName}</StyledValue>
                 </div>
                 <div>
-                    <StyledLabel>duration:</StyledLabel>
+                    <StyledLabel>{getText('duration', lg)}:</StyledLabel>
                     <StyledValue>
                         {
                             moment.utc(moment.duration(
                                 game.endGameTime.getTime()
                                 - game.startGameTime.getTime()
-                            ).asMilliseconds()).format("HH:mm")
+                            ).asMilliseconds()).locale(lg).format("HH:mm:ss")
                         }
                     </StyledValue>
                 </div>

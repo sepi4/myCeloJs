@@ -14,9 +14,14 @@ import {
     byTotal,
 } from '../../functions/sorters'
 
+import getText from '../../functions/getText'
+
 function ListDiv({ ranksArr }) {
     const dispatch = useDispatch()
     const state = useSelector(state => state)
+    const settings = useSelector(state => state.settings)
+    const lg = settings ? settings.language : null
+
     const tableView = state.navButtons.table
     const showAll = state.navButtons.all
     const sorter = state.sorter
@@ -66,22 +71,22 @@ function ListDiv({ ranksArr }) {
                     color: 'gray',
                 }}
             >
-                <ColumnTitle 
+                <ColumnTitle
                     {...setSorter(byRank, 'byRank')}
-                >rank</ColumnTitle>
+                >{getText('rank', lg)}</ColumnTitle>
                 <ColumnTitle
                     {...setSorter(byName, 'byName')}
                     width='40%'
-                >mode</ColumnTitle>
+                >{getText('mode', lg)}</ColumnTitle>
                 <ColumnTitle
                     {...setSorter(byWinRate, 'byWinRate')}
-                >win %</ColumnTitle>
+                >{getText('win', lg)}</ColumnTitle>
                 <ColumnTitle
                     {...setSorter(byStreak, 'byStreak')}
-                >streak</ColumnTitle>
+                >{getText('streak', lg)}</ColumnTitle>
                 <ColumnTitle
                     {...setSorter(byTotal, 'byTotal')}
-                >total</ColumnTitle>
+                >{getText('total', lg)}</ColumnTitle>
             </div>
         }
 
@@ -109,7 +114,7 @@ function ListDiv({ ranksArr }) {
             })
         }
     </div>
-    
+
 }
 
 export default ListDiv

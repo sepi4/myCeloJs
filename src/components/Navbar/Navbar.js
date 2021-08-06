@@ -7,6 +7,7 @@ import { faCogs, faTimes, } from '@fortawesome/free-solid-svg-icons'
 
 import setPlayersWithoutChecking from '../../functions/setPlayersWithoutChecking'
 import { readLog } from '../../functions/readLog/readLog'
+import getText from '../../functions/getText'
 
 import NavCheckbox from './NavCheckBox'
 
@@ -53,6 +54,10 @@ export default function Navbar({ handleSetSettingsView }) {
 
 
     const state = useSelector(state => state)
+    const settings = useSelector(state => state.settings)
+    const lg = settings ? settings.language : 'en'
+
+
     const dispatch = useDispatch()
 
     const fun = () => {
@@ -66,7 +71,7 @@ export default function Navbar({ handleSetSettingsView }) {
     const [all, table, total] = ['all', 'table', 'total'].map(text => {
         return <NavCheckbox
             key={text}
-            text={text}
+            text={getText(text, lg)}
             checked={navButtons[text]}
             handler={() => dispatch({
                 type: 'TOGGLE_NAVBUTTON',
@@ -113,9 +118,11 @@ export default function Navbar({ handleSetSettingsView }) {
                         : null
                 }
             />
-            <span>sec</span>
+            <span>{getText('sec', lg)}</span>
             {error &&
-                <div className='error'>integer 1-999</div>
+                <div className='error'>
+                    {getText('integer_error', lg)}
+                </div>
             }
         </StyledInputDiv>
     )
@@ -125,10 +132,9 @@ export default function Navbar({ handleSetSettingsView }) {
             display: 'flex',
             justifyContent: 'space-evenly',
             width: '100%',
-            // backgroundColor: 'pink',
         }}>
             <NavCheckbox
-                text={'auto'}
+                text={getText('auto', lg)}
                 checked={state.autoLogChecking
                     ? state.autoLogChecking
                     : false
@@ -142,7 +148,7 @@ export default function Navbar({ handleSetSettingsView }) {
                 ? <>
                     {intervalInput}
                     <NavCheckbox
-                        text={'alert'}
+                        text={getText('alert', lg)}
                         checked={state.alert
                             ? state.alert
                             : false
@@ -162,7 +168,7 @@ export default function Navbar({ handleSetSettingsView }) {
                             ),
                         )
                     }}
-                >check log</StyledButton>
+                >{getText('check_log_button', lg)}</StyledButton>
             }
         </div>
     )
@@ -173,11 +179,14 @@ export default function Navbar({ handleSetSettingsView }) {
         </StyledNavbar>
     }
 
+
     return <StyledNavbar>
         <Div>
             <StyledColumn>
                 <StyledRow>
-                    <div style={{ fontSize: '70%' }}>dropdown info</div>
+                    <div style={{ fontSize: '70%' }}>
+                        {getText('dropdown_info', lg)}
+                    </div>
                 </StyledRow>
                 <StyledRow>
                     {table}
@@ -188,7 +197,12 @@ export default function Navbar({ handleSetSettingsView }) {
 
             <StyledColumn>
                 <StyledRow>
-                    <div style={{ fontSize: '70%' }}>log checking</div>
+                    <div style={{ fontSize: '70%' }}>
+                        {getText(
+                            'log_checking',
+                            settings ? settings.language : null
+                        )}
+                    </div>
                 </StyledRow>
                 <StyledRow>
                     {checkLogDiv}

@@ -10,10 +10,12 @@ import SettingsAfterLog from './SettingsAfterLog'
 import writeSettings from '../../functions/writeSettings'
 
 import { StyledTextDiv, StyledButton } from '../styled/styledSettings'
+import getText from '../../functions/getText'
 
 function Settings() {
     const dispatch = useDispatch()
     const settings = useSelector(state => state.settings)
+    const lg = settings ? settings.language : 'en'
 
     const changeLogLocation = () => {
         dialog.showOpenDialog({
@@ -32,15 +34,27 @@ function Settings() {
             }
         })
     }
-    console.log('settings:', settings)
 
-    const text = {
-        en: 'Select',
-        ru: 'Выбрать',
+    const handleLanguage = (e) => {
+        const newSettings = {
+            ...settings,
+            language: e.target.value,
+        }
+        writeSettings(newSettings, dispatch)
     }
 
+
     return <div style={{ marginTop: '4em' }}>
-        <SettingsDiv title="Log location:" >
+
+        <SettingsDiv title={getText('language', lg)}>
+            <select onChange={handleLanguage} value={lg}>
+                <option value="en">EN</option>
+                <option value="ru">RU</option>
+            </select>
+        </SettingsDiv>
+
+
+        <SettingsDiv title={getText('log_location_title', lg)} >
             <StyledTextDiv>
                 {settings && settings.logLocation
                     ? settings.logLocation
@@ -50,8 +64,7 @@ function Settings() {
             <StyledButton
                 onClick={changeLogLocation}
                 buttonColor='black'
-            >{text[settings.language]}</StyledButton>
-            {/* >Select</StyledButton> */}
+            >{getText('select', lg)}</StyledButton>
         </SettingsDiv>
 
         <SettingsAfterLog />

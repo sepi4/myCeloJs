@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import writeSettings from '../../functions/writeSettings'
+import getText from '../../functions/getText'
 
 import SettingsDiv from './SettingsDiv'
 import RadioButton from './RadioButton'
@@ -12,6 +13,8 @@ import SettingsLocation from './SettingsLocation'
 export default function SettingsAfterLog() {
     const state = useSelector(state => state)
     const { settings } = state
+    const lg = settings ? settings.language : 'en'
+
     const dispatch = useDispatch()
 
     const handleType = (e) => {
@@ -35,14 +38,6 @@ export default function SettingsAfterLog() {
         writeSettings(newSettings, dispatch)
     }
 
-    const handleLanguage = (e) => {
-        const newSettings = {
-            ...settings,
-            language: e.target.value,
-        }
-        writeSettings(newSettings, dispatch)
-    }
-
     const fileTypeSet = settings
         && settings.rankingsFile
         && settings.rankingsHorizontal !== undefined
@@ -50,8 +45,12 @@ export default function SettingsAfterLog() {
 
     if (settings && settings.logLocation) {
         return <>
-            <SettingsDiv title="Rankings file (for OBS-studio):" >
-                <RadioButtonsDiv title='Type:' >
+            <SettingsDiv
+                title={getText('rankings_file_title', lg)}
+            >
+
+
+                <RadioButtonsDiv title={getText('format', lg)} >
                     <RadioButton
                         checked={settings.rankingsHtml !== undefined
                             && settings.rankingsHtml}
@@ -66,18 +65,18 @@ export default function SettingsAfterLog() {
                     />
                 </RadioButtonsDiv>
 
-                <RadioButtonsDiv title='Orientation:' >
+                <RadioButtonsDiv title={getText('orientation', lg)} >
                     <RadioButton
                         checked={settings.rankingsHorizontal !== undefined
                             && settings.rankingsHorizontal}
                         handler={handleOrientation}
-                        labelText={'horizontal'}
+                        labelText={getText('horizontal', lg)}
                     />
                     <RadioButton
                         checked={settings.rankingsHorizontal !== undefined
                             && !settings.rankingsHorizontal}
                         handler={handleOrientation}
-                        labelText={'vertical'}
+                        labelText={getText('vertical', lg)}
                     />
                 </RadioButtonsDiv>
 
@@ -86,23 +85,28 @@ export default function SettingsAfterLog() {
                 />
             </SettingsDiv>
 
-            <SettingsLocation fileTypeSet={fileTypeSet} />
+            <SettingsLocation
+                fileTypeSet={fileTypeSet}
+                title={getText(
+                    'settings_file_location_title',
+                    lg)}
+            />
 
-
-            <SettingsDiv title='Language'>
-                <select onChange={handleLanguage}>
-                    <option value="en">EN</option>
-                    <option value="ru">RU</option>
-                </select>
-
-            </SettingsDiv>
         </>
     }
 
     // if log-file not set
     return (
-        <SettingsDiv title="Rankings file type (OBS-studio):">
-            <p style={{ color: 'darkred' }}>Add log location file first</p>
+        <SettingsDiv
+            title={getText(
+                'settings_file_location_title',
+                lg)}
+        >
+            <p style={{ color: 'darkred' }}>
+                {getText(
+                    'log_location_first',
+                    lg)}
+            </p>
         </SettingsDiv>
     )
 }
