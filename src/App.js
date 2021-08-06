@@ -47,7 +47,6 @@ function App() {
     useEffect(() => {
         // initial readSettings location of log file
         if (state.settings === null) {
-            // readSettings('./settings.json', (data) => {
             readSettings(settingsDir + '/settings.json', (data) => {
                 if (!data) {
                     return

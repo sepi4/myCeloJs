@@ -32,6 +32,12 @@ function Settings() {
             }
         })
     }
+    console.log('settings:', settings)
+
+    const text = {
+        en: 'Select',
+        ru: 'Выбрать',
+    }
 
     return <div style={{ marginTop: '4em' }}>
         <SettingsDiv title="Log location:" >
@@ -44,7 +50,8 @@ function Settings() {
             <StyledButton
                 onClick={changeLogLocation}
                 buttonColor='black'
-            >Select</StyledButton>
+            >{text[settings.language]}</StyledButton>
+            {/* >Select</StyledButton> */}
         </SettingsDiv>
 
         <SettingsAfterLog />

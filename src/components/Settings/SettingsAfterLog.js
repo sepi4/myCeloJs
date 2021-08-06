@@ -35,6 +35,14 @@ export default function SettingsAfterLog() {
         writeSettings(newSettings, dispatch)
     }
 
+    const handleLanguage = (e) => {
+        const newSettings = {
+            ...settings,
+            language: e.target.value,
+        }
+        writeSettings(newSettings, dispatch)
+    }
+
     const fileTypeSet = settings
         && settings.rankingsFile
         && settings.rankingsHorizontal !== undefined
@@ -79,9 +87,19 @@ export default function SettingsAfterLog() {
             </SettingsDiv>
 
             <SettingsLocation fileTypeSet={fileTypeSet} />
+
+
+            <SettingsDiv title='Language'>
+                <select onChange={handleLanguage}>
+                    <option value="en">EN</option>
+                    <option value="ru">RU</option>
+                </select>
+
+            </SettingsDiv>
         </>
     }
 
+    // if log-file not set
     return (
         <SettingsDiv title="Rankings file type (OBS-studio):">
             <p style={{ color: 'darkred' }}>Add log location file first</p>

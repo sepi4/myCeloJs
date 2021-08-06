@@ -9,6 +9,9 @@ const Span = styled.span`
     &:hover {
         color: #ddd;
     }
+    input {
+        margin-right: .5em;
+    }
 `
 
 function RadioButton({ checked, handler, labelText }) {
@@ -16,7 +19,6 @@ function RadioButton({ checked, handler, labelText }) {
 
     return <Span>
         <input
-            style={{ marginRight: '.5em' }}
             type='radio'
             id={id}
             checked={checked}
