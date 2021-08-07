@@ -55,12 +55,14 @@ export default function SettingsAfterLog() {
                         checked={settings.rankingsHtml !== undefined
                             && settings.rankingsHtml}
                         handler={handleType}
+                        value={'html'}
                         labelText={'html'}
                     />
                     <RadioButton
                         checked={settings.rankingsHtml !== undefined
                             && !settings.rankingsHtml}
                         handler={handleType}
+                        value={'txt'}
                         labelText={'txt'}
                     />
                 </RadioButtonsDiv>
@@ -70,12 +72,14 @@ export default function SettingsAfterLog() {
                         checked={settings.rankingsHorizontal !== undefined
                             && settings.rankingsHorizontal}
                         handler={handleOrientation}
+                        value={'horizontal'}
                         labelText={getText('horizontal', lg)}
                     />
                     <RadioButton
                         checked={settings.rankingsHorizontal !== undefined
                             && !settings.rankingsHorizontal}
                         handler={handleOrientation}
+                        value={'vertical'}
                         labelText={getText('vertical', lg)}
                     />
                 </RadioButtonsDiv>

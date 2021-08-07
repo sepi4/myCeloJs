@@ -47,7 +47,14 @@ function Settings() {
     return <div style={{ marginTop: '4em' }}>
 
         <SettingsDiv title={getText('language', lg)}>
-            <select onChange={handleLanguage} value={lg}>
+            <select
+                onChange={handleLanguage}
+                value={lg}
+                style={{
+                    padding: '.5em',
+                    backgroundColor: '#999',
+                }}
+            >
                 <option value="en">EN</option>
                 <option value="ru">RU</option>
             </select>

@@ -2,7 +2,7 @@ const text = {
     // settings
     log_location_title: {
         en: 'Log location',
-        ru: 'Разположение log файла',
+        ru: 'Разположение лог-файла',
     },
     select: {
         en: 'select',
@@ -36,6 +36,10 @@ const text = {
         en: 'copy',
         ru: 'копировать',
     },
+    copied: {
+        en: 'copied',
+        ru: 'скопировано',
+    },
 
     settings_file_location_title: {
         en: 'Settings file location',
@@ -49,7 +53,7 @@ const text = {
 
     log_location_first: {
         en: 'Add log location file first',
-        ru: 'Надо сначала указать расположение log файла',
+        ru: 'Надо сначала указать расположение лог-файла',
     },
 
 
@@ -70,12 +74,12 @@ const text = {
     },
     total: {
         en: 'total',
-        ru: 'сумма игр',
+        ru: 'количество игр',
     },
 
     log_checking: {
         en: 'log checking',
-        ru: 'проверка log файла'
+        ru: 'проверка лог-файла'
     },
     auto: {
         en: 'auto',
@@ -151,6 +155,17 @@ const text = {
         en: 'name',
         ru: 'имя',
     },
+
+
+    // main view
+    no_info: {
+        en: 'no game info in log file',
+        ru: 'нет информации об игре в лог-файле',
+    },
+    add_log_location: {
+        en: 'Please, in settings specify location log file (warnings.log)',
+        ru: 'Укажите в настройках расположение лог-файла (warnings.log)',
+    }
 
 
 }

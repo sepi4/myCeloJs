@@ -14,7 +14,7 @@ const Span = styled.span`
     }
 `
 
-function RadioButton({ checked, handler, labelText }) {
+function RadioButton({ checked, handler, labelText, value }) {
     const id = Math.random().toString()
 
     return <Span>
@@ -22,7 +22,7 @@ function RadioButton({ checked, handler, labelText }) {
             type='radio'
             id={id}
             checked={checked}
-            value={labelText}
+            value={value}
             onChange={e => handler(e)}
         />
         <label htmlFor={id}>{labelText}</label>

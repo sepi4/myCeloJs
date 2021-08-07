@@ -2,18 +2,30 @@
     "teams": {
         "team1": [
             {
+                "name": "π | Atonement",
+                "ranking": "521",
+                "country": "de",
+                "faction": "okw"
+            },
+            {
                 "name": "sepi",
-                "ranking": "160",
+                "ranking": "272",
                 "country": "fi",
-                "faction": "usa"
+                "faction": "wer"
             }
         ],
         "team2": [
             {
-                "name": "Registered Flex Offender",
-                "ranking": "390",
-                "country": "ca",
-                "faction": "wer"
+                "name": "Garrett",
+                "ranking": "816 ¹",
+                "country": "de",
+                "faction": "uk"
+            },
+            {
+                "name": "Köpfespalter",
+                "ranking": "816 ¹",
+                "country": "de",
+                "faction": "sov"
             }
         ]
     },

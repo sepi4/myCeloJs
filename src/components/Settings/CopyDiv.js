@@ -31,7 +31,7 @@ function CopyDiv({ text }) {
         <div>
             <StyledTextDiv>
                 {text}
-                {timed && <Notification text='copied' />}
+                {timed && <Notification text={getText('copied', lg)} />}
             </StyledTextDiv>
 
             <StyledButton
