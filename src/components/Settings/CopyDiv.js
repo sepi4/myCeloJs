@@ -14,7 +14,7 @@ import getText from '../../functions/getText'
 function CopyDiv({ text }) {
     const state = useSelector(state => state)
     const { settings } = state
-    const lg = settings ? settings.language : 'en'
+    // const lg = settings ? settings.language : 'en'
 
 
     const [timed, setTimed] = useTimedBoolean(1000)
@@ -31,13 +31,13 @@ function CopyDiv({ text }) {
         <div>
             <StyledTextDiv>
                 {text}
-                {timed && <Notification text={getText('copied', lg)} />}
+                {timed && <Notification text={getText('copied', settings)} />}
             </StyledTextDiv>
 
             <StyledButton
                 onClick={handleCopy}
                 buttonColor='black'
-            >{getText('copy', lg)}</StyledButton>
+            >{getText('copy', settings)}</StyledButton>
         </div>
     )
 }

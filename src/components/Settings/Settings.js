@@ -15,7 +15,8 @@ import getText from '../../functions/getText'
 function Settings() {
     const dispatch = useDispatch()
     const settings = useSelector(state => state.settings)
-    const lg = settings ? settings.language : 'en'
+    const lg = settings && settings.language ? settings.language : 'en'
+    const siteLink = settings ? settings.siteLink : 'coh2stats.com'
 
     const changeLogLocation = () => {
         dialog.showOpenDialog({
@@ -43,10 +44,18 @@ function Settings() {
         writeSettings(newSettings, dispatch)
     }
 
+    const handleSiteLink = (e) => {
+
+        const newSettings = {
+            ...settings,
+            siteLink: e.target.value,
+        }
+        writeSettings(newSettings, dispatch)
+    }
 
     return <div style={{ marginTop: '4em' }}>
 
-        <SettingsDiv title={getText('language', lg)}>
+        <SettingsDiv title={getText('language', settings)}>
             <select
                 onChange={handleLanguage}
                 value={lg}
@@ -60,8 +69,7 @@ function Settings() {
             </select>
         </SettingsDiv>
 
-
-        <SettingsDiv title={getText('log_location_title', lg)} >
+        <SettingsDiv title={getText('log_location_title', settings)} >
             <StyledTextDiv>
                 {settings && settings.logLocation
                     ? settings.logLocation
@@ -71,10 +79,25 @@ function Settings() {
             <StyledButton
                 onClick={changeLogLocation}
                 buttonColor='black'
-            >{getText('select', lg)}</StyledButton>
+            >{getText('select', settings)}</StyledButton>
         </SettingsDiv>
 
         <SettingsAfterLog />
+
+        <SettingsDiv title='Site for player links'>
+            <select
+                onChange={handleSiteLink}
+                value={siteLink}
+                style={{
+                    padding: '.5em',
+                    backgroundColor: '#999',
+                }}
+            >
+                <option value="coh2stats.com">coh2stats.com</option>
+                <option value="coh2.org">coh2.org</option>
+            </select>
+
+        </SettingsDiv>
 
     </div>
 }

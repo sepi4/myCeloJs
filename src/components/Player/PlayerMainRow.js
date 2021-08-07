@@ -12,6 +12,8 @@ import { faCaretRight, faCaretDown, } from '@fortawesome/free-solid-svg-icons'
 
 import countries from '../../../countries.json'
 
+import getSiteLink from '../../functions/getSiteLink'
+
 const StyledSpan = styled.span`
     width: ${({ width }) => width};
     display: flex;
@@ -69,10 +71,16 @@ function PlayerMainRow({
     //     + 'ladders/playercard/steamid/'
     //     + steamId
 
-    const link =
-        'https://coh2stats.com/'
-        + 'players/'
-        + steamId
+    // const link =
+    //     'https://coh2stats.com/'
+    //     + 'players/'
+    //     + steamId
+
+    const settings = useSelector(state => state.settings)
+    // const siteLink = settings ? settings.siteLink : 'coh2stats.com'
+
+    const link = getSiteLink(settings.siteLink) + steamId
+
 
     const countryFlagLocation = useSelector(
         state => state.countryFlags[country]

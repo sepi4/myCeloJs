@@ -9,6 +9,7 @@ import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation'
 import { getFactionById } from '../../functions/simpleFunctions'
 
 import styled from 'styled-components'
+import getSiteLink from '../../functions/getSiteLink'
 
 const StyledTr = styled.tr`
     text-align: center;
@@ -40,7 +41,9 @@ const StyledTable = styled.table`
 export default function GameHistoryDiv({ game, profiles }) {
     const [modal, setModal] = useState(false)
     const settings = useSelector(state => state.settings)
-    const lg = settings ? settings.language : 'en'
+    const lg = settings && settings.language ? settings.language : 'en'
+    // const siteLink = settings ? settings.siteLink : 'coh2stats.com'
+
 
     let backgroundColor = 'blue'
     if (game.result.resulttype === 1) {
@@ -61,7 +64,7 @@ export default function GameHistoryDiv({ game, profiles }) {
                         textAlign: 'left',
                     }}
                 >
-                    {getText('faction', lg)}
+                    {getText('faction', settings)}
                 </StyledTh>
 
                 {players.map((p) => (
@@ -86,7 +89,7 @@ export default function GameHistoryDiv({ game, profiles }) {
                         textAlign: 'left',
                     }}
                 >
-                    {getText('name', lg)}
+                    {getText('name', settings)}
                 </StyledTh>
                 {players.map((p) => {
                     // console.log('p:', p)
@@ -94,10 +97,11 @@ export default function GameHistoryDiv({ game, profiles }) {
 
                     const steamId = profiles[p.profile_id].name.substring(7)
 
-                    const link =
-                        'https://coh2stats.com/'
-                        + 'players/'
-                        + steamId
+                    const link = getSiteLink(settings.siteLink) + steamId
+
+                    // 'https://coh2stats.com/'
+                    // + 'players/'
+                    // + steamId
 
                     // 'https://www.coh2.org/'
                     // + 'ladders/playercard/steamid/'
@@ -166,6 +170,7 @@ export default function GameHistoryDiv({ game, profiles }) {
         </tbody>
     )
 
+    console.log('lg:', lg)
     const matchType = game.matchType ? game.matchType.name : '???'
     const timeAgo = moment(game.endGameTime).locale(lg).fromNow()
 
@@ -252,23 +257,23 @@ export default function GameHistoryDiv({ game, profiles }) {
                 {/* <button onClick={() => setModal(false)}>Close Modal</button> */}
 
                 <div>
-                    <StyledLabel>{getText('game_start_time', lg)}:</StyledLabel>
+                    <StyledLabel>{getText('game_start_time', settings)}:</StyledLabel>
                     <StyledValue>
                         {moment(game.startGameTime).locale(lg).format('lll')}
                     </StyledValue>
                 </div>
                 <div>
-                    <StyledLabel>{getText('game_end_time', lg)}:</StyledLabel>
+                    <StyledLabel>{getText('game_end_time', settings)}:</StyledLabel>
                     <StyledValue>
                         {moment(game.endGameTime).locale(lg).format('lll')}
                     </StyledValue>
                 </div>
                 <div>
-                    <StyledLabel>{getText('map', lg)}:</StyledLabel>
+                    <StyledLabel>{getText('map', settings)}:</StyledLabel>
                     <StyledValue>{game.mapName}</StyledValue>
                 </div>
                 <div>
-                    <StyledLabel>{getText('duration', lg)}:</StyledLabel>
+                    <StyledLabel>{getText('duration', settings)}:</StyledLabel>
                     <StyledValue>
                         {
                             moment.utc(moment.duration(

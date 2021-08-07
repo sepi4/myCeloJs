@@ -1,2 +1,5 @@
-       π | Atonement   DEU   521   OKW           UK    816 ¹ DEU   Garrett             
-                sepi   FIN   272   WER           SOV   816 ¹ DEU   Köpfespalter        
+UK    813 ¹ DEU   Garrett             
+SOV   813 ¹ DEU   Köpfespalter        
+
+OKW   520   DEU   π | Atonement       
+WER   272   FIN   sepi                

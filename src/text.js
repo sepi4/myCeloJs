@@ -1,5 +1,5 @@
 const text = {
-    // settings
+    // settings ---------------------------------
     log_location_title: {
         en: 'Log location',
         ru: 'Разположение лог-файла',
@@ -8,8 +8,6 @@ const text = {
         en: 'select',
         ru: 'выбрать',
     },
-
-
 
 
     rankings_file_title: {
@@ -59,7 +57,7 @@ const text = {
 
 
 
-    // navbar
+    // navbar  ---------------------------------
     dropdown_info: {
         en: 'dropdown info',
         ru: 'раскрывающаяся инфо',
@@ -102,7 +100,7 @@ const text = {
         ru: 'целое чило 1-999',
     },
 
-    // dropdown menu
+    // dropdown menu  ---------------------------------
     rank: {
         en: 'rank',
         ru: 'ранг',
@@ -128,8 +126,12 @@ const text = {
         en: 'fetch game history',
         ru: 'загрузить историю игр',
     },
+    total_games: {
+        en: 'total games',
+        ru: 'количество игр',
+    },
 
-    // history
+    // history ---------------------------------
     game_start_time: {
         en: 'game start time',
         ru: 'время начала игры',
@@ -157,7 +159,7 @@ const text = {
     },
 
 
-    // main view
+    // main view ---------------------------------
     no_info: {
         en: 'no game info in log file',
         ru: 'нет информации об игре в лог-файле',

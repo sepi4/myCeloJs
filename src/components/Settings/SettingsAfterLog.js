@@ -13,7 +13,7 @@ import SettingsLocation from './SettingsLocation'
 export default function SettingsAfterLog() {
     const state = useSelector(state => state)
     const { settings } = state
-    const lg = settings ? settings.language : 'en'
+    // const lg = settings ? settings.language : 'en'
 
     const dispatch = useDispatch()
 
@@ -46,11 +46,11 @@ export default function SettingsAfterLog() {
     if (settings && settings.logLocation) {
         return <>
             <SettingsDiv
-                title={getText('rankings_file_title', lg)}
+                title={getText('rankings_file_title', settings)}
             >
 
 
-                <RadioButtonsDiv title={getText('format', lg)} >
+                <RadioButtonsDiv title={getText('format', settings)} >
                     <RadioButton
                         checked={settings.rankingsHtml !== undefined
                             && settings.rankingsHtml}
@@ -67,20 +67,20 @@ export default function SettingsAfterLog() {
                     />
                 </RadioButtonsDiv>
 
-                <RadioButtonsDiv title={getText('orientation', lg)} >
+                <RadioButtonsDiv title={getText('orientation', settings)} >
                     <RadioButton
                         checked={settings.rankingsHorizontal !== undefined
                             && settings.rankingsHorizontal}
                         handler={handleOrientation}
                         value={'horizontal'}
-                        labelText={getText('horizontal', lg)}
+                        labelText={getText('horizontal', settings)}
                     />
                     <RadioButton
                         checked={settings.rankingsHorizontal !== undefined
                             && !settings.rankingsHorizontal}
                         handler={handleOrientation}
                         value={'vertical'}
-                        labelText={getText('vertical', lg)}
+                        labelText={getText('vertical', settings)}
                     />
                 </RadioButtonsDiv>
 
@@ -93,7 +93,7 @@ export default function SettingsAfterLog() {
                 fileTypeSet={fileTypeSet}
                 title={getText(
                     'settings_file_location_title',
-                    lg)}
+                    settings)}
             />
 
         </>
@@ -104,12 +104,12 @@ export default function SettingsAfterLog() {
         <SettingsDiv
             title={getText(
                 'settings_file_location_title',
-                lg)}
+                settings)}
         >
             <p style={{ color: 'darkred' }}>
                 {getText(
                     'log_location_first',
-                    lg)}
+                    settings)}
             </p>
         </SettingsDiv>
     )

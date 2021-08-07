@@ -20,7 +20,7 @@ function ListDiv({ ranksArr }) {
     const dispatch = useDispatch()
     const state = useSelector(state => state)
     const settings = useSelector(state => state.settings)
-    const lg = settings ? settings.language : null
+    // const lg = settings ? settings.language : null
 
     const tableView = state.navButtons.table
     const showAll = state.navButtons.all
@@ -73,20 +73,20 @@ function ListDiv({ ranksArr }) {
             >
                 <ColumnTitle
                     {...setSorter(byRank, 'byRank')}
-                >{getText('rank', lg)}</ColumnTitle>
+                >{getText('rank', settings)}</ColumnTitle>
                 <ColumnTitle
                     {...setSorter(byName, 'byName')}
                     width='40%'
-                >{getText('mode', lg)}</ColumnTitle>
+                >{getText('mode', settings)}</ColumnTitle>
                 <ColumnTitle
                     {...setSorter(byWinRate, 'byWinRate')}
-                >{getText('win', lg)}</ColumnTitle>
+                >{getText('win', settings)}</ColumnTitle>
                 <ColumnTitle
                     {...setSorter(byStreak, 'byStreak')}
-                >{getText('streak', lg)}</ColumnTitle>
+                >{getText('streak', settings)}</ColumnTitle>
                 <ColumnTitle
                     {...setSorter(byTotal, 'byTotal')}
-                >{getText('total', lg)}</ColumnTitle>
+                >{getText('total', settings)}</ColumnTitle>
             </div>
         }
 

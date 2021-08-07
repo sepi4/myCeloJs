@@ -5,6 +5,8 @@ import TableDiv from '../Table/TableDiv'
 import ListDiv from '../ListDiv/ListDiv'
 import History from './History'
 
+import getText from '../../functions/getText'
+
 import styled from 'styled-components'
 
 const Div = styled.div`
@@ -21,7 +23,10 @@ const TotalDiv = styled.div`
 
 function PlayerExtraInfo({ extraInfo, player }) {
     let ranksArr = extraInfo && extraInfo.ranks
-    const navButtons = useSelector((state) => state.navButtons)
+    const state = useSelector(state => state)
+    const navButtons = state.navButtons
+    const settings = state.settings
+    // const lg = settings ? settings.language : 'en'
 
     const totalGames = (() => {
         if (!navButtons.total) {
@@ -33,7 +38,7 @@ function PlayerExtraInfo({ extraInfo, player }) {
         }
         return (
             <TotalDiv>
-                <p>total games: {sum}</p>
+                <p>{getText('total_games', settings)}: {sum}</p>
             </TotalDiv>
         )
     })()

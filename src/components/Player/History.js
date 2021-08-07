@@ -8,7 +8,7 @@ import { StyledLoading } from '../styled/StyledLoading'
 
 export default function History({ player, }) {
     const settings = useSelector(state => state.settings)
-    const lg = settings ? settings.language : null
+    // const lg = settings ? settings.language : null
 
     const [getHistory, setGetHistory] = useState(false)
     const [history, setHistory] = useState(null)
@@ -116,7 +116,7 @@ export default function History({ player, }) {
                     padding: '0.2em .6em',
                 }}
                 onClick={() => setGetHistory(true)}
-            >{getText('fetch_history', lg)}</span>
+            >{getText('fetch_history', settings)}</span>
         }
     </div>
 

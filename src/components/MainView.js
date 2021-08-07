@@ -12,7 +12,7 @@ function MainView() {
     let state = useSelector(state => state)
     let players = state.players
     const settings = state.settings
-    const lg = settings ? settings.language : 'en'
+    // const lg = settings ? settings.language : 'en'
 
 
     if (players) {
@@ -28,7 +28,7 @@ function MainView() {
     // haven't add log location
     if (settings && !settings.logLocation) {
         return <div>
-            <h2>{getText('add_log_location', lg)}</h2>
+            <h2>{getText('add_log_location', settings)}</h2>
         </div>
     }
     if (players && players.length > 0) {
@@ -38,7 +38,7 @@ function MainView() {
         </div>
     }
     return <div>
-        <h2>{getText('no_info', lg)}</h2>
+        <h2>{getText('no_info', settings)}</h2>
     </div>
 }
 

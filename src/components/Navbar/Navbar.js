@@ -55,7 +55,7 @@ export default function Navbar({ handleSetSettingsView }) {
 
     const state = useSelector(state => state)
     const settings = useSelector(state => state.settings)
-    const lg = settings ? settings.language : 'en'
+    // const lg = settings ? settings.language : 'en'
 
 
     const dispatch = useDispatch()
@@ -71,7 +71,7 @@ export default function Navbar({ handleSetSettingsView }) {
     const [all, table, total] = ['all', 'table', 'total'].map(text => {
         return <NavCheckbox
             key={text}
-            text={getText(text, lg)}
+            text={getText(text, settings)}
             checked={navButtons[text]}
             handler={() => dispatch({
                 type: 'TOGGLE_NAVBUTTON',
@@ -118,10 +118,10 @@ export default function Navbar({ handleSetSettingsView }) {
                         : null
                 }
             />
-            <span>{getText('sec', lg)}</span>
+            <span>{getText('sec', settings)}</span>
             {error &&
                 <div className='error'>
-                    {getText('integer_error', lg)}
+                    {getText('integer_error', settings)}
                 </div>
             }
         </StyledInputDiv>
@@ -134,7 +134,7 @@ export default function Navbar({ handleSetSettingsView }) {
             width: '100%',
         }}>
             <NavCheckbox
-                text={getText('auto', lg)}
+                text={getText('auto', settings)}
                 checked={state.autoLogChecking
                     ? state.autoLogChecking
                     : false
@@ -148,7 +148,7 @@ export default function Navbar({ handleSetSettingsView }) {
                 ? <>
                     {intervalInput}
                     <NavCheckbox
-                        text={getText('alert', lg)}
+                        text={getText('alert', settings)}
                         checked={state.alert
                             ? state.alert
                             : false
@@ -168,7 +168,7 @@ export default function Navbar({ handleSetSettingsView }) {
                             ),
                         )
                     }}
-                >{getText('check_log_button', lg)}</StyledButton>
+                >{getText('check_log_button', settings)}</StyledButton>
             }
         </div>
     )
@@ -185,7 +185,7 @@ export default function Navbar({ handleSetSettingsView }) {
             <StyledColumn>
                 <StyledRow>
                     <div style={{ fontSize: '70%' }}>
-                        {getText('dropdown_info', lg)}
+                        {getText('dropdown_info', settings)}
                     </div>
                 </StyledRow>
                 <StyledRow>
@@ -198,10 +198,7 @@ export default function Navbar({ handleSetSettingsView }) {
             <StyledColumn>
                 <StyledRow>
                     <div style={{ fontSize: '70%' }}>
-                        {getText(
-                            'log_checking',
-                            settings ? settings.language : null
-                        )}
+                        {getText('log_checking', settings)}
                     </div>
                 </StyledRow>
                 <StyledRow>

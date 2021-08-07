@@ -4,12 +4,17 @@ import { useSelector } from 'react-redux'
 import e from 'electron'
 const { shell } = e
 
-function Members({ members }) {
-    const countryFlags = useSelector(state => state.countryFlags)
+import getSiteLink from '../../functions/getSiteLink'
 
-    const link =
-        'https://coh2stats.com/'
-        + 'players/'
+function Members({ members }) {
+    const state = useSelector(state => state)
+    const countryFlags = state.countryFlags
+    const settings = state.settings
+    // const siteLink = settings ? settings.siteLink : 'coh2stats.com'
+
+    const link = getSiteLink(settings.siteLink)
+    // 'https://coh2stats.com/'
+    // + 'players/'
 
     return <div style={{ margin: '0.5rem 0' }}>
         <hr />

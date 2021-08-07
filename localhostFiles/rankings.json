@@ -3,7 +3,7 @@
         "team1": [
             {
                 "name": "π | Atonement",
-                "ranking": "521",
+                "ranking": "520",
                 "country": "de",
                 "faction": "okw"
             },
@@ -17,17 +17,17 @@
         "team2": [
             {
                 "name": "Garrett",
-                "ranking": "816 ¹",
+                "ranking": "813 ¹",
                 "country": "de",
                 "faction": "uk"
             },
             {
                 "name": "Köpfespalter",
-                "ranking": "816 ¹",
+                "ranking": "813 ¹",
                 "country": "de",
                 "faction": "sov"
             }
         ]
     },
-    "horizontal": true
+    "horizontal": false
 }
