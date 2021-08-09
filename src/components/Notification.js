@@ -4,7 +4,7 @@ function Notification({ text, style }) {
     return <div style={{
         display: 'inline-block',
         color: '#ddd',
-        backgroundColor: 'black',
+        backgroundColor: '#222',
         padding: '0 .2em',
         margin: '0 0 0 .2em',
         ...style,

@@ -36,7 +36,7 @@ function CopyDiv({ text }) {
 
             <StyledButton
                 onClick={handleCopy}
-                buttonColor='black'
+            // buttonColor='black'
             >{getText('copy', settings)}</StyledButton>
         </div>
     )

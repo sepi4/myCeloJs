@@ -29,7 +29,7 @@ export const StyledButton = styled.button`
     width: 25vw;
     color: #ddd;
     cursor: pointer;
-    background-color: ${({ buttonColor }) => buttonColor || '#181818'};
+    background-color: ${({ buttonColor }) => buttonColor || '#222'};
     padding: .2em 0;
     font-size: 1em;
     border: 0;

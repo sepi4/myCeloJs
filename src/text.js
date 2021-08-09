@@ -127,8 +127,8 @@ const text = {
         ru: 'загрузить историю игр',
     },
     total_games: {
-        en: 'total games',
-        ru: 'количество игр',
+        en: 'total multiplay games',
+        ru: 'количество сетевых игр',
     },
 
     // history ---------------------------------
@@ -157,6 +157,44 @@ const text = {
         en: 'name',
         ru: 'имя',
     },
+
+    // history keys    
+    dmgdone: {
+        en: 'damage',
+        ru: 'урон',
+    },
+    edeaths: {
+        en: 'losts',
+        ru: 'потери',
+    },
+    ekills: {
+        en: 'kills',
+        ru: 'убийства',
+    },
+    sqlost: {
+        en: 'squad lost',
+        ru: 'отрядов потеряно',
+    },
+    sqkilled: {
+        en: 'squad killed',
+        ru: 'отрядов убито',
+    },
+    pcap: {
+        en: 'point cap',
+        ru: 'точек захвачено',
+    },
+    vkill: {
+        en: 'vehicle kills',
+        ru: 'техники убито',
+    },
+    vlost: {
+        en: 'vehicle losts',
+        ru: 'техники потеряно',
+    },
+
+
+
+
 
 
     // main view ---------------------------------

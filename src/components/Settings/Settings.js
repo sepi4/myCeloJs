@@ -78,7 +78,7 @@ function Settings() {
             </StyledTextDiv>
             <StyledButton
                 onClick={changeLogLocation}
-                buttonColor='black'
+            // buttonColor='#999'
             >{getText('select', settings)}</StyledButton>
         </SettingsDiv>
 

@@ -44,7 +44,6 @@ export default function GameHistoryDiv({ game, profiles }) {
     const lg = settings && settings.language ? settings.language : 'en'
     // const siteLink = settings ? settings.siteLink : 'coh2stats.com'
 
-
     let backgroundColor = 'blue'
     if (game.result.resulttype === 1) {
         backgroundColor = 'green'
@@ -92,8 +91,6 @@ export default function GameHistoryDiv({ game, profiles }) {
                     {getText('name', settings)}
                 </StyledTh>
                 {players.map((p) => {
-                    // console.log('p:', p)
-                    // console.log('profiles:', profiles)
 
                     const steamId = profiles[p.profile_id].name.substring(7)
 
@@ -147,6 +144,8 @@ export default function GameHistoryDiv({ game, profiles }) {
         <tbody>
             {Object.keys(game.counters)
                 .sort((a, b) => (a > b ? 1 : -1))
+                .filter(k => getText(k, settings) !== undefined)
+                // .filter(k => text[k] !== undefined)
                 .map((k, i) => (
                     <StyledTr key={`${k} ${i}`}>
                         <td
@@ -157,7 +156,8 @@ export default function GameHistoryDiv({ game, profiles }) {
                                 textAlign: 'left',
                             }}
                         >
-                            {k}
+                            {/* {k} */}
+                            {getText(k, settings)}
                         </td>
 
                         {players.map((p) => (
@@ -170,7 +170,7 @@ export default function GameHistoryDiv({ game, profiles }) {
         </tbody>
     )
 
-    console.log('lg:', lg)
+    // console.log('lg:', lg)
     const matchType = game.matchType ? game.matchType.name : '???'
     const timeAgo = moment(game.endGameTime).locale(lg).fromNow()
 
@@ -188,6 +188,7 @@ export default function GameHistoryDiv({ game, profiles }) {
         }
         playersNames += profiles[p.profile_id].alias + '\n'
     })
+
     return (
         <>
             <div
@@ -201,6 +202,7 @@ export default function GameHistoryDiv({ game, profiles }) {
                     justifyContent: 'space-evenly',
                     cursor: 'pointer',
                     margin: '0.2em',
+
                 }}
                 onClick={() => {
                     setModal(true)
@@ -254,8 +256,6 @@ export default function GameHistoryDiv({ game, profiles }) {
 
                 }}
             >
-                {/* <button onClick={() => setModal(false)}>Close Modal</button> */}
-
                 <div>
                     <StyledLabel>{getText('game_start_time', settings)}:</StyledLabel>
                     <StyledValue>
@@ -283,8 +283,6 @@ export default function GameHistoryDiv({ game, profiles }) {
                         }
                     </StyledValue>
                 </div>
-
-
                 <StyledTable>
                     {tableHeader}
                     {tableBody}

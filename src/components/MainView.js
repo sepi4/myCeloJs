@@ -26,7 +26,7 @@ function MainView() {
         return <Settings />
     }
     // haven't add log location
-    if (settings && !settings.logLocation) {
+    if (!settings || !settings.logLocation) {
         return <div>
             <h2>{getText('add_log_location', settings)}</h2>
         </div>

@@ -2,32 +2,32 @@
     "teams": {
         "team1": [
             {
-                "name": "π | Atonement",
-                "ranking": "520",
-                "country": "de",
-                "faction": "okw"
+                "name": "sepi",
+                "ranking": "240",
+                "country": "fi",
+                "faction": "uk"
             },
             {
-                "name": "sepi",
-                "ranking": "272",
-                "country": "fi",
-                "faction": "wer"
+                "name": "Plastic bitch chicken",
+                "ranking": "328",
+                "country": "us",
+                "faction": "sov"
             }
         ],
         "team2": [
             {
-                "name": "Garrett",
-                "ranking": "813 ¹",
-                "country": "de",
-                "faction": "uk"
+                "name": "Happy",
+                "ranking": "534",
+                "country": "ar",
+                "faction": "okw"
             },
             {
-                "name": "Köpfespalter",
-                "ranking": "813 ¹",
-                "country": "de",
-                "faction": "sov"
+                "name": "strelok22",
+                "ranking": "773",
+                "country": "cl",
+                "faction": "okw"
             }
         ]
     },
-    "horizontal": false
+    "horizontal": true
 }
