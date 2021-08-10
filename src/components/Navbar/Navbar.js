@@ -8,11 +8,9 @@ import getText from '../../functions/getText'
 
 import NavCheckbox from './NavCheckBox'
 
-import { StyledRow } from '../styled/StyledFlex'
-import { StyledColumn } from '../styled/StyledFlex'
-
 import NavBarIcon from './NavbarIcon'
 import CheckLogDiv from './CheckLogDiv'
+import NavbarRow from './NavbarRow'
 
 export default function Navbar({ handleSetSettingsView }) {
     const state = useSelector(state => state)
@@ -47,33 +45,27 @@ export default function Navbar({ handleSetSettingsView }) {
         </div>
     }
 
-    return <div
-        className={styles.navbar}
-    >
+    return <div className={styles.navbar} >
         <div className={styles.container}>
-            <StyledColumn>
-                <StyledRow>
-                    <div style={{ fontSize: '70%' }}>
-                        {getText('dropdown_info', settings)}
-                    </div>
-                </StyledRow>
-                <StyledRow>
+            <div className={styles.column}>
+                <NavbarRow fontSize='60%'>
+                    {getText('dropdown_info', settings)}
+                </NavbarRow>
+                <NavbarRow>
                     {table}
                     {all}
                     {total}
-                </StyledRow>
-            </StyledColumn>
+                </NavbarRow>
+            </div>
 
-            <StyledColumn>
-                <StyledRow>
-                    <div style={{ fontSize: '70%' }}>
-                        {getText('log_checking', settings)}
-                    </div>
-                </StyledRow>
-                <StyledRow>
+            <div className={styles.column}>
+                <NavbarRow fontSize='60%'>
+                    {getText('log_checking', settings)}
+                </NavbarRow>
+                <NavbarRow>
                     <CheckLogDiv />
-                </StyledRow>
-            </StyledColumn>
+                </NavbarRow>
+            </div>
         </div>
         <NavBarIcon icon={faCogs} fun={settingsViewToggeler} />
     </div>

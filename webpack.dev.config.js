@@ -7,20 +7,17 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.css$/,
+                // test: /\.css$/,
                 // use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
 
+                test: /\.css$/,
                 exclude: /node_modules/,
                 use: [
                     { loader: 'style-loader' },
                     {
                         loader: 'css-loader',
-                        // options: {
-                        //     // modules: true,
-                        //     // sourceMap: true,
-                        //     // localIdentName: '[name]__[local]__[hash:base64:5]',
-                        // },
                         options: {
+                            sourceMap: true,
                             modules: {
                                 localIdentName: "[path][name]__[local]--[hash:base64:5]",
                             },
