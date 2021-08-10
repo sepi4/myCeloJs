@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 import { shell } from 'electron'
-import styled from 'styled-components'
+import styles from './PlayerMainRow.module.css'
 
 import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation'
 import { commonName } from '../../functions/simpleFunctions'
@@ -13,18 +13,7 @@ import { faCaretRight, faCaretDown, } from '@fortawesome/free-solid-svg-icons'
 import countries from '../../../countries.json'
 
 import getSiteLink from '../../functions/getSiteLink'
-
-const StyledSpan = styled.span`
-    width: ${({ width }) => width};
-    display: flex;
-    align-items: center;
-    justify-content: ${({ justifyContent }) => justifyContent
-        ? justifyContent
-        : 'center'
-    };
-    color: #ddd;
-    font-weight: bold;
-`
+import MainRowSpan from './MainRowSpan'
 
 function PlayerMainRow({
     player,
@@ -50,37 +39,14 @@ function PlayerMainRow({
     }
 
     const factionImage = (
-        <img
-            style={{
-                width: '2em',
-                height: '2em',
-            }}
+        <img className={styles.factionFlag}
             src={getFactionFlagLocation(commonName(player.faction))}
             alt={`${player.faction}`}
         />
     )
 
-    // const link =
-    //     'http://www.companyofheroes.com/'
-    //     + 'leaderboards#profile/steam/'
-    //     + steamId
-    //     + '/standings'
-
-    // const link =
-    //     'https://www.coh2.org/'
-    //     + 'ladders/playercard/steamid/'
-    //     + steamId
-
-    // const link =
-    //     'https://coh2stats.com/'
-    //     + 'players/'
-    //     + steamId
-
     const settings = useSelector(state => state.settings)
-    // const siteLink = settings ? settings.siteLink : 'coh2stats.com'
-
     const link = getSiteLink(settings.siteLink) + steamId
-
 
     const countryFlagLocation = useSelector(
         state => state.countryFlags[country]
@@ -98,10 +64,7 @@ function PlayerMainRow({
         display: 'flex',
         alignItems: 'center',
     }}>
-        <StyledSpan
-            width='20%'
-            justifyContent='flex-start'
-        >
+        <MainRowSpan width='20%' justifyContent='flex-start' >
             <span style={{ width: '2em', }} >
                 {+player.profileId > 0 && <FontAwesomeIcon
                     icon={showExtra ? faCaretDown : faCaretRight}
@@ -119,15 +82,16 @@ function PlayerMainRow({
                 ? '-'
                 : player.ranking // Number(player.ranking)
             }
-        </StyledSpan>
+        </MainRowSpan>
 
-        <StyledSpan width='15%' >
+        <MainRowSpan width='15%' >
             <span title={commonName(player.faction)} >
                 {factionImage}
             </span>
-        </StyledSpan>
 
-        <StyledSpan width='15%'>
+        </MainRowSpan>
+
+        <MainRowSpan width='15%' >
             {country !== undefined
                 ? <img
                     style={{
@@ -142,12 +106,9 @@ function PlayerMainRow({
                 />
                 : null
             }
-        </StyledSpan>
+        </MainRowSpan>
 
-        <StyledSpan
-            width='50%'
-            onClick={() => (steamId ? shell.openExternal(link) : null)}
-        >
+        <MainRowSpan width='50%'>
             <span
                 style={{ cursor: steamId ? 'pointer' : null, }}
                 title={
@@ -155,10 +116,11 @@ function PlayerMainRow({
                         ? getTotalGames(player) + ' games played'
                         : null
                 }
+                onClick={() => (steamId ? shell.openExternal(link) : null)}
             >
                 {player.name}
             </span>
-        </StyledSpan>
+        </MainRowSpan>
     </div>
 }
 

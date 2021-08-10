@@ -1,4 +1,12 @@
-label {
+.span {
+    display: flex;
+    align-items: center;
+    color: lime;
+}
+span .label {
     cursor: pointer;
     margin-left: 0.2em;
+}
+span .input {
+    cursor: pointer;
 }

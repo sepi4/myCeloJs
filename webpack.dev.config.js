@@ -8,7 +8,25 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/,
-                use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+                // use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
+
+                exclude: /node_modules/,
+                use: [
+                    { loader: 'style-loader' },
+                    {
+                        loader: 'css-loader',
+                        // options: {
+                        //     // modules: true,
+                        //     // sourceMap: true,
+                        //     // localIdentName: '[name]__[local]__[hash:base64:5]',
+                        // },
+                        options: {
+                            modules: {
+                                localIdentName: "[path][name]__[local]--[hash:base64:5]",
+                            },
+                        },
+                    },
+                ],
             },
             {
                 test: /\.jsx?$/,

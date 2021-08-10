@@ -1,0 +1,11 @@
+.membersDiv {
+    margin-left: 1em;
+    font-size: 0.9em;
+    cursor: pointer;
+    color: green;
+}
+
+.flagImage {
+    width: 1em;
+    margin-right: 1em;
+}

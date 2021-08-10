@@ -4,7 +4,10 @@ import { useSelector } from 'react-redux'
 import getText from '../../functions/getText'
 
 import GameHistoryDiv from './GameHistoryDiv'
-import { StyledLoading } from '../styled/StyledLoading'
+
+import Loading from './Loading'
+
+import styles from './History.module.css'
 
 export default function History({ player, }) {
     const settings = useSelector(state => state.settings)
@@ -100,21 +103,10 @@ export default function History({ player, }) {
             />
         })
 
-    const fetchDiv = <div
-        style={{
-            display: 'flex',
-            justifyContent: 'center',
-        }}
-    >
+    const fetchDiv = <div className={styles.fetchDiv} >
         {fetchingHistory
-            ? <StyledLoading />
-            : <span
-                style={{
-                    // fontWeight: 'bold',
-                    cursor: 'pointer',
-                    border: '.05em solid #ddd',
-                    padding: '0.2em .6em',
-                }}
+            ? <Loading />
+            : <span className={styles.getHistory}
                 onClick={() => setGetHistory(true)}
             >{getText('fetch_history', settings)}</span>
         }
@@ -122,13 +114,7 @@ export default function History({ player, }) {
 
     return <>
         {history
-            ? <div
-                style={{
-                    margin: '1em 0',
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                }}
-            >
+            ? <div className={styles.historyDivs} >
                 {historyDivs}
             </div>
             : fetchDiv

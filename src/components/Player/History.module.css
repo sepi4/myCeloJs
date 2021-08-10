@@ -1,0 +1,16 @@
+.fetchDiv {
+    display: flex;
+    justify-content: center;
+}
+
+.getHistory {
+    cursor: pointer;
+    border: .05em solid #ddd;
+    padding: 0.2em .6em;
+}
+
+.historyDivs {
+    margin: 1em 0;
+    display: flex;
+    flex-wrap: wrap;
+}

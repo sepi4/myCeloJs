@@ -1,34 +1,25 @@
 import React from 'react'
+import moduleStyle from './NavCheckBox.module.css'
 
 export default function NavCheckbox({ text, handler, checked }) {
 
     const id = Math.random().toString()
 
-    return <span style={{
-        display: 'flex',
-        alignItems: 'center',
-    }}>
-
+    return <span className={moduleStyle.span}>
         <input
+            className={moduleStyle.input}
             onChange={handler}
             defaultChecked={checked}
             id={id}
             type='checkbox'
-            style={{
-                cursor: 'pointer',
-            }}
         />
 
         <label
-            className='checkbox'
+            className={moduleStyle.label}
             htmlFor={id}
-            style={{
-                cursor: 'pointer',
-                marginLeft: '0.2em',
-            }}
-        >{text}</label>
-
-
+        >
+            {text}
+        </label>
     </span>
 
 }
