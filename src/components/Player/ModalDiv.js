@@ -1,35 +1,23 @@
 import React from 'react'
 import Modal from 'react-modal'
 import moment from 'moment'
-import styled from 'styled-components'
+import styles from './ModalDiv.module.css'
 
 import getText from '../../functions/getText'
 
-const StyledLabel = styled.span`
-    display: inline-block;
-    color: gray;
-    font-size: 90%;
-    min-width: 40%;
-`
-const StyledValue = styled.span`
-    color: yellow;
-`
-const StyledTable = styled.table`
-    margin: 1em 0 0 0;
-    table-layout: fixed;
-    width: 100%;
-    cursor: default;
-`
+import ModalTableBody from './ModalTableBody'
+import ModalTableHeaders from './ModalTableHeaders'
 
 function ModalDiv({
     modal,
     setModal,
     settings,
     game,
-    tableHeader,
-    tableBody,
+    players,
+    profiles,
 }) {
     const lg = settings && settings.language ? settings.language : 'en'
+
     return (
         <Modal
             isOpen={modal}
@@ -50,45 +38,59 @@ function ModalDiv({
                 },
                 overlay: {
                     backgroundColor: 'rgba(200, 200, 200, 0.5)',
-                }
-
+                },
             }}
         >
             <div>
-                <StyledLabel>
+                <span className={styles.label}>
                     {getText('game_start_time', settings)}:
-                </StyledLabel>
-                <StyledValue>
+                </span>
+                <span className={styles.value}>
                     {moment(game.startGameTime).locale(lg).format('lll')}
-                </StyledValue>
+                </span>
             </div>
             <div>
-                <StyledLabel>{getText('game_end_time', settings)}:</StyledLabel>
-                <StyledValue>
+                <span className={styles.label}>
+                    {getText('game_end_time', settings)}:
+                </span>
+                <span className={styles.value}>
                     {moment(game.endGameTime).locale(lg).format('lll')}
-                </StyledValue>
+                </span>
             </div>
             <div>
-                <StyledLabel>{getText('map', settings)}:</StyledLabel>
-                <StyledValue>{game.mapName}</StyledValue>
+                <span className={styles.label}>
+                    {getText('map', settings)}:
+                </span>
+                <span className={styles.value}>
+                    {game.mapName}
+                </span>
             </div>
             <div>
-                <StyledLabel>{getText('duration', settings)}:</StyledLabel>
-                <StyledValue>
+                <span className={styles.label}>
+                    {getText('duration', settings)}:
+                </span>
+                <span className={styles.value}>
                     {
                         moment.utc(moment.duration(
                             game.endGameTime.getTime()
                             - game.startGameTime.getTime()
                         ).asMilliseconds()).locale(lg).format("HH:mm:ss")
                     }
-                </StyledValue>
+                </span>
             </div>
-            <StyledTable>
-                {tableHeader}
-                {tableBody}
-            </StyledTable>
+            <table className={styles.table}>
+                <ModalTableHeaders
+                    settings={settings}
+                    players={players}
+                    profiles={profiles}
+                />
+                <ModalTableBody
+                    game={game}
+                    settings={settings}
+                    players={players}
+                />
+            </table>
         </Modal>
-
     )
 }
 export default ModalDiv

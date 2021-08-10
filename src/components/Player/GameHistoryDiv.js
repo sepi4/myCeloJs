@@ -1,28 +1,11 @@
 import React, { useState } from 'react'
 import moment from 'moment'
-import { shell } from 'electron'
 import { useSelector } from 'react-redux'
-import getText from '../../functions/getText'
 
 import ModalDiv from './ModalDiv'
 
 import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation'
 import { getFactionById } from '../../functions/simpleFunctions'
-
-import styled from 'styled-components'
-import getSiteLink from '../../functions/getSiteLink'
-
-const StyledTr = styled.tr`
-    text-align: center;
-    &:hover {
-        background-color: rgb(38, 38, 38);
-    }
-`
-
-const StyledTh = styled.th`
-    word-wrap: break-word;
-    max-width: ${({ len }) => 99 / (len + 1)} + '%';
-`
 
 export default function GameHistoryDiv({ game, profiles }) {
     const [modal, setModal] = useState(false)
@@ -36,113 +19,7 @@ export default function GameHistoryDiv({ game, profiles }) {
     if (game.result.resulttype === 0) {
         backgroundColor = 'red'
     }
-
     const players = game.players.sort((a, b) => b.teamid - a.teamid)
-
-    const tableHeader = (
-        <thead>
-            <tr>
-                <StyledTh
-                    style={{
-                        textAlign: 'left',
-                    }}
-                >
-                    {getText('faction', settings)}
-                </StyledTh>
-
-                {players.map((p) => (
-                    <StyledTh key={p.profile_id} len={players.length}>
-                        <img
-                            style={{
-                                width: '1.4em',
-                                height: '1.4em',
-                            }}
-                            src={getFactionFlagLocation(
-                                getFactionById(p.race_id),
-                            )}
-                            alt={`${getFactionById(p.race_id)}`}
-                        />
-                    </StyledTh>
-                ))}
-            </tr>
-
-            <tr>
-                <StyledTh
-                    style={{
-                        textAlign: 'left',
-                    }}
-                >
-                    {getText('name', settings)}
-                </StyledTh>
-                {players.map((p) => {
-                    const steamId = profiles[p.profile_id].name.substring(7)
-                    const link = getSiteLink(settings.siteLink) + steamId
-
-                    return <StyledTh
-                        key={p.profile_id}
-                        len={players.length}
-                        style={{
-                            color:
-                                p.resulttype === 1
-                                    ? 'green'
-                                    : p.resulttype === 0
-                                        ? 'red'
-                                        : 'blue',
-                            cursor: 'pointer',
-                        }}
-                    >
-                        <a
-                            title={profiles[p.profile_id].alias}
-                            onClick={() => (steamId
-                                ? shell.openExternal(link)
-                                : null)
-                            }
-                        >
-                            {profiles[p.profile_id].alias}
-                        </a>
-
-                    </StyledTh>
-                })}
-            </tr>
-        </thead>
-    )
-    console.log('players:', players)
-
-    const styleTd = {
-        overflow: 'hidden',
-        fontSize: '75%',
-        width: 99 / 9 + '%',
-    }
-
-    const tableBody = (
-        <tbody>
-            {Object.keys(game.counters)
-                .sort((a, b) => (a > b ? 1 : -1))
-                .filter(k => getText(k, settings) !== undefined)
-                // .filter(k => text[k] !== undefined)
-                .map((k, i) => (
-                    <StyledTr key={`${k} ${i}`}>
-                        <td
-                            style={{
-                                ...styleTd,
-                                fontWeight: 'bold',
-                                color: 'gray',
-                                textAlign: 'left',
-                            }}
-                        >
-                            {/* {k} */}
-                            {getText(k, settings)}
-                        </td>
-
-                        {players.map((p) => (
-                            <td style={styleTd} key={`${p.profile_id} ${i}`}>
-                                {p.counters[k]}
-                            </td>
-                        ))}
-                    </StyledTr>
-                ))}
-        </tbody>
-    )
 
     const matchType = game.matchType ? game.matchType.name : '???'
     const timeAgo = moment(game.endGameTime).locale(lg).fromNow()
@@ -174,7 +51,6 @@ export default function GameHistoryDiv({ game, profiles }) {
                     justifyContent: 'space-evenly',
                     cursor: 'pointer',
                     margin: '0.2em',
-
                 }}
                 onClick={() => {
                     setModal(true)
@@ -210,8 +86,8 @@ export default function GameHistoryDiv({ game, profiles }) {
                 setModal={setModal}
                 game={game}
                 settings={settings}
-                tableHeader={tableHeader}
-                tableBody={tableBody}
+                players={players}
+                profiles={profiles}
             />
 
         </>

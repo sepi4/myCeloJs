@@ -1,0 +1,17 @@
+.label {
+    display: inline-block;
+    color: gray;
+    font-size: 90%;
+    min-width: 40%;
+}
+
+.value {
+    color: yellow;
+}
+
+.table {
+    margin: 1em 0 0 0;
+    table-layout: fixed;
+    width: 100%;
+    cursor: default;
+}
