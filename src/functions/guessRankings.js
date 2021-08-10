@@ -25,9 +25,6 @@ function getStatGrops(team, data) {
 }
 
 function addRankToTeamLeaderboardStats(statGroups, data, leaderboardId) {
-    // console.log('statGropus', statGroups)
-    // console.log('leaderboardId', leaderboardId)
-    // console.log('data.leaderboardStats: ', data.leaderboardStats)
     let arr = []
     let teamIndex = 1
     data.leaderboardStats.forEach(ls => {

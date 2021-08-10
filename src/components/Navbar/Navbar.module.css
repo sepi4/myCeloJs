@@ -1,7 +1,13 @@
-import styled from 'styled-components'
+.container {
+    margin: 0 1.2em;
+    display: flex;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 100%;
+    color: gray;
+}
 
-
-export const StyledNavbar = styled.div`
+.navbar {
     background-color: #181818;
     color: #ddd;
     position: fixed;
@@ -14,6 +20,4 @@ export const StyledNavbar = styled.div`
     align-items: center;
     z-index: 100;
     cursor: default;
-
-    justify-content: ${({ justifyContent }) => justifyContent}
-`
+}

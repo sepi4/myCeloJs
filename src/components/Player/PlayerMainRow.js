@@ -88,7 +88,6 @@ function PlayerMainRow({
             <span title={commonName(player.faction)} >
                 {factionImage}
             </span>
-
         </MainRowSpan>
 
         <MainRowSpan width='15%' >

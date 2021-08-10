@@ -1,6 +1,5 @@
 export function ranksArrFilter(ranksArr, tableView, showAll) {
     let reg = tableView ? /^Team/ : /^./
-    // let rankedOnly = true // navSettings.ranked
     let rankedOnly = !showAll
     ranksArr = ranksArr
         .filter(r => r.name.match(reg))
@@ -31,7 +30,7 @@ export function ranksArrSort(ranksArr, sorter) {
     neg = neg.sort(byTotal)
 
     pos = pos.sort((a, b) => {
-        const diff = sorter.fun(a,b)
+        const diff = sorter.fun(a, b)
         if (diff !== 0) {
             return diff
         }

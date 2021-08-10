@@ -1,7 +1,6 @@
 .span {
     display: flex;
     align-items: center;
-    color: lime;
 }
 span .label {
     cursor: pointer;
