@@ -1,0 +1,18 @@
+.container {
+    font-size: 90%;
+    margin-bottom: 1.2em;
+}
+
+.row {
+    font-size: 90%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.title {
+    font-style: italic;
+    font-size: 80%;
+    margin-bottom: .6em;
+    color: gray;
+}

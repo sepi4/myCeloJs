@@ -2,29 +2,29 @@
     "teams": {
         "team1": [
             {
-                "name": "sepi",
-                "ranking": "238",
-                "country": "fi",
-                "faction": "uk"
+                "name": "MasterSteve",
+                "ranking": "749",
+                "country": "de",
+                "faction": "usa"
             },
             {
-                "name": "Plastic bitch chicken",
-                "ranking": "234",
-                "country": "us",
-                "faction": "sov"
+                "name": "sepi",
+                "ranking": "256",
+                "country": "fi",
+                "faction": "uk"
             }
         ],
         "team2": [
             {
-                "name": "Happy",
-                "ranking": "568",
-                "country": "ar",
+                "name": "[SSMN] KaanBabaBurda",
+                "ranking": "1153 ¹",
+                "country": "tr",
                 "faction": "okw"
             },
             {
-                "name": "strelok22",
-                "ranking": "779",
-                "country": "cl",
+                "name": "Battalfield",
+                "ranking": "1153 ¹",
+                "country": "tr",
                 "faction": "okw"
             }
         ]
