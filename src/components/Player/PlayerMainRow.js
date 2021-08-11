@@ -38,13 +38,6 @@ function PlayerMainRow({
         }
     }
 
-    const factionImage = (
-        <img className={styles.factionFlag}
-            src={getFactionFlagLocation(commonName(player.faction))}
-            alt={`${player.faction}`}
-        />
-    )
-
     const settings = useSelector(state => state.settings)
     const link = getSiteLink(settings.siteLink) + steamId
 
@@ -60,65 +53,77 @@ function PlayerMainRow({
         return sum
     }
 
-    return <div style={{
-        display: 'flex',
-        alignItems: 'center',
-    }}>
-        <MainRowSpan width='20%' justifyContent='flex-start' >
-            <span style={{ width: '2em', }} >
-                {+player.profileId > 0 && <FontAwesomeIcon
-                    icon={showExtra ? faCaretDown : faCaretRight}
-                    size='lg'
-                    style={{
-                        color: '#ddd',
-                        cursor: 'pointer',
-                    }}
-                    onClick={extraInfo ? handleSetShowExtra : undefined}
-                />
+    const dropDownArrow = (
+        <span style={{ width: '2em', }} >
+            {+player.profileId > 0 && <FontAwesomeIcon
+                icon={showExtra ? faCaretDown : faCaretRight}
+                size='lg'
+                style={{
+                    color: '#ddd',
+                    cursor: 'pointer',
+                }}
+                onClick={extraInfo ? handleSetShowExtra : undefined}
+            />
+            }
+        </span>
+    )
+    const rank = player.ranking === '-1' || player.ranking === -1
+        ? '-'
+        : player.ranking
+
+    const faction = (
+        <span title={commonName(player.faction)} >
+            <img className={styles.factionFlag}
+                src={getFactionFlagLocation(commonName(player.faction))}
+                alt={`${player.faction}`}
+            />
+        </span>
+    )
+
+    const countryFlag =
+        country !== undefined
+            ? <img
+                style={{
+                    height: '1.2em',
+                }}
+                src={countryFlagLocation}
+                alt={country}
+                title={countries[country]
+                    ? countries[country]['name']
+                    : null
                 }
-            </span>
+            />
+            : null
 
-            {player.ranking === '-1' || player.ranking === -1
-                ? '-'
-                : player.ranking // Number(player.ranking)
+    const alias = (
+        <span
+            style={{ cursor: steamId ? 'pointer' : null, }}
+            title={
+                extraInfo && player.profileId
+                    ? getTotalGames(player) + ' games played'
+                    : null
             }
+            onClick={() => (steamId ? shell.openExternal(link) : null)}
+        >
+            {player.name}
+        </span>
+    )
+
+    return <div className={styles.container}>
+        <MainRowSpan width='20%' justifyContent='flex-start' >
+            {dropDownArrow} {rank}
         </MainRowSpan>
 
         <MainRowSpan width='15%' >
-            <span title={commonName(player.faction)} >
-                {factionImage}
-            </span>
+            {faction}
         </MainRowSpan>
 
         <MainRowSpan width='15%' >
-            {country !== undefined
-                ? <img
-                    style={{
-                        height: '1.2em',
-                    }}
-                    src={countryFlagLocation}
-                    alt={country}
-                    title={countries[country]
-                        ? countries[country]['name']
-                        : null
-                    }
-                />
-                : null
-            }
+            {countryFlag}
         </MainRowSpan>
 
         <MainRowSpan width='50%'>
-            <span
-                style={{ cursor: steamId ? 'pointer' : null, }}
-                title={
-                    extraInfo && player.profileId
-                        ? getTotalGames(player) + ' games played'
-                        : null
-                }
-                onClick={() => (steamId ? shell.openExternal(link) : null)}
-            >
-                {player.name}
-            </span>
+            {alias}
         </MainRowSpan>
     </div>
 }

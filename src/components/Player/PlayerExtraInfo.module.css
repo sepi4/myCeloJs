@@ -1,0 +1,11 @@
+.container {
+    color: #ddd;
+    padding: 0.5em 0;
+}
+
+.total {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1em;
+    font-size: 80%;
+}

@@ -7,26 +7,13 @@ import History from './History'
 
 import getText from '../../functions/getText'
 
-import styled from 'styled-components'
-
-const Div = styled.div`
-    color: #ddd;
-    padding: 0.5em 0;
-`
-
-const TotalDiv = styled.div`
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1em;
-    font-size: 80%;
-`
+import styles from './PlayerExtraInfo.module.css'
 
 function PlayerExtraInfo({ extraInfo, player }) {
     let ranksArr = extraInfo && extraInfo.ranks
     const state = useSelector(state => state)
     const navButtons = state.navButtons
     const settings = state.settings
-    // const lg = settings ? settings.language : 'en'
 
     const totalGames = (() => {
         if (!navButtons.total) {
@@ -37,13 +24,13 @@ function PlayerExtraInfo({ extraInfo, player }) {
             sum += rankObj.wins + rankObj.losses
         }
         return (
-            <TotalDiv>
-                <p>{getText('total_games', settings)}: {sum}</p>
-            </TotalDiv>
+            <div className={styles.total}>
+                {getText('total_games', settings)}: {sum}
+            </div>
         )
     })()
 
-    return <Div>
+    return <div className={styles.container}>
         {totalGames}
 
         {navButtons.table && ranksArr &&
@@ -52,7 +39,7 @@ function PlayerExtraInfo({ extraInfo, player }) {
 
         <ListDiv ranksArr={ranksArr} />
         <History player={player} />
-    </Div>
+    </div>
 }
 
 export default PlayerExtraInfo
