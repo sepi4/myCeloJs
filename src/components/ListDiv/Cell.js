@@ -1,12 +1,12 @@
 import React from 'react'
 
-function Cell({children, title, color, width, cursor}) {
+function Cell({ children, title, color, width, cursor }) {
     return (
         <div
             style={{
                 color,
                 width: width || '20%',
-                cursor: cursor ||'default',
+                cursor: cursor || 'default',
 
                 display: 'flex',
                 justifyContent: 'center',
@@ -18,7 +18,7 @@ function Cell({children, title, color, width, cursor}) {
                 {children}
             </span>
         </div>
-    ) 
+    )
 }
 
 export default Cell

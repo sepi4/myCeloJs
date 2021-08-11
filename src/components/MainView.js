@@ -12,15 +12,12 @@ function MainView() {
     let state = useSelector(state => state)
     let players = state.players
     const settings = state.settings
-    // const lg = settings ? settings.language : 'en'
-
 
     if (players) {
         players.forEach(p => {
             teams[p.teamSlot].push(p)
         })
     }
-
 
     if (settingsView) {
         return <Settings />

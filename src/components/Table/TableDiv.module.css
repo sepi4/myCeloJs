@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 0.5em;
+}
+
+.factionGrid {
+    width: 49%;
+    display: grid;
+    grid-template: 1fr / repeat(6, 1fr);
+    font-size: 0.7em;
+    padding: 0.6em 0;
+}

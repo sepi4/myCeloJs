@@ -7,6 +7,7 @@ import writeSettings from '../functions/writeSettings'
 import axios from 'axios'
 
 import electron from 'electron'
+import styles from './UpdateBar.module.css'
 
 const { clipboard, shell, app } = electron.remote
 
@@ -61,31 +62,6 @@ function UpdateBar() {
 
     }, [])
 
-    const style = {
-        backgroundColor: '#181818',
-        color: '#ddd',
-        height: '2.5em',
-        width: '100%',
-        position: 'fixed',
-        bottom: 0,
-        left: 0,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: '80%',
-        borderTop: '2px solid black',
-    }
-
-    const buttonStyle = {
-        display: 'inline',
-        backgroundColor: '#181818',
-        border: '.1em solid gray',
-        marginLeft: '1em',
-        padding: '.1em .3em',
-        color: 'gray',
-        cursor: 'pointer',
-        fontSize: '1em',
-    }
 
     const ignore = () => {
         const newSettings = {
@@ -96,33 +72,33 @@ function UpdateBar() {
         writeSettings(newSettings, dispatch)
     }
 
-    return <div>
+    return <>
         {update
-            ? <div style={style}>
+            ? <div className={styles.container}>
                 <span>update to version {update.tagName}</span>
 
                 <button
-                    style={buttonStyle}
+                    className={styles.btn}
                     onClick={() => {
                         shell.openExternal(update.url)
                     }}
                 >download</button>
 
                 <button
-                    style={buttonStyle}
+                    className={styles.btn}
                     onClick={() => {
                         clipboard.writeText(update.url)
                     }}
                 >copy link</button>
 
                 <button
-                    style={buttonStyle}
+                    className={styles.btn}
                     onClick={ignore}
                 >ignore this version</button>
             </div>
             : null
         }
-    </div>
+    </>
 }
 
 export default UpdateBar
