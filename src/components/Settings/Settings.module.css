@@ -1,0 +1,9 @@
+.textDiv {
+    min-height: 1em;
+    font-size: 90%;
+    overflow-wrap: break-word;
+    background-color: #999;
+    padding: .3em;
+    margin-bottom: .2em;
+    border: solid .05em #555;
+}

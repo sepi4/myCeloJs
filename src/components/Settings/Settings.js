@@ -9,7 +9,9 @@ import SettingsAfterLog from './SettingsAfterLog'
 
 import writeSettings from '../../functions/writeSettings'
 
-import { StyledTextDiv, StyledButton } from '../styled/styledSettings'
+import { StyledButton } from '../styled/styledSettings'
+import styles from './Settings.module.css'
+
 import getText from '../../functions/getText'
 
 function Settings() {
@@ -70,12 +72,12 @@ function Settings() {
         </SettingsDiv>
 
         <SettingsDiv title={getText('log_location_title', settings)} >
-            <StyledTextDiv>
+            <div className={styles.textDiv}>
                 {settings && settings.logLocation
                     ? settings.logLocation
                     : ''
                 }
-            </StyledTextDiv>
+            </div>
             <StyledButton
                 onClick={changeLogLocation}
             // buttonColor='#999'

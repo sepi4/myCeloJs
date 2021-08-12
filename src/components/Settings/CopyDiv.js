@@ -6,7 +6,9 @@ const { clipboard } = electron.remote
 
 import Notification from '../Notification'
 
-import { StyledTextDiv, StyledButton } from '../styled/styledSettings'
+import { StyledButton } from '../styled/styledSettings'
+import styles from './Settings.module.css'
+
 import useTimedBoolean from '../../hooks/useTimedBoolean'
 
 import getText from '../../functions/getText'
@@ -27,10 +29,10 @@ function CopyDiv({ text }) {
     }
     return (
         <div>
-            <StyledTextDiv>
+            <div className={styles.textDiv}>
                 {text}
                 {timed && <Notification text={getText('copied', settings)} />}
-            </StyledTextDiv>
+            </div>
 
             <StyledButton onClick={handleCopy} >
                 {getText('copy', settings)}
