@@ -2,29 +2,29 @@
     "teams": {
         "team1": [
             {
-                "name": "MasterSteve",
-                "ranking": "782",
-                "country": "de",
-                "faction": "usa"
-            },
-            {
                 "name": "sepi",
-                "ranking": "256",
+                "ranking": "295",
                 "country": "fi",
                 "faction": "uk"
+            },
+            {
+                "name": "Spook",
+                "ranking": "713",
+                "country": "us",
+                "faction": "sov"
             }
         ],
         "team2": [
             {
-                "name": "[SSMN] KaanBabaBurda",
-                "ranking": "1138 ¹",
-                "country": "tr",
-                "faction": "okw"
+                "name": "LololoerShadow",
+                "ranking": "871",
+                "country": "lv",
+                "faction": "wer"
             },
             {
-                "name": "Battalfield",
-                "ranking": "1138 ¹",
-                "country": "tr",
+                "name": "little girl",
+                "ranking": "969",
+                "country": "cn",
                 "faction": "okw"
             }
         ]
