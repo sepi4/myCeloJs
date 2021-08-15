@@ -59,6 +59,11 @@ let initialStore = {
         reversed: false,
     },
 
+    playerCard: {
+        active: false,
+        player: null,
+    },
+
 }
 
 export default initialStore

@@ -2,52 +2,52 @@
     "teams": {
         "team1": [
             {
-                "name": "Frost",
-                "ranking": "532",
-                "country": "us",
-                "faction": "usa"
-            },
-            {
-                "name": "[noob]*putyosan27@JP",
-                "ranking": "442",
-                "country": "jp",
+                "name": "Gwydion",
+                "ranking": "612",
+                "country": "de",
                 "faction": "sov"
             },
             {
-                "name": "轮奸女大学生和女老师",
-                "ranking": "354",
+                "name": "DouDou",
+                "ranking": "569",
                 "country": "cn",
                 "faction": "usa"
             },
             {
+                "name": "男儿何不带吴钩",
+                "ranking": "331",
+                "country": "cn",
+                "faction": "sov"
+            },
+            {
                 "name": "sepi",
-                "ranking": "459",
+                "ranking": "461",
                 "country": "fi",
                 "faction": "uk"
             }
         ],
         "team2": [
             {
-                "name": "Nelec",
-                "ranking": "605",
+                "name": "zw123_456",
+                "ranking": "692",
                 "country": "cn",
                 "faction": "wer"
             },
             {
-                "name": "LOL8800",
-                "ranking": "394 ¹",
+                "name": "急速左转90后",
+                "ranking": "1047",
                 "country": "cn",
                 "faction": "okw"
             },
             {
-                "name": "CharlesLe",
-                "ranking": "728",
+                "name": "寻开心",
+                "ranking": "16",
                 "country": "cn",
                 "faction": "okw"
             },
             {
-                "name": "249339246",
-                "ranking": "394 ¹",
+                "name": "[Company of Clown]MaGua",
+                "ranking": "812",
                 "country": "cn",
                 "faction": "wer"
             }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
 import { shell } from 'electron'
 import styles from './PlayerMainRow.module.css'
@@ -42,6 +42,16 @@ function PlayerMainRow({
 
     const settings = useSelector(state => state.settings)
     const link = getSiteLink(settings.siteLink) + steamId
+    const dispatch = useDispatch()
+
+    const handlePlayerCardOn = () => {
+        dispatch({
+            type: 'PLAYER_CARD_ON',
+            data: {
+                player,
+            }
+        })
+    }
 
     const countryFlagLocation = useSelector(
         state => state.countryFlags[country]
@@ -106,6 +116,7 @@ function PlayerMainRow({
                     ? getTotalGames(player) + ' games played'
                     : null
             }
+            onClick={handlePlayerCardOn}
         >
             {player.name}
         </span>

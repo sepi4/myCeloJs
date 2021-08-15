@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 
 import Team from './Teams/Team'
 import Settings from './Settings/Settings'
+import PlayerCard from './PlayerCard/PlayerCard'
 
 import getText from '../functions/getText'
 
@@ -19,6 +20,8 @@ function MainView() {
         })
     }
 
+
+
     if (settingsView) {
         return <Settings />
     }
@@ -26,6 +29,11 @@ function MainView() {
     if (!settings || !settings.logLocation) {
         return <div>
             <h2>{getText('add_log_location', settings)}</h2>
+        </div>
+    }
+    if (state.playerCard.active) {
+        return <div>
+            <PlayerCard />
         </div>
     }
     if (players && players.length > 0) {

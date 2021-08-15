@@ -119,6 +119,25 @@ function reducer(state, action) {
                     },
             }
 
+        case 'PLAYER_CARD_ON':
+            return {
+                ...state,
+                playerCard: {
+                    ...state.playerCard,
+                    active: true,
+                    player: action.data.player,
+                }
+            }
+
+        case 'PLAYER_CARD_OFF':
+            return {
+                ...state,
+                playerCard: {
+                    active: false,
+                    ids: [],
+                }
+            }
+
         default:
             return state
     }
