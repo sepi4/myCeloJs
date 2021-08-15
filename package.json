@@ -3,7 +3,7 @@
     "productName": "myCelo",
     "version": "1.8.0",
     "description": "COH2 ranking display",
-    "license": "GPL",
+    "license": "GPL-3.0-or-later",
     "author": "Sergei Polishsuk",
     "engines": {
         "node": ">=9.0.0",

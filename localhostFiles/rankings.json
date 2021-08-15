@@ -2,30 +2,54 @@
     "teams": {
         "team1": [
             {
-                "name": "sepi",
-                "ranking": "295",
-                "country": "fi",
-                "faction": "uk"
+                "name": "Frost",
+                "ranking": "532",
+                "country": "us",
+                "faction": "usa"
             },
             {
-                "name": "Spook",
-                "ranking": "713",
-                "country": "us",
+                "name": "[noob]*putyosan27@JP",
+                "ranking": "442",
+                "country": "jp",
                 "faction": "sov"
+            },
+            {
+                "name": "轮奸女大学生和女老师",
+                "ranking": "354",
+                "country": "cn",
+                "faction": "usa"
+            },
+            {
+                "name": "sepi",
+                "ranking": "459",
+                "country": "fi",
+                "faction": "uk"
             }
         ],
         "team2": [
             {
-                "name": "LololoerShadow",
-                "ranking": "871",
-                "country": "lv",
+                "name": "Nelec",
+                "ranking": "605",
+                "country": "cn",
                 "faction": "wer"
             },
             {
-                "name": "little girl",
-                "ranking": "969",
+                "name": "LOL8800",
+                "ranking": "394 ¹",
                 "country": "cn",
                 "faction": "okw"
+            },
+            {
+                "name": "CharlesLe",
+                "ranking": "728",
+                "country": "cn",
+                "faction": "okw"
+            },
+            {
+                "name": "249339246",
+                "ranking": "394 ¹",
+                "country": "cn",
+                "faction": "wer"
             }
         ]
     },

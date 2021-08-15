@@ -86,7 +86,7 @@ function Settings() {
 
         <SettingsAfterLog />
 
-        <SettingsDiv title='Site for player links'>
+        <SettingsDiv title={getText('web_link', settings)}>
             <select
                 onChange={handleSiteLink}
                 value={siteLink}

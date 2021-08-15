@@ -15,6 +15,8 @@ import countries from '../../../countries.json'
 import getSiteLink from '../../functions/getSiteLink'
 import MainRowSpan from './MainRowSpan'
 
+import worldIcon from '../../../img/world.png'
+
 function PlayerMainRow({
     player,
     handleSetShowExtra,
@@ -80,7 +82,7 @@ function PlayerMainRow({
         </span>
     )
 
-    const countryFlag =
+    const countryFlag = (
         country !== undefined
             ? <img
                 style={{
@@ -94,6 +96,7 @@ function PlayerMainRow({
                 }
             />
             : null
+    )
 
     const alias = (
         <span
@@ -103,11 +106,26 @@ function PlayerMainRow({
                     ? getTotalGames(player) + ' games played'
                     : null
             }
-            onClick={() => (steamId ? shell.openExternal(link) : null)}
         >
             {player.name}
         </span>
     )
+
+    const webIcon = (
+        steamId
+            ? <img
+                style={{
+                    cursor: 'pointer',
+                    height: '1em',
+                }}
+                onClick={() => (steamId ? shell.openExternal(link) : null)}
+                src={worldIcon}
+                title='web'
+            />
+            : null
+    )
+
+
 
     return <div className={styles.container}>
         <MainRowSpan width='20%' justifyContent='flex-start' >
@@ -122,8 +140,12 @@ function PlayerMainRow({
             {countryFlag}
         </MainRowSpan>
 
-        <MainRowSpan width='50%'>
+        <MainRowSpan width='40%'>
             {alias}
+        </MainRowSpan>
+
+        <MainRowSpan width='10%'>
+            {webIcon}
         </MainRowSpan>
     </div>
 }
