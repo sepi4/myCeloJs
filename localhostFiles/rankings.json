@@ -1,57 +1,7 @@
 {
     "teams": {
-        "team1": [
-            {
-                "name": "Gwydion",
-                "ranking": "612",
-                "country": "de",
-                "faction": "sov"
-            },
-            {
-                "name": "DouDou",
-                "ranking": "569",
-                "country": "cn",
-                "faction": "usa"
-            },
-            {
-                "name": "男儿何不带吴钩",
-                "ranking": "331",
-                "country": "cn",
-                "faction": "sov"
-            },
-            {
-                "name": "sepi",
-                "ranking": "461",
-                "country": "fi",
-                "faction": "uk"
-            }
-        ],
-        "team2": [
-            {
-                "name": "zw123_456",
-                "ranking": "692",
-                "country": "cn",
-                "faction": "wer"
-            },
-            {
-                "name": "急速左转90后",
-                "ranking": "1047",
-                "country": "cn",
-                "faction": "okw"
-            },
-            {
-                "name": "寻开心",
-                "ranking": "16",
-                "country": "cn",
-                "faction": "okw"
-            },
-            {
-                "name": "[Company of Clown]MaGua",
-                "ranking": "812",
-                "country": "cn",
-                "faction": "wer"
-            }
-        ]
+        "team1": [],
+        "team2": []
     },
     "horizontal": true
 }

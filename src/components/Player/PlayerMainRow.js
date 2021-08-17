@@ -1,7 +1,6 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { shell } from 'electron'
 import styles from './PlayerMainRow.module.css'
 
 import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation'
@@ -12,10 +11,11 @@ import { faCaretRight, faCaretDown, } from '@fortawesome/free-solid-svg-icons'
 
 import countries from '../../../countries.json'
 
-import getSiteLink from '../../functions/getSiteLink'
 import MainRowSpan from './MainRowSpan'
 
-import worldIcon from '../../../img/world.png'
+// import { shell } from 'electron'
+// import getSiteLink from '../../functions/getSiteLink'
+// import worldIcon from '../../../img/world.png'
 
 function PlayerMainRow({
     player,
@@ -40,8 +40,8 @@ function PlayerMainRow({
         }
     }
 
-    const settings = useSelector(state => state.settings)
-    const link = getSiteLink(settings.siteLink) + steamId
+    // const settings = useSelector(state => state.settings)
+    // const link = getSiteLink(settings.siteLink) + steamId
     const dispatch = useDispatch()
 
     const handlePlayerCardOn = () => {
@@ -122,19 +122,19 @@ function PlayerMainRow({
         </span>
     )
 
-    const webIcon = (
-        steamId
-            ? <img
-                style={{
-                    cursor: 'pointer',
-                    height: '1em',
-                }}
-                onClick={() => (steamId ? shell.openExternal(link) : null)}
-                src={worldIcon}
-                title='web'
-            />
-            : null
-    )
+    // const webIcon = (
+    //     steamId
+    //         ? <img
+    //             style={{
+    //                 cursor: 'pointer',
+    //                 height: '1em',
+    //             }}
+    //             onClick={() => (steamId ? shell.openExternal(link) : null)}
+    //             src={worldIcon}
+    //             title='web'
+    //         />
+    //         : null
+    // )
 
 
 
@@ -151,13 +151,14 @@ function PlayerMainRow({
             {countryFlag}
         </MainRowSpan>
 
-        <MainRowSpan width='40%'>
+        <MainRowSpan width='50%'>
             {alias}
         </MainRowSpan>
 
+        {/* 
         <MainRowSpan width='10%'>
             {webIcon}
-        </MainRowSpan>
+        </MainRowSpan> */}
     </div>
 }
 

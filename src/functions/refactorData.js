@@ -45,6 +45,7 @@ export function refactorData(leaderboard, cohTitles, ids) {
 
         for (const member of group.members) {
             let id = member.profile_id
+
             if (
                 players[id]
                 && !players[id].ranks.find(y =>
@@ -58,6 +59,20 @@ export function refactorData(leaderboard, cohTitles, ids) {
                     name: names[x.leaderboard_id],
                     ...x,
                 })
+                break
+            }
+        }
+    }
+
+
+    // add steamId to extraInfo
+    for (let id of Object.keys(players)) {
+        if (players[id].steamId) {
+            break
+        }
+        for (let rankObj of players[id].ranks) {
+            if (rankObj.members.length === 1) {
+                players[id].steamId = rankObj.members[0].name.substring(7)
                 break
             }
         }

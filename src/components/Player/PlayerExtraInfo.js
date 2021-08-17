@@ -15,10 +15,10 @@ function PlayerExtraInfo({ extraInfo, player }) {
     const navButtons = state.navButtons
     const settings = state.settings
 
-    console.log('ranksArr: ', ranksArr)
-    console.log('state: ', state)
-    console.log('navButtons: ', navButtons)
-    console.log('settings: ', settings)
+    // console.log('ranksArr: ', ranksArr)
+    // console.log('state: ', state)
+    // console.log('navButtons: ', navButtons)
+    // console.log('settings: ', settings)
 
     const totalGames = (() => {
         if (!navButtons.total) {

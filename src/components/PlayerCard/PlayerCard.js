@@ -1,17 +1,24 @@
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 
 import PlayerExtraInfo from '../Player/PlayerExtraInfo'
+import Icon from './Icon'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes, } from '@fortawesome/free-solid-svg-icons'
+import styles from './PlayerCard.module.css'
+
+import logo_coh2 from '../../../img/logo_coh2.png'
+import logo_coh2stats from '../../../img/logo_coh2stats.png'
+
+import getSiteLink from '../../functions/getSiteLink'
+
+import { shell } from 'electron'
 
 export default function PlayerCard() {
     const dispatch = useDispatch()
     const state = useSelector(state => state)
-
-    console.log(state)
+    const countryFlags = state.countryFlags
 
     const handlePlayerCardOff = () => {
         dispatch({
@@ -19,14 +26,27 @@ export default function PlayerCard() {
         })
     }
 
-    // console.log(
-    //     state && state.playerCard && state.extraInfo
-    // )
-    // console.log(
-    //     state.playerCard.player
-    // )
+    // esc button close player card
+    function escPressed(e) {
+        if (e.key === 'Escape') {
+            handlePlayerCardOff()
+        }
+    }
+    useEffect(() => {
+        window.addEventListener('keydown', escPressed);
 
-    const player = state.playerCard.player
+        return () => {
+            window.removeEventListener('keydown', escPressed);
+        }
+    })
+
+    // SEARCH
+    // const baseUrl = "https://coh2-api.reliclink.com"
+    // const getPlayerSearchUrl = (name: string): string => {
+    //     return encodeURI(baseUrl + `/community/leaderboard/GetPersonalStat?title=coh2&search=${name}`);
+    // }
+
+    let player = state.playerCard.player
     let extraInfo = state.extraInfo
 
     extraInfo = extraInfo && player.profileId
@@ -42,42 +62,64 @@ export default function PlayerCard() {
             : null
     )
 
+    const steamId = state.extraInfo[player.profileId].steamId
+
+    const linkCoh2stats = getSiteLink('coh2stats.com') + steamId
+    const funCoh2stats = () => steamId ? shell.openExternal(linkCoh2stats) : null
+
+    const linkCoh2 = getSiteLink('coh2.org') + steamId
+    const funCoh2 = () => steamId ? shell.openExternal(linkCoh2) : null
+
     return (
-        <div>
-            <div style={{
-                background: '#181818',
-                padding: '0.5em 1.5em',
-                margin: '1em 0',
-            }}>
-                <div
-                    style={{
-                        width: '100%',
-                        justifyContent: 'flex-end',
-                        display: 'flex',
-                    }}
-                >
-                    <FontAwesomeIcon
-                        icon={faTimes}
-                        size='2x'
-                        color='#dddddd'
-                        onClick={handlePlayerCardOff}
-                        style={{
-                            marginRight: '0.5em',
-                            cursor: 'pointer',
-                            // height: '5em',
-                            // width: '5em',
-                        }}
+        <>
+            <div className={styles.container}>
+                <Icon
+                    fun={handlePlayerCardOff}
+                    icon={faTimes}
+                />
+
+                <div className={styles.nameDiv}>
+                    <img
+                        src={countryFlags[player.country]}
+                        alt={`${player.country}`}
+                        title={`${player.country}`}
+                    />
+                    <span>{player.name}</span>
+                </div>
+
+
+                <div className={styles.info}>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th className={styles.label}>steam id:</th>
+                                <td>{steamId}</td>
+                            </tr>
+                            <tr>
+                                <th className={styles.label}>profile id:</th>
+                                <td>{player.profileId}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div className={styles.links}>
+                    <img
+                        src={logo_coh2stats}
+                        alt='coh2stats'
+                        title='coh2stats.com'
+                        onClick={funCoh2stats}
+                    />
+                    <img
+                        src={logo_coh2}
+                        alt='coh2'
+                        title='coh2.org'
+                        onClick={funCoh2}
                     />
                 </div>
-                <h2 style={{
-                    textAlign: 'center',
-                    color: '#dddddd',
-                }} >
-                    Player Card
-                </h2>
+
                 {card}
             </div>
-
-        </div>
+        </>
     )
 }
