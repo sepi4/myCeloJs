@@ -1,7 +1,33 @@
 {
     "teams": {
-        "team1": [],
-        "team2": []
+        "team1": [
+            {
+                "name": "Cardy",
+                "ranking": "574",
+                "country": "ru",
+                "faction": "sov"
+            },
+            {
+                "name": "sepi",
+                "ranking": "316",
+                "country": "fi",
+                "faction": "uk"
+            }
+        ],
+        "team2": [
+            {
+                "name": "Etiennie",
+                "ranking": "856",
+                "country": "nl",
+                "faction": "okw"
+            },
+            {
+                "name": "иН$yJIbT Aн@р}{иИ",
+                "ranking": "672",
+                "country": "ru",
+                "faction": "okw"
+            }
+        ]
     },
     "horizontal": true
 }

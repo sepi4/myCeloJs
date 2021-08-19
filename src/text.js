@@ -209,7 +209,27 @@ const text = {
     add_log_location: {
         en: 'Please, in settings specify location log file (warnings.log)',
         ru: 'Укажите в настройках расположение лог-файла (warnings.log)',
-    }
+    },
+
+
+    // update bar
+    update_to_version: {
+        en: 'update to version',
+        ru: 'обновить на версию',
+    },
+    download: {
+        en: 'download',
+        ru: 'скачать',
+    },
+    copy_link: {
+        en: 'copy link',
+        ru: 'скопировать ссылку',
+    },
+    skip_this_version: {
+        en: 'skip this version',
+        ru: 'пропустить эту версию',
+    },
+
 
 
 }

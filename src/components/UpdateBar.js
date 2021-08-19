@@ -9,6 +9,8 @@ import axios from 'axios'
 import electron from 'electron'
 import styles from './UpdateBar.module.css'
 
+import _getText from '../functions/getText'
+
 const { clipboard, shell, app } = electron.remote
 
 function UpdateBar() {
@@ -17,6 +19,10 @@ function UpdateBar() {
     const updateCheckDone = useSelector(state => state.updateCheckDone)
     const settings = useSelector(state => state.settings)
     const appVersion = app.getVersion()
+
+    const getText = function (x) {
+        return _getText(x, settings)
+    }
 
     const isHigherVersion = (tag, current) => {
         let arrTag = tag.split('.')
@@ -75,26 +81,26 @@ function UpdateBar() {
     return <>
         {update
             ? <div className={styles.container}>
-                <span>update to version {update.tagName}</span>
+                <span>{getText('update_to_version')} {update.tagName}</span>
 
                 <button
                     className={styles.btn}
                     onClick={() => {
                         shell.openExternal(update.url)
                     }}
-                >download</button>
+                >{getText('download')}</button>
 
                 <button
                     className={styles.btn}
                     onClick={() => {
                         clipboard.writeText(update.url)
                     }}
-                >copy link</button>
+                >{getText('copy_link')}</button>
 
                 <button
                     className={styles.btn}
                     onClick={ignore}
-                >ignore this version</button>
+                >{getText('skip_this_version')}</button>
             </div>
             : null
         }
