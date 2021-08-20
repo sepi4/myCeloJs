@@ -9,7 +9,7 @@ import axios from 'axios'
 import electron from 'electron'
 import styles from './UpdateBar.module.css'
 
-import _getText from '../functions/getText'
+import funGetText from '../functions/getText'
 
 const { clipboard, shell, app } = electron.remote
 
@@ -21,7 +21,7 @@ function UpdateBar() {
     const appVersion = app.getVersion()
 
     const getText = function (x) {
-        return _getText(x, settings)
+        return funGetText(x, settings)
     }
 
     const isHigherVersion = (tag, current) => {

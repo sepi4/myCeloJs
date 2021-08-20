@@ -9,7 +9,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* margin-bottom: 1em; */
+    margin-bottom: 1em;
 }
 
 .nameDiv span {
@@ -25,7 +25,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 90%;
+    font-size: 80%;
+    color: #cfcfcf;
+
     /* margin-bottom: 1em; */
 }
 

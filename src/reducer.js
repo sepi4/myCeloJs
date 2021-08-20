@@ -81,6 +81,11 @@ function reducer(state, action) {
                     [false, false, false, false],
                     [false, false, false, false],
                 ],
+                playerCard: {
+                    active: false,
+                    ids: [],
+                }
+
             }
 
         case 'SET_SETTINGS':
@@ -126,6 +131,7 @@ function reducer(state, action) {
                     ...state.playerCard,
                     active: true,
                     player: action.data.player,
+                    extraInfo: action.data.extraInfo,
                 }
             }
 
@@ -134,7 +140,6 @@ function reducer(state, action) {
                 ...state,
                 playerCard: {
                     active: false,
-                    ids: [],
                 }
             }
 

@@ -3,7 +3,7 @@ import axios from 'axios'
 import { refactorData } from './refactorData'
 import { guessRankings } from './guessRankings'
 
-export function getExtraInfo(players, callback) {
+export function getExtraInfo(players, callback, forPlayerCard) {
 
     let ids = players.filter(p => p.profileId != undefined)
         .map(p => p.profileId)
@@ -25,12 +25,17 @@ export function getExtraInfo(players, callback) {
 
     Promise.all([fetch1, fetch2])
         .then(values => {
+            // debugger
             if (values[0].status === 200 && values[1].status === 200) {
                 leaderboard = values[0].data
                 cohTitles = values[1].data
                 let result = refactorData(leaderboard, cohTitles, ids)
-                const teams = guessRankings(players, leaderboard, cohTitles)
+                if (forPlayerCard) {
+                    callback(result)
+                    return
+                }
 
+                const teams = guessRankings(players, leaderboard, cohTitles)
                 callback(result, teams)
             }
         })

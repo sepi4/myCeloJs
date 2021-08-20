@@ -10,6 +10,8 @@ import getText from '../../functions/getText'
 import styles from './PlayerExtraInfo.module.css'
 
 function PlayerExtraInfo({ extraInfo, player }) {
+
+    // debugger
     let ranksArr = extraInfo && extraInfo.ranks
     const state = useSelector(state => state)
     const navButtons = state.navButtons

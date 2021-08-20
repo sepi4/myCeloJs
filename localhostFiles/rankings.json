@@ -2,29 +2,29 @@
     "teams": {
         "team1": [
             {
-                "name": "Cardy",
-                "ranking": "574",
-                "country": "ru",
+                "name": "leto",
+                "ranking": "306",
+                "country": "de",
                 "faction": "sov"
             },
             {
                 "name": "sepi",
-                "ranking": "316",
+                "ranking": "216",
                 "country": "fi",
-                "faction": "uk"
+                "faction": "sov"
             }
         ],
         "team2": [
             {
-                "name": "Etiennie",
-                "ranking": "856",
-                "country": "nl",
+                "name": "LuchsSkywalker",
+                "ranking": "74",
+                "country": "ru",
                 "faction": "okw"
             },
             {
-                "name": "иН$yJIbT Aн@р}{иИ",
-                "ranking": "672",
-                "country": "ru",
+                "name": "Tommy Shelby",
+                "ranking": "214",
+                "country": "ar",
                 "faction": "okw"
             }
         ]

@@ -134,6 +134,19 @@ const text = {
         en: 'total multiplay games',
         ru: 'количество сетевых игр',
     },
+    team_of: {
+        en: 'team',
+        ru: 'команда',
+    },
+    Allies: {
+        en: '✰',
+        ru: '✰',
+    },
+    Axis: {
+        en: '✚',
+        ru: '✚',
+    },
+
 
     // history ---------------------------------
     game_start_time: {

@@ -86,8 +86,6 @@ function App() {
                     })
                 })
 
-                // console.log('extra data', data)
-
                 dispatch({
                     type: 'SET_EXTRA_INFO',
                     data: {

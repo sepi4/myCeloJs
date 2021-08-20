@@ -47,11 +47,27 @@ export default function PlayerCard() {
     // }
 
     let player = state.playerCard.player
-    let extraInfo = state.extraInfo
+    let extraInfo = state.playerCard.extraInfo
 
-    extraInfo = extraInfo && player.profileId
-        ? extraInfo[player.profileId]
-        : null
+    if (!extraInfo) {
+        return <>
+            <div className={styles.container}>
+                <Icon
+                    fun={handlePlayerCardOff}
+                    icon={faTimes}
+                />
+
+                <div className={styles.nameDiv}>
+                    <img
+                        src={countryFlags[player.country]}
+                        alt={`${player.country}`}
+                        title={`${player.country}`}
+                    />
+                    <span>{player.name}</span>
+                </div>
+            </div>
+        </>
+    }
 
     const card = (
         state && state.playerCard && state.extraInfo
@@ -62,7 +78,8 @@ export default function PlayerCard() {
             : null
     )
 
-    const steamId = state.extraInfo[player.profileId].steamId
+    // debugger
+    let steamId = extraInfo.steamId
 
     const linkCoh2stats = getSiteLink('coh2stats.com') + steamId
     const funCoh2stats = () => steamId ? shell.openExternal(linkCoh2stats) : null

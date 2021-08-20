@@ -1,12 +1,21 @@
 import React from 'react'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
+import getTextFun from '../../functions/getText'
 
 import Members from '../Player/Members'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons'
 
+import star from '../../../img/star.png'
+import cross from '../../../img/cross.png'
+
 function Rank({ style, rank }) {
+    const state = useSelector(state => state)
+    const settings = state.settings
+    const getText = x => getTextFun(x, settings)
+
     const [showMembers, setShowMembers] = useState(false)
     function sw(x) {
         switch (x) {
@@ -30,6 +39,32 @@ function Rank({ style, rank }) {
         return m + ' ' + sw(rn)
     }
 
+    const arrow = (
+        <FontAwesomeIcon
+            icon={showMembers ? faCaretDown : faCaretRight}
+            size='lg'
+            style={{
+                color: 'green',
+                marginRight: '.2em',
+            }}
+        />
+    )
+
+    let rankName = rank.name
+    const x = rankName.match(/^TeamOf(\d)(.+)$/)
+    if (x) {
+        rankName = <>
+            {`${getText('team_of')} ${x[1]}v${x[1]} `}
+            <img
+                src={x[2] === 'Axis' ? cross : star}
+                style={{
+                    height: '1em'
+                }}
+            />
+        </>
+    }
+
+
     return <div style={style}>
         {rank.members.length > 1
             ? <div>
@@ -37,16 +72,8 @@ function Rank({ style, rank }) {
                     onClick={() => setShowMembers(!showMembers)}
                     style={{ cursor: 'pointer' }}
                 >
-                    <FontAwesomeIcon
-                        icon={showMembers ? faCaretDown : faCaretRight}
-                        size='lg'
-                        style={{
-                            color: 'green',
-                            marginRight: '.2em',
-                        }}
-                    />
-
-                    {rank.name}
+                    {arrow}
+                    {rankName}
                 </span>
                 {showMembers && <Members members={rank.members} />}
             </div>

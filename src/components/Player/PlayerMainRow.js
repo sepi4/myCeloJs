@@ -23,6 +23,7 @@ function PlayerMainRow({
     extraInfo,
     showExtra,
 }) {
+
     let country
     let steamId
     if (extraInfo && player.profileId) {
@@ -49,6 +50,7 @@ function PlayerMainRow({
             type: 'PLAYER_CARD_ON',
             data: {
                 player,
+                extraInfo,
             }
         })
     }
@@ -121,21 +123,6 @@ function PlayerMainRow({
             {player.name}
         </span>
     )
-
-    // const webIcon = (
-    //     steamId
-    //         ? <img
-    //             style={{
-    //                 cursor: 'pointer',
-    //                 height: '1em',
-    //             }}
-    //             onClick={() => (steamId ? shell.openExternal(link) : null)}
-    //             src={worldIcon}
-    //             title='web'
-    //         />
-    //         : null
-    // )
-
 
 
     return <div className={styles.container}>

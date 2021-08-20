@@ -1,18 +1,45 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import styles from './Members.module.css'
 
-import e from 'electron'
-const { shell } = e
-
-import getSiteLink from '../../functions/getSiteLink'
+import { getExtraInfo } from '../../functions/getExtraInfo'
 
 function Members({ members }) {
     const state = useSelector(state => state)
     const countryFlags = state.countryFlags
-    const settings = state.settings
+    const dispatch = useDispatch()
 
-    const link = getSiteLink(settings.siteLink)
+    const handlePlayerCardOn = (player) => {
+        player = {
+            name: player.alias,
+            country: player.country,
+            profileId: player.profile_id,
+        }
+
+        // debugger
+
+        // alias: "Maximus Decimus Meridius"
+        // country: "ru"
+        // leaderboardregion_id: 0
+        // level: 300
+        // name: "/steam/76561198309343528"
+        // personal_statgroup_id: 4232750
+        // profile_id: 2894783
+        // xp: 18785964
+
+        getExtraInfo([player], (result) => {
+            const ex = result[player.profileId]
+            if (result && ex) {
+                dispatch({
+                    type: 'PLAYER_CARD_ON',
+                    data: {
+                        player,
+                        extraInfo: ex,
+                    }
+                })
+            }
+        }, true)
+    }
 
     return <div style={{ margin: '0.5rem 0' }}>
         <hr />
@@ -20,7 +47,7 @@ function Members({ members }) {
             <div
                 className={styles.membersDiv}
                 key={m.name}
-                onClick={() => shell.openExternal(link + m.name.substring(7))}
+                onClick={() => handlePlayerCardOn(m)}
             >
                 <img
                     className={styles.flagImage}
