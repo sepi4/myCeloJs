@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { useDispatch, useSelector, } from 'react-redux'
 
 import electron from 'electron'
@@ -19,6 +19,18 @@ function Settings() {
     const settings = useSelector(state => state.settings)
     const lg = settings && settings.language ? settings.language : 'en'
     const siteLink = settings ? settings.siteLink : 'coh2stats.com'
+
+    const steamIdInputRef = useRef(null)
+
+    const handleSteamId = () => {
+        let num = steamIdInputRef.current.value
+        // check that steam id is 17 long digit
+        if (!num.match(/^\d{17}$/)) {
+            console.log('virheellinen')
+            return
+        }
+
+    }
 
     const changeLogLocation = () => {
         dialog.showOpenDialog({
@@ -71,22 +83,6 @@ function Settings() {
             </select>
         </SettingsDiv>
 
-        <SettingsDiv title={getText('log_location_title', settings)} >
-            <div className={styles.textDiv}>
-                {settings && settings.logLocation
-                    ? settings.logLocation
-                    : ''
-                }
-            </div>
-            <StyledButton
-                onClick={changeLogLocation}
-            // buttonColor='#999'
-            >{getText('select', settings)}</StyledButton>
-        </SettingsDiv>
-
-        <SettingsAfterLog />
-
-
         <SettingsDiv title={getText('web_link', settings)}>
             <select
                 onChange={handleSiteLink}
@@ -101,6 +97,26 @@ function Settings() {
             </select>
         </SettingsDiv>
 
+        <SettingsDiv title='my steam id'>
+            <input ref={steamIdInputRef} />
+            <button onClick={handleSteamId}>save</button>
+
+        </SettingsDiv>
+
+        <SettingsDiv title={getText('log_location_title', settings)} >
+            <div className={styles.textDiv}>
+                {settings && settings.logLocation
+                    ? settings.logLocation
+                    : ''
+                }
+            </div>
+            <StyledButton
+                onClick={changeLogLocation}
+            // buttonColor='#999'
+            >{getText('select', settings)}</StyledButton>
+        </SettingsDiv>
+
+        <SettingsAfterLog />
     </div>
 }
 

@@ -2,30 +2,30 @@
     "teams": {
         "team1": [
             {
-                "name": "leto",
-                "ranking": "306",
-                "country": "de",
-                "faction": "sov"
+                "name": "Ruh Roh",
+                "ranking": "147",
+                "country": "us",
+                "faction": "usa"
             },
             {
                 "name": "sepi",
-                "ranking": "216",
+                "ranking": "200",
                 "country": "fi",
                 "faction": "sov"
             }
         ],
         "team2": [
             {
-                "name": "LuchsSkywalker",
-                "ranking": "74",
+                "name": "VATMEN",
+                "ranking": "499 ¹",
                 "country": "ru",
                 "faction": "okw"
             },
             {
-                "name": "Tommy Shelby",
-                "ranking": "214",
-                "country": "ar",
-                "faction": "okw"
+                "name": "[ S.B ] BLITZ",
+                "ranking": "499 ¹",
+                "country": "ru",
+                "faction": "wer"
             }
         ]
     },

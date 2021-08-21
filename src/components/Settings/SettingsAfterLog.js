@@ -13,8 +13,6 @@ import SettingsLocation from './SettingsLocation'
 export default function SettingsAfterLog() {
     const state = useSelector(state => state)
     const { settings } = state
-    // const lg = settings ? settings.language : 'en'
-
     const dispatch = useDispatch()
 
     const handleType = (e) => {
