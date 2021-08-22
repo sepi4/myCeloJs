@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './Navbar.module.css'
 
-import { faCogs, faTimes, faUserAlt } from '@fortawesome/free-solid-svg-icons'
+import { faCogs, faSearch, faTimes, faUserAlt } from '@fortawesome/free-solid-svg-icons'
 
 import getText from '../../functions/getText'
 
@@ -46,6 +46,12 @@ export default function Navbar({ handleSetSettingsView }) {
         </div>
     }
 
+    const handleSearchView = () => {
+        dispatch({
+            type: 'SEARCH_VIEW_ON',
+        })
+    }
+
     const handleOpenMyCard = () => {
         let player = {
             profileId: settings.profileId,
@@ -73,14 +79,29 @@ export default function Navbar({ handleSetSettingsView }) {
 
     const userIcon = settings && settings.steamId
         ? <NavBarIcon
-            style={{ marginLeft: '1em' }}
+            title={getText('my_playercard', settings)}
+            style={{
+                height: '.8em',
+                marginRight: '0',
+            }}
             icon={faUserAlt}
             fun={handleOpenMyCard}
         />
         : null
 
+    const searchIcon = <NavBarIcon
+        title={getText('my_playercard', settings)}
+        style={{
+            height: '.8em',
+        }}
+        icon={faSearch}
+        fun={handleSearchView}
+    />
+
     return <div className={styles.navbar} >
         {userIcon}
+
+        {searchIcon}
 
         <div className={styles.container}>
             <div className={styles.column}>
@@ -103,6 +124,10 @@ export default function Navbar({ handleSetSettingsView }) {
                 </NavbarRow>
             </div>
         </div>
-        <NavBarIcon icon={faCogs} fun={settingsViewToggeler} />
+        <NavBarIcon
+            title={getText('settings', settings)}
+            icon={faCogs}
+            fun={settingsViewToggeler}
+        />
     </div>
 }

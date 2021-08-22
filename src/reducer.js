@@ -124,24 +124,40 @@ function reducer(state, action) {
                     },
             }
 
+        case 'TO_MAIN_VIEW':
+            return {
+                ...state,
+                view: 'main',
+            }
+
         case 'PLAYER_CARD_ON':
             return {
                 ...state,
+                view: 'playerCard',
                 playerCard: {
                     ...state.playerCard,
-                    active: true,
                     player: action.data.player,
                     extraInfo: action.data.extraInfo,
                 }
             }
-
-        case 'PLAYER_CARD_OFF':
+        case 'SEARCH_VIEW_ON':
             return {
                 ...state,
-                playerCard: {
-                    active: false,
-                }
+                view: 'search',
             }
+
+        // case 'SEARCH_VIEW_OFF':
+        //     return {
+        //         ...state,
+        //         view: 'main',
+        //     }
+
+        // case 'PLAYER_CARD_OFF':
+        //     return {
+        //         ...state,
+        //         view: 'main',
+        //     }
+
 
         default:
             return state

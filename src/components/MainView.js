@@ -6,6 +6,8 @@ import Settings from './Settings/Settings'
 import PlayerCard from './PlayerCard/PlayerCard'
 
 import getText from '../functions/getText'
+import Search from './Search/Search'
+import ClosingViewWrapper from './ClosingViewWrapper/ClosingViewWrapper'
 
 function MainView() {
     const settingsView = useSelector(state => state.settingsView)
@@ -20,8 +22,6 @@ function MainView() {
         })
     }
 
-
-
     if (settingsView) {
         return <Settings />
     }
@@ -31,11 +31,21 @@ function MainView() {
             <h2>{getText('add_log_location', settings)}</h2>
         </div>
     }
-    if (state.playerCard.active) {
-        return <div>
-            <PlayerCard />
-        </div>
+    if (state.view === 'playerCard') {
+        return (
+            <ClosingViewWrapper>
+                <PlayerCard />
+            </ClosingViewWrapper>
+        )
     }
+    if (state.view === 'search') {
+        return (
+            <ClosingViewWrapper>
+                <Search />
+            </ClosingViewWrapper>
+        )
+    }
+
     if (players && players.length > 0) {
         return <div>
             <Team players={teams[0]} teamIndex={0} />

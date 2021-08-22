@@ -36,9 +36,19 @@ function Settings() {
 
     const handleSteamId = () => {
         const num = steamIdInputRef.current.value.trim()
+        if (num === '') {
+            const newSettings = {
+                ...settings,
+                steamId: undefined,
+                profileId: undefined,
+            }
+            writeSettings(newSettings, dispatch)
+            return
+        }
+
         // check that steam id is 17 long digit
         if (!num.match(/^\d{17}$/)) {
-            console.log('virheellinen')
+            // console.error('num:', num)
             setError()
             return
         }
@@ -58,9 +68,6 @@ function Settings() {
                         const group = res.data.statGroups.find(g => g.type === 1)
                         const profile = group.members[0]
 
-                        console.log('res:', res)
-                        console.log('profile:', profile)
-
                         const newSettings = {
                             ...settings,
                             steamId: num,
@@ -78,7 +85,7 @@ function Settings() {
                 }
             })
             .catch((err) => {
-                console.log('err:', err)
+                console.error('err:', err)
             })
     }
 
@@ -147,7 +154,7 @@ function Settings() {
             </select>
         </SettingsDiv>
 
-        <SettingsDiv title='my steam id'>
+        <SettingsDiv title={getText('my_steam_id', settings)}>
             <input
                 className={styles.input}
                 ref={steamIdInputRef}
@@ -158,7 +165,7 @@ function Settings() {
             />
 
             <StyledButton onClick={handleSteamId} >
-                save
+                {getText('save', settings)}
             </StyledButton>
             {timed &&
                 <span style={{

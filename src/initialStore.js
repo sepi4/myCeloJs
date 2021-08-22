@@ -60,9 +60,10 @@ let initialStore = {
     },
 
     playerCard: {
-        active: false,
         player: null,
     },
+
+    view: 'main',
 
 }
 

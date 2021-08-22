@@ -1,11 +1,7 @@
-
-import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 
 import PlayerExtraInfo from '../Player/PlayerExtraInfo'
-import Icon from './Icon'
-
-import { faTimes, } from '@fortawesome/free-solid-svg-icons'
 import styles from './PlayerCard.module.css'
 
 import logo_coh2 from '../../../img/logo_coh2.png'
@@ -16,29 +12,9 @@ import getSiteLink from '../../functions/getSiteLink'
 import { shell } from 'electron'
 
 export default function PlayerCard() {
-    const dispatch = useDispatch()
     const state = useSelector(state => state)
     const countryFlags = state.countryFlags
 
-    const handlePlayerCardOff = () => {
-        dispatch({
-            type: 'PLAYER_CARD_OFF',
-        })
-    }
-
-    // esc button close player card
-    function escPressed(e) {
-        if (e.key === 'Escape') {
-            handlePlayerCardOff()
-        }
-    }
-    useEffect(() => {
-        window.addEventListener('keydown', escPressed);
-
-        return () => {
-            window.removeEventListener('keydown', escPressed);
-        }
-    })
 
     // SEARCH
     // const baseUrl = "https://coh2-api.reliclink.com"
@@ -51,20 +27,13 @@ export default function PlayerCard() {
 
     if (!extraInfo) {
         return <>
-            <div className={styles.container}>
-                <Icon
-                    fun={handlePlayerCardOff}
-                    icon={faTimes}
+            <div className={styles.nameDiv}>
+                <img
+                    src={countryFlags[player.country]}
+                    alt={`${player.country}`}
+                    title={`${player.country}`}
                 />
-
-                <div className={styles.nameDiv}>
-                    <img
-                        src={countryFlags[player.country]}
-                        alt={`${player.country}`}
-                        title={`${player.country}`}
-                    />
-                    <span>{player.name}</span>
-                </div>
+                <span>{player.name}</span>
             </div>
         </>
     }
@@ -89,54 +58,47 @@ export default function PlayerCard() {
 
     return (
         <>
-            <div className={styles.container}>
-                <Icon
-                    fun={handlePlayerCardOff}
-                    icon={faTimes}
+            <div className={styles.nameDiv}>
+                <img
+                    src={countryFlags[player.country]}
+                    alt={`${player.country}`}
+                    title={`${player.country}`}
                 />
-
-                <div className={styles.nameDiv}>
-                    <img
-                        src={countryFlags[player.country]}
-                        alt={`${player.country}`}
-                        title={`${player.country}`}
-                    />
-                    <span>{player.name}</span>
-                </div>
-
-
-                <div className={styles.info}>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th className={styles.label}>steam id:</th>
-                                <td>{steamId}</td>
-                            </tr>
-                            <tr>
-                                <th className={styles.label}>profile id:</th>
-                                <td>{player.profileId}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div className={styles.links}>
-                    <img
-                        src={logo_coh2stats}
-                        alt='coh2stats'
-                        title='coh2stats.com'
-                        onClick={funCoh2stats}
-                    />
-                    <img
-                        src={logo_coh2}
-                        alt='coh2'
-                        title='coh2.org'
-                        onClick={funCoh2}
-                    />
-                </div>
-
-                {card}
+                <span>{player.name}</span>
             </div>
+
+
+            <div className={styles.info}>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th className={styles.label}>steam id:</th>
+                            <td>{steamId}</td>
+                        </tr>
+                        <tr>
+                            <th className={styles.label}>profile id:</th>
+                            <td>{player.profileId}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div className={styles.links}>
+                <img
+                    src={logo_coh2stats}
+                    alt='coh2stats'
+                    title='coh2stats.com'
+                    onClick={funCoh2stats}
+                />
+                <img
+                    src={logo_coh2}
+                    alt='coh2'
+                    title='coh2.org'
+                    onClick={funCoh2}
+                />
+            </div>
+
+            {card}
         </>
     )
 }

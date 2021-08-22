@@ -1,4 +1,4 @@
-import text from '../text'
+import text from '../translation'
 
 function getText(key, settings) {
     const lang = settings && settings.language ? settings.language : 'en'

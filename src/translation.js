@@ -59,6 +59,14 @@ const text = {
         ru: 'Сайт для ссылки игрока',
     },
 
+    my_steam_id: {
+        en: 'My steam id',
+        ru: 'Мой steam id',
+    },
+    save: {
+        en: 'save',
+        ru: 'сохранить',
+    },
 
 
     // navbar  ---------------------------------
@@ -103,6 +111,15 @@ const text = {
         en: 'integer 1-999',
         ru: 'целое чило 1-999',
     },
+    my_playercard: {
+        en: 'my playercard',
+        ru: 'моя карта игрока',
+    },
+    settings: {
+        en: 'settings',
+        ru: 'настройки',
+    },
+
 
     // dropdown menu  ---------------------------------
     rank: {
@@ -175,6 +192,7 @@ const text = {
         ru: 'имя',
     },
 
+
     // history keys    
     dmgdone: {
         en: 'damage',
@@ -208,10 +226,6 @@ const text = {
         en: 'vehicle losts',
         ru: 'техники потеряно',
     },
-
-
-
-
 
 
     // main view ---------------------------------
