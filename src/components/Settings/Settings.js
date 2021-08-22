@@ -71,7 +71,7 @@ function Settings() {
                         const newSettings = {
                             ...settings,
                             steamId: num,
-                            profileId: profile.profile_id,
+                            profileId: profile.profile_id + '',
                         }
                         writeSettings(newSettings, dispatch)
                     } else {

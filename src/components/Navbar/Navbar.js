@@ -67,7 +67,7 @@ export default function Navbar({ handleSetSettingsView }) {
                     data: {
                         player: {
                             name: profile.alias,
-                            profileId: profile.profile_id,
+                            profileId: profile.profile_id + '',
                             country: profile.country,
                         },
                         extraInfo: ex,
@@ -77,7 +77,12 @@ export default function Navbar({ handleSetSettingsView }) {
         }, true)
     }
 
+    // debugger
     const userIcon = settings && settings.steamId
+        && !(
+            state.view === 'playerCard'
+            && state.playerCard.player.profileId === settings.profileId
+        )
         ? <NavBarIcon
             title={getText('my_playercard', settings)}
             style={{
@@ -89,14 +94,16 @@ export default function Navbar({ handleSetSettingsView }) {
         />
         : null
 
-    const searchIcon = <NavBarIcon
-        title={getText('my_playercard', settings)}
-        style={{
-            height: '.8em',
-        }}
-        icon={faSearch}
-        fun={handleSearchView}
-    />
+    const searchIcon = state.view !== 'search'
+        ? <NavBarIcon
+            title={getText('my_playercard', settings)}
+            style={{
+                height: '.8em',
+            }}
+            icon={faSearch}
+            fun={handleSearchView}
+        />
+        : null
 
     return <div className={styles.navbar} >
         {userIcon}

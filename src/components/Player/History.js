@@ -47,6 +47,7 @@ export default function History({ player, }) {
                         return b.completiontime - a.completiontime
                     })
 
+                    // console.log('player in History:', player)
                     matches.forEach((m) => {
                         let mObj = {}
                         mObj.startGameTime = new Date(m.startgametime * 1000)
