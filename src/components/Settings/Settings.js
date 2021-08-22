@@ -7,29 +7,79 @@ const { dialog } = electron.remote
 import SettingsDiv from './SettingsDiv'
 import SettingsAfterLog from './SettingsAfterLog'
 
+import useTimedBoolean from '../../hooks/useTimedBoolean'
+
 import writeSettings from '../../functions/writeSettings'
 
 import { StyledButton } from '../styled/styledSettings'
 import styles from './Settings.module.css'
 
 import getText from '../../functions/getText'
+import axios from 'axios'
 
 function Settings() {
     const dispatch = useDispatch()
     const settings = useSelector(state => state.settings)
     const lg = settings && settings.language ? settings.language : 'en'
     const siteLink = settings ? settings.siteLink : 'coh2stats.com'
+    // const [error, setError] = useState(false)
 
+    const [timed, setTimed] = useTimedBoolean(1000)
     const steamIdInputRef = useRef(null)
 
+    const setError = () => {
+        setTimed(true)
+        steamIdInputRef.current.value = settings.steamId
+            ? settings.steamId
+            : ''
+    }
+
     const handleSteamId = () => {
-        let num = steamIdInputRef.current.value
+        const num = steamIdInputRef.current.value.trim()
         // check that steam id is 17 long digit
         if (!num.match(/^\d{17}$/)) {
             console.log('virheellinen')
+            setError()
             return
         }
 
+        // 76561198006675368
+        const url = 'https://coh2-api.reliclink.com/community/' +
+            'leaderboard/GetPersonalStat?title=coh2&profile_names=[' +
+            '%22%2Fsteam%2F' + num + '%22]'
+
+        axios.get(url)
+            .then((res) => {
+                try {
+                    if (
+                        res.status === 200
+                        && res.data.result.message === 'SUCCESS'
+                    ) {
+                        const group = res.data.statGroups.find(g => g.type === 1)
+                        const profile = group.members[0]
+
+                        console.log('res:', res)
+                        console.log('profile:', profile)
+
+                        const newSettings = {
+                            ...settings,
+                            steamId: num,
+                            profileId: profile.profile_id,
+                        }
+                        writeSettings(newSettings, dispatch)
+                    } else {
+                        console.error('res:', res)
+                        setError()
+                    }
+
+                } catch (error) {
+                    console.error('error:', error)
+                    setError()
+                }
+            })
+            .catch((err) => {
+                console.log('err:', err)
+            })
     }
 
     const changeLogLocation = () => {
@@ -98,8 +148,29 @@ function Settings() {
         </SettingsDiv>
 
         <SettingsDiv title='my steam id'>
-            <input ref={steamIdInputRef} />
-            <button onClick={handleSteamId}>save</button>
+            <input
+                className={styles.input}
+                ref={steamIdInputRef}
+                defaultValue={settings && settings.steamId
+                    ? settings.steamId
+                    : ''
+                }
+            />
+
+            <StyledButton onClick={handleSteamId} >
+                save
+            </StyledButton>
+            {timed &&
+                <span style={{
+                    backgroundColor: 'darkred',
+                    color: 'white',
+                    fontSize: '90%',
+                    padding: '.2em',
+                }}>
+                    id is wrong
+                    {/* {getText('integer_error', settings)} */}
+                </span>
+            }
 
         </SettingsDiv>
 

@@ -7,3 +7,11 @@
     margin-bottom: .2em;
     border: solid .05em #555;
 }
+
+.input {
+    width: 100%;
+    background-color: #dddddd;
+    padding: .3em;
+    margin-bottom: .2em;
+    border: solid .05em #555;
+}

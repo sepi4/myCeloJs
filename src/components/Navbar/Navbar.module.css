@@ -1,5 +1,5 @@
 .container {
-    margin: 0 1.2em;
+    /* margin: 0 1.2em; */
     display: flex;
     justify-content: space-evenly;
     height: 100%;

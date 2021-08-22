@@ -2,30 +2,18 @@
     "teams": {
         "team1": [
             {
-                "name": "Ruh Roh",
-                "ranking": "147",
-                "country": "us",
-                "faction": "usa"
-            },
-            {
-                "name": "sepi",
-                "ranking": "200",
-                "country": "fi",
-                "faction": "sov"
+                "name": "Marshal Georgy Zhukov",
+                "ranking": "1123",
+                "country": "sg",
+                "faction": "wer"
             }
         ],
         "team2": [
             {
-                "name": "VATMEN",
-                "ranking": "499 ¹",
-                "country": "ru",
-                "faction": "okw"
-            },
-            {
-                "name": "[ S.B ] BLITZ",
-                "ranking": "499 ¹",
-                "country": "ru",
-                "faction": "wer"
+                "name": "?",
+                "ranking": "1223",
+                "country": "cn",
+                "faction": "sov"
             }
         ]
     },

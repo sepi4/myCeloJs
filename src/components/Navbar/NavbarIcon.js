@@ -10,6 +10,7 @@ export default function NavBarIcon({ icon, fun }) {
         onClick={fun}
         style={{
             marginRight: '0.5em',
+            marginLeft: '0.5em',
             cursor: 'pointer',
         }}
     />
