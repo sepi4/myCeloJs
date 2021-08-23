@@ -2,18 +2,18 @@
     "teams": {
         "team1": [
             {
-                "name": "Marshal Georgy Zhukov",
-                "ranking": "1115",
-                "country": "sg",
-                "faction": "wer"
+                "name": "sepi",
+                "ranking": "187",
+                "country": "fi",
+                "faction": "sov"
             }
         ],
         "team2": [
             {
-                "name": "?",
-                "ranking": "954",
-                "country": "cn",
-                "faction": "sov"
+                "name": "GolDenCoBRaaa",
+                "ranking": "171",
+                "country": "br",
+                "faction": "wer"
             }
         ]
     },

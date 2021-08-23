@@ -17,7 +17,7 @@ export default function PlayerCard() {
     const countryFlags = state.countryFlags
 
 
-    // console.log('state.playerCard:', state.playerCard)
+    console.log('state.playerCard:', state.playerCard)
 
     let player = state.playerCard.player
     let extraInfo = state.playerCard.extraInfo

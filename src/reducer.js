@@ -82,9 +82,10 @@ function reducer(state, action) {
                     [false, false, false, false],
                 ],
                 playerCard: {
-                    active: false,
-                    ids: [],
-                }
+                    // active: false,
+                    // ids: [],
+                },
+                view: 'main',
 
             }
 
