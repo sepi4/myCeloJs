@@ -121,7 +121,7 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
                 ![alt text](./readmeImages/plusBrowserRus.png "+ browser"). 
 
             - вставьте в "Адрес URL" местонахождение файла rankings.html (скопировали из настроек myCelo)
-            - вставьте такую же ширину и высоту, что резолюция вашего монитора
+            - сделайте ширину 1920 и высоту 1080
 
                 ![alt text](./readmeImages/urlPasteRus.png "url") 
 

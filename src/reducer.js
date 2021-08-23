@@ -146,17 +146,11 @@ function reducer(state, action) {
                 view: 'search',
             }
 
-        // case 'SEARCH_VIEW_OFF':
-        //     return {
-        //         ...state,
-        //         view: 'main',
-        //     }
-
-        // case 'PLAYER_CARD_OFF':
-        //     return {
-        //         ...state,
-        //         view: 'main',
-        //     }
+        case 'SET_FOUND_PLAYERS':
+            return {
+                ...state,
+                foundPlayers: action.data,
+            }
 
 
         default:

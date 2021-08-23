@@ -1,7 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-export default function Icon({ icon, fun, }) {
+export default function Icon({ icon, fun, size = '2x' }) {
     return (
         <div
             style={{
@@ -12,7 +12,7 @@ export default function Icon({ icon, fun, }) {
         >
             <FontAwesomeIcon
                 icon={icon}
-                size='2x'
+                size={size}
                 color='#dddddd'
                 onClick={fun}
                 style={{

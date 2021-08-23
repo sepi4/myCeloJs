@@ -1,0 +1,29 @@
+.container {
+    padding: 0.5em;
+    margin: 1em;
+    color: #dddddd;
+    border: solid .05em #dddddd;
+    /* background-color: black; */
+    cursor: pointer;
+    /* width: 10em; */
+    width: 100%;
+}
+
+.flagImage {
+    height: 1em;
+    margin-right: 1em;
+}
+
+.alias {
+    font-weight: bold;
+}
+
+.label {
+    text-align: left;
+    padding-right: 1em;
+}
+
+.table {
+    color: gray;
+    font-size: 80%;
+}

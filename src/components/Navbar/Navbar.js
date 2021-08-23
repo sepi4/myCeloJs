@@ -96,7 +96,7 @@ export default function Navbar({ handleSetSettingsView }) {
 
     const searchIcon = state.view !== 'search'
         ? <NavBarIcon
-            title={getText('my_playercard', settings)}
+            title={getText('search', settings)}
             style={{
                 height: '.8em',
             }}
@@ -104,6 +104,12 @@ export default function Navbar({ handleSetSettingsView }) {
             fun={handleSearchView}
         />
         : null
+
+    const settingsIcon = <NavBarIcon
+        title={getText('settings', settings)}
+        icon={faCogs}
+        fun={settingsViewToggeler}
+    />
 
     return <div className={styles.navbar} >
         {userIcon}
@@ -131,10 +137,8 @@ export default function Navbar({ handleSetSettingsView }) {
                 </NavbarRow>
             </div>
         </div>
-        <NavBarIcon
-            title={getText('settings', settings)}
-            icon={faCogs}
-            fun={settingsViewToggeler}
-        />
+
+        {settingsIcon}
+
     </div>
 }

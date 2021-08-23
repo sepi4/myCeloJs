@@ -4,7 +4,6 @@ import { refactorData } from './refactorData'
 import { guessRankings } from './guessRankings'
 
 export function getExtraInfo(players, callback, forPlayerCard) {
-
     let ids = players.filter(p => p.profileId != undefined)
         .map(p => p.profileId)
 
@@ -22,9 +21,11 @@ export function getExtraInfo(players, callback, forPlayerCard) {
         'community/leaderboard/GetAvailableLeaderboards?title=coh2'
 
     const fetch2 = axios.get(url2)
+    console.log()
 
     Promise.all([fetch1, fetch2])
         .then(values => {
+            console.log('values: ', values)
             // debugger
             if (values[0].status === 200 && values[1].status === 200) {
                 leaderboard = values[0].data
@@ -41,5 +42,6 @@ export function getExtraInfo(players, callback, forPlayerCard) {
         })
         .catch(error => {
             console.log(error)
+            // callback(result)
         })
 }

@@ -115,6 +115,10 @@ const text = {
         en: 'my playercard',
         ru: 'моя карта игрока',
     },
+    search: {
+        en: 'search',
+        ru: 'поиск',
+    },
     settings: {
         en: 'settings',
         ru: 'настройки',

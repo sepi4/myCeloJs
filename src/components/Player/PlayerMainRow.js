@@ -13,6 +13,8 @@ import countries from '../../../countries.json'
 
 import MainRowSpan from './MainRowSpan'
 
+import getTotalGames from '../../functions/getTotalGames'
+
 // import { shell } from 'electron'
 // import getSiteLink from '../../functions/getSiteLink'
 // import worldIcon from '../../../img/world.png'
@@ -59,13 +61,13 @@ function PlayerMainRow({
         state => state.countryFlags[country]
     )
 
-    const getTotalGames = () => {
-        let sum = 0
-        for (const rankObj of extraInfo.ranks) {
-            sum += rankObj.wins + rankObj.losses
-        }
-        return sum
-    }
+    // const getTotalGames = () => {
+    //     let sum = 0
+    //     for (const rankObj of extraInfo.ranks) {
+    //         sum += rankObj.wins + rankObj.losses
+    //     }
+    //     return sum
+    // }
 
     const dropDownArrow = (
         <span style={{ width: '2em', }} >
@@ -115,7 +117,7 @@ function PlayerMainRow({
             style={{ cursor: steamId ? 'pointer' : null, }}
             title={
                 extraInfo && player.profileId
-                    ? getTotalGames(player) + ' games played'
+                    ? getTotalGames(extraInfo) + ' games played'
                     : null
             }
             onClick={handlePlayerCardOn}

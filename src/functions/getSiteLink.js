@@ -4,6 +4,9 @@ function getSiteLink(site) {
             return 'https://www.coh2.org/'
                 + 'ladders/playercard/steamid/'
 
+        case 'steam':
+            return 'https://steamcommunity.com/profiles/'
+
         default:
             return 'https://coh2stats.com/'
                 + 'players/'

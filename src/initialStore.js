@@ -65,6 +65,8 @@ let initialStore = {
 
     view: 'main',
 
+    foundPlayers: [],
+
 }
 
 export default initialStore

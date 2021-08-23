@@ -3,4 +3,30 @@
     padding: 0.5em;
     margin: 1em 0;
     color: #dddddd;
+
+    display: flex;
+    flex-wrap: wrap;
 }
+
+.inputDiv {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.input {
+    background-color: #dddddd;
+    padding: .3em;
+    border: solid .05em #555;
+}
+
+
+.content {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* .block {
+    display: block;
+} */

@@ -6,6 +6,7 @@ import styles from './PlayerCard.module.css'
 
 import logo_coh2 from '../../../img/logo_coh2.png'
 import logo_coh2stats from '../../../img/logo_coh2stats.png'
+import logo_steam from '../../../img/logo_steam.png'
 
 import getSiteLink from '../../functions/getSiteLink'
 
@@ -16,11 +17,7 @@ export default function PlayerCard() {
     const countryFlags = state.countryFlags
 
 
-    // SEARCH
-    // const baseUrl = "https://coh2-api.reliclink.com"
-    // const getPlayerSearchUrl = (name: string): string => {
-    //     return encodeURI(baseUrl + `/community/leaderboard/GetPersonalStat?title=coh2&search=${name}`);
-    // }
+    // console.log('state.playerCard:', state.playerCard)
 
     let player = state.playerCard.player
     let extraInfo = state.playerCard.extraInfo
@@ -55,6 +52,9 @@ export default function PlayerCard() {
 
     const linkCoh2 = getSiteLink('coh2.org') + steamId
     const funCoh2 = () => steamId ? shell.openExternal(linkCoh2) : null
+
+    const linkSteam = getSiteLink('steam') + steamId
+    const funSteam = () => steamId ? shell.openExternal(linkSteam) : null
 
     return (
         <>
@@ -95,6 +95,12 @@ export default function PlayerCard() {
                     alt='coh2'
                     title='coh2.org'
                     onClick={funCoh2}
+                />
+                <img
+                    src={logo_steam}
+                    alt='steam'
+                    title='steam'
+                    onClick={funSteam}
                 />
             </div>
 
