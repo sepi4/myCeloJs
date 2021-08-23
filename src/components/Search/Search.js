@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getExtraInfo } from '../../functions/getExtraInfo'
+import getLastPlayedGame from '../../functions/getLastPlayedGame'
 import getTotalGames from '../../functions/getTotalGames'
 
 import searchPlayers from '../../functions/searchPlayers'
@@ -41,6 +42,7 @@ export default function Search() {
                     const newPlayers = res.map(p => {
                         if (result[p.profile_id]) {
                             p.totalGames = getTotalGames(result[p.profile_id])
+                            p.lastGameTime = getLastPlayedGame(result[p.profile_id])
                         } else {
                             p.totalGames = 0
                         }

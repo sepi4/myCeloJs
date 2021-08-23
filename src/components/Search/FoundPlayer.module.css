@@ -3,10 +3,13 @@
     margin: 1em;
     color: #dddddd;
     border: solid .05em #dddddd;
-    /* background-color: black; */
     cursor: pointer;
     /* width: 10em; */
     width: 100%;
+}
+
+.container:hover {
+    background-color: #2b2b2b;
 }
 
 .flagImage {

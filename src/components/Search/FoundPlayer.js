@@ -1,11 +1,19 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+import moment from 'moment'
 
 import styles from './FoundPlayer.module.css'
 
 export default function FoundPlayer({ player, clickFun }) {
     const state = useSelector(state => state)
     const countryFlags = state.countryFlags
+
+    const settings = state.settings
+
+    const lg = settings && settings.language ? settings.language : 'en'
+    const timeAgo = player.lastGameTime
+        ? moment(player.lastGameTime * 1000).locale(lg).fromNow()
+        : '-'
 
     // alias: "Sepi"
     // country: "de"
@@ -35,6 +43,10 @@ export default function FoundPlayer({ player, clickFun }) {
                     <tr>
                         <th className={styles.label}>MP games:</th>
                         <td>{player.totalGames}</td>
+                    </tr>
+                    <tr>
+                        <th className={styles.label}>last game:</th>
+                        <td>{timeAgo}</td>
                     </tr>
                 </tbody>
             </table>
