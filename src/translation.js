@@ -261,6 +261,19 @@ const text = {
         ru: 'пропустить эту версию',
     },
 
+    // search
+    steam_alias_or_id: {
+        en: 'steam alias or id',
+        ru: 'ник или ID стима',
+    },
+    mp_games: {
+        en: 'mp games',
+        ru: 'сетевых игр',
+    },
+    last_game: {
+        en: 'last game',
+        ru: 'последняя игра',
+    },
 
 
 }

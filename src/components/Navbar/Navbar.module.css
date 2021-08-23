@@ -25,7 +25,7 @@
 .row {
     display: inline-flex;
     display: flex;
-    width: 40vw;
+    /* width: 40vw; */
     font-size: 90%;
 
     /* align-items: ${({ alignItems }) => alignItems || 'center'}; */

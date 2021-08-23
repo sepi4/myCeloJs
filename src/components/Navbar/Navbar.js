@@ -86,7 +86,7 @@ export default function Navbar({ handleSetSettingsView }) {
         ? <NavBarIcon
             title={getText('my_playercard', settings)}
             style={{
-                height: '.8em',
+                height: '.7em',
                 marginRight: '0',
             }}
             icon={faUserAlt}
@@ -98,7 +98,8 @@ export default function Navbar({ handleSetSettingsView }) {
         ? <NavBarIcon
             title={getText('search', settings)}
             style={{
-                height: '.8em',
+                height: '.7em',
+                marginRight: '0',
             }}
             icon={faSearch}
             fun={handleSearchView}
@@ -106,6 +107,10 @@ export default function Navbar({ handleSetSettingsView }) {
         : null
 
     const settingsIcon = <NavBarIcon
+        style={{
+            height: '.8em',
+            marginLeft: '0',
+        }}
         title={getText('settings', settings)}
         icon={faCogs}
         fun={settingsViewToggeler}

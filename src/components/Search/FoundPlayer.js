@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import moment from 'moment'
 
 import styles from './FoundPlayer.module.css'
+import getText from '../../functions/getText'
 
 export default function FoundPlayer({ player, clickFun }) {
     const state = useSelector(state => state)
@@ -41,11 +42,15 @@ export default function FoundPlayer({ player, clickFun }) {
             <table className={styles.table}>
                 <tbody>
                     <tr>
-                        <th className={styles.label}>MP games:</th>
+                        <th className={styles.label} >
+                            {getText('mp_games', settings)}:
+                        </th>
                         <td>{player.totalGames}</td>
                     </tr>
                     <tr>
-                        <th className={styles.label}>last game:</th>
+                        <th className={styles.label} >
+                            {getText('last_game', settings)}:
+                        </th>
                         <td>{timeAgo}</td>
                     </tr>
                 </tbody>

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getExtraInfo } from '../../functions/getExtraInfo'
 import getLastPlayedGame from '../../functions/getLastPlayedGame'
+import getText from '../../functions/getText'
 import getTotalGames from '../../functions/getTotalGames'
 
 import searchPlayers from '../../functions/searchPlayers'
@@ -71,11 +72,6 @@ export default function Search() {
                     country: player.country,
                 },
 
-                // extraInfo: {
-                //     ...extraInfo[player.profile_id],
-                //     steamId: player.name.substring(7),
-                // },
-
                 extraInfo: {
                     ranks: player.extraInfo.ranks,
                     steamId: player.name.substring(7),
@@ -111,7 +107,7 @@ export default function Search() {
                 <input
                     ref={inputRef}
                     className={styles.input}
-                    placeholder='steam alias or id'
+                    placeholder={getText('steam_alias_or_id', state.settings)}
                     onChange={handleSearchInput}
                     onKeyUp={handleKeyUp}
                 />
