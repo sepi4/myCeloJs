@@ -28,8 +28,14 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 - in settings ![alt text](./readmeImages/settingsIcon.png "settings icon") select location of 'warnings.log' file (Same folder where are replays saved, usually in "C:\Users\USERNAME\Documents\my games\company of heroes 2\")
 - done (test installation by opening game in SPECTATE MODE or game vs AI.)
  <hr>
+ 
+ **OPTIONAL SETTINGS** 
 
-**ONLY FOR STREAMERS** 
+- select language
+- add your steam ID. This will make your player card icon appear on navbar
+- default player link site. Used only in history view player links.  
+
+*ONLY FOR STREAMERS* 
 
 - simple way for OBS studio to display ranking:
     - select rankings output  file format and orientations, **html**:
@@ -88,13 +94,19 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 - скачайте zip-файл (<a id="raw-url" href="https://github.com/sepi4/myCeloJs/releases/latest">latest release</a>)
 - распакуйте zip-файл
 - откройте "myCelo.exe"
-- если фаервол попросит разрешения дайте разрешите *(программа использует localhost чтобы rankings.json можно было прочитать с помощью javascript и обновлять rankings.html если это необходимо)*
+- если фаервол попросит разрешения, разрешите *(программа использует localhost чтобы rankings.json можно было прочитать с помощью javascript и обновлять rankings.html если это необходимо)*
 
-- в настройках ![alt text](./readmeImages/settingsIcon.png "settings icon") выберите местонахождение 'warnings.log'-файла (тоже место куда сохраняются риплеи, обычно в C:\Users\USERNAME\Documents\my games\company of heroes 2\) 
+- в настройках ![alt text](./readmeImages/settingsIcon.png "settings icon") выберите местонахождение 'warnings.log'-файла (тоже место куда сохраняются реплеи, обычно находится в "C:\Users\USERNAME\Documents\my games\company of heroes 2\\") 
 - проверьте установку в игре против компьютера или в режиме просмотра
 <hr>
 
-**ТОЛЬКО ДЛЯ СТРИМЕРОВ** 
+ **НЕОБЯЗАТЕЛЬНЫЕ НАСТРОЙКИ** 
+
+- выбор языка
+- установка вашего стеам ID. После чего на верхней панели появится иконка со ссылкой на вашу статистику.
+- выбор дефолтного сайта для ссылок игрока. Используется только на окне истории игры.  
+
+*ТОЛЬКО ДЛЯ СТРИМЕРОВ* 
 
 - отображение рангов на стриме через OBS-studio:
     - выберите формат и ориентацию:    
@@ -141,7 +153,7 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 
                 ![alt text](./readmeImages/readFromFileRus.png "read from file")
 
-            - сделайте новое окно подходящего размера, выберите подходящий фонт и поместите окно куда хотите на экране (для горизанльного формата, вам надо найти подходящий фонт, например Consolas)
+            - сделайте новое окно подходящего размера, выберите подходящий фонт и поместите окно куда хотите на экране (для горизонтального формата, вам надо найти подходящий фонт, например Consolas)
             - проверьте установку в игре против компьютера 
 
 
@@ -157,7 +169,7 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
     - Add player card view
     - Add steam id option to settings
     - Add language option in settings
-    - Add tranlations: en, ru
+    - Add translations: en, ru
     - Add basic search view
     - Add navbar links to my player card and search
     - Add default web player link option in settings
@@ -169,7 +181,7 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
     - Add sound alert when log checking is in auto mode
 * **version 1.6.1.** 
     - Bug fix (current user team was some times on wrong positions, should always be first)
-    - Small navbar visual changings
+    - Small navbar visual changing
 * **version 1.6.0.** 
     - Manual possibility to check log file 
     - Changing interval of auto checking log file
