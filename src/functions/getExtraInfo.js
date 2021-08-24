@@ -25,7 +25,6 @@ export function getExtraInfo(players, callback, forPlayerCard) {
 
     Promise.all([fetch1, fetch2])
         .then(values => {
-            console.log('values: ', values)
             // debugger
             if (values[0].status === 200 && values[1].status === 200) {
                 leaderboard = values[0].data

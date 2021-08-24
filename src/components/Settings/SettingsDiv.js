@@ -2,7 +2,19 @@ import React from 'react'
 
 import { StyledContentDiv, StyledDiv } from '../styled/styledSettings'
 
-function SettingsDiv({ title, children }) {
+function SettingsDiv({ title, required, children }) {
+    const req = required
+        ? <span
+            style={{
+                // marginLeft: '1em',
+                color: 'darkred',
+                fontWeight: 'bold',
+                fontSize: '150%',
+            }}
+        >
+            *
+        </span>
+        : null
     return <StyledDiv>
         {title && (
             <div
@@ -11,7 +23,7 @@ function SettingsDiv({ title, children }) {
                     fontSize: '100%',
                 }}
             >
-                {title}
+                {title} {req}
             </div>
         )}
         <StyledContentDiv>{children}</StyledContentDiv>

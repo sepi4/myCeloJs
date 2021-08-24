@@ -2,13 +2,12 @@ const text = {
     // settings ---------------------------------
     log_location_title: {
         en: 'Log location',
-        ru: 'Разположение лог-файла',
+        ru: 'Расположение лог-файла',
     },
     select: {
         en: 'select',
         ru: 'выбрать',
     },
-
 
     rankings_file_title: {
         en: 'Rankings file (for OBS-studio)',
@@ -67,6 +66,15 @@ const text = {
         en: 'save',
         ru: 'сохранить',
     },
+    id_is_wrong: {
+        en: 'ID is wrong',
+        ru: 'неправильный ID',
+    },
+
+    required: {
+        en: 'required',
+        ru: 'обязательно',
+    },
 
 
     // navbar  ---------------------------------
@@ -109,7 +117,7 @@ const text = {
     },
     integer_error: {
         en: 'integer 1-999',
-        ru: 'целое чило 1-999',
+        ru: 'целое число 1-999',
     },
     my_playercard: {
         en: 'my playercard',
@@ -152,7 +160,7 @@ const text = {
         ru: 'загрузить историю игр',
     },
     total_games: {
-        en: 'total multiplay games',
+        en: 'total MP games',
         ru: 'количество сетевых игр',
     },
     team_of: {

@@ -3,16 +3,28 @@
         "team1": [
             {
                 "name": "sepi",
-                "ranking": "187",
+                "ranking": "299",
                 "country": "fi",
+                "faction": "uk"
+            },
+            {
+                "name": "jacob",
+                "ranking": "501",
+                "country": "gb",
                 "faction": "sov"
             }
         ],
         "team2": [
             {
-                "name": "GolDenCoBRaaa",
-                "ranking": "171",
-                "country": "br",
+                "name": "Zerg",
+                "ranking": "931",
+                "country": "ru",
+                "faction": "okw"
+            },
+            {
+                "name": "strelok22",
+                "ranking": "800",
+                "country": "cl",
                 "faction": "wer"
             }
         ]

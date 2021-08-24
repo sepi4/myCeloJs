@@ -16,9 +16,6 @@ export default function PlayerCard() {
     const state = useSelector(state => state)
     const countryFlags = state.countryFlags
 
-
-    console.log('state.playerCard:', state.playerCard)
-
     let player = state.playerCard.player
     let extraInfo = state.playerCard.extraInfo
 

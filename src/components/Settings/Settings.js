@@ -124,7 +124,29 @@ function Settings() {
         writeSettings(newSettings, dispatch)
     }
 
+    const star = <span
+        style={{
+            // marginLeft: '1em',
+            color: 'darkred',
+            fontWeight: 'bold',
+            fontSize: '150%',
+        }}
+    >*</span>
+
+    const req = (
+        <div
+            style={{
+                color: 'darkred',
+                padding: '0 0 1em 1em',
+                fontSize: '80%',
+                // marginLeft: '1em',
+                // fontWeight: 'bold',
+            }}
+        >{star} {getText('required', settings)}</div>
+    )
+
     return <div style={{ marginTop: '4em' }}>
+        {req}
 
         <SettingsDiv title={getText('language', settings)}>
             <select
@@ -138,6 +160,22 @@ function Settings() {
                 <option value="en">EN</option>
                 <option value="ru">RU</option>
             </select>
+        </SettingsDiv>
+
+        <SettingsDiv
+            title={getText('log_location_title', settings)}
+            required
+        >
+            <div className={styles.textDiv}>
+                {settings && settings.logLocation
+                    ? settings.logLocation
+                    : ''
+                }
+            </div>
+            <StyledButton
+                onClick={changeLogLocation}
+            // buttonColor='#999'
+            >{getText('select', settings)}</StyledButton>
         </SettingsDiv>
 
         <SettingsDiv title={getText('web_link', settings)}>
@@ -168,33 +206,17 @@ function Settings() {
                 {getText('save', settings)}
             </StyledButton>
             {timed &&
-                <span style={{
-                    backgroundColor: 'darkred',
-                    color: 'white',
-                    fontSize: '90%',
-                    padding: '.2em',
-                }}>
-                    id is wrong
-                    {/* {getText('integer_error', settings)} */}
+                <span className={styles.error}>
+                    {getText('id_is_wrong', settings)}
                 </span>
             }
 
         </SettingsDiv>
 
-        <SettingsDiv title={getText('log_location_title', settings)} >
-            <div className={styles.textDiv}>
-                {settings && settings.logLocation
-                    ? settings.logLocation
-                    : ''
-                }
-            </div>
-            <StyledButton
-                onClick={changeLogLocation}
-            // buttonColor='#999'
-            >{getText('select', settings)}</StyledButton>
-        </SettingsDiv>
 
         <SettingsAfterLog />
+
+
     </div>
 }
 

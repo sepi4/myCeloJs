@@ -21,7 +21,6 @@ function CopyDiv({ text }) {
     const handleCopy = () => {
         setTimed(true)
         clipboard.writeText(text)
-        console.log('handlecopy')
     }
 
     if (!text) {
