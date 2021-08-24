@@ -18,6 +18,8 @@ export default function PlayerCard() {
 
     let player = state.playerCard.player
     let extraInfo = state.playerCard.extraInfo
+    // console.log('state:', state)
+    // console.log('extraInfo:', extraInfo)
 
     if (!extraInfo) {
         return <>
@@ -33,7 +35,7 @@ export default function PlayerCard() {
     }
 
     const card = (
-        state && state.playerCard && state.extraInfo
+        state && state.playerCard && state.playerCard.extraInfo
             ? <PlayerExtraInfo
                 player={player}
                 extraInfo={extraInfo}
