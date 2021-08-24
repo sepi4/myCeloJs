@@ -151,13 +151,15 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 <a name="updates"></a>
 
 ## Updates:
+* **version 1.8.1.** 
+    - Bugfix
 * **version 1.8.0.** 
+    - Add player card view
+    - Add steam id option to settings
     - Add language option in settings
     - Add tranlations: en, ru
     - Add basic search view
-    - Add player card view
     - Add navbar links to my player card and search
-    - Add steam id option to settings
     - Add default web player link option in settings
 * **version 1.7.1.** 
     - updated links to https://coh2stats.com
