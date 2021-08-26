@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-// import moment from 'moment'
 import { useSelector } from 'react-redux'
 
 import ModalDiv from './ModalDiv'
@@ -23,7 +22,6 @@ export default function GameHistoryDiv({ game, profiles }) {
     const players = game.players.sort((a, b) => b.teamid - a.teamid)
 
     const matchType = game.matchType ? game.matchType.name : '???'
-    // const timeAgo = moment(game.endGameTime).locale(lg).fromNow()
     const timeAgo = getTimeAgo(game.endGameTime, lg)
 
     const defaultStyle = {

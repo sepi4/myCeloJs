@@ -47,13 +47,19 @@ export default function PlayerCard() {
     let steamId = extraInfo.steamId
 
     const linkCoh2stats = getSiteLink('coh2stats.com') + steamId
-    const funCoh2stats = () => steamId ? shell.openExternal(linkCoh2stats) : null
+    const funCoh2stats = () => steamId
+        ? shell.openExternal(linkCoh2stats)
+        : null
 
     const linkCoh2 = getSiteLink('coh2.org') + steamId
-    const funCoh2 = () => steamId ? shell.openExternal(linkCoh2) : null
+    const funCoh2 = () => steamId
+        ? shell.openExternal(linkCoh2)
+        : null
 
     const linkSteam = getSiteLink('steam') + steamId
-    const funSteam = () => steamId ? shell.openExternal(linkSteam) : null
+    const funSteam = () => steamId
+        ? shell.openExternal(linkSteam)
+        : null
 
     return (
         <>

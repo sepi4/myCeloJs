@@ -3,7 +3,7 @@
         "team1": [
             {
                 "name": "莱因哈特.买买提",
-                "ranking": "945",
+                "ranking": "909",
                 "country": "cn",
                 "faction": "sov"
             },
@@ -15,13 +15,13 @@
             },
             {
                 "name": "sepi",
-                "ranking": "372",
+                "ranking": "370",
                 "country": "fi",
                 "faction": "sov"
             },
             {
                 "name": "cNope",
-                "ranking": "367",
+                "ranking": "345",
                 "country": "th",
                 "faction": "uk"
             }
@@ -29,25 +29,25 @@
         "team2": [
             {
                 "name": "RovichMoon",
-                "ranking": "208 ¹",
+                "ranking": "207 ¹",
                 "country": "pe",
                 "faction": "okw"
             },
             {
                 "name": "Ed...",
-                "ranking": "208 ¹",
+                "ranking": "207 ¹",
                 "country": "pe",
                 "faction": "wer"
             },
             {
                 "name": "Mandalorian",
-                "ranking": "666",
+                "ranking": "665",
                 "country": "cl",
                 "faction": "okw"
             },
             {
                 "name": "Capitan Mono",
-                "ranking": "672",
+                "ranking": "671",
                 "country": "ar",
                 "faction": "wer"
             }

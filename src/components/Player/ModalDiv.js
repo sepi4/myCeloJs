@@ -1,12 +1,13 @@
 import React from 'react'
 import Modal from 'react-modal'
-// import moment from 'moment'
+
 import styles from './ModalDiv.module.css'
 
 import getText from '../../functions/getText'
 
 import ModalTableBody from './ModalTableBody'
 import ModalTableHeaders from './ModalTableHeaders'
+import { getDateTime, getTime } from '../../functions/time'
 
 function ModalDiv({
     modal,
@@ -17,6 +18,10 @@ function ModalDiv({
     profiles,
 }) {
     const lg = settings && settings.language ? settings.language : 'en'
+
+    const startTime = getDateTime(game.startGameTime, lg)
+    const endTime = getDateTime(game.endGameTime, lg)
+    const durationTime = getTime(game.endGameTime - game.startGameTime)
 
     return (
         <Modal
@@ -46,7 +51,7 @@ function ModalDiv({
                     {getText('game_start_time', settings)}:
                 </span>
                 <span className={styles.value}>
-                    {moment(game.startGameTime).locale(lg).format('lll')}
+                    {startTime}
                 </span>
             </div>
             <div>
@@ -54,7 +59,7 @@ function ModalDiv({
                     {getText('game_end_time', settings)}:
                 </span>
                 <span className={styles.value}>
-                    {moment(game.endGameTime).locale(lg).format('lll')}
+                    {endTime}
                 </span>
             </div>
             <div>
@@ -70,11 +75,7 @@ function ModalDiv({
                     {getText('duration', settings)}:
                 </span>
                 <span className={styles.value}>
-                    {
-                        moment.utc(moment.duration(
-                            game.endGameTime.getTime()
-                            - game.startGameTime.getTime()
-                        ).asMilliseconds()).locale(lg).format("HH:mm:ss")
+                    {durationTime
                     }
                 </span>
             </div>
