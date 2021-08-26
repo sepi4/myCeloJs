@@ -1,6 +1,6 @@
 import React from 'react'
 import Modal from 'react-modal'
-import moment from 'moment'
+// import moment from 'moment'
 import styles from './ModalDiv.module.css'
 
 import getText from '../../functions/getText'

@@ -1,9 +1,12 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import moment from 'moment'
+// import moment from 'moment'
+
+
 
 import styles from './FoundPlayer.module.css'
 import getText from '../../functions/getText'
+import { getTimeAgo } from '../../functions/time'
 
 export default function FoundPlayer({ player, clickFun }) {
     const state = useSelector(state => state)
@@ -12,8 +15,15 @@ export default function FoundPlayer({ player, clickFun }) {
     const settings = state.settings
 
     const lg = settings && settings.language ? settings.language : 'en'
+
+    // const timeAgo = player.lastGameTime
+    //     ? moment(player.lastGameTime * 1000).locale(lg).fromNow()
+    //     : '-'
+
+
+
     const timeAgo = player.lastGameTime
-        ? moment(player.lastGameTime * 1000).locale(lg).fromNow()
+        ? getTimeAgo(player.lastGameTime * 1000, lg)
         : '-'
 
     // alias: "Sepi"

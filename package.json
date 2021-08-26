@@ -43,6 +43,7 @@
         "@fortawesome/react-fontawesome": "^0.1.14",
         "axios": "^0.21.1",
         "cors": "^2.8.5",
+        "dayjs": "^1.10.6",
         "moment": "^2.29.1",
         "portfinder": "^1.0.28",
         "react": "^17.0.2",
