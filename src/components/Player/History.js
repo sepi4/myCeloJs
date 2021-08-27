@@ -8,6 +8,7 @@ import GameHistoryDiv from './GameHistoryDiv'
 import Loading from './Loading'
 
 import styles from './History.module.css'
+import { parseHistoryData, getHistoryUrls } from '../../functions/historyFuns'
 
 export default function History({ player, }) {
     const settings = useSelector(state => state.settings)
@@ -21,60 +22,14 @@ export default function History({ player, }) {
         if (getHistory) {
             setFetchingHistory(true)
 
-            const url = 'https://coh2-api.reliclink.com/community/leaderboard/'
-                + 'getRecentMatchHistory?title=coh2&profile_ids=['
-                + player.profileId
-                + ']'
-            const url2 = 'https://coh2-api.reliclink.com/'
-                + 'community/leaderboard/GetAvailableLeaderboards?title=coh2'
-
+            const [url, url2] = getHistoryUrls(player.profileId)
             const fetch1 = axios.get(url)
             const fetch2 = axios.get(url2)
 
             Promise.all([fetch1, fetch2])
                 .then((result) => {
-                    let matchesArr = []
-
-                    const { data } = result[0]
-                    const { matchTypes } = result[1].data
-                    const { matchHistoryStats, profiles } = data
-                    const matches = matchHistoryStats.sort((a, b) => {
-                        return b.completiontime - a.completiontime
-                    })
-
-                    matches.forEach((m) => {
-                        let mObj = {}
-                        mObj.startGameTime = new Date(m.startgametime * 1000)
-                        mObj.endGameTime = new Date(m.completiontime * 1000)
-                        mObj.mapName = m.mapname
-                        mObj.players = m.matchhistoryreportresults.map((p) => {
-                            p.counters = JSON.parse(p.counters)
-                            return p
-                        })
-                        mObj.matchType = matchTypes.find(
-                            (t) => t.id === m.matchtype_id,
-                        )
-                        mObj.description = m.description
-                        mObj.all = m
-                        if (mObj.players.length === 0) {
-                            return
-                        }
-                        mObj.result = m.matchhistoryreportresults.find((r) => {
-                            return r.profile_id.toString() === player.profileId
-                        })
-
-                        mObj.counters = mObj.result.counters
-                        matchesArr.push(mObj)
-                    })
-
-                    let profilesObj = {}
-                    profiles.forEach((p) => (profilesObj[p.profile_id] = p))
-
                     if (mounted) {
-                        setHistory({
-                            matchHistoryStats: matchesArr,
-                            profiles: profilesObj,
-                        })
+                        setHistory(parseHistoryData(result, player))
                         setFetchingHistory(null)
                     }
                 })
@@ -95,15 +50,20 @@ export default function History({ player, }) {
         setGetHistory(false)
     }, [player.profileId])
 
-    const historyDivs =
-        history &&
-        history.matchHistoryStats.map((m, i) => {
-            return <GameHistoryDiv
-                key={i}
-                game={m}
-                profiles={history.profiles}
-            />
-        })
+    const historyDivs = history
+        ? (
+            <div className={styles.historyDivs} > {
+                history.matchHistoryStats.map((m, i) => {
+                    return <GameHistoryDiv
+                        key={i}
+                        game={m}
+                        profiles={history.profiles}
+                    />
+                })
+            }
+            </div>
+        )
+        : null
 
     const fetchDiv = <div className={styles.fetchDiv} >
         {fetchingHistory
@@ -116,9 +76,7 @@ export default function History({ player, }) {
 
     return <>
         {history
-            ? <div className={styles.historyDivs} >
-                {historyDivs}
-            </div>
+            ? historyDivs
             : fetchDiv
         }
     </>
