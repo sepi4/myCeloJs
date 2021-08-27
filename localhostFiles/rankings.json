@@ -2,54 +2,30 @@
     "teams": {
         "team1": [
             {
-                "name": "莱因哈特.买买提",
-                "ranking": "909",
-                "country": "cn",
-                "faction": "sov"
-            },
-            {
-                "name": "RCX",
-                "ranking": "254",
-                "country": "ca",
-                "faction": "uk"
+                "name": "Kajota",
+                "ranking": "428",
+                "country": "us",
+                "faction": "okw"
             },
             {
                 "name": "sepi",
-                "ranking": "370",
+                "ranking": "302",
                 "country": "fi",
-                "faction": "sov"
-            },
-            {
-                "name": "cNope",
-                "ranking": "345",
-                "country": "th",
-                "faction": "uk"
+                "faction": "wer"
             }
         ],
         "team2": [
             {
-                "name": "RovichMoon",
-                "ranking": "207 ¹",
-                "country": "pe",
-                "faction": "okw"
+                "name": "LoopDloop",
+                "ranking": "408 ¹",
+                "country": "us",
+                "faction": "uk"
             },
             {
-                "name": "Ed...",
-                "ranking": "207 ¹",
-                "country": "pe",
-                "faction": "wer"
-            },
-            {
-                "name": "Mandalorian",
-                "ranking": "665",
-                "country": "cl",
-                "faction": "okw"
-            },
-            {
-                "name": "Capitan Mono",
-                "ranking": "671",
-                "country": "ar",
-                "faction": "wer"
+                "name": "Shadow Link",
+                "ranking": "408 ¹",
+                "country": "us",
+                "faction": "sov"
             }
         ]
     },

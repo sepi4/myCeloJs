@@ -15,7 +15,6 @@ export function getDateTime(ms, lg) {
     dayjs.extend(localizedFormat)
     // const result = dayjs(ms).format('DD.MM.YYYY, HH:mm')
     const result = dayjs(ms).locale(lg).format('LL LTS')
-    console.log('result:', result)
     return result
 }
 

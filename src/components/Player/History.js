@@ -1,17 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+
 import { useSelector } from 'react-redux'
 import getText from '../../functions/getText'
 
 import GameHistoryDiv from './GameHistoryDiv'
-
 import Loading from './Loading'
 
 import styles from './History.module.css'
 
 export default function History({ player, }) {
     const settings = useSelector(state => state.settings)
-    // const lg = settings ? settings.language : null
 
     const [getHistory, setGetHistory] = useState(false)
     const [history, setHistory] = useState(null)
@@ -20,25 +19,21 @@ export default function History({ player, }) {
     useEffect(() => {
         let mounted = true
         if (getHistory) {
-
             setFetchingHistory(true)
 
-            let arr = []
-            const url =
-                'https://coh2-api.reliclink.com/community/leaderboard/' +
-                'getRecentMatchHistory?title=coh2&profile_ids=[' +
-                player.profileId +
-                ']'
-            const fetch1 = axios.get(url)
+            const url = 'https://coh2-api.reliclink.com/community/leaderboard/'
+                + 'getRecentMatchHistory?title=coh2&profile_ids=['
+                + player.profileId
+                + ']'
+            const url2 = 'https://coh2-api.reliclink.com/'
+                + 'community/leaderboard/GetAvailableLeaderboards?title=coh2'
 
-            const url2 =
-                'https://coh2-api.reliclink.com/' +
-                'community/leaderboard/GetAvailableLeaderboards?title=coh2'
+            const fetch1 = axios.get(url)
             const fetch2 = axios.get(url2)
 
             Promise.all([fetch1, fetch2])
                 .then((result) => {
-                    console.log('History fetch result:', result)
+                    let matchesArr = []
 
                     const { data } = result[0]
                     const { matchTypes } = result[1].data
@@ -47,7 +42,6 @@ export default function History({ player, }) {
                         return b.completiontime - a.completiontime
                     })
 
-                    // console.log('player in History:', player)
                     matches.forEach((m) => {
                         let mObj = {}
                         mObj.startGameTime = new Date(m.startgametime * 1000)
@@ -68,18 +62,20 @@ export default function History({ player, }) {
                         mObj.result = m.matchhistoryreportresults.find((r) => {
                             return r.profile_id.toString() === player.profileId
                         })
+
                         mObj.counters = mObj.result.counters
-                        arr.push(mObj)
+                        matchesArr.push(mObj)
                     })
 
-                    let objProfiles = {}
-                    profiles.forEach((p) => (objProfiles[p.profile_id] = p))
+                    let profilesObj = {}
+                    profiles.forEach((p) => (profilesObj[p.profile_id] = p))
 
                     if (mounted) {
                         setHistory({
-                            matchHistoryStats: arr,
-                            profiles: objProfiles,
+                            matchHistoryStats: matchesArr,
+                            profiles: profilesObj,
                         })
+                        setFetchingHistory(null)
                     }
                 })
                 .catch((error) => {
@@ -93,6 +89,11 @@ export default function History({ player, }) {
             mounted = false
         }
     }, [getHistory])
+
+    useEffect(() => {
+        setHistory(null)
+        setGetHistory(false)
+    }, [player.profileId])
 
     const historyDivs =
         history &&

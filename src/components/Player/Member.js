@@ -13,7 +13,7 @@ export default function Member({ m }) {
         player = {
             name: player.alias,
             country: player.country,
-            profileId: player.profile_id,
+            profileId: player.profile_id + '',
         }
 
         // debugger
