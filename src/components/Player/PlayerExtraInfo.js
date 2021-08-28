@@ -11,7 +11,6 @@ import styles from './PlayerExtraInfo.module.css'
 
 function PlayerExtraInfo({ extraInfo, player }) {
 
-    // debugger
     let ranksArr = extraInfo && extraInfo.ranks
     const state = useSelector(state => state)
     const navButtons = state.navButtons
@@ -32,13 +31,13 @@ function PlayerExtraInfo({ extraInfo, player }) {
         )
     })()
 
+    const table = navButtons.table && ranksArr
+        ? <TableDiv ranksArr={ranksArr} />
+        : null
+
     return <div className={styles.container}>
         {totalGames}
-
-        {navButtons.table && ranksArr &&
-            <TableDiv ranksArr={ranksArr} />
-        }
-
+        {table}
         <ListDiv ranksArr={ranksArr} />
         <History player={player} />
     </div>

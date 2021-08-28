@@ -1,53 +1,31 @@
 import React from 'react'
-import styled from 'styled-components'
+// import styled from 'styled-components'
 
 import getText from '../../functions/getText'
 
-const StyledTr = styled.tr`
-    text-align: center;
-    &:hover {
-        background-color: rgb(38, 38, 38);
-    }
-`
+import styles from './ModalTableBody.module.css'
 
-function ModalTableBody({
-    game,
-    settings,
-    players,
-}) {
-    const styleTd = {
-        overflow: 'hidden',
-        fontSize: '75%',
-        width: 99 / 9 + '%',
-    }
+
+function ModalTableBody({ game, settings, players, }) {
+    const infoArr = Object.keys(game.counters)
+        .sort((a, b) => (a > b ? 1 : -1))
+        .filter(k => getText(k, settings) !== undefined)
 
     return (
         <tbody>
-            {Object.keys(game.counters)
-                .sort((a, b) => (a > b ? 1 : -1))
-                .filter(k => getText(k, settings) !== undefined)
-                // .filter(k => text[k] !== undefined)
-                .map((k, i) => (
-                    <StyledTr key={`${k} ${i}`}>
-                        <td
-                            style={{
-                                ...styleTd,
-                                fontWeight: 'bold',
-                                color: 'gray',
-                                textAlign: 'left',
-                            }}
-                        >
-                            {/* {k} */}
-                            {getText(k, settings)}
-                        </td>
+            {infoArr.map((k, i) => (
+                <tr className={styles.row} key={`${k} ${i}`}>
+                    <td className={styles.name} >
+                        {getText(k, settings)}
+                    </td>
 
-                        {players.map((p) => (
-                            <td style={styleTd} key={`${p.profile_id} ${i}`}>
-                                {p.counters[k]}
-                            </td>
-                        ))}
-                    </StyledTr>
-                ))}
+                    {players.map((p) => (
+                        <td key={`${p.profile_id} ${i}`} >
+                            {p.counters[k]}
+                        </td>
+                    ))}
+                </tr>
+            ))}
         </tbody>
     )
 }

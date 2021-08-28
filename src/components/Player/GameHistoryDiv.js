@@ -7,6 +7,8 @@ import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation'
 import { getFactionById } from '../../functions/simpleFunctions'
 import { getTimeAgo } from '../../functions/time'
 
+import styles from './GameHistoryDiv.module.css'
+
 export default function GameHistoryDiv({ game, profiles }) {
     const [modal, setModal] = useState(false)
     const settings = useSelector(state => state.settings)
@@ -19,17 +21,11 @@ export default function GameHistoryDiv({ game, profiles }) {
     if (game.result.resulttype === 0) {
         backgroundColor = 'red'
     }
+
     const players = game.players.sort((a, b) => b.teamid - a.teamid)
 
     const matchType = game.matchType ? game.matchType.name : '???'
     const timeAgo = getTimeAgo(game.endGameTime, lg)
-
-    const defaultStyle = {
-        overflow: 'hidden',
-        height: '2em',
-        margin: '0',
-        flex: '1 1 8em',
-    }
 
     let playersNames = ''
     players.forEach((p, i) => {
@@ -43,39 +39,20 @@ export default function GameHistoryDiv({ game, profiles }) {
         <>
             <div
                 title={playersNames}
-                style={{
-                    ...defaultStyle,
-                    border: '.1em solid ' + backgroundColor,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-evenly',
-                    cursor: 'pointer',
-                    margin: '0.2em',
-                }}
-                onClick={() => {
-                    setModal(true)
-                }}
+                className={styles.container}
+                style={{ border: '.1em solid ' + backgroundColor }}
+                onClick={() => setModal(true)}
             >
                 <img
-                    style={{
-                        width: '1.4em',
-                        height: '1.4em',
-                    }}
-                    src={getFactionFlagLocation(
-                        getFactionById(game.result.race_id),
-                    )}
+                    src={
+                        getFactionFlagLocation(
+                            getFactionById(game.result.race_id),
+                        )
+                    }
                     alt={`${getFactionById(game.result.race_id)}`}
                 />
 
-                <div
-                    style={{
-                        fontSize: '70%',
-                        width: '70%',
-                        display: 'flex',
-                        alignItems: 'center',
-                        flexDirection: 'column',
-                    }}
-                >
+                <div className={styles.name} >
                     <div>{matchType}</div>
                     <div>{timeAgo}</div>
                 </div>

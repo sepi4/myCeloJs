@@ -15,7 +15,6 @@ export default function FoundPlayer({ player, clickFun }) {
 
     const lg = settings && settings.language ? settings.language : 'en'
 
-
     const timeAgo = player.lastGameTime
         ? getTimeAgo(player.lastGameTime * 1000, lg)
         : '-'
@@ -29,37 +28,42 @@ export default function FoundPlayer({ player, clickFun }) {
     // profile_id: 4578968
     // xp: 437372
 
+    const name = (
+        <div>
+            <img
+                className={styles.flagImage}
+                src={countryFlags[player.country]}
+                alt={`${player.country}`}
+            />
+            <span className={styles.alias}>
+                {player.alias}
+            </span>
+        </div>
+    )
+
+    const table = (
+        <table className={styles.table}>
+            <tbody>
+                <tr>
+                    <th className={styles.label} >
+                        {getText('mp_games', settings)}:
+                    </th>
+                    <td>{player.totalGames}</td>
+                </tr>
+                <tr>
+                    <th className={styles.label} >
+                        {getText('last_game', settings)}:
+                    </th>
+                    <td>{timeAgo}</td>
+                </tr>
+            </tbody>
+        </table>
+    )
+
     return (
         <div className={styles.container} onClick={clickFun}>
-            <div>
-                <img
-                    className={styles.flagImage}
-                    src={countryFlags[player.country]}
-                    alt={`${player.country}`}
-                />
-                <span className={styles.alias}>
-                    {player.alias}
-                </span>
-
-            </div>
-
-            <table className={styles.table}>
-                <tbody>
-                    <tr>
-                        <th className={styles.label} >
-                            {getText('mp_games', settings)}:
-                        </th>
-                        <td>{player.totalGames}</td>
-                    </tr>
-                    <tr>
-                        <th className={styles.label} >
-                            {getText('last_game', settings)}:
-                        </th>
-                        <td>{timeAgo}</td>
-                    </tr>
-                </tbody>
-            </table>
-
+            {name}
+            {table}
         </div>
     )
 }

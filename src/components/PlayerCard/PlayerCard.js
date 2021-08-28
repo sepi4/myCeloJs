@@ -18,8 +18,6 @@ export default function PlayerCard() {
 
     let player = state.playerCard.player
     let extraInfo = state.playerCard.extraInfo
-    // console.log('state:', state)
-    // console.log('extraInfo:', extraInfo)
 
     if (!extraInfo) {
         return <>
@@ -34,17 +32,36 @@ export default function PlayerCard() {
         </>
     }
 
-    const card = (
-        state && state.playerCard && state.playerCard.extraInfo
-            ? <PlayerExtraInfo
-                player={player}
-                extraInfo={extraInfo}
+    const name = (
+        <div className={styles.nameDiv}>
+            <img
+                src={countryFlags[player.country]}
+                alt={`${player.country}`}
+                title={`${player.country}`}
             />
-            : null
+            <span>{player.name}</span>
+        </div>
     )
 
-    // debugger
+
     let steamId = extraInfo.steamId
+
+    const table = (
+        <div className={styles.info}>
+            <table>
+                <tbody>
+                    <tr>
+                        <th className={styles.label}>steam id:</th>
+                        <td>{steamId}</td>
+                    </tr>
+                    <tr>
+                        <th className={styles.label}>profile id:</th>
+                        <td>{player.profileId}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    )
 
     const linkCoh2stats = getSiteLink('coh2stats.com') + steamId
     const funCoh2stats = () => steamId
@@ -61,54 +78,43 @@ export default function PlayerCard() {
         ? shell.openExternal(linkSteam)
         : null
 
+    const linkImages = (
+        <div className={styles.links}>
+            <img
+                src={logo_coh2stats}
+                alt='coh2stats'
+                title='coh2stats.com'
+                onClick={funCoh2stats}
+            />
+            <img
+                src={logo_coh2}
+                alt='coh2'
+                title='coh2.org'
+                onClick={funCoh2}
+            />
+            <img
+                src={logo_steam}
+                alt='steam'
+                title='steam'
+                onClick={funSteam}
+            />
+        </div>
+    )
+
+    const card = (
+        state && state.playerCard && state.playerCard.extraInfo
+            ? <PlayerExtraInfo
+                player={player}
+                extraInfo={extraInfo}
+            />
+            : null
+    )
+
     return (
         <>
-            <div className={styles.nameDiv}>
-                <img
-                    src={countryFlags[player.country]}
-                    alt={`${player.country}`}
-                    title={`${player.country}`}
-                />
-                <span>{player.name}</span>
-            </div>
-
-
-            <div className={styles.info}>
-                <table>
-                    <tbody>
-                        <tr>
-                            <th className={styles.label}>steam id:</th>
-                            <td>{steamId}</td>
-                        </tr>
-                        <tr>
-                            <th className={styles.label}>profile id:</th>
-                            <td>{player.profileId}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div className={styles.links}>
-                <img
-                    src={logo_coh2stats}
-                    alt='coh2stats'
-                    title='coh2stats.com'
-                    onClick={funCoh2stats}
-                />
-                <img
-                    src={logo_coh2}
-                    alt='coh2'
-                    title='coh2.org'
-                    onClick={funCoh2}
-                />
-                <img
-                    src={logo_steam}
-                    alt='steam'
-                    title='steam'
-                    onClick={funSteam}
-                />
-            </div>
-
+            {name}
+            {table}
+            {linkImages}
             {card}
         </>
     )
