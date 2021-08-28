@@ -23,3 +23,15 @@
     padding: .2em;
     margin-left: 1em;
 }
+
+.star {
+    color: darkred;
+    font-weight: bold;
+    font-size: 150%;
+}
+
+.req {
+    color: darkred;
+    padding: 0 0 1em 1em;
+    font-size: 80%;
+}

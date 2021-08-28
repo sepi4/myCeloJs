@@ -9,6 +9,7 @@
 }
 
 body {
+  cursor: default;
   background-color: gray;
   font-size: 16px;
 }

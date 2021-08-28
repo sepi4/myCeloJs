@@ -2,29 +2,17 @@
     "teams": {
         "team1": [
             {
-                "name": "Kajota",
-                "ranking": "409",
-                "country": "us",
+                "name": "渣渣，反了他，偶不艹了你爸，气死偶嘞！",
+                "ranking": "26",
+                "country": "cn",
                 "faction": "okw"
-            },
-            {
-                "name": "sepi",
-                "ranking": "301",
-                "country": "fi",
-                "faction": "wer"
             }
         ],
         "team2": [
             {
-                "name": "LoopDloop",
-                "ranking": "407 ¹",
-                "country": "us",
-                "faction": "uk"
-            },
-            {
-                "name": "Shadow Link",
-                "ranking": "407 ¹",
-                "country": "us",
+                "name": "T.R. Stormjäger",
+                "ranking": "48",
+                "country": "gr",
                 "faction": "sov"
             }
         ]

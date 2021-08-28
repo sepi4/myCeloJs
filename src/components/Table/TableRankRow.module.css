@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+}
+
+.container span {
+    display: flex;
+    justify-content: center;
+    width: 20%;
+}
+
+.container:hover {
+    background-color: #2b2b2b;
+}

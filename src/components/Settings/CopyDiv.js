@@ -26,11 +26,15 @@ function CopyDiv({ text }) {
     if (!text) {
         return null
     }
+    const notification = timed
+        ? <Notification text={getText('copied', settings)} />
+        : null
+
     return (
         <div>
             <div className={styles.textDiv}>
                 {text}
-                {timed && <Notification text={getText('copied', settings)} />}
+                {notification}
             </div>
 
             <StyledButton onClick={handleCopy} >

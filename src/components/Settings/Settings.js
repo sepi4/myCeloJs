@@ -1,11 +1,14 @@
 import React, { useRef } from 'react'
 import { useDispatch, useSelector, } from 'react-redux'
 
+import axios from 'axios'
 import electron from 'electron'
+
 const { dialog } = electron.remote
 
 import SettingsDiv from './SettingsDiv'
 import SettingsAfterLog from './SettingsAfterLog'
+import Notification from '../Notification'
 
 import useTimedBoolean from '../../hooks/useTimedBoolean'
 
@@ -15,7 +18,6 @@ import { StyledButton } from '../styled/styledSettings'
 import styles from './Settings.module.css'
 
 import getText from '../../functions/getText'
-import axios from 'axios'
 
 function Settings() {
     const dispatch = useDispatch()
@@ -24,11 +26,12 @@ function Settings() {
     const siteLink = settings ? settings.siteLink : 'coh2stats.com'
     // const [error, setError] = useState(false)
 
-    const [timed, setTimed] = useTimedBoolean(1000)
+    const [timedError, setTimedError] = useTimedBoolean(1000)
+    const [timedSetID, setTimedSetID] = useTimedBoolean(1000)
     const steamIdInputRef = useRef(null)
 
     const setError = () => {
-        setTimed(true)
+        setTimedError(true)
         steamIdInputRef.current.value = settings.steamId
             ? settings.steamId
             : ''
@@ -43,17 +46,16 @@ function Settings() {
                 profileId: undefined,
             }
             writeSettings(newSettings, dispatch)
+            setTimedSetID(true)
             return
         }
 
         // check that steam id is 17 long digit
         if (!num.match(/^\d{17}$/)) {
-            // console.error('num:', num)
             setError()
             return
         }
 
-        // 76561198006675368
         const url = 'https://coh2-api.reliclink.com/community/' +
             'leaderboard/GetPersonalStat?title=coh2&profile_names=[' +
             '%22%2Fsteam%2F' + num + '%22]'
@@ -74,6 +76,7 @@ function Settings() {
                             profileId: profile.profile_id + '',
                         }
                         writeSettings(newSettings, dispatch)
+                        setTimedSetID(true)
                     } else {
                         console.error('res:', res)
                         setError()
@@ -124,26 +127,35 @@ function Settings() {
         writeSettings(newSettings, dispatch)
     }
 
-    const star = <span
-        style={{
-            // marginLeft: '1em',
-            color: 'darkred',
-            fontWeight: 'bold',
-            fontSize: '150%',
-        }}
-    >*</span>
+    const star = <span className={styles.star} >*</span>
 
     const req = (
-        <div
-            style={{
-                color: 'darkred',
-                padding: '0 0 1em 1em',
-                fontSize: '80%',
-                // marginLeft: '1em',
-                // fontWeight: 'bold',
-            }}
-        >{star} {getText('required', settings)}</div>
+        <div className={styles.req} >
+            {star} {getText('required', settings)}
+        </div>
     )
+
+    const errorDiv = timedError
+        ? (
+            <Notification
+                style={{
+                    backgroundColor: 'darkred',
+                    color: 'white'
+                }}
+                text={getText('id_is_wrong', settings)}
+            />
+        )
+        : null
+
+    const savedDiv = timedSetID
+        ? (
+            <Notification
+                text={getText('id_set', settings)}
+            />
+        )
+        : null
+
+
 
     return <div style={{ marginTop: '4em' }}>
         {req}
@@ -205,17 +217,12 @@ function Settings() {
             <StyledButton onClick={handleSteamId} >
                 {getText('save', settings)}
             </StyledButton>
-            {timed &&
-                <span className={styles.error}>
-                    {getText('id_is_wrong', settings)}
-                </span>
-            }
+            {errorDiv}
+            {savedDiv}
 
         </SettingsDiv>
 
-
         <SettingsAfterLog />
-
 
     </div>
 }
