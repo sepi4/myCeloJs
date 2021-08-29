@@ -2,17 +2,17 @@
     "teams": {
         "team1": [
             {
-                "name": "渣渣，反了他，偶不艹了你爸，气死偶嘞！",
-                "ranking": "26",
-                "country": "cn",
+                "name": "sepi",
+                "ranking": "185",
+                "country": "fi",
                 "faction": "okw"
             }
         ],
         "team2": [
             {
-                "name": "T.R. Stormjäger",
-                "ranking": "48",
-                "country": "gr",
+                "name": "CPU - Easy",
+                "ranking": "-",
+                "country": "",
                 "faction": "sov"
             }
         ]

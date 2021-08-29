@@ -30,9 +30,10 @@ export function refactorData(leaderboard, cohTitles, ids) {
     }
 
     let names = {}
-    // for (const x of cohTitles.leaderboards) {
     // get all that are ranked
-    for (const x of cohTitles.leaderboards.filter(l => l.isranked === 1)) {
+    // for (const x of cohTitles.leaderboards.filter(l => l.isranked === 1)) {
+
+    for (const x of cohTitles.leaderboards) {
         names[x.id] = x.name
     }
 

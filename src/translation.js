@@ -164,8 +164,8 @@ const text = {
         ru: 'загрузить историю игр',
     },
     total_games: {
-        en: 'total MP games',
-        ru: 'количество сетевых игр',
+        en: 'total games',
+        ru: 'количество игр',
     },
     team_of: {
         en: 'team',
@@ -279,8 +279,8 @@ const text = {
         ru: 'ник или ID стима',
     },
     mp_games: {
-        en: 'mp games',
-        ru: 'сетевых игр',
+        en: 'total games',
+        ru: 'количество игр',
     },
     last_game: {
         en: 'last game',
