@@ -29,12 +29,17 @@ export function refactorData(leaderboard, cohTitles, ids) {
         statGroups[x.id] = x
     }
 
-    let names = {}
+    let titlesLeadersboards = {}
     // get all that are ranked
     // for (const x of cohTitles.leaderboards.filter(l => l.isranked === 1)) {
 
     for (const x of cohTitles.leaderboards) {
-        names[x.id] = x.name
+        // console.log('x:', x)
+        // titlesLeadersboards[x.id] =  x.name
+        titlesLeadersboards[x.id] = {
+            name: x.name,
+            isRanked: x.isranked,
+        }
     }
 
     // for (const x of leaderboard.leaderboardStats.filter(l => l.rank > -1)) {
@@ -53,11 +58,12 @@ export function refactorData(leaderboard, cohTitles, ids) {
                     y.statgroup_id === x.statgroup_id &&
                     y.leaderboard_id === x.leaderboard_id
                 )
-                && names[x.leaderboard_id]
+                && titlesLeadersboards[x.leaderboard_id]
             ) {
                 players[id].ranks.push({
                     members: group.members,
-                    name: names[x.leaderboard_id],
+                    name: titlesLeadersboards[x.leaderboard_id].name,
+                    isModeRanked: titlesLeadersboards[x.leaderboard_id].isRanked,
                     ...x,
                 })
                 break

@@ -31,6 +31,8 @@ function PlayerExtraInfo({ extraInfo, player }) {
         )
     })()
 
+    ranksArr = ranksArr.filter(r => r.isModeRanked === 1)
+
     const table = navButtons.table && ranksArr
         ? <TableDiv ranksArr={ranksArr} />
         : null

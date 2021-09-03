@@ -2,18 +2,30 @@
     "teams": {
         "team1": [
             {
+                "name": "V.l.a,d",
+                "ranking": "- ¹",
+                "country": "ua",
+                "faction": "sov"
+            },
+            {
                 "name": "sepi",
-                "ranking": "185",
+                "ranking": "- ¹",
                 "country": "fi",
-                "faction": "okw"
+                "faction": "sov"
             }
         ],
         "team2": [
             {
-                "name": "CPU - Easy",
-                "ranking": "-",
-                "country": "",
-                "faction": "sov"
+                "name": "Thariii",
+                "ranking": "3576 ¹",
+                "country": "de",
+                "faction": "okw"
+            },
+            {
+                "name": "realDonaldTrump",
+                "ranking": "3576 ¹",
+                "country": "de",
+                "faction": "wer"
             }
         ]
     },
