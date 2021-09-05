@@ -82,13 +82,6 @@ export default function Navbar({ handleSetSettingsView }) {
         && !(
             state.view === 'playerCard'
             && state.playerCard.player.profileId === settings.profileId
-
-
-            // state.view === 'playerCard'
-            // && state.playerCard
-            // && state.playerCard.player
-            // && state.playerCard.player.profileId === settings.profileId
-
         )
         ? <NavBarIcon
             title={getText('my_playercard', settings)}

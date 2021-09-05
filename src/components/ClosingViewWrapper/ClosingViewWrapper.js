@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useDispatch } from 'react-redux'
 
 import Icon from '../Icon'
@@ -6,6 +6,7 @@ import Icon from '../Icon'
 import { faTimes, } from '@fortawesome/free-solid-svg-icons'
 
 import styles from './ViewWrapper.module.css'
+import useEsc from '../../hooks/useEsc'
 
 export default function ViewWrapper({ children }) {
     const dispatch = useDispatch()
@@ -16,19 +17,8 @@ export default function ViewWrapper({ children }) {
         })
     }
 
-    // esc button close player card
-    function escPressed(e) {
-        if (e.key === 'Escape') {
-            handleToMainView()
-        }
-    }
-    useEffect(() => {
-        window.addEventListener('keydown', escPressed);
+    useEsc(handleToMainView)
 
-        return () => {
-            window.removeEventListener('keydown', escPressed);
-        }
-    })
     return (
         <div className={styles.container}>
             <Icon

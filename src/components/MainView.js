@@ -9,7 +9,7 @@ import getText from '../functions/getText'
 import Search from './Search/Search'
 import ClosingViewWrapper from './ClosingViewWrapper/ClosingViewWrapper'
 
-function MainView() {
+function MainView({ handleSetSettingsView }) {
     const settingsView = useSelector(state => state.settingsView)
     let teams = [[], []]
     let state = useSelector(state => state)
@@ -23,7 +23,9 @@ function MainView() {
     }
 
     if (settingsView) {
-        return <Settings />
+        return <Settings
+            handleSetSettingsView={handleSetSettingsView}
+        />
     }
     // haven't add log location
     if (!settings || !settings.logLocation) {

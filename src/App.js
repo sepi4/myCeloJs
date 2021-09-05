@@ -147,7 +147,9 @@ function App() {
         marginTop: '4em',
     }} >
         <Navbar {...{ handleSetSettingsView }} />
-        <MainView />
+        <MainView
+            handleSetSettingsView={handleSetSettingsView}
+        />
 
         {state.settings &&
             <UpdateBar appVersion={appVersion} />

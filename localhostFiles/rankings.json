@@ -2,30 +2,30 @@
     "teams": {
         "team1": [
             {
-                "name": "V.l.a,d",
-                "ranking": "- ¹",
-                "country": "ua",
-                "faction": "sov"
-            },
-            {
                 "name": "sepi",
                 "ranking": "- ¹",
                 "country": "fi",
                 "faction": "sov"
+            },
+            {
+                "name": "HSRometh",
+                "ranking": "- ¹",
+                "country": "ru",
+                "faction": "uk"
             }
         ],
         "team2": [
             {
-                "name": "Thariii",
-                "ranking": "3576 ¹",
-                "country": "de",
-                "faction": "okw"
+                "name": "Señor Stamos ✌",
+                "ranking": "-",
+                "country": "ro",
+                "faction": "wer"
             },
             {
-                "name": "realDonaldTrump",
-                "ranking": "3576 ¹",
-                "country": "de",
-                "faction": "wer"
+                "name": "LuchsSkywalker",
+                "ranking": "180",
+                "country": "ru",
+                "faction": "okw"
             }
         ]
     },

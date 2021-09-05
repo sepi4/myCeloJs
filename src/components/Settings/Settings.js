@@ -18,10 +18,13 @@ import { StyledButton } from '../styled/styledSettings'
 import styles from './Settings.module.css'
 
 import getText from '../../functions/getText'
+import useEsc from '../../hooks/useEsc'
 
-function Settings() {
+function Settings({ handleSetSettingsView }) {
     const dispatch = useDispatch()
-    const settings = useSelector(state => state.settings)
+    const state = useSelector(state => state)
+    const settings = state.settings
+
     const lg = settings && settings.language ? settings.language : 'en'
     const siteLink = settings ? settings.siteLink : 'coh2stats.com'
     // const [error, setError] = useState(false)
@@ -29,6 +32,13 @@ function Settings() {
     const [timedError, setTimedError] = useTimedBoolean(1000)
     const [timedSetID, setTimedSetID] = useTimedBoolean(1000)
     const steamIdInputRef = useRef(null)
+
+    const settingsViewToggeler = () => {
+        dispatch({ type: 'TOGGLE_SETTINGS_VIEW' })
+        handleSetSettingsView()
+    }
+
+    useEsc(settingsViewToggeler)
 
     const setError = () => {
         setTimedError(true)
