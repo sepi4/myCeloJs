@@ -1,7 +1,17 @@
-import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconProp, SizeProp } from '@fortawesome/fontawesome-svg-core';
 
-export default function Icon({ icon, fun, size = '2x' }) {
+type IconProps = {
+    icon: IconProp;
+    fun: () => void;
+    size: SizeProp;
+};
+
+export default function Icon({
+    icon,
+    fun,
+    size = '2x',
+}: IconProps): JSX.Element {
     return (
         <div
             style={{
@@ -13,7 +23,7 @@ export default function Icon({ icon, fun, size = '2x' }) {
             <FontAwesomeIcon
                 icon={icon}
                 size={size}
-                color='#dddddd'
+                color="#dddddd"
                 onClick={fun}
                 style={{
                     marginRight: '0.2em',
@@ -21,5 +31,5 @@ export default function Icon({ icon, fun, size = '2x' }) {
                 }}
             />
         </div>
-    )
+    );
 }
