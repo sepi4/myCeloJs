@@ -15,6 +15,23 @@ export function commonName(str: string): string {
     }
 }
 
+interface Arr {
+    ranks: [
+        {
+            wins: number;
+            losses: number;
+        }
+    ];
+}
+
+export function getTotalGames(arr: Arr): number {
+    let sum = 0;
+    for (const rankObj of arr.ranks) {
+        sum += rankObj.wins + rankObj.losses;
+    }
+    return sum;
+}
+
 export function separateTeams(arr: { teamSlot: number }[]): [any[], any[]] {
     let teams: [any[], any[]] = [[], []];
     for (let obj of arr) {

@@ -13,7 +13,7 @@ import countries from '../../../countries.json'
 
 import MainRowSpan from './MainRowSpan'
 
-import getTotalGames from '../../functions/getTotalGames'
+import { getTotalGames } from '../../functions/simpleFunctions'
 
 // import { shell } from 'electron'
 // import getSiteLink from '../../functions/getSiteLink'

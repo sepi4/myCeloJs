@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { getExtraInfo } from '../../functions/getExtraInfo'
 import getLastPlayedGame from '../../functions/getLastPlayedGame'
 import getText from '../../functions/getText'
-import getTotalGames from '../../functions/getTotalGames'
+import { getTotalGames } from '../../functions/simpleFunctions'
 
 import searchPlayers from '../../functions/searchPlayers'
 import FoundPlayer from './FoundPlayer'
