@@ -6,10 +6,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 module.exports = {
 	module: {
 		rules: [
-			// {
-			// 	test: /\.css$/,
-			// 	use: [MiniCssExtractPlugin.loader, 'css-loader'],
-			// },
 			{
 				test: /\.css$/,
 				exclude: /node_modules/,
@@ -37,6 +33,17 @@ module.exports = {
 					{ loader: 'file-loader?name=font/[name]__[hash:base64:5].[ext]' },
 				],
 			},
+			{
+				test: /\.(tsx?|jsx?)$/,
+				exclude: /(node_modules|\.webpack)/,
+				use: {
+					loader: 'ts-loader',
+					options: {
+						transpileOnly: true,
+						configFile: 'tsconfig.prod.json',
+					}
+				}
+			},
 		],
 	},
 	target: 'electron-renderer',
@@ -58,5 +65,8 @@ module.exports = {
 		children: false,
 		chunks: false,
 		modules: false,
+	},
+	resolve: {
+		extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.json']
 	},
 }

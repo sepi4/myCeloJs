@@ -7,9 +7,6 @@ module.exports = {
     module: {
         rules: [
             {
-                // test: /\.css$/,
-                // use: [{ loader: 'style-loader' }, { loader: 'css-loader' }],
-
                 test: /\.css$/,
                 exclude: /node_modules/,
                 use: [
@@ -39,6 +36,16 @@ module.exports = {
                     { loader: 'file-loader?name=font/[name]__[hash:base64:5].[ext]' },
                 ],
             },
+            {
+                test: /\.(tsx?|jsx?)$/,
+                exclude: /(node_modules|\.webpack)/,
+                use: {
+                    loader: 'ts-loader',
+                    options: {
+                        transpileOnly: true,
+                    },
+                }
+            },
         ],
     },
     target: 'electron-renderer',
@@ -66,5 +73,8 @@ module.exports = {
                 .on('close', () => process.exit(0))
                 .on('error', (spawnError) => console.error(spawnError))
         },
+    },
+    resolve: {
+        extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.json']
     },
 }
