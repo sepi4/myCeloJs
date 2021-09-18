@@ -1,7 +1,21 @@
 import fs from 'fs'
-import { commonName, formatToStr, } from '../functions/simpleFunctions'
+import { commonName } from '../functions/simpleFunctions'
 import countries from '../../countries.json'
 import stringWidth from 'string-width'
+
+
+// function formatToStr(arr) {
+//     // console.log('formatToStr arr: ', arr);
+
+//     for (let obj of arr) {
+//         for (let key of Object.keys(obj)) {
+//             if (typeof obj[key] === 'number') {
+//                 obj[key] = obj[key].toString();
+//             }
+//         }
+//     }
+//     return arr;
+// }
 
 export function writeRankings(
     players,
@@ -16,7 +30,8 @@ export function writeRankings(
         }
     }
 
-    players = formatToStr(players)
+    // players = formatToStr(players)
+
     // let str1 = ''
     // let str2 = ''
     function countryText(s, left, n) {
