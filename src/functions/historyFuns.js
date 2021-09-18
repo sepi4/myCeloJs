@@ -37,7 +37,7 @@ export const parseHistoryData = (result, player) => {
             return
         }
         mObj.result = m.matchhistoryreportresults.find((r) => {
-            return r.profile_id.toString() === player.profileId
+            return r.profile_id.toString() === player.profileId.toString()
         })
 
         mObj.counters = mObj.result.counters
