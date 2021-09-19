@@ -1,4 +1,9 @@
-const text = {
+const text: {
+    [key: string]: {
+        en: string;
+        ru: string;
+    };
+} = {
     // settings ---------------------------------
     log_location_title: {
         en: 'Log location',
@@ -80,7 +85,6 @@ const text = {
         ru: 'ID установлен',
     },
 
-
     // navbar  ---------------------------------
     dropdown_info: {
         en: 'dropdown info',
@@ -101,7 +105,7 @@ const text = {
 
     log_checking: {
         en: 'log checking',
-        ru: 'проверка лог-файла'
+        ru: 'проверка лог-файла',
     },
     auto: {
         en: 'auto',
@@ -135,7 +139,6 @@ const text = {
         en: 'settings',
         ru: 'настройки',
     },
-
 
     // dropdown menu  ---------------------------------
     rank: {
@@ -180,7 +183,6 @@ const text = {
         ru: '✚',
     },
 
-
     // history ---------------------------------
     game_start_time: {
         en: 'game start time',
@@ -208,8 +210,7 @@ const text = {
         ru: 'имя',
     },
 
-
-    // history keys    
+    // history keys
     dmgdone: {
         en: 'damage',
         ru: 'урон',
@@ -243,7 +244,6 @@ const text = {
         ru: 'техники потеряно',
     },
 
-
     // main view ---------------------------------
     no_info: {
         en: 'no game info in log file',
@@ -253,7 +253,6 @@ const text = {
         en: 'Please, in settings specify location log file (warnings.log)',
         ru: 'Укажите в настройках расположение лог-файла (warnings.log)',
     },
-
 
     // update bar
     update_to_version: {
@@ -286,8 +285,6 @@ const text = {
         en: 'last game',
         ru: 'последняя игра',
     },
+};
 
-
-}
-
-export default text
+export default text;

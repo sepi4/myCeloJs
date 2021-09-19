@@ -1,6 +1,8 @@
 import { byRank } from './functions/sorters';
 import getLocalStorage from './functions/getLocalStorage';
 
+import { InitialStore, CountryFlagsLocation } from './types';
+
 function importAll(r: any) {
     return r.keys().map(r);
 }
@@ -9,43 +11,10 @@ const images: { default: string }[] = importAll(
     require.context('../img/countryFlags/', false, /\.(png|jpe?g|svg)$/)
 );
 
-interface CountryFlags {
-    [key: string]: string;
-}
-const countryFlags: CountryFlags = {};
+const countryFlags: CountryFlagsLocation = {};
 images.forEach((x: { default: string }) => {
     countryFlags[x.default.substring(4, 6)] = x.default;
 });
-
-interface InitialStore {
-    settingsView: boolean;
-    settings: any; // TODO
-    logCheckInterval: number;
-    autoLogChecking: boolean;
-    alert: boolean;
-    updateCheckDone: boolean;
-    appLocation: string;
-    players: any; // TODO
-    fromFile: any; // TODO
-    extraInfo: any; // TODO
-    navButtons: {
-        all: boolean;
-        table: boolean;
-        total: boolean;
-    };
-    openInfos: [boolean[], boolean[]];
-    countryFlags: CountryFlags;
-    sorter: {
-        fun: (a: any, b: any) => number; // TODO
-        name: string;
-        reversed: boolean;
-    };
-    playerCard: {
-        player: any; // TODO
-    };
-    view: string;
-    foundPlayers: any[]; // TODO
-}
 
 let initialStore: InitialStore = {
     settingsView: false,
