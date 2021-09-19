@@ -1,9 +1,11 @@
-const text: {
+interface Translations {
     [key: string]: {
         en: string;
         ru: string;
     };
-} = {
+}
+
+const text: Translations = {
     // settings ---------------------------------
     log_location_title: {
         en: 'Log location',

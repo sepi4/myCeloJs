@@ -1,7 +1,4 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
-
-
 
 import styles from './FoundPlayer.module.css'
 import getText from '../../functions/getText'

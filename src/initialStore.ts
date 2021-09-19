@@ -67,6 +67,7 @@ let initialStore: InitialStore = {
 
     playerCard: {
         player: null,
+        extraInfo: null,
     },
 
     view: 'main',

@@ -2,9 +2,21 @@ export interface CountryFlagsLocation {
     [key: string]: string;
 }
 
+interface Settings {
+    logLocation: string;
+    language: string;
+    appLocation: string;
+    rankingsHtml: boolean;
+    rankingsFile: string;
+    rankingsHorizontal: boolean;
+    siteLink: string;
+    steamId: string;
+    profileId: string;
+}
+
 export interface InitialStore {
     settingsView: boolean;
-    settings: any; // TODO
+    settings: Settings | null;
     logCheckInterval: number;
     autoLogChecking: boolean;
     alert: boolean;
@@ -27,6 +39,7 @@ export interface InitialStore {
     };
     playerCard: {
         player: any; // TODO
+        extraInfo: any; // TODO
     };
     view: string;
     foundPlayers: any[]; // TODO

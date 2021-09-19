@@ -1,10 +1,14 @@
 import text from '../translation';
 
-function getText(
-    key: string,
-    settings: { language: string }
-): string | undefined {
-    const lang: string = settings?.language ? settings.language : 'en';
+type X = { language: string } | null;
+
+function getText(key: string, settings: X): string | undefined {
+    if (!settings) {
+        return;
+    }
+
+    const lang = settings?.language === 'ru' ? settings.language : 'en';
+
     if (text[key]) {
         return text[key][lang];
     }
