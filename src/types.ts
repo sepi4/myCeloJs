@@ -14,6 +14,27 @@ export interface Settings {
     profileId: string;
 }
 
+export interface Rank {
+    disputes: number;
+    drops: number;
+    lastmatchdate: number;
+    leaderboard_id: number;
+    losses: number;
+    rank: number;
+    ranklevel: number;
+    ranktotal: number;
+    regionrank: number;
+    regionranktotal: number;
+    statgroup_id: number;
+    streak: number;
+    wins: number;
+
+    name: string;
+
+    isModeRanked?: 1;
+    members?: any[];
+}
+
 export interface InitialStore {
     settingsView: boolean;
     settings: Settings | null;
