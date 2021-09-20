@@ -14,6 +14,91 @@ export interface Settings {
     profileId: string;
 }
 
+interface Leaderboard {
+    id: number;
+    isranked: number;
+    leaderboardmap: any[];
+    name: string;
+}
+
+export interface MatchType {
+    id: number;
+    localizedName: string;
+    locstringid: number;
+    name: string;
+}
+
+interface Race {
+    faction_id: number;
+    id: number;
+    localizedName: string;
+    locstringid: number;
+    name: string;
+}
+
+export interface AvailableLeaderboard {
+    factions: any[];
+    leaderboardRegions: any[];
+    result: any[];
+    leaderboards: Leaderboard[];
+    matchTypes: MatchType[];
+    races: Race[];
+}
+
+export interface MatchHistoryReportResult {
+    matchhistory_id: number;
+    profile_id: number;
+    resulttype: number;
+    teamid: number;
+    race_id: number;
+    xpgained: number;
+    counters: string;
+    matchstartdate: number;
+}
+
+export interface MatchHistoryStat {
+    id: number;
+    creator_profile_id: number;
+    mapname: string;
+    maxplayers: number;
+    matchtype_id: number;
+    options: string;
+    slotinfo: string;
+    description: string;
+    startgametime: number;
+    completiontime: number;
+    observertotal: number;
+    matchhistoryreportresults: MatchHistoryReportResult[];
+    matchhistoryitems: any[];
+    matchurls: any[];
+}
+
+/**
+ * Profile as it return from Relic server on RecentMatchHistory call
+ */
+export interface Profile {
+    profile_id: number;
+    name: string;
+    alias: string;
+    personal_statgroup_id: number;
+    xp: number;
+    level: number;
+    leaderboardregion_id: number;
+    country: string;
+}
+
+/**
+ * relic match history api return format
+ */
+export interface RecentMatchHistory {
+    result: {
+        code: number;
+        message: string;
+    };
+    matchHistoryStats: MatchHistoryStat[];
+    profiles: Profile[];
+}
+
 export interface Rank {
     disputes: number;
     drops: number;
