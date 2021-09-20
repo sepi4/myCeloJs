@@ -1,12 +1,8 @@
+import { RELIC_SERVER_BASE } from '../constants'
+
 export const getHistoryUrls = id => {
-
-    const url = 'https://coh2-api.reliclink.com/community/leaderboard/'
-        + 'getRecentMatchHistory?title=coh2&profile_ids=['
-        + id
-        + ']'
-    const url2 = 'https://coh2-api.reliclink.com/'
-        + 'community/leaderboard/GetAvailableLeaderboards?title=coh2'
-
+    const url = `${RELIC_SERVER_BASE}/getRecentMatchHistory?title=coh2&profile_ids=[${id}]`
+    const url2 = `${RELIC_SERVER_BASE}/GetAvailableLeaderboards?title=coh2`
     return [url, url2]
 }
 export const parseHistoryData = (result, player) => {
