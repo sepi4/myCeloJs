@@ -21,8 +21,7 @@ export function getExtraInfo(
     callback: (a: any, b?: any) => void, // TODO remove any
     forPlayerCard: boolean
 ) {
-    // TODO - get rid of unnessary calls to server
-    console.log('getExtraInfo players:', players);
+    // TODO - get rid of unnessary calls to server on app start
 
     let ids = players
         .filter((p) => p.profileId != undefined)
@@ -43,7 +42,6 @@ export function getExtraInfo(
 
             if (values[0].status === 200 && values[1].status === 200) {
                 personalStats = values[0].data;
-                console.log('personalStats:', personalStats);
                 cohTitles = values[1].data;
                 let result = refactorData(personalStats, cohTitles, ids);
                 if (forPlayerCard) {

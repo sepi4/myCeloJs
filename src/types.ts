@@ -54,7 +54,7 @@ interface StatGroup {
     type: number;
 }
 
-interface LeaderboardStat {
+export interface LeaderboardStat {
     disputes: number;
     drops: number;
     lastmatchdate: number;
