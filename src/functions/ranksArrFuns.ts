@@ -5,9 +5,6 @@ export function ranksArrFilter(
     tableView: boolean,
     showAll: boolean
 ) {
-    console.log('tableView:', tableView);
-    console.log('showAll:', showAll);
-
     let reg = tableView ? /^Team/ : /^./;
     let rankedOnly = !showAll;
     ranksArr = ranksArr

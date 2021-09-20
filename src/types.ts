@@ -1,3 +1,33 @@
+export interface Member {
+    alias: string;
+    country: string;
+    leaderboardregion_id: number;
+    level: number;
+    name: string;
+    personal_statgroup_id: number;
+    profile_id: number;
+    xp: number;
+}
+
+export interface RankForTableView {
+    disputes: number;
+    drops: number;
+    isModeRanked: number;
+    lastmatchdate: number;
+    leaderboard_id: number;
+    losses: number;
+    members: Member[];
+    name: string;
+    rank: number;
+    ranklevel: number;
+    ranktotal: number;
+    regionrank: number;
+    regionranktotal: number;
+    statgroup_id: number;
+    streak: number;
+    wins: number;
+}
+
 export interface CountryFlagsLocation {
     [key: string]: string;
 }
