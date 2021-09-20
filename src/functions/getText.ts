@@ -3,10 +3,6 @@ import text from '../translation';
 type X = { language: string } | null;
 
 function getText(key: string, settings: X): string | undefined {
-    if (!settings) {
-        return;
-    }
-
     const lang = settings?.language === 'ru' ? settings.language : 'en';
 
     if (text[key]) {

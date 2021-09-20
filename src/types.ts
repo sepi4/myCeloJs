@@ -2,7 +2,7 @@ export interface CountryFlagsLocation {
     [key: string]: string;
 }
 
-interface Settings {
+export interface Settings {
     logLocation: string;
     language: string;
     appLocation: string;
