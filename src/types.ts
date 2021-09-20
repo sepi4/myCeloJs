@@ -1,3 +1,6 @@
+/**
+ * From server, raw
+ */
 export interface Member {
     alias: string;
     country: string;
@@ -42,6 +45,35 @@ export interface Settings {
     siteLink: string;
     steamId: string;
     profileId: string;
+}
+
+interface StatGroup {
+    id: number;
+    members: Member;
+    name: string;
+    type: number;
+}
+
+interface LeaderboardStat {
+    disputes: number;
+    drops: number;
+    lastmatchdate: number;
+    leaderboard_id: number;
+    losses: number;
+    rank: number;
+    ranklevel: number;
+    ranktotal: number;
+    regionrank: number;
+    regionranktotal: number;
+    statgroup_id: number;
+    streak: number;
+    wins: number;
+}
+
+export interface PersonalStats {
+    leaderboardStats: LeaderboardStat[];
+    result: { code: number; message: string };
+    statGroups: StatGroup[];
 }
 
 interface Leaderboard {

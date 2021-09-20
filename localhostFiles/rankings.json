@@ -2,17 +2,17 @@
     "teams": {
         "team1": [
             {
-                "name": "sepi",
-                "ranking": "175",
-                "country": "fi",
-                "faction": "okw"
+                "name": "Itaperuna",
+                "ranking": "73",
+                "country": "br",
+                "faction": "wer"
             }
         ],
         "team2": [
             {
-                "name": "SpongeСoh SquareTanks",
-                "ranking": "231",
-                "country": "ru",
+                "name": "sepi",
+                "ranking": "175",
+                "country": "fi",
                 "faction": "sov"
             }
         ]
