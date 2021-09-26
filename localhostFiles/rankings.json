@@ -2,18 +2,30 @@
     "teams": {
         "team1": [
             {
-                "name": "Itaperuna",
-                "ranking": "73",
-                "country": "br",
-                "faction": "wer"
+                "name": "sepi",
+                "ranking": "- ¹",
+                "country": "fi",
+                "faction": "sov"
+            },
+            {
+                "name": "HSRometh",
+                "ranking": "- ¹",
+                "country": "ru",
+                "faction": "uk"
             }
         ],
         "team2": [
             {
-                "name": "sepi",
-                "ranking": "176",
-                "country": "fi",
-                "faction": "sov"
+                "name": "Señor Stamos ✌",
+                "ranking": "-1",
+                "country": "ro",
+                "faction": "wer"
+            },
+            {
+                "name": "LuchsSkywalker",
+                "ranking": "156",
+                "country": "ru",
+                "faction": "okw"
             }
         ]
     },
