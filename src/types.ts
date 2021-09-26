@@ -1,3 +1,10 @@
+// declare module '*.module.css' {
+//     const classes: { [key: string]: string };
+//     export default classes;
+// }
+
+export type FactionName = 'okw' | 'sov' | 'uk' | 'usa' | 'wer';
+
 /**
  * From server, raw
  */

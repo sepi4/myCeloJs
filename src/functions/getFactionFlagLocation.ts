@@ -9,9 +9,9 @@ import flagUsa from '../../img/usa.png';
 // @ts-ignore
 import flagWer from '../../img/wer.png';
 
-type Name = 'okw' | 'sov' | 'uk' | 'usa' | 'wer';
+import { FactionName } from '../types';
 
-export function getFactionFlagLocation(code: Name) {
+export function getFactionFlagLocation(code: FactionName) {
     switch (code) {
         case 'okw':
             return flagOkw;
