@@ -182,7 +182,28 @@ export interface Rank {
     members?: any[];
 }
 
-export interface InitialStore {
+/**
+ * Format that come from warnings.log
+ */
+export interface DataFromFile {
+    faction: string;
+    name: string;
+    profileId: string;
+    ranking: string;
+    slot: string;
+    teamSlot: string;
+    time: string;
+
+    // faction: "soviet"
+    // name: "sepi"
+    // profileId: "580525"
+    // ranking: "-1"
+    // slot: "0"
+    // teamSlot: "0"
+    // time: "01:32:47.12"
+}
+
+export interface Store {
     settingsView: boolean;
     settings: Settings | null;
     logCheckInterval: number;
@@ -191,7 +212,7 @@ export interface InitialStore {
     updateCheckDone: boolean;
     appLocation: string;
     players: any; // TODO
-    fromFile: any; // TODO
+    fromFile: DataFromFile[] | null;
     extraInfo: any; // TODO
     navButtons: {
         all: boolean;

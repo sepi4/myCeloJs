@@ -73,7 +73,7 @@ function App() {
 
             if (state.settings && state.settings.logLocation) {
                 readLog(state.settings.logLocation, data => {
-                    checkLogData(data, state, dispatch)
+                    checkLogData({ data, state, dispatch })
                 })
             }
         } else if (state.extraInfo === null && state.players.length > 0) {
@@ -112,9 +112,9 @@ function App() {
             if (state.settings && state.settings.logLocation) {
                 readLog(state.settings.logLocation, data => {
                     if (state.alert) {
-                        checkLogData(data, state, dispatch, playAudio)
+                        checkLogData({ data, state, dispatch, playAudio })
                     } else {
-                        checkLogData(data, state, dispatch)
+                        checkLogData({ data, state, dispatch })
                     }
                 })
             }
@@ -138,7 +138,7 @@ function App() {
         }
         if (state.settings && state.settings.logLocation) {
             readLog(state.settings.logLocation, data => {
-                checkLogData(data, state, dispatch)
+                checkLogData({ data, state, dispatch })
             })
         }
     }

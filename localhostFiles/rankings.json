@@ -3,29 +3,17 @@
         "team1": [
             {
                 "name": "sepi",
-                "ranking": "- ¹",
+                "ranking": "183",
                 "country": "fi",
-                "faction": "sov"
-            },
-            {
-                "name": "HSRometh",
-                "ranking": "- ¹",
-                "country": "ru",
-                "faction": "uk"
+                "faction": "okw"
             }
         ],
         "team2": [
             {
-                "name": "Señor Stamos ✌",
-                "ranking": "-1",
-                "country": "ro",
-                "faction": "wer"
-            },
-            {
-                "name": "LuchsSkywalker",
-                "ranking": "156",
+                "name": "SpongeСoh SquareTanks",
+                "ranking": "235",
                 "country": "ru",
-                "faction": "okw"
+                "faction": "sov"
             }
         ]
     },
