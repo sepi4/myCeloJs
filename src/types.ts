@@ -54,9 +54,9 @@ export interface Settings {
     profileId: string;
 }
 
-interface StatGroup {
+export interface StatGroup {
     id: number;
-    members: Member;
+    members: Member[];
     name: string;
     type: number;
 }
@@ -83,7 +83,7 @@ export interface PersonalStats {
     statGroups: StatGroup[];
 }
 
-interface Leaderboard {
+export interface Leaderboard {
     id: number;
     isranked: number;
     leaderboardmap: any[];

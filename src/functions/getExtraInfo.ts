@@ -23,9 +23,15 @@ export function getExtraInfo(
 ) {
     // TODO - get rid of unnessary calls to server on app start
 
-    let ids = players
-        .filter((p) => p.profileId != undefined)
-        .map((p) => p.profileId);
+    let ids: string[] = [];
+    for (const p of players) {
+        if (p.profileId) {
+            ids.push(p.profileId);
+        }
+    }
+    // players
+    //     .filter((p) => p.profileId !== undefined)
+    //     .map((p) => p.profileId);
 
     const strIds: string = ids.join(',');
     const url = `${RELIC_SERVER_BASE}/GetPersonalStat?title=coh2&profile_ids=[${strIds}]`;
