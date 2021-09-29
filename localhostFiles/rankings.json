@@ -2,18 +2,18 @@
     "teams": {
         "team1": [
             {
-                "name": "Itaperuna",
-                "ranking": "86",
-                "country": "br",
-                "faction": "wer"
+                "name": "prabuty",
+                "ranking": "49",
+                "country": "pl",
+                "faction": "okw"
             }
         ],
         "team2": [
             {
-                "name": "sepi",
-                "ranking": "173",
-                "country": "fi",
-                "faction": "sov"
+                "name": "rangers",
+                "ranking": "65",
+                "country": "ar",
+                "faction": "usa"
             }
         ]
     },

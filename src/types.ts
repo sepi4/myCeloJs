@@ -3,6 +3,18 @@
 //     export default classes;
 // }
 
+export interface Player {
+    name: string;
+    slot: string;
+    teamSlot: string;
+    profileId?: string;
+    faction: string;
+    time: string;
+
+    id?: string;
+    ranking?: string;
+}
+
 export type FactionName = 'okw' | 'sov' | 'uk' | 'usa' | 'wer';
 
 /**
