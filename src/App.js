@@ -37,7 +37,6 @@ function App() {
         if (state.settings) {
             writeRankings(
                 data,
-                state.settings.rankingsHtml,
                 state.settings.rankingsHorizontal,
                 'writeNewRankingsFile'
             )
@@ -96,7 +95,6 @@ function App() {
 
                 writeRankings(
                     newPlayers,
-                    state.settings.rankingsHtml,
                     state.settings.rankingsHorizontal,
                     'useEffect'
                 )

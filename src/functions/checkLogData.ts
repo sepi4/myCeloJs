@@ -1,10 +1,16 @@
 import { writeRankings } from './writeRankings';
-import { DataFromFile, Store } from '../types';
+import { PlayerFromFile, Store } from '../types';
 
 interface Props {
-    data: DataFromFile[];
+    data: PlayerFromFile[];
     state: Store;
-    dispatch: ({ type, data }: { type: string; data: DataFromFile[] }) => void;
+    dispatch: ({
+        type,
+        data,
+    }: {
+        type: string;
+        data: PlayerFromFile[];
+    }) => void;
     playAudio?: () => void;
 }
 
@@ -22,7 +28,6 @@ export default function checkLogData({
         if (state.settings) {
             writeRankings(
                 data,
-                state.settings.rankingsHtml,
                 state.settings.rankingsHorizontal,
                 'checkLogData'
             );

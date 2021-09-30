@@ -3,8 +3,26 @@
 //     export default classes;
 // }
 
+type Team = {
+    country?: string;
+    faction: string;
+    name: string;
+    ranking: string;
+};
+/**
+ * rankings json file format
+ */
+export interface RankingsJson {
+    teams: {
+        team1: Team[];
+        team2: Team[];
+    };
+    horizontal: boolean;
+}
+
 /**
  * Player object after reading warnings.log file.
+ * Used readlog
  */
 export interface Player {
     name: string;
@@ -15,6 +33,20 @@ export interface Player {
 
     id?: string;
     ranking?: string;
+}
+
+/**
+ * Player object passed in getExtraInfo
+ * Used getExtraInfo
+ */
+export interface PlayerFromFile {
+    country?: string;
+    faction: string;
+    name: string;
+    profileId?: number;
+    ranking?: number;
+    teamSlot: number;
+    time: string;
 }
 
 export type FactionName = 'okw' | 'sov' | 'uk' | 'usa' | 'wer';
@@ -207,6 +239,7 @@ export interface Rank {
  * Format that come from warnings.log
  */
 export interface DataFromFile {
+    // TODO check if used
     faction: string;
     name: string;
     profileId: string;

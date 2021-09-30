@@ -2,18 +2,54 @@
     "teams": {
         "team1": [
             {
-                "name": "prabuty",
-                "ranking": "45",
-                "country": "pl",
+                "name": "Janamstart",
+                "ranking": "-",
+                "country": "de",
                 "faction": "okw"
+            },
+            {
+                "name": "Heartii",
+                "ranking": "6802",
+                "country": "pl",
+                "faction": "wer"
+            },
+            {
+                "name": "KaBandha",
+                "ranking": "-",
+                "country": "hr",
+                "faction": "wer"
+            },
+            {
+                "name": "happy okw player",
+                "ranking": "-",
+                "country": "ru",
+                "faction": "wer"
             }
         ],
         "team2": [
             {
-                "name": "rangers",
-                "ranking": "72",
-                "country": "ar",
-                "faction": "usa"
+                "name": "TomWPL",
+                "ranking": "5755",
+                "country": "pl",
+                "faction": "sov"
+            },
+            {
+                "name": "DaGrooveNL",
+                "ranking": "-",
+                "country": "nl",
+                "faction": "sov"
+            },
+            {
+                "name": "Peryton",
+                "ranking": "-",
+                "country": "tr",
+                "faction": "uk"
+            },
+            {
+                "name": "Dartorius",
+                "ranking": "-",
+                "country": "nl",
+                "faction": "uk"
             }
         ]
     },

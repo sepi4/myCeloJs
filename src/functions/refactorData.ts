@@ -9,7 +9,7 @@ type Players = { [key: string]: Player };
 export function refactorData(
     leaderboard: PersonalStats,
     cohTitles: AvailableLeaderboard,
-    ids: string[]
+    ids: number[]
 ): Players {
     let players: Players = {};
     for (const id of ids) {

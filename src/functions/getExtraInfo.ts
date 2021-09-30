@@ -6,14 +6,7 @@ import { guessRankings } from './guessRankings';
 import { RELIC_SERVER_BASE } from '../constants';
 import { AvailableLeaderboard, PersonalStats } from '../types';
 
-type PlayerFromFile = {
-    faction: string;
-    name: string;
-    profileId?: string;
-    ranking: string;
-    teamSlot: string;
-    time: string;
-};
+import { PlayerFromFile } from '../types';
 
 export function getExtraInfo(
     players: PlayerFromFile[],
@@ -22,7 +15,7 @@ export function getExtraInfo(
 ) {
     // TODO - get rid of unnessary calls to server on app start
 
-    let ids: string[] = [];
+    let ids: number[] = [];
     for (const p of players) {
         if (p.profileId) {
             ids.push(p.profileId);

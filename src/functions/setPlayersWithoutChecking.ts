@@ -1,10 +1,11 @@
 import { writeRankings } from './writeRankings';
-import { DataFromFile, Store } from '../types';
+// import { DataFromFile, Store } from '../types';
+import { PlayerFromFile, Store } from '../types';
 
 export default function setPlayersWithoutChecking(
-    data: DataFromFile[],
+    data: PlayerFromFile[],
     state: Store,
-    dispatch: ({ type, data }: { type: string; data: DataFromFile[] }) => void
+    dispatch: ({ type, data }: { type: string; data: PlayerFromFile[] }) => void
 ) {
     // console.log('data:', data);
 
@@ -15,7 +16,6 @@ export default function setPlayersWithoutChecking(
     if (state.settings) {
         writeRankings(
             data,
-            state.settings.rankingsHtml,
             state.settings.rankingsHorizontal,
             'setPlayersWithoutChecking'
         );
