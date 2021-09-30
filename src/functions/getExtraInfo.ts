@@ -11,7 +11,6 @@ type PlayerFromFile = {
     name: string;
     profileId?: string;
     ranking: string;
-    slot: string;
     teamSlot: string;
     time: string;
 };

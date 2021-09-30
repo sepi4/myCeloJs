@@ -3,13 +3,15 @@
 //     export default classes;
 // }
 
+/**
+ * Player object after reading warnings.log file.
+ */
 export interface Player {
     name: string;
-    slot: string;
     teamSlot: string;
-    profileId?: string;
     faction: string;
     time: string;
+    profileId?: string;
 
     id?: string;
     ranking?: string;

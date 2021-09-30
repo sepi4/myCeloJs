@@ -1,6 +1,6 @@
 import { Player } from '../../types';
 
-export function getPlayersInfo(arr: string[]) {
+export function getPlayersInfo(arr: string[]): Player[] {
     let time: string | undefined;
     arr = arr.map((row) => {
         if (row.match(/GAME --.* Player:/)) {
@@ -69,7 +69,6 @@ export function getPlayersInfo(arr: string[]) {
             if (slot && faction && teamSlot && time) {
                 players[slot] = {
                     name,
-                    slot,
                     teamSlot,
                     profileId,
                     faction,
