@@ -1,3 +1,5 @@
+import { PlayerFromFile } from '../types';
+
 export function commonName(str: string): string {
     switch (str) {
         case 'british':
@@ -32,7 +34,9 @@ export function getTotalGames(arr: Arr): number {
     return sum;
 }
 
-export function separateTeams(arr: { teamSlot: number }[]): [any[], any[]] {
+export function separateTeams(
+    arr: { teamSlot: number }[]
+): [PlayerFromFile[], PlayerFromFile[]] {
     let teams: [any[], any[]] = [[], []];
     for (let obj of arr) {
         if (obj.teamSlot === 0) {
@@ -44,16 +48,29 @@ export function separateTeams(arr: { teamSlot: number }[]): [any[], any[]] {
     return teams;
 }
 
-export function copyObj(obj: any) {
+/**
+ * Generic object copy
+ * @param obj Object to copy
+ * @returns Copy
+ */
+export function copyObj<T>(obj: T): T {
     return JSON.parse(JSON.stringify(obj));
 }
 
-export function formatToNums(arr: any[]): any[] {
+export function formatToNums(arr: PlayerFromFile[]): PlayerFromFile[] {
     for (let obj of arr) {
-        for (let key of Object.keys(obj)) {
-            if (!isNaN(obj[key])) {
-                obj[key] = +obj[key];
-            }
+        if (obj.profileId && !isNaN(obj.profileId)) {
+            obj.profileId = Number(obj.profileId);
+        }
+        if (
+            obj.ranking &&
+            typeof obj.ranking === 'number' &&
+            !isNaN(obj.ranking)
+        ) {
+            obj.ranking = Number(obj.ranking);
+        }
+        if (obj.teamSlot && !isNaN(obj.teamSlot)) {
+            obj.teamSlot = Number(obj.teamSlot);
         }
     }
     return arr;

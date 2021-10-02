@@ -44,7 +44,7 @@ export interface PlayerFromFile {
     faction: string;
     name: string;
     profileId?: number;
-    ranking?: number;
+    ranking?: number | string;
     teamSlot: number;
     time: string;
 }
@@ -105,6 +105,7 @@ export interface StatGroup {
     members: Member[];
     name: string;
     type: number;
+    rank?: string;
 }
 
 export interface LeaderboardStat {
@@ -121,6 +122,11 @@ export interface LeaderboardStat {
     statgroup_id: number;
     streak: number;
     wins: number;
+}
+
+export interface LeaderboardStatWithRankToTeam
+    extends Omit<LeaderboardStat, 'rank'> {
+    rank: number | string;
 }
 
 export interface PersonalStats {

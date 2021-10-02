@@ -2,54 +2,30 @@
     "teams": {
         "team1": [
             {
-                "name": "Janamstart",
-                "ranking": "-",
-                "country": "de",
-                "faction": "okw"
+                "name": "sepi",
+                "ranking": "- ¹",
+                "country": "fi",
+                "faction": "sov"
             },
             {
-                "name": "Heartii",
-                "ranking": "6802",
-                "country": "pl",
-                "faction": "wer"
-            },
-            {
-                "name": "KaBandha",
-                "ranking": "-",
-                "country": "hr",
-                "faction": "wer"
-            },
-            {
-                "name": "happy okw player",
-                "ranking": "-",
+                "name": "HSRometh",
+                "ranking": "- ¹",
                 "country": "ru",
-                "faction": "wer"
+                "faction": "uk"
             }
         ],
         "team2": [
             {
-                "name": "TomWPL",
-                "ranking": "5755",
-                "country": "pl",
-                "faction": "sov"
+                "name": "Señor Stamos ✌",
+                "ranking": "-",
+                "country": "ro",
+                "faction": "wer"
             },
             {
-                "name": "DaGrooveNL",
-                "ranking": "-",
-                "country": "nl",
-                "faction": "sov"
-            },
-            {
-                "name": "Peryton",
-                "ranking": "-",
-                "country": "tr",
-                "faction": "uk"
-            },
-            {
-                "name": "Dartorius",
-                "ranking": "-",
-                "country": "nl",
-                "faction": "uk"
+                "name": "LuchsSkywalker",
+                "ranking": "154",
+                "country": "ru",
+                "faction": "okw"
             }
         ]
     },
