@@ -6,21 +6,28 @@ import { Provider } from 'react-redux'
 
 import './index.css'
 
-
-// Since we are using HtmlWebpackPlugin WITHOUT a template, we should create 
+// Since we are using HtmlWebpackPlugin WITHOUT a template, we should create
 // our own root node in the body element before rendering into it
 
 import reducer from './reducer'
 import initialStore from './initialStore'
 
-let store = createStore(reducer, initialStore)
+import { configureStore } from '@reduxjs/toolkit'
+
+export const store = configureStore({
+    reducer,
+    devTools: true,
+    preloadedState: initialStore,
+})
+
+// let store = createStore(reducer, initialStore)
 
 let root = document.createElement('div')
 root.id = 'root'
 document.body.appendChild(root)
 
 render(
-    <Provider store={store} >
+    <Provider store={store}>
         <App />
     </Provider>,
     document.getElementById('root')

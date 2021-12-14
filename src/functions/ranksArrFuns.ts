@@ -1,23 +1,23 @@
-import { Rank } from '../types';
+import { Rank } from '../types'
+import sorters from './sorters'
 
 export function ranksArrFilter(
     ranksArr: Rank[],
     tableView: boolean,
     showAll: boolean
 ) {
-    let reg = tableView ? /^Team/ : /^./;
-    let rankedOnly = !showAll;
+    let reg = tableView ? /^Team/ : /^./
+    let rankedOnly = !showAll
     ranksArr = ranksArr
         .filter((r) => r.name.match(reg))
-        .filter((r) => (rankedOnly ? r.rank > 0 : true));
-    return ranksArr;
+        .filter((r) => (rankedOnly ? r.rank > 0 : true))
+    return ranksArr
 }
 
 type Sorter = {
-    name: string;
-    fun: (a: Rank, b: Rank) => number;
-    reversed: boolean;
-};
+    name: 'byRank' | 'byWinRate' | 'byStreak' | 'byName' | 'byTotal'
+    reversed: boolean
+}
 
 /**
  * Sorting array of Rank objects for rank list in drop menu
@@ -27,32 +27,34 @@ type Sorter = {
  */
 export function ranksArrSort(ranksArr: Rank[], sorter: Sorter) {
     const byTotal = (a: Rank, b: Rank) => {
-        let aTotal = a.wins + a.losses;
-        let bTotal = b.wins + b.losses;
-        return bTotal - aTotal;
-    };
+        let aTotal = a.wins + a.losses
+        let bTotal = b.wins + b.losses
+        return bTotal - aTotal
+    }
+
+    const f = sorters[sorter.name]
 
     if (sorter.name !== 'byRank') {
-        return ranksArr.sort(sorter.fun);
+        return ranksArr.sort(f)
     }
 
-    let pos = [];
-    let neg = [];
+    let pos = []
+    let neg = []
     for (const r of ranksArr) {
         if (r.rank < 0) {
-            neg.push(r);
+            neg.push(r)
         } else {
-            pos.push(r);
+            pos.push(r)
         }
     }
-    neg = neg.sort(byTotal);
+    neg = neg.sort(byTotal)
 
     pos = pos.sort((a, b) => {
-        const diff = sorter.fun(a, b);
+        const diff = f(a, b)
         if (diff !== 0) {
-            return diff;
+            return diff
         }
-        return byTotal(a, b);
-    });
-    return [...pos, ...neg];
+        return byTotal(a, b)
+    })
+    return [...pos, ...neg]
 }

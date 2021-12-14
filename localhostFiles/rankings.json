@@ -2,32 +2,31 @@
     "teams": {
         "team1": [
             {
-                "name": "sepi",
-                "ranking": "- ¹",
-                "country": "fi",
+                "name": "Feebz",
+                "ranking": "152",
+                "country": "us",
                 "faction": "sov"
             },
             {
-                "name": "HSRometh",
-                "ranking": "- ¹",
-                "country": "ru",
-                "faction": "uk"
+                "name": "sepi",
+                "ranking": "196",
+                "country": "fi",
+                "faction": "sov"
             }
         ],
         "team2": [
             {
-                "name": "Señor Stamos ✌",
-                "ranking": "-",
-                "country": "ro",
+                "name": "Zauberer von Ost",
+                "ranking": "151",
+                "country": "de",
                 "faction": "wer"
             },
             {
-                "name": "LuchsSkywalker",
-                "ranking": "154",
-                "country": "ru",
+                "name": "Liquid Silver",
+                "ranking": "238",
+                "country": "au",
                 "faction": "okw"
             }
         ]
-    },
-    "horizontal": true
+    }
 }

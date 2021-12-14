@@ -1,20 +1,19 @@
-import { byRank } from './functions/sorters';
-import getLocalStorage from './functions/getLocalStorage';
+import getLocalStorage from './functions/getLocalStorage'
 
-import { Store, CountryFlagsLocation } from './types';
+import { Store, CountryFlagsLocation } from './types'
 
 function importAll(r: any) {
-    return r.keys().map(r);
+    return r.keys().map(r)
 }
 
 const images: { default: string }[] = importAll(
     require.context('../img/countryFlags/', false, /\.(png|jpe?g|svg)$/)
-);
+)
 
-const countryFlags: CountryFlagsLocation = {};
+const countryFlags: CountryFlagsLocation = {}
 images.forEach((x: { default: string }) => {
-    countryFlags[x.default.substring(4, 6)] = x.default;
-});
+    countryFlags[x.default.substring(4, 6)] = x.default
+})
 
 let initialStore: Store = {
     settingsView: false,
@@ -60,7 +59,6 @@ let initialStore: Store = {
     countryFlags,
 
     sorter: {
-        fun: byRank,
         name: 'byRank',
         reversed: false,
     },
@@ -73,6 +71,6 @@ let initialStore: Store = {
     view: 'main',
 
     foundPlayers: [],
-};
+}
 
-export default initialStore;
+export default initialStore
