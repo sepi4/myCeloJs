@@ -1,7 +1,23 @@
+import { AnyAction } from '@reduxjs/toolkit'
 import { copyObj } from './functions/simpleFunctions'
+import { Store } from './types'
 
 // Reducer
-function reducer(state, action) {
+
+// function settingsViewReducer(state: false, action: AnyAction) {
+//     switch (action.type) {
+//         case 'TOGGLE_SETTINGS_VIEW':
+//             return {
+//                 ...state,
+//                 settingsView: !state.settingsView,
+//             }
+//         default:
+//             return state
+//         }
+
+// }
+
+function reducer(state: Store, action: AnyAction) {
     switch (action.type) {
         case 'TOGGLE_SETTINGS_VIEW':
             return {
@@ -12,7 +28,7 @@ function reducer(state, action) {
         case 'TOGGLE_AUTO_LOG_CHECKING':
             localStorage.setItem(
                 'autoLogChecking',
-                JSON.stringify(!state.autoLogChecking),
+                JSON.stringify(!state.autoLogChecking)
             )
             return {
                 ...state,
@@ -20,10 +36,7 @@ function reducer(state, action) {
             }
 
         case 'TOGGLE_ALERT':
-            localStorage.setItem(
-                'alert',
-                JSON.stringify(!state.alert),
-            )
+            localStorage.setItem('alert', JSON.stringify(!state.alert))
             return {
                 ...state,
                 alert: !state.alert,
@@ -32,11 +45,9 @@ function reducer(state, action) {
         case 'TOGGLE_NAVBUTTON':
             // eslint-disable-next-line no-case-declarations
             let obj = copyObj(state.navButtons)
+            // @ts-ignore TODO fix
             obj[action.key] = !obj[action.key]
-            localStorage.setItem(
-                'navButtons',
-                JSON.stringify(obj),
-            )
+            localStorage.setItem('navButtons', JSON.stringify(obj))
             return {
                 ...state,
                 navButtons: obj,
@@ -45,7 +56,7 @@ function reducer(state, action) {
         case 'SET_INTERVAL':
             localStorage.setItem(
                 'logCheckInterval',
-                JSON.stringify(action.data),
+                JSON.stringify(action.data)
             )
             return {
                 ...state,
@@ -85,7 +96,6 @@ function reducer(state, action) {
                     player: null,
                 },
                 view: 'main',
-
             }
 
         case 'SET_SETTINGS':
@@ -94,34 +104,33 @@ function reducer(state, action) {
                 settings: action.data,
             }
 
-
         case 'TOGGLE_EXTRA':
             return {
                 ...state,
-                openInfos: state.openInfos
-                    .map((t, i) => i === action.data.teamIndex
-                        ? t.map((p, j) => j === action.data.playerIndex
-                            ? !p
-                            : p
-                        )
+                openInfos: state.openInfos.map((t, i) =>
+                    i === action.data.teamIndex
+                        ? t.map((p, j) =>
+                              j === action.data.playerIndex ? !p : p
+                          )
                         : t
-                    )
+                ),
             }
 
         case 'SET_SORTER':
             return {
                 ...state,
-                sorter: state.sorter.name === action.data.name
-                    ? {
-                        fun: action.data.fun,
-                        name: action.data.name,
-                        reversed: !state.sorter.reversed,
-                    }
-                    : {
-                        fun: action.data.fun,
-                        name: action.data.name,
-                        reversed: false,
-                    },
+                sorter:
+                    state.sorter.name === action.data.name
+                        ? {
+                              fun: action.data.fun,
+                              name: action.data.name,
+                              reversed: !state.sorter.reversed,
+                          }
+                        : {
+                              fun: action.data.fun,
+                              name: action.data.name,
+                              reversed: false,
+                          },
             }
 
         case 'TO_MAIN_VIEW':
@@ -138,7 +147,7 @@ function reducer(state, action) {
                     ...state.playerCard,
                     player: action.data.player,
                     extraInfo: action.data.extraInfo,
-                }
+                },
             }
         case 'SEARCH_VIEW_ON':
             return {
@@ -151,7 +160,6 @@ function reducer(state, action) {
                 ...state,
                 foundPlayers: action.data,
             }
-
 
         default:
             return state
