@@ -1,5 +1,2 @@
-WER   152   DEU   Zauberer von Ost    
-OKW   238   AUS   Liquid Silver       
-
-SOV   152   USA   Feebz               
-SOV   195   FIN   sepi                
+               Feebz   USA   153   SOV           WER   214   DEU   Zauberer von Ost    
+                sepi   FIN   197   SOV           OKW   227   AUS   Liquid Silver       

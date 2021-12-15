@@ -279,7 +279,7 @@ export interface Store {
         table: boolean
         total: boolean
     }
-    openInfos: [boolean[], boolean[]]
+    openInfos: boolean[][]
     countryFlags: CountryFlagsLocation
     sorter: {
         name: string

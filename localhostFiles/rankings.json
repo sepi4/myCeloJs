@@ -3,13 +3,13 @@
         "team1": [
             {
                 "name": "Feebz",
-                "ranking": "152",
+                "ranking": "153",
                 "country": "us",
                 "faction": "sov"
             },
             {
                 "name": "sepi",
-                "ranking": "195",
+                "ranking": "197",
                 "country": "fi",
                 "faction": "sov"
             }
@@ -17,16 +17,17 @@
         "team2": [
             {
                 "name": "Zauberer von Ost",
-                "ranking": "152",
+                "ranking": "214",
                 "country": "de",
                 "faction": "wer"
             },
             {
                 "name": "Liquid Silver",
-                "ranking": "238",
+                "ranking": "227",
                 "country": "au",
                 "faction": "okw"
             }
         ]
-    }
+    },
+    "horizontal": true
 }
