@@ -47,7 +47,7 @@
         "@types/react-dom": "^17.0.9",
         "@types/react-redux": "^7.1.18",
         "@types/redux": "^3.6.0",
-        "axios": "^0.21.1",
+        "axios": "^0.24.0",
         "cors": "^2.8.5",
         "dayjs": "^1.10.6",
         "portfinder": "^1.0.28",
@@ -77,9 +77,9 @@
         "electron-builder": "^22.9.1",
         "electron-devtools-installer": "^3.1.1",
         "electron-packager": "^14.2.1",
-        "eslint": "^7.21.0",
-        "eslint-plugin-jest": "^24.1.5",
-        "eslint-plugin-react": "^7.22.0",
+        "eslint": "^7.32.0",
+        "eslint-plugin-jest": "^24.7.0",
+        "eslint-plugin-react": "^7.27.1",
         "file-loader": "^6.2.0",
         "html-webpack-plugin": "^4.5.1",
         "mini-css-extract-plugin": "^0.9.0",
@@ -88,6 +88,6 @@
         "typescript-plugin-css-modules": "^3.4.0",
         "webpack": "^4.46.0",
         "webpack-cli": "^3.3.12",
-        "webpack-dev-server": "^3.11.2"
+        "webpack-dev-server": "^3.11.3"
     }
 }
