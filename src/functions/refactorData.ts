@@ -1,33 +1,33 @@
-import { AvailableLeaderboard, PersonalStats, StatGroup } from '../types';
+import { AvailableLeaderboard, PersonalStats, StatGroup } from '../types'
 
 type Player = {
-    ranks: any[];
-    steamId?: string;
-};
-type Players = { [key: string]: Player };
+    ranks: any[] // TODO FIX
+    steamId?: string
+}
+type Players = { [key: string]: Player }
 
 export function refactorData(
     leaderboard: PersonalStats,
     cohTitles: AvailableLeaderboard,
     ids: number[]
 ): Players {
-    let players: Players = {};
+    const players: Players = {}
     for (const id of ids) {
         players[id] = {
             ranks: [],
-        };
+        }
     }
 
-    let statGroups: { [key: number]: StatGroup } = {};
+    const statGroups: { [key: number]: StatGroup } = {}
     for (const x of leaderboard.statGroups) {
-        statGroups[x.id] = x;
+        statGroups[x.id] = x
     }
 
     type TL = {
-        name: string;
-        isRanked: number;
-    };
-    let titlesLeadersboards: { [key: number]: TL } = {};
+        name: string
+        isRanked: number
+    }
+    const titlesLeadersboards: { [key: number]: TL } = {}
     // get all that are ranked
     // for (const x of cohTitles.leaderboards.filter(l => l.isranked === 1)) {
 
@@ -36,17 +36,17 @@ export function refactorData(
         titlesLeadersboards[x.id] = {
             name: x.name,
             isRanked: x.isranked,
-        };
+        }
     }
 
     // for (const x of leaderboard.leaderboardStats.filter(l => l.rank > -1)) {
     for (const x of leaderboard.leaderboardStats) {
         // check members
 
-        let group = statGroups[x.statgroup_id];
+        const group = statGroups[x.statgroup_id]
 
         for (const member of group.members) {
-            let id = member.profile_id;
+            const id = member.profile_id
 
             if (
                 players[id] &&
@@ -63,24 +63,24 @@ export function refactorData(
                     isModeRanked:
                         titlesLeadersboards[x.leaderboard_id].isRanked,
                     ...x,
-                });
-                break;
+                })
+                break
             }
         }
     }
 
     // add steamId to extraInfo
-    for (let id of Object.keys(players)) {
+    for (const id of Object.keys(players)) {
         if (players[id].steamId) {
-            break;
+            break
         }
-        for (let rankObj of players[id].ranks) {
+        for (const rankObj of players[id].ranks) {
             if (rankObj.members.length === 1) {
-                players[id].steamId = rankObj.members[0].name.substring(7);
-                break;
+                players[id].steamId = rankObj.members[0].name.substring(7)
+                break
             }
         }
     }
 
-    return players;
+    return players
 }

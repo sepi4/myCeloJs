@@ -1,7 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect } from 'react'
 
 interface E {
-    key: string;
+    key: string
 }
 
 export default function useEsc(fun: () => void) {
@@ -9,13 +9,14 @@ export default function useEsc(fun: () => void) {
 
     function escPressed(e: E) {
         if (e.key === 'Escape') {
-            fun();
+            fun()
         }
     }
+
     useEffect(() => {
-        window.addEventListener('keydown', escPressed);
+        window.addEventListener('keydown', escPressed)
         return () => {
-            window.removeEventListener('keydown', escPressed);
-        };
-    });
+            window.removeEventListener('keydown', escPressed)
+        }
+    })
 }

@@ -1,8 +1,8 @@
 interface Translations {
     [key: string]: {
-        en: string;
-        ru: string;
-    };
+        en: string
+        ru: string
+    }
 }
 
 const text: Translations = {
@@ -287,6 +287,6 @@ const text: Translations = {
         en: 'last game',
         ru: 'последняя игра',
     },
-};
+}
 
-export default text;
+export default text

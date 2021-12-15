@@ -1,14 +1,14 @@
-import fs from 'fs';
+import fs from 'fs'
 
 export function readSettings(
     fileLocation: string,
     callback: (d: string) => void
 ) {
-    fileLocation = fileLocation.replace(/\\/, '\\\\');
+    fileLocation = fileLocation.replace(/\\/, '\\\\')
     fs.readFile(fileLocation, 'utf-8', (err, data) => {
         if (err) {
-            return;
+            return
         }
-        callback(data);
-    });
+        callback(data)
+    })
 }

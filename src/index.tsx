@@ -1,3 +1,4 @@
+import React from 'react'
 import { render } from 'react-dom'
 import App from './App'
 
@@ -11,7 +12,7 @@ import './index.css'
 
 // let store = createStore(reducer, initialStore)
 
-let root = document.createElement('div')
+const root = document.createElement('div')
 root.id = 'root'
 document.body.appendChild(root)
 

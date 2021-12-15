@@ -1,95 +1,93 @@
-import fs from 'fs';
-import { commonName } from './simpleFunctions';
-import countriesJson from '../../countries.json';
+import fs from 'fs'
+import { commonName } from './simpleFunctions'
+import countriesJson from '../../countries.json'
 // import countries from '../../countries.json';
-import stringWidth from 'string-width';
+import stringWidth from 'string-width'
 
-import { PlayerFromFile, RankingsJson } from '../types';
+import { PlayerFromFile, RankingsJson } from '../types'
 
 interface Countries {
     [key: string]: {
-        ['name']: string;
-        ['alpha-2']: string;
-        ['alpha-3']: string;
-        ['country-code']: string;
-        ['iso_3166-2']: string;
-        ['region']: string;
-        ['sub-region']: string;
-        ['intermediate-region']: string;
-        ['region-code']: string;
-        ['sub-region-code']: string;
-        ['intermediate-region-code']: string;
-    };
+        ['name']: string
+        ['alpha-2']: string
+        ['alpha-3']: string
+        ['country-code']: string
+        ['iso_3166-2']: string
+        ['region']: string
+        ['sub-region']: string
+        ['intermediate-region']: string
+        ['region-code']: string
+        ['sub-region-code']: string
+        ['intermediate-region-code']: string
+    }
 }
 
-const countries: Countries = countriesJson;
+const countries: Countries = countriesJson
 
 function countryText(s: string | undefined, left: boolean, n: number) {
-    let x = '';
+    let x = ''
     if (s && s.length > 0 && countries[s]) {
-        x = countries[s]['alpha-3'];
+        x = countries[s]['alpha-3']
     }
     if (left) {
-        x = x.padStart(n);
+        x = x.padStart(n)
     } else {
-        x = x.padEnd(n);
+        x = x.padEnd(n)
     }
-    return x;
+    return x
 }
 
 function getLimitedWord(str: string, limit: number, padLeft: boolean) {
-    let sum = 0;
-    let newStr = '';
+    let sum = 0
+    let newStr = ''
     for (const x of str) {
-        const sw = stringWidth(x);
+        const sw = stringWidth(x)
         // console.log(x, sw)
         if (sum + sw <= limit) {
-            sum += sw;
-            newStr += x;
+            sum += sw
+            newStr += x
         } else {
-            break;
+            break
         }
     }
     if (padLeft) {
-        newStr = ' '.repeat(limit - sum) + newStr;
-        return newStr;
+        newStr = ' '.repeat(limit - sum) + newStr
+        return newStr
     }
-    return newStr + ' '.repeat(limit - sum);
+    return newStr + ' '.repeat(limit - sum)
 }
 
 export function writeRankings(
     players: PlayerFromFile[],
-    rankingsHorizontal: boolean,
-    from?: string
+    rankingsHorizontal: boolean
 ): void {
     // console.log('writeRankings: players:', players);
 
-    let json: RankingsJson = {
+    const json: RankingsJson = {
         teams: {
             team1: [],
             team2: [],
         },
         horizontal: false,
-    };
+    }
 
-    let rowsLeft = [];
-    let rowsRight = [];
+    const rowsLeft = []
+    const rowsRight = []
     for (let i = 0; i < players.length; i++) {
-        const country = players[i].country ? players[i].country : '';
-        const name = players[i].name;
+        const country = players[i].country ? players[i].country : ''
+        const name = players[i].name
 
-        // prettier-ignore
-        let ranking = players[i].ranking === -1 ? '-' 
-            : players[i].ranking?.toString();
+        let ranking =
+            players[i].ranking === -1 ? '-' : players[i].ranking?.toString()
 
         if (ranking === undefined) {
-            ranking = '-';
+            ranking = '-'
         }
 
-        const faction = players[i].faction;
-        const teamSlot = Number(players[i].teamSlot);
+        const faction = players[i].faction
+        const teamSlot = Number(players[i].teamSlot)
 
-        const maxNameLength = 20;
+        const maxNameLength = 20
         if (rankingsHorizontal) {
             if (teamSlot % 2 === 0) {
                 const text =
@@ -99,8 +97,8 @@ export function writeRankings(
                     ' ' +
                     ranking.padStart(5) +
                     ' ' +
-                    commonName(faction).padStart(5).toUpperCase();
-                rowsLeft.push(text);
+                    commonName(faction).padStart(5).toUpperCase()
+                rowsLeft.push(text)
             } else {
                 const text =
                     commonName(faction).padEnd(5).toUpperCase() +
@@ -109,8 +107,8 @@ export function writeRankings(
                     ' ' +
                     countryText(country, false, 5) +
                     ' ' +
-                    getLimitedWord(name, maxNameLength, false);
-                rowsRight.push(text);
+                    getLimitedWord(name, maxNameLength, false)
+                rowsRight.push(text)
             }
         } else {
             const text =
@@ -120,12 +118,12 @@ export function writeRankings(
                 ' ' +
                 countryText(country, false, 5) +
                 ' ' +
-                getLimitedWord(name, maxNameLength, false);
+                getLimitedWord(name, maxNameLength, false)
 
             if (teamSlot % 2 === 0) {
-                rowsRight.push(text);
+                rowsRight.push(text)
             } else {
-                rowsLeft.push(text);
+                rowsLeft.push(text)
             }
         }
 
@@ -135,31 +133,31 @@ export function writeRankings(
                 ranking,
                 country,
                 faction: commonName(faction),
-            });
+            })
         } else {
             json.teams.team2.push({
                 name,
                 ranking,
                 country,
                 faction: commonName(faction),
-            });
+            })
         }
     }
 
-    json.horizontal = rankingsHorizontal;
+    json.horizontal = rankingsHorizontal
 
-    let text = '';
+    let text = ''
     if (rankingsHorizontal) {
         for (let i = 0; i < rowsLeft.length; i++) {
-            text += rowsLeft[i] + '           ' + rowsRight[i] + '\n';
+            text += rowsLeft[i] + '           ' + rowsRight[i] + '\n'
         }
     } else {
         for (let i = 0; i < rowsLeft.length; i++) {
-            text += rowsLeft[i] + '\n';
+            text += rowsLeft[i] + '\n'
         }
-        text += '\n';
+        text += '\n'
         for (let i = 0; i < rowsRight.length; i++) {
-            text += rowsRight[i] + '\n';
+            text += rowsRight[i] + '\n'
         }
     }
 
@@ -169,18 +167,18 @@ export function writeRankings(
         'utf-8',
         (err) => {
             if (err) {
-                console.log('Error in writing rankings.json file: ', err);
+                console.log('Error in writing rankings.json file: ', err)
             }
         }
-    );
+    )
     fs.writeFile(
         process.cwd() + '/localhostFiles/rankings.txt',
         text,
         'utf-8',
         (err) => {
             if (err) {
-                console.log('Error in writing rankings.txt file: ', err);
+                console.log('Error in writing rankings.txt file: ', err)
             }
         }
-    );
+    )
 }

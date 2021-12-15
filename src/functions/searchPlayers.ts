@@ -1,23 +1,24 @@
-import axios from 'axios';
+import axios from 'axios'
 
-import { RELIC_SERVER_BASE } from '../constants';
+import { RELIC_SERVER_BASE } from '../constants'
 
 type Result = {
-    status: number;
-    data: any;
-};
+    status: number
+    data: any // TODO
+}
 type Player = {
-    id: number;
-    type: number;
-    name: string;
-    members: any[];
-};
+    id: number
+    type: number
+    name: string
+    members: any[] // TODO
+}
 
 export default function searchPlayers(
     searchValue: string,
+    // TODO
     callback: (res: any[]) => void
 ) {
-    const url = `${RELIC_SERVER_BASE}/GetPersonalStat?title=coh2&search=${searchValue}`;
+    const url = `${RELIC_SERVER_BASE}/GetPersonalStat?title=coh2&search=${searchValue}`
 
     axios
         .get(url)
@@ -28,17 +29,17 @@ export default function searchPlayers(
             ) {
                 let playerArr: Player[] = result.data.statGroups.filter(
                     (p: Player) => p.type === 1
-                );
+                )
 
-                playerArr = playerArr.map((p: Player) => p.members[0]);
-                callback(playerArr);
+                playerArr = playerArr.map((p: Player) => p.members[0])
+                callback(playerArr)
             } else {
-                console.log('searchPlayers else:', result);
-                callback([]);
+                console.log('searchPlayers else:', result)
+                callback([])
             }
         })
         .catch((error) => {
-            console.error(error);
-            callback([]);
-        });
+            console.error(error)
+            callback([])
+        })
 }

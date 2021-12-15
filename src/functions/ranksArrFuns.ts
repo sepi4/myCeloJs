@@ -6,8 +6,8 @@ export function ranksArrFilter(
     tableView: boolean,
     showAll: boolean
 ) {
-    let reg = tableView ? /^Team/ : /^./
-    let rankedOnly = !showAll
+    const reg = tableView ? /^Team/ : /^./
+    const rankedOnly = !showAll
     ranksArr = ranksArr
         .filter((r) => r.name.match(reg))
         .filter((r) => (rankedOnly ? r.rank > 0 : true))
@@ -27,8 +27,8 @@ type Sorter = {
  */
 export function ranksArrSort(ranksArr: Rank[], sorter: Sorter) {
     const byTotal = (a: Rank, b: Rank) => {
-        let aTotal = a.wins + a.losses
-        let bTotal = b.wins + b.losses
+        const aTotal = a.wins + a.losses
+        const bTotal = b.wins + b.losses
         return bTotal - aTotal
     }
 

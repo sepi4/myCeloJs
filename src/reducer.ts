@@ -141,14 +141,8 @@ export function sorter(state = initialStore.sorter, action: AnyAction) {
     switch (action.type) {
         case 'SET_SORTER':
             return state.name === action.data.name
-                ? {
-                      name: action.data.name,
-                      reversed: !state.reversed,
-                  }
-                : {
-                      name: action.data.name,
-                      reversed: false,
-                  }
+                ? { name: action.data.name, reversed: !state.reversed }
+                : { name: action.data.name, reversed: false }
         default:
             return state
     }
@@ -195,7 +189,11 @@ export function players(state = initialStore.players, action: AnyAction) {
 export function navButtons(state = initialStore.navButtons, action: AnyAction) {
     switch (action.type) {
         case 'TOGGLE_NAVBUTTON':
-            let obj = copyObj(state)
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore TODO fix
+            // eslint-disable-next-line no-case-declarations
+            const obj = copyObj(state)
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore TODO fix
             obj[action.key] = !obj[action.key]
             localStorage.setItem('navButtons', JSON.stringify(obj))
@@ -205,17 +203,11 @@ export function navButtons(state = initialStore.navButtons, action: AnyAction) {
     }
 }
 
-export function countryFlags(
-    state = initialStore.countryFlags,
-    action: AnyAction
-) {
+export function countryFlags() {
     return initialStore.countryFlags
 }
 
-export function appLocation(
-    state = initialStore.appLocation,
-    action: AnyAction
-) {
+export function appLocation() {
     return initialStore.appLocation
 }
 

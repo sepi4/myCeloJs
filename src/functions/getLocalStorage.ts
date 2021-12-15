@@ -22,9 +22,9 @@ interface NavButtons {
 type Props = LogCheckInterval | AutoLogChecking | Alert | NavButtons;
 
 export default function getLocalStorage({ key, def }: Props) {
-    const str = localStorage.getItem(key);
+    const str = localStorage.getItem(key)
     if (str !== undefined && str !== null) {
-        return JSON.parse(str);
+        return JSON.parse(str)
     }
-    return def;
+    return def
 }

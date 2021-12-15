@@ -3,13 +3,13 @@
         "team1": [
             {
                 "name": "Feebz",
-                "ranking": "154",
+                "ranking": "153",
                 "country": "us",
                 "faction": "sov"
             },
             {
                 "name": "sepi",
-                "ranking": "201",
+                "ranking": "200",
                 "country": "fi",
                 "faction": "sov"
             }
@@ -23,7 +23,7 @@
             },
             {
                 "name": "Liquid Silver",
-                "ranking": "224",
+                "ranking": "233",
                 "country": "au",
                 "faction": "okw"
             }

@@ -15,7 +15,7 @@ images.forEach((x: { default: string }) => {
     countryFlags[x.default.substring(4, 6)] = x.default
 })
 
-let initialStore: Store = {
+const initialStore: Store = {
     settingsView: false,
 
     settings: null,

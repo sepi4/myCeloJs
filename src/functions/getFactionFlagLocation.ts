@@ -1,27 +1,28 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 // @ts-ignore
-import flagOkw from '../../img/okw.png';
+import flagOkw from '../../img/okw.png'
 // @ts-ignore
-import flagSov from '../../img/sov.png';
+import flagSov from '../../img/sov.png'
 // @ts-ignore
-import flagUk from '../../img/uk.png';
+import flagUk from '../../img/uk.png'
 // @ts-ignore
-import flagUsa from '../../img/usa.png';
+import flagUsa from '../../img/usa.png'
 // @ts-ignore
-import flagWer from '../../img/wer.png';
+import flagWer from '../../img/wer.png'
 
-import { FactionName } from '../types';
+import { FactionName } from '../types'
 
 export function getFactionFlagLocation(code: FactionName) {
     switch (code) {
         case 'okw':
-            return flagOkw;
+            return flagOkw
         case 'sov':
-            return flagSov;
+            return flagSov
         case 'uk':
-            return flagUk;
+            return flagUk
         case 'usa':
-            return flagUsa;
+            return flagUsa
         case 'wer':
-            return flagWer;
+            return flagWer
     }
 }

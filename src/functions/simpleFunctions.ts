@@ -1,51 +1,52 @@
-import { PlayerFromFile } from '../types';
+import { PlayerFromFile } from '../types'
 
 export function commonName(str: string): string {
     switch (str) {
         case 'british':
-            return 'uk';
+            return 'uk'
         case 'aef':
-            return 'usa';
+            return 'usa'
         case 'soviet':
-            return 'sov';
+            return 'sov'
         case 'west_german':
-            return 'okw';
+            return 'okw'
         case 'german':
-            return 'wer';
+            return 'wer'
         default:
-            return '?????';
+            return '?????'
     }
 }
 
 interface Arr {
     ranks: [
         {
-            wins: number;
-            losses: number;
+            wins: number
+            losses: number
         }
-    ];
+    ]
 }
 
 export function getTotalGames(arr: Arr): number {
-    let sum = 0;
+    let sum = 0
     for (const rankObj of arr.ranks) {
-        sum += rankObj.wins + rankObj.losses;
+        sum += rankObj.wins + rankObj.losses
     }
-    return sum;
+    return sum
 }
 
 export function separateTeams(
     arr: { teamSlot: number }[]
 ): [PlayerFromFile[], PlayerFromFile[]] {
-    let teams: [any[], any[]] = [[], []];
-    for (let obj of arr) {
+    // TODO FIX
+    const teams: [any[], any[]] = [[], []]
+    for (const obj of arr) {
         if (obj.teamSlot === 0) {
-            teams[0].push(obj);
+            teams[0].push(obj)
         } else {
-            teams[1].push(obj);
+            teams[1].push(obj)
         }
     }
-    return teams;
+    return teams
 }
 
 /**
@@ -54,58 +55,58 @@ export function separateTeams(
  * @returns Copy
  */
 export function copyObj<T>(obj: T): T {
-    return JSON.parse(JSON.stringify(obj));
+    return JSON.parse(JSON.stringify(obj))
 }
 
 export function formatToNums(arr: PlayerFromFile[]): PlayerFromFile[] {
-    for (let obj of arr) {
+    for (const obj of arr) {
         if (obj.profileId && !isNaN(obj.profileId)) {
-            obj.profileId = Number(obj.profileId);
+            obj.profileId = Number(obj.profileId)
         }
         if (
             obj.ranking &&
             typeof obj.ranking === 'number' &&
             !isNaN(obj.ranking)
         ) {
-            obj.ranking = Number(obj.ranking);
+            obj.ranking = Number(obj.ranking)
         }
         if (obj.teamSlot && !isNaN(obj.teamSlot)) {
-            obj.teamSlot = Number(obj.teamSlot);
+            obj.teamSlot = Number(obj.teamSlot)
         }
     }
-    return arr;
+    return arr
 }
 
 export function getFactionName(x: string): string {
     switch (x) {
         case 'soviet':
-            return 'Soviet';
+            return 'Soviet'
         case 'german':
-            return 'German';
+            return 'German'
         case 'aef':
-            return 'AEF';
+            return 'AEF'
         case 'british':
-            return 'British';
+            return 'British'
         case 'west_german':
-            return 'WestGerman';
+            return 'WestGerman'
         default:
-            return '';
+            return ''
     }
 }
 
 export function getFactionById(id: number): string {
     switch (id) {
         case 0:
-            return 'wer';
+            return 'wer'
         case 1:
-            return 'sov';
+            return 'sov'
         case 2:
-            return 'okw';
+            return 'okw'
         case 3:
-            return 'usa';
+            return 'usa'
         case 4:
-            return 'uk';
+            return 'uk'
         default:
-            return '';
+            return ''
     }
 }

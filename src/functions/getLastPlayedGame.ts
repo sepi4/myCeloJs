@@ -1,4 +1,4 @@
-import { LeaderboardStat, Member } from '../types';
+import { LeaderboardStat, Member } from '../types'
 
 type Rank = {
     name: string;
@@ -11,13 +11,13 @@ type PlayerData = {
 };
 
 export default function getLastPlayedGame(playerData: PlayerData) {
-    let last;
+    let last
     for (const rankObj of playerData.ranks) {
         if (rankObj.lastmatchdate) {
             if (last === undefined || last < rankObj.lastmatchdate) {
-                last = rankObj.lastmatchdate;
+                last = rankObj.lastmatchdate
             }
         }
     }
-    return last;
+    return last
 }

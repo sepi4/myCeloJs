@@ -1,5 +1,5 @@
-import { writeRankings } from './writeRankings';
-import { PlayerFromFile, Store } from '../types';
+import { writeRankings } from './writeRankings'
+import { PlayerFromFile, Store } from '../types'
 
 interface Props {
     data: PlayerFromFile[];
@@ -24,15 +24,15 @@ export default function checkLogData({
         dispatch({
             type: 'SET_NEW_PLAYERS',
             data,
-        });
+        })
         if (state.settings) {
             writeRankings(
                 data,
                 state.settings.rankingsHorizontal,
                 'checkLogData'
-            );
+            )
             if (playAudio && data.length > 0) {
-                playAudio();
+                playAudio()
             }
         }
     }
