@@ -1,5 +1,5 @@
-import fs from 'fs'
-// import { promises as fs } from 'fs'
+// import fs from 'fs/promises'
+import { promises as fs } from 'fs'
 
 import { getPlayersInfo } from './getPlayersInfo'
 import { Player } from '../../types'
@@ -63,16 +63,13 @@ export function switchTeams(info: Player[], currentUser: string): Player[] {
     return info
 }
 
-export function readLog(
-    fileLocation: string,
-    callback: (info: Player[]) => void
+export async function readLog(
+    fileLocation: string
+    // callback: (info: Player[]) => void
 ) {
     fileLocation = fileLocation.replace(/\\/, '\\\\')
-    fs.readFile(fileLocation, 'utf-8', (err, data) => {
-        if (err) {
-            console.log('Error in reading logfile: ', err)
-        }
-
+    try {
+        const data = await fs.readFile(fileLocation, 'utf-8')
         const lines = data.split('\n')
 
         const currentUserAlias: string | undefined = getCurrentUserAlias(lines)
@@ -83,13 +80,17 @@ export function readLog(
         if (currentUserAlias) {
             psInfo = switchTeams(psInfo, currentUserAlias)
         }
-        callback(psInfo)
-        // return new Promise<Player[]>((resolve, reject) => {
-        //     if (psInfo) {
-        //         resolve(psInfo)
-        //     } else {
-        //         reject()
-        //     }
-        // })
-    })
+        // callback(psInfo)
+        return new Promise<Player[]>((resolve, reject) => {
+            resolve(psInfo)
+            // if (psInfo) {
+            // } else {
+            //     reject()
+            // }
+        })
+    } catch (err) {
+        if (err) {
+            console.log('Error in reading logfile: ', err)
+        }
+    }
 }

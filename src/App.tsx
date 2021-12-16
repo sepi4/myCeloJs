@@ -74,8 +74,13 @@ function App() {
             }
 
             if (state.settings && state.settings.logLocation) {
-                readLog(state.settings.logLocation, (data) => {
-                    checkLogData({ data, state, dispatch })
+                // readLog(state.settings.logLocation, (data) => {
+                //     checkLogData({ data, state, dispatch })
+                // })
+                readLog(state.settings.logLocation).then((data) => {
+                    if (data) {
+                        checkLogData({ data, state, dispatch })
+                    }
                 })
             }
         } else if (state.extraInfo === null && state.players.length > 0) {
@@ -106,11 +111,13 @@ function App() {
 
         const intervalId = setInterval(() => {
             if (state.settings && state.settings.logLocation) {
-                readLog(state.settings.logLocation, (data) => {
-                    if (state.alert) {
-                        checkLogData({ data, state, dispatch, playAudio })
-                    } else {
-                        checkLogData({ data, state, dispatch })
+                readLog(state.settings.logLocation).then((data) => {
+                    if (data) {
+                        if (state.alert) {
+                            checkLogData({ data, state, dispatch, playAudio })
+                        } else {
+                            checkLogData({ data, state, dispatch })
+                        }
                     }
                 })
             }
@@ -124,7 +131,9 @@ function App() {
             return
         }
         if (state.settings && state.settings.logLocation) {
-            readLog(state.settings.logLocation, writeNewRankingsFile)
+            readLog(state.settings.logLocation).then((data) => {
+                writeNewRankingsFile(data)
+            })
         }
     }, [state.settings])
 
@@ -133,8 +142,11 @@ function App() {
             return
         }
         if (state.settings && state.settings.logLocation) {
-            readLog(state.settings.logLocation, (data) => {
-                checkLogData({ data, state, dispatch })
+            readLog(state.settings.logLocation).then((data) => {
+                if (data) {
+                    // kissa
+                    checkLogData({ data, state, dispatch })
+                }
             })
         }
     }
