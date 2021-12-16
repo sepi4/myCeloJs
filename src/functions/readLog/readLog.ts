@@ -1,75 +1,95 @@
-import fs from 'fs';
+import fs from 'fs'
+// import { promises as fs } from 'fs'
 
-import { getPlayersInfo } from './getPlayersInfo';
-import { Player } from '../../types';
+import { getPlayersInfo } from './getPlayersInfo'
+import { Player } from '../../types'
 
-export function getCurrentUser(lines: string[]) {
+export function getCurrentUserAlias(lines: string[]) {
     for (let i = 0; i < lines.length; i++) {
-        const row = lines[i];
-        const m = row.match(/GAME -- Current user name is \[(.+)\]/);
+        const row = lines[i]
+        const m = row.match(/GAME -- Current user name is \[(.+)\]/)
         if (m) {
-            return m[1];
+            return m[1]
         }
     }
 }
 
 export function getLines(lines: string[]) {
-    let arr = [];
-    let stop = false;
-    let wasGame = false;
-    let wasNone = false;
+    const arr: string[] = []
+    let stop = false
+    let wasGame = false
+    let wasNone = false
 
     for (let i = lines.length - 1; i >= 0; i--) {
-        const row = lines[i];
+        const row = lines[i]
         if (row.match('GAME --.* Player:')) {
-            wasGame = true;
+            wasGame = true
             if (wasGame && wasNone) {
-                break;
+                break
             }
-            arr.push(row);
+            arr.push(row)
         } else if (row.match('Match Started.*steam.*slot.*ranking')) {
-            stop = true;
-            arr.push(row);
+            stop = true
+            arr.push(row)
         } else if (stop) {
-            break;
+            break
         } else if (wasGame) {
-            wasNone = true;
+            wasNone = true
         }
     }
-    return arr;
+
+    return arr
 }
 
-export function switchTeams(info: Player[], currentUser: string) {
-    const arr = info.filter((p) => p.name === currentUser && p.profileId);
+/**
+ * Switch players so that current player is in first team
+ * @param info players info arr
+ * @param currentUser current user
+ * @returns modified players info arr
+ */
+export function switchTeams(info: Player[], currentUser: string): Player[] {
+    const currentUserTeam: Player[] = info.filter(
+        (p) => p.name === currentUser && p.profileId
+    )
 
-    if (arr.length !== 1 || arr[0].teamSlot === '0') {
-        return info;
+    if (currentUserTeam.length !== 1 || currentUserTeam[0].teamSlot === 0) {
+        return info
     }
 
-    for (let p of info) {
-        p.teamSlot = p.teamSlot === '1' ? '0' : '1';
+    for (const p of info) {
+        p.teamSlot = p.teamSlot === 1 ? 0 : 1
     }
 
-    return info;
+    return info
 }
 
-// TODO, fix any
-export function readLog(fileLocation: string, callback: (info: any) => void) {
-    fileLocation = fileLocation.replace(/\\/, '\\\\');
+export function readLog(
+    fileLocation: string,
+    callback: (info: Player[]) => void
+) {
+    fileLocation = fileLocation.replace(/\\/, '\\\\')
     fs.readFile(fileLocation, 'utf-8', (err, data) => {
         if (err) {
-            console.log('Error in reading logfile: ', err);
+            console.log('Error in reading logfile: ', err)
         }
 
-        let lines = data.split('\n');
+        const lines = data.split('\n')
 
-        let currentUser = getCurrentUser(lines);
-        let arr = getLines(lines);
-        let info = getPlayersInfo(arr);
+        const currentUserAlias: string | undefined = getCurrentUserAlias(lines)
 
-        if (currentUser) {
-            info = switchTeams(info, currentUser);
+        const arr: string[] = getLines(lines)
+        let psInfo = getPlayersInfo(arr)
+
+        if (currentUserAlias) {
+            psInfo = switchTeams(psInfo, currentUserAlias)
         }
-        callback(info);
-    });
+        callback(psInfo)
+        // return new Promise<Player[]>((resolve, reject) => {
+        //     if (psInfo) {
+        //         resolve(psInfo)
+        //     } else {
+        //         reject()
+        //     }
+        // })
+    })
 }

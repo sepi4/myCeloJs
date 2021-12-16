@@ -1,4 +1,4 @@
-import { getCurrentUser, getLines } from './readLog'
+import { getCurrentUserAlias, getLines } from './readLog'
 
 describe('getCurrentUser: ', () => {
     test('getCurrentUser return correct username', () => {
@@ -8,7 +8,7 @@ describe('getCurrentUser: ', () => {
 03:49:54.75   GAME -- Company Of Heroes 2, Build [4.0.0.23887], Language [english]
 `
         let lines = txt.split('\n')
-        let result = getCurrentUser(lines)
+        let result = getCurrentUserAlias(lines)
         // expect(result).toMatch(/^sepi$/)
         expect(result).toBe('sepi')
     })
@@ -20,14 +20,11 @@ describe('getCurrentUser: ', () => {
 03:49:54.75   GAME -- Company Of Heroes 2, Build [4.0.0.23887], Language [english]
 `
         let lines = txt.split('\n')
-        let result = getCurrentUser(lines)
+        let result = getCurrentUserAlias(lines)
         // expect(result).toMatch(/^\[sepi kissa \]$/)
-        expect(result).toBe('[sepi kissa \]')
+        expect(result).toBe('[sepi kissa ]')
     })
-
 })
-
-
 
 describe('getLines:', () => {
     test('getLines should get correct txt lines', () => {
@@ -45,7 +42,5 @@ describe('getLines:', () => {
             '03:50:51.90   GAME -- AI Player: 1 CPU - Easy -1 1 aef',
             '03:50:51.90   GAME -- Human Player: 0 sepi 580525 0 west_german',
         ])
-
     })
-
 })

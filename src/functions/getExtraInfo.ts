@@ -11,7 +11,7 @@ import { PlayerFromFile } from '../types'
 export function getExtraInfo(
     players: PlayerFromFile[],
     callback: (a: any, b?: any) => void, // TODO remove any
-    forPlayerCard: boolean
+    forPlayerCard?: boolean
 ) {
     // TODO - get rid of unnessary calls to server on app start
 

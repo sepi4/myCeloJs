@@ -1,0 +1,621 @@
+{
+    "result": { "code": 0, "message": "SUCCESS" },
+    "leaderboards": [
+        {
+            "id": 0,
+            "name": "CustomGerman",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 0, "statgroup_type": 1, "race_id": 0 },
+                { "matchtype_id": 22, "statgroup_type": 1, "race_id": 0 }
+            ]
+        },
+        {
+            "id": 1,
+            "name": "CustomSoviet",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 0, "statgroup_type": 1, "race_id": 1 },
+                { "matchtype_id": 22, "statgroup_type": 1, "race_id": 1 }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "CustomWestGerman",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 0, "statgroup_type": 1, "race_id": 2 },
+                { "matchtype_id": 22, "statgroup_type": 1, "race_id": 2 }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "CustomAEF",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 0, "statgroup_type": 1, "race_id": 3 },
+                { "matchtype_id": 22, "statgroup_type": 1, "race_id": 3 }
+            ]
+        },
+        {
+            "id": 4,
+            "name": "1v1German",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 1, "statgroup_type": 1, "race_id": 0 }
+            ]
+        },
+        {
+            "id": 5,
+            "name": "1v1Soviet",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 1, "statgroup_type": 1, "race_id": 1 }
+            ]
+        },
+        {
+            "id": 6,
+            "name": "1v1WestGerman",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 1, "statgroup_type": 1, "race_id": 2 }
+            ]
+        },
+        {
+            "id": 7,
+            "name": "1v1AEF",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 1, "statgroup_type": 1, "race_id": 3 }
+            ]
+        },
+        {
+            "id": 8,
+            "name": "2v2German",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 2, "statgroup_type": 1, "race_id": 0 }
+            ]
+        },
+        {
+            "id": 9,
+            "name": "2v2Soviet",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 2, "statgroup_type": 1, "race_id": 1 }
+            ]
+        },
+        {
+            "id": 10,
+            "name": "2v2WestGerman",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 2, "statgroup_type": 1, "race_id": 2 }
+            ]
+        },
+        {
+            "id": 11,
+            "name": "2v2AEF",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 2, "statgroup_type": 1, "race_id": 3 }
+            ]
+        },
+        {
+            "id": 12,
+            "name": "3v3German",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 3, "statgroup_type": 1, "race_id": 0 }
+            ]
+        },
+        {
+            "id": 13,
+            "name": "3v3Soviet",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 3, "statgroup_type": 1, "race_id": 1 }
+            ]
+        },
+        {
+            "id": 14,
+            "name": "3v3WestGerman",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 3, "statgroup_type": 1, "race_id": 2 }
+            ]
+        },
+        {
+            "id": 15,
+            "name": "3v3AEF",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 3, "statgroup_type": 1, "race_id": 3 }
+            ]
+        },
+        {
+            "id": 16,
+            "name": "4v4German",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 4, "statgroup_type": 1, "race_id": 0 }
+            ]
+        },
+        {
+            "id": 17,
+            "name": "4v4Soviet",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 4, "statgroup_type": 1, "race_id": 1 }
+            ]
+        },
+        {
+            "id": 18,
+            "name": "4v4WestGerman",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 4, "statgroup_type": 1, "race_id": 2 }
+            ]
+        },
+        {
+            "id": 19,
+            "name": "4v4AEF",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 4, "statgroup_type": 1, "race_id": 3 }
+            ]
+        },
+        {
+            "id": 20,
+            "name": "TeamOf2Axis",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 2, "statgroup_type": 2, "race_id": 0 },
+                { "matchtype_id": 2, "statgroup_type": 2, "race_id": 2 },
+                { "matchtype_id": 3, "statgroup_type": 2, "race_id": 0 },
+                { "matchtype_id": 3, "statgroup_type": 2, "race_id": 2 },
+                { "matchtype_id": 4, "statgroup_type": 2, "race_id": 0 },
+                { "matchtype_id": 4, "statgroup_type": 2, "race_id": 2 }
+            ]
+        },
+        {
+            "id": 21,
+            "name": "TeamOf2Allies",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 2, "statgroup_type": 2, "race_id": 1 },
+                { "matchtype_id": 2, "statgroup_type": 2, "race_id": 3 },
+                { "matchtype_id": 2, "statgroup_type": 2, "race_id": 4 },
+                { "matchtype_id": 3, "statgroup_type": 2, "race_id": 1 },
+                { "matchtype_id": 3, "statgroup_type": 2, "race_id": 3 },
+                { "matchtype_id": 3, "statgroup_type": 2, "race_id": 4 },
+                { "matchtype_id": 4, "statgroup_type": 2, "race_id": 1 },
+                { "matchtype_id": 4, "statgroup_type": 2, "race_id": 3 },
+                { "matchtype_id": 4, "statgroup_type": 2, "race_id": 4 }
+            ]
+        },
+        {
+            "id": 22,
+            "name": "TeamOf3Axis",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 3, "statgroup_type": 3, "race_id": 0 },
+                { "matchtype_id": 3, "statgroup_type": 3, "race_id": 2 },
+                { "matchtype_id": 4, "statgroup_type": 3, "race_id": 0 },
+                { "matchtype_id": 4, "statgroup_type": 3, "race_id": 2 }
+            ]
+        },
+        {
+            "id": 23,
+            "name": "TeamOf3Allies",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 3, "statgroup_type": 3, "race_id": 1 },
+                { "matchtype_id": 3, "statgroup_type": 3, "race_id": 3 },
+                { "matchtype_id": 3, "statgroup_type": 3, "race_id": 4 },
+                { "matchtype_id": 4, "statgroup_type": 3, "race_id": 1 },
+                { "matchtype_id": 4, "statgroup_type": 3, "race_id": 3 },
+                { "matchtype_id": 4, "statgroup_type": 3, "race_id": 4 }
+            ]
+        },
+        {
+            "id": 24,
+            "name": "TeamOf4Axis",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 4, "statgroup_type": 4, "race_id": 0 },
+                { "matchtype_id": 4, "statgroup_type": 4, "race_id": 2 }
+            ]
+        },
+        {
+            "id": 25,
+            "name": "TeamOf4Allies",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 4, "statgroup_type": 4, "race_id": 1 },
+                { "matchtype_id": 4, "statgroup_type": 4, "race_id": 3 },
+                { "matchtype_id": 4, "statgroup_type": 4, "race_id": 4 }
+            ]
+        },
+        {
+            "id": 26,
+            "name": "2v2AIEasyAxis",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 5, "statgroup_type": 0, "race_id": 0 },
+                { "matchtype_id": 5, "statgroup_type": 0, "race_id": 2 }
+            ]
+        },
+        {
+            "id": 27,
+            "name": "2v2AIEasyAllies",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 5, "statgroup_type": 0, "race_id": 1 },
+                { "matchtype_id": 5, "statgroup_type": 0, "race_id": 3 },
+                { "matchtype_id": 5, "statgroup_type": 0, "race_id": 4 }
+            ]
+        },
+        {
+            "id": 28,
+            "name": "2v2AIMediumAxis",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 6, "statgroup_type": 0, "race_id": 0 },
+                { "matchtype_id": 6, "statgroup_type": 0, "race_id": 2 }
+            ]
+        },
+        {
+            "id": 29,
+            "name": "2v2AIMediumAllies",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 6, "statgroup_type": 0, "race_id": 1 },
+                { "matchtype_id": 6, "statgroup_type": 0, "race_id": 3 },
+                { "matchtype_id": 6, "statgroup_type": 0, "race_id": 4 }
+            ]
+        },
+        {
+            "id": 30,
+            "name": "2v2AIHardAxis",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 7, "statgroup_type": 0, "race_id": 0 },
+                { "matchtype_id": 7, "statgroup_type": 0, "race_id": 2 }
+            ]
+        },
+        {
+            "id": 31,
+            "name": "2v2AIHardAllies",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 7, "statgroup_type": 0, "race_id": 1 },
+                { "matchtype_id": 7, "statgroup_type": 0, "race_id": 3 },
+                { "matchtype_id": 7, "statgroup_type": 0, "race_id": 4 }
+            ]
+        },
+        {
+            "id": 32,
+            "name": "2v2AIExpertAxis",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 8, "statgroup_type": 0, "race_id": 0 },
+                { "matchtype_id": 8, "statgroup_type": 0, "race_id": 2 }
+            ]
+        },
+        {
+            "id": 33,
+            "name": "2v2AIExpertAllies",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 8, "statgroup_type": 0, "race_id": 1 },
+                { "matchtype_id": 8, "statgroup_type": 0, "race_id": 3 },
+                { "matchtype_id": 8, "statgroup_type": 0, "race_id": 4 }
+            ]
+        },
+        {
+            "id": 34,
+            "name": "3v3AIEasyAxis",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 9, "statgroup_type": 0, "race_id": 0 },
+                { "matchtype_id": 9, "statgroup_type": 0, "race_id": 2 }
+            ]
+        },
+        {
+            "id": 35,
+            "name": "3v3AIEasyAllies",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 9, "statgroup_type": 0, "race_id": 1 },
+                { "matchtype_id": 9, "statgroup_type": 0, "race_id": 3 },
+                { "matchtype_id": 9, "statgroup_type": 0, "race_id": 4 }
+            ]
+        },
+        {
+            "id": 36,
+            "name": "3v3AIMediumAxis",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 10, "statgroup_type": 0, "race_id": 0 },
+                { "matchtype_id": 10, "statgroup_type": 0, "race_id": 2 }
+            ]
+        },
+        {
+            "id": 37,
+            "name": "3v3AIMediumAllies",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 10, "statgroup_type": 0, "race_id": 1 },
+                { "matchtype_id": 10, "statgroup_type": 0, "race_id": 3 },
+                { "matchtype_id": 10, "statgroup_type": 0, "race_id": 4 }
+            ]
+        },
+        {
+            "id": 38,
+            "name": "3v3AIHardAxis",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 11, "statgroup_type": 0, "race_id": 0 },
+                { "matchtype_id": 11, "statgroup_type": 0, "race_id": 2 }
+            ]
+        },
+        {
+            "id": 39,
+            "name": "3v3AIHardAllies",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 11, "statgroup_type": 0, "race_id": 1 },
+                { "matchtype_id": 11, "statgroup_type": 0, "race_id": 3 },
+                { "matchtype_id": 11, "statgroup_type": 0, "race_id": 4 }
+            ]
+        },
+        {
+            "id": 40,
+            "name": "3v3AIExpertAxis",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 12, "statgroup_type": 0, "race_id": 0 },
+                { "matchtype_id": 12, "statgroup_type": 0, "race_id": 2 }
+            ]
+        },
+        {
+            "id": 41,
+            "name": "3v3AIExpertAllies",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 12, "statgroup_type": 0, "race_id": 1 },
+                { "matchtype_id": 12, "statgroup_type": 0, "race_id": 3 },
+                { "matchtype_id": 12, "statgroup_type": 0, "race_id": 4 }
+            ]
+        },
+        {
+            "id": 42,
+            "name": "4v4AIEasyAxis",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 13, "statgroup_type": 0, "race_id": 0 },
+                { "matchtype_id": 13, "statgroup_type": 0, "race_id": 2 }
+            ]
+        },
+        {
+            "id": 43,
+            "name": "4v4AIEasyAllies",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 13, "statgroup_type": 0, "race_id": 1 },
+                { "matchtype_id": 13, "statgroup_type": 0, "race_id": 3 },
+                { "matchtype_id": 13, "statgroup_type": 0, "race_id": 4 }
+            ]
+        },
+        {
+            "id": 44,
+            "name": "4v4AIMediumAxis",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 14, "statgroup_type": 0, "race_id": 0 },
+                { "matchtype_id": 14, "statgroup_type": 0, "race_id": 2 }
+            ]
+        },
+        {
+            "id": 45,
+            "name": "4v4AIMediumAllies",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 14, "statgroup_type": 0, "race_id": 1 },
+                { "matchtype_id": 14, "statgroup_type": 0, "race_id": 3 },
+                { "matchtype_id": 14, "statgroup_type": 0, "race_id": 4 }
+            ]
+        },
+        {
+            "id": 46,
+            "name": "4v4AIHardAxis",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 15, "statgroup_type": 0, "race_id": 0 },
+                { "matchtype_id": 15, "statgroup_type": 0, "race_id": 2 }
+            ]
+        },
+        {
+            "id": 47,
+            "name": "4v4AIHardAllies",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 15, "statgroup_type": 0, "race_id": 1 },
+                { "matchtype_id": 15, "statgroup_type": 0, "race_id": 3 },
+                { "matchtype_id": 15, "statgroup_type": 0, "race_id": 4 }
+            ]
+        },
+        {
+            "id": 48,
+            "name": "4v4AIExpertAxis",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 16, "statgroup_type": 0, "race_id": 0 },
+                { "matchtype_id": 16, "statgroup_type": 0, "race_id": 2 }
+            ]
+        },
+        {
+            "id": 49,
+            "name": "4v4AIExpertAllies",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 16, "statgroup_type": 0, "race_id": 1 },
+                { "matchtype_id": 16, "statgroup_type": 0, "race_id": 3 },
+                { "matchtype_id": 16, "statgroup_type": 0, "race_id": 4 }
+            ]
+        },
+        {
+            "id": 50,
+            "name": "CustomBritish",
+            "isranked": 0,
+            "leaderboardmap": [
+                { "matchtype_id": 0, "statgroup_type": 1, "race_id": 4 },
+                { "matchtype_id": 22, "statgroup_type": 1, "race_id": 4 }
+            ]
+        },
+        {
+            "id": 51,
+            "name": "1v1British",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 1, "statgroup_type": 1, "race_id": 4 }
+            ]
+        },
+        {
+            "id": 52,
+            "name": "2v2British",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 2, "statgroup_type": 1, "race_id": 4 }
+            ]
+        },
+        {
+            "id": 53,
+            "name": "3v3British",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 3, "statgroup_type": 1, "race_id": 4 }
+            ]
+        },
+        {
+            "id": 54,
+            "name": "4v4British",
+            "isranked": 1,
+            "leaderboardmap": [
+                { "matchtype_id": 4, "statgroup_type": 1, "race_id": 4 }
+            ]
+        }
+    ],
+    "matchTypes": [
+        {
+            "id": 0,
+            "name": "CUSTOM",
+            "locstringid": 11077279,
+            "localizedName": "Friends Games"
+        },
+        {
+            "id": 1,
+            "name": "1V1",
+            "locstringid": 11038958,
+            "localizedName": "1v1"
+        },
+        {
+            "id": 2,
+            "name": "2V2",
+            "locstringid": 11038959,
+            "localizedName": "2v2"
+        },
+        {
+            "id": 3,
+            "name": "3V3",
+            "locstringid": 11038960,
+            "localizedName": "3v3"
+        },
+        {
+            "id": 4,
+            "name": "4V4",
+            "locstringid": 11038961,
+            "localizedName": "4v4"
+        },
+        { "id": 5, "name": "2V2_AI_EASY", "locstringid": -1 },
+        { "id": 6, "name": "2V2_AI_MEDIUM", "locstringid": -1 },
+        { "id": 7, "name": "2V2_AI_HARD", "locstringid": -1 },
+        { "id": 8, "name": "2V2_AI_EXPERT", "locstringid": -1 },
+        { "id": 9, "name": "3V3_AI_EASY", "locstringid": -1 },
+        { "id": 10, "name": "3V3_AI_MEDIUM", "locstringid": -1 },
+        { "id": 11, "name": "3V3_AI_HARD", "locstringid": -1 },
+        { "id": 12, "name": "3V3_AI_EXPERT", "locstringid": -1 },
+        { "id": 13, "name": "4V4_AI_EASY", "locstringid": -1 },
+        { "id": 14, "name": "4V4_AI_MEDIUM", "locstringid": -1 },
+        { "id": 15, "name": "4V4_AI_HARD", "locstringid": -1 },
+        { "id": 16, "name": "4V4_AI_EXPERT", "locstringid": -1 },
+        {
+            "id": 22,
+            "name": "CUSTOM_PUBLIC",
+            "locstringid": 11077280,
+            "localizedName": "Custom Games"
+        }
+    ],
+    "races": [
+        {
+            "id": 0,
+            "name": "German",
+            "faction_id": 1,
+            "locstringid": 11006986,
+            "localizedName": "Wehrmacht"
+        },
+        {
+            "id": 1,
+            "name": "Soviet",
+            "faction_id": 0,
+            "locstringid": 11049352,
+            "localizedName": "Soviet"
+        },
+        {
+            "id": 2,
+            "name": "WGerman",
+            "faction_id": 1,
+            "locstringid": 11073205,
+            "localizedName": "Oberkommando West"
+        },
+        {
+            "id": 3,
+            "name": "AEF",
+            "faction_id": 0,
+            "locstringid": 11073202,
+            "localizedName": "US Forces"
+        },
+        {
+            "id": 4,
+            "name": "British",
+            "faction_id": 0,
+            "locstringid": 11078364,
+            "localizedName": "British Forces"
+        }
+    ],
+    "factions": [
+        {
+            "id": 0,
+            "name": "Allies",
+            "locstringid": 11076369,
+            "localizedName": "Allies"
+        },
+        {
+            "id": 1,
+            "name": "Axis",
+            "locstringid": 11076370,
+            "localizedName": "Axis"
+        }
+    ],
+    "leaderboardRegions": [
+        { "id": 0, "name": "Europe", "locstringid": 11084172 },
+        { "id": 1, "name": "Middle East", "locstringid": 11084173 },
+        { "id": 2, "name": "Asia", "locstringid": 11083946 },
+        { "id": 3, "name": "North America", "locstringid": 11083948 },
+        { "id": 4, "name": "South America", "locstringid": 11083949 },
+        { "id": 5, "name": "Oceania", "locstringid": 11083950 },
+        { "id": 6, "name": "Africa", "locstringid": 11083951 },
+        { "id": 7, "name": "Unknown", "locstringid": 11083952 }
+    ]
+}

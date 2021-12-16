@@ -2,16 +2,10 @@ import { writeRankings } from './writeRankings'
 import { PlayerFromFile, Store } from '../types'
 
 interface Props {
-    data: PlayerFromFile[];
-    state: Store;
-    dispatch: ({
-        type,
-        data,
-    }: {
-        type: string;
-        data: PlayerFromFile[];
-    }) => void;
-    playAudio?: () => void;
+    data: PlayerFromFile[]
+    state: Store
+    dispatch: ({ type, data }: { type: string; data: PlayerFromFile[] }) => void
+    playAudio?: () => void
 }
 
 export default function checkLogData({
@@ -26,11 +20,7 @@ export default function checkLogData({
             data,
         })
         if (state.settings) {
-            writeRankings(
-                data,
-                state.settings.rankingsHorizontal,
-                'checkLogData'
-            )
+            writeRankings(data, state.settings.rankingsHorizontal)
             if (playAudio && data.length > 0) {
                 playAudio()
             }

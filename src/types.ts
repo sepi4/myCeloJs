@@ -1,8 +1,3 @@
-// declare module '*.module.css' {
-//     const classes: { [key: string]: string };
-//     export default classes;
-// }
-
 type Team = {
     country?: string
     faction: string
@@ -25,14 +20,13 @@ export interface RankingsJson {
  * Used readlog
  */
 export interface Player {
-    name: string
-    teamSlot: string
     faction: string
+    id?: number
+    name: string
+    profileId?: number
+    ranking?: number
+    teamSlot: number
     time: string
-    profileId?: string
-
-    id?: string
-    ranking?: string
 }
 
 /**

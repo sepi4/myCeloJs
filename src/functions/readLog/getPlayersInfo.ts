@@ -1,94 +1,68 @@
-import { Player } from '../../types';
-
+import { Player } from '../../types'
+/**
+ *
+ * // example row
+ * // 21:01:16.90   GAME -- Human Player: 2 sepi 580525 0 soviet
+ *
+ * @param arr string arr from warnings.log with players data
+ * @returns  TODO
+ */
 export function getPlayersInfo(arr: string[]): Player[] {
-    let time: string | undefined;
-    arr = arr.map((row) => {
+    console.log('arr:', arr)
+    let time: string | undefined
+
+    const playersData: string[] = arr.map((row) => {
         if (row.match(/GAME --.* Player:/)) {
-            let splited = row.split(':');
+            const splitted = row.split(':')
             if (time === undefined) {
                 time = [
-                    splited[0],
-                    splited[1],
-                    splited[2].split('   ')[0],
-                ].join(':');
+                    splitted[0],
+                    splitted[1],
+                    splitted[2].split('   ')[0],
+                ].join(':')
             }
 
-            return splited.slice(3).join(':').trim();
+            return splitted.slice(3).join(':').trim()
         } else {
-            let splited = row.split(':');
-            return splited[splited.length - 1].trim();
+            const splited = row.split(':')
+            return splited[splited.length - 1].trim()
         }
-    });
+    })
 
-    type SteamId = {
-        id: string;
-        slot: string;
-        ranking: string;
-        time: string | undefined;
-    };
+    const players: {
+        [key: string]: Player
+    } = {}
 
-    let steamIds: {
-        [key: string]: SteamId;
-    } = {};
+    for (const pData of playersData) {
+        const playerArr: string[] = pData.split(' ')
+        const slot: string | undefined = playerArr.shift()
 
-    let players: {
-        [key: string]: Player;
-    } = {};
-    for (let row of arr) {
-        let idMatch = row.match(/^.*\/steam\/(\d+).+/);
-        let id: string;
-        let slotMatch = row.match(/, slot = +(\d), ranking/);
-        let slot: string | undefined;
-        let rankingMatch = row.match(/, ranking = +(-?\d+)/);
-        let ranking: string;
-
-        if (
-            idMatch &&
-            idMatch[1] &&
-            slotMatch &&
-            slotMatch[1] &&
-            rankingMatch &&
-            rankingMatch[1]
-        ) {
-            id = idMatch[1];
-            slot = slotMatch[1];
-            ranking = rankingMatch[1];
-            steamIds[slot] = {
-                id,
-                slot,
-                ranking,
+        const faction: string | undefined = playerArr.pop()
+        const teamSlot: string | undefined = playerArr.pop()
+        const profileId: string | undefined = playerArr.pop()
+        const name: string = playerArr.join(' ')
+        if (slot && faction && teamSlot && time) {
+            // console.log(
+            //     'teamSlot:',
+            //     teamSlot,
+            //     typeof teamSlot,
+            //     teamSlot === undefined,
+            //     typeof Number(teamSlot)
+            // )
+            players[slot] = {
+                faction,
+                name,
+                profileId: profileId === undefined ? -1 : Number(profileId),
+                teamSlot: teamSlot === undefined ? -1 : Number(teamSlot),
                 time,
-            };
-        } else {
-            let playerArr = row.split(' ');
-            slot = playerArr.shift();
-            let faction = playerArr.pop();
-            let teamSlot = playerArr.pop();
-            let profileId = playerArr.pop();
-            let name = playerArr.join(' ');
-            if (slot && faction && teamSlot && time) {
-                players[slot] = {
-                    name,
-                    teamSlot,
-                    profileId,
-                    faction,
-                    time,
-                };
             }
         }
     }
 
     //combine into one obj
     return Object.keys(players).map((key) => {
-        if (steamIds[key]) {
-            let p = players[key];
-            p.ranking = steamIds[key].ranking;
-            p.id = steamIds[key].id;
-            return p;
-        } else {
-            let p = players[key];
-            p.ranking = '-1';
-            return p;
-        }
-    });
+        const p = players[key]
+        p.ranking = -1
+        return p
+    })
 }
