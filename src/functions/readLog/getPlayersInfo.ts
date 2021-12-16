@@ -8,7 +8,6 @@ import { Player } from '../../types'
  * @returns  TODO
  */
 export function getPlayersInfo(arr: string[]): Player[] {
-    console.log('arr:', arr)
     let time: string | undefined
 
     const playersData: string[] = arr.map((row) => {
@@ -41,14 +40,8 @@ export function getPlayersInfo(arr: string[]): Player[] {
         const teamSlot: string | undefined = playerArr.pop()
         const profileId: string | undefined = playerArr.pop()
         const name: string = playerArr.join(' ')
+
         if (slot && faction && teamSlot && time) {
-            // console.log(
-            //     'teamSlot:',
-            //     teamSlot,
-            //     typeof teamSlot,
-            //     teamSlot === undefined,
-            //     typeof Number(teamSlot)
-            // )
             players[slot] = {
                 faction,
                 name,
