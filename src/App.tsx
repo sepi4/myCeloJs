@@ -22,6 +22,7 @@ import checkLogData from './functions/checkLogData'
 
 import electron from 'electron'
 import { useAppDispatch, useAppSelector } from './hooks/customReduxHooks'
+import { Player } from './types'
 const appVersion = electron.remote.app.getVersion()
 const settingsDir = electron.remote.app.getPath('userData')
 
@@ -35,8 +36,7 @@ function App() {
     // const state = useSelector((state) => state)
     const state = useAppSelector((state) => state)
 
-    const writeNewRankingsFile = (data: any) => {
-        // TODO
+    const writeNewRankingsFile = (data: Player[]) => {
         dispatch({
             type: 'CLEAR_EXTRA_INFO',
         })
@@ -74,14 +74,20 @@ function App() {
             }
 
             if (state.settings && state.settings.logLocation) {
-                readLog(state.settings.logLocation, (data) => {
-                    checkLogData({ data, state, dispatch })
+                // readLog(state.settings.logLocation, (data) => {
+                //     checkLogData({ data, state, dispatch })
+                // })
+                readLog(state.settings.logLocation).then((data) => {
+                    if (data) {
+                        checkLogData({ data, state, dispatch })
+                    }
                 })
             }
         } else if (state.extraInfo === null && state.players.length > 0) {
             getExtraInfo(state.players, (data, teams) => {
                 const newPlayers: any[] = [] // TODO
                 teams.forEach((team: any[]) => {
+                    console.log(team)
                     // TODO
                     team.forEach((player) => {
                         newPlayers.push(player)
@@ -106,11 +112,13 @@ function App() {
 
         const intervalId = setInterval(() => {
             if (state.settings && state.settings.logLocation) {
-                readLog(state.settings.logLocation, (data) => {
-                    if (state.alert) {
-                        checkLogData({ data, state, dispatch, playAudio })
-                    } else {
-                        checkLogData({ data, state, dispatch })
+                readLog(state.settings.logLocation).then((data) => {
+                    if (data) {
+                        if (state.alert) {
+                            checkLogData({ data, state, dispatch, playAudio })
+                        } else {
+                            checkLogData({ data, state, dispatch })
+                        }
                     }
                 })
             }
@@ -124,7 +132,11 @@ function App() {
             return
         }
         if (state.settings && state.settings.logLocation) {
-            readLog(state.settings.logLocation, writeNewRankingsFile)
+            readLog(state.settings.logLocation).then((data) => {
+                if (data) {
+                    writeNewRankingsFile(data)
+                }
+            })
         }
     }, [state.settings])
 
@@ -133,8 +145,11 @@ function App() {
             return
         }
         if (state.settings && state.settings.logLocation) {
-            readLog(state.settings.logLocation, (data) => {
-                checkLogData({ data, state, dispatch })
+            readLog(state.settings.logLocation).then((data) => {
+                if (data) {
+                    // kissa
+                    checkLogData({ data, state, dispatch })
+                }
             })
         }
     }

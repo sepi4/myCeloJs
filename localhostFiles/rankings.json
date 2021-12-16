@@ -2,30 +2,54 @@
     "teams": {
         "team1": [
             {
-                "name": "Feebz",
-                "ranking": "156",
-                "country": "us",
-                "faction": "sov"
+                "name": "Janamstart",
+                "ranking": "-",
+                "country": "de",
+                "faction": "okw"
             },
             {
-                "name": "sepi",
-                "ranking": "201",
-                "country": "fi",
-                "faction": "sov"
+                "name": "Heartii",
+                "ranking": "5395",
+                "country": "pl",
+                "faction": "wer"
+            },
+            {
+                "name": "KaBandha",
+                "ranking": "-",
+                "country": "hr",
+                "faction": "wer"
+            },
+            {
+                "name": "happy okw player",
+                "ranking": "-",
+                "country": "ru",
+                "faction": "wer"
             }
         ],
         "team2": [
             {
-                "name": "Zauberer von Ost",
-                "ranking": "194",
-                "country": "de",
-                "faction": "wer"
+                "name": "TomWPL",
+                "ranking": "4435",
+                "country": "pl",
+                "faction": "sov"
             },
             {
-                "name": "Liquid Silver",
-                "ranking": "238",
-                "country": "au",
-                "faction": "okw"
+                "name": "DaGrooveNL",
+                "ranking": "-",
+                "country": "nl",
+                "faction": "sov"
+            },
+            {
+                "name": "Peryton",
+                "ranking": "-",
+                "country": "tr",
+                "faction": "uk"
+            },
+            {
+                "name": "Dartorius",
+                "ranking": "-",
+                "country": "nl",
+                "faction": "uk"
             }
         ]
     },

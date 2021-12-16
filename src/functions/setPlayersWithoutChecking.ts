@@ -14,10 +14,6 @@ export default function setPlayersWithoutChecking(
         data,
     })
     if (state.settings) {
-        writeRankings(
-            data,
-            state.settings.rankingsHorizontal,
-            'setPlayersWithoutChecking'
-        )
+        writeRankings(data, state.settings.rankingsHorizontal)
     }
 }
