@@ -1,17 +1,16 @@
-import { AvailableLeaderboard, PersonalStats, StatGroup } from '../types'
-
-type Player = {
-    ranks: any[] // TODO FIX
-    steamId?: string
-}
-type Players = { [key: string]: Player }
+import {
+    NormalizedExtraInfo,
+    AvailableLeaderboard,
+    PersonalStats,
+    StatGroup,
+} from '../types'
 
 export function refactorData(
     leaderboard: PersonalStats,
     cohTitles: AvailableLeaderboard,
     ids: number[]
-): Players {
-    const players: Players = {}
+): NormalizedExtraInfo {
+    const players: NormalizedExtraInfo = {}
     for (const id of ids) {
         players[id] = {
             ranks: [],
@@ -32,7 +31,6 @@ export function refactorData(
     // for (const x of cohTitles.leaderboards.filter(l => l.isranked === 1)) {
 
     for (const x of cohTitles.leaderboards) {
-        // titlesLeadersboards[x.id] =  x.name
         titlesLeadersboards[x.id] = {
             name: x.name,
             isRanked: x.isranked,
@@ -75,7 +73,7 @@ export function refactorData(
             break
         }
         for (const rankObj of players[id].ranks) {
-            if (rankObj.members.length === 1) {
+            if (rankObj.members?.length === 1) {
                 players[id].steamId = rankObj.members[0].name.substring(7)
                 break
             }

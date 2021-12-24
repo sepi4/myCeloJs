@@ -7,7 +7,7 @@ import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation'
 import { commonName } from '../../functions/simpleFunctions'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCaretRight, faCaretDown, } from '@fortawesome/free-solid-svg-icons'
+import { faCaretRight, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 
 import countries from '../../../countries.json'
 
@@ -19,13 +19,7 @@ import { getTotalGames } from '../../functions/simpleFunctions'
 // import getSiteLink from '../../functions/getSiteLink'
 // import worldIcon from '../../../img/world.png'
 
-function PlayerMainRow({
-    player,
-    handleSetShowExtra,
-    extraInfo,
-    showExtra,
-}) {
-
+function PlayerMainRow({ player, handleSetShowExtra, extraInfo, showExtra }) {
     let country
     let steamId
     if (extraInfo && player.profileId) {
@@ -53,12 +47,12 @@ function PlayerMainRow({
             data: {
                 player,
                 extraInfo,
-            }
+            },
         })
     }
 
     const countryFlagLocation = useSelector(
-        state => state.countryFlags[country]
+        (state) => state.countryFlags[country]
     )
 
     // const getTotalGames = () => {
@@ -70,51 +64,53 @@ function PlayerMainRow({
     // }
 
     const dropDownArrow = (
-        <span style={{ width: '2em', }} >
-            {+player.profileId > 0 && <FontAwesomeIcon
-                icon={showExtra ? faCaretDown : faCaretRight}
-                size='lg'
-                style={{
-                    color: '#ddd',
-                    cursor: 'pointer',
-                }}
-                onClick={extraInfo ? handleSetShowExtra : undefined}
-            />
-            }
+        <span style={{ width: '2em' }}>
+            {+player.profileId > 0 && (
+                <FontAwesomeIcon
+                    icon={showExtra ? faCaretDown : faCaretRight}
+                    size="lg"
+                    style={{
+                        color: '#ddd',
+                        cursor: 'pointer',
+                    }}
+                    onClick={extraInfo ? handleSetShowExtra : undefined}
+                />
+            )}
         </span>
     )
-    const rank = player.ranking === '-1' || player.ranking === -1
-        ? '-'
-        : player.ranking
+    // const rank = player.ranking === '-1' || player.ranking === -1
+    //     ? '-'
+    //     : player.ranking
+
+    const teamMarker = player.teamMarker ? player.teamMarker : ''
+
+    const rank = (player.ranking === -1 ? '-' : player.ranking) + teamMarker
 
     const faction = (
-        <span title={commonName(player.faction)} >
-            <img className={styles.factionFlag}
+        <span title={commonName(player.faction)}>
+            <img
+                className={styles.factionFlag}
                 src={getFactionFlagLocation(commonName(player.faction))}
                 alt={`${player.faction}`}
             />
         </span>
     )
 
-    const countryFlag = (
-        country !== undefined
-            ? <img
+    const countryFlag =
+        country !== undefined ? (
+            <img
                 style={{
                     height: '1.2em',
                 }}
                 src={countryFlagLocation}
                 alt={country}
-                title={countries[country]
-                    ? countries[country]['name']
-                    : null
-                }
+                title={countries[country] ? countries[country]['name'] : null}
             />
-            : null
-    )
+        ) : null
 
     const alias = (
         <span
-            style={{ cursor: steamId ? 'pointer' : null, }}
+            style={{ cursor: steamId ? 'pointer' : null }}
             title={
                 extraInfo && player.profileId
                     ? getTotalGames(extraInfo) + ' games played'
@@ -126,29 +122,24 @@ function PlayerMainRow({
         </span>
     )
 
+    return (
+        <div className={styles.container}>
+            <MainRowSpan width="20%" justifyContent="flex-start">
+                {dropDownArrow} {rank}
+            </MainRowSpan>
 
-    return <div className={styles.container}>
-        <MainRowSpan width='20%' justifyContent='flex-start' >
-            {dropDownArrow} {rank}
-        </MainRowSpan>
+            <MainRowSpan width="15%">{faction}</MainRowSpan>
 
-        <MainRowSpan width='15%' >
-            {faction}
-        </MainRowSpan>
+            <MainRowSpan width="15%">{countryFlag}</MainRowSpan>
 
-        <MainRowSpan width='15%' >
-            {countryFlag}
-        </MainRowSpan>
+            <MainRowSpan width="50%">{alias}</MainRowSpan>
 
-        <MainRowSpan width='50%'>
-            {alias}
-        </MainRowSpan>
-
-        {/* 
+            {/* 
         <MainRowSpan width='10%'>
             {webIcon}
         </MainRowSpan> */}
-    </div>
+        </div>
+    )
 }
 
 export default PlayerMainRow

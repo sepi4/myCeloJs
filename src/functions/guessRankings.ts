@@ -6,14 +6,14 @@ import {
 } from './simpleFunctions'
 
 import {
-    PlayerFromFile,
+    Player,
     AvailableLeaderboard,
     PersonalStats,
     StatGroup,
-    LeaderboardStatWithRankToTeam,
+    LeaderboardStat,
 } from '../types'
 
-function getStatGrops(team: PlayerFromFile[], data: PersonalStats) {
+function getStatGrops(team: Player[], data: PersonalStats) {
     const len = team.length
     for (let i = len; i > 1; i--) {
         const statGroups = data.statGroups
@@ -36,9 +36,9 @@ function addRankToTeamLeaderboardStats(
     data: PersonalStats,
     leaderboardId: number | undefined
 ) {
-    const arr: LeaderboardStatWithRankToTeam[] = []
+    const arr: LeaderboardStat[] = []
     let teamIndex = 1
-    data.leaderboardStats.forEach((ls: LeaderboardStatWithRankToTeam) => {
+    data.leaderboardStats.forEach((ls: LeaderboardStat) => {
         statGroups.forEach((sg) => {
             if (
                 ls.statgroup_id === sg.id &&
@@ -58,11 +58,12 @@ function addRankToTeamLeaderboardStats(
                     teamMarker = ' ²'
                 }
 
-                if (!ls.rank || ls.rank < 1) {
-                    ls.rank = '-'
-                }
+                // if (!ls.rank || ls.rank < 1) {
+                //     ls.rank = '-'
+                // }
 
-                sg.rank = ls.rank + teamMarker
+                sg.rank = ls.rank
+                sg.teamMarker = teamMarker
                 teamIndex++
             }
         })
@@ -70,7 +71,7 @@ function addRankToTeamLeaderboardStats(
     // return arr;
 }
 
-function factionSide(team: PlayerFromFile[]) {
+function factionSide(team: Player[]) {
     const isAllies = team.every(
         (p) =>
             p.faction === 'british' ||
@@ -143,7 +144,7 @@ function getPlayerLeaderboardStat(
     )
 }
 
-function findInStatGroups(statGroups: StatGroup[], player: PlayerFromFile) {
+function findInStatGroups(statGroups: StatGroup[], player: Player) {
     for (const sg of statGroups) {
         for (const m of sg.members) {
             if (m.profile_id === player.profileId) {
@@ -154,14 +155,11 @@ function findInStatGroups(statGroups: StatGroup[], player: PlayerFromFile) {
 }
 
 export function guessRankings(
-    playersArr: PlayerFromFile[],
+    playersArr: Player[],
     data: PersonalStats,
     titles: AvailableLeaderboard
 ) {
-    function rankToRandomPlayer(
-        team: PlayerFromFile[],
-        player: PlayerFromFile
-    ) {
+    function rankToRandomPlayer(team: Player[], player: Player) {
         const s = team.length
         const fn = getFactionName(player.faction)
         const matchTypeName = `${s}v${s}${fn}`
@@ -186,13 +184,13 @@ export function guessRankings(
         }
     }
 
-    const arr: PlayerFromFile[] = formatToNums(copyObj(playersArr))
-    const teams: [PlayerFromFile[], PlayerFromFile[]] = separateTeams(arr)
+    const arr: Player[] = formatToNums(copyObj(playersArr))
+    const teams: [Player[], Player[]] = separateTeams(arr)
 
     for (const team of teams) {
         const side = factionSide(team)
-
         const statGroups = getStatGrops(team, data)
+        // console.log(statGroups)
 
         if (statGroups.length > 0 && team.length > 1) {
             const modeName = getTitleName(statGroups[0].members.length, side)
@@ -202,6 +200,7 @@ export function guessRankings(
                 const sg = findInStatGroups(statGroups, player)
                 if (sg) {
                     player.ranking = sg.rank
+                    player.teamMarker = sg.teamMarker
                 } else {
                     rankToRandomPlayer(team, player)
                 }

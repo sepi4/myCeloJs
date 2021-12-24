@@ -85,14 +85,14 @@ function App() {
             }
         } else if (state.extraInfo === null && state.players.length > 0) {
             getExtraInfo(state.players, (data, teams) => {
-                const newPlayers: any[] = [] // TODO
-                teams.forEach((team: any[]) => {
-                    console.log(team)
-                    // TODO
-                    team.forEach((player) => {
-                        newPlayers.push(player)
+                const newPlayers: Player[] = []
+                if (teams) {
+                    teams.forEach((team: Player[]) => {
+                        team.forEach((player) => {
+                            newPlayers.push(player)
+                        })
                     })
-                })
+                }
 
                 dispatch({
                     type: 'SET_EXTRA_INFO',

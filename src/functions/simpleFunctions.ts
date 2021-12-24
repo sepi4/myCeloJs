@@ -1,4 +1,4 @@
-import { PlayerFromFile } from '../types'
+import { Player } from '../types'
 
 export function commonName(str: string): string {
     switch (str) {
@@ -34,11 +34,8 @@ export function getTotalGames(arr: Arr): number {
     return sum
 }
 
-export function separateTeams(
-    arr: { teamSlot: number }[]
-): [PlayerFromFile[], PlayerFromFile[]] {
-    // TODO FIX
-    const teams: [any[], any[]] = [[], []]
+export function separateTeams(arr: Player[]): [Player[], Player[]] {
+    const teams: [Player[], Player[]] = [[], []]
     for (const obj of arr) {
         if (obj.teamSlot === 0) {
             teams[0].push(obj)
@@ -58,7 +55,7 @@ export function copyObj<T>(obj: T): T {
     return JSON.parse(JSON.stringify(obj))
 }
 
-export function formatToNums(arr: PlayerFromFile[]): PlayerFromFile[] {
+export function formatToNums(arr: Player[]): Player[] {
     for (const obj of arr) {
         if (obj.profileId && !isNaN(obj.profileId)) {
             obj.profileId = Number(obj.profileId)

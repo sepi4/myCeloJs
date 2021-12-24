@@ -8,7 +8,6 @@ import getText from '../../functions/getText'
 
 import NavCheckbox from './NavCheckBox'
 import styles from './CheckLogDiv.module.css'
-import checkLogData from '../../functions/checkLogData'
 
 function CheckLogDiv() {
     const state = useSelector((state) => state)

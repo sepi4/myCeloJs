@@ -1,10 +1,10 @@
 import { writeRankings } from './writeRankings'
-import { PlayerFromFile, Store } from '../types'
+import { Player, Store } from '../types'
 
 interface Props {
-    data: PlayerFromFile[]
+    data: Player[]
     state: Store
-    dispatch: ({ type, data }: { type: string; data: PlayerFromFile[] }) => void
+    dispatch: ({ type, data }: { type: string; data: Player[] }) => void
     playAudio?: () => void
 }
 
