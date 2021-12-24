@@ -15,32 +15,15 @@ export interface RankingsJson {
     horizontal: boolean
 }
 
-/**
- * Player object after reading warnings.log file.
- * Used readlog
- */
 export interface Player {
+    country?: string
     faction: string
-    id?: number
     name: string
     profileId?: number
     ranking?: number
     teamSlot: number
     time: string
-}
-
-/**
- * Player object passed in getExtraInfo
- * Used getExtraInfo
- */
-export interface PlayerFromFile {
-    country?: string
-    faction: string
-    name: string
-    profileId?: number
-    ranking?: number | string
-    teamSlot: number
-    time: string
+    teamMarker?: string
 }
 
 export type FactionName = 'okw' | 'sov' | 'uk' | 'usa' | 'wer'
@@ -99,7 +82,8 @@ export interface StatGroup {
     members: Member[]
     name: string
     type: number
-    rank?: string
+    rank?: number
+    teamMarker?: string
 }
 
 export interface LeaderboardStat {
@@ -118,11 +102,6 @@ export interface LeaderboardStat {
     wins: number
 }
 
-export interface LeaderboardStatWithRankToTeam
-    extends Omit<LeaderboardStat, 'rank'> {
-    rank: number | string
-}
-
 export interface PersonalStats {
     leaderboardStats: LeaderboardStat[]
     result: { code: number; message: string }
@@ -132,7 +111,11 @@ export interface PersonalStats {
 export interface Leaderboard {
     id: number
     isranked: number
-    leaderboardmap: any[]
+    leaderboardmap: {
+        matchtype_id: number
+        race_id: number
+        statgroup_type: number
+    }
     name: string
 }
 
@@ -152,9 +135,18 @@ interface Race {
 }
 
 export interface AvailableLeaderboard {
-    factions: any[]
-    leaderboardRegions: any[]
-    result: any[]
+    factions: {
+        id: number
+        localizedName: 'Allies' | 'Axis'
+        locstringid: number
+        name: 'Allies' | 'Axis'
+    }[]
+    leaderboardRegions: {
+        id: number
+        locstringid: number
+        name: string
+    }[]
+    result: { code: number; message: string }
     leaderboards: Leaderboard[]
     matchTypes: MatchType[]
     races: Race[]
@@ -172,20 +164,29 @@ export interface MatchHistoryReportResult {
 }
 
 export interface MatchHistoryStat {
-    id: number
+    completiontime: number
     creator_profile_id: number
+    description: string
+    id: number
     mapname: string
-    maxplayers: number
+    matchhistoryitems: {
+        durability: number
+        durabilitytype: number
+        itemdefinition_id: number
+        iteminstance_id: number
+        itemlocation_id: number
+        matchhistory_id: number
+        metadata: string
+        profile_id: number
+    }[]
+    matchhistoryreportresults: MatchHistoryReportResult[]
     matchtype_id: number
+    matchurls: []
+    maxplayers: number
+    observertotal: number
     options: string
     slotinfo: string
-    description: string
     startgametime: number
-    completiontime: number
-    observertotal: number
-    matchhistoryreportresults: MatchHistoryReportResult[]
-    matchhistoryitems: any[]
-    matchurls: any[]
 }
 
 /**
@@ -231,15 +232,20 @@ export interface Rank {
 
     name: string
 
-    isModeRanked?: 1
-    members?: any[]
+    isModeRanked?: number
+    members?: Member[]
+}
+export interface NormalizedExtraInfo {
+    [key: string]: {
+        ranks: Rank[]
+        steamId?: string
+    }
 }
 
 /**
  * Format that come from warnings.log
  */
 export interface DataFromFile {
-    // TODO check if used
     faction: string
     name: string
     profileId: string
@@ -265,9 +271,9 @@ export interface Store {
     alert: boolean
     updateCheckDone: boolean
     appLocation: string
-    players: any // TODO
+    players: Player[] | null
     fromFile: DataFromFile[] | null
-    extraInfo: any // TODO
+    extraInfo: NormalizedExtraInfo | null
     navButtons: {
         all: boolean
         table: boolean
@@ -280,9 +286,9 @@ export interface Store {
         reversed: boolean
     }
     playerCard: {
-        player: any // TODO
-        extraInfo: any // TODO
+        player: Player | null
+        extraInfo: NormalizedExtraInfo | null
     }
     view: string
-    foundPlayers: any[] // TODO
+    foundPlayers: Player[]
 }

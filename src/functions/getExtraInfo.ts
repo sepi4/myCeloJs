@@ -4,13 +4,17 @@ import { refactorData } from './refactorData'
 import { guessRankings } from './guessRankings'
 
 import { RELIC_SERVER_BASE } from '../constants'
-import { AvailableLeaderboard, PersonalStats } from '../types'
+import {
+    AvailableLeaderboard,
+    NormalizedExtraInfo,
+    PersonalStats,
+} from '../types'
 
-import { PlayerFromFile } from '../types'
+import { Player } from '../types'
 
 export function getExtraInfo(
-    players: PlayerFromFile[],
-    callback: (a: any, b?: any) => void, // TODO remove any
+    players: Player[],
+    callback: (a: NormalizedExtraInfo, b?: Player[][]) => void, // TODO remove any
     forPlayerCard?: boolean
 ) {
     // TODO - get rid of unnessary calls to server on app start
@@ -21,9 +25,6 @@ export function getExtraInfo(
             ids.push(p.profileId)
         }
     }
-    // players
-    //     .filter((p) => p.profileId !== undefined)
-    //     .map((p) => p.profileId);
 
     const strIds: string = ids.join(',')
     const url = `${RELIC_SERVER_BASE}/GetPersonalStat?title=coh2&profile_ids=[${strIds}]`
@@ -34,14 +35,18 @@ export function getExtraInfo(
 
     Promise.all([fetch1, fetch2])
         .then((values) => {
-            // console.log('values:', values);
             let personalStats: PersonalStats
             let cohTitles: AvailableLeaderboard
 
             if (values[0].status === 200 && values[1].status === 200) {
                 personalStats = values[0].data
                 cohTitles = values[1].data
-                const result = refactorData(personalStats, cohTitles, ids)
+                const result: NormalizedExtraInfo = refactorData(
+                    personalStats,
+                    cohTitles,
+                    ids
+                )
+
                 if (forPlayerCard) {
                     callback(result)
                     return

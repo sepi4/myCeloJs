@@ -2,54 +2,54 @@
     "teams": {
         "team1": [
             {
-                "name": "Janamstart",
+                "name": "Feisty Fawn",
                 "ranking": "-",
                 "country": "de",
+                "faction": "wer"
+            },
+            {
+                "name": "Crateruss",
+                "ranking": "-",
+                "country": "fi",
+                "faction": "wer"
+            },
+            {
+                "name": "sepi",
+                "ranking": "-",
+                "country": "fi",
                 "faction": "okw"
             },
             {
-                "name": "Heartii",
-                "ranking": "5395",
-                "country": "pl",
-                "faction": "wer"
-            },
-            {
-                "name": "KaBandha",
+                "name": "Flump",
                 "ranking": "-",
-                "country": "hr",
-                "faction": "wer"
-            },
-            {
-                "name": "happy okw player",
-                "ranking": "-",
-                "country": "ru",
-                "faction": "wer"
+                "country": "de",
+                "faction": "okw"
             }
         ],
         "team2": [
             {
-                "name": "TomWPL",
-                "ranking": "4435",
+                "name": "Blaston",
+                "ranking": "228",
+                "country": "cn",
+                "faction": "uk"
+            },
+            {
+                "name": "Kacperaa",
+                "ranking": "368",
                 "country": "pl",
                 "faction": "sov"
             },
             {
-                "name": "DaGrooveNL",
+                "name": "Maschinengewehr42",
                 "ranking": "-",
-                "country": "nl",
+                "country": "us",
                 "faction": "sov"
             },
             {
-                "name": "Peryton",
-                "ranking": "-",
-                "country": "tr",
-                "faction": "uk"
-            },
-            {
-                "name": "Dartorius",
-                "ranking": "-",
-                "country": "nl",
-                "faction": "uk"
+                "name": "Adamos (3qmpqnq qf I-Ierqes 3)",
+                "ranking": "368",
+                "country": "pl",
+                "faction": "usa"
             }
         ]
     },

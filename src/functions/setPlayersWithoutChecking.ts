@@ -1,11 +1,11 @@
 import { writeRankings } from './writeRankings'
 // import { DataFromFile, Store } from '../types';
-import { PlayerFromFile, Store } from '../types'
+import { Player, Store } from '../types'
 
 export default function setPlayersWithoutChecking(
-    data: PlayerFromFile[],
+    data: Player[],
     state: Store,
-    dispatch: ({ type, data }: { type: string; data: PlayerFromFile[] }) => void
+    dispatch: ({ type, data }: { type: string; data: Player[] }) => void
 ) {
     // console.log('data:', data);
 

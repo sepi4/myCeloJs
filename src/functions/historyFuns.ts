@@ -14,15 +14,12 @@ export const getHistoryUrls = (id: string) => {
     return [url, url2]
 }
 
-type Result = [{ data: RecentMatchHistory }, { data: AvailableLeaderboard }];
+type Result = [{ data: RecentMatchHistory }, { data: AvailableLeaderboard }]
 type Player = {
-    profileId: string;
-};
+    profileId: string
+}
 
 export const parseHistoryData = (result: Result, player: Player) => {
-    // console.log('result:', result);
-    // console.log('player:', player);
-
     const { data } = result[0]
     const { matchTypes } = result[1].data
     const { matchHistoryStats, profiles } = data
@@ -31,16 +28,16 @@ export const parseHistoryData = (result: Result, player: Player) => {
     })
 
     type MatchObject = {
-        startGameTime: Date;
-        endGameTime: Date;
-        mapName: string;
-        players: MatchHistoryReportResult[];
-        matchType: MatchType | undefined;
-        description: string;
-        all: MatchHistoryStat;
-        result: MatchHistoryReportResult | undefined;
-        counters: string | undefined;
-    };
+        startGameTime: Date
+        endGameTime: Date
+        mapName: string
+        players: MatchHistoryReportResult[]
+        matchType: MatchType | undefined
+        description: string
+        all: MatchHistoryStat
+        result: MatchHistoryReportResult | undefined
+        counters: string | undefined
+    }
 
     const matchesArr: MatchObject[] = []
 
@@ -68,8 +65,8 @@ export const parseHistoryData = (result: Result, player: Player) => {
     })
 
     type ProfilesObj = {
-        [key: number]: Profile;
-    };
+        [key: number]: Profile
+    }
     const profilesObj: ProfilesObj = {}
     for (const p of profiles) {
         profilesObj[p.profile_id] = p

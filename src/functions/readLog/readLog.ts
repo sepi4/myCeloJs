@@ -81,7 +81,7 @@ export async function readLog(
             psInfo = switchTeams(psInfo, currentUserAlias)
         }
         // callback(psInfo)
-        return new Promise<Player[]>((resolve, reject) => {
+        return new Promise<Player[]>((resolve) => {
             resolve(psInfo)
             // if (psInfo) {
             // } else {

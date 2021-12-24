@@ -4,7 +4,7 @@ import countriesJson from '../../countries.json'
 // import countries from '../../countries.json';
 import stringWidth from 'string-width'
 
-import { PlayerFromFile, RankingsJson } from '../types'
+import { Player, RankingsJson } from '../types'
 
 interface Countries {
     [key: string]: {
@@ -58,7 +58,7 @@ function getLimitedWord(str: string, limit: number, padLeft: boolean) {
 }
 
 export function writeRankings(
-    players: PlayerFromFile[],
+    players: Player[],
     rankingsHorizontal: boolean
 ): void {
     // console.log('writeRankings: players:', players);
