@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
 function useTimedBoolean(ms: number) {
-    const [status, setStatus] = useState(false);
+    const [status, setStatus] = useState(false)
 
     useEffect(() => {
-        const timerId = setTimeout(() => setStatus(false), ms);
+        const timerId = setTimeout(() => setStatus(false), ms)
         return () => {
-            clearTimeout(timerId);
-        };
-    }, [status]);
+            clearTimeout(timerId)
+        }
+    }, [status])
 
-    return [status, setStatus];
+    return [status, setStatus]
 }
 
-export default useTimedBoolean;
+export default useTimedBoolean

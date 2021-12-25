@@ -1,8 +1,9 @@
-import { CSSProperties } from 'react';
+import React from 'react'
+import { CSSProperties } from 'react'
 
 interface NotificationProps {
-    style: CSSProperties;
-    text: string;
+    style: CSSProperties
+    text: string
 }
 
 function Notification({ text, style }: NotificationProps) {
@@ -19,7 +20,7 @@ function Notification({ text, style }: NotificationProps) {
         >
             {text}
         </div>
-    );
+    )
 }
 
-export default Notification;
+export default Notification

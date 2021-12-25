@@ -1,38 +1,36 @@
 import axios from 'axios'
 
 import { RELIC_SERVER_BASE } from '../constants'
+import { Member, PersonalStats, StatGroup } from '../types'
 
-type Result = {
+interface SearchResult {
+    data: PersonalStats
     status: number
-    data: any // TODO
-}
-type Player = {
-    id: number
-    type: number
-    name: string
-    members: any[] // TODO
+    statusText: string
+    //...
 }
 
 export default function searchPlayers(
     searchValue: string,
-    // TODO
-    callback: (res: any[]) => void
+    callback: (res: Member[]) => void
 ) {
     const url = `${RELIC_SERVER_BASE}/GetPersonalStat?title=coh2&search=${searchValue}`
 
     axios
         .get(url)
-        .then((result: Result) => {
+        .then((result: SearchResult) => {
             if (
                 result.status === 200 &&
                 result.data.result.message === 'SUCCESS'
             ) {
-                let playerArr: Player[] = result.data.statGroups.filter(
-                    (p: Player) => p.type === 1
+                const playerArr: StatGroup[] = result.data.statGroups.filter(
+                    (p: StatGroup) => p.type === 1
                 )
 
-                playerArr = playerArr.map((p: Player) => p.members[0])
-                callback(playerArr)
+                const mm: Member[] = playerArr.map(
+                    (p: StatGroup) => p.members[0]
+                )
+                callback(mm)
             } else {
                 console.log('searchPlayers else:', result)
                 callback([])

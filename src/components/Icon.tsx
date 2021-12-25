@@ -1,11 +1,12 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IconProp, SizeProp } from '@fortawesome/fontawesome-svg-core';
+import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { IconProp, SizeProp } from '@fortawesome/fontawesome-svg-core'
 
 type IconProps = {
-    icon: IconProp;
-    fun: () => void;
-    size: SizeProp;
-};
+    icon: IconProp
+    fun: () => void
+    size: SizeProp
+}
 
 export default function Icon({
     icon,
@@ -31,5 +32,5 @@ export default function Icon({
                 }}
             />
         </div>
-    );
+    )
 }
