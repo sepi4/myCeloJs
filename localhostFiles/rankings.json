@@ -2,54 +2,30 @@
     "teams": {
         "team1": [
             {
-                "name": "Feisty Fawn",
-                "ranking": "-",
-                "country": "de",
-                "faction": "wer"
-            },
-            {
-                "name": "Crateruss",
-                "ranking": "-",
-                "country": "fi",
-                "faction": "wer"
-            },
-            {
                 "name": "sepi",
-                "ranking": "-",
+                "ranking": "354",
                 "country": "fi",
-                "faction": "okw"
+                "faction": "uk"
             },
             {
-                "name": "Flump",
-                "ranking": "-",
-                "country": "de",
-                "faction": "okw"
+                "name": "Zhong Xina",
+                "ranking": "354",
+                "country": "ru",
+                "faction": "uk"
             }
         ],
         "team2": [
             {
-                "name": "Blaston",
-                "ranking": "231",
-                "country": "cn",
-                "faction": "uk"
-            },
-            {
-                "name": "Kacperaa",
-                "ranking": "369",
-                "country": "pl",
-                "faction": "sov"
-            },
-            {
-                "name": "Maschinengewehr42",
-                "ranking": "-",
+                "name": "Farlion",
+                "ranking": "15",
                 "country": "us",
-                "faction": "sov"
+                "faction": "wer"
             },
             {
-                "name": "Adamos (3qmpqnq qf I-Ierqes 3)",
-                "ranking": "369",
-                "country": "pl",
-                "faction": "usa"
+                "name": "Onimusha",
+                "ranking": "123",
+                "country": "it",
+                "faction": "okw"
             }
         ]
     },

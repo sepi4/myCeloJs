@@ -1,12 +1,12 @@
 import fs from 'fs'
 import e from 'electron'
-import { Settings } from '../types'
+import { SettingsType } from '../types'
 
 const settingsDir = e.remote.app.getPath('userData')
 
-type D = ({ type, data }: { type: string; data: Settings }) => void
+type D = ({ type, data }: { type: string; data: SettingsType }) => void
 
-function writeSettings(newSettings: Settings, dispatch: D) {
+function writeSettings(newSettings: SettingsType, dispatch: D) {
     fs.writeFile(
         settingsDir + '/settings.json',
         JSON.stringify(newSettings, null, 4),

@@ -65,7 +65,7 @@ export interface CountryFlagsLocation {
     [key: string]: string
 }
 
-export interface Settings {
+export interface SettingsType {
     logLocation: string
     language: string
     appLocation: string
@@ -235,11 +235,13 @@ export interface Rank {
     isModeRanked?: number
     members?: Member[]
 }
+
+export interface ExtraInfo {
+    ranks: Rank[]
+    steamId?: string
+}
 export interface NormalizedExtraInfo {
-    [key: string]: {
-        ranks: Rank[]
-        steamId?: string
-    }
+    [key: string]: ExtraInfo
 }
 
 /**
@@ -265,7 +267,7 @@ export interface DataFromFile {
 
 export interface Store {
     settingsView: boolean
-    settings: Settings | null
+    settings: SettingsType | null
     logCheckInterval: number
     autoLogChecking: boolean
     alert: boolean

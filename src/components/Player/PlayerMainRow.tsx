@@ -1,5 +1,4 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 
 import styles from './PlayerMainRow.module.css'
 
@@ -9,21 +8,49 @@ import { commonName } from '../../functions/simpleFunctions'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretRight, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 
-import countries from '../../../countries.json'
+import countriesJson from '../../../countries.json'
 
 import MainRowSpan from './MainRowSpan'
 
 import { getTotalGames } from '../../functions/simpleFunctions'
 
-// import { shell } from 'electron'
-// import getSiteLink from '../../functions/getSiteLink'
-// import worldIcon from '../../../img/world.png'
+import { ExtraInfo, Player } from '../../types'
+import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
 
-function PlayerMainRow({ player, handleSetShowExtra, extraInfo, showExtra }) {
-    let country
-    let steamId
+const countries = countriesJson as {
+    [key: string]: {
+        name: string
+        'alpha-2': string
+        'alpha-3': string
+        'country-code': string
+        'iso_3166-2': string
+        region: string
+        'sub-region': string
+        'intermediate-region': string
+        'region-code': string
+        'sub-region-code': string
+        'intermediate-region-code': string
+    }
+}
+
+interface Props {
+    player: Player
+    extraInfo: ExtraInfo | null
+    showExtra: boolean
+    handleSetShowExtra: () => void
+}
+
+function PlayerMainRow(props: Props) {
+    const { player, handleSetShowExtra, extraInfo, showExtra } = props
+    let country: string | undefined
+    let steamId: string | undefined
+
     if (extraInfo && player.profileId) {
         for (const rank of extraInfo.ranks) {
+            if (!rank.members) {
+                continue
+            }
+
             for (const member of rank.members) {
                 if (member.profile_id == player.profileId) {
                     country = member.country
@@ -37,9 +64,7 @@ function PlayerMainRow({ player, handleSetShowExtra, extraInfo, showExtra }) {
         }
     }
 
-    // const settings = useSelector(state => state.settings)
-    // const link = getSiteLink(settings.siteLink) + steamId
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const handlePlayerCardOn = () => {
         dispatch({
@@ -51,21 +76,13 @@ function PlayerMainRow({ player, handleSetShowExtra, extraInfo, showExtra }) {
         })
     }
 
-    const countryFlagLocation = useSelector(
-        (state) => state.countryFlags[country]
+    const countryFlagLocation = useAppSelector(
+        (state) => state.countryFlags[country ? country : '']
     )
-
-    // const getTotalGames = () => {
-    //     let sum = 0
-    //     for (const rankObj of extraInfo.ranks) {
-    //         sum += rankObj.wins + rankObj.losses
-    //     }
-    //     return sum
-    // }
 
     const dropDownArrow = (
         <span style={{ width: '2em' }}>
-            {+player.profileId > 0 && (
+            {Number(player.profileId) > 0 && (
                 <FontAwesomeIcon
                     icon={showExtra ? faCaretDown : faCaretRight}
                     size="lg"
@@ -78,12 +95,8 @@ function PlayerMainRow({ player, handleSetShowExtra, extraInfo, showExtra }) {
             )}
         </span>
     )
-    // const rank = player.ranking === '-1' || player.ranking === -1
-    //     ? '-'
-    //     : player.ranking
 
     const teamMarker = player.teamMarker ? player.teamMarker : ''
-
     const rank = (player.ranking === -1 ? '-' : player.ranking) + teamMarker
 
     const faction = (
@@ -104,17 +117,17 @@ function PlayerMainRow({ player, handleSetShowExtra, extraInfo, showExtra }) {
                 }}
                 src={countryFlagLocation}
                 alt={country}
-                title={countries[country] ? countries[country]['name'] : null}
+                title={countries[country] ? countries[country]['name'] : ''}
             />
         ) : null
 
     const alias = (
         <span
-            style={{ cursor: steamId ? 'pointer' : null }}
+            style={{ cursor: steamId ? 'pointer' : undefined }}
             title={
                 extraInfo && player.profileId
                     ? getTotalGames(extraInfo) + ' games played'
-                    : null
+                    : ''
             }
             onClick={handlePlayerCardOn}
         >
@@ -125,19 +138,13 @@ function PlayerMainRow({ player, handleSetShowExtra, extraInfo, showExtra }) {
     return (
         <div className={styles.container}>
             <MainRowSpan width="20%" justifyContent="flex-start">
-                {dropDownArrow} {rank}
+                <>
+                    {dropDownArrow} {rank}
+                </>
             </MainRowSpan>
-
             <MainRowSpan width="15%">{faction}</MainRowSpan>
-
             <MainRowSpan width="15%">{countryFlag}</MainRowSpan>
-
             <MainRowSpan width="50%">{alias}</MainRowSpan>
-
-            {/* 
-        <MainRowSpan width='10%'>
-            {webIcon}
-        </MainRowSpan> */}
         </div>
     )
 }

@@ -1,19 +1,21 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 
 import ColumnTitle from './ColumnTitle'
 import getText from '../../functions/getText'
 
 import styles from './ListDiv.module.css'
 
-function RanksListTitles({ ranksArr }) {
-    const state = useSelector((state) => state)
-    const dispatch = useDispatch()
+import { Rank } from '../../types'
+import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
+
+function RanksListTitles({ ranksArr }: { ranksArr: Rank[] }) {
+    const state = useAppSelector((state) => state)
+    const dispatch = useAppDispatch()
 
     const settings = state.settings
     const sorter = state.sorter
 
-    const setSorter = (name) => {
+    const setSorter = (name: string) => {
         return {
             click: () => {
                 dispatch({

@@ -1,0 +1,12 @@
+.active {
+    color: yellow;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.def {
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    white-space: nowrap;
+}

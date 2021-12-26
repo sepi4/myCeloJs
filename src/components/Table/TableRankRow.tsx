@@ -1,11 +1,12 @@
-import styles from './TableRankRow.module.css';
+import React from 'react'
+import styles from './TableRankRow.module.css'
 
 interface Props {
-    rank: number | string;
-    num: number;
-    per: string;
-    streak: number | string;
-    totalGames: number | string;
+    rank: number | string
+    num: number
+    per: string
+    streak: number | string
+    totalGames: number | string
 }
 
 function TableRankRow({ rank, num, per, streak, totalGames }: Props) {
@@ -18,7 +19,7 @@ function TableRankRow({ rank, num, per, streak, totalGames }: Props) {
             : '#ddd'
     )
 
-    streak = streak > 0 ? '+' + streak : streak;
+    streak = streak > 0 ? '+' + streak : streak
 
     return (
         <div className={styles.container}>
@@ -31,7 +32,7 @@ function TableRankRow({ rank, num, per, streak, totalGames }: Props) {
             <span style={{ color }}> {streak} </span>
             <span> {totalGames} </span>
         </div>
-    );
+    )
 }
 
-export default TableRankRow;
+export default TableRankRow

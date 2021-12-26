@@ -1,17 +1,17 @@
-import { RankForTableView } from '../types'
+import { Rank } from '../types'
 
 type ModeObj = {
-    [key: number]: RankForTableView;
-};
+    [key: number]: Rank
+}
 type RanksObj = {
     solo: {
-        [key: string]: ModeObj;
-    };
-    team: [];
-};
-type Result = [(RankForTableView | undefined)[], string[]];
+        [key: string]: ModeObj
+    }
+    team: []
+}
+type Result = [(Rank | undefined)[], string[]]
 
-export function refactronTableInfo(ranksArr: RankForTableView[]): Result {
+export function refactronTableInfo(ranksArr: Rank[]): Result {
     const ranksObj: RanksObj = {
         solo: {
             sov: {},
@@ -41,12 +41,12 @@ export function refactronTableInfo(ranksArr: RankForTableView[]): Result {
         }
     }
 
-    const solo: (RankForTableView | undefined)[] = []
+    const solo: (Rank | undefined)[] = []
     const names = ['sov', 'wer', 'usa', 'okw', 'uk']
 
     names.forEach((key: string) => {
         for (let i = 1; i < 5; i++) {
-            const o: RankForTableView = ranksObj.solo[key][i]
+            const o: Rank = ranksObj.solo[key][i]
             if (o) {
                 solo.push(o)
             } else {

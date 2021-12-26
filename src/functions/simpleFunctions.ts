@@ -1,6 +1,6 @@
-import { Player } from '../types'
+import { ExtraInfo, Player, FactionName } from '../types'
 
-export function commonName(str: string): string {
+export function commonName(str: string): FactionName {
     switch (str) {
         case 'british':
             return 'uk'
@@ -13,20 +13,11 @@ export function commonName(str: string): string {
         case 'german':
             return 'wer'
         default:
-            return '?????'
+            return 'wer'
     }
 }
 
-interface Arr {
-    ranks: [
-        {
-            wins: number
-            losses: number
-        }
-    ]
-}
-
-export function getTotalGames(arr: Arr): number {
+export function getTotalGames(arr: ExtraInfo): number {
     let sum = 0
     for (const rankObj of arr.ranks) {
         sum += rankObj.wins + rankObj.losses

@@ -2,6 +2,7 @@ import getLocalStorage from './functions/getLocalStorage'
 
 import { Store, CountryFlagsLocation } from './types'
 
+// TODO ANY
 function importAll(r: any) {
     return r.keys().map(r)
 }

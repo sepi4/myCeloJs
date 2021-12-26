@@ -1,5 +1,4 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 
 import { ranksArrSort, ranksArrFilter } from '../../functions/ranksArrFuns'
 
@@ -7,8 +6,12 @@ import styles from './ListDiv.module.css'
 import RanksList from './RanksList'
 import RanksListTitles from './RanksListTitles'
 
-function ListDiv({ ranksArr }) {
-    const state = useSelector(state => state)
+import { Rank } from '../../types'
+
+import { useAppSelector } from '../../hooks/customReduxHooks'
+
+function ListDiv({ ranksArr }: { ranksArr: Rank[] }) {
+    const state = useAppSelector((state) => state)
     const tableView = state.navButtons.table
     const showAll = state.navButtons.all
     const sorter = state.sorter
@@ -20,10 +23,14 @@ function ListDiv({ ranksArr }) {
         ranksArr = ranksArr.reverse()
     }
 
-    return ranksArr && <div className={styles.container}     >
-        <RanksListTitles ranksArr={ranksArr} />
-        <RanksList ranksArr={ranksArr} />
-    </div>
+    return (
+        ranksArr && (
+            <div className={styles.container}>
+                <RanksListTitles ranksArr={ranksArr} />
+                <RanksList ranksArr={ranksArr} />
+            </div>
+        )
+    )
 }
 
 export default ListDiv

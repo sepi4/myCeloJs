@@ -1,9 +1,10 @@
-import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation';
-import { FactionName } from '../../types';
+import React from 'react'
+import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation'
+import { FactionName } from '../../types'
 
 interface Props {
-    faction: FactionName;
-    size: string;
+    faction: FactionName
+    size: string
 }
 
 function FactionIcon({ faction, size }: Props) {
@@ -23,7 +24,7 @@ function FactionIcon({ faction, size }: Props) {
                 alt={`${faction}`}
             />
         </div>
-    );
+    )
 }
 
-export default FactionIcon;
+export default FactionIcon
