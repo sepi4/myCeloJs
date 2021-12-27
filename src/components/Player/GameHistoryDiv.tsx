@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
 
 import ModalDiv from './ModalDiv'
 
@@ -8,31 +7,42 @@ import { getFactionById } from '../../functions/simpleFunctions'
 import { getTimeAgo } from '../../functions/time'
 
 import styles from './GameHistoryDiv.module.css'
+import { MatchObject, NormalizedProfiles } from '../../types'
+import { useAppSelector } from '../../hooks/customReduxHooks'
 
-export default function GameHistoryDiv({ game, profiles }) {
+interface Props {
+    game: MatchObject
+    profiles: NormalizedProfiles
+}
+
+export default function GameHistoryDiv(props: Props) {
     const [modal, setModal] = useState(false)
-    const settings = useSelector(state => state.settings)
+    const settings = useAppSelector((state) => state.settings)
     const lg = settings && settings.language ? settings.language : 'en'
 
+    if (!props.game.result) {
+        return null
+    }
+
     let backgroundColor = 'blue'
-    if (game.result.resulttype === 1) {
+    if (props.game.result.resulttype === 1) {
         backgroundColor = 'green'
     }
-    if (game.result.resulttype === 0) {
+    if (props.game.result.resulttype === 0) {
         backgroundColor = 'red'
     }
 
-    const players = game.players.sort((a, b) => b.teamid - a.teamid)
+    const players = props.game.players.sort((a, b) => b.teamid - a.teamid)
 
-    const matchType = game.matchType ? game.matchType.name : '???'
-    const timeAgo = getTimeAgo(game.endGameTime, lg)
+    const matchType = props.game.matchType ? props.game.matchType.name : '???'
+    const timeAgo = getTimeAgo(props.game.endGameTime, lg)
 
     let playersNames = ''
     players.forEach((p, i) => {
         if (i !== 0 && players.length / i === 2) {
             playersNames += '\t----- vs -----\t\n'
         }
-        playersNames += profiles[p.profile_id].alias + '\n'
+        playersNames += props.profiles[p.profile_id].alias + '\n'
     })
 
     return (
@@ -44,15 +54,13 @@ export default function GameHistoryDiv({ game, profiles }) {
                 onClick={() => setModal(true)}
             >
                 <img
-                    src={
-                        getFactionFlagLocation(
-                            getFactionById(game.result.race_id),
-                        )
-                    }
-                    alt={`${getFactionById(game.result.race_id)}`}
+                    src={getFactionFlagLocation(
+                        getFactionById(props.game.result.race_id)
+                    )}
+                    alt={`${getFactionById(props.game.result.race_id)}`}
                 />
 
-                <div className={styles.name} >
+                <div className={styles.name}>
                     <div>{matchType}</div>
                     <div>{timeAgo}</div>
                 </div>
@@ -61,12 +69,11 @@ export default function GameHistoryDiv({ game, profiles }) {
             <ModalDiv
                 modal={modal}
                 setModal={setModal}
-                game={game}
+                game={props.game}
                 settings={settings}
                 players={players}
-                profiles={profiles}
+                profiles={props.profiles}
             />
-
         </>
     )
 }

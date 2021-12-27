@@ -21,9 +21,9 @@ export interface Player {
     name: string
     profileId?: number
     ranking?: number
+    teamMarker?: string
     teamSlot: number
     time: string
-    teamMarker?: string
 }
 
 export type FactionName = 'okw' | 'sov' | 'uk' | 'usa' | 'wer'
@@ -124,6 +124,22 @@ export interface MatchType {
     localizedName: string
     locstringid: number
     name: string
+}
+
+export interface MatchObject {
+    startGameTime: number
+    endGameTime: number
+    mapName: string
+    players: MatchHistoryReportResult[]
+    matchType: MatchType | undefined
+    description: string
+    all: MatchHistoryStat
+    result: MatchHistoryReportResult | undefined
+    counters: string | undefined
+}
+
+export interface NormalizedProfiles {
+    [key: number]: Profile
 }
 
 interface Race {

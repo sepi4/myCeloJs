@@ -1,2 +1,2 @@
-                sepi   FIN   354    UK           WER   15    USA   Farlion             
-          Zhong Xina   RUS   354    UK           OKW   123   ITA   Onimusha            
+                sepi   FIN   361    UK           WER   423   CHN   ***                 
+          Zhong Xina   RUS   361    UK           OKW   498   PHL   HauptmannWolfMan    

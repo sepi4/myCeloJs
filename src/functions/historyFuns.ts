@@ -1,23 +1,19 @@
 import { RELIC_SERVER_BASE } from '../constants'
 import {
     RecentMatchHistory,
-    MatchHistoryReportResult,
-    MatchHistoryStat,
     AvailableLeaderboard,
-    MatchType,
-    Profile,
+    Player,
+    MatchObject,
+    NormalizedProfiles,
 } from '../types'
 
-export const getHistoryUrls = (id: string) => {
+export const getHistoryUrls = (id: number | undefined) => {
     const url = `${RELIC_SERVER_BASE}/getRecentMatchHistory?title=coh2&profile_ids=[${id}]`
     const url2 = `${RELIC_SERVER_BASE}/GetAvailableLeaderboards?title=coh2`
     return [url, url2]
 }
 
 type Result = [{ data: RecentMatchHistory }, { data: AvailableLeaderboard }]
-type Player = {
-    profileId: string
-}
 
 export const parseHistoryData = (result: Result, player: Player) => {
     const { data } = result[0]
@@ -26,18 +22,6 @@ export const parseHistoryData = (result: Result, player: Player) => {
     const matches = matchHistoryStats.sort((a, b) => {
         return b.completiontime - a.completiontime
     })
-
-    type MatchObject = {
-        startGameTime: Date
-        endGameTime: Date
-        mapName: string
-        players: MatchHistoryReportResult[]
-        matchType: MatchType | undefined
-        description: string
-        all: MatchHistoryStat
-        result: MatchHistoryReportResult | undefined
-        counters: string | undefined
-    }
 
     const matchesArr: MatchObject[] = []
 
@@ -57,17 +41,14 @@ export const parseHistoryData = (result: Result, player: Player) => {
             return
         }
         mObj.result = m.matchhistoryreportresults.find((r) => {
-            return r.profile_id.toString() === player.profileId.toString()
+            return r.profile_id === player.profileId
         })
 
         mObj.counters = mObj.result?.counters
         matchesArr.push(mObj)
     })
 
-    type ProfilesObj = {
-        [key: number]: Profile
-    }
-    const profilesObj: ProfilesObj = {}
+    const profilesObj: NormalizedProfiles = {}
     for (const p of profiles) {
         profilesObj[p.profile_id] = p
     }

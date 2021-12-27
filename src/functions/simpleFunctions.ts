@@ -82,7 +82,7 @@ export function getFactionName(x: string): string {
     }
 }
 
-export function getFactionById(id: number): string {
+export function getFactionById(id: number): FactionName {
     switch (id) {
         case 0:
             return 'wer'
@@ -95,6 +95,6 @@ export function getFactionById(id: number): string {
         case 4:
             return 'uk'
         default:
-            return ''
+            return 'wer'
     }
 }

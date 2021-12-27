@@ -3,28 +3,28 @@
         "team1": [
             {
                 "name": "sepi",
-                "ranking": "354",
+                "ranking": "361",
                 "country": "fi",
                 "faction": "uk"
             },
             {
                 "name": "Zhong Xina",
-                "ranking": "354",
+                "ranking": "361",
                 "country": "ru",
                 "faction": "uk"
             }
         ],
         "team2": [
             {
-                "name": "Farlion",
-                "ranking": "15",
-                "country": "us",
+                "name": "***",
+                "ranking": "423",
+                "country": "cn",
                 "faction": "wer"
             },
             {
-                "name": "Onimusha",
-                "ranking": "123",
-                "country": "it",
+                "name": "HauptmannWolfMan",
+                "ranking": "498",
+                "country": "ph",
                 "faction": "okw"
             }
         ]
