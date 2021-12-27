@@ -7,7 +7,7 @@ import { getFactionById } from '../../functions/simpleFunctions'
 import { getTimeAgo } from '../../functions/time'
 
 import styles from './GameHistoryDiv.module.css'
-import { MatchObject, NormalizedProfiles } from '../../types'
+import { MatchObject, NormalizedProfiles, SettingsType } from '../../types'
 import { useAppSelector } from '../../hooks/customReduxHooks'
 
 interface Props {
@@ -17,10 +17,11 @@ interface Props {
 
 export default function GameHistoryDiv(props: Props) {
     const [modal, setModal] = useState(false)
-    const settings = useAppSelector((state) => state.settings)
+    const settings: SettingsType = useAppSelector((state) => state.settings)
     const lg = settings && settings.language ? settings.language : 'en'
 
     if (!props.game.result) {
+        console.log('if return null')
         return null
     }
 
@@ -67,12 +68,12 @@ export default function GameHistoryDiv(props: Props) {
             </div>
 
             <ModalDiv
-                modal={modal}
-                setModal={setModal}
                 game={props.game}
-                settings={settings}
+                modal={modal}
                 players={players}
                 profiles={props.profiles}
+                setModal={setModal}
+                settings={settings}
             />
         </>
     )

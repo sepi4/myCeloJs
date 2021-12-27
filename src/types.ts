@@ -102,6 +102,12 @@ export interface LeaderboardStat {
     wins: number
 }
 
+export interface SearchResult {
+    data: PersonalStats
+    status: number
+    statusText: string
+}
+
 export interface PersonalStats {
     leaderboardStats: LeaderboardStat[]
     result: { code: number; message: string }
@@ -127,8 +133,8 @@ export interface MatchType {
 }
 
 export interface MatchObject {
-    startGameTime: number
-    endGameTime: number
+    startGameTime: Date
+    endGameTime: Date
     mapName: string
     players: MatchHistoryReportResult[]
     matchType: MatchType | undefined

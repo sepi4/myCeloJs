@@ -6,15 +6,15 @@ import localizedFormat from 'dayjs/plugin/localizedFormat'
 import 'dayjs/locale/en'
 import 'dayjs/locale/ru'
 
-export function getTimeAgo(ms: number, lg: string) {
+export function getTimeAgo(date: Date, lg: string) {
     dayjs.extend(relativeTime)
-    return dayjs(ms).locale(lg).from(dayjs())
+    return dayjs(date).locale(lg).from(dayjs())
 }
 
-export function getDateTime(ms: number, lg: string) {
+export function getDateTime(date: Date, lg: string) {
     dayjs.extend(localizedFormat)
     // const result = dayjs(ms).format('DD.MM.YYYY, HH:mm')
-    const result = dayjs(ms).locale(lg).format('LL LTS')
+    const result = dayjs(date).locale(lg).format('LL LTS')
     return result
 }
 

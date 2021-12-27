@@ -41,11 +41,14 @@ export const parseHistoryData = (result: Result, player: Player) => {
             return
         }
         mObj.result = m.matchhistoryreportresults.find((r) => {
-            return r.profile_id === player.profileId
+            // TODO === fix string profileId
+            return r.profile_id == player.profileId
         })
 
         mObj.counters = mObj.result?.counters
-        matchesArr.push(mObj)
+        if (result) {
+            matchesArr.push(mObj)
+        }
     })
 
     const profilesObj: NormalizedProfiles = {}

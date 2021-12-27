@@ -8,25 +8,37 @@ import getText from '../../functions/getText'
 import ModalTableBody from './ModalTableBody'
 import ModalTableHeaders from './ModalTableHeaders'
 import { getDateTime, getTime } from '../../functions/time'
+import {
+    MatchHistoryReportResult,
+    MatchObject,
+    NormalizedProfiles,
+    SettingsType,
+} from '../../types'
 
-function ModalDiv({
-    modal,
-    setModal,
-    settings,
-    game,
-    players,
-    profiles,
-}) {
+interface Props {
+    game: MatchObject
+    modal: boolean
+    players: MatchHistoryReportResult[]
+    profiles: NormalizedProfiles
+    setModal: (x: boolean) => void
+    settings: SettingsType
+}
+
+function ModalDiv(props: Props) {
+    const { modal, setModal, settings, game, players, profiles } = props
+
     const lg = settings && settings.language ? settings.language : 'en'
 
     const startTime = getDateTime(game.startGameTime, lg)
     const endTime = getDateTime(game.endGameTime, lg)
-    const durationTime = getTime(game.endGameTime - game.startGameTime)
+    const durationTime = getTime(
+        game.endGameTime.getTime() - game.startGameTime.getTime()
+    )
 
     return (
         <Modal
             isOpen={modal}
-            contentLabel='gameHistoryStats'
+            contentLabel="gameHistoryStats"
             ariaHideApp={false}
             shouldCloseOnOverlayClick={true}
             onRequestClose={() => setModal(false)}
@@ -50,34 +62,25 @@ function ModalDiv({
                 <span className={styles.label}>
                     {getText('game_start_time', settings)}:
                 </span>
-                <span className={styles.value}>
-                    {startTime}
-                </span>
+                <span className={styles.value}>{startTime}</span>
             </div>
             <div>
                 <span className={styles.label}>
                     {getText('game_end_time', settings)}:
                 </span>
-                <span className={styles.value}>
-                    {endTime}
-                </span>
+                <span className={styles.value}>{endTime}</span>
             </div>
             <div>
                 <span className={styles.label}>
                     {getText('map', settings)}:
                 </span>
-                <span className={styles.value}>
-                    {game.mapName}
-                </span>
+                <span className={styles.value}>{game.mapName}</span>
             </div>
             <div>
                 <span className={styles.label}>
                     {getText('duration', settings)}:
                 </span>
-                <span className={styles.value}>
-                    {durationTime
-                    }
-                </span>
+                <span className={styles.value}>{durationTime}</span>
             </div>
             <table className={styles.table}>
                 <ModalTableHeaders

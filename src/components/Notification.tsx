@@ -2,8 +2,8 @@ import React from 'react'
 import { CSSProperties } from 'react'
 
 interface NotificationProps {
-    style: CSSProperties
-    text: string
+    style?: CSSProperties
+    text?: string
 }
 
 function Notification({ text, style }: NotificationProps) {

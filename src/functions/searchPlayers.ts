@@ -1,14 +1,7 @@
 import axios from 'axios'
 
 import { RELIC_SERVER_BASE } from '../constants'
-import { Member, PersonalStats, StatGroup } from '../types'
-
-interface SearchResult {
-    data: PersonalStats
-    status: number
-    statusText: string
-    //...
-}
+import { Member, SearchResult, StatGroup } from '../types'
 
 export default function searchPlayers(
     searchValue: string,

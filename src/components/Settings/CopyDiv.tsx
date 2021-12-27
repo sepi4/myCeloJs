@@ -1,5 +1,4 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 
 import electron from 'electron'
 const { clipboard } = electron.remote
@@ -12,32 +11,39 @@ import styles from './Settings.module.css'
 import useTimedBoolean from '../../hooks/useTimedBoolean'
 
 import getText from '../../functions/getText'
+import { useAppSelector } from '../../hooks/customReduxHooks'
+import { SettingsType } from '../../types'
 
-function CopyDiv({ text }) {
-    const state = useSelector(state => state)
-    const { settings } = state
+interface Props {
+    text?: string
+}
+
+function CopyDiv(props: Props) {
+    const settings: SettingsType = useAppSelector((state) => state.settings)
 
     const [timed, setTimed] = useTimedBoolean(1000)
     const handleCopy = () => {
-        setTimed(true)
-        clipboard.writeText(text)
+        if (props.text) {
+            setTimed(true)
+            clipboard.writeText(props.text)
+        }
     }
 
-    if (!text) {
+    if (!props.text) {
         return null
     }
-    const notification = timed
-        ? <Notification text={getText('copied', settings)} />
-        : null
+    const notification = timed ? (
+        <Notification text={getText('copied', settings)} />
+    ) : null
 
     return (
         <div>
             <div className={styles.textDiv}>
-                {text}
+                {props.text}
                 {notification}
             </div>
 
-            <StyledButton onClick={handleCopy} >
+            <StyledButton onClick={handleCopy}>
                 {getText('copy', settings)}
             </StyledButton>
         </div>

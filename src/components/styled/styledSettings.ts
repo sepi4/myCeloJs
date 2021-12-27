@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const StyledContentDiv = styled.div`
-    margin: .2em 0 0 0;
+    margin: 0.2em 0 0 0;
     min-width: 100%;
     min-height: 1em;
     color: black;
@@ -19,9 +19,9 @@ export const StyledTextDiv = styled.div`
     font-size: 90%;
     overflow-wrap: break-word;
     background-color: #999;
-    padding: .3em;
-    margin-bottom: .2em;
-    border: solid .05em #555;
+    padding: 0.3em;
+    margin-bottom: 0.2em;
+    border: solid 0.05em #555;
 `
 
 export const StyledButton = styled.button`
@@ -29,8 +29,9 @@ export const StyledButton = styled.button`
     width: 25vw;
     color: #ddd;
     cursor: pointer;
-    background-color: ${({ buttonColor }) => buttonColor || '#222'};
-    padding: .2em 0;
+    background-color: ${({ buttonColor }: { buttonColor?: string }) =>
+        buttonColor || '#222'};
+    padding: 0.2em 0;
     font-size: 1em;
     border: 0;
     &:active {
