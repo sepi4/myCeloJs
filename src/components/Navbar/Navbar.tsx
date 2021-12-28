@@ -80,7 +80,7 @@ export default function Navbar(props: Props) {
         const player = {
             profileId: settings.profileId,
 
-            // fake
+            // TODO fix fake
             faction: '',
             name: '',
             teamSlot: -1,

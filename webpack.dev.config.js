@@ -16,7 +16,8 @@ module.exports = {
                         options: {
                             sourceMap: true,
                             modules: {
-                                localIdentName: "[path][name]__[local]--[hash:base64:5]",
+                                localIdentName:
+                                    '[path][name]__[local]--[hash:base64:5]',
                             },
                         },
                     },
@@ -28,12 +29,18 @@ module.exports = {
             },
             {
                 test: /\.(jpe?g|png|gif|mp3)$/,
-                use: [{ loader: 'file-loader?name=img/[name]__[hash:base64:5].[ext]' }],
+                use: [
+                    {
+                        loader: 'file-loader?name=img/[name]__[hash:base64:5].[ext]',
+                    },
+                ],
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2)$/,
                 use: [
-                    { loader: 'file-loader?name=font/[name]__[hash:base64:5].[ext]' },
+                    {
+                        loader: 'file-loader?name=font/[name]__[hash:base64:5].[ext]',
+                    },
                 ],
             },
             {
@@ -44,7 +51,7 @@ module.exports = {
                     options: {
                         transpileOnly: true,
                     },
-                }
+                },
             },
         ],
     },
@@ -75,6 +82,6 @@ module.exports = {
         },
     },
     resolve: {
-        extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.json']
+        extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.json'],
     },
 }

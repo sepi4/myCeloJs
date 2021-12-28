@@ -62,8 +62,6 @@ function UpdateBar() {
 
             const url = LATEST_RELEASES_URL
             axios.get(url).then((x: GitHubResult) => {
-                console.log('x:', x)
-
                 if (x && x.data) {
                     const newTagName = x.data.tag_name
                     if (settings.ignoreUntil === newTagName) {

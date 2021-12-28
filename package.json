@@ -21,7 +21,7 @@
         "provider": "github",
         "releaseType": "release"
     },
-    "main": "main.js",
+    "main": "main.ts",
     "scripts": {
         "make-zip": "npm run make && npm run rm-zip && npm run zip",
         "make": "npm run build && npm run postpackage && npm run cp-img && npm run cp-localhost-files",

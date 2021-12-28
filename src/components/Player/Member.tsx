@@ -15,12 +15,12 @@ export default function Member(props: Props) {
     const dispatch = useAppDispatch()
 
     const handlePlayerCardOn = (p: Member) => {
-        console.log('p:', p)
         const newPlayer: Player = {
             country: p.country,
             name: p.alias,
             profileId: p.profile_id,
 
+            // TODO fix
             faction: '',
             time: '',
             teamSlot: -1,
@@ -39,13 +39,12 @@ export default function Member(props: Props) {
                     dispatch({
                         type: 'PLAYER_CARD_ON',
                         data: {
-                            player: p,
+                            player: newPlayer,
                             extraInfo: ex,
                         },
                     })
                 }
-            },
-            true
+            }
         )
     }
 

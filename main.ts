@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 const url = require('url')
 const { app, BrowserWindow } = require('electron')
@@ -55,7 +56,6 @@ function createMainWindow() {
     mainWindow.loadURL(indexPath)
     mainWindow.setMenu(null)
 
-
     // Don't show until we are ready and loaded
     mainWindow.once('ready-to-show', () => {
         mainWindow.show()
@@ -103,7 +103,7 @@ function serveJson(port) {
         response.writeHead(200, {
             'Content-Type': 'text/json',
             'Access-Control-Allow-Origin': '*',
-            'X-Powered-By': 'nodejs'
+            'X-Powered-By': 'nodejs',
         })
         fs.readFile('./localhostFiles/rankings.json', function (err, content) {
             response.write(content)
@@ -114,26 +114,28 @@ function serveJson(port) {
     })
 }
 
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const portfinder = require('portfinder')
 
-const portfinder = require('portfinder');
-
-portfinder.getPortPromise({
-    port: 2222,
-    stopPort: 3333,
-}).then((port) => {
-    console.log('portfinder free port:', port)
-    serveJson(port.toString())
-    fs.writeFile(
-        './localhostFiles/port.js',
-        'let port = ' + port,
-        'utf-8',
-        (err) => {
-            if (err) {
-                console.log('portfinder writing port.js file error:', err)
+portfinder
+    .getPortPromise({
+        port: 2222,
+        stopPort: 3333,
+    })
+    .then((port) => {
+        console.log('portfinder free port:', port)
+        serveJson(port.toString())
+        fs.writeFile(
+            './localhostFiles/port.js',
+            'let port = ' + port,
+            'utf-8',
+            (err) => {
+                if (err) {
+                    console.log('portfinder writing port.js file error:', err)
+                }
             }
-        },
-    )
-
-}).catch((err) => {
-    console.log('portfinder err:', err)
-});
+        )
+    })
+    .catch((err) => {
+        console.log('portfinder err:', err)
+    })
