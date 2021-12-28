@@ -186,7 +186,9 @@ export interface MatchHistoryReportResult {
     teamid: number
     race_id: number
     xpgained: number
-    counters: string
+    counters: {
+        [key: string]: number
+    }
     matchstartdate: number
 }
 
