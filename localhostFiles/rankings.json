@@ -3,13 +3,13 @@
         "team1": [
             {
                 "name": "sepi",
-                "ranking": "365",
+                "ranking": "363",
                 "country": "fi",
                 "faction": "uk"
             },
             {
                 "name": "Zhong Xina",
-                "ranking": "365",
+                "ranking": "363",
                 "country": "ru",
                 "faction": "uk"
             }
@@ -17,13 +17,13 @@
         "team2": [
             {
                 "name": "***",
-                "ranking": "432",
+                "ranking": "431",
                 "country": "cn",
                 "faction": "wer"
             },
             {
                 "name": "HauptmannWolfMan",
-                "ranking": "499",
+                "ranking": "500",
                 "country": "ph",
                 "faction": "okw"
             }

@@ -40,6 +40,11 @@ export interface Member {
     personal_statgroup_id: number
     profile_id: number
     xp: number
+
+    // TODO remove this maybe
+    totalGames?: number
+    lastGameTime?: number
+    extraInfo?: ExtraInfo
 }
 
 export interface RankForTableView {
@@ -314,5 +319,5 @@ export interface Store {
         extraInfo: NormalizedExtraInfo | null
     }
     view: string
-    foundPlayers: Player[]
+    foundPlayers: Member[]
 }

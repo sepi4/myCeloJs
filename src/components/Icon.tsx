@@ -5,7 +5,7 @@ import { IconProp, SizeProp } from '@fortawesome/fontawesome-svg-core'
 type IconProps = {
     icon: IconProp
     fun: () => void
-    size: SizeProp
+    size?: SizeProp
 }
 
 export default function Icon({

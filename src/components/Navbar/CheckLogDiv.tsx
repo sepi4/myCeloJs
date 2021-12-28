@@ -1,5 +1,4 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
 import IntervalInput from './IntervalInput'
 
 import setPlayersWithoutChecking from '../../functions/setPlayersWithoutChecking'
@@ -8,11 +7,13 @@ import getText from '../../functions/getText'
 
 import NavCheckbox from './NavCheckBox'
 import styles from './CheckLogDiv.module.css'
+import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
+import { SettingsType } from '../../types'
 
 function CheckLogDiv() {
-    const state = useSelector((state) => state)
-    const settings = state.settings
-    const dispatch = useDispatch()
+    const state = useAppSelector((state) => state)
+    const settings: SettingsType = state.settings
+    const dispatch = useAppDispatch()
 
     return (
         <div className={styles.container}>
@@ -43,13 +44,6 @@ function CheckLogDiv() {
                 <button
                     className={styles.btn}
                     onClick={() => {
-                        // readLog(
-                        //     state.settings.logLocation,
-                        //     data => setPlayersWithoutChecking(
-                        //         data, state, dispatch
-                        //     ),
-                        // )
-
                         readLog(state.settings.logLocation).then((data) => {
                             if (data) {
                                 setPlayersWithoutChecking(data, state, dispatch)

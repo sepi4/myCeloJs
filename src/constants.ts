@@ -8,3 +8,7 @@ export const STEAM = 'https://steamcommunity.com/profiles/'
 // relic
 export const RELIC_SERVER_BASE =
     'https://coh2-api.reliclink.com/community/leaderboard'
+
+//
+export const LATEST_RELEASES_URL =
+    'https://api.github.com/repos/sepi4/myCeloJs/releases/latest'

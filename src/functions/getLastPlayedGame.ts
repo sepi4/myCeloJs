@@ -1,16 +1,6 @@
-import { LeaderboardStat, Member } from '../types'
+import { ExtraInfo } from '../types'
 
-type Rank = {
-    name: string;
-    members: Member[];
-} & LeaderboardStat;
-
-type PlayerData = {
-    ranks: Rank[];
-    steamId: string;
-};
-
-export default function getLastPlayedGame(playerData: PlayerData) {
+export default function getLastPlayedGame(playerData: ExtraInfo) {
     let last
     for (const rankObj of playerData.ranks) {
         if (rankObj.lastmatchdate) {

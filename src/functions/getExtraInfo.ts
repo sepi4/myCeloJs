@@ -14,8 +14,7 @@ import { Player } from '../types'
 
 export function getExtraInfo(
     players: Player[],
-    callback: (a: NormalizedExtraInfo, b?: Player[][]) => void,
-    forPlayerCard?: boolean
+    callback: (a: NormalizedExtraInfo, b?: Player[][]) => void
 ) {
     // TODO - get rid of unnessary calls to server on app start
 
@@ -46,11 +45,6 @@ export function getExtraInfo(
                     cohTitles,
                     ids
                 )
-
-                if (forPlayerCard) {
-                    callback(result)
-                    return
-                }
 
                 const teams = guessRankings(players, personalStats, cohTitles)
                 callback(result, teams)
