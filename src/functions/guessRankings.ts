@@ -58,17 +58,12 @@ function addRankToTeamLeaderboardStats(
                     teamMarker = ' ²'
                 }
 
-                // if (!ls.rank || ls.rank < 1) {
-                //     ls.rank = '-'
-                // }
-
                 sg.rank = ls.rank
                 sg.teamMarker = teamMarker
                 teamIndex++
             }
         })
     })
-    // return arr;
 }
 
 function factionSide(team: Player[]) {
