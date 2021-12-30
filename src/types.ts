@@ -4,9 +4,7 @@ type Team = {
     name: string
     ranking: string
 }
-/**
- * rankings json file format
- */
+
 export interface RankingsJson {
     teams: {
         team1: Team[]
@@ -28,9 +26,6 @@ export interface Player {
 
 export type FactionName = 'okw' | 'sov' | 'uk' | 'usa' | 'wer'
 
-/**
- * From server, raw
- */
 export interface Member {
     alias: string
     country: string
@@ -218,9 +213,6 @@ export interface MatchHistoryStat {
     startgametime: number
 }
 
-/**
- * Profile as it return from Relic server on RecentMatchHistory call
- */
 export interface Profile {
     profile_id: number
     name: string
@@ -232,9 +224,6 @@ export interface Profile {
     country: string
 }
 
-/**
- * relic match history api return format
- */
 export interface RecentMatchHistory {
     result: {
         code: number
@@ -273,9 +262,6 @@ export interface NormalizedExtraInfo {
     [key: string]: ExtraInfo
 }
 
-/**
- * Format that come from warnings.log
- */
 export interface DataFromFile {
     faction: string
     name: string
@@ -284,14 +270,6 @@ export interface DataFromFile {
     slot: string
     teamSlot: string
     time: string
-
-    // faction: "soviet"
-    // name: "sepi"
-    // profileId: "580525"
-    // ranking: "-1"
-    // slot: "0"
-    // teamSlot: "0"
-    // time: "01:32:47.12"
 }
 
 export interface Store {

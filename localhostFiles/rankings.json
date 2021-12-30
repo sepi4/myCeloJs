@@ -2,30 +2,30 @@
     "teams": {
         "team1": [
             {
-                "name": "sepi",
-                "ranking": "361",
-                "country": "fi",
+                "name": "Zhong Xina",
+                "ranking": "290",
+                "country": "ru",
                 "faction": "uk"
             },
             {
-                "name": "Zhong Xina",
-                "ranking": "361",
-                "country": "ru",
+                "name": "sepi",
+                "ranking": "290",
+                "country": "fi",
                 "faction": "uk"
             }
         ],
         "team2": [
             {
-                "name": "***",
-                "ranking": "430",
-                "country": "cn",
-                "faction": "wer"
+                "name": "stickyxxx",
+                "ranking": "304",
+                "country": "ru",
+                "faction": "okw"
             },
             {
-                "name": "HauptmannWolfMan",
-                "ranking": "500",
-                "country": "ph",
-                "faction": "okw"
+                "name": "Engine1000",
+                "ranking": "314",
+                "country": "ru",
+                "faction": "wer"
             }
         ]
     },

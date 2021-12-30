@@ -4,11 +4,8 @@ import React from 'react'
 import PlayerExtraInfo from '../Player/PlayerExtraInfo'
 import styles from './PlayerCard.module.css'
 
-// @ts-ignore
 import logo_coh2 from '../../../img/logo_coh2.png'
-// @ts-ignore
 import logo_coh2stats from '../../../img/logo_coh2stats.png'
-// @ts-ignore
 import logo_steam from '../../../img/logo_steam.png'
 
 import getSiteLink from '../../functions/getSiteLink'

@@ -3,7 +3,7 @@ import styles from './Members.module.css'
 
 import { getExtraInfo } from '../../functions/getExtraInfo'
 import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
-import { Member, Player } from '../../types'
+import { Member } from '../../types'
 
 interface Props {
     member: Member
@@ -15,25 +15,19 @@ export default function Member(props: Props) {
     const dispatch = useAppDispatch()
 
     const handlePlayerCardOn = (p: Member) => {
-        const newPlayer: Player = {
+        const newPlayer = {
             country: p.country,
             name: p.alias,
             profileId: p.profile_id,
-
-            // TODO fix
-            faction: '',
-            time: '',
-            teamSlot: -1,
         }
 
         getExtraInfo(
-            [newPlayer],
+            [p.profile_id],
 
             (result) => {
                 if (!newPlayer.profileId) {
                     return
                 }
-
                 const ex = result[newPlayer.profileId]
                 if (result && ex) {
                     dispatch({

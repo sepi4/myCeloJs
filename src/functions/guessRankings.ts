@@ -185,7 +185,6 @@ export function guessRankings(
     for (const team of teams) {
         const side = factionSide(team)
         const statGroups = getStatGrops(team, data)
-        // console.log(statGroups)
 
         if (statGroups.length > 0 && team.length > 1) {
             const modeName = getTitleName(statGroups[0].members.length, side)
@@ -226,6 +225,5 @@ export function guessRankings(
         }
     }
 
-    // console.log('teams:', teams);
     return teams
 }

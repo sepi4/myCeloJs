@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from 'react'
 import { useState } from 'react'
 import getTextFun from '../../functions/getText'
@@ -8,9 +7,7 @@ import Members from './Members'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons'
 
-// @ts-ignore
 import star from '../../../img/star.png'
-// @ts-ignore
 import cross from '../../../img/cross.png'
 
 import { Rank as RankType } from '../../types'

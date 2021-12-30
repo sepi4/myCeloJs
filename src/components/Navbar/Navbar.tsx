@@ -77,17 +77,10 @@ export default function Navbar(props: Props) {
     }
 
     const handleOpenMyCard = () => {
-        const player = {
-            profileId: settings.profileId,
+        const id: number = settings.profileId
 
-            // TODO fix fake
-            faction: '',
-            name: '',
-            teamSlot: -1,
-            time: '',
-        }
-        getExtraInfo([player], (result) => {
-            const ex = result[player.profileId]
+        getExtraInfo([id], (result) => {
+            const ex = result[id]
             const rank = ex.ranks.find((x: Rank) => x.members?.length === 1)
             if (!rank?.members) {
                 return

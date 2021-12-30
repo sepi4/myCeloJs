@@ -189,8 +189,6 @@ export function players(state = initialStore.players, action: AnyAction) {
 export function navButtons(state = initialStore.navButtons, action: AnyAction) {
     switch (action.type) {
         case 'TOGGLE_NAVBUTTON':
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore TODO fix
             // eslint-disable-next-line no-case-declarations
             const obj = copyObj(state)
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment

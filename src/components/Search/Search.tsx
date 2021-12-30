@@ -31,20 +31,15 @@ export default function Search() {
     const handleKeyUp = (e: KeyboardEvent) => {
         if (e.key === 'Enter' && searchValue.trim().length > 0) {
             searchPlayers(searchValue, (res) => {
-                const arrPlayersIds = res.map((p) => {
+                const arrPlayers = res.map((p) => {
                     return {
                         country: p.country,
                         name: p.name,
                         profileId: p.profile_id,
-
-                        // fake values
-                        time: '',
-                        teamSlot: -1,
-                        faction: '',
                     }
                 })
 
-                if (arrPlayersIds.length === 0) {
+                if (arrPlayers.length === 0) {
                     dispatch({
                         type: 'SET_FOUND_PLAYERS',
                         data: [],
@@ -52,7 +47,13 @@ export default function Search() {
                     return
                 }
 
-                getExtraInfo(arrPlayersIds, (result) => {
+                const ids: number[] = []
+                for (const p of arrPlayers) {
+                    if (p.profileId) {
+                        ids.push(p.profileId)
+                    }
+                }
+                getExtraInfo(ids, (result) => {
                     const newPlayers = res
                         .map((p) => {
                             if (result[p.profile_id]) {

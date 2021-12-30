@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 import { refactorData } from './refactorData'
-import { guessRankings } from './guessRankings'
+// import { guessRankings } from './guessRankings'
 
 import { RELIC_SERVER_BASE } from '../constants'
 import {
@@ -10,20 +10,17 @@ import {
     PersonalStats,
 } from '../types'
 
-import { Player } from '../types'
-
 export function getExtraInfo(
-    players: Player[],
-    callback: (a: NormalizedExtraInfo, b?: Player[][]) => void
+    ids: number[],
+    callback: (
+        a: NormalizedExtraInfo,
+        b?: {
+            personalStats: PersonalStats
+            cohTitles: AvailableLeaderboard
+        }
+    ) => void
 ) {
     // TODO - get rid of unnessary calls to server on app start
-
-    const ids: number[] = []
-    for (const p of players) {
-        if (p.profileId) {
-            ids.push(p.profileId)
-        }
-    }
 
     const strIds: string = ids.join(',')
     const url = `${RELIC_SERVER_BASE}/GetPersonalStat?title=coh2&profile_ids=[${strIds}]`
@@ -46,12 +43,13 @@ export function getExtraInfo(
                     ids
                 )
 
-                const teams = guessRankings(players, personalStats, cohTitles)
-                callback(result, teams)
+                callback(result, {
+                    personalStats,
+                    cohTitles,
+                })
             }
         })
         .catch((error) => {
             console.log(error)
-            // callback(result)
         })
 }

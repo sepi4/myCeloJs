@@ -1,10 +1,7 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import React from 'react'
 import { useEffect } from 'react'
-// import { useDispatch, useSelector } from 'react-redux'
 
 import useSound from 'use-sound'
-// @ts-ignore
 import audioLocation from './bell.mp3'
 
 // components
@@ -23,6 +20,7 @@ import checkLogData from './functions/checkLogData'
 import electron from 'electron'
 import { useAppDispatch, useAppSelector } from './hooks/customReduxHooks'
 import { Player } from './types'
+import { guessRankings } from './functions/guessRankings'
 const appVersion = electron.remote.app.getVersion()
 const settingsDir = electron.remote.app.getPath('userData')
 
@@ -31,9 +29,7 @@ document.title = 'myCelo ' + appVersion
 function App() {
     const [playAudio] = useSound(audioLocation)
 
-    // const dispatch = useDispatch()
     const dispatch = useAppDispatch()
-    // const state = useSelector((state) => state)
     const state = useAppSelector((state) => state)
 
     const writeNewRankingsFile = (data: Player[]) => {
@@ -74,9 +70,6 @@ function App() {
             }
 
             if (state.settings && state.settings.logLocation) {
-                // readLog(state.settings.logLocation, (data) => {
-                //     checkLogData({ data, state, dispatch })
-                // })
                 readLog(state.settings.logLocation).then((data) => {
                     if (data) {
                         checkLogData({ data, state, dispatch })
@@ -84,7 +77,21 @@ function App() {
                 })
             }
         } else if (state.extraInfo === null && state.players.length > 0) {
-            getExtraInfo(state.players, (data, teams) => {
+            const pp: Player[] = state.players
+
+            const ids: number[] = []
+            for (const p of pp) {
+                if (p.profileId) {
+                    ids.push(p.profileId)
+                }
+            }
+
+            getExtraInfo(ids, (result, x) => {
+                if (!x) {
+                    return
+                }
+
+                const teams = guessRankings(pp, x.personalStats, x.cohTitles)
                 const newPlayers: Player[] = []
                 if (teams) {
                     teams.forEach((team: Player[]) => {
@@ -97,7 +104,7 @@ function App() {
                 dispatch({
                     type: 'SET_EXTRA_INFO',
                     data: {
-                        extraInfo: data,
+                        extraInfo: result,
                         newPlayers,
                     },
                 })
@@ -147,7 +154,6 @@ function App() {
         if (state.settings && state.settings.logLocation) {
             readLog(state.settings.logLocation).then((data) => {
                 if (data) {
-                    // kissa
                     checkLogData({ data, state, dispatch })
                 }
             })

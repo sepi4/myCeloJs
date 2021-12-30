@@ -2,7 +2,7 @@ import getLocalStorage from './functions/getLocalStorage'
 
 import { Store, CountryFlagsLocation } from './types'
 
-// TODO ANY
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function importAll(r: any) {
     return r.keys().map(r)
 }
