@@ -2,16 +2,16 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { shell } from 'electron'
 import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation'
 import { getFactionById } from '../../functions/simpleFunctions'
-import getSiteLink from '../../functions/getSiteLink'
 import getText from '../../functions/getText'
 import {
     MatchHistoryReportResult,
     NormalizedProfiles,
     SettingsType,
 } from '../../types'
+import { getExtraInfo } from '../../functions/getExtraInfo'
+import { useAppDispatch } from '../../hooks/customReduxHooks'
 
 const StyledTh = styled.th`
     word-wrap: break-word;
@@ -30,7 +30,7 @@ interface Props {
 }
 
 function ModalTableHeaders(props: Props) {
-    console.log('players', props.players)
+    const dispatch = useAppDispatch()
     return (
         <thead>
             <tr>
@@ -41,7 +41,6 @@ function ModalTableHeaders(props: Props) {
                 {props.players.map((p) => (
                     <StyledTh key={p.profile_id} len={props.players.length}>
                         <img
-                            // className={styles.factionImg}
                             src={getFactionFlagLocation(
                                 getFactionById(p.race_id)
                             )}
@@ -60,10 +59,6 @@ function ModalTableHeaders(props: Props) {
                     {getText('name', props.settings)}
                 </StyledTh>
                 {props.players.map((p) => {
-                    const steamId =
-                        props.profiles[p.profile_id].name.substring(7)
-                    const link = getSiteLink(props.settings.siteLink) + steamId
-
                     return (
                         <StyledTh
                             key={p.profile_id}
@@ -80,9 +75,30 @@ function ModalTableHeaders(props: Props) {
                         >
                             <a
                                 title={props.profiles[p.profile_id].alias}
-                                onClick={() =>
-                                    steamId ? shell.openExternal(link) : null
-                                }
+                                onClick={() => {
+                                    getExtraInfo([p.profile_id], (result) => {
+                                        const pro = props.profiles[p.profile_id]
+                                        const newPlayer = {
+                                            country: pro.country,
+                                            name: pro.alias,
+                                            profileId: pro.profile_id,
+                                        }
+                                        if (!newPlayer.profileId) {
+                                            return
+                                        }
+
+                                        const ex = result[newPlayer.profileId]
+                                        if (result && ex) {
+                                            dispatch({
+                                                type: 'PLAYER_CARD_ON',
+                                                data: {
+                                                    player: newPlayer,
+                                                    extraInfo: ex,
+                                                },
+                                            })
+                                        }
+                                    })
+                                }}
                             >
                                 {props.profiles[p.profile_id].alias}
                             </a>

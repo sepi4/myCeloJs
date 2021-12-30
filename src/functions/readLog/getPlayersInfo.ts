@@ -5,7 +5,7 @@ import { Player } from '../../types'
  * // 21:01:16.90   GAME -- Human Player: 2 sepi 580525 0 soviet
  *
  * @param arr string arr from warnings.log with players data
- * @returns  TODO
+ * @returns  arr of players objects
  */
 export function getPlayersInfo(arr: string[]): Player[] {
     let time: string | undefined
