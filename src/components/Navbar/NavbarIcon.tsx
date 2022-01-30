@@ -19,8 +19,6 @@ export default function NavBarIcon(props: Props) {
             color="gray"
             onClick={props.fun}
             style={{
-                marginRight: '0.5em',
-                marginLeft: '0.5em',
                 cursor: 'pointer',
                 ...props.style,
             }}

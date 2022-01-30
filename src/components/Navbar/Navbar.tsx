@@ -152,9 +152,17 @@ export default function Navbar(props: Props) {
 
     return (
         <div className={styles.navbar}>
-            {userIcon}
-
-            {searchIcon}
+            <div
+                style={{
+                    margin: '0 1em',
+                    display: 'grid',
+                    gap: '0.5em',
+                    gridTemplateColumns: 'auto auto',
+                }}
+            >
+                {userIcon}
+                {searchIcon}
+            </div>
 
             <div className={styles.container}>
                 <div className={styles.column}>
@@ -174,7 +182,13 @@ export default function Navbar(props: Props) {
                 </div>
             </div>
 
-            {settingsIcon}
+            <div
+                style={{
+                    margin: '0 1em',
+                }}
+            >
+                {settingsIcon}
+            </div>
         </div>
     )
 }

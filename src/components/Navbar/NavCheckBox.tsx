@@ -1,4 +1,6 @@
 import React from 'react'
+
+import { Checkbox, Switch } from '@mui/material'
 import moduleStyle from './NavCheckBox.module.css'
 
 interface Props {
@@ -12,17 +14,25 @@ export default function NavCheckbox(props: Props) {
 
     return (
         <span className={moduleStyle.span}>
-            <input
-                className={moduleStyle.input}
-                onChange={props.handler}
-                defaultChecked={props.checked}
-                id={id}
-                type="checkbox"
-            />
+            <span
+                style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                }}
+            >
+                <Checkbox
+                    size="small"
+                    id={id}
+                    onChange={props.handler}
+                    checked={props.checked}
+                    title={props.text}
+                />
 
-            <label className={moduleStyle.label} htmlFor={id}>
-                {props.text}
-            </label>
+                <label className={moduleStyle.label} htmlFor={id}>
+                    {props.text}
+                </label>
+            </span>
         </span>
     )
 }

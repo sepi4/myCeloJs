@@ -1,4 +1,5 @@
 /* eslint-disable indent */
+import { TextField } from '@mui/material'
 import React, { useRef, useState } from 'react'
 
 import getText from '../../functions/getText'
@@ -40,7 +41,40 @@ function IntervalInput() {
 
     return (
         <span className={styles.container}>
-            <input
+            <TextField
+                sx={{
+                    padding: 0,
+                    margin: 0,
+                    '& .MuiOutlinedInput-input': {
+                        margin: '0.1em',
+                        padding: '0.1em',
+                        color: '#808080',
+                        textAlign: 'center',
+                    },
+                }}
+                error={error}
+                focused
+                // helperText={error ? getText('integer_error', settings) : ''}
+                // color="blue"
+
+                size="small"
+                // id="outlined-uncontrolled"
+                label={getText('sec', settings)}
+                defaultValue={
+                    state.logCheckInterval ? state.logCheckInterval : ''
+                }
+                ref={refInputElement}
+                onBlur={checkNumbers}
+                onKeyDown={(e: any) =>
+                    e.key === 'Enter'
+                        ? checkNumbers(e)
+                        : error
+                        ? setError(false)
+                        : null
+                }
+            />
+
+            {/* <input
                 className={styles.input}
                 defaultValue={
                     state.logCheckInterval ? state.logCheckInterval : ''
@@ -61,7 +95,7 @@ function IntervalInput() {
                 <div className={styles.error}>
                     {getText('integer_error', settings)}
                 </div>
-            )}
+            )} */}
         </span>
     )
 }

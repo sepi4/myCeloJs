@@ -21,6 +21,7 @@ import electron from 'electron'
 import { useAppDispatch, useAppSelector } from './hooks/customReduxHooks'
 import { Player } from './types'
 import { guessRankings } from './functions/guessRankings'
+import { Button } from '@mui/material'
 const appVersion = electron.remote.app.getVersion()
 const settingsDir = electron.remote.app.getPath('userData')
 
@@ -163,7 +164,7 @@ function App() {
     return (
         <main
             style={{
-                marginTop: '4em',
+                marginTop: '4.5em',
             }}
         >
             <Navbar {...{ handleSetSettingsView }} />

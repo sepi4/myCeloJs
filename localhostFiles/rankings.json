@@ -2,30 +2,42 @@
     "teams": {
         "team1": [
             {
-                "name": "Zhong Xina",
-                "ranking": "292",
-                "country": "ru",
-                "faction": "uk"
+                "name": "sepi",
+                "ranking": "1093",
+                "country": "fi",
+                "faction": "okw"
             },
             {
-                "name": "sepi",
-                "ranking": "292",
+                "name": "Babka",
+                "ranking": "1093",
                 "country": "fi",
-                "faction": "uk"
+                "faction": "wer"
+            },
+            {
+                "name": "Stertitius",
+                "ranking": "1093",
+                "country": "fi",
+                "faction": "wer"
             }
         ],
         "team2": [
             {
-                "name": "stickyxxx",
-                "ranking": "304",
-                "country": "ru",
-                "faction": "okw"
+                "name": "jessyjames",
+                "ranking": "-",
+                "country": "lb",
+                "faction": "sov"
             },
             {
-                "name": "Engine1000",
-                "ranking": "313",
-                "country": "ru",
-                "faction": "wer"
+                "name": "Miško",
+                "ranking": "-",
+                "country": "sk",
+                "faction": "usa"
+            },
+            {
+                "name": "E_404_r",
+                "ranking": "-",
+                "country": "lb",
+                "faction": "sov"
             }
         ]
     },

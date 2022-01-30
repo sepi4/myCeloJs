@@ -1,4 +1,5 @@
 import React from 'react'
+import { Paper } from '@mui/material'
 import { useAppSelector } from '../../hooks/customReduxHooks'
 import { NormalizedExtraInfo, Player as PlayerType } from '../../types'
 
@@ -14,13 +15,7 @@ function Team(props: Props) {
         (state) => state.extraInfo
     )
     return (
-        <div
-            style={{
-                background: '#181818',
-                padding: '0.5em 1.5em',
-                margin: '1em 0',
-            }}
-        >
+        <Paper elevation={3}>
             {props.players.map((p, i) => (
                 <Player
                     key={p.profileId ? p.profileId : i}
@@ -32,7 +27,7 @@ function Team(props: Props) {
                     teamIndex={props.teamIndex}
                 />
             ))}
-        </div>
+        </Paper>
     )
 }
 
