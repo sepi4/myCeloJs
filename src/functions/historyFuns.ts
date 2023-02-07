@@ -8,7 +8,7 @@ import {
 } from '../types'
 
 export const getHistoryUrls = (id: number | undefined) => {
-    const url = `${RELIC_SERVER_BASE}/getRecentMatchHistory?title=coh2&profile_ids=[${id}]`
+    const url = `${RELIC_SERVER_BASE}/getRecentMatchHistoryByProfileId?title=coh2&profile_id=${id}`
     const url2 = `${RELIC_SERVER_BASE}/GetAvailableLeaderboards?title=coh2`
     return [url, url2]
 }
