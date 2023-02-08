@@ -6,6 +6,7 @@ interface Props {
     color?: string
     width?: string
     cursor?: string
+    justifyContent?: string
 }
 
 function Cell(props: Props) {
@@ -13,11 +14,11 @@ function Cell(props: Props) {
         <div
             style={{
                 color: props.color,
-                width: props.width || '20%',
-                cursor: props.cursor || 'default',
+                width: props.width ?? '20%',
+                cursor: props.cursor ?? 'default',
 
                 display: 'flex',
-                justifyContent: 'center',
+                justifyContent: props.justifyContent ?? 'center',
                 overflow: 'hidden',
                 whiteSpace: 'nowrap',
             }}

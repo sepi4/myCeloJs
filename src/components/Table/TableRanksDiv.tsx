@@ -19,6 +19,7 @@ function TableRanksDiv({ solo, index, name }: Props) {
         let totalGames = 0
         let rank: number | string = '-'
         let streak: number | string = '-'
+        let ranktotal = r?.ranktotal ?? '?'
         if (r) {
             const x = (r.wins / (r.wins + r.losses)) * 100
             per = x.toFixed(0) + '%'
@@ -31,7 +32,7 @@ function TableRanksDiv({ solo, index, name }: Props) {
         return (
             <TableRankRow
                 key={x + i + 'rank'}
-                {...{ rank, num, per, streak, totalGames }}
+                {...{ rank, num, per, streak, totalGames, ranktotal }}
             />
         )
     })

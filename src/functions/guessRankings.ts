@@ -155,9 +155,9 @@ export function guessRankings(
     titles: AvailableLeaderboard
 ) {
     function rankToRandomPlayer(team: Player[], player: Player) {
-        const s = team.length
-        const fn = getFactionName(player.faction)
-        const matchTypeName = `${s}v${s}${fn}`
+        const teamSize = team.length
+        const factionName = getFactionName(player.faction)
+        const matchTypeName = `${teamSize}v${teamSize}${factionName}`
         const leaderboardId = getTitlesLeaderboardId(matchTypeName, titles)
 
         const playerId = player.profileId
@@ -168,14 +168,14 @@ export function guessRankings(
             playerStatGroupId = playerStatGroup.id
         }
 
-        const pls = getPlayerLeaderboardStat(
+        const playerLeaderboardStat = getPlayerLeaderboardStat(
             playerStatGroupId,
             leaderboardId,
             data
         )
 
-        if (pls && pls.rank) {
-            player.ranking = pls.rank
+        if (playerLeaderboardStat?.rank) {
+            player.ranking = playerLeaderboardStat.rank
         }
     }
 

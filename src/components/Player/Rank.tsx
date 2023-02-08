@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import getTextFun from '../../functions/getText'
 
@@ -15,6 +15,7 @@ import { useAppSelector } from '../../hooks/customReduxHooks'
 
 interface Props {
     rank: RankType
+    allOpen: boolean
 }
 
 function Rank(props: Props) {
@@ -44,6 +45,9 @@ function Rank(props: Props) {
         rn = rn.replace(/^(\dv\d)/, '')
         return m + ' ' + sw(rn)
     }
+    useEffect(() => {
+        setShowMembers(props.allOpen)
+    }, [props.allOpen])
 
     const arrow = (
         <FontAwesomeIcon

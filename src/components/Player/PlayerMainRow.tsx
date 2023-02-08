@@ -139,7 +139,7 @@ function PlayerMainRow(props: Props) {
         <div className={styles.container}>
             <MainRowSpan width="20%" justifyContent="flex-start">
                 <>
-                    {dropDownArrow} {rank}
+                    {dropDownArrow} <span>{rank}</span>
                 </>
             </MainRowSpan>
             <MainRowSpan width="15%">{faction}</MainRowSpan>

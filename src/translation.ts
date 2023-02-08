@@ -143,6 +143,18 @@ const text: Translations = {
     },
 
     // dropdown menu  ---------------------------------
+    of: {
+        en: 'of',
+        ru: 'из',
+    },
+    expand_all: {
+        en: 'expand all',
+        ru: 'открыть все',
+    },
+    close_all: {
+        en: 'close all',
+        ru: 'закрыть все',
+    },
     rank: {
         en: 'rank',
         ru: 'ранг',

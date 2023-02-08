@@ -77,10 +77,10 @@ function App() {
                 })
             }
         } else if (state.extraInfo === null && state.players.length > 0) {
-            const pp: Player[] = state.players
+            const players: Player[] = state.players
 
             const ids: number[] = []
-            for (const p of pp) {
+            for (const p of players) {
                 if (p.profileId) {
                     ids.push(p.profileId)
                 }
@@ -91,7 +91,7 @@ function App() {
                     return
                 }
 
-                const teams = guessRankings(pp, x.personalStats, x.cohTitles)
+                const teams = guessRankings(players, x.personalStats, x.cohTitles)
                 const newPlayers: Player[] = []
                 if (teams) {
                     teams.forEach((team: Player[]) => {
