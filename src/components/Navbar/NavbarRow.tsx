@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from './NavbarRow.module.css'
 
 interface Props {

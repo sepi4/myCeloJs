@@ -1,4 +1,3 @@
-import React from 'react'
 import IntervalInput from './IntervalInput'
 
 import setPlayersWithoutChecking from '../../functions/setPlayersWithoutChecking'

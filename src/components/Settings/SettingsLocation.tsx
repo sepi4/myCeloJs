@@ -1,4 +1,3 @@
-import React from 'react'
 import electron from 'electron'
 const { app } = electron.remote
 

@@ -1,4 +1,3 @@
-import React from 'react'
 import { Member as MemberType } from '../../types'
 import Member from './Member'
 

@@ -1,4 +1,3 @@
-import React from 'react'
 import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation'
 import { FactionName } from '../../types'
 

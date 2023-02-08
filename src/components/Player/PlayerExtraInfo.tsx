@@ -1,5 +1,3 @@
-import React from 'react'
-
 import TableDiv from '../Table/TableDiv'
 import ListDiv from '../ListDiv/ListDiv'
 import History from './History'

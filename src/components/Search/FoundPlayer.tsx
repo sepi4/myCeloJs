@@ -1,5 +1,3 @@
-import React from 'react'
-
 import styles from './FoundPlayer.module.css'
 import getText from '../../functions/getText'
 import { getTimeAgo } from '../../functions/time'

@@ -1,4 +1,3 @@
-import React from 'react'
 import moduleStyle from './NavCheckBox.module.css'
 
 interface Props {

@@ -1,4 +1,3 @@
-import React from 'react'
 import getText from '../../functions/getText'
 import { useAppSelector } from '../../hooks/customReduxHooks'
 import styles from './TableRankRow.module.css'

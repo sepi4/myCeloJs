@@ -1,5 +1,3 @@
-import React from 'react'
-
 import styles from './PlayerMainRow.module.css'
 
 import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation'

@@ -1,5 +1,3 @@
-import React from 'react'
-
 interface Props {
     children?: string | number | JSX.Element
     title?: string

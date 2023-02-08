@@ -1,5 +1,3 @@
-import React from 'react'
-
 import ColumnTitle from './ColumnTitle'
 import getText from '../../functions/getText'
 

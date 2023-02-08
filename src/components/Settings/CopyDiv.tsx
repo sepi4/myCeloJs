@@ -1,5 +1,3 @@
-import React from 'react'
-
 import electron from 'electron'
 const { clipboard } = electron.remote
 

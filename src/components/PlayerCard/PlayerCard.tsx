@@ -1,6 +1,4 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import React from 'react'
-
 import PlayerExtraInfo from '../Player/PlayerExtraInfo'
 import styles from './PlayerCard.module.css'
 

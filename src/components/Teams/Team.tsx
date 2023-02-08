@@ -1,4 +1,3 @@
-import React from 'react'
 import { useAppSelector } from '../../hooks/customReduxHooks'
 import { NormalizedExtraInfo, Player as PlayerType } from '../../types'
 

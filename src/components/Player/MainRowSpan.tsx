@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from './MainRowSpan.module.css'
 
 interface Props {

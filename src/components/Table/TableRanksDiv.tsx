@@ -1,5 +1,3 @@
-import React from 'react'
-
 import TableRankRow from './TableRankRow'
 import FactionIcon from './FactionIcon'
 import { FactionName, Rank } from '../../types'

@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from './Members.module.css'
 
 import { getExtraInfo } from '../../functions/getExtraInfo'

@@ -1,4 +1,3 @@
-import React from 'react'
 import getText from '../../functions/getText'
 import { useAppSelector } from '../../hooks/customReduxHooks'
 import { Rank as RankType } from '../../types'

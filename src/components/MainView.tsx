@@ -1,5 +1,3 @@
-import React from 'react'
-
 import Team from './Teams/Team'
 import Settings from './Settings/Settings'
 import PlayerCard from './PlayerCard/PlayerCard'
