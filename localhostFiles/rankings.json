@@ -2,30 +2,30 @@
     "teams": {
         "team1": [
             {
-                "name": "Zhong Xina",
-                "ranking": "292",
-                "country": "ru",
-                "faction": "uk"
+                "name": "Babka",
+                "ranking": "1847",
+                "country": "fi",
+                "faction": "sov"
             },
             {
-                "name": "sepi",
-                "ranking": "292",
+                "name": "sepi | ПУТИНА В МОГИЛУ",
+                "ranking": "1847",
                 "country": "fi",
-                "faction": "uk"
+                "faction": "sov"
             }
         ],
         "team2": [
             {
-                "name": "stickyxxx",
-                "ranking": "304",
-                "country": "ru",
+                "name": "Bogeyman",
+                "ranking": "2057",
+                "country": "ua",
                 "faction": "okw"
             },
             {
-                "name": "Engine1000",
-                "ranking": "313",
-                "country": "ru",
-                "faction": "wer"
+                "name": "KTN",
+                "ranking": "2057",
+                "country": "ua",
+                "faction": "okw"
             }
         ]
     },
