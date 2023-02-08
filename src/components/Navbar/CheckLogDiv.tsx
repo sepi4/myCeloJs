@@ -27,33 +27,40 @@ function CheckLogDiv() {
                 }
             />
 
-            {state.autoLogChecking ? (
+            {
                 <>
-                    <IntervalInput />
-                    <NavCheckbox
-                        text={getText('alert', settings)}
-                        checked={state.alert ? state.alert : false}
-                        handler={() =>
-                            dispatch({
-                                type: 'TOGGLE_ALERT',
+                    {state.autoLogChecking ? (
+                        <>
+                            <IntervalInput />
+                            <NavCheckbox
+                                text={getText('alert', settings)}
+                                checked={state.alert ? state.alert : false}
+                                handler={() =>
+                                    dispatch({
+                                        type: 'TOGGLE_ALERT',
+                                    })
+                                }
+                            />
+                        </>
+                    ) : null}
+                    <button
+                        className={styles.btn}
+                        onClick={() => {
+                            readLog(state.settings.logLocation).then((data) => {
+                                if (data) {
+                                    setPlayersWithoutChecking(
+                                        data,
+                                        state,
+                                        dispatch
+                                    )
+                                }
                             })
-                        }
-                    />
+                        }}
+                    >
+                        {getText('check_log_button', settings)}
+                    </button>
                 </>
-            ) : (
-                <button
-                    className={styles.btn}
-                    onClick={() => {
-                        readLog(state.settings.logLocation).then((data) => {
-                            if (data) {
-                                setPlayersWithoutChecking(data, state, dispatch)
-                            }
-                        })
-                    }}
-                >
-                    {getText('check_log_button', settings)}
-                </button>
-            )}
+            }
         </div>
     )
 }
