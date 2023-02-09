@@ -163,8 +163,13 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 <a name="updates"></a>
 
 ## Updates:
+* **version 1.9.0.** 
+    - Source code to TS
+    - Bug fixes
+    - Check log button visible always
+    - Expand all teams button
 * **version 1.8.1.** 
-    - Bugfix
+    - Bug fixes
 * **version 1.8.0.** 
     - Add player card view
     - Add steam id option to settings
