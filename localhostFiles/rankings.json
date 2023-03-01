@@ -2,30 +2,54 @@
     "teams": {
         "team1": [
             {
-                "name": "Babka",
-                "ranking": "1847",
+                "name": "sepi | ПУТИНА В МОГИЛУ",
+                "ranking": "-",
                 "country": "fi",
-                "faction": "sov"
+                "faction": "british_africa"
             },
             {
-                "name": "sepi | ПУТИНА В МОГИЛУ",
-                "ranking": "1847",
+                "name": "Sgannarel",
+                "ranking": "571",
+                "country": "fr",
+                "faction": "americans"
+            },
+            {
+                "name": "ch1lly1981",
+                "ranking": "-",
+                "country": "gb",
+                "faction": "british_africa"
+            },
+            {
+                "name": "Babka",
+                "ranking": "-",
                 "country": "fi",
-                "faction": "sov"
+                "faction": "americans"
             }
         ],
         "team2": [
             {
-                "name": "Bogeyman",
-                "ranking": "2057",
-                "country": "ua",
-                "faction": "okw"
+                "name": "taxation is theft",
+                "ranking": "867",
+                "country": "de",
+                "faction": "afrika_korps"
             },
             {
-                "name": "KTN",
-                "ranking": "2057",
-                "country": "ua",
-                "faction": "okw"
+                "name": "Smö",
+                "ranking": "714",
+                "country": "de",
+                "faction": "afrika_korps"
+            },
+            {
+                "name": "Takanation",
+                "ranking": "1085",
+                "country": "de",
+                "faction": "germans"
+            },
+            {
+                "name": "P2yk0",
+                "ranking": "-",
+                "country": "de",
+                "faction": "germans"
             }
         ]
     },

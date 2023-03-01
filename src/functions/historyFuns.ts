@@ -1,4 +1,4 @@
-import { RELIC_SERVER_BASE } from '../constants'
+import { RELIC_SERVER_BASE_COH2 } from '../constants'
 import {
     RecentMatchHistory,
     AvailableLeaderboard,
@@ -8,8 +8,8 @@ import {
 } from '../types'
 
 export const getHistoryUrls = (id: number | undefined) => {
-    const url = `${RELIC_SERVER_BASE}/getRecentMatchHistoryByProfileId?title=coh2&profile_id=${id}`
-    const url2 = `${RELIC_SERVER_BASE}/GetAvailableLeaderboards?title=coh2`
+    const url = `${RELIC_SERVER_BASE_COH2}/getRecentMatchHistoryByProfileId?title=coh2&profile_id=${id}`
+    const url2 = `${RELIC_SERVER_BASE_COH2}/GetAvailableLeaderboards?title=coh2`
     return [url, url2]
 }
 

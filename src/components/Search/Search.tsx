@@ -30,7 +30,10 @@ export default function Search() {
 
     const handleKeyUp = (e: KeyboardEvent) => {
         if (e.key === 'Enter' && searchValue.trim().length > 0) {
-            searchPlayers(searchValue, (res) => {
+            searchPlayers(
+                state.navButtons.coh3,
+                searchValue, 
+                (res) => {
                 const arrPlayers = res.map((p) => {
                     return {
                         country: p.country,
@@ -53,7 +56,10 @@ export default function Search() {
                         ids.push(p.profileId)
                     }
                 }
-                getExtraInfo(ids, (result) => {
+                getExtraInfo(
+                    state.navButtons.coh3,
+                    ids, 
+                    (result) => {
                     const newPlayers = res
                         .map((p) => {
                             if (result[p.profile_id]) {

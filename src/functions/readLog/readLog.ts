@@ -1,13 +1,23 @@
-// import fs from 'fs/promises'
 import { promises as fs } from 'fs'
 
 import { getPlayersInfo } from './getPlayersInfo'
 import { Player } from '../../types'
+import { getPlayersInfoCoh3 } from './getPlayersInfoCoh3'
 
 export function getCurrentUserAlias(lines: string[]) {
     for (let i = 0; i < lines.length; i++) {
         const row = lines[i]
         const m = row.match(/GAME -- Current user name is \[(.+)\]/)
+        if (m) {
+            return m[1]
+        }
+    }
+}
+
+export function getCurrentUserAliasCoh3(lines: string[]) {
+    for (let i = 0; i < lines.length; i++) {
+        const row = lines[i]
+        const m = row.match(/GAME -- Current Steam name is \[(.+)\]/)
         if (m) {
             return m[1]
         }
@@ -64,18 +74,18 @@ export function switchTeams(info: Player[], currentUser: string): Player[] {
 }
 
 export async function readLog(
-    fileLocation: string
-    // callback: (info: Player[]) => void
+    coh3: boolean,
+    fileLocation: string,
 ) {
     fileLocation = fileLocation.replace(/\\/, '\\\\')
     try {
         const data = await fs.readFile(fileLocation, 'utf-8')
         const lines = data.split('\n')
 
-        const currentUserAlias: string | undefined = getCurrentUserAlias(lines)
+        const currentUserAlias: string | undefined = coh3 ? getCurrentUserAliasCoh3(lines) : getCurrentUserAlias(lines)
 
         const arr: string[] = getLines(lines)
-        let psInfo = getPlayersInfo(arr)
+        let psInfo = coh3 ? getPlayersInfoCoh3(arr) : getPlayersInfo(arr)
 
         if (currentUserAlias) {
             psInfo = switchTeams(psInfo, currentUserAlias)

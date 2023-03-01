@@ -45,7 +45,7 @@ function CheckLogDiv() {
                     <button
                         className={styles.btn}
                         onClick={() => {
-                            readLog(state.settings.logLocation).then((data) => {
+                            readLog(state.navButtons.coh3, state.settings.logLocation).then((data) => {
                                 if (data) {
                                     setPlayersWithoutChecking(
                                         data,

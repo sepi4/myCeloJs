@@ -36,7 +36,7 @@ function App() {
             type: 'CLEAR_EXTRA_INFO',
         })
         if (state.settings) {
-            writeRankings(data, state.settings.rankingsHorizontal)
+            writeRankings(state.navButtons.coh3, data, state.settings.rankingsHorizontal)
         }
     }
 
@@ -69,11 +69,13 @@ function App() {
             }
 
             if (state.settings && state.settings.logLocation) {
-                readLog(state.settings.logLocation).then((data) => {
-                    if (data) {
-                        checkLogData({ data, state, dispatch })
+                readLog(state.navButtons.coh3, state.settings.logLocation).then(
+                    (data) => {
+                        if (data) {
+                            checkLogData({ data, state, dispatch })
+                        }
                     }
-                })
+                )
             }
         } else if (state.extraInfo === null && state.players.length > 0) {
             const players: Player[] = state.players
@@ -85,12 +87,17 @@ function App() {
                 }
             }
 
-            getExtraInfo(ids, (result, x) => {
+            getExtraInfo(state.navButtons.coh3, ids, (result, x) => {
                 if (!x) {
                     return
                 }
 
-                const teams = guessRankings(players, x.personalStats, x.cohTitles)
+                const teams = guessRankings(
+                    state.navButtons.coh3,
+                    players,
+                    x.personalStats,
+                    x.cohTitles
+                )
                 const newPlayers: Player[] = []
                 if (teams) {
                     teams.forEach((team: Player[]) => {
@@ -108,7 +115,7 @@ function App() {
                     },
                 })
 
-                writeRankings(newPlayers, state.settings.rankingsHorizontal)
+                writeRankings(state.navButtons.coh3, newPlayers, state.settings.rankingsHorizontal)
             })
         }
 
@@ -118,15 +125,22 @@ function App() {
 
         const intervalId = setInterval(() => {
             if (state.settings && state.settings.logLocation) {
-                readLog(state.settings.logLocation).then((data) => {
-                    if (data) {
-                        if (state.alert) {
-                            checkLogData({ data, state, dispatch, playAudio })
-                        } else {
-                            checkLogData({ data, state, dispatch })
+                readLog(state.navButtons.coh3, state.settings.logLocation).then(
+                    (data) => {
+                        if (data) {
+                            if (state.alert) {
+                                checkLogData({
+                                    data,
+                                    state,
+                                    dispatch,
+                                    playAudio,
+                                })
+                            } else {
+                                checkLogData({ data, state, dispatch })
+                            }
                         }
                     }
-                })
+                )
             }
         }, state.logCheckInterval * 1000)
 
@@ -138,11 +152,13 @@ function App() {
             return
         }
         if (state.settings && state.settings.logLocation) {
-            readLog(state.settings.logLocation).then((data) => {
-                if (data) {
-                    writeNewRankingsFile(data)
+            readLog(state.navButtons.coh3, state.settings.logLocation).then(
+                (data) => {
+                    if (data) {
+                        writeNewRankingsFile(data)
+                    }
                 }
-            })
+            )
         }
     }, [state.settings])
 
@@ -151,11 +167,13 @@ function App() {
             return
         }
         if (state.settings && state.settings.logLocation) {
-            readLog(state.settings.logLocation).then((data) => {
-                if (data) {
-                    checkLogData({ data, state, dispatch })
+            readLog(state.navButtons.coh3, state.settings.logLocation).then(
+                (data) => {
+                    if (data) {
+                        checkLogData({ data, state, dispatch })
+                    }
                 }
-            })
+            )
         }
     }
 

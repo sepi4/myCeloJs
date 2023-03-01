@@ -10,7 +10,7 @@ import {
     SettingsType,
 } from '../../types'
 import { getExtraInfo } from '../../functions/getExtraInfo'
-import { useAppDispatch } from '../../hooks/customReduxHooks'
+import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
 
 const StyledTh = styled.th`
     word-wrap: break-word;
@@ -29,6 +29,7 @@ interface Props {
 }
 
 function ModalTableHeaders(props: Props) {
+    const state = useAppSelector((state) => state)
     const dispatch = useAppDispatch()
     return (
         <thead>
@@ -75,7 +76,10 @@ function ModalTableHeaders(props: Props) {
                             <a
                                 title={props.profiles[p.profile_id].alias}
                                 onClick={() => {
-                                    getExtraInfo([p.profile_id], (result) => {
+                                    getExtraInfo(
+                                    state.navButtons.coh3,
+                                    [p.profile_id], 
+                                        (result) => {
                                         const pro = props.profiles[p.profile_id]
                                         const newPlayer = {
                                             country: pro.country,

@@ -1,4 +1,5 @@
-import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation'
+import { getFactionFlagLocation, getFactionFlagLocationCoh3 } from '../../functions/getFactionFlagLocation'
+import { useAppSelector } from '../../hooks/customReduxHooks'
 import { FactionName } from '../../types'
 
 interface Props {
@@ -7,6 +8,7 @@ interface Props {
 }
 
 function FactionIcon({ faction, size }: Props) {
+    const coh3 = useAppSelector((state) => state.navButtons.coh3)
     return (
         <div
             style={{
@@ -19,7 +21,7 @@ function FactionIcon({ faction, size }: Props) {
                     width: size,
                     height: size,
                 }}
-                src={getFactionFlagLocation(faction)}
+                src={coh3 ? getFactionFlagLocationCoh3(faction) : getFactionFlagLocation(faction)}
                 alt={`${faction}`}
             />
         </div>

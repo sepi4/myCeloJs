@@ -20,7 +20,7 @@ export default function checkLogData({
             data,
         })
         if (state.settings) {
-            writeRankings(data, state.settings.rankingsHorizontal)
+            writeRankings(state.navButtons.coh3, data, state.settings.rankingsHorizontal)
             if (playAudio && data.length > 0) {
                 playAudio()
             }

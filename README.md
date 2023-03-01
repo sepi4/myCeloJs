@@ -163,6 +163,9 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 <a name="updates"></a>
 
 ## Updates:
+
+* **version 1.10.0.** 
+    - Add support for coh3
 * **version 1.9.0.** 
     - Source code to TS
     - Bug fixes

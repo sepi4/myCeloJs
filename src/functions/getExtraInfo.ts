@@ -1,9 +1,8 @@
 import axios from 'axios'
 
 import { refactorData } from './refactorData'
-// import { guessRankings } from './guessRankings'
 
-import { RELIC_SERVER_BASE } from '../constants'
+import { RELIC_SERVER_BASE_COH2, RELIC_SERVER_BASE_COH3 } from '../constants'
 import {
     AvailableLeaderboard,
     NormalizedExtraInfo,
@@ -11,6 +10,7 @@ import {
 } from '../types'
 
 export function getExtraInfo(
+    coh3: boolean,
     ids: number[],
     callback: (
         a: NormalizedExtraInfo,
@@ -23,10 +23,10 @@ export function getExtraInfo(
     // TODO - get rid of unnessary calls to server on app start
 
     const strIds: string = ids.join(',')
-    const url = `${RELIC_SERVER_BASE}/GetPersonalStat?title=coh2&profile_ids=[${strIds}]`
+    const url = `${coh3 ? RELIC_SERVER_BASE_COH3 : RELIC_SERVER_BASE_COH2}/GetPersonalStat?title=coh${coh3 ? 3 : 2}&profile_ids=[${strIds}]`
     const fetch1 = axios.get(url)
 
-    const url2 = `${RELIC_SERVER_BASE}/GetAvailableLeaderboards?title=coh2`
+    const url2 = `${coh3 ? RELIC_SERVER_BASE_COH3 : RELIC_SERVER_BASE_COH2}/GetAvailableLeaderboards?title=coh${coh3 ? 3 : 2}`
     const fetch2 = axios.get(url2)
 
     Promise.all([fetch1, fetch2])

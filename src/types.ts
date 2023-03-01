@@ -24,7 +24,7 @@ export interface Player {
     time: string
 }
 
-export type FactionName = 'okw' | 'sov' | 'uk' | 'usa' | 'wer'
+export type FactionName = 'okw' | 'sov' | 'uk' | 'usa' | 'wer' 
 
 export interface Member {
     alias: string
@@ -287,6 +287,7 @@ export interface Store {
         all: boolean
         table: boolean
         total: boolean
+        coh3: boolean
     }
     openInfos: boolean[][]
     countryFlags: CountryFlagsLocation

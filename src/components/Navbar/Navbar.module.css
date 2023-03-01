@@ -25,12 +25,7 @@
 .row {
     display: inline-flex;
     display: flex;
-    /* width: 40vw; */
     font-size: 90%;
-
-    /* align-items: ${({ alignItems }) => alignItems || 'center'}; */
-    /* justify-content: ${({ justifyContent }) => justifyContent || 'space-evenly'}; */
-    /* margin: ${({ margin }) => margin || '0'}; */
 
     align-items: center;
     justify-content: space-evenly;
@@ -40,10 +35,18 @@
 .column {
     display: flex;
     flex-direction: column;
-
-    /* margin: ${({ margin }) => margin || '0'}; */
-    /* justify-content: ${({ justifyContent }) => justifyContent || 'space-evenly'}; */
+    width: 100%;
 
     margin: 0;
     justify-content: space-evenly;
+}
+
+.radio {
+    display: flex;
+    align-items: center;
+}
+
+
+.radio label {
+    margin-left: 0.2em;
 }

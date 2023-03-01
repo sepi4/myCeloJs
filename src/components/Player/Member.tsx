@@ -21,8 +21,8 @@ export default function Member(props: Props) {
         }
 
         getExtraInfo(
+            state.navButtons.coh3,
             [p.profile_id],
-
             (result) => {
                 if (!newPlayer.profileId) {
                     return

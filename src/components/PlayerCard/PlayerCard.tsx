@@ -14,6 +14,7 @@ import { useAppSelector } from '../../hooks/customReduxHooks'
 export default function PlayerCard() {
     const state = useAppSelector((state) => state)
     const countryFlags = state.countryFlags
+    const coh3 = state.navButtons.coh3
 
     const player = state.playerCard.player
     const extraInfo = state.playerCard.extraInfo
@@ -75,18 +76,22 @@ export default function PlayerCard() {
 
     const linkImages = (
         <div className={styles.links}>
-            <img
-                src={logo_coh2stats}
-                alt="coh2stats"
-                title="coh2stats.com"
-                onClick={funCoh2stats}
-            />
-            <img
-                src={logo_coh2}
-                alt="coh2"
-                title="coh2.org"
-                onClick={funCoh2}
-            />
+            {!coh3 && (
+                <>
+                    <img
+                        src={logo_coh2stats}
+                        alt="coh2stats"
+                        title="coh2stats.com"
+                        onClick={funCoh2stats}
+                    />
+                    <img
+                        src={logo_coh2}
+                        alt="coh2"
+                        title="coh2.org"
+                        onClick={funCoh2}
+                    />
+                </>
+            )}
             <img
                 src={logo_steam}
                 alt="steam"

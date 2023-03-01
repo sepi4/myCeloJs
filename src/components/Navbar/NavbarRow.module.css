@@ -1,14 +1,7 @@
 .row {
-    display: inline-flex;
     display: flex;
-    width: 40vw;
     font-size: 90%;
-
-    /* align-items: ${({ alignItems }) => alignItems || 'center'}; */
-    /* justify-content: ${({ justifyContent }) => justifyContent || 'space-evenly'}; */
-    /* margin: ${({ margin }) => margin || '0'}; */
-
     align-items: center;
     justify-content: space-evenly;
-    margin: 0;
+    gap: 1em;
 }

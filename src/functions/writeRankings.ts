@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { commonName } from './simpleFunctions'
+import { commonName, commonNameCoh3 } from './simpleFunctions'
 import countriesJson from '../../countries.json'
 // import countries from '../../countries.json';
 import stringWidth from 'string-width'
@@ -58,6 +58,7 @@ function getLimitedWord(str: string, limit: number, padLeft: boolean) {
 }
 
 export function writeRankings(
+    coh3: boolean,
     players: Player[],
     rankingsHorizontal: boolean
 ): void {
@@ -85,8 +86,10 @@ export function writeRankings(
         }
 
         const faction = players[i].faction
+        console.log(faction)
         const teamSlot = Number(players[i].teamSlot)
 
+        const nameFun = coh3 ? commonNameCoh3 : commonName
         const maxNameLength = 20
         if (rankingsHorizontal) {
             if (teamSlot % 2 === 0) {
@@ -97,11 +100,11 @@ export function writeRankings(
                     ' ' +
                     ranking.padStart(5) +
                     ' ' +
-                    commonName(faction).padStart(5).toUpperCase()
+                    nameFun(faction).padStart(5).toUpperCase()
                 rowsLeft.push(text)
             } else {
                 const text =
-                    commonName(faction).padEnd(5).toUpperCase() +
+                    nameFun(faction).padEnd(5).toUpperCase() +
                     ' ' +
                     ranking.padEnd(5) +
                     ' ' +
@@ -112,7 +115,7 @@ export function writeRankings(
             }
         } else {
             const text =
-                commonName(faction).padEnd(5).toUpperCase() +
+                nameFun(faction).padEnd(5).toUpperCase() +
                 ' ' +
                 ranking.padEnd(5) +
                 ' ' +
@@ -132,14 +135,14 @@ export function writeRankings(
                 name,
                 ranking,
                 country,
-                faction: commonName(faction),
+                faction: coh3 ? faction : commonName(faction),
             })
         } else {
             json.teams.team2.push({
                 name,
                 ranking,
                 country,
-                faction: commonName(faction),
+                faction: coh3 ? faction : commonName(faction),
             })
         }
     }

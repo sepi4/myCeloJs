@@ -1,13 +1,14 @@
 import axios from 'axios'
 
-import { RELIC_SERVER_BASE } from '../constants'
+import {  RELIC_SERVER_BASE_COH2, RELIC_SERVER_BASE_COH3  } from '../constants'
 import { Member, SearchResult, StatGroup } from '../types'
 
 export default function searchPlayers(
+    coh3: boolean,
     searchValue: string,
     callback: (res: Member[]) => void
 ) {
-    const url = `${RELIC_SERVER_BASE}/GetPersonalStat?title=coh2&search=${searchValue}`
+    const url = `${coh3 ? RELIC_SERVER_BASE_COH3 : RELIC_SERVER_BASE_COH2}/GetPersonalStat?title=coh2&search=${searchValue}`
 
     axios
         .get(url)

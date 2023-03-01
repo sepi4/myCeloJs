@@ -54,6 +54,7 @@ export default function Navbar(props: Props) {
             {getNavCheckBox('all')}
             {getNavCheckBox('total')}
             {getNavCheckBox('table')}
+            {/* {!state.navButtons.coh3 && getNavCheckBox('table')} */}
         </>
     )
 
@@ -77,7 +78,7 @@ export default function Navbar(props: Props) {
     const handleOpenMyCard = () => {
         const id: number = settings.profileId
 
-        getExtraInfo([id], (result) => {
+        getExtraInfo(state.navButtons.coh3, [id], (result) => {
             const ex = result[id]
             const rank = ex.ranks.find((x: Rank) => x.members?.length === 1)
             if (!rank?.members) {
@@ -150,9 +151,12 @@ export default function Navbar(props: Props) {
 
     return (
         <div className={styles.navbar}>
-            {userIcon}
-
-            {searchIcon}
+            {!state.navButtons.coh3 && (
+                <>
+                    {userIcon}
+                    {searchIcon}
+                </>
+            )}
 
             <div className={styles.container}>
                 <div className={styles.column}>
@@ -160,6 +164,54 @@ export default function Navbar(props: Props) {
                         {getText('dropdown_info', settings)}
                     </NavbarRow>
                     <NavbarRow>{buttons}</NavbarRow>
+                </div>
+
+                <div className={styles.column}>
+                    <NavbarRow fontSize="60%">
+                        {getText('game', settings)}
+                    </NavbarRow>
+                    <NavbarRow>
+                        <div className={styles.radio}>
+                            <input
+                                id='coh2'
+                                type="radio"
+                                onChange={() =>
+                                    dispatch({
+                                        type: 'TOGGLE_NAVBUTTON',
+                                        key: 'coh3',
+                                    })
+                                }
+                                checked={!navButtons['coh3']}
+                            />{' '}
+                            <label htmlFor='coh2'>coh2</label>
+                        </div>
+                        <div className={styles.radio}>
+                            <input
+                                id='coh3'
+                                type="radio"
+                                onChange={() =>
+                                    dispatch({
+                                        type: 'TOGGLE_NAVBUTTON',
+                                        key: 'coh3',
+                                    })
+                                }
+                                checked={navButtons['coh3']}
+                            />{' '}
+                            <label htmlFor='coh3'>coh3</label>
+                        </div>
+
+                        {/* <NavCheckbox
+                            key={'coh3'}
+                            text={'coh3'}
+                            checked={navButtons['coh3']}
+                            handler={() =>
+                                dispatch({
+                                    type: 'TOGGLE_NAVBUTTON',
+                                    key: 'coh3',
+                                })
+                            }
+                        /> */}
+                    </NavbarRow>
                 </div>
 
                 <div className={styles.column}>

@@ -88,6 +88,11 @@ const text: Translations = {
     },
 
     // navbar  ---------------------------------
+
+    game: {
+        en: 'game',
+        ru: 'игра',
+    },
     dropdown_info: {
         en: 'dropdown info',
         ru: 'раскрывающаяся инфо',

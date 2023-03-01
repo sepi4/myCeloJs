@@ -17,6 +17,21 @@ export function commonName(str: string): FactionName {
     }
 }
 
+export function commonNameCoh3(str: string): string {
+    switch (str) {
+        case 'americans':
+            return 'usa'
+        case 'afrika_korps':
+            return 'dak'
+        case 'british_africa':
+            return 'uk'
+        case 'germans':
+            return 'wer'
+        default:
+            return 'wer'
+    }
+}
+
 export function getTotalGames(arr: ExtraInfo): number {
     let sum = 0
     for (const rankObj of arr.ranks) {

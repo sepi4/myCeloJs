@@ -150,6 +150,7 @@ function findInStatGroups(statGroups: StatGroup[], player: Player) {
 }
 
 export function guessRankings(
+    coh3: boolean,
     playersArr: Player[],
     data: PersonalStats,
     titles: AvailableLeaderboard
@@ -182,29 +183,32 @@ export function guessRankings(
     const arr: Player[] = formatToNums(copyObj(playersArr))
     const teams: [Player[], Player[]] = separateTeams(arr)
 
-    for (const team of teams) {
-        const side = factionSide(team)
-        const statGroups = getStatGrops(team, data)
-
-        if (statGroups.length > 0 && team.length > 1) {
-            const modeName = getTitleName(statGroups[0].members.length, side)
-            const leaderboardId = getLeaderboardId(modeName, titles)
-            addRankToTeamLeaderboardStats(statGroups, data, leaderboardId)
-            team.forEach((player) => {
-                const sg = findInStatGroups(statGroups, player)
-                if (sg) {
-                    player.ranking = sg.rank
-                    player.teamMarker = sg.teamMarker
-                } else {
+    if (!coh3) {
+        for (const team of teams) {
+            const side = factionSide(team)
+            const statGroups = getStatGrops(team, data)
+    
+            if (statGroups.length > 0 && team.length > 1) {
+                const modeName = getTitleName(statGroups[0].members.length, side)
+                const leaderboardId = getLeaderboardId(modeName, titles)
+                addRankToTeamLeaderboardStats(statGroups, data, leaderboardId)
+                team.forEach((player) => {
+                    const sg = findInStatGroups(statGroups, player)
+                    if (sg) {
+                        player.ranking = sg.rank
+                        player.teamMarker = sg.teamMarker
+                    } else {
+                        rankToRandomPlayer(team, player)
+                    }
+                })
+            } else {
+                for (const player of team) {
                     rankToRandomPlayer(team, player)
                 }
-            })
-        } else {
-            for (const player of team) {
-                rankToRandomPlayer(team, player)
             }
         }
     }
+
 
     // adding country to player
     for (const t of teams) {

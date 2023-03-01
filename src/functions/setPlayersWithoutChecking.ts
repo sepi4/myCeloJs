@@ -7,13 +7,11 @@ export default function setPlayersWithoutChecking(
     state: Store,
     dispatch: ({ type, data }: { type: string; data: Player[] }) => void
 ) {
-    // console.log('data:', data);
-
     dispatch({
         type: 'SET_NEW_PLAYERS',
         data,
     })
     if (state.settings) {
-        writeRankings(data, state.settings.rankingsHorizontal)
+        writeRankings(state.navButtons.coh3, data, state.settings.rankingsHorizontal)
     }
 }
