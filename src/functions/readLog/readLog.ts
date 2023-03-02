@@ -24,7 +24,14 @@ export function getCurrentUserAliasCoh3(lines: string[]) {
     }
 }
 
-export function getLines(lines: string[]) {
+export function checkGameVersionIsCorrect(lines: string[], coh3: boolean) {
+    if (coh3) {
+        return lines[0].match(/RelicCoH3/)
+    }
+    return lines[0].match(/RELICCOH2/)
+}
+
+export function getLines(lines: string[], coh3: boolean) {
     const arr: string[] = []
     let stop = false
     let wasGame = false
@@ -82,9 +89,15 @@ export async function readLog(
         const data = await fs.readFile(fileLocation, 'utf-8')
         const lines = data.split('\n')
 
+        if (!checkGameVersionIsCorrect(lines, coh3)) {
+            return new Promise<Player[]>((resolve) => {
+                resolve([])
+            })
+        }
+
         const currentUserAlias: string | undefined = coh3 ? getCurrentUserAliasCoh3(lines) : getCurrentUserAlias(lines)
 
-        const arr: string[] = getLines(lines)
+        const arr: string[] = getLines(lines, coh3)
         let psInfo = coh3 ? getPlayersInfoCoh3(arr) : getPlayersInfo(arr)
 
         if (currentUserAlias) {

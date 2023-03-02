@@ -17,7 +17,7 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
 
     if (players) {
         players.forEach((p) => {
-            teams[p.teamSlot].push(p)
+            teams[p?.teamSlot]?.push(p)
         })
     }
 

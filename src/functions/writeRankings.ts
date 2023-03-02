@@ -42,7 +42,6 @@ function getLimitedWord(str: string, limit: number, padLeft: boolean) {
     let newStr = ''
     for (const x of str) {
         const sw = stringWidth(x)
-        // console.log(x, sw)
         if (sum + sw <= limit) {
             sum += sw
             newStr += x
@@ -86,7 +85,6 @@ export function writeRankings(
         }
 
         const faction = players[i].faction
-        console.log(faction)
         const teamSlot = Number(players[i].teamSlot)
 
         const nameFun = coh3 ? commonNameCoh3 : commonName
