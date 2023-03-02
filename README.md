@@ -9,9 +9,9 @@
 
 ## About
 
-This is electron app for viewing ranks of current connected game of Company of Heroes 2 and display ranks in OBS.
+This is electron app for viewing ranks of current connected game of Company of Heroes 2/3 and display ranks in OBS.
 
-Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone/MakoCelo</a> for ideas. It's also rank display for COH2, check it out, maybe you like it better. 
+Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone/MakoCelo</a> for ideas. It's also rank display for COH2/COH3, check it out, maybe you like it better. 
 
 
 
@@ -25,7 +25,7 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 - double click 'myCelo.exe'
 - allow in firewall if asked *(permission is needed because app is serving ranking.json file to localhost, so that it can read by javascript in ranking.html file every second and update it if needed)*
 
-- in settings ![alt text](./readmeImages/settingsIcon.png "settings icon") select location of 'warnings.log' file (Same folder where are replays saved, usually in "C:\Users\USERNAME\Documents\my games\company of heroes 2\")
+- in settings ![alt text](./readmeImages/settingsIcon.png "settings icon") select location of 'warnings.log' file (Same folder where are replays saved, usually in "C:\Users\USERNAME\Documents\my games\company of heroes 2\" or "C:\Users\USERNAME\Documents\my games\company of heroes 3\")
 - done (test installation by opening game in SPECTATE MODE or game vs AI.)
  <hr>
  
@@ -96,7 +96,7 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 - откройте "myCelo.exe"
 - если фаервол попросит разрешения, разрешите *(программа использует localhost чтобы rankings.json можно было прочитать с помощью javascript и обновлять rankings.html если это необходимо)*
 
-- в настройках ![alt text](./readmeImages/settingsIcon.png "settings icon") выберите местонахождение 'warnings.log'-файла (тоже место куда сохраняются реплеи, обычно находится в "C:\Users\USERNAME\Documents\my games\company of heroes 2\\") 
+- в настройках ![alt text](./readmeImages/settingsIcon.png "settings icon") выберите местонахождение 'warnings.log'-файла (тоже место куда сохраняются реплеи, обычно находится в "C:\Users\USERNAME\Documents\my games\company of heroes 2\\" или "C:\Users\USERNAME\Documents\my games\company of heroes 3\\") 
 - проверьте установку в игре против компьютера или в режиме просмотра
 <hr>
 
@@ -164,7 +164,7 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 
 ## Updates:
 
-* **version 1.10.0.** 
+* **version 2.0.0.** 
     - Add support for coh3
 * **version 1.9.0.** 
     - Source code to TS

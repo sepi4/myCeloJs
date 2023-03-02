@@ -2,7 +2,7 @@
     "name": "mycelo",
     "productName": "myCelo",
     "version": "2.0.0",
-    "description": "COH2 ranking display",
+    "description": "COH2/COH3 ranking display",
     "license": "GPL-3.0-or-later",
     "author": "Sergei Polishsuk",
     "engines": {
