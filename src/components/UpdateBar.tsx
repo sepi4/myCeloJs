@@ -28,6 +28,19 @@ interface A {
     tagName: string
 }
 
+export const isHigherVersion = (tag: string, current: string) => {
+    const arrTag = tag.split('.')
+    const arrCurrent = current.split('.')
+    for (let i = 0; i < arrCurrent.length; i++) {
+        if (Number(arrTag[i]) > Number(arrCurrent[i])) {
+            return true
+        } else if (Number(arrTag[i]) < Number(arrCurrent[i])) {
+            return false
+        }
+    }
+    return false
+}
+
 function UpdateBar() {
     const [update, setUpdate] = useState<A | null>(null)
     const dispatch = useAppDispatch()
@@ -39,18 +52,6 @@ function UpdateBar() {
         return funGetText(x, settings)
     }
 
-    const isHigherVersion = (tag: string, current: string) => {
-        const arrTag = tag.split('.')
-        const arrCurrent = current.split('.')
-        for (let i = 0; i < arrCurrent.length; i++) {
-            if (Number(arrTag[i]) > Number(arrCurrent[i])) {
-                return true
-            } else if (Number(arrTag[i]) < Number(arrCurrent[i])) {
-                return false
-            }
-        }
-        return false
-    }
 
     useEffect(() => {
         if (!updateCheckDone && settings) {

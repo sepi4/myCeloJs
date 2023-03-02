@@ -5,19 +5,7 @@
                 "name": "sepi | ПУТИНА В МОГИЛУ",
                 "ranking": "-",
                 "country": "fi",
-                "faction": "british_africa"
-            },
-            {
-                "name": "Sgannarel",
-                "ranking": "571",
-                "country": "fr",
                 "faction": "americans"
-            },
-            {
-                "name": "ch1lly1981",
-                "ranking": "-",
-                "country": "gb",
-                "faction": "british_africa"
             },
             {
                 "name": "Babka",
@@ -28,30 +16,17 @@
         ],
         "team2": [
             {
-                "name": "taxation is theft",
-                "ranking": "867",
-                "country": "de",
+                "name": "yeetdaddy69",
+                "ranking": "178",
+                "country": "us",
                 "faction": "afrika_korps"
             },
             {
-                "name": "Smö",
-                "ranking": "714",
-                "country": "de",
+                "name": "laggyAR",
+                "ranking": "106",
+                "country": "ar",
                 "faction": "afrika_korps"
-            },
-            {
-                "name": "Takanation",
-                "ranking": "1085",
-                "country": "de",
-                "faction": "germans"
-            },
-            {
-                "name": "P2yk0",
-                "ranking": "-",
-                "country": "de",
-                "faction": "germans"
             }
         ]
-    },
-    "horizontal": true
+    }
 }
