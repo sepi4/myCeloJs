@@ -11,7 +11,6 @@ import styles from './UpdateBar.module.css'
 import funGetText from '../functions/getText'
 import { useAppDispatch, useAppSelector } from '../hooks/customReduxHooks'
 import { LATEST_RELEASES_URL } from '../constants'
-import {} from '../types'
 
 const { clipboard, shell, app } = electron.remote
 
@@ -44,9 +43,9 @@ function UpdateBar() {
         const arrTag = tag.split('.')
         const arrCurrent = current.split('.')
         for (let i = 0; i < arrCurrent.length; i++) {
-            if (arrTag[i] > arrCurrent[i]) {
+            if (Number(arrTag[i]) > Number(arrCurrent[i])) {
                 return true
-            } else if (arrTag[i] < arrCurrent[i]) {
+            } else if (Number(arrTag[i]) < Number(arrCurrent[i])) {
                 return false
             }
         }
