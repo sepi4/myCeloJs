@@ -64,7 +64,7 @@ export default function Search() {
                         .map((p) => {
                             if (result[p.profile_id]) {
                                 p.totalGames = getTotalGames(
-                                    result[p.profile_id]
+                                    result[p.profile_id]?.ranks
                                 )
                                 p.lastGameTime = getLastPlayedGame(
                                     result[p.profile_id]

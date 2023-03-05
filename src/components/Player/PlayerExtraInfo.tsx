@@ -8,6 +8,7 @@ import styles from './PlayerExtraInfo.module.css'
 
 import { ExtraInfo, Player } from '../../types'
 import { useAppSelector } from '../../hooks/customReduxHooks'
+import { getTotalGames } from '../../functions/simpleFunctions'
 
 interface Props {
     player: Player
@@ -26,7 +27,9 @@ function PlayerExtraInfo(props: Props) {
         }
         let sum = 0
         for (const rankObj of ranksArr) {
-            sum += rankObj.wins + rankObj.losses
+            if(rankObj?.isModeRanked === 1) {
+                sum += rankObj.wins + rankObj.losses
+            }
         }
         return (
             <div className={styles.total}>

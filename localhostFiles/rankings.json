@@ -6,27 +6,16 @@
                 "ranking": "-",
                 "country": "fi",
                 "faction": "americans"
-            },
-            {
-                "name": "Babka",
-                "ranking": "-",
-                "country": "fi",
-                "faction": "americans"
             }
         ],
         "team2": [
             {
-                "name": "yeetdaddy69",
-                "ranking": "178",
-                "country": "us",
-                "faction": "afrika_korps"
-            },
-            {
-                "name": "laggyAR",
-                "ranking": "106",
-                "country": "ar",
+                "name": "jonax",
+                "ranking": "-",
+                "country": "de",
                 "faction": "afrika_korps"
             }
         ]
-    }
+    },
+    "horizontal": true
 }

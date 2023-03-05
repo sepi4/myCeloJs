@@ -1,13 +1,13 @@
 import getText from "./getText"
 
 describe('Get translation text', () => {
-  test('getText()', () => {
-    expect(getText('game', null)).toBe('game');
+    test('getText()', () => {
+        expect(getText('game', null)).toBe('game');
 
-    let fakeSettings = { language: 'ru' }
-    expect(getText('game', fakeSettings)).toBe('игра');
+        let fakeSettings = { language: 'ru' }
+        expect(getText('game', fakeSettings)).toBe('игра');
 
-    fakeSettings.language = 'en'
-    expect(getText('game', fakeSettings)).toBe('game');
-  });
+        fakeSettings.language = 'en'
+        expect(getText('game', fakeSettings)).toBe('game');
+    });
 });

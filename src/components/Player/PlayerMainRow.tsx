@@ -127,7 +127,7 @@ function PlayerMainRow(props: Props) {
             style={{ cursor: steamId ? 'pointer' : undefined }}
             title={
                 extraInfo && player.profileId
-                    ? getTotalGames(extraInfo) + ' games played'
+                    ? getTotalGames(extraInfo.ranks) + ' games played'
                     : ''
             }
             onClick={handlePlayerCardOn}

@@ -1,4 +1,4 @@
-import { ExtraInfo, Player, FactionName } from '../types'
+import { ExtraInfo, Player, FactionName, Rank } from '../types'
 
 export function commonName(str: string): FactionName {
     switch (str) {
@@ -32,10 +32,12 @@ export function commonNameCoh3(str: string): string {
     }
 }
 
-export function getTotalGames(arr: ExtraInfo): number {
+export function getTotalGames(ranks: Rank[]): number {
     let sum = 0
-    for (const rankObj of arr.ranks) {
-        sum += rankObj.wins + rankObj.losses
+    for (const rankObj of ranks) {
+        if(rankObj?.isModeRanked === 1) {
+            sum += rankObj.wins + rankObj.losses
+        }
     }
     return sum
 }
