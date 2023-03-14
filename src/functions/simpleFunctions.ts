@@ -84,6 +84,7 @@ export function formatToNums(arr: Player[]): Player[] {
 
 export function getFactionName(x: string): string {
     switch (x) {
+        // coh2
         case 'soviet':
             return 'Soviet'
         case 'german':
@@ -94,6 +95,18 @@ export function getFactionName(x: string): string {
             return 'British'
         case 'west_german':
             return 'WestGerman'
+
+        // coh3
+        case 'british_africa':
+            return 'British'
+        case 'americans':
+            return 'American'
+        case 'afrika_korps':
+            return 'DAK'
+        case 'germans':
+            return 'German'
+        
+        // else
         default:
             return ''
     }

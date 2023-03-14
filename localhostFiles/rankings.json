@@ -3,16 +3,28 @@
         "team1": [
             {
                 "name": "sepi | ПУТИНА В МОГИЛУ",
-                "ranking": "-",
+                "ranking": "421",
+                "country": "fi",
+                "faction": "americans"
+            },
+            {
+                "name": "Babka",
+                "ranking": "906",
                 "country": "fi",
                 "faction": "americans"
             }
         ],
         "team2": [
             {
-                "name": "jonax",
-                "ranking": "-",
-                "country": "de",
+                "name": "yeetdaddy69",
+                "ranking": "428",
+                "country": "us",
+                "faction": "afrika_korps"
+            },
+            {
+                "name": "laggyAR",
+                "ranking": "422",
+                "country": "ar",
                 "faction": "afrika_korps"
             }
         ]

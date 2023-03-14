@@ -183,12 +183,14 @@ export function guessRankings(
     const arr: Player[] = formatToNums(copyObj(playersArr))
     const teams: [Player[], Player[]] = separateTeams(arr)
 
-    if (!coh3) {
         for (const team of teams) {
             const side = factionSide(team)
             const statGroups = getStatGrops(team, data)
     
-            if (statGroups.length > 0 && team.length > 1) {
+            if (
+                statGroups.length > 0  
+                // && team.length > 1
+            ) {
                 const modeName = getTitleName(statGroups[0].members.length, side)
                 const leaderboardId = getLeaderboardId(modeName, titles)
                 addRankToTeamLeaderboardStats(statGroups, data, leaderboardId)
@@ -207,7 +209,6 @@ export function guessRankings(
                 }
             }
         }
-    }
 
 
     // adding country to player
