@@ -33,7 +33,7 @@
         "@types/react-modal": "^3.16.3",
         "@types/react-redux": "^7.1.34",
         "@types/redux": "^3.6.0",
-        "axios": "^0.24.0",
+        "axios": "^1.13.6",
         "cors": "^2.8.6",
         "dayjs": "^1.11.19",
         "portfinder": "^1.0.38",
@@ -43,9 +43,9 @@
         "react-redux": "^9.2.0",
         "redux": "^5.0.1",
         "string-width": "^4.2.0",
-        "styled-components": "^5.2.1",
+        "styled-components": "^6.3.11",
         "typescript": "^5.9.3",
-        "use-sound": "^2.0.1"
+        "use-sound": "^5.0.0"
     },
     "devDependencies": {
         "@types/jest": "^29.4.0",
