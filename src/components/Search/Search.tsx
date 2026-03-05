@@ -34,63 +34,63 @@ export default function Search() {
                 state.navButtons.coh3,
                 searchValue, 
                 (res) => {
-                const arrPlayers = res.map((p) => {
-                    return {
-                        country: p.country,
-                        name: p.name,
-                        profileId: p.profile_id,
-                    }
-                })
-
-                if (arrPlayers.length === 0) {
-                    dispatch({
-                        type: 'SET_FOUND_PLAYERS',
-                        data: [],
+                    const arrPlayers = res.map((p) => {
+                        return {
+                            country: p.country,
+                            name: p.name,
+                            profileId: p.profile_id,
+                        }
                     })
-                    return
-                }
 
-                const ids: number[] = []
-                for (const p of arrPlayers) {
-                    if (p.profileId) {
-                        ids.push(p.profileId)
-                    }
-                }
-                getExtraInfo(
-                    state.navButtons.coh3,
-                    ids, 
-                    (result) => {
-                    const newPlayers = res
-                        .map((p) => {
-                            if (result[p.profile_id]) {
-                                p.totalGames = getTotalGames(
-                                    result[p.profile_id]?.ranks
-                                )
-                                p.lastGameTime = getLastPlayedGame(
-                                    result[p.profile_id]
-                                )
-                            } else {
-                                p.totalGames = 0
-                            }
-                            p.extraInfo = result[p.profile_id]
-                            return p
+                    if (arrPlayers.length === 0) {
+                        dispatch({
+                            type: 'SET_FOUND_PLAYERS',
+                            data: [],
                         })
-                        .sort((a, b) => {
-                            if (
-                                typeof a.totalGames === 'number' &&
+                        return
+                    }
+
+                    const ids: number[] = []
+                    for (const p of arrPlayers) {
+                        if (p.profileId) {
+                            ids.push(p.profileId)
+                        }
+                    }
+                    getExtraInfo(
+                        state.navButtons.coh3,
+                        ids, 
+                        (result) => {
+                            const newPlayers = res
+                                .map((p) => {
+                                    if (result[p.profile_id]) {
+                                        p.totalGames = getTotalGames(
+                                            result[p.profile_id]?.ranks
+                                        )
+                                        p.lastGameTime = getLastPlayedGame(
+                                            result[p.profile_id]
+                                        )
+                                    } else {
+                                        p.totalGames = 0
+                                    }
+                                    p.extraInfo = result[p.profile_id]
+                                    return p
+                                })
+                                .sort((a, b) => {
+                                    if (
+                                        typeof a.totalGames === 'number' &&
                                 typeof b.totalGames === 'number'
-                            ) {
-                                return b.totalGames - a.totalGames
-                            }
-                            return 0
-                        })
+                                    ) {
+                                        return b.totalGames - a.totalGames
+                                    }
+                                    return 0
+                                })
 
-                    dispatch({
-                        type: 'SET_FOUND_PLAYERS',
-                        data: newPlayers,
-                    })
+                            dispatch({
+                                type: 'SET_FOUND_PLAYERS',
+                                data: newPlayers,
+                            })
+                        })
                 })
-            })
         }
     }
 

@@ -24,13 +24,12 @@ export const StyledTextDiv = styled.div`
     border: solid 0.05em #555;
 `
 
-export const StyledButton = styled.button`
+export const StyledButton = styled.button<{ $buttonColor?: string }>`
     margin: 0.2em 0;
     width: 25vw;
     color: #ddd;
     cursor: pointer;
-    background-color: ${({ buttonColor }: { buttonColor?: string }) =>
-        buttonColor || '#222'};
+    background-color: ${({ $buttonColor }) => $buttonColor || '#222'};
     padding: 0.2em 0;
     font-size: 1em;
     border: 0;

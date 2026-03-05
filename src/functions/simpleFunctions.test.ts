@@ -1,5 +1,5 @@
-import { Rank } from "../types";
-import { getTotalGames } from "./simpleFunctions";
+import { Rank } from '../types'
+import { getTotalGames } from './simpleFunctions'
 
 describe('simpleFunctions', () => {
     let ranks
@@ -35,5 +35,5 @@ describe('simpleFunctions', () => {
             },
         ]
         expect(getTotalGames(ranks as Rank[])).toBe(0)
-    });
-});
+    })
+})

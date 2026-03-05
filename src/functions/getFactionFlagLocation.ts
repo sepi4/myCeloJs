@@ -35,5 +35,5 @@ export function getFactionFlagLocationCoh3(code: string) {
             return flagBrits
         case 'germans':
             return flagGermans
-        }
+    }
 }

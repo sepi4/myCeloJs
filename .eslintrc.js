@@ -7,6 +7,7 @@ module.exports = {
     extends: [
         'eslint:recommended',
         'plugin:react/recommended',
+        'plugin:react/jsx-runtime',
         'plugin:@typescript-eslint/recommended',
     ],
     parser: '@typescript-eslint/parser',
@@ -18,11 +19,16 @@ module.exports = {
         sourceType: 'module',
     },
     plugins: ['react', '@typescript-eslint'],
+    settings: {
+        react: {
+            version: 'detect',
+        },
+    },
     rules: {
         indent: ['error', 4, { SwitchCase: 1 }],
         'linebreak-style': ['error', 'unix'],
         quotes: ['error', 'single'],
         semi: ['error', 'never'],
-        'no-var-requires': true,
+        '@typescript-eslint/no-var-requires': 'error',
     },
 }
