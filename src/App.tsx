@@ -16,12 +16,11 @@ import { readLog } from './functions/readLog/readLog'
 import writeSettings from './functions/writeSettings'
 import checkLogData from './functions/checkLogData'
 
-import electron from 'electron'
 import { useAppDispatch, useAppSelector } from './hooks/customReduxHooks'
 import { Player } from './types'
 import { guessRankings } from './functions/guessRankings'
-const appVersion = electron.remote.app.getVersion()
-const settingsDir = electron.remote.app.getPath('userData')
+const appVersion = window.electronAPI.appVersion
+const settingsDir = window.electronAPI.settingsDir
 
 document.title = 'myCelo ' + appVersion
 

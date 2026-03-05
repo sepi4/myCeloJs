@@ -1,6 +1,3 @@
-import electron from 'electron'
-const { clipboard } = electron.remote
-
 import Notification from '../Notification'
 
 import { StyledButton } from '../styled/styledSettings'
@@ -23,7 +20,7 @@ function CopyDiv(props: Props) {
     const handleCopy = () => {
         if (props.text) {
             setTimed(true)
-            clipboard.writeText(props.text)
+            window.electronAPI.clipboard.writeText(props.text)
         }
     }
 

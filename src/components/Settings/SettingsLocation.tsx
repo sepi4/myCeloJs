@@ -1,6 +1,3 @@
-import electron from 'electron'
-const { app } = electron.remote
-
 import SettingsDiv from './SettingsDiv'
 import CopyDiv from './CopyDiv'
 
@@ -13,7 +10,7 @@ export default function SettingsLocation(props: Props) {
     if (props.fileTypeSet) {
         return (
             <SettingsDiv title={props.title}>
-                <CopyDiv text={app.getPath('userData') + '\\settings.json'} />
+                <CopyDiv text={window.electronAPI.settingsDir + '\\settings.json'} />
             </SettingsDiv>
         )
     }

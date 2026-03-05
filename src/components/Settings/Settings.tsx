@@ -1,9 +1,6 @@
 import React, { useRef } from 'react'
 
 import axios from 'axios'
-import electron from 'electron'
-
-const { dialog } = electron.remote
 
 import SettingsDiv from './SettingsDiv'
 import SettingsAfterLog from './SettingsAfterLog'
@@ -118,7 +115,7 @@ function Settings(props: Props) {
     }
 
     const changeLogLocation = () => {
-        dialog
+        window.electronAPI.dialog
             .showOpenDialog({
                 properties: ['openFile'],
                 filters: [

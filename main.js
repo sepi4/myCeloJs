@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 const url = require('url')
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain, dialog } = require('electron')
 
 let mainWindow
 
@@ -29,11 +29,11 @@ function createMainWindow() {
         icon: icon,
         webPreferences: {
             nodeIntegration: true,
-            nativeWindowOpen: true,
+            contextIsolation: false,
             webSecurity: false,
+            preload: path.join(__dirname, 'preload.js'),
         },
         center: true,
-        // enableRemoteModule: true,
     })
 
     let indexPath
@@ -92,8 +92,16 @@ app.on('activate', () => {
     }
 })
 
-// Stop error
-app.allowRendererProcessReuse = true
+ipcMain.on('get-app-info', (event) => {
+    event.returnValue = {
+        version: app.getVersion(),
+        settingsDir: app.getPath('userData'),
+    }
+})
+
+ipcMain.handle('dialog:show-open', (_event, options) => {
+    return dialog.showOpenDialog(mainWindow, options)
+})
 
 const http = require('http')
 const fs = require('fs')

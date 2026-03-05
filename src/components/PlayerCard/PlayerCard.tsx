@@ -8,7 +8,6 @@ import logo_steam from '../../../img/logo_steam.png'
 
 import getSiteLink from '../../functions/getSiteLink'
 
-import { shell } from 'electron'
 import { useAppSelector } from '../../hooks/customReduxHooks'
 
 export default function PlayerCard() {
@@ -66,13 +65,13 @@ export default function PlayerCard() {
 
     const linkCoh2stats = getSiteLink('coh2stats.com') + steamId
     const funCoh2stats = () =>
-        steamId ? shell.openExternal(linkCoh2stats) : null
+        steamId ? window.electronAPI.shell.openExternal(linkCoh2stats) : null
 
     const linkCoh2 = getSiteLink('coh2.org') + steamId
-    const funCoh2 = () => (steamId ? shell.openExternal(linkCoh2) : null)
+    const funCoh2 = () => (steamId ? window.electronAPI.shell.openExternal(linkCoh2) : null)
 
     const linkSteam = getSiteLink('steam') + steamId
-    const funSteam = () => (steamId ? shell.openExternal(linkSteam) : null)
+    const funSteam = () => (steamId ? window.electronAPI.shell.openExternal(linkSteam) : null)
 
     const linkImages = (
         <div className={styles.links}>

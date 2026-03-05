@@ -5,14 +5,11 @@ import writeSettings from '../functions/writeSettings'
 
 import axios from 'axios'
 
-import electron from 'electron'
 import styles from './UpdateBar.module.css'
 
 import funGetText from '../functions/getText'
 import { useAppDispatch, useAppSelector } from '../hooks/customReduxHooks'
 import { LATEST_RELEASES_URL } from '../constants'
-
-const { clipboard, shell, app } = electron.remote
 
 interface GitHubResult {
     data: {
@@ -46,7 +43,7 @@ function UpdateBar() {
     const dispatch = useAppDispatch()
     const updateCheckDone = useAppSelector((state) => state.updateCheckDone)
     const settings = useAppSelector((state) => state.settings)
-    const appVersion = app.getVersion()
+    const appVersion = window.electronAPI.appVersion
 
     const getText = function (x: string) {
         return funGetText(x, settings)
@@ -101,7 +98,7 @@ function UpdateBar() {
                     <button
                         className={styles.btn}
                         onClick={() => {
-                            shell.openExternal(update.url)
+                            window.electronAPI.shell.openExternal(update.url)
                         }}
                     >
                         {getText('download')}
@@ -110,7 +107,7 @@ function UpdateBar() {
                     <button
                         className={styles.btn}
                         onClick={() => {
-                            clipboard.writeText(update.url)
+                            window.electronAPI.clipboard.writeText(update.url)
                         }}
                     >
                         {getText('copy_link')}

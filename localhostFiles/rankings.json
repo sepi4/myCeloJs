@@ -2,5 +2,6 @@
     "teams": {
         "team1": [],
         "team2": []
-    }
+    },
+    "horizontal": true
 }

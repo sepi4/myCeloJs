@@ -21,7 +21,7 @@
         "provider": "github",
         "releaseType": "release"
     },
-    "main": "main.ts",
+    "main": "main.js",
     "scripts": {
         "make-zip": "npm run make && npm run rm-zip && npm run zip",
         "make": "npm run build && npm run postpackage && npm run cp-img && npm run cp-localhost-files",
@@ -78,7 +78,7 @@
         "babili-webpack-plugin": "^0.1.2",
         "cross-env": "^7.0.3",
         "css-loader": "^3.6.0",
-        "electron": "^9.4.2",
+        "electron": "^34.5.8",
         "electron-builder": "^22.9.1",
         "electron-devtools-installer": "^3.1.1",
         "electron-packager": "^14.2.1",

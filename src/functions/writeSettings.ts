@@ -1,8 +1,7 @@
 import fs from 'fs'
-import e from 'electron'
 import { SettingsType } from '../types'
 
-const settingsDir = e.remote.app.getPath('userData')
+const settingsDir = window.electronAPI.settingsDir
 
 type D = ({ type, data }: { type: string; data: SettingsType }) => void
 
