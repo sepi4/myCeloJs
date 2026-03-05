@@ -36,7 +36,7 @@ function createMainWindow() {
     mainWindow.once('ready-to-show', () => {
         mainWindow.show()
         if (process.env['ELECTRON_RENDERER_URL']) {
-            const { default: installExtension, REACT_DEVELOPER_TOOLS } =
+            const { installExtension, REACT_DEVELOPER_TOOLS } =
                 require('electron-devtools-installer')
             installExtension(REACT_DEVELOPER_TOOLS).catch((err) =>
                 console.log('Error loading React DevTools:', err)
