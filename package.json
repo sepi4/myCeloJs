@@ -21,7 +21,8 @@
         "dev": "electron-vite dev",
         "build": "electron-vite build",
         "preview": "electron-vite preview",
-        "test": "jest"
+        "test": "jest",
+        "test:e2e": "npm run build && npx playwright test"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^1.2.34",
@@ -48,6 +49,7 @@
         "use-sound": "^5.0.0"
     },
     "devDependencies": {
+        "@playwright/test": "^1.58.2",
         "@types/jest": "^29.4.0",
         "@types/styled-components": "^5.1.36",
         "@typescript-eslint/eslint-plugin": "^5.7.0",
