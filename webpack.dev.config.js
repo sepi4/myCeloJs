@@ -72,7 +72,7 @@ module.exports = {
             children: false,
         },
         before() {
-            spawn('electron', ['.'], {
+            spawn('electron', ['.', '--no-sandbox'], {
                 shell: true,
                 env: process.env,
                 stdio: 'inherit',

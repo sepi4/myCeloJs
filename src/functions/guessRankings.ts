@@ -1,151 +1,69 @@
-import {
-    copyObj,
-    formatToNums,
-    separateTeams,
-    getFactionName,
-} from './simpleFunctions'
+import { copyObj, formatToNums, separateTeams, getFactionName } from './simpleFunctions'
+import { Player, AvailableLeaderboard, PersonalStats, StatGroup } from '../types'
 
-import {
-    Player,
-    AvailableLeaderboard,
-    PersonalStats,
-    StatGroup,
-    LeaderboardStat,
-} from '../types'
+const ALLIES_FACTIONS = ['british', 'aef', 'soviet']
+const AXIS_FACTIONS = ['west_german', 'german']
 
-function getStatGrops(team: Player[], data: PersonalStats) {
-    const len = team.length
-    for (let i = len; i > 1; i--) {
-        const statGroups = data.statGroups
-            .filter((s) => s.type === i)
-            .filter((s) =>
-                s.members.every((el) =>
-                    team.find((m) => m.profileId === el.profile_id)
-                )
-            )
+function findLeaderboardId(name: string | undefined, titles: AvailableLeaderboard): number | undefined {
+    return titles.leaderboards.find((lb) => lb.name === name)?.id
+}
 
-        if (statGroups.length >= 1) {
-            return statGroups
-        }
+function getTeamStatGroups(team: Player[], data: PersonalStats): StatGroup[] {
+    for (let size = team.length; size > 1; size--) {
+        const groups = data.statGroups
+            .filter((sg) => sg.type === size)
+            .filter((sg) => sg.members.every((m) => team.some((p) => p.profileId === m.profile_id)))
+
+        if (groups.length > 0) return groups
     }
     return []
 }
 
-function addRankToTeamLeaderboardStats(
-    statGroups: StatGroup[],
-    data: PersonalStats,
-    leaderboardId: number | undefined
-) {
-    const arr: LeaderboardStat[] = []
+function getTeamLeaderboardName(teamSize: number, team: Player[]): string | undefined {
+    if (teamSize < 2) return undefined
+
+    const isAllies = team.every((p) => ALLIES_FACTIONS.includes(p.faction))
+    const isAxis = team.every((p) => AXIS_FACTIONS.includes(p.faction))
+
+    if (isAllies) return `TeamOf${teamSize}Allies`
+    if (isAxis) return `TeamOf${teamSize}Axis`
+    return undefined
+}
+
+function assignTeamRanks(statGroups: StatGroup[], data: PersonalStats, leaderboardId: number | undefined): void {
+    const seen = new Set<number>()
     let teamIndex = 1
-    data.leaderboardStats.forEach((ls: LeaderboardStat) => {
-        statGroups.forEach((sg) => {
-            if (
-                ls.statgroup_id === sg.id &&
-                ls.leaderboard_id === leaderboardId &&
-                !arr.find(
-                    // no duplicates
-                    (x) =>
-                        x.statgroup_id === ls.statgroup_id &&
-                        x.leaderboard_id === ls.leaderboard_id
-                )
-            ) {
-                arr.push(ls)
-                let teamMarker
-                if (teamIndex === 1) {
-                    teamMarker = ' ¹'
-                } else {
-                    teamMarker = ' ²'
-                }
 
-                sg.rank = ls.rank
-                sg.teamMarker = teamMarker
-                teamIndex++
-            }
-        })
-    })
+    for (const ls of data.leaderboardStats) {
+        if (ls.leaderboard_id !== leaderboardId) continue
+
+        const sg = statGroups.find((sg) => sg.id === ls.statgroup_id)
+        if (!sg || seen.has(ls.statgroup_id)) continue
+
+        seen.add(ls.statgroup_id)
+        sg.rank = ls.rank
+        sg.teamMarker = teamIndex === 1 ? ' ¹' : ' ²'
+        teamIndex++
+    }
 }
 
-function factionSide(team: Player[]) {
-    const isAllies = team.every(
-        (p) =>
-            p.faction === 'british' ||
-            p.faction === 'aef' ||
-            p.faction === 'soviet'
+function getSolo1v1Rank(player: Player, team: Player[], data: PersonalStats, titles: AvailableLeaderboard): number | undefined {
+    const matchTypeName = `${team.length}v${team.length}${getFactionName(player.faction)}`
+    const leaderboardId = findLeaderboardId(matchTypeName, titles)
+
+    const playerSg = data.statGroups.find(
+        (sg) => sg.type === 1 && sg.members[0].profile_id === player.profileId
     )
 
-    const isAxis = team.every(
-        (p) => p.faction === 'west_german' || p.faction === 'german'
-    )
-
-    if (isAllies) {
-        return 'allies'
-    } else if (isAxis) {
-        return 'axis'
-    } else {
-        return undefined
-    }
-}
-
-function getTitleName(teamLen: number, side: string | undefined) {
-    const size = teamLen
-    if (side === undefined) {
-        return undefined
-    }
-    if (size < 2) {
-        return undefined
-    }
-    if (side === 'allies') {
-        return 'TeamOf' + size + 'Allies'
-    } else if (side === 'axis') {
-        return 'TeamOf' + size + 'Axis'
-    }
-}
-
-function getLeaderboardId(
-    titleName: string | undefined,
-    titles: AvailableLeaderboard
-) {
-    const obj = titles.leaderboards.find((t) => t.name === titleName)
-    if (obj) {
-        return obj.id
-    }
-}
-
-function getTitlesLeaderboardId(name: string, titles: AvailableLeaderboard) {
-    const obj = titles.leaderboards.find((obj) => obj.name === name)
-    if (obj) {
-        return obj.id
-    }
-}
-
-function getPlayerStatGroup(playerId: number | undefined, data: PersonalStats) {
-    if (playerId) {
-        return data.statGroups.find(
-            (obj) => obj.type === 1 && obj.members[0].profile_id === playerId
-        )
-    }
-}
-
-function getPlayerLeaderboardStat(
-    statGroupId: number | undefined,
-    leaderboardId: number | undefined,
-    data: PersonalStats
-) {
     return data.leaderboardStats.find(
-        (obj) =>
-            obj.statgroup_id === statGroupId &&
-            obj.leaderboard_id === leaderboardId
-    )
+        (ls) => ls.statgroup_id === playerSg?.id && ls.leaderboard_id === leaderboardId
+    )?.rank
 }
 
-function findInStatGroups(statGroups: StatGroup[], player: Player) {
-    for (const sg of statGroups) {
-        for (const m of sg.members) {
-            if (m.profile_id === player.profileId) {
-                return sg
-            }
-        }
+function findPlayerCountry(player: Player, data: PersonalStats): string | undefined {
+    for (const sg of data.statGroups) {
+        const member = sg.members.find((m) => m.profile_id === player.profileId)
+        if (member) return member.country
     }
 }
 
@@ -155,77 +73,37 @@ export function guessRankings(
     data: PersonalStats,
     titles: AvailableLeaderboard
 ) {
-    function rankToRandomPlayer(team: Player[], player: Player) {
-        const teamSize = team.length
-        const factionName = getFactionName(player.faction)
-        const matchTypeName = `${teamSize}v${teamSize}${factionName}`
-        const leaderboardId = getTitlesLeaderboardId(matchTypeName, titles)
+    const players: Player[] = formatToNums(copyObj(playersArr))
+    const teams: [Player[], Player[]] = separateTeams(players)
 
-        const playerId = player.profileId
-        const playerStatGroup = getPlayerStatGroup(playerId, data)
+    for (const team of teams) {
+        const statGroups = getTeamStatGroups(team, data)
 
-        let playerStatGroupId
-        if (playerStatGroup) {
-            playerStatGroupId = playerStatGroup.id
-        }
+        if (statGroups.length > 0) {
+            const leaderboardName = getTeamLeaderboardName(statGroups[0].members.length, team)
+            const leaderboardId = findLeaderboardId(leaderboardName, titles)
+            assignTeamRanks(statGroups, data, leaderboardId)
 
-        const playerLeaderboardStat = getPlayerLeaderboardStat(
-            playerStatGroupId,
-            leaderboardId,
-            data
-        )
-
-        if (playerLeaderboardStat?.rank) {
-            player.ranking = playerLeaderboardStat.rank
+            for (const player of team) {
+                const sg = statGroups.find((sg) => sg.members.some((m) => m.profile_id === player.profileId))
+                if (sg) {
+                    player.ranking = sg.rank
+                    player.teamMarker = sg.teamMarker
+                } else {
+                    player.ranking = getSolo1v1Rank(player, team, data, titles)
+                }
+            }
+        } else {
+            for (const player of team) {
+                player.ranking = getSolo1v1Rank(player, team, data, titles)
+            }
         }
     }
 
-    const arr: Player[] = formatToNums(copyObj(playersArr))
-    const teams: [Player[], Player[]] = separateTeams(arr)
-
-        for (const team of teams) {
-            const side = factionSide(team)
-            const statGroups = getStatGrops(team, data)
-    
-            if (
-                statGroups.length > 0  
-                // && team.length > 1
-            ) {
-                const modeName = getTitleName(statGroups[0].members.length, side)
-                const leaderboardId = getLeaderboardId(modeName, titles)
-                addRankToTeamLeaderboardStats(statGroups, data, leaderboardId)
-                team.forEach((player) => {
-                    const sg = findInStatGroups(statGroups, player)
-                    if (sg) {
-                        player.ranking = sg.rank
-                        player.teamMarker = sg.teamMarker
-                    } else {
-                        rankToRandomPlayer(team, player)
-                    }
-                })
-            } else {
-                for (const player of team) {
-                    rankToRandomPlayer(team, player)
-                }
-            }
-        }
-
-
-    // adding country to player
-    for (const t of teams) {
-        for (const player of t) {
+    for (const team of teams) {
+        for (const player of team) {
             if (player.profileId) {
-                for (const sg of data.statGroups) {
-                    for (const m of sg.members) {
-                        if (m.profile_id === player.profileId) {
-                            player.country = m.country
-                            break
-                        }
-                    }
-                    if (player.country) {
-                        break
-                    }
-                }
+                player.country = findPlayerCountry(player, data)
             }
         }
     }
