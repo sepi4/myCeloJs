@@ -1,7 +1,5 @@
-import fs from 'fs'
 import { commonName, commonNameCoh3 } from './simpleFunctions'
 import countriesJson from '../../countries.json'
-// import countries from '../../countries.json';
 import stringWidth from 'string-width'
 
 import { Player, RankingsJson } from '../types'
@@ -61,8 +59,6 @@ export function writeRankings(
     players: Player[],
     rankingsHorizontal: boolean
 ): void {
-    // console.log('writeRankings: players:', players);
-
     const json: RankingsJson = {
         teams: {
             team1: [],
@@ -162,24 +158,5 @@ export function writeRankings(
         }
     }
 
-    fs.writeFile(
-        process.cwd() + '/localhostFiles/rankings.json',
-        JSON.stringify(json, null, 4),
-        'utf-8',
-        (err) => {
-            if (err) {
-                console.log('Error in writing rankings.json file: ', err)
-            }
-        }
-    )
-    fs.writeFile(
-        process.cwd() + '/localhostFiles/rankings.txt',
-        text,
-        'utf-8',
-        (err) => {
-            if (err) {
-                console.log('Error in writing rankings.txt file: ', err)
-            }
-        }
-    )
+    window.electronAPI.rankings.write(JSON.stringify(json, null, 4), text)
 }

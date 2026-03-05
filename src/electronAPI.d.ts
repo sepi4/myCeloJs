@@ -1,6 +1,7 @@
 interface ElectronAPI {
     appVersion: string
     settingsDir: string
+    appLocation: string
     dialog: {
         showOpenDialog(options: {
             properties?: string[]
@@ -12,6 +13,16 @@ interface ElectronAPI {
     }
     shell: {
         openExternal(url: string): Promise<void>
+    }
+    settings: {
+        read(filePath: string): Promise<string | null>
+        write(filePath: string, data: string): Promise<void>
+    }
+    log: {
+        read(filePath: string): Promise<string | null>
+    }
+    rankings: {
+        write(jsonContent: string, txtContent: string): Promise<void>
     }
 }
 

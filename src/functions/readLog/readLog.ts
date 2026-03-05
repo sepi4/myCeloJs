@@ -1,5 +1,3 @@
-import { promises as fs } from 'fs'
-
 import { getPlayersInfo } from './getPlayersInfo'
 import { Player } from '../../types'
 import { getPlayersInfoCoh3 } from './getPlayersInfoCoh3'
@@ -60,9 +58,6 @@ export function getLines(lines: string[], coh3: boolean) {
 
 /**
  * Switch players so that current player is in first team
- * @param info players info arr
- * @param currentUser current user
- * @returns modified players info arr
  */
 export function switchTeams(info: Player[], currentUser: string): Player[] {
     const currentUserTeam: Player[] = info.filter(
@@ -80,22 +75,21 @@ export function switchTeams(info: Player[], currentUser: string): Player[] {
     return info
 }
 
-export async function readLog(
-    coh3: boolean,
-    fileLocation: string,
-) {
+export async function readLog(coh3: boolean, fileLocation: string) {
     fileLocation = fileLocation.replace(/\\/, '\\\\')
     try {
-        const data = await fs.readFile(fileLocation, 'utf-8')
+        const data = await window.electronAPI.log.read(fileLocation)
+        if (!data) return []
+
         const lines = data.split('\n')
 
         if (!checkGameVersionIsCorrect(lines, coh3)) {
-            return new Promise<Player[]>((resolve) => {
-                resolve([])
-            })
+            return []
         }
 
-        const currentUserAlias: string | undefined = coh3 ? getCurrentUserAliasCoh3(lines) : getCurrentUserAlias(lines)
+        const currentUserAlias = coh3
+            ? getCurrentUserAliasCoh3(lines)
+            : getCurrentUserAlias(lines)
 
         const arr: string[] = getLines(lines, coh3)
         let psInfo = coh3 ? getPlayersInfoCoh3(arr) : getPlayersInfo(arr)
@@ -103,17 +97,10 @@ export async function readLog(
         if (currentUserAlias) {
             psInfo = switchTeams(psInfo, currentUserAlias)
         }
-        // callback(psInfo)
-        return new Promise<Player[]>((resolve) => {
-            resolve(psInfo)
-            // if (psInfo) {
-            // } else {
-            //     reject()
-            // }
-        })
+
+        return psInfo
     } catch (err) {
-        if (err) {
-            console.log('Error in reading logfile: ', err)
-        }
+        console.log('Error in reading logfile:', err)
+        return []
     }
 }

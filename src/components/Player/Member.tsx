@@ -2,10 +2,10 @@ import styles from './Members.module.css'
 
 import { getExtraInfo } from '../../functions/getExtraInfo'
 import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
-import { Member } from '../../types'
+import { Member as MemberType } from '../../types'
 
 interface Props {
-    member: Member
+    member: MemberType
 }
 
 export default function Member(props: Props) {
@@ -13,7 +13,7 @@ export default function Member(props: Props) {
     const countryFlags = state.countryFlags
     const dispatch = useAppDispatch()
 
-    const handlePlayerCardOn = (p: Member) => {
+    const handlePlayerCardOn = (p: MemberType) => {
         const newPlayer = {
             country: p.country,
             name: p.alias,

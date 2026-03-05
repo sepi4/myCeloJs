@@ -2,18 +2,15 @@ import getLocalStorage from './functions/getLocalStorage'
 
 import { Store, CountryFlagsLocation } from './types'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function importAll(r: any) {
-    return r.keys().map(r)
-}
-
-const images: { default: string }[] = importAll(
-    require.context('../img/countryFlags/', false, /\.(png|jpe?g|svg)$/)
-)
+const flagModules = import.meta.glob('../img/countryFlags/*.png', {
+    eager: true,
+}) as Record<string, { default: string }>
 
 const countryFlags: CountryFlagsLocation = {}
-images.forEach((x: { default: string }) => {
-    countryFlags[x.default.substring(4, 6)] = x.default
+Object.entries(flagModules).forEach(([path, mod]) => {
+    const filename = path.split('/').pop() ?? ''
+    const code = filename.substring(0, 2)
+    countryFlags[code] = mod.default
 })
 
 const initialStore: Store = {
@@ -37,7 +34,7 @@ const initialStore: Store = {
 
     updateCheckDone: false,
 
-    appLocation: process.cwd(),
+    appLocation: window.electronAPI.appLocation,
 
     players: null,
     fromFile: null,

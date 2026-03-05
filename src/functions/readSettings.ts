@@ -1,14 +1,9 @@
-import fs from 'fs'
-
-export function readSettings(
+export async function readSettings(
     fileLocation: string,
     callback: (d: string) => void
 ) {
-    fileLocation = fileLocation.replace(/\\/, '\\\\')
-    fs.readFile(fileLocation, 'utf-8', (err, data) => {
-        if (err) {
-            return
-        }
+    const data = await window.electronAPI.settings.read(fileLocation)
+    if (data) {
         callback(data)
-    })
+    }
 }

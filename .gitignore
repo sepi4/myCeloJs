@@ -4,6 +4,7 @@
 # Build folder and files #
 ##########################
 release-builds/
+out/
 
 # Development folders and files #
 #################################
