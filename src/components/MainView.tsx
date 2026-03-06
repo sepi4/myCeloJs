@@ -7,11 +7,12 @@ import Search from './Search/Search'
 import ClosingViewWrapper from './ClosingViewWrapper/ClosingViewWrapper'
 import { useAppSelector } from '../hooks/customReduxHooks'
 import { usePlayersStore } from '../stores/playersStore'
+import { useSettingsViewStore } from '../stores/settingsViewStore'
 import { useViewStore } from '../stores/viewStore'
 import { Player, SettingsType } from '../types'
 
 function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
-    const settingsView = useAppSelector((state) => state.settingsView)
+    const { settingsView } = useSettingsViewStore()
     const teams: Player[][] = [[], []]
     const settings: SettingsType = useAppSelector((state) => state.settings)
     const { players } = usePlayersStore()

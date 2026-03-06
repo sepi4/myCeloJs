@@ -1,14 +1,10 @@
-import {
-    settings,
-    settingsView,
-} from './reducer'
+import { settings } from './reducer'
 
 import { configureStore } from '@reduxjs/toolkit'
 
 export const store = configureStore({
     reducer: {
         settings,
-        settingsView,
     },
 
     // devTools: true,

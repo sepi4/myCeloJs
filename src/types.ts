@@ -273,6 +273,5 @@ export interface DataFromFile {
 }
 
 export interface Store {
-    settingsView: boolean
     settings: SettingsType | null
 }
