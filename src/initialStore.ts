@@ -16,8 +16,6 @@ const initialStore: Store = {
 
     players: null,
     fromFile: null,
-    extraInfo: null,
-
     navButtons: getLocalStorage({
         key: 'navButtons',
         def: {
