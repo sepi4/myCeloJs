@@ -15,20 +15,6 @@ export function settingsView(
     }
 }
 
-export function autoLogChecking(
-    state = initialStore.autoLogChecking,
-    action: AnyAction
-) {
-    switch (action.type) {
-        case 'TOGGLE_AUTO_LOG_CHECKING':
-            localStorage.setItem('autoLogChecking', JSON.stringify(!state))
-            return !state
-
-        default:
-            return state
-    }
-}
-
 export function logCheckInterval(
     state = initialStore.logCheckInterval,
     action: AnyAction
@@ -187,10 +173,6 @@ export function navButtons(state = initialStore.navButtons, action: AnyAction) {
         default:
             return state
     }
-}
-
-export function countryFlags() {
-    return initialStore.countryFlags
 }
 
 

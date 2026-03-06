@@ -9,10 +9,11 @@ import logo_steam from '../../../img/logo_steam.png'
 import getSiteLink from '../../functions/getSiteLink'
 
 import { useAppSelector } from '../../hooks/customReduxHooks'
+import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 
 export default function PlayerCard() {
     const state = useAppSelector((state) => state)
-    const countryFlags = state.countryFlags
+    const { countryFlags } = useCountryFlagsStore()
     const coh3 = state.navButtons.coh3
 
     const player = state.playerCard.player

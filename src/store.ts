@@ -1,6 +1,4 @@
 import {
-    autoLogChecking,
-    countryFlags,
     extraInfo,
     foundPlayers,
     fromFile,
@@ -20,8 +18,6 @@ import { configureStore } from '@reduxjs/toolkit'
 
 export const store = configureStore({
     reducer: {
-        autoLogChecking,
-        countryFlags,
         extraInfo,
         foundPlayers,
         fromFile,
