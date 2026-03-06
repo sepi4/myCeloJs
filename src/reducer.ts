@@ -53,21 +53,6 @@ export function updateCheckDone(
     }
 }
 
-export function extraInfo(state = initialStore.extraInfo, action: AnyAction) {
-    switch (action.type) {
-        case 'CLEAR_EXTRA_INFO':
-            return null
-        case 'SET_EXTRA_INFO':
-            return action.data.extraInfo
-        case 'SET_NEW_PLAYERS':
-            return null
-        // case 'PLAYER_CARD_ON':
-        //     return action.data.extraInfo
-        default:
-            return state
-    }
-}
-
 export function view(state = initialStore.view, action: AnyAction) {
     switch (action.type) {
         case 'SEARCH_VIEW_ON':

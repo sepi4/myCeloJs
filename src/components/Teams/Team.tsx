@@ -1,5 +1,5 @@
-import { useAppSelector } from '../../hooks/customReduxHooks'
-import { NormalizedExtraInfo, Player as PlayerType } from '../../types'
+import { Player as PlayerType } from '../../types'
+import { useExtraInfoStore } from '../../stores/extraInfoStore'
 
 import Player from '../Player/Player'
 
@@ -9,9 +9,7 @@ interface Props {
 }
 
 function Team(props: Props) {
-    const extraInfo: NormalizedExtraInfo = useAppSelector(
-        (state) => state.extraInfo
-    )
+    const { extraInfo } = useExtraInfoStore()
     return (
         <div
             style={{

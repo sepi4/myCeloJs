@@ -279,7 +279,6 @@ export interface Store {
 updateCheckDone: boolean
     players: Player[] | null
     fromFile: DataFromFile[] | null
-    extraInfo: NormalizedExtraInfo | null
     navButtons: {
         all: boolean
         table: boolean
