@@ -15,23 +15,6 @@ export function settingsView(
     }
 }
 
-export function logCheckInterval(
-    state = initialStore.logCheckInterval,
-    action: AnyAction
-) {
-    switch (action.type) {
-        case 'SET_INTERVAL':
-            localStorage.setItem(
-                'logCheckInterval',
-                JSON.stringify(action.data)
-            )
-            return action.data
-
-        default:
-            return state
-    }
-}
-
 export function settings(state = initialStore.settings, action: AnyAction) {
     switch (action.type) {
         case 'SET_SETTINGS':

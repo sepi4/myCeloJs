@@ -275,7 +275,6 @@ export interface DataFromFile {
 export interface Store {
     settingsView: boolean
     settings: SettingsType | null
-    logCheckInterval: number
 updateCheckDone: boolean
     players: Player[] | null
 navButtons: {
