@@ -7,7 +7,6 @@ import getText from '../../functions/getText'
 import styles from './PlayerExtraInfo.module.css'
 
 import { ExtraInfo, Player } from '../../types'
-import { getTotalGames } from '../../functions/simpleFunctions'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 

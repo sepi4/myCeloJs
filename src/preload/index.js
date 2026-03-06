@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const { contextBridge, ipcRenderer, clipboard, shell } = require('electron')
 
 const appInfo = ipcRenderer.sendSync('get-app-info')

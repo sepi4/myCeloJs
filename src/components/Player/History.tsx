@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import getText from '../../functions/getText'
 
 import GameHistoryDiv from './GameHistoryDiv'
@@ -51,7 +51,7 @@ export default function History(props: Props) {
         return () => {
             mounted = false
         }
-    }, [getHistory])
+    }, [getHistory, props.player])
 
     useEffect(() => {
         setHistory(null)

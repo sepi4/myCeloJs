@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react'
+import { ChangeEvent } from 'react'
 
 import writeSettings from '../../functions/writeSettings'
 import getText from '../../functions/getText'

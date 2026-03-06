@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import writeSettings from '../functions/writeSettings'
 
@@ -36,11 +35,12 @@ export const isHigherVersion = (tag: string, current: string) => {
     return false
 }
 
+const appVersion = window.electronAPI.appVersion
+
 function UpdateBar() {
     const [update, setUpdate] = useState<A | null>(null)
     const { updateCheckDone, setUpdateCheckDone } = useUpdateCheckDoneStore()
     const { settings } = useSettingsStore()
-    const appVersion = window.electronAPI.appVersion
 
     const getText = function (x: string) {
         return funGetText(x, settings)
@@ -72,7 +72,7 @@ function UpdateBar() {
                     }
                 })
         }
-    }, [])
+    }, [updateCheckDone, settings, setUpdateCheckDone])
 
     const ignoreHandler = () => {
         const newSettings = {

@@ -28,7 +28,7 @@ export function getPlayersInfoCoh3(arr: string[]): Player[] {
         }
     })
 
-    const ooo: any = {}
+    const ooo: Record<string, NonNullable<ReturnType<typeof parse>>> = {}
     for (const row of playersData) {
         const p = parse(row)
         if (p?.profileId) {

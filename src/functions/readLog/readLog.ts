@@ -29,7 +29,7 @@ export function checkGameVersionIsCorrect(lines: string[], coh3: boolean) {
     return lines[0].match(/RELICCOH2/)
 }
 
-export function getLines(lines: string[], coh3: boolean) {
+export function getLines(lines: string[]) {
     const arr: string[] = []
     let stop = false
     let wasGame = false
@@ -91,7 +91,7 @@ export async function readLog(coh3: boolean, fileLocation: string) {
             ? getCurrentUserAliasCoh3(lines)
             : getCurrentUserAlias(lines)
 
-        const arr: string[] = getLines(lines, coh3)
+        const arr: string[] = getLines(lines)
         let psInfo = coh3 ? getPlayersInfoCoh3(arr) : getPlayersInfo(arr)
 
         if (currentUserAlias) {

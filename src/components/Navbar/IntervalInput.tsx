@@ -13,7 +13,7 @@ function IntervalInput() {
     const [error, setError] = useState(false)
     const refInputElement = useRef<HTMLInputElement>(null)
 
-    const checkNumbers = (e: React.FocusEvent<HTMLInputElement>) => {
+    const checkNumbers = (e: React.FocusEvent<HTMLInputElement> | React.KeyboardEvent<HTMLInputElement>) => {
         setError(false)
         const x = parseInt(e.target.value)
         if (!isNaN(x) && x > 0 && x < 1000 && x !== logCheckInterval) {
@@ -42,8 +42,7 @@ function IntervalInput() {
                 }
                 ref={refInputElement}
                 onBlur={checkNumbers}
-                // TODO fix any
-                onKeyDown={(e: any) =>
+                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
                     e.key === 'Enter'
                         ? checkNumbers(e)
                         : error

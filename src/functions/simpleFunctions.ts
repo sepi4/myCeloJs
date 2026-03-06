@@ -1,4 +1,4 @@
-import { ExtraInfo, Player, FactionName, Rank } from '../types'
+import { Player, FactionName, Rank } from '../types'
 
 export function commonName(str: string): FactionName {
     switch (str) {

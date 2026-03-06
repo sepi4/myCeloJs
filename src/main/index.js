@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
 const { app, BrowserWindow, ipcMain, dialog } = require('electron')
 const fs = require('fs')

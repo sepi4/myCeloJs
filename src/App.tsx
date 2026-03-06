@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 
 import useSound from 'use-sound'
 import audioLocation from './bell.mp3'
@@ -43,12 +43,12 @@ function App() {
     const { players, setPlayers } = usePlayersStore()
     const { settings } = useSettingsStore()
 
-    const writeNewRankingsFile = (data: Player[]) => {
+    const writeNewRankingsFile = useCallback((data: Player[]) => {
         clearExtraInfo()
         if (settings) {
             writeRankings(coh3, data, settings.rankingsHorizontal)
         }
-    }
+    }, [clearExtraInfo, settings, coh3])
 
     useEffect(() => {
         // initial readSettings location of log file
@@ -159,7 +159,7 @@ function App() {
                 }
             )
         }
-    }, [settings])
+    }, [settings, autoLogChecking, coh3, writeNewRankingsFile])
 
     const handleSetSettingsView = () => {
         if (!autoLogChecking) {

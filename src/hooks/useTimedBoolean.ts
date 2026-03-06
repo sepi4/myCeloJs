@@ -8,7 +8,7 @@ function useTimedBoolean(ms: number): [boolean, (x: boolean) => void] {
         return () => {
             clearTimeout(timerId)
         }
-    }, [status])
+    }, [status, ms])
 
     return [status, setStatus]
 }
