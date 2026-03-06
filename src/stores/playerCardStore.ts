@@ -1,10 +1,16 @@
 import { create } from 'zustand'
-import { NormalizedExtraInfo, Player } from '../types'
+import { ExtraInfo } from '../types'
+
+export interface PlayerCardData {
+    name?: string
+    country?: string
+    profileId?: string | number
+}
 
 interface PlayerCardStore {
-    player: Player | null
-    extraInfo: NormalizedExtraInfo | null
-    setPlayerCard: (player: Player, extraInfo: NormalizedExtraInfo) => void
+    player: PlayerCardData | null
+    extraInfo: ExtraInfo | null
+    setPlayerCard: (player: PlayerCardData, extraInfo: ExtraInfo | null) => void
     resetPlayerCard: () => void
 }
 
