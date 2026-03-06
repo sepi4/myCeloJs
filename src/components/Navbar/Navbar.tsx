@@ -13,8 +13,8 @@ import NavBarIcon from './NavbarIcon'
 import CheckLogDiv from './CheckLogDiv'
 import NavbarRow from './NavbarRow'
 import { getExtraInfo } from '../../functions/getExtraInfo'
-import { useAppSelector } from '../../hooks/customReduxHooks'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
+import { useSettingsStore } from '../../stores/settingsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { useSettingsViewStore } from '../../stores/settingsViewStore'
 import { useViewStore } from '../../stores/viewStore'
@@ -26,8 +26,7 @@ interface Props {
 }
 
 export default function Navbar(props: Props) {
-    const state = useAppSelector((state) => state)
-    const settings = state.settings
+    const { settings } = useSettingsStore()
     const { settingsView, toggleSettingsView } = useSettingsViewStore()
 
     const settingsViewToggeler = () => {
@@ -75,7 +74,7 @@ export default function Navbar(props: Props) {
     }
 
     const handleOpenMyCard = () => {
-        const id: number = settings.profileId
+        const id: number = Number(settings!.profileId)
 
         getExtraInfo(navButtons.coh3, [id], (result) => {
             const ex = result[id]

@@ -7,7 +7,7 @@ import Loading from './Loading'
 import styles from './History.module.css'
 import { parseHistoryData, getHistoryUrls } from '../../functions/historyFuns'
 import { Player, MatchObject, NormalizedProfiles } from '../../types'
-import { useAppSelector } from '../../hooks/customReduxHooks'
+import { useSettingsStore } from '../../stores/settingsStore'
 
 interface Props {
     player: Player
@@ -18,7 +18,7 @@ interface X {
 }
 
 export default function History(props: Props) {
-    const settings = useAppSelector((state) => state.settings)
+    const { settings } = useSettingsStore()
 
     const [getHistory, setGetHistory] = useState(false)
     const [history, setHistory] = useState<X | null>(null)

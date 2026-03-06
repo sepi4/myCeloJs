@@ -1,5 +1,5 @@
 import getText from '../../functions/getText'
-import { useAppSelector } from '../../hooks/customReduxHooks'
+import { useSettingsStore } from '../../stores/settingsStore'
 import { Rank as RankType } from '../../types'
 import Rank from '../Player/Rank'
 import Cell from './Cell'
@@ -12,7 +12,7 @@ interface Props {
 }
 
 function RanksList(props: Props) {
-    const settings = useAppSelector((state) => state.settings)
+    const { settings } = useSettingsStore()
     const { ranksArr } = props
     return (
         <div>

@@ -75,6 +75,7 @@ export interface SettingsType {
     siteLink: string
     steamId: string
     profileId: string
+    ignoreUntil?: string
 }
 
 export interface StatGroup {
@@ -272,6 +273,4 @@ export interface DataFromFile {
     time: string
 }
 
-export interface Store {
-    settings: SettingsType | null
-}
+export interface Store {}

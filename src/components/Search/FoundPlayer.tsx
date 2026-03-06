@@ -1,9 +1,9 @@
 import styles from './FoundPlayer.module.css'
 import getText from '../../functions/getText'
 import { getTimeAgo } from '../../functions/time'
-import { useAppSelector } from '../../hooks/customReduxHooks'
-import { Member, SettingsType } from '../../types'
+import { Member } from '../../types'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
+import { useSettingsStore } from '../../stores/settingsStore'
 
 interface Props {
     player: Member
@@ -11,9 +11,8 @@ interface Props {
 }
 
 export default function FoundPlayer(props: Props) {
-    const state = useAppSelector((state) => state)
     const { countryFlags } = useCountryFlagsStore()
-    const settings: SettingsType = state.settings
+    const { settings } = useSettingsStore()
 
     const lg: string = settings?.language ? settings.language : 'en'
 
