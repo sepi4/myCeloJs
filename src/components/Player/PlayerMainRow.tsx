@@ -14,6 +14,7 @@ import { getTotalGames } from '../../functions/simpleFunctions'
 
 import { ExtraInfo, Player } from '../../types'
 import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
+import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 
 const countries = countriesJson as {
     [key: string]: {
@@ -75,9 +76,8 @@ function PlayerMainRow(props: Props) {
         })
     }
 
-    const countryFlagLocation = useAppSelector(
-        (state) => state.countryFlags[country ? country : '']
-    )
+    const { countryFlags } = useCountryFlagsStore()
+    const countryFlagLocation = countryFlags[country ? country : '']
 
     const dropDownArrow = (
         <span style={{ width: '2em' }}>

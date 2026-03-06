@@ -1,17 +1,6 @@
 import getLocalStorage from './functions/getLocalStorage'
 
-import { Store, CountryFlagsLocation } from './types'
-
-const flagModules = import.meta.glob('../img/countryFlags/*.png', {
-    eager: true,
-}) as Record<string, { default: string }>
-
-const countryFlags: CountryFlagsLocation = {}
-Object.entries(flagModules).forEach(([path, mod]) => {
-    const filename = path.split('/').pop() ?? ''
-    const code = filename.substring(0, 2)
-    countryFlags[code] = mod.default
-})
+import { Store } from './types'
 
 const initialStore: Store = {
     settingsView: false,
@@ -23,13 +12,9 @@ const initialStore: Store = {
         def: 3,
     }),
 
-    autoLogChecking: getLocalStorage({
-        key: 'autoLogChecking',
-        def: true,
-    }),
-updateCheckDone: false,
+    updateCheckDone: false,
 
-players: null,
+    players: null,
     fromFile: null,
     extraInfo: null,
 
@@ -46,8 +31,6 @@ players: null,
         [false, false, false, false],
         [false, false, false, false],
     ],
-
-    countryFlags,
 
     sorter: {
         name: 'byRank',
