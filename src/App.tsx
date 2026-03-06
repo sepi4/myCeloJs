@@ -23,6 +23,7 @@ import { useAutoLogCheckingStore } from './stores/autoLogCheckingStore'
 import { useExtraInfoStore } from './stores/extraInfoStore'
 import { useLogCheckIntervalStore } from './stores/logCheckIntervalStore'
 import { useNavButtonsStore } from './stores/navButtonsStore'
+import { usePlayersStore } from './stores/playersStore'
 import { Player } from './types'
 import { guessRankings } from './functions/guessRankings'
 const appVersion = window.electronAPI.appVersion
@@ -41,6 +42,7 @@ function App() {
     const { extraInfo, setExtraInfo, clearExtraInfo } = useExtraInfoStore()
     const { logCheckInterval } = useLogCheckIntervalStore()
     const { navButtons: { coh3 } } = useNavButtonsStore()
+    const { players, setPlayers } = usePlayersStore()
 
     const writeNewRankingsFile = (data: Player[]) => {
         clearExtraInfo()
@@ -71,7 +73,7 @@ function App() {
                 writeSettings(newSettings, dispatch)
             })
             return
-        } else if (state.players === null) {
+        } else if (players === null) {
             // initial readLog
             if (!autoLogChecking) {
                 return
@@ -86,8 +88,7 @@ function App() {
                     }
                 )
             }
-        } else if (extraInfo === null && state.players.length > 0) {
-            const players: Player[] = state.players
+        } else if (extraInfo === null && players.length > 0) {
 
             const ids: number[] = []
             for (const p of players) {
@@ -117,6 +118,7 @@ function App() {
                 }
 
                 setExtraInfo(result)
+                setPlayers(newPlayers)
                 dispatch({
                     type: 'SET_EXTRA_INFO',
                     data: { newPlayers },
