@@ -4,10 +4,10 @@ import TableRanksDiv from './TableRanksDiv'
 import styles from './TableDiv.module.css'
 
 import { FactionName, Rank } from '../../types'
-import { useAppSelector } from '../../hooks/customReduxHooks'
+import { useNavButtonsStore } from '../../stores/navButtonsStore'
 
 function TableDiv({ ranksArr }: { ranksArr: Rank[] }) {
-    const coh3 = useAppSelector((state) => state.navButtons.coh3)
+    const { navButtons: { coh3 } } = useNavButtonsStore()
     const [solo, factionNames] = coh3 ? refactronTableInfoCoh3(ranksArr) : refactronTableInfo(ranksArr)
     let index = 0
 

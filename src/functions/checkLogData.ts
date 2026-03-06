@@ -2,6 +2,7 @@ import { writeRankings } from './writeRankings'
 import { Player, Store } from '../types'
 import { useExtraInfoStore } from '../stores/extraInfoStore'
 import { useFromFileStore } from '../stores/fromFileStore'
+import { useNavButtonsStore } from '../stores/navButtonsStore'
 
 interface Props {
     data: Player[]
@@ -17,6 +18,7 @@ export default function checkLogData({
     playAudio,
 }: Props) {
     const { fromFile, setFromFile } = useFromFileStore.getState()
+    const { navButtons: { coh3 } } = useNavButtonsStore.getState()
     if (JSON.stringify(fromFile) !== JSON.stringify(data)) {
         setFromFile(data)
         useExtraInfoStore.getState().clearExtraInfo()
@@ -25,7 +27,7 @@ export default function checkLogData({
             data,
         })
         if (state.settings) {
-            writeRankings(state.navButtons.coh3, data, state.settings.rankingsHorizontal)
+            writeRankings(coh3, data, state.settings.rankingsHorizontal)
             if (playAudio && data.length > 0) {
                 playAudio()
             }

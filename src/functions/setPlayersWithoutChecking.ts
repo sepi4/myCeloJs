@@ -3,6 +3,7 @@ import { writeRankings } from './writeRankings'
 import { Player, Store } from '../types'
 import { useExtraInfoStore } from '../stores/extraInfoStore'
 import { useFromFileStore } from '../stores/fromFileStore'
+import { useNavButtonsStore } from '../stores/navButtonsStore'
 
 export default function setPlayersWithoutChecking(
     data: Player[],
@@ -10,12 +11,13 @@ export default function setPlayersWithoutChecking(
     dispatch: ({ type, data }: { type: string; data: Player[] }) => void
 ) {
     useFromFileStore.getState().setFromFile(data)
+    const { navButtons: { coh3 } } = useNavButtonsStore.getState()
     useExtraInfoStore.getState().clearExtraInfo()
     dispatch({
         type: 'SET_NEW_PLAYERS',
         data,
     })
     if (state.settings) {
-        writeRankings(state.navButtons.coh3, data, state.settings.rankingsHorizontal)
+        writeRankings(coh3, data, state.settings.rankingsHorizontal)
     }
 }
