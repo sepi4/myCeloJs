@@ -1,7 +1,5 @@
 import { Store } from './types'
 
-const initialStore: Store = {
-    settings: null,
-}
+const initialStore: Store = {}
 
 export default initialStore

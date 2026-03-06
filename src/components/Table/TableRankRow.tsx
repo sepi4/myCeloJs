@@ -1,5 +1,5 @@
 import getText from '../../functions/getText'
-import { useAppSelector } from '../../hooks/customReduxHooks'
+import { useSettingsStore } from '../../stores/settingsStore'
 import styles from './TableRankRow.module.css'
 
 interface Props {
@@ -12,7 +12,7 @@ interface Props {
 }
 
 function TableRankRow({ rank, num, per, streak, totalGames, ranktotal }: Props) {
-    const settings = useAppSelector((state) => state.settings)
+    const { settings } = useSettingsStore()
     // prettier-ignore
     const color = (
         Number(streak)

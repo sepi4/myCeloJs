@@ -2,15 +2,12 @@
 import React, { useRef, useState } from 'react'
 
 import getText from '../../functions/getText'
-import { useAppSelector } from '../../hooks/customReduxHooks'
-import { SettingsType } from '../../types'
 import styles from './IntervalInput.module.css'
 import { useLogCheckIntervalStore } from '../../stores/logCheckIntervalStore'
+import { useSettingsStore } from '../../stores/settingsStore'
 
 function IntervalInput() {
-    const state = useAppSelector((state) => state)
-    const settings: SettingsType = state.settings
-
+    const { settings } = useSettingsStore()
     const { logCheckInterval, setLogCheckInterval } = useLogCheckIntervalStore()
 
     const [error, setError] = useState(false)

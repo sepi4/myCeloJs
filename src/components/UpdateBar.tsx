@@ -6,9 +6,10 @@ import writeSettings from '../functions/writeSettings'
 import styles from './UpdateBar.module.css'
 
 import funGetText from '../functions/getText'
-import { useAppDispatch, useAppSelector } from '../hooks/customReduxHooks'
+import { useSettingsStore } from '../stores/settingsStore'
 import { useUpdateCheckDoneStore } from '../stores/updateCheckDoneStore'
 import { LATEST_RELEASES_URL } from '../constants'
+import { SettingsType } from '../types'
 
 interface GitHubResult {
     tag_name: string
@@ -37,9 +38,8 @@ export const isHigherVersion = (tag: string, current: string) => {
 
 function UpdateBar() {
     const [update, setUpdate] = useState<A | null>(null)
-    const dispatch = useAppDispatch()
     const { updateCheckDone, setUpdateCheckDone } = useUpdateCheckDoneStore()
-    const settings = useAppSelector((state) => state.settings)
+    const { settings } = useSettingsStore()
     const appVersion = window.electronAPI.appVersion
 
     const getText = function (x: string) {
@@ -78,9 +78,9 @@ function UpdateBar() {
         const newSettings = {
             ...settings,
             ignoreUntil: update?.tagName,
-        }
+        } as SettingsType
         setUpdate(null)
-        writeSettings(newSettings, dispatch)
+        writeSettings(newSettings)
     }
 
     return (

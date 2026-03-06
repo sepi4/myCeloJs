@@ -14,15 +14,15 @@ import searchPlayers from '../../functions/searchPlayers'
 import FoundPlayer from './FoundPlayer'
 
 import styles from './Search.module.css'
-import { useAppSelector } from '../../hooks/customReduxHooks'
 import { Member } from '../../types'
+import { useSettingsStore } from '../../stores/settingsStore'
 import { useFoundPlayersStore } from '../../stores/foundPlayersStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { useViewStore } from '../../stores/viewStore'
 
 export default function Search() {
-    const state = useAppSelector((state) => state)
+    const { settings } = useSettingsStore()
     const inputRef = useRef<HTMLInputElement>(null)
 
     const [searchValue, setSearchValue] = useState('')
@@ -132,7 +132,7 @@ export default function Search() {
                 <input
                     ref={inputRef}
                     className={styles.input}
-                    placeholder={getText('steam_alias_or_id', state.settings)}
+                    placeholder={getText('steam_alias_or_id', settings)}
                     onChange={handleSearchInput}
                     onKeyUp={handleKeyUp}
                 />

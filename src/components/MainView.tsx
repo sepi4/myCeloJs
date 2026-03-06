@@ -5,16 +5,16 @@ import PlayerCard from './PlayerCard/PlayerCard'
 import getText from '../functions/getText'
 import Search from './Search/Search'
 import ClosingViewWrapper from './ClosingViewWrapper/ClosingViewWrapper'
-import { useAppSelector } from '../hooks/customReduxHooks'
 import { usePlayersStore } from '../stores/playersStore'
+import { useSettingsStore } from '../stores/settingsStore'
 import { useSettingsViewStore } from '../stores/settingsViewStore'
 import { useViewStore } from '../stores/viewStore'
-import { Player, SettingsType } from '../types'
+import { Player } from '../types'
 
 function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
     const { settingsView } = useSettingsViewStore()
     const teams: Player[][] = [[], []]
-    const settings: SettingsType = useAppSelector((state) => state.settings)
+    const { settings } = useSettingsStore()
     const { players } = usePlayersStore()
     const { view } = useViewStore()
 
