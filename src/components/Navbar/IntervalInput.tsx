@@ -15,13 +15,13 @@ function IntervalInput() {
 
     const checkNumbers = (e: React.FocusEvent<HTMLInputElement> | React.KeyboardEvent<HTMLInputElement>) => {
         setError(false)
-        const x = parseInt(e.target.value)
+        const x = parseInt(e.currentTarget.value)
         if (!isNaN(x) && x > 0 && x < 1000 && x !== logCheckInterval) {
             setLogCheckInterval(x)
             if (refInputElement?.current) {
                 refInputElement.current.value = x + ''
             }
-            e.target.blur()
+            e.currentTarget.blur()
         } else {
             if (refInputElement?.current) {
                 refInputElement.current.value = logCheckInterval + ''

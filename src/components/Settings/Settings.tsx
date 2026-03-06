@@ -41,7 +41,7 @@ function Settings(props: Props) {
 
     const setError = () => {
         setTimedError(true)
-        if (steamIdInputRef.current) {
+        if (steamIdInputRef.current && settings) {
             steamIdInputRef.current.value = settings.steamId
                 ? settings.steamId
                 : ''
