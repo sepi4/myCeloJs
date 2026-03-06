@@ -23,18 +23,6 @@ export function settings(state = initialStore.settings, action: AnyAction) {
     }
 }
 
-export function updateCheckDone(
-    state = initialStore.updateCheckDone,
-    action: AnyAction
-) {
-    switch (action.type) {
-        case 'UPDATE_CHECK_DONE':
-            return true
-        default:
-            return state
-    }
-}
-
 function reducer(state: Store = initialStore, action: AnyAction) {
     switch (action.type) {
         default:
