@@ -1,7 +1,6 @@
 import {
     settings,
     settingsView,
-    updateCheckDone,
 } from './reducer'
 
 import { configureStore } from '@reduxjs/toolkit'
@@ -10,7 +9,6 @@ export const store = configureStore({
     reducer: {
         settings,
         settingsView,
-        updateCheckDone,
     },
 
     // devTools: true,
