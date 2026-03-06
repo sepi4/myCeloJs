@@ -1,5 +1,6 @@
 # playwright
 test-results/
+playwright-report/
 
 .vscode
 .VSCodeCounter
@@ -27,7 +28,6 @@ _ignore/
 # Log files & folders #
 #######################
 logs/
-*.log
 npm-debug.log*
 .npm
 
