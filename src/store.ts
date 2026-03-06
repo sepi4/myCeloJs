@@ -1,5 +1,4 @@
 import {
-    foundPlayers,
     fromFile,
     logCheckInterval,
     navButtons,
@@ -17,7 +16,6 @@ import { configureStore } from '@reduxjs/toolkit'
 
 export const store = configureStore({
     reducer: {
-        foundPlayers,
         fromFile,
         logCheckInterval,
         navButtons,

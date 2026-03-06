@@ -41,8 +41,6 @@ const initialStore: Store = {
     },
 
     view: 'main',
-
-    foundPlayers: [],
 }
 
 export default initialStore
