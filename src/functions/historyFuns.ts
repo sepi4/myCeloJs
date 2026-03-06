@@ -31,7 +31,7 @@ export const parseHistoryData = (result: Result, player: Player) => {
         mObj.endGameTime = new Date(m.completiontime * 1000)
         mObj.mapName = m.mapname
         mObj.players = m.matchhistoryreportresults.map((p) => {
-            p.counters = JSON.parse(p.counters)
+            p.counters = JSON.parse(p.counters as unknown as string)
             return p
         })
         mObj.matchType = matchTypes.find((t) => t.id === m.matchtype_id)

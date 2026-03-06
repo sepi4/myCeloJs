@@ -17,12 +17,14 @@ export default function PlayerCard() {
     const { navButtons: { coh3 } } = useNavButtonsStore()
     const { player, extraInfo } = usePlayerCardStore()
 
+    if (!player) return null
+
     if (!extraInfo) {
         return (
             <>
                 <div className={styles.nameDiv}>
                     <img
-                        src={countryFlags[player.country]}
+                        src={countryFlags[player.country ?? '']}
                         alt={`${player.country}`}
                         title={`${player.country}`}
                     />
@@ -35,7 +37,7 @@ export default function PlayerCard() {
     const name = (
         <div className={styles.nameDiv}>
             <img
-                src={countryFlags[player.country]}
+                src={countryFlags[player.country ?? '']}
                 alt={`${player.country}`}
                 title={`${player.country}`}
             />
@@ -100,6 +102,7 @@ export default function PlayerCard() {
     )
 
     const card = extraInfo && (
+        // @ts-ignore player is a partial Player used only for display
         <PlayerExtraInfo player={player} extraInfo={extraInfo} />
     )
 

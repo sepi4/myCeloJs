@@ -14,9 +14,9 @@ import { useAppDispatch } from '../../hooks/customReduxHooks'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 
-const StyledTh = styled.th`
+const StyledTh = styled.th<{ len?: number }>`
     word-wrap: break-word;
-    max-width: ${({ len }: { len?: number }) => (len ? 99 / (len + 1) : null)} +
+    max-width: ${({ len }) => (len ? 99 / (len + 1) : null)} +
         '%';
     img {
         width: 1.4em;

@@ -16,14 +16,14 @@ function TableRankRow({ rank, num, per, streak, totalGames, ranktotal }: Props) 
     // prettier-ignore
     const color = (
         Number(streak)
-            ? streak > 0
+            ? Number(streak) > 0
                 ? 'green'
                 : 'red'
             : '#ddd'
     )
 
-    streak = streak > 0 ? '+' + streak : streak
-    ranktotal = rank > 0 && ranktotal > 0 ? `${getText('of', settings)} ${ranktotal}` : '' 
+    streak = Number(streak) > 0 ? '+' + streak : streak
+    ranktotal = Number(rank) > 0 && Number(ranktotal) > 0 ? `${getText('of', settings)} ${ranktotal}` : ''
     return (
         <div className={styles.container}>
             <span title={ranktotal}> {rank} </span>

@@ -1,9 +1,9 @@
 import { create } from 'zustand'
-import { DataFromFile } from '../types'
+import { Player } from '../types'
 
 interface FromFileStore {
-    fromFile: DataFromFile[] | null
-    setFromFile: (fromFile: DataFromFile[]) => void
+    fromFile: Player[] | null
+    setFromFile: (fromFile: Player[]) => void
 }
 
 export const useFromFileStore = create<FromFileStore>((set) => ({
