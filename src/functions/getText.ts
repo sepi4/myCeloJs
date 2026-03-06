@@ -1,6 +1,6 @@
 import text from '../translation'
 
-type X = { language: string } | null;
+type X = { language: string } | null
 
 function getText(key: string, settings: X): string | undefined {
     const lang = settings?.language === 'ru' ? settings.language : 'en'

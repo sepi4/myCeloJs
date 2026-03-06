@@ -1,10 +1,4 @@
-import {
-    useEffect,
-    useState,
-    useRef,
-    KeyboardEvent,
-    ChangeEvent,
-} from 'react'
+import { useEffect, useState, useRef, KeyboardEvent, ChangeEvent } from 'react'
 import { getExtraInfo } from '../../functions/getExtraInfo'
 import getLastPlayedGame from '../../functions/getLastPlayedGame'
 import getText from '../../functions/getText'
@@ -27,7 +21,9 @@ export default function Search() {
 
     const [searchValue, setSearchValue] = useState('')
     const { foundPlayers, setFoundPlayers } = useFoundPlayersStore()
-    const { navButtons: { coh3 } } = useNavButtonsStore()
+    const {
+        navButtons: { coh3 },
+    } = useNavButtonsStore()
     const { setPlayerCard } = usePlayerCardStore()
     const { setView } = useViewStore()
 
@@ -37,61 +33,55 @@ export default function Search() {
 
     const handleKeyUp = (e: KeyboardEvent) => {
         if (e.key === 'Enter' && searchValue.trim().length > 0) {
-            searchPlayers(
-                coh3,
-                searchValue, 
-                (res) => {
-                    const arrPlayers = res.map((p) => {
-                        return {
-                            country: p.country,
-                            name: p.name,
-                            profileId: p.profile_id,
-                        }
-                    })
-
-                    if (arrPlayers.length === 0) {
-                        setFoundPlayers([])
-                        return
+            searchPlayers(coh3, searchValue, (res) => {
+                const arrPlayers = res.map((p) => {
+                    return {
+                        country: p.country,
+                        name: p.name,
+                        profileId: p.profile_id,
                     }
-
-                    const ids: number[] = []
-                    for (const p of arrPlayers) {
-                        if (p.profileId) {
-                            ids.push(p.profileId)
-                        }
-                    }
-                    getExtraInfo(
-                        coh3,
-                        ids, 
-                        (result) => {
-                            const newPlayers = res
-                                .map((p) => {
-                                    if (result[p.profile_id]) {
-                                        p.totalGames = getTotalGames(
-                                            result[p.profile_id]?.ranks
-                                        )
-                                        p.lastGameTime = getLastPlayedGame(
-                                            result[p.profile_id]
-                                        )
-                                    } else {
-                                        p.totalGames = 0
-                                    }
-                                    p.extraInfo = result[p.profile_id]
-                                    return p
-                                })
-                                .sort((a, b) => {
-                                    if (
-                                        typeof a.totalGames === 'number' &&
-                                typeof b.totalGames === 'number'
-                                    ) {
-                                        return b.totalGames - a.totalGames
-                                    }
-                                    return 0
-                                })
-
-                            setFoundPlayers(newPlayers)
-                        })
                 })
+
+                if (arrPlayers.length === 0) {
+                    setFoundPlayers([])
+                    return
+                }
+
+                const ids: number[] = []
+                for (const p of arrPlayers) {
+                    if (p.profileId) {
+                        ids.push(p.profileId)
+                    }
+                }
+                getExtraInfo(coh3, ids, (result) => {
+                    const newPlayers = res
+                        .map((p) => {
+                            if (result[p.profile_id]) {
+                                p.totalGames = getTotalGames(
+                                    result[p.profile_id]?.ranks
+                                )
+                                p.lastGameTime = getLastPlayedGame(
+                                    result[p.profile_id]
+                                )
+                            } else {
+                                p.totalGames = 0
+                            }
+                            p.extraInfo = result[p.profile_id]
+                            return p
+                        })
+                        .sort((a, b) => {
+                            if (
+                                typeof a.totalGames === 'number' &&
+                                typeof b.totalGames === 'number'
+                            ) {
+                                return b.totalGames - a.totalGames
+                            }
+                            return 0
+                        })
+
+                    setFoundPlayers(newPlayers)
+                })
+            })
         }
     }
 

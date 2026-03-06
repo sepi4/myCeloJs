@@ -26,7 +26,7 @@ function PlayerExtraInfo(props: Props) {
         }
         let sum = 0
         for (const rankObj of ranksArr) {
-            if(rankObj?.isModeRanked === 1) {
+            if (rankObj?.isModeRanked === 1) {
                 sum += rankObj.wins + rankObj.losses
             }
         }

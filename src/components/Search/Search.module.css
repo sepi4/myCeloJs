@@ -16,10 +16,9 @@
 
 .input {
     background-color: #dddddd;
-    padding: .3em;
-    border: solid .05em #555;
+    padding: 0.3em;
+    border: solid 0.05em #555;
 }
-
 
 .content {
     width: 100%;

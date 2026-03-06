@@ -13,7 +13,9 @@ interface Props {
 
 export default function Member(props: Props) {
     const { countryFlags } = useCountryFlagsStore()
-    const { navButtons: { coh3 } } = useNavButtonsStore()
+    const {
+        navButtons: { coh3 },
+    } = useNavButtonsStore()
     const { setPlayerCard } = usePlayerCardStore()
     const { setView } = useViewStore()
 
@@ -24,20 +26,16 @@ export default function Member(props: Props) {
             profileId: p.profile_id,
         }
 
-        getExtraInfo(
-            coh3,
-            [p.profile_id],
-            (result) => {
-                if (!newPlayer.profileId) {
-                    return
-                }
-                const ex = result[newPlayer.profileId]
-                if (result && ex) {
-                    setPlayerCard(newPlayer, ex)
-                    setView('playerCard')
-                }
+        getExtraInfo(coh3, [p.profile_id], (result) => {
+            if (!newPlayer.profileId) {
+                return
             }
-        )
+            const ex = result[newPlayer.profileId]
+            if (result && ex) {
+                setPlayerCard(newPlayer, ex)
+                setView('playerCard')
+            }
+        })
     }
 
     return (

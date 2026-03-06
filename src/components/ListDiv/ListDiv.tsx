@@ -16,7 +16,9 @@ import { useSettingsStore } from '../../stores/settingsStore'
 import { useSorterStore } from '../../stores/sorterStore'
 
 function ListDiv({ ranksArr }: { ranksArr: Rank[] }) {
-    const { navButtons: { table: tableView, all: showAll, coh3 } } = useNavButtonsStore()
+    const {
+        navButtons: { table: tableView, all: showAll, coh3 },
+    } = useNavButtonsStore()
     const { sorter } = useSorterStore()
     const { settings } = useSettingsStore()
 

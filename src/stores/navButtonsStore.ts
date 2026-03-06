@@ -19,11 +19,17 @@ export const useNavButtonsStore = create<NavButtonsStore>((set) => ({
         table: false,
         total: false,
         coh3: false,
-        ...getLocalStorage({ key: 'navButtons', def: { all: false, table: false, total: false } }),
+        ...getLocalStorage({
+            key: 'navButtons',
+            def: { all: false, table: false, total: false },
+        }),
     },
     toggleNavButton: (key) =>
         set((state) => {
-            const updated = { ...state.navButtons, [key]: !state.navButtons[key] }
+            const updated = {
+                ...state.navButtons,
+                [key]: !state.navButtons[key],
+            }
             localStorage.setItem('navButtons', JSON.stringify(updated))
             return { navButtons: updated }
         }),

@@ -1,25 +1,25 @@
 interface LogCheckInterval {
-    key: 'logCheckInterval';
-    def: number;
+    key: 'logCheckInterval'
+    def: number
 }
 interface AutoLogChecking {
-    key: 'autoLogChecking';
-    def: boolean;
+    key: 'autoLogChecking'
+    def: boolean
 }
 interface Alert {
-    key: 'alert';
-    def: boolean;
+    key: 'alert'
+    def: boolean
 }
 interface NavButtons {
-    key: 'navButtons';
+    key: 'navButtons'
     def: {
-        all: boolean;
-        table: boolean;
-        total: boolean;
-    };
+        all: boolean
+        table: boolean
+        total: boolean
+    }
 }
 
-type Props = LogCheckInterval | AutoLogChecking | Alert | NavButtons;
+type Props = LogCheckInterval | AutoLogChecking | Alert | NavButtons
 
 export default function getLocalStorage({ key, def }: Props) {
     const str = localStorage.getItem(key)

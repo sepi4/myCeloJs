@@ -7,10 +7,10 @@
     border-radius: 0.2em;
     border: 0;
     cursor: pointer;
-    padding: .2em 0;
+    padding: 0.2em 0;
 }
 .btn:active {
-        background-color: #fff;
+    background-color: #fff;
 }
 .btn:hover {
     opacity: 70%;

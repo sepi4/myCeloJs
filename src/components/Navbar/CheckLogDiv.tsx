@@ -15,7 +15,9 @@ function CheckLogDiv() {
     const { settings } = useSettingsStore()
     const { alert, toggleAlert } = useAlertStore()
     const { autoLogChecking, toggleAutoLogChecking } = useAutoLogCheckingStore()
-    const { navButtons: { coh3 } } = useNavButtonsStore()
+    const {
+        navButtons: { coh3 },
+    } = useNavButtonsStore()
 
     return (
         <div className={styles.container}>
@@ -40,11 +42,13 @@ function CheckLogDiv() {
                     <button
                         className={styles.btn}
                         onClick={() => {
-                            readLog(coh3, settings!.logLocation).then((data) => {
-                                if (data) {
-                                    setPlayersWithoutChecking(data)
+                            readLog(coh3, settings!.logLocation).then(
+                                (data) => {
+                                    if (data) {
+                                        setPlayersWithoutChecking(data)
+                                    }
                                 }
-                            })
+                            )
                         }}
                     >
                         {getText('check_log_button', settings)}

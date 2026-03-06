@@ -15,7 +15,9 @@ export default function setPlayersWithoutChecking(data: Player[]) {
     usePlayerCardStore.getState().resetPlayerCard()
     usePlayersStore.getState().setPlayers(data)
     useViewStore.getState().setView('main')
-    const { navButtons: { coh3 } } = useNavButtonsStore.getState()
+    const {
+        navButtons: { coh3 },
+    } = useNavButtonsStore.getState()
     const { settings } = useSettingsStore.getState()
     useExtraInfoStore.getState().clearExtraInfo()
     if (settings) {

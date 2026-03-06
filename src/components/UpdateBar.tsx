@@ -46,7 +46,6 @@ function UpdateBar() {
         return funGetText(x, settings)
     }
 
-
     useEffect(() => {
         if (!updateCheckDone && settings) {
             console.log('CHECKING UPDATE')

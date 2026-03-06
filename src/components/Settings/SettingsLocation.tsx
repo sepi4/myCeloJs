@@ -10,7 +10,9 @@ export default function SettingsLocation(props: Props) {
     if (props.fileTypeSet) {
         return (
             <SettingsDiv title={props.title}>
-                <CopyDiv text={window.electronAPI.settingsDir + '\\settings.json'} />
+                <CopyDiv
+                    text={window.electronAPI.settingsDir + '\\settings.json'}
+                />
             </SettingsDiv>
         )
     }

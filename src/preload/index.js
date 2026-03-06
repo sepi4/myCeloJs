@@ -7,7 +7,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
     settingsDir: appInfo.settingsDir,
     appLocation: appInfo.appLocation,
     dialog: {
-        showOpenDialog: (options) => ipcRenderer.invoke('dialog:show-open', options),
+        showOpenDialog: (options) =>
+            ipcRenderer.invoke('dialog:show-open', options),
     },
     clipboard: {
         writeText: (text) => clipboard.writeText(text),
@@ -17,7 +18,8 @@ contextBridge.exposeInMainWorld('electronAPI', {
     },
     settings: {
         read: (filePath) => ipcRenderer.invoke('settings:read', filePath),
-        write: (filePath, data) => ipcRenderer.invoke('settings:write', filePath, data),
+        write: (filePath, data) =>
+            ipcRenderer.invoke('settings:write', filePath, data),
     },
     log: {
         read: (filePath) => ipcRenderer.invoke('log:read', filePath),

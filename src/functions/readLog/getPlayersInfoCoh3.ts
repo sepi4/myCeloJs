@@ -1,6 +1,5 @@
 import { Player } from '../../types'
 
-
 // TODO: ADD EXAMPLES
 /**
  *
@@ -14,11 +13,7 @@ export function getPlayersInfoCoh3(arr: string[]): Player[] {
         if (row.match(/GAME --.* Player:/)) {
             const splitted = row.split(':')
             if (time === undefined) {
-                time = [
-                    splitted[0],
-                    splitted[1],
-                    splitted[2],
-                ].join(':')
+                time = [splitted[0], splitted[1], splitted[2]].join(':')
             }
 
             return splitted.slice(4).join(':').trim()
@@ -69,9 +64,10 @@ export function getPlayersInfoCoh3(arr: string[]): Player[] {
     })
 }
 
-
 function parse(row: string) {
-    const m = row.match(/Match Started - \[(\d+) \/steam\/(\d+)\], slot = +(\d+), ranking = +(-?\d+)/)
+    const m = row.match(
+        /Match Started - \[(\d+) \/steam\/(\d+)\], slot = +(\d+), ranking = +(-?\d+)/
+    )
     if (m) {
         return {
             profileId: Number(m[1]),

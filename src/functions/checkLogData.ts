@@ -16,7 +16,9 @@ interface Props {
 
 export default function checkLogData({ data, playAudio }: Props) {
     const { fromFile, setFromFile } = useFromFileStore.getState()
-    const { navButtons: { coh3 } } = useNavButtonsStore.getState()
+    const {
+        navButtons: { coh3 },
+    } = useNavButtonsStore.getState()
     const { settings } = useSettingsStore.getState()
     if (JSON.stringify(fromFile) !== JSON.stringify(data)) {
         setFromFile(data)

@@ -14,7 +14,9 @@ import { usePlayerCardStore } from '../../stores/playerCardStore'
 
 export default function PlayerCard() {
     const { countryFlags } = useCountryFlagsStore()
-    const { navButtons: { coh3 } } = useNavButtonsStore()
+    const {
+        navButtons: { coh3 },
+    } = useNavButtonsStore()
     const { player, extraInfo } = usePlayerCardStore()
 
     if (!player) return null
@@ -69,10 +71,12 @@ export default function PlayerCard() {
         steamId ? window.electronAPI.shell.openExternal(linkCoh2stats) : null
 
     const linkCoh2 = getSiteLink('coh2.org') + steamId
-    const funCoh2 = () => (steamId ? window.electronAPI.shell.openExternal(linkCoh2) : null)
+    const funCoh2 = () =>
+        steamId ? window.electronAPI.shell.openExternal(linkCoh2) : null
 
     const linkSteam = getSiteLink('steam') + steamId
-    const funSteam = () => (steamId ? window.electronAPI.shell.openExternal(linkSteam) : null)
+    const funSteam = () =>
+        steamId ? window.electronAPI.shell.openExternal(linkSteam) : null
 
     const linkImages = (
         <div className={styles.links}>

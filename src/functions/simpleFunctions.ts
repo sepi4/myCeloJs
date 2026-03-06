@@ -35,7 +35,7 @@ export function commonNameCoh3(str: string): string {
 export function getTotalGames(ranks: Rank[]): number {
     let sum = 0
     for (const rankObj of ranks) {
-        if(rankObj?.isModeRanked === 1) {
+        if (rankObj?.isModeRanked === 1) {
             sum += rankObj.wins + rankObj.losses
         }
     }
@@ -105,7 +105,7 @@ export function getFactionName(x: string): string {
             return 'DAK'
         case 'germans':
             return 'German'
-        
+
         // else
         default:
             return ''

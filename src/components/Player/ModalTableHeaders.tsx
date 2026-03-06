@@ -16,8 +16,7 @@ import { useViewStore } from '../../stores/viewStore'
 
 const StyledTh = styled.th<{ len?: number }>`
     word-wrap: break-word;
-    max-width: ${({ len }) => (len ? 99 / (len + 1) : null)} +
-        '%';
+    max-width: ${({ len }) => (len ? 99 / (len + 1) : null)} + '%';
     img {
         width: 1.4em;
         height: 1.4em;
@@ -31,7 +30,9 @@ interface Props {
 }
 
 function ModalTableHeaders(props: Props) {
-    const { navButtons: { coh3 } } = useNavButtonsStore()
+    const {
+        navButtons: { coh3 },
+    } = useNavButtonsStore()
     const { setPlayerCard } = usePlayerCardStore()
     const { setView } = useViewStore()
     return (
@@ -71,8 +72,8 @@ function ModalTableHeaders(props: Props) {
                                     p.resulttype === 1
                                         ? 'green'
                                         : p.resulttype === 0
-                                        ? 'red'
-                                        : 'blue',
+                                          ? 'red'
+                                          : 'blue',
                                 cursor: 'pointer',
                             }}
                         >
@@ -80,25 +81,28 @@ function ModalTableHeaders(props: Props) {
                                 title={props.profiles[p.profile_id].alias}
                                 onClick={() => {
                                     getExtraInfo(
-                                    coh3,
-                                    [p.profile_id], 
+                                        coh3,
+                                        [p.profile_id],
                                         (result) => {
-                                        const pro = props.profiles[p.profile_id]
-                                        const newPlayer = {
-                                            country: pro.country,
-                                            name: pro.alias,
-                                            profileId: pro.profile_id,
-                                        }
-                                        if (!newPlayer.profileId) {
-                                            return
-                                        }
+                                            const pro =
+                                                props.profiles[p.profile_id]
+                                            const newPlayer = {
+                                                country: pro.country,
+                                                name: pro.alias,
+                                                profileId: pro.profile_id,
+                                            }
+                                            if (!newPlayer.profileId) {
+                                                return
+                                            }
 
-                                        const ex = result[newPlayer.profileId]
-                                        if (result && ex) {
-                                            setPlayerCard(newPlayer, ex)
-                                            setView('playerCard')
+                                            const ex =
+                                                result[newPlayer.profileId]
+                                            if (result && ex) {
+                                                setPlayerCard(newPlayer, ex)
+                                                setView('playerCard')
+                                            }
                                         }
-                                    })
+                                    )
                                 }}
                             >
                                 {props.profiles[p.profile_id].alias}

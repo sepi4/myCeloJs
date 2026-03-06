@@ -39,16 +39,21 @@ function App() {
     const { autoLogChecking } = useAutoLogCheckingStore()
     const { extraInfo, setExtraInfo, clearExtraInfo } = useExtraInfoStore()
     const { logCheckInterval } = useLogCheckIntervalStore()
-    const { navButtons: { coh3 } } = useNavButtonsStore()
+    const {
+        navButtons: { coh3 },
+    } = useNavButtonsStore()
     const { players, setPlayers } = usePlayersStore()
     const { settings } = useSettingsStore()
 
-    const writeNewRankingsFile = useCallback((data: Player[]) => {
-        clearExtraInfo()
-        if (settings) {
-            writeRankings(coh3, data, settings.rankingsHorizontal)
-        }
-    }, [clearExtraInfo, settings, coh3])
+    const writeNewRankingsFile = useCallback(
+        (data: Player[]) => {
+            clearExtraInfo()
+            if (settings) {
+                writeRankings(coh3, data, settings.rankingsHorizontal)
+            }
+        },
+        [clearExtraInfo, settings, coh3]
+    )
 
     useEffect(() => {
         // initial readSettings location of log file
@@ -79,16 +84,13 @@ function App() {
             }
 
             if (settings && settings.logLocation) {
-                readLog(coh3, settings.logLocation).then(
-                    (data) => {
-                        if (data) {
-                            checkLogData({ data })
-                        }
+                readLog(coh3, settings.logLocation).then((data) => {
+                    if (data) {
+                        checkLogData({ data })
                     }
-                )
+                })
             }
         } else if (extraInfo === null && players.length > 0) {
-
             const ids: number[] = []
             for (const p of players) {
                 if (p.profileId) {
@@ -129,17 +131,15 @@ function App() {
 
         const intervalId = setInterval(() => {
             if (settings && settings.logLocation) {
-                readLog(coh3, settings.logLocation).then(
-                    (data) => {
-                        if (data) {
-                            if (alert) {
-                                checkLogData({ data, playAudio })
-                            } else {
-                                checkLogData({ data })
-                            }
+                readLog(coh3, settings.logLocation).then((data) => {
+                    if (data) {
+                        if (alert) {
+                            checkLogData({ data, playAudio })
+                        } else {
+                            checkLogData({ data })
                         }
                     }
-                )
+                })
             }
         }, logCheckInterval * 1000)
 
@@ -151,13 +151,11 @@ function App() {
             return
         }
         if (settings && settings.logLocation) {
-            readLog(coh3, settings.logLocation).then(
-                (data) => {
-                    if (data) {
-                        writeNewRankingsFile(data)
-                    }
+            readLog(coh3, settings.logLocation).then((data) => {
+                if (data) {
+                    writeNewRankingsFile(data)
                 }
-            )
+            })
         }
     }, [settings, autoLogChecking, coh3, writeNewRankingsFile])
 
@@ -166,13 +164,11 @@ function App() {
             return
         }
         if (settings && settings.logLocation) {
-            readLog(coh3, settings.logLocation).then(
-                (data) => {
-                    if (data) {
-                        checkLogData({ data })
-                    }
+            readLog(coh3, settings.logLocation).then((data) => {
+                if (data) {
+                    checkLogData({ data })
                 }
-            )
+            })
         }
     }
 

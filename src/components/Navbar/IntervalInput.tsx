@@ -13,7 +13,11 @@ function IntervalInput() {
     const [error, setError] = useState(false)
     const refInputElement = useRef<HTMLInputElement>(null)
 
-    const checkNumbers = (e: React.FocusEvent<HTMLInputElement> | React.KeyboardEvent<HTMLInputElement>) => {
+    const checkNumbers = (
+        e:
+            | React.FocusEvent<HTMLInputElement>
+            | React.KeyboardEvent<HTMLInputElement>
+    ) => {
         setError(false)
         const x = parseInt(e.currentTarget.value)
         if (!isNaN(x) && x > 0 && x < 1000 && x !== logCheckInterval) {
@@ -37,17 +41,15 @@ function IntervalInput() {
         <span className={styles.container}>
             <input
                 className={styles.input}
-                defaultValue={
-                    logCheckInterval ? logCheckInterval : ''
-                }
+                defaultValue={logCheckInterval ? logCheckInterval : ''}
                 ref={refInputElement}
                 onBlur={checkNumbers}
                 onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
                     e.key === 'Enter'
                         ? checkNumbers(e)
                         : error
-                        ? setError(false)
-                        : null
+                          ? setError(false)
+                          : null
                 }
             />
             <span>{getText('sec', settings)}</span>

@@ -1,6 +1,9 @@
 import styles from './PlayerMainRow.module.css'
 
-import { getFactionFlagLocation, getFactionFlagLocationCoh3 } from '../../functions/getFactionFlagLocation'
+import {
+    getFactionFlagLocation,
+    getFactionFlagLocationCoh3,
+} from '../../functions/getFactionFlagLocation'
 import { commonName } from '../../functions/simpleFunctions'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -42,7 +45,9 @@ interface Props {
 }
 
 function PlayerMainRow(props: Props) {
-    const { navButtons: { coh3 } } = useNavButtonsStore()
+    const {
+        navButtons: { coh3 },
+    } = useNavButtonsStore()
     const { player, handleSetShowExtra, extraInfo, showExtra } = props
     let country: string | undefined
     let steamId: string | undefined
@@ -96,7 +101,9 @@ function PlayerMainRow(props: Props) {
     const teamMarker = player.teamMarker ? player.teamMarker : ''
     const rank = (player.ranking === -1 ? '-' : player.ranking) + teamMarker
 
-    const factionFlag = coh3 ? getFactionFlagLocationCoh3(player.faction) : getFactionFlagLocation(commonName(player.faction))
+    const factionFlag = coh3
+        ? getFactionFlagLocationCoh3(player.faction)
+        : getFactionFlagLocation(commonName(player.faction))
     const factionTitle = coh3 ? player.faction : commonName(player.faction)
     const faction = (
         <span title={factionTitle}>

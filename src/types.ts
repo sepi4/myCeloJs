@@ -24,7 +24,7 @@ export interface Player {
     time: string
 }
 
-export type FactionName = 'okw' | 'sov' | 'uk' | 'usa' | 'wer' 
+export type FactionName = 'okw' | 'sov' | 'uk' | 'usa' | 'wer'
 
 export interface Member {
     alias: string
@@ -272,4 +272,3 @@ export interface DataFromFile {
     teamSlot: string
     time: string
 }
-

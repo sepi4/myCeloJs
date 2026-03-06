@@ -24,8 +24,14 @@ export function getExtraInfo(
     const url = `${coh3 ? RELIC_SERVER_BASE_COH3 : RELIC_SERVER_BASE_COH2}/GetPersonalStat?title=coh${coh3 ? 3 : 2}&profile_ids=[${strIds}]`
     const url2 = `${coh3 ? RELIC_SERVER_BASE_COH3 : RELIC_SERVER_BASE_COH2}/GetAvailableLeaderboards?title=coh${coh3 ? 3 : 2}`
 
-    const promise1 = fetch(url).then((r) => { if (!r.ok) throw new Error(`${r.status}`); return r.json() as Promise<PersonalStats> })
-    const promise2 = fetch(url2).then((r) => { if (!r.ok) throw new Error(`${r.status}`); return r.json() as Promise<AvailableLeaderboard> })
+    const promise1 = fetch(url).then((r) => {
+        if (!r.ok) throw new Error(`${r.status}`)
+        return r.json() as Promise<PersonalStats>
+    })
+    const promise2 = fetch(url2).then((r) => {
+        if (!r.ok) throw new Error(`${r.status}`)
+        return r.json() as Promise<AvailableLeaderboard>
+    })
 
     Promise.all([promise1, promise2])
         .then(([personalStats, cohTitles]) => {

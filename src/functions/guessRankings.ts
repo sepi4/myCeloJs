@@ -1,10 +1,23 @@
-import { copyObj, formatToNums, separateTeams, getFactionName } from './simpleFunctions'
-import { Player, AvailableLeaderboard, PersonalStats, StatGroup } from '../types'
+import {
+    copyObj,
+    formatToNums,
+    separateTeams,
+    getFactionName,
+} from './simpleFunctions'
+import {
+    Player,
+    AvailableLeaderboard,
+    PersonalStats,
+    StatGroup,
+} from '../types'
 
 const ALLIES_FACTIONS = ['british', 'aef', 'soviet']
 const AXIS_FACTIONS = ['west_german', 'german']
 
-function findLeaderboardId(name: string | undefined, titles: AvailableLeaderboard): number | undefined {
+function findLeaderboardId(
+    name: string | undefined,
+    titles: AvailableLeaderboard
+): number | undefined {
     return titles.leaderboards.find((lb) => lb.name === name)?.id
 }
 
@@ -12,14 +25,21 @@ function getTeamStatGroups(team: Player[], data: PersonalStats): StatGroup[] {
     for (let size = team.length; size > 1; size--) {
         const groups = data.statGroups
             .filter((sg) => sg.type === size)
-            .filter((sg) => sg.members.every((m) => team.some((p) => p.profileId === m.profile_id)))
+            .filter((sg) =>
+                sg.members.every((m) =>
+                    team.some((p) => p.profileId === m.profile_id)
+                )
+            )
 
         if (groups.length > 0) return groups
     }
     return []
 }
 
-function getTeamLeaderboardName(teamSize: number, team: Player[]): string | undefined {
+function getTeamLeaderboardName(
+    teamSize: number,
+    team: Player[]
+): string | undefined {
     if (teamSize < 2) return undefined
 
     const isAllies = team.every((p) => ALLIES_FACTIONS.includes(p.faction))
@@ -30,7 +50,11 @@ function getTeamLeaderboardName(teamSize: number, team: Player[]): string | unde
     return undefined
 }
 
-function assignTeamRanks(statGroups: StatGroup[], data: PersonalStats, leaderboardId: number | undefined): void {
+function assignTeamRanks(
+    statGroups: StatGroup[],
+    data: PersonalStats,
+    leaderboardId: number | undefined
+): void {
     const seen = new Set<number>()
     let teamIndex = 1
 
@@ -47,7 +71,12 @@ function assignTeamRanks(statGroups: StatGroup[], data: PersonalStats, leaderboa
     }
 }
 
-function getSolo1v1Rank(player: Player, team: Player[], data: PersonalStats, titles: AvailableLeaderboard): number | undefined {
+function getSolo1v1Rank(
+    player: Player,
+    team: Player[],
+    data: PersonalStats,
+    titles: AvailableLeaderboard
+): number | undefined {
     const matchTypeName = `${team.length}v${team.length}${getFactionName(player.faction)}`
     const leaderboardId = findLeaderboardId(matchTypeName, titles)
 
@@ -56,11 +85,16 @@ function getSolo1v1Rank(player: Player, team: Player[], data: PersonalStats, tit
     )
 
     return data.leaderboardStats.find(
-        (ls) => ls.statgroup_id === playerSg?.id && ls.leaderboard_id === leaderboardId
+        (ls) =>
+            ls.statgroup_id === playerSg?.id &&
+            ls.leaderboard_id === leaderboardId
     )?.rank
 }
 
-function findPlayerCountry(player: Player, data: PersonalStats): string | undefined {
+function findPlayerCountry(
+    player: Player,
+    data: PersonalStats
+): string | undefined {
     for (const sg of data.statGroups) {
         const member = sg.members.find((m) => m.profile_id === player.profileId)
         if (member) return member.country
@@ -80,12 +114,17 @@ export function guessRankings(
         const statGroups = getTeamStatGroups(team, data)
 
         if (statGroups.length > 0) {
-            const leaderboardName = getTeamLeaderboardName(statGroups[0].members.length, team)
+            const leaderboardName = getTeamLeaderboardName(
+                statGroups[0].members.length,
+                team
+            )
             const leaderboardId = findLeaderboardId(leaderboardName, titles)
             assignTeamRanks(statGroups, data, leaderboardId)
 
             for (const player of team) {
-                const sg = statGroups.find((sg) => sg.members.some((m) => m.profile_id === player.profileId))
+                const sg = statGroups.find((sg) =>
+                    sg.members.some((m) => m.profile_id === player.profileId)
+                )
                 if (sg) {
                     player.ranking = sg.rank
                     player.teamMarker = sg.teamMarker

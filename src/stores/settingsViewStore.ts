@@ -7,5 +7,6 @@ interface SettingsViewStore {
 
 export const useSettingsViewStore = create<SettingsViewStore>((set) => ({
     settingsView: false,
-    toggleSettingsView: () => set((state) => ({ settingsView: !state.settingsView })),
+    toggleSettingsView: () =>
+        set((state) => ({ settingsView: !state.settingsView })),
 }))

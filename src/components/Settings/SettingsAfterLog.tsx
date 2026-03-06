@@ -18,8 +18,7 @@ export default function SettingsAfterLog() {
 
     const handleType = (e: ChangeEvent<HTMLInputElement>) => {
         const newFormat = e.target.value
-        const loc =
-            appLocation + '\\localhostFiles\\rankings.' + newFormat
+        const loc = appLocation + '\\localhostFiles\\rankings.' + newFormat
         const newSettings = {
             ...settings,
             rankingsHtml: newFormat === 'html',

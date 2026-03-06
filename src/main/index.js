@@ -6,9 +6,10 @@ const http = require('http')
 let mainWindow
 
 function createMainWindow() {
-    const icon = process.platform !== 'win32'
-        ? path.join(__dirname, '../../img/icon/icon.png')
-        : path.join(__dirname, '../../img/icon/icon.ico')
+    const icon =
+        process.platform !== 'win32'
+            ? path.join(__dirname, '../../img/icon/icon.png')
+            : path.join(__dirname, '../../img/icon/icon.ico')
 
     mainWindow = new BrowserWindow({
         width: 800,
@@ -35,8 +36,10 @@ function createMainWindow() {
     mainWindow.once('ready-to-show', () => {
         mainWindow.show()
         if (process.env['ELECTRON_RENDERER_URL']) {
-            const { installExtension, REACT_DEVELOPER_TOOLS } =
-                require('electron-devtools-installer')
+            const {
+                installExtension,
+                REACT_DEVELOPER_TOOLS,
+            } = require('electron-devtools-installer')
             installExtension(REACT_DEVELOPER_TOOLS).catch((err) =>
                 console.log('Error loading React DevTools:', err)
             )

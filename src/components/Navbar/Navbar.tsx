@@ -167,21 +167,21 @@ export default function Navbar(props: Props) {
                     <NavbarRow>
                         <div className={styles.radio}>
                             <input
-                                id='coh2'
+                                id="coh2"
                                 type="radio"
                                 onChange={() => toggleNavButton('coh3')}
                                 checked={!navButtons['coh3']}
                             />{' '}
-                            <label htmlFor='coh2'>coh2</label>
+                            <label htmlFor="coh2">coh2</label>
                         </div>
                         <div className={styles.radio}>
                             <input
-                                id='coh3'
+                                id="coh3"
                                 type="radio"
                                 onChange={() => toggleNavButton('coh3')}
                                 checked={navButtons['coh3']}
                             />{' '}
-                            <label htmlFor='coh3'>coh3</label>
+                            <label htmlFor="coh3">coh3</label>
                         </div>
 
                         {/* <NavCheckbox

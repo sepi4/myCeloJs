@@ -5,8 +5,8 @@
 
 .getHistory {
     cursor: pointer;
-    border: .05em solid #ddd;
-    padding: 0.2em .6em;
+    border: 0.05em solid #ddd;
+    padding: 0.2em 0.6em;
 }
 
 .historyDivs {
