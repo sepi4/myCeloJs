@@ -7,6 +7,7 @@ import styles from './UpdateBar.module.css'
 
 import funGetText from '../functions/getText'
 import { useAppDispatch, useAppSelector } from '../hooks/customReduxHooks'
+import { useUpdateCheckDoneStore } from '../stores/updateCheckDoneStore'
 import { LATEST_RELEASES_URL } from '../constants'
 
 interface GitHubResult {
@@ -37,7 +38,7 @@ export const isHigherVersion = (tag: string, current: string) => {
 function UpdateBar() {
     const [update, setUpdate] = useState<A | null>(null)
     const dispatch = useAppDispatch()
-    const updateCheckDone = useAppSelector((state) => state.updateCheckDone)
+    const { updateCheckDone, setUpdateCheckDone } = useUpdateCheckDoneStore()
     const settings = useAppSelector((state) => state.settings)
     const appVersion = window.electronAPI.appVersion
 
@@ -49,9 +50,7 @@ function UpdateBar() {
     useEffect(() => {
         if (!updateCheckDone && settings) {
             console.log('CHECKING UPDATE')
-            dispatch({
-                type: 'UPDATE_CHECK_DONE',
-            })
+            setUpdateCheckDone()
 
             const url = LATEST_RELEASES_URL
             fetch(url)
