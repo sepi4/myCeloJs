@@ -68,18 +68,6 @@ export function view(state = initialStore.view, action: AnyAction) {
     }
 }
 
-export function foundPlayers(
-    state = initialStore.foundPlayers,
-    action: AnyAction
-) {
-    switch (action.type) {
-        case 'SET_FOUND_PLAYERS':
-            return action.data
-        default:
-            return state
-    }
-}
-
 export function playerCard(state = initialStore.playerCard, action: AnyAction) {
     switch (action.type) {
         case 'PLAYER_CARD_ON':
