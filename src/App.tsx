@@ -21,6 +21,7 @@ import { useAlertStore } from './stores/alertStore'
 import { useAppLocationStore } from './stores/appLocationStore'
 import { useAutoLogCheckingStore } from './stores/autoLogCheckingStore'
 import { useExtraInfoStore } from './stores/extraInfoStore'
+import { useLogCheckIntervalStore } from './stores/logCheckIntervalStore'
 import { Player } from './types'
 import { guessRankings } from './functions/guessRankings'
 const appVersion = window.electronAPI.appVersion
@@ -37,6 +38,7 @@ function App() {
     const { appLocation } = useAppLocationStore()
     const { autoLogChecking } = useAutoLogCheckingStore()
     const { extraInfo, setExtraInfo, clearExtraInfo } = useExtraInfoStore()
+    const { logCheckInterval } = useLogCheckIntervalStore()
 
     const writeNewRankingsFile = (data: Player[]) => {
         clearExtraInfo()
@@ -145,7 +147,7 @@ function App() {
                     }
                 )
             }
-        }, state.logCheckInterval * 1000)
+        }, logCheckInterval * 1000)
 
         return () => clearInterval(intervalId)
     })

@@ -2,15 +2,16 @@
 import React, { useRef, useState } from 'react'
 
 import getText from '../../functions/getText'
-import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
+import { useAppSelector } from '../../hooks/customReduxHooks'
 import { SettingsType } from '../../types'
 import styles from './IntervalInput.module.css'
+import { useLogCheckIntervalStore } from '../../stores/logCheckIntervalStore'
 
 function IntervalInput() {
     const state = useAppSelector((state) => state)
     const settings: SettingsType = state.settings
 
-    const dispatch = useAppDispatch()
+    const { logCheckInterval, setLogCheckInterval } = useLogCheckIntervalStore()
 
     const [error, setError] = useState(false)
     const refInputElement = useRef<HTMLInputElement>(null)
@@ -18,20 +19,17 @@ function IntervalInput() {
     const checkNumbers = (e: React.FocusEvent<HTMLInputElement>) => {
         setError(false)
         const x = parseInt(e.target.value)
-        if (!isNaN(x) && x > 0 && x < 1000 && x !== state.logCheckInterval) {
-            dispatch({
-                type: 'SET_INTERVAL',
-                data: x,
-            })
+        if (!isNaN(x) && x > 0 && x < 1000 && x !== logCheckInterval) {
+            setLogCheckInterval(x)
             if (refInputElement?.current) {
                 refInputElement.current.value = x + ''
             }
             e.target.blur()
         } else {
             if (refInputElement?.current) {
-                refInputElement.current.value = state.logCheckInterval
+                refInputElement.current.value = logCheckInterval + ''
             }
-            if (x !== state.logCheckInterval) {
+            if (x !== logCheckInterval) {
                 setError(true)
                 setTimeout(() => setError(false), 5000)
             }
@@ -43,7 +41,7 @@ function IntervalInput() {
             <input
                 className={styles.input}
                 defaultValue={
-                    state.logCheckInterval ? state.logCheckInterval : ''
+                    logCheckInterval ? logCheckInterval : ''
                 }
                 ref={refInputElement}
                 onBlur={checkNumbers}
