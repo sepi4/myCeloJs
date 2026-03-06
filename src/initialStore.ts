@@ -7,7 +7,6 @@ const initialStore: Store = {
 
     updateCheckDone: false,
 
-    players: null,
     sorter: {
         name: 'byRank',
         reversed: false,
