@@ -273,4 +273,3 @@ export interface DataFromFile {
     time: string
 }
 
-export interface Store {}
