@@ -141,7 +141,7 @@ export interface MatchObject {
     description: string
     all: MatchHistoryStat
     result: MatchHistoryReportResult | undefined
-    counters: string | undefined
+    counters: { [key: string]: number } | undefined
 }
 
 export interface NormalizedProfiles {
