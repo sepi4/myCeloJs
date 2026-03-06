@@ -295,5 +295,4 @@ updateCheckDone: boolean
         extraInfo: NormalizedExtraInfo | null
     }
     view: string
-    foundPlayers: Member[]
 }

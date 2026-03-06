@@ -16,6 +16,7 @@ import FoundPlayer from './FoundPlayer'
 import styles from './Search.module.css'
 import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
 import { Member } from '../../types'
+import { useFoundPlayersStore } from '../../stores/foundPlayersStore'
 
 export default function Search() {
     const state = useAppSelector((state) => state)
@@ -23,6 +24,7 @@ export default function Search() {
 
     const [searchValue, setSearchValue] = useState('')
     const dispatch = useAppDispatch()
+    const { foundPlayers, setFoundPlayers } = useFoundPlayersStore()
 
     const handleSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value)
@@ -43,10 +45,7 @@ export default function Search() {
                     })
 
                     if (arrPlayers.length === 0) {
-                        dispatch({
-                            type: 'SET_FOUND_PLAYERS',
-                            data: [],
-                        })
+                        setFoundPlayers([])
                         return
                     }
 
@@ -85,10 +84,7 @@ export default function Search() {
                                     return 0
                                 })
 
-                            dispatch({
-                                type: 'SET_FOUND_PLAYERS',
-                                data: newPlayers,
-                            })
+                            setFoundPlayers(newPlayers)
                         })
                 })
         }
@@ -112,8 +108,6 @@ export default function Search() {
             },
         })
     }
-
-    const foundPlayers: Member[] = state.foundPlayers
 
     const players =
         foundPlayers.length > 0 &&
