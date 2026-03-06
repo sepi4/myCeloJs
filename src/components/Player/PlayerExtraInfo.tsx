@@ -9,6 +9,7 @@ import styles from './PlayerExtraInfo.module.css'
 import { ExtraInfo, Player } from '../../types'
 import { useAppSelector } from '../../hooks/customReduxHooks'
 import { getTotalGames } from '../../functions/simpleFunctions'
+import { useNavButtonsStore } from '../../stores/navButtonsStore'
 
 interface Props {
     player: Player
@@ -17,9 +18,8 @@ interface Props {
 
 function PlayerExtraInfo(props: Props) {
     let ranksArr = props.extraInfo?.ranks ?? []
-    const state = useAppSelector((state) => state)
-    const navButtons = state.navButtons
-    const settings = state.settings
+    const settings = useAppSelector((state) => state.settings)
+    const { navButtons } = useNavButtonsStore()
 
     const totalGames = (() => {
         if (!navButtons.total) {

@@ -10,11 +10,12 @@ import getSiteLink from '../../functions/getSiteLink'
 
 import { useAppSelector } from '../../hooks/customReduxHooks'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
+import { useNavButtonsStore } from '../../stores/navButtonsStore'
 
 export default function PlayerCard() {
     const state = useAppSelector((state) => state)
     const { countryFlags } = useCountryFlagsStore()
-    const coh3 = state.navButtons.coh3
+    const { navButtons: { coh3 } } = useNavButtonsStore()
 
     const player = state.playerCard.player
     const extraInfo = state.playerCard.extraInfo

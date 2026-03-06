@@ -1,5 +1,4 @@
 import {
-    navButtons,
     openInfos,
     playerCard,
     players,
@@ -14,7 +13,6 @@ import { configureStore } from '@reduxjs/toolkit'
 
 export const store = configureStore({
     reducer: {
-        navButtons,
         openInfos,
         playerCard,
         players,

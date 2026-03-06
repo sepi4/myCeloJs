@@ -1,5 +1,4 @@
 import { AnyAction } from '@reduxjs/toolkit'
-import { copyObj } from './functions/simpleFunctions'
 import initialStore from './initialStore'
 import { Store } from './types'
 
@@ -108,20 +107,6 @@ export function players(state = initialStore.players, action: AnyAction) {
             return state
     }
 }
-
-export function navButtons(state = initialStore.navButtons, action: AnyAction) {
-    switch (action.type) {
-        case 'TOGGLE_NAVBUTTON':
-            const obj = copyObj(state)
-            // @ts-ignore TODO fix
-            obj[action.key] = !obj[action.key]
-            localStorage.setItem('navButtons', JSON.stringify(obj))
-            return obj
-        default:
-            return state
-    }
-}
-
 
 function reducer(state: Store = initialStore, action: AnyAction) {
     switch (action.type) {

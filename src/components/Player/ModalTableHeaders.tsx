@@ -10,7 +10,8 @@ import {
     SettingsType,
 } from '../../types'
 import { getExtraInfo } from '../../functions/getExtraInfo'
-import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
+import { useAppDispatch } from '../../hooks/customReduxHooks'
+import { useNavButtonsStore } from '../../stores/navButtonsStore'
 
 const StyledTh = styled.th`
     word-wrap: break-word;
@@ -29,8 +30,8 @@ interface Props {
 }
 
 function ModalTableHeaders(props: Props) {
-    const state = useAppSelector((state) => state)
     const dispatch = useAppDispatch()
+    const { navButtons: { coh3 } } = useNavButtonsStore()
     return (
         <thead>
             <tr>
@@ -77,7 +78,7 @@ function ModalTableHeaders(props: Props) {
                                 title={props.profiles[p.profile_id].alias}
                                 onClick={() => {
                                     getExtraInfo(
-                                    state.navButtons.coh3,
+                                    coh3,
                                     [p.profile_id], 
                                         (result) => {
                                         const pro = props.profiles[p.profile_id]
