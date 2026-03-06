@@ -16,6 +16,7 @@ import { ExtraInfo, Player } from '../../types'
 import { useAppDispatch } from '../../hooks/customReduxHooks'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
+import { usePlayerCardStore } from '../../stores/playerCardStore'
 
 const countries = countriesJson as {
     [key: string]: {
@@ -66,8 +67,10 @@ function PlayerMainRow(props: Props) {
     }
 
     const dispatch = useAppDispatch()
+    const { setPlayerCard } = usePlayerCardStore()
 
     const handlePlayerCardOn = () => {
+        setPlayerCard(player, extraInfo)
         dispatch({
             type: 'PLAYER_CARD_ON',
             data: {
