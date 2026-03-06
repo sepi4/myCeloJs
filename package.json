@@ -38,7 +38,8 @@
         "redux": "^5.0.1",
         "string-width": "^4.2.0",
         "styled-components": "^6.3.11",
-        "use-sound": "^5.0.0"
+        "use-sound": "^5.0.0",
+        "zustand": "^5.0.11"
     },
     "devDependencies": {
         "@playwright/test": "^1.58.2",

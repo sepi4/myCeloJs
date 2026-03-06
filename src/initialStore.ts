@@ -27,16 +27,9 @@ const initialStore: Store = {
         key: 'autoLogChecking',
         def: true,
     }),
-    alert: getLocalStorage({
-        key: 'alert',
-        def: false,
-    }),
+updateCheckDone: false,
 
-    updateCheckDone: false,
-
-    appLocation: window.electronAPI.appLocation,
-
-    players: null,
+players: null,
     fromFile: null,
     extraInfo: null,
 

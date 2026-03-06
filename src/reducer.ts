@@ -46,16 +46,6 @@ export function logCheckInterval(
     }
 }
 
-export function alert(state = initialStore.alert, action: AnyAction) {
-    switch (action.type) {
-        case 'TOGGLE_ALERT':
-            localStorage.setItem('alert', JSON.stringify(!state))
-            return !state
-        default:
-            return state
-    }
-}
-
 export function settings(state = initialStore.settings, action: AnyAction) {
     switch (action.type) {
         case 'SET_SETTINGS':
@@ -203,9 +193,6 @@ export function countryFlags() {
     return initialStore.countryFlags
 }
 
-export function appLocation() {
-    return initialStore.appLocation
-}
 
 function reducer(state: Store = initialStore, action: AnyAction) {
     switch (action.type) {
