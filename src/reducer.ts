@@ -61,17 +61,6 @@ export function sorter(state = initialStore.sorter, action: AnyAction) {
     }
 }
 
-export function players(state = initialStore.players, action: AnyAction) {
-    switch (action.type) {
-        case 'SET_NEW_PLAYERS':
-            return action.data
-        case 'SET_EXTRA_INFO':
-            return action.data.newPlayers
-        default:
-            return state
-    }
-}
-
 function reducer(state: Store = initialStore, action: AnyAction) {
     switch (action.type) {
         default:
