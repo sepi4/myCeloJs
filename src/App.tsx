@@ -22,6 +22,7 @@ import { useAppLocationStore } from './stores/appLocationStore'
 import { useAutoLogCheckingStore } from './stores/autoLogCheckingStore'
 import { useExtraInfoStore } from './stores/extraInfoStore'
 import { useLogCheckIntervalStore } from './stores/logCheckIntervalStore'
+import { useNavButtonsStore } from './stores/navButtonsStore'
 import { Player } from './types'
 import { guessRankings } from './functions/guessRankings'
 const appVersion = window.electronAPI.appVersion
@@ -39,11 +40,12 @@ function App() {
     const { autoLogChecking } = useAutoLogCheckingStore()
     const { extraInfo, setExtraInfo, clearExtraInfo } = useExtraInfoStore()
     const { logCheckInterval } = useLogCheckIntervalStore()
+    const { navButtons: { coh3 } } = useNavButtonsStore()
 
     const writeNewRankingsFile = (data: Player[]) => {
         clearExtraInfo()
         if (state.settings) {
-            writeRankings(state.navButtons.coh3, data, state.settings.rankingsHorizontal)
+            writeRankings(coh3, data, state.settings.rankingsHorizontal)
         }
     }
 
@@ -76,7 +78,7 @@ function App() {
             }
 
             if (state.settings && state.settings.logLocation) {
-                readLog(state.navButtons.coh3, state.settings.logLocation).then(
+                readLog(coh3, state.settings.logLocation).then(
                     (data) => {
                         if (data) {
                             checkLogData({ data, state, dispatch })
@@ -94,13 +96,13 @@ function App() {
                 }
             }
 
-            getExtraInfo(state.navButtons.coh3, ids, (result, x) => {
+            getExtraInfo(coh3, ids, (result, x) => {
                 if (!x) {
                     return
                 }
 
                 const teams = guessRankings(
-                    state.navButtons.coh3,
+                    coh3,
                     players,
                     x.personalStats,
                     x.cohTitles
@@ -120,7 +122,7 @@ function App() {
                     data: { newPlayers },
                 })
 
-                writeRankings(state.navButtons.coh3, newPlayers, state.settings.rankingsHorizontal)
+                writeRankings(coh3, newPlayers, state.settings.rankingsHorizontal)
             })
         }
 
@@ -130,7 +132,7 @@ function App() {
 
         const intervalId = setInterval(() => {
             if (state.settings && state.settings.logLocation) {
-                readLog(state.navButtons.coh3, state.settings.logLocation).then(
+                readLog(coh3, state.settings.logLocation).then(
                     (data) => {
                         if (data) {
                             if (alert) {
@@ -157,7 +159,7 @@ function App() {
             return
         }
         if (state.settings && state.settings.logLocation) {
-            readLog(state.navButtons.coh3, state.settings.logLocation).then(
+            readLog(coh3, state.settings.logLocation).then(
                 (data) => {
                     if (data) {
                         writeNewRankingsFile(data)
@@ -172,7 +174,7 @@ function App() {
             return
         }
         if (state.settings && state.settings.logLocation) {
-            readLog(state.navButtons.coh3, state.settings.logLocation).then(
+            readLog(coh3, state.settings.logLocation).then(
                 (data) => {
                     if (data) {
                         checkLogData({ data, state, dispatch })

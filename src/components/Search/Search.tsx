@@ -17,6 +17,7 @@ import styles from './Search.module.css'
 import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
 import { Member } from '../../types'
 import { useFoundPlayersStore } from '../../stores/foundPlayersStore'
+import { useNavButtonsStore } from '../../stores/navButtonsStore'
 
 export default function Search() {
     const state = useAppSelector((state) => state)
@@ -25,6 +26,7 @@ export default function Search() {
     const [searchValue, setSearchValue] = useState('')
     const dispatch = useAppDispatch()
     const { foundPlayers, setFoundPlayers } = useFoundPlayersStore()
+    const { navButtons: { coh3 } } = useNavButtonsStore()
 
     const handleSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value)
@@ -33,7 +35,7 @@ export default function Search() {
     const handleKeyUp = (e: KeyboardEvent) => {
         if (e.key === 'Enter' && searchValue.trim().length > 0) {
             searchPlayers(
-                state.navButtons.coh3,
+                coh3,
                 searchValue, 
                 (res) => {
                     const arrPlayers = res.map((p) => {
@@ -56,7 +58,7 @@ export default function Search() {
                         }
                     }
                     getExtraInfo(
-                        state.navButtons.coh3,
+                        coh3,
                         ids, 
                         (result) => {
                             const newPlayers = res

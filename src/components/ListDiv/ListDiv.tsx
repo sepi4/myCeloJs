@@ -12,12 +12,11 @@ import { Rank } from '../../types'
 import { useAppSelector } from '../../hooks/customReduxHooks'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import getText from '../../functions/getText'
+import { useNavButtonsStore } from '../../stores/navButtonsStore'
 
 function ListDiv({ ranksArr }: { ranksArr: Rank[] }) {
     const state = useAppSelector((state) => state)
-    const tableView = state.navButtons.table
-    const showAll = state.navButtons.all
-    const coh3 = state.navButtons.coh3
+    const { navButtons: { table: tableView, all: showAll, coh3 } } = useNavButtonsStore()
     const sorter = state.sorter
     const settings = state.settings
 

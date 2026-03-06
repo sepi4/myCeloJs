@@ -1,18 +1,19 @@
 import styles from './Members.module.css'
 
 import { getExtraInfo } from '../../functions/getExtraInfo'
-import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
+import { useAppDispatch } from '../../hooks/customReduxHooks'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { Member as MemberType } from '../../types'
+import { useNavButtonsStore } from '../../stores/navButtonsStore'
 
 interface Props {
     member: MemberType
 }
 
 export default function Member(props: Props) {
-    const state = useAppSelector((state) => state)
     const { countryFlags } = useCountryFlagsStore()
     const dispatch = useAppDispatch()
+    const { navButtons: { coh3 } } = useNavButtonsStore()
 
     const handlePlayerCardOn = (p: MemberType) => {
         const newPlayer = {
@@ -22,7 +23,7 @@ export default function Member(props: Props) {
         }
 
         getExtraInfo(
-            state.navButtons.coh3,
+            coh3,
             [p.profile_id],
             (result) => {
                 if (!newPlayer.profileId) {

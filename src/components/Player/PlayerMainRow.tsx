@@ -13,8 +13,9 @@ import MainRowSpan from './MainRowSpan'
 import { getTotalGames } from '../../functions/simpleFunctions'
 
 import { ExtraInfo, Player } from '../../types'
-import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
+import { useAppDispatch } from '../../hooks/customReduxHooks'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
+import { useNavButtonsStore } from '../../stores/navButtonsStore'
 
 const countries = countriesJson as {
     [key: string]: {
@@ -40,7 +41,7 @@ interface Props {
 }
 
 function PlayerMainRow(props: Props) {
-    const state = useAppSelector((state) => state)
+    const { navButtons: { coh3 } } = useNavButtonsStore()
     const { player, handleSetShowExtra, extraInfo, showExtra } = props
     let country: string | undefined
     let steamId: string | undefined
@@ -98,8 +99,8 @@ function PlayerMainRow(props: Props) {
     const teamMarker = player.teamMarker ? player.teamMarker : ''
     const rank = (player.ranking === -1 ? '-' : player.ranking) + teamMarker
 
-    const factionFlag = state.navButtons.coh3 ? getFactionFlagLocationCoh3(player.faction) : getFactionFlagLocation(commonName(player.faction))
-    const factionTitle = state.navButtons.coh3 ? player.faction : commonName(player.faction)
+    const factionFlag = coh3 ? getFactionFlagLocationCoh3(player.faction) : getFactionFlagLocation(commonName(player.faction))
+    const factionTitle = coh3 ? player.faction : commonName(player.faction)
     const faction = (
         <span title={factionTitle}>
             <img

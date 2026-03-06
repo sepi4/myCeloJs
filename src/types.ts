@@ -277,12 +277,6 @@ export interface Store {
     settings: SettingsType | null
 updateCheckDone: boolean
     players: Player[] | null
-navButtons: {
-        all: boolean
-        table: boolean
-        total: boolean
-        coh3: boolean
-    }
     openInfos: boolean[][]
     sorter: {
         name: string

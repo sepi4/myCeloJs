@@ -14,6 +14,7 @@ import CheckLogDiv from './CheckLogDiv'
 import NavbarRow from './NavbarRow'
 import { getExtraInfo } from '../../functions/getExtraInfo'
 import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
+import { useNavButtonsStore } from '../../stores/navButtonsStore'
 
 import { Rank } from '../../types'
 
@@ -31,7 +32,7 @@ export default function Navbar(props: Props) {
         props.handleSetSettingsView()
     }
 
-    const navButtons = useAppSelector((state) => state.navButtons)
+    const { navButtons, toggleNavButton } = useNavButtonsStore()
 
     const getNavCheckBox = (text: 'all' | 'total' | 'table') => {
         return (
@@ -39,12 +40,7 @@ export default function Navbar(props: Props) {
                 key={text}
                 text={getText(text, settings)}
                 checked={navButtons[text]}
-                handler={() =>
-                    dispatch({
-                        type: 'TOGGLE_NAVBUTTON',
-                        key: text,
-                    })
-                }
+                handler={() => toggleNavButton(text)}
             />
         )
     }
@@ -78,7 +74,7 @@ export default function Navbar(props: Props) {
     const handleOpenMyCard = () => {
         const id: number = settings.profileId
 
-        getExtraInfo(state.navButtons.coh3, [id], (result) => {
+        getExtraInfo(navButtons.coh3, [id], (result) => {
             const ex = result[id]
             const rank = ex.ranks.find((x: Rank) => x.members?.length === 1)
             if (!rank?.members) {
@@ -151,7 +147,7 @@ export default function Navbar(props: Props) {
 
     return (
         <div className={styles.navbar}>
-            {!state.navButtons.coh3 && (
+            {!navButtons.coh3 && (
                 <>
                     {userIcon}
                     {searchIcon}
@@ -175,12 +171,7 @@ export default function Navbar(props: Props) {
                             <input
                                 id='coh2'
                                 type="radio"
-                                onChange={() =>
-                                    dispatch({
-                                        type: 'TOGGLE_NAVBUTTON',
-                                        key: 'coh3',
-                                    })
-                                }
+                                onChange={() => toggleNavButton('coh3')}
                                 checked={!navButtons['coh3']}
                             />{' '}
                             <label htmlFor='coh2'>coh2</label>
@@ -189,12 +180,7 @@ export default function Navbar(props: Props) {
                             <input
                                 id='coh3'
                                 type="radio"
-                                onChange={() =>
-                                    dispatch({
-                                        type: 'TOGGLE_NAVBUTTON',
-                                        key: 'coh3',
-                                    })
-                                }
+                                onChange={() => toggleNavButton('coh3')}
                                 checked={navButtons['coh3']}
                             />{' '}
                             <label htmlFor='coh3'>coh3</label>
