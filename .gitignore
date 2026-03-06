@@ -1,3 +1,6 @@
+localhostFiles/rankings.json
+localhostFiles/rankings.txt
+
 # playwright
 test-results/
 playwright-report/

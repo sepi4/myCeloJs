@@ -3,8 +3,6 @@ import { useState } from 'react'
 
 import writeSettings from '../functions/writeSettings'
 
-import axios from 'axios'
-
 import styles from './UpdateBar.module.css'
 
 import funGetText from '../functions/getText'
@@ -12,12 +10,10 @@ import { useAppDispatch, useAppSelector } from '../hooks/customReduxHooks'
 import { LATEST_RELEASES_URL } from '../constants'
 
 interface GitHubResult {
-    data: {
-        tag_name: string
-        assets: {
-            browser_download_url: string
-        }[]
-    }
+    tag_name: string
+    assets: {
+        browser_download_url: string
+    }[]
 }
 
 interface A {
@@ -58,23 +54,24 @@ function UpdateBar() {
             })
 
             const url = LATEST_RELEASES_URL
-            axios.get(url).then((x: GitHubResult) => {
-                if (x && x.data) {
-                    const newTagName = x.data.tag_name
-                    if (settings.ignoreUntil === newTagName) {
-                        return
-                    }
-                    if (isHigherVersion(newTagName, appVersion)) {
-                        const data = x.data
-                        if (data.assets[0]) {
-                            setUpdate({
-                                url: data.assets[0].browser_download_url,
-                                tagName: newTagName,
-                            })
+            fetch(url)
+                .then((res) => res.json())
+                .then((data: GitHubResult) => {
+                    if (data) {
+                        const newTagName = data.tag_name
+                        if (settings.ignoreUntil === newTagName) {
+                            return
+                        }
+                        if (isHigherVersion(newTagName, appVersion)) {
+                            if (data.assets[0]) {
+                                setUpdate({
+                                    url: data.assets[0].browser_download_url,
+                                    tagName: newTagName,
+                                })
+                            }
                         }
                     }
-                }
-            })
+                })
         }
     }, [])
 

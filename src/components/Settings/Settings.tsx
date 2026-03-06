@@ -1,7 +1,5 @@
 import React, { useRef } from 'react'
 
-import axios from 'axios'
-
 import SettingsDiv from './SettingsDiv'
 import SettingsAfterLog from './SettingsAfterLog'
 import Notification from '../Notification'
@@ -16,7 +14,6 @@ import styles from './Settings.module.css'
 import getText from '../../functions/getText'
 import useEsc from '../../hooks/useEsc'
 import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
-import { SearchResult } from '../../types'
 
 interface Props {
     handleSetSettingsView: () => void
@@ -76,16 +73,13 @@ function Settings(props: Props) {
             num +
             '%22]'
 
-        axios
-            .get(url)
-            .then((res: SearchResult) => {
+        fetch(url)
+            .then((res) => res.json())
+            .then((data) => {
                 try {
-                    if (
-                        res.status === 200 &&
-                        res.data.result.message === 'SUCCESS'
-                    ) {
-                        const group = res.data.statGroups.find(
-                            (g) => g.type === 1
+                    if (data.result.message === 'SUCCESS') {
+                        const group = data.statGroups.find(
+                            (g: { type: number }) => g.type === 1
                         )
                         if (!group) {
                             return
@@ -101,7 +95,7 @@ function Settings(props: Props) {
                         writeSettings(newSettings, dispatch)
                         setTimedSetID(true)
                     } else {
-                        console.error('res:', res)
+                        console.error('data:', data)
                         setError()
                     }
                 } catch (error) {

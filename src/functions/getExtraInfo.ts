@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 import { refactorData } from './refactorData'
 
 import { RELIC_SERVER_BASE_COH2, RELIC_SERVER_BASE_COH3 } from '../constants'
@@ -24,30 +22,19 @@ export function getExtraInfo(
 
     const strIds: string = ids.join(',')
     const url = `${coh3 ? RELIC_SERVER_BASE_COH3 : RELIC_SERVER_BASE_COH2}/GetPersonalStat?title=coh${coh3 ? 3 : 2}&profile_ids=[${strIds}]`
-    const fetch1 = axios.get(url)
-
     const url2 = `${coh3 ? RELIC_SERVER_BASE_COH3 : RELIC_SERVER_BASE_COH2}/GetAvailableLeaderboards?title=coh${coh3 ? 3 : 2}`
-    const fetch2 = axios.get(url2)
 
-    Promise.all([fetch1, fetch2])
-        .then((values) => {
-            let personalStats: PersonalStats
-            let cohTitles: AvailableLeaderboard
+    const promise1 = fetch(url).then((r) => { if (!r.ok) throw new Error(`${r.status}`); return r.json() as Promise<PersonalStats> })
+    const promise2 = fetch(url2).then((r) => { if (!r.ok) throw new Error(`${r.status}`); return r.json() as Promise<AvailableLeaderboard> })
 
-            if (values[0].status === 200 && values[1].status === 200) {
-                personalStats = values[0].data
-                cohTitles = values[1].data
-                const result: NormalizedExtraInfo = refactorData(
-                    personalStats,
-                    cohTitles,
-                    ids
-                )
-
-                callback(result, {
-                    personalStats,
-                    cohTitles,
-                })
-            }
+    Promise.all([promise1, promise2])
+        .then(([personalStats, cohTitles]) => {
+            const result: NormalizedExtraInfo = refactorData(
+                personalStats,
+                cohTitles,
+                ids
+            )
+            callback(result, { personalStats, cohTitles })
         })
         .catch((error) => {
             console.log(error)

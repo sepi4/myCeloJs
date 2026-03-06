@@ -13,11 +13,11 @@ export const getHistoryUrls = (id: number | undefined) => {
     return [url, url2]
 }
 
-type Result = [{ data: RecentMatchHistory }, { data: AvailableLeaderboard }]
+type Result = [RecentMatchHistory, AvailableLeaderboard]
 
 export const parseHistoryData = (result: Result, player: Player) => {
-    const { data } = result[0]
-    const { matchTypes } = result[1].data
+    const data = result[0]
+    const { matchTypes } = result[1]
     const { matchHistoryStats, profiles } = data
     const matches = matchHistoryStats.sort((a, b) => {
         return b.completiontime - a.completiontime

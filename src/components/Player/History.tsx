@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-
 import getText from '../../functions/getText'
 
 import GameHistoryDiv from './GameHistoryDiv'
@@ -32,8 +30,8 @@ export default function History(props: Props) {
             setFetching(true)
 
             const [url, url2] = getHistoryUrls(props.player.profileId)
-            const fetch1 = axios.get(url)
-            const fetch2 = axios.get(url2)
+            const fetch1 = fetch(url).then((r) => r.json())
+            const fetch2 = fetch(url2).then((r) => r.json())
 
             Promise.all([fetch1, fetch2])
                 .then((result) => {
