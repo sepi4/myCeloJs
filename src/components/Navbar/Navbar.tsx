@@ -13,9 +13,10 @@ import NavBarIcon from './NavbarIcon'
 import CheckLogDiv from './CheckLogDiv'
 import NavbarRow from './NavbarRow'
 import { getExtraInfo } from '../../functions/getExtraInfo'
-import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
+import { useAppSelector } from '../../hooks/customReduxHooks'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
+import { useSettingsViewStore } from '../../stores/settingsViewStore'
 import { useViewStore } from '../../stores/viewStore'
 
 import { Rank } from '../../types'
@@ -27,10 +28,10 @@ interface Props {
 export default function Navbar(props: Props) {
     const state = useAppSelector((state) => state)
     const settings = state.settings
-    const dispatch = useAppDispatch()
+    const { settingsView, toggleSettingsView } = useSettingsViewStore()
 
     const settingsViewToggeler = () => {
-        dispatch({ type: 'TOGGLE_SETTINGS_VIEW' })
+        toggleSettingsView()
         props.handleSetSettingsView()
     }
 
@@ -58,7 +59,7 @@ export default function Navbar(props: Props) {
         </>
     )
 
-    if (state.settingsView) {
+    if (settingsView) {
         return (
             <div
                 className={styles.navbar}

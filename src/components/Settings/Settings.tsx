@@ -14,6 +14,7 @@ import styles from './Settings.module.css'
 import getText from '../../functions/getText'
 import useEsc from '../../hooks/useEsc'
 import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
+import { useSettingsViewStore } from '../../stores/settingsViewStore'
 
 interface Props {
     handleSetSettingsView: () => void
@@ -23,6 +24,7 @@ function Settings(props: Props) {
     const dispatch = useAppDispatch()
     const state = useAppSelector((state) => state)
     const settings = state.settings
+    const { toggleSettingsView } = useSettingsViewStore()
 
     const lg = settings && settings.language ? settings.language : 'en'
     const siteLink = settings ? settings.siteLink : 'coh2stats.com'
@@ -32,7 +34,7 @@ function Settings(props: Props) {
     const steamIdInputRef = useRef<HTMLInputElement>(null)
 
     const settingsViewToggeler = () => {
-        dispatch({ type: 'TOGGLE_SETTINGS_VIEW' })
+        toggleSettingsView()
         props.handleSetSettingsView()
     }
 

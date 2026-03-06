@@ -2,18 +2,6 @@ import { AnyAction } from '@reduxjs/toolkit'
 import initialStore from './initialStore'
 import { Store } from './types'
 
-export function settingsView(
-    state = initialStore.settingsView,
-    action: AnyAction
-) {
-    switch (action.type) {
-        case 'TOGGLE_SETTINGS_VIEW':
-            return !state
-        default:
-            return state
-    }
-}
-
 export function settings(state = initialStore.settings, action: AnyAction) {
     switch (action.type) {
         case 'SET_SETTINGS':
