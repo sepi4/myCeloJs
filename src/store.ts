@@ -1,6 +1,4 @@
 import {
-    alert,
-    appLocation,
     autoLogChecking,
     countryFlags,
     extraInfo,
@@ -22,8 +20,6 @@ import { configureStore } from '@reduxjs/toolkit'
 
 export const store = configureStore({
     reducer: {
-        alert,
-        appLocation,
         autoLogChecking,
         countryFlags,
         extraInfo,

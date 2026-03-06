@@ -9,17 +9,19 @@ import RadioButtonsDiv from './RadioButtonsDiv'
 import CopyDiv from './CopyDiv'
 import SettingsLocation from './SettingsLocation'
 import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
+import { useAppLocationStore } from '../../stores/appLocationStore'
 import { SettingsType } from '../../types'
 
 export default function SettingsAfterLog() {
     const state = useAppSelector((state) => state)
     const { settings }: { settings: SettingsType } = state
     const dispatch = useAppDispatch()
+    const { appLocation } = useAppLocationStore()
 
     const handleType = (e: ChangeEvent<HTMLInputElement>) => {
         const newFormat = e.target.value
         const loc =
-            state.appLocation + '\\localhostFiles\\rankings.' + newFormat
+            appLocation + '\\localhostFiles\\rankings.' + newFormat
         const newSettings = {
             ...settings,
             rankingsHtml: newFormat === 'html',

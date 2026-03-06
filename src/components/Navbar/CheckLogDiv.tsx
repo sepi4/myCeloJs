@@ -7,12 +7,14 @@ import getText from '../../functions/getText'
 import NavCheckbox from './NavCheckBox'
 import styles from './CheckLogDiv.module.css'
 import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
+import { useAlertStore } from '../../stores/alertStore'
 import { SettingsType } from '../../types'
 
 function CheckLogDiv() {
     const state = useAppSelector((state) => state)
     const settings: SettingsType = state.settings
     const dispatch = useAppDispatch()
+    const { alert, toggleAlert } = useAlertStore()
 
     return (
         <div className={styles.container}>
@@ -33,12 +35,8 @@ function CheckLogDiv() {
                             <IntervalInput />
                             <NavCheckbox
                                 text={getText('alert', settings)}
-                                checked={state.alert ? state.alert : false}
-                                handler={() =>
-                                    dispatch({
-                                        type: 'TOGGLE_ALERT',
-                                    })
-                                }
+                                checked={alert}
+                                handler={toggleAlert}
                             />
                         </>
                     ) : null}
