@@ -79,24 +79,6 @@ export function sorter(state = initialStore.sorter, action: AnyAction) {
     }
 }
 
-export function openInfos(state = initialStore.openInfos, action: AnyAction) {
-    switch (action.type) {
-        case 'TOGGLE_EXTRA':
-            return state.map((t, i) =>
-                i === action.data.teamIndex
-                    ? t.map((p, j) => (j === action.data.playerIndex ? !p : p))
-                    : t
-            )
-        case 'SET_NEW_PLAYERS':
-            return [
-                [false, false, false, false],
-                [false, false, false, false],
-            ]
-        default:
-            return state
-    }
-}
-
 export function players(state = initialStore.players, action: AnyAction) {
     switch (action.type) {
         case 'SET_NEW_PLAYERS':
