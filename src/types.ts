@@ -281,9 +281,5 @@ updateCheckDone: boolean
         name: string
         reversed: boolean
     }
-    playerCard: {
-        player: Player | null
-        extraInfo: NormalizedExtraInfo | null
-    }
     view: string
 }

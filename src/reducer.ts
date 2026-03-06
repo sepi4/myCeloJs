@@ -50,24 +50,6 @@ export function view(state = initialStore.view, action: AnyAction) {
     }
 }
 
-export function playerCard(state = initialStore.playerCard, action: AnyAction) {
-    switch (action.type) {
-        case 'PLAYER_CARD_ON':
-            return {
-                player: action.data.player,
-                extraInfo: action.data.extraInfo,
-            }
-        case 'SET_NEW_PLAYERS':
-            return {
-                player: null,
-                extraInfo: null,
-            }
-
-        default:
-            return state
-    }
-}
-
 export function sorter(state = initialStore.sorter, action: AnyAction) {
     switch (action.type) {
         case 'SET_SORTER':

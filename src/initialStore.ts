@@ -13,11 +13,6 @@ const initialStore: Store = {
         reversed: false,
     },
 
-    playerCard: {
-        player: null,
-        extraInfo: null,
-    },
-
     view: 'main',
 }
 

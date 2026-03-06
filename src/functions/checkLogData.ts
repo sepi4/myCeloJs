@@ -4,6 +4,7 @@ import { useExtraInfoStore } from '../stores/extraInfoStore'
 import { useFromFileStore } from '../stores/fromFileStore'
 import { useNavButtonsStore } from '../stores/navButtonsStore'
 import { useOpenInfosStore } from '../stores/openInfosStore'
+import { usePlayerCardStore } from '../stores/playerCardStore'
 
 interface Props {
     data: Player[]
@@ -24,6 +25,7 @@ export default function checkLogData({
         setFromFile(data)
         useExtraInfoStore.getState().clearExtraInfo()
         useOpenInfosStore.getState().resetOpenInfos()
+        usePlayerCardStore.getState().resetPlayerCard()
         dispatch({
             type: 'SET_NEW_PLAYERS',
             data,
