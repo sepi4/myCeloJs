@@ -1,7 +1,6 @@
 import {
     settings,
     settingsView,
-    sorter,
     updateCheckDone,
 } from './reducer'
 
@@ -11,7 +10,6 @@ export const store = configureStore({
     reducer: {
         settings,
         settingsView,
-        sorter,
         updateCheckDone,
     },
 

@@ -4,25 +4,20 @@ import getText from '../../functions/getText'
 import styles from './ListDiv.module.css'
 
 import { Rank } from '../../types'
-import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
+import { useAppSelector } from '../../hooks/customReduxHooks'
+import { useSorterStore } from '../../stores/sorterStore'
+
+type SorterName = 'byRank' | 'byWinRate' | 'byStreak' | 'byName' | 'byTotal'
 
 function RanksListTitles({ ranksArr }: { ranksArr: Rank[] }) {
     const state = useAppSelector((state) => state)
-    const dispatch = useAppDispatch()
+    const { sorter, setSorter } = useSorterStore()
 
     const settings = state.settings
-    const sorter = state.sorter
 
-    const setSorter = (name: string) => {
+    const getSorter = (name: SorterName) => {
         return {
-            click: () => {
-                dispatch({
-                    type: 'SET_SORTER',
-                    data: {
-                        name,
-                    },
-                })
-            },
+            click: () => setSorter(name),
             active: sorter.name === name,
             reversed: sorter.reversed,
         }
@@ -32,19 +27,19 @@ function RanksListTitles({ ranksArr }: { ranksArr: Rank[] }) {
         <>
             {ranksArr.length > 0 && (
                 <div className={`${styles.row} ${styles.title}`}>
-                    <ColumnTitle {...setSorter('byRank')}>
+                    <ColumnTitle {...getSorter('byRank')}>
                         {getText('rank', settings)}
                     </ColumnTitle>
-                    <ColumnTitle {...setSorter('byName')} width="40%">
+                    <ColumnTitle {...getSorter('byName')} width="40%">
                         {getText('mode', settings)}
                     </ColumnTitle>
-                    <ColumnTitle {...setSorter('byWinRate')}>
+                    <ColumnTitle {...getSorter('byWinRate')}>
                         {getText('win', settings)}
                     </ColumnTitle>
-                    <ColumnTitle {...setSorter('byStreak')}>
+                    <ColumnTitle {...getSorter('byStreak')}>
                         {getText('streak', settings)}
                     </ColumnTitle>
-                    <ColumnTitle {...setSorter('byTotal')}>
+                    <ColumnTitle {...getSorter('byTotal')}>
                         {getText('total', settings)}
                     </ColumnTitle>
                 </div>

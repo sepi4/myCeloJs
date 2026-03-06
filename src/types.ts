@@ -276,8 +276,4 @@ export interface Store {
     settingsView: boolean
     settings: SettingsType | null
 updateCheckDone: boolean
-    sorter: {
-        name: string
-        reversed: boolean
-    }
 }
