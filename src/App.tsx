@@ -20,6 +20,7 @@ import { useAppDispatch, useAppSelector } from './hooks/customReduxHooks'
 import { useAlertStore } from './stores/alertStore'
 import { useAppLocationStore } from './stores/appLocationStore'
 import { useAutoLogCheckingStore } from './stores/autoLogCheckingStore'
+import { useExtraInfoStore } from './stores/extraInfoStore'
 import { Player } from './types'
 import { guessRankings } from './functions/guessRankings'
 const appVersion = window.electronAPI.appVersion
@@ -35,11 +36,10 @@ function App() {
     const { alert } = useAlertStore()
     const { appLocation } = useAppLocationStore()
     const { autoLogChecking } = useAutoLogCheckingStore()
+    const { extraInfo, setExtraInfo, clearExtraInfo } = useExtraInfoStore()
 
     const writeNewRankingsFile = (data: Player[]) => {
-        dispatch({
-            type: 'CLEAR_EXTRA_INFO',
-        })
+        clearExtraInfo()
         if (state.settings) {
             writeRankings(state.navButtons.coh3, data, state.settings.rankingsHorizontal)
         }
@@ -82,7 +82,7 @@ function App() {
                     }
                 )
             }
-        } else if (state.extraInfo === null && state.players.length > 0) {
+        } else if (extraInfo === null && state.players.length > 0) {
             const players: Player[] = state.players
 
             const ids: number[] = []
@@ -112,12 +112,10 @@ function App() {
                     })
                 }
 
+                setExtraInfo(result)
                 dispatch({
                     type: 'SET_EXTRA_INFO',
-                    data: {
-                        extraInfo: result,
-                        newPlayers,
-                    },
+                    data: { newPlayers },
                 })
 
                 writeRankings(state.navButtons.coh3, newPlayers, state.settings.rankingsHorizontal)
