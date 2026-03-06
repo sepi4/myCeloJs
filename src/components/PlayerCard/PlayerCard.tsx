@@ -8,17 +8,14 @@ import logo_steam from '../../../img/logo_steam.png'
 
 import getSiteLink from '../../functions/getSiteLink'
 
-import { useAppSelector } from '../../hooks/customReduxHooks'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
+import { usePlayerCardStore } from '../../stores/playerCardStore'
 
 export default function PlayerCard() {
-    const state = useAppSelector((state) => state)
     const { countryFlags } = useCountryFlagsStore()
     const { navButtons: { coh3 } } = useNavButtonsStore()
-
-    const player = state.playerCard.player
-    const extraInfo = state.playerCard.extraInfo
+    const { player, extraInfo } = usePlayerCardStore()
 
     if (!extraInfo) {
         return (
@@ -102,7 +99,7 @@ export default function PlayerCard() {
         </div>
     )
 
-    const card = state && state.playerCard && state.playerCard.extraInfo && (
+    const card = extraInfo && (
         <PlayerExtraInfo player={player} extraInfo={extraInfo} />
     )
 

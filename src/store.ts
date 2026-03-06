@@ -1,5 +1,4 @@
 import {
-    playerCard,
     players,
     settings,
     settingsView,
@@ -12,7 +11,6 @@ import { configureStore } from '@reduxjs/toolkit'
 
 export const store = configureStore({
     reducer: {
-        playerCard,
         players,
         settings,
         settingsView,

@@ -18,6 +18,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
 import { Member } from '../../types'
 import { useFoundPlayersStore } from '../../stores/foundPlayersStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
+import { usePlayerCardStore } from '../../stores/playerCardStore'
 
 export default function Search() {
     const state = useAppSelector((state) => state)
@@ -27,6 +28,7 @@ export default function Search() {
     const dispatch = useAppDispatch()
     const { foundPlayers, setFoundPlayers } = useFoundPlayersStore()
     const { navButtons: { coh3 } } = useNavButtonsStore()
+    const { setPlayerCard } = usePlayerCardStore()
 
     const handleSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value)
@@ -93,20 +95,22 @@ export default function Search() {
     }
 
     const handlePlayerCardOn = (player: Member) => {
+        const playerData = {
+            ...player,
+            name: player.alias,
+            profileId: player.profile_id + '',
+            country: player.country,
+        }
+        const extraInfoData = {
+            ranks: player.extraInfo?.ranks ?? [],
+            steamId: player.name.substring(7),
+        }
+        setPlayerCard(playerData, extraInfoData)
         dispatch({
             type: 'PLAYER_CARD_ON',
             data: {
-                player: {
-                    ...player,
-                    name: player.alias,
-                    profileId: player.profile_id + '',
-                    country: player.country,
-                },
-
-                extraInfo: {
-                    ranks: player.extraInfo?.ranks ?? [],
-                    steamId: player.name.substring(7),
-                },
+                player: playerData,
+                extraInfo: extraInfoData,
             },
         })
     }

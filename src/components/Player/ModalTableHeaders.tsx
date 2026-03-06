@@ -12,6 +12,7 @@ import {
 import { getExtraInfo } from '../../functions/getExtraInfo'
 import { useAppDispatch } from '../../hooks/customReduxHooks'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
+import { usePlayerCardStore } from '../../stores/playerCardStore'
 
 const StyledTh = styled.th`
     word-wrap: break-word;
@@ -32,6 +33,7 @@ interface Props {
 function ModalTableHeaders(props: Props) {
     const dispatch = useAppDispatch()
     const { navButtons: { coh3 } } = useNavButtonsStore()
+    const { setPlayerCard } = usePlayerCardStore()
     return (
         <thead>
             <tr>
@@ -93,6 +95,7 @@ function ModalTableHeaders(props: Props) {
 
                                         const ex = result[newPlayer.profileId]
                                         if (result && ex) {
+                                            setPlayerCard(newPlayer, ex)
                                             dispatch({
                                                 type: 'PLAYER_CARD_ON',
                                                 data: {

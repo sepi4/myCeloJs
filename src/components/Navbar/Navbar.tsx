@@ -15,6 +15,7 @@ import NavbarRow from './NavbarRow'
 import { getExtraInfo } from '../../functions/getExtraInfo'
 import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
+import { usePlayerCardStore } from '../../stores/playerCardStore'
 
 import { Rank } from '../../types'
 
@@ -33,6 +34,7 @@ export default function Navbar(props: Props) {
     }
 
     const { navButtons, toggleNavButton } = useNavButtonsStore()
+    const { setPlayerCard, player: playerCardPlayer } = usePlayerCardStore()
 
     const getNavCheckBox = (text: 'all' | 'total' | 'table') => {
         return (
@@ -83,14 +85,16 @@ export default function Navbar(props: Props) {
             const profile = rank.members[0]
 
             if (result && ex) {
+                const playerData = {
+                    name: profile.alias,
+                    profileId: profile.profile_id + '',
+                    country: profile.country,
+                }
+                setPlayerCard(playerData, ex)
                 dispatch({
                     type: 'PLAYER_CARD_ON',
                     data: {
-                        player: {
-                            name: profile.alias,
-                            profileId: profile.profile_id + '',
-                            country: profile.country,
-                        },
+                        player: playerData,
                         extraInfo: ex,
                     },
                 })
@@ -104,7 +108,7 @@ export default function Navbar(props: Props) {
         settings.steamId &&
         !(
             state.view === 'playerCard' &&
-            state.playerCard.player.profileId === settings.profileId
+            playerCardPlayer?.profileId === settings.profileId
         )
     ) {
         userIcon = (
