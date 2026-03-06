@@ -276,7 +276,6 @@ export interface Store {
     settingsView: boolean
     settings: SettingsType | null
     logCheckInterval: number
-    autoLogChecking: boolean
 updateCheckDone: boolean
     players: Player[] | null
     fromFile: DataFromFile[] | null
@@ -288,7 +287,6 @@ updateCheckDone: boolean
         coh3: boolean
     }
     openInfos: boolean[][]
-    countryFlags: CountryFlagsLocation
     sorter: {
         name: string
         reversed: boolean

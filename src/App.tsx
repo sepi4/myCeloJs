@@ -19,6 +19,7 @@ import checkLogData from './functions/checkLogData'
 import { useAppDispatch, useAppSelector } from './hooks/customReduxHooks'
 import { useAlertStore } from './stores/alertStore'
 import { useAppLocationStore } from './stores/appLocationStore'
+import { useAutoLogCheckingStore } from './stores/autoLogCheckingStore'
 import { Player } from './types'
 import { guessRankings } from './functions/guessRankings'
 const appVersion = window.electronAPI.appVersion
@@ -33,6 +34,7 @@ function App() {
     const state = useAppSelector((state) => state)
     const { alert } = useAlertStore()
     const { appLocation } = useAppLocationStore()
+    const { autoLogChecking } = useAutoLogCheckingStore()
 
     const writeNewRankingsFile = (data: Player[]) => {
         dispatch({
@@ -67,7 +69,7 @@ function App() {
             return
         } else if (state.players === null) {
             // initial readLog
-            if (!state.autoLogChecking) {
+            if (!autoLogChecking) {
                 return
             }
 
@@ -122,7 +124,7 @@ function App() {
             })
         }
 
-        if (!state.autoLogChecking) {
+        if (!autoLogChecking) {
             return
         }
 
@@ -151,7 +153,7 @@ function App() {
     })
 
     useEffect(() => {
-        if (!state.autoLogChecking) {
+        if (!autoLogChecking) {
             return
         }
         if (state.settings && state.settings.logLocation) {
@@ -166,7 +168,7 @@ function App() {
     }, [state.settings])
 
     const handleSetSettingsView = () => {
-        if (!state.autoLogChecking) {
+        if (!autoLogChecking) {
             return
         }
         if (state.settings && state.settings.logLocation) {

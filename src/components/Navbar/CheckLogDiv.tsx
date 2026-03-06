@@ -8,6 +8,7 @@ import NavCheckbox from './NavCheckBox'
 import styles from './CheckLogDiv.module.css'
 import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
 import { useAlertStore } from '../../stores/alertStore'
+import { useAutoLogCheckingStore } from '../../stores/autoLogCheckingStore'
 import { SettingsType } from '../../types'
 
 function CheckLogDiv() {
@@ -15,22 +16,19 @@ function CheckLogDiv() {
     const settings: SettingsType = state.settings
     const dispatch = useAppDispatch()
     const { alert, toggleAlert } = useAlertStore()
+    const { autoLogChecking, toggleAutoLogChecking } = useAutoLogCheckingStore()
 
     return (
         <div className={styles.container}>
             <NavCheckbox
                 text={getText('auto', settings)}
-                checked={state.autoLogChecking ? state.autoLogChecking : false}
-                handler={() =>
-                    dispatch({
-                        type: 'TOGGLE_AUTO_LOG_CHECKING',
-                    })
-                }
+                checked={autoLogChecking}
+                handler={toggleAutoLogChecking}
             />
 
             {
                 <>
-                    {state.autoLogChecking ? (
+                    {autoLogChecking ? (
                         <>
                             <IntervalInput />
                             <NavCheckbox

@@ -2,6 +2,7 @@ import styles from './Members.module.css'
 
 import { getExtraInfo } from '../../functions/getExtraInfo'
 import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
+import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { Member as MemberType } from '../../types'
 
 interface Props {
@@ -10,7 +11,7 @@ interface Props {
 
 export default function Member(props: Props) {
     const state = useAppSelector((state) => state)
-    const countryFlags = state.countryFlags
+    const { countryFlags } = useCountryFlagsStore()
     const dispatch = useAppDispatch()
 
     const handlePlayerCardOn = (p: MemberType) => {
