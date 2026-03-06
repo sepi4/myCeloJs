@@ -1,17 +1,13 @@
 import { SettingsType } from '../types'
+import { useSettingsStore } from '../stores/settingsStore'
 
 const settingsDir = window.electronAPI.settingsDir
 
-type D = ({ type, data }: { type: string; data: SettingsType }) => void
-
-function writeSettings(newSettings: SettingsType, dispatch: D) {
+function writeSettings(newSettings: SettingsType) {
     window.electronAPI.settings
         .write(settingsDir + '/settings.json', JSON.stringify(newSettings, null, 4))
         .then(() => {
-            dispatch({
-                type: 'SET_SETTINGS',
-                data: newSettings,
-            })
+            useSettingsStore.getState().setSettings(newSettings)
         })
 }
 

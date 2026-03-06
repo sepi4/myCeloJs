@@ -8,14 +8,12 @@ import RadioButton from './RadioButton'
 import RadioButtonsDiv from './RadioButtonsDiv'
 import CopyDiv from './CopyDiv'
 import SettingsLocation from './SettingsLocation'
-import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
 import { useAppLocationStore } from '../../stores/appLocationStore'
+import { useSettingsStore } from '../../stores/settingsStore'
 import { SettingsType } from '../../types'
 
 export default function SettingsAfterLog() {
-    const state = useAppSelector((state) => state)
-    const { settings }: { settings: SettingsType } = state
-    const dispatch = useAppDispatch()
+    const { settings } = useSettingsStore()
     const { appLocation } = useAppLocationStore()
 
     const handleType = (e: ChangeEvent<HTMLInputElement>) => {
@@ -26,8 +24,8 @@ export default function SettingsAfterLog() {
             ...settings,
             rankingsHtml: newFormat === 'html',
             rankingsFile: loc,
-        }
-        writeSettings(newSettings, dispatch)
+        } as SettingsType
+        writeSettings(newSettings)
     }
 
     const handleOrientation = (e: ChangeEvent<HTMLInputElement>) => {
@@ -35,15 +33,16 @@ export default function SettingsAfterLog() {
         const newSettings = {
             ...settings,
             rankingsHorizontal: newOriantation === 'horizontal',
-        }
-        writeSettings(newSettings, dispatch)
+        } as SettingsType
+        writeSettings(newSettings)
     }
 
-    const fileTypeSet =
+    const fileTypeSet = !!(
         settings &&
         settings.rankingsFile !== undefined &&
         settings.rankingsHorizontal !== undefined &&
         settings.rankingsHtml !== undefined
+    )
 
     if (settings && settings.logLocation) {
         return (

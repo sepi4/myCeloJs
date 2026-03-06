@@ -6,15 +6,13 @@ import getText from '../../functions/getText'
 
 import NavCheckbox from './NavCheckBox'
 import styles from './CheckLogDiv.module.css'
-import { useAppSelector } from '../../hooks/customReduxHooks'
 import { useAlertStore } from '../../stores/alertStore'
 import { useAutoLogCheckingStore } from '../../stores/autoLogCheckingStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
-import { SettingsType } from '../../types'
+import { useSettingsStore } from '../../stores/settingsStore'
 
 function CheckLogDiv() {
-    const state = useAppSelector((state) => state)
-    const settings: SettingsType = state.settings
+    const { settings } = useSettingsStore()
     const { alert, toggleAlert } = useAlertStore()
     const { autoLogChecking, toggleAutoLogChecking } = useAutoLogCheckingStore()
     const { navButtons: { coh3 } } = useNavButtonsStore()
@@ -42,12 +40,9 @@ function CheckLogDiv() {
                     <button
                         className={styles.btn}
                         onClick={() => {
-                            readLog(coh3, state.settings.logLocation).then((data) => {
+                            readLog(coh3, settings!.logLocation).then((data) => {
                                 if (data) {
-                                    setPlayersWithoutChecking(
-                                        data,
-                                        state
-                                    )
+                                    setPlayersWithoutChecking(data)
                                 }
                             })
                         }}

@@ -4,16 +4,14 @@ import getText from '../../functions/getText'
 import styles from './ListDiv.module.css'
 
 import { Rank } from '../../types'
-import { useAppSelector } from '../../hooks/customReduxHooks'
+import { useSettingsStore } from '../../stores/settingsStore'
 import { useSorterStore } from '../../stores/sorterStore'
 
 type SorterName = 'byRank' | 'byWinRate' | 'byStreak' | 'byName' | 'byTotal'
 
 function RanksListTitles({ ranksArr }: { ranksArr: Rank[] }) {
-    const state = useAppSelector((state) => state)
     const { sorter, setSorter } = useSorterStore()
-
-    const settings = state.settings
+    const { settings } = useSettingsStore()
 
     const getSorter = (name: SorterName) => {
         return {

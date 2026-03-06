@@ -13,7 +13,8 @@ import styles from './Settings.module.css'
 
 import getText from '../../functions/getText'
 import useEsc from '../../hooks/useEsc'
-import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
+import { useSettingsStore } from '../../stores/settingsStore'
+import { SettingsType } from '../../types'
 import { useSettingsViewStore } from '../../stores/settingsViewStore'
 
 interface Props {
@@ -21,9 +22,7 @@ interface Props {
 }
 
 function Settings(props: Props) {
-    const dispatch = useAppDispatch()
-    const state = useAppSelector((state) => state)
-    const settings = state.settings
+    const { settings } = useSettingsStore()
     const { toggleSettingsView } = useSettingsViewStore()
 
     const lg = settings && settings.language ? settings.language : 'en'
@@ -43,8 +42,8 @@ function Settings(props: Props) {
     const setError = () => {
         setTimedError(true)
         if (steamIdInputRef.current) {
-            steamIdInputRef.current.value = settings.steamId
-                ? settings.steamId
+            steamIdInputRef.current.value = settings!.steamId
+                ? settings!.steamId
                 : ''
         }
     }
@@ -56,8 +55,8 @@ function Settings(props: Props) {
                 ...settings,
                 steamId: undefined,
                 profileId: undefined,
-            }
-            writeSettings(newSettings, dispatch)
+            } as unknown as SettingsType
+            writeSettings(newSettings)
             setTimedSetID(true)
             return
         }
@@ -93,8 +92,8 @@ function Settings(props: Props) {
                             ...settings,
                             steamId: num,
                             profileId: profile.profile_id,
-                        }
-                        writeSettings(newSettings, dispatch)
+                        } as SettingsType
+                        writeSettings(newSettings)
                         setTimedSetID(true)
                     } else {
                         console.error('data:', data)
@@ -124,8 +123,8 @@ function Settings(props: Props) {
                     const newSettings = {
                         ...settings,
                         logLocation: file.filePaths[0],
-                    }
-                    writeSettings(newSettings, dispatch)
+                    } as SettingsType
+                    writeSettings(newSettings)
                 }
             })
     }
@@ -134,16 +133,16 @@ function Settings(props: Props) {
         const newSettings = {
             ...settings,
             language: e.target.value,
-        }
-        writeSettings(newSettings, dispatch)
+        } as SettingsType
+        writeSettings(newSettings)
     }
 
     const handleSiteLink = (e: React.ChangeEvent<HTMLSelectElement>) => {
         const newSettings = {
             ...settings,
             siteLink: e.target.value,
-        }
-        writeSettings(newSettings, dispatch)
+        } as SettingsType
+        writeSettings(newSettings)
     }
 
     const star = <span className={styles.star}>*</span>

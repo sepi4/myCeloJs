@@ -6,15 +6,14 @@ import styles from './Settings.module.css'
 import useTimedBoolean from '../../hooks/useTimedBoolean'
 
 import getText from '../../functions/getText'
-import { useAppSelector } from '../../hooks/customReduxHooks'
-import { SettingsType } from '../../types'
+import { useSettingsStore } from '../../stores/settingsStore'
 
 interface Props {
     text?: string
 }
 
 function CopyDiv(props: Props) {
-    const settings: SettingsType = useAppSelector((state) => state.settings)
+    const { settings } = useSettingsStore()
 
     const [timed, setTimed] = useTimedBoolean(1000)
     const handleCopy = () => {

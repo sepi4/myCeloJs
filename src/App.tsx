@@ -16,7 +16,6 @@ import { readLog } from './functions/readLog/readLog'
 import writeSettings from './functions/writeSettings'
 import checkLogData from './functions/checkLogData'
 
-import { useAppDispatch, useAppSelector } from './hooks/customReduxHooks'
 import { useAlertStore } from './stores/alertStore'
 import { useAppLocationStore } from './stores/appLocationStore'
 import { useAutoLogCheckingStore } from './stores/autoLogCheckingStore'
@@ -24,6 +23,7 @@ import { useExtraInfoStore } from './stores/extraInfoStore'
 import { useLogCheckIntervalStore } from './stores/logCheckIntervalStore'
 import { useNavButtonsStore } from './stores/navButtonsStore'
 import { usePlayersStore } from './stores/playersStore'
+import { useSettingsStore } from './stores/settingsStore'
 import { Player } from './types'
 import { guessRankings } from './functions/guessRankings'
 const appVersion = window.electronAPI.appVersion
@@ -34,8 +34,6 @@ document.title = 'myCelo ' + appVersion
 function App() {
     const [playAudio] = useSound(audioLocation)
 
-    const dispatch = useAppDispatch()
-    const state = useAppSelector((state) => state)
     const { alert } = useAlertStore()
     const { appLocation } = useAppLocationStore()
     const { autoLogChecking } = useAutoLogCheckingStore()
@@ -43,17 +41,18 @@ function App() {
     const { logCheckInterval } = useLogCheckIntervalStore()
     const { navButtons: { coh3 } } = useNavButtonsStore()
     const { players, setPlayers } = usePlayersStore()
+    const { settings } = useSettingsStore()
 
     const writeNewRankingsFile = (data: Player[]) => {
         clearExtraInfo()
-        if (state.settings) {
-            writeRankings(coh3, data, state.settings.rankingsHorizontal)
+        if (settings) {
+            writeRankings(coh3, data, settings.rankingsHorizontal)
         }
     }
 
     useEffect(() => {
         // initial readSettings location of log file
-        if (state.settings === null) {
+        if (settings === null) {
             readSettings(settingsDir + '/settings.json', (data) => {
                 if (!data) {
                     return
@@ -70,7 +69,7 @@ function App() {
                         '\\localhostFiles\\rankings.' +
                         (newSettings.rankingsHtml ? 'html' : 'txt')
                 }
-                writeSettings(newSettings, dispatch)
+                writeSettings(newSettings)
             })
             return
         } else if (players === null) {
@@ -79,11 +78,11 @@ function App() {
                 return
             }
 
-            if (state.settings && state.settings.logLocation) {
-                readLog(coh3, state.settings.logLocation).then(
+            if (settings && settings.logLocation) {
+                readLog(coh3, settings.logLocation).then(
                     (data) => {
                         if (data) {
-                            checkLogData({ data, state })
+                            checkLogData({ data })
                         }
                     }
                 )
@@ -119,12 +118,8 @@ function App() {
 
                 setExtraInfo(result)
                 setPlayers(newPlayers)
-                dispatch({
-                    type: 'SET_EXTRA_INFO',
-                    data: { newPlayers },
-                })
 
-                writeRankings(coh3, newPlayers, state.settings.rankingsHorizontal)
+                writeRankings(coh3, newPlayers, settings.rankingsHorizontal)
             })
         }
 
@@ -133,18 +128,14 @@ function App() {
         }
 
         const intervalId = setInterval(() => {
-            if (state.settings && state.settings.logLocation) {
-                readLog(coh3, state.settings.logLocation).then(
+            if (settings && settings.logLocation) {
+                readLog(coh3, settings.logLocation).then(
                     (data) => {
                         if (data) {
                             if (alert) {
-                                checkLogData({
-                                    data,
-                                    state,
-                                    playAudio,
-                                })
+                                checkLogData({ data, playAudio })
                             } else {
-                                checkLogData({ data, state })
+                                checkLogData({ data })
                             }
                         }
                     }
@@ -159,8 +150,8 @@ function App() {
         if (!autoLogChecking) {
             return
         }
-        if (state.settings && state.settings.logLocation) {
-            readLog(coh3, state.settings.logLocation).then(
+        if (settings && settings.logLocation) {
+            readLog(coh3, settings.logLocation).then(
                 (data) => {
                     if (data) {
                         writeNewRankingsFile(data)
@@ -168,17 +159,17 @@ function App() {
                 }
             )
         }
-    }, [state.settings])
+    }, [settings])
 
     const handleSetSettingsView = () => {
         if (!autoLogChecking) {
             return
         }
-        if (state.settings && state.settings.logLocation) {
-            readLog(coh3, state.settings.logLocation).then(
+        if (settings && settings.logLocation) {
+            readLog(coh3, settings.logLocation).then(
                 (data) => {
                     if (data) {
-                        checkLogData({ data, state })
+                        checkLogData({ data })
                     }
                 }
             )
@@ -194,7 +185,7 @@ function App() {
             <Navbar {...{ handleSetSettingsView }} />
             <MainView handleSetSettingsView={handleSetSettingsView} />
 
-            {state.settings && <UpdateBar />}
+            {settings && <UpdateBar />}
         </main>
     )
 }

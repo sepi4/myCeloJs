@@ -11,7 +11,7 @@ import star from '../../../img/star.png'
 import cross from '../../../img/cross.png'
 
 import { Rank as RankType } from '../../types'
-import { useAppSelector } from '../../hooks/customReduxHooks'
+import { useSettingsStore } from '../../stores/settingsStore'
 
 interface Props {
     rank: RankType
@@ -20,7 +20,7 @@ interface Props {
 
 function Rank(props: Props) {
     const { rank } = props
-    const settings = useAppSelector((state) => state.settings)
+    const { settings } = useSettingsStore()
     const getText = (x: string) => getTextFun(x, settings)
 
     const [showMembers, setShowMembers] = useState(false)

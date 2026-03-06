@@ -1,11 +1,9 @@
-import { settings } from './reducer'
+import reducer from './reducer'
 
 import { configureStore } from '@reduxjs/toolkit'
 
 export const store = configureStore({
-    reducer: {
-        settings,
-    },
+    reducer,
 
     // devTools: true,
     // preloadedState: initialStore,
