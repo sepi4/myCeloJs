@@ -1,6 +1,7 @@
 import { writeRankings } from './writeRankings'
 import { Player, Store } from '../types'
 import { useExtraInfoStore } from '../stores/extraInfoStore'
+import { useFromFileStore } from '../stores/fromFileStore'
 
 interface Props {
     data: Player[]
@@ -15,7 +16,9 @@ export default function checkLogData({
     dispatch,
     playAudio,
 }: Props) {
-    if (JSON.stringify(state.fromFile) !== JSON.stringify(data)) {
+    const { fromFile, setFromFile } = useFromFileStore.getState()
+    if (JSON.stringify(fromFile) !== JSON.stringify(data)) {
+        setFromFile(data)
         useExtraInfoStore.getState().clearExtraInfo()
         dispatch({
             type: 'SET_NEW_PLAYERS',
