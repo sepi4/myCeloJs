@@ -278,8 +278,7 @@ export interface Store {
     logCheckInterval: number
 updateCheckDone: boolean
     players: Player[] | null
-    fromFile: DataFromFile[] | null
-    navButtons: {
+navButtons: {
         all: boolean
         table: boolean
         total: boolean

@@ -115,15 +115,6 @@ export function openInfos(state = initialStore.openInfos, action: AnyAction) {
     }
 }
 
-export function fromFile(state = initialStore.fromFile, action: AnyAction) {
-    switch (action.type) {
-        case 'SET_NEW_PLAYERS':
-            return action.data
-        default:
-            return state
-    }
-}
-
 export function players(state = initialStore.players, action: AnyAction) {
     switch (action.type) {
         case 'SET_NEW_PLAYERS':
