@@ -1,4 +1,4 @@
-const { contextBridge, ipcRenderer, clipboard, shell } = require('electron')
+const { contextBridge, ipcRenderer, clipboard } = require('electron')
 
 const appInfo = ipcRenderer.sendSync('get-app-info')
 
@@ -13,7 +13,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
         writeText: (text) => clipboard.writeText(text),
     },
     shell: {
-        openExternal: (url) => shell.openExternal(url),
+        openExternal: (url) => ipcRenderer.invoke('shell:open-external', url),
     },
     settings: {
         read: (filePath) => ipcRenderer.invoke('settings:read', filePath),

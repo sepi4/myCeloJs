@@ -1,5 +1,5 @@
 const path = require('path')
-const { app, BrowserWindow, ipcMain, dialog } = require('electron')
+const { app, BrowserWindow, ipcMain, dialog, shell } = require('electron')
 const fs = require('fs')
 const http = require('http')
 
@@ -65,6 +65,10 @@ ipcMain.on('get-app-info', (event) => {
         settingsDir: app.getPath('userData'),
         appLocation: process.cwd(),
     }
+})
+
+ipcMain.handle('shell:open-external', (_event, url) => {
+    return shell.openExternal(url)
 })
 
 ipcMain.handle('dialog:show-open', (_event, options) => {
