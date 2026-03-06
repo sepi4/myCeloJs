@@ -6,7 +6,7 @@ import getText from '../../functions/getText'
 
 import NavCheckbox from './NavCheckBox'
 import styles from './CheckLogDiv.module.css'
-import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
+import { useAppSelector } from '../../hooks/customReduxHooks'
 import { useAlertStore } from '../../stores/alertStore'
 import { useAutoLogCheckingStore } from '../../stores/autoLogCheckingStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
@@ -15,7 +15,6 @@ import { SettingsType } from '../../types'
 function CheckLogDiv() {
     const state = useAppSelector((state) => state)
     const settings: SettingsType = state.settings
-    const dispatch = useAppDispatch()
     const { alert, toggleAlert } = useAlertStore()
     const { autoLogChecking, toggleAutoLogChecking } = useAutoLogCheckingStore()
     const { navButtons: { coh3 } } = useNavButtonsStore()
@@ -47,8 +46,7 @@ function CheckLogDiv() {
                                 if (data) {
                                     setPlayersWithoutChecking(
                                         data,
-                                        state,
-                                        dispatch
+                                        state
                                     )
                                 }
                             })

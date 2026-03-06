@@ -7,14 +7,15 @@ import Search from './Search/Search'
 import ClosingViewWrapper from './ClosingViewWrapper/ClosingViewWrapper'
 import { useAppSelector } from '../hooks/customReduxHooks'
 import { usePlayersStore } from '../stores/playersStore'
+import { useViewStore } from '../stores/viewStore'
 import { Player, SettingsType } from '../types'
 
 function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
     const settingsView = useAppSelector((state) => state.settingsView)
     const teams: Player[][] = [[], []]
-    const state = useAppSelector((state) => state)
+    const settings: SettingsType = useAppSelector((state) => state.settings)
     const { players } = usePlayersStore()
-    const settings: SettingsType = state.settings
+    const { view } = useViewStore()
 
     if (players) {
         players.forEach((p) => {
@@ -33,14 +34,14 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
             </div>
         )
     }
-    if (state.view === 'playerCard') {
+    if (view === 'playerCard') {
         return (
             <ClosingViewWrapper>
                 <PlayerCard />
             </ClosingViewWrapper>
         )
     }
-    if (state.view === 'search') {
+    if (view === 'search') {
         return (
             <ClosingViewWrapper>
                 <Search />
