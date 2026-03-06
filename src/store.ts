@@ -3,7 +3,6 @@ import {
     settingsView,
     sorter,
     updateCheckDone,
-    view,
 } from './reducer'
 
 import { configureStore } from '@reduxjs/toolkit'
@@ -14,7 +13,6 @@ export const store = configureStore({
         settingsView,
         sorter,
         updateCheckDone,
-        view,
     },
 
     // devTools: true,

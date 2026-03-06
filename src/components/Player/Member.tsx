@@ -1,11 +1,11 @@
 import styles from './Members.module.css'
 
 import { getExtraInfo } from '../../functions/getExtraInfo'
-import { useAppDispatch } from '../../hooks/customReduxHooks'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { Member as MemberType } from '../../types'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
+import { useViewStore } from '../../stores/viewStore'
 
 interface Props {
     member: MemberType
@@ -13,9 +13,9 @@ interface Props {
 
 export default function Member(props: Props) {
     const { countryFlags } = useCountryFlagsStore()
-    const dispatch = useAppDispatch()
     const { navButtons: { coh3 } } = useNavButtonsStore()
     const { setPlayerCard } = usePlayerCardStore()
+    const { setView } = useViewStore()
 
     const handlePlayerCardOn = (p: MemberType) => {
         const newPlayer = {
@@ -34,13 +34,7 @@ export default function Member(props: Props) {
                 const ex = result[newPlayer.profileId]
                 if (result && ex) {
                     setPlayerCard(newPlayer, ex)
-                    dispatch({
-                        type: 'PLAYER_CARD_ON',
-                        data: {
-                            player: newPlayer,
-                            extraInfo: ex,
-                        },
-                    })
+                    setView('playerCard')
                 }
             }
         )

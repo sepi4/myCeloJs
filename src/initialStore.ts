@@ -11,8 +11,6 @@ const initialStore: Store = {
         name: 'byRank',
         reversed: false,
     },
-
-    view: 'main',
 }
 
 export default initialStore

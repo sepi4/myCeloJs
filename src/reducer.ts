@@ -35,21 +35,6 @@ export function updateCheckDone(
     }
 }
 
-export function view(state = initialStore.view, action: AnyAction) {
-    switch (action.type) {
-        case 'SEARCH_VIEW_ON':
-            return 'search'
-        case 'PLAYER_CARD_ON':
-            return 'playerCard'
-        case 'TO_MAIN_VIEW':
-            return 'main'
-        case 'SET_NEW_PLAYERS':
-            return 'main'
-        default:
-            return state
-    }
-}
-
 export function sorter(state = initialStore.sorter, action: AnyAction) {
     switch (action.type) {
         case 'SET_SORTER':

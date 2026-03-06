@@ -10,9 +10,9 @@ import {
     SettingsType,
 } from '../../types'
 import { getExtraInfo } from '../../functions/getExtraInfo'
-import { useAppDispatch } from '../../hooks/customReduxHooks'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
+import { useViewStore } from '../../stores/viewStore'
 
 const StyledTh = styled.th<{ len?: number }>`
     word-wrap: break-word;
@@ -31,9 +31,9 @@ interface Props {
 }
 
 function ModalTableHeaders(props: Props) {
-    const dispatch = useAppDispatch()
     const { navButtons: { coh3 } } = useNavButtonsStore()
     const { setPlayerCard } = usePlayerCardStore()
+    const { setView } = useViewStore()
     return (
         <thead>
             <tr>
@@ -96,13 +96,7 @@ function ModalTableHeaders(props: Props) {
                                         const ex = result[newPlayer.profileId]
                                         if (result && ex) {
                                             setPlayerCard(newPlayer, ex)
-                                            dispatch({
-                                                type: 'PLAYER_CARD_ON',
-                                                data: {
-                                                    player: newPlayer,
-                                                    extraInfo: ex,
-                                                },
-                                            })
+                                            setView('playerCard')
                                         }
                                     })
                                 }}
