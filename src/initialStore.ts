@@ -8,11 +8,6 @@ const initialStore: Store = {
     updateCheckDone: false,
 
     players: null,
-    openInfos: [
-        [false, false, false, false],
-        [false, false, false, false],
-    ],
-
     sorter: {
         name: 'byRank',
         reversed: false,

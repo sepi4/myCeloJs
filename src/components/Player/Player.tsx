@@ -2,7 +2,7 @@ import PlayerExtraInfo from './PlayerExtraInfo'
 import PlayerMainRow from './PlayerMainRow'
 
 import { ExtraInfo, Player as PlayerType } from '../../types'
-import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
+import { useOpenInfosStore } from '../../stores/openInfosStore'
 
 interface Props {
     player: PlayerType
@@ -14,17 +14,10 @@ interface Props {
 function Player(props: Props) {
     const { player, extraInfo, teamIndex, playerIndex } = props
 
-    const dispatch = useAppDispatch()
-    const openInfos = useAppSelector((state) => state.openInfos)
+    const { openInfos, toggleOpenInfo } = useOpenInfosStore()
 
     const handleSetShowExtra = () => {
-        dispatch({
-            type: 'TOGGLE_EXTRA',
-            data: {
-                teamIndex,
-                playerIndex,
-            },
-        })
+        toggleOpenInfo(teamIndex, playerIndex)
     }
 
     const showExtra = openInfos[teamIndex][playerIndex]

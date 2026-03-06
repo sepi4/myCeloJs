@@ -277,7 +277,6 @@ export interface Store {
     settings: SettingsType | null
 updateCheckDone: boolean
     players: Player[] | null
-    openInfos: boolean[][]
     sorter: {
         name: string
         reversed: boolean
