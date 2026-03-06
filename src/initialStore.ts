@@ -7,11 +7,6 @@ const initialStore: Store = {
 
     settings: null,
 
-    logCheckInterval: getLocalStorage({
-        key: 'logCheckInterval',
-        def: 3,
-    }),
-
     updateCheckDone: false,
 
     players: null,
