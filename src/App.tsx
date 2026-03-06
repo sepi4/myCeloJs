@@ -17,6 +17,8 @@ import writeSettings from './functions/writeSettings'
 import checkLogData from './functions/checkLogData'
 
 import { useAppDispatch, useAppSelector } from './hooks/customReduxHooks'
+import { useAlertStore } from './stores/alertStore'
+import { useAppLocationStore } from './stores/appLocationStore'
 import { Player } from './types'
 import { guessRankings } from './functions/guessRankings'
 const appVersion = window.electronAPI.appVersion
@@ -29,6 +31,8 @@ function App() {
 
     const dispatch = useAppDispatch()
     const state = useAppSelector((state) => state)
+    const { alert } = useAlertStore()
+    const { appLocation } = useAppLocationStore()
 
     const writeNewRankingsFile = (data: Player[]) => {
         dispatch({
@@ -48,13 +52,13 @@ function App() {
                 }
 
                 const newSettings = JSON.parse(data)
-                newSettings.appLocation = state.appLocation
+                newSettings.appLocation = appLocation
 
                 // update rankingsFile location, for cases where
                 // app location is different
                 if (newSettings.rankingsFile) {
                     newSettings.rankingsFile =
-                        state.appLocation +
+                        appLocation +
                         '\\localhostFiles\\rankings.' +
                         (newSettings.rankingsHtml ? 'html' : 'txt')
                 }
@@ -127,7 +131,7 @@ function App() {
                 readLog(state.navButtons.coh3, state.settings.logLocation).then(
                     (data) => {
                         if (data) {
-                            if (state.alert) {
+                            if (alert) {
                                 checkLogData({
                                     data,
                                     state,

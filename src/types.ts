@@ -277,9 +277,7 @@ export interface Store {
     settings: SettingsType | null
     logCheckInterval: number
     autoLogChecking: boolean
-    alert: boolean
-    updateCheckDone: boolean
-    appLocation: string
+updateCheckDone: boolean
     players: Player[] | null
     fromFile: DataFromFile[] | null
     extraInfo: NormalizedExtraInfo | null
