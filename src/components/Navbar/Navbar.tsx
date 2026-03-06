@@ -16,6 +16,7 @@ import { getExtraInfo } from '../../functions/getExtraInfo'
 import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
+import { useViewStore } from '../../stores/viewStore'
 
 import { Rank } from '../../types'
 
@@ -35,6 +36,7 @@ export default function Navbar(props: Props) {
 
     const { navButtons, toggleNavButton } = useNavButtonsStore()
     const { setPlayerCard, player: playerCardPlayer } = usePlayerCardStore()
+    const { view, setView } = useViewStore()
 
     const getNavCheckBox = (text: 'all' | 'total' | 'table') => {
         return (
@@ -68,9 +70,7 @@ export default function Navbar(props: Props) {
     }
 
     const handleSearchView = () => {
-        dispatch({
-            type: 'SEARCH_VIEW_ON',
-        })
+        setView('search')
     }
 
     const handleOpenMyCard = () => {
@@ -91,13 +91,7 @@ export default function Navbar(props: Props) {
                     country: profile.country,
                 }
                 setPlayerCard(playerData, ex)
-                dispatch({
-                    type: 'PLAYER_CARD_ON',
-                    data: {
-                        player: playerData,
-                        extraInfo: ex,
-                    },
-                })
+                setView('playerCard')
             }
         })
     }
@@ -107,7 +101,7 @@ export default function Navbar(props: Props) {
         settings &&
         settings.steamId &&
         !(
-            state.view === 'playerCard' &&
+            view === 'playerCard' &&
             playerCardPlayer?.profileId === settings.profileId
         )
     ) {
@@ -125,7 +119,7 @@ export default function Navbar(props: Props) {
     }
 
     const searchIcon =
-        state.view !== 'search' ? (
+        view !== 'search' ? (
             <NavBarIcon
                 title={getText('search', settings)}
                 style={{

@@ -14,21 +14,22 @@ import searchPlayers from '../../functions/searchPlayers'
 import FoundPlayer from './FoundPlayer'
 
 import styles from './Search.module.css'
-import { useAppDispatch, useAppSelector } from '../../hooks/customReduxHooks'
+import { useAppSelector } from '../../hooks/customReduxHooks'
 import { Member } from '../../types'
 import { useFoundPlayersStore } from '../../stores/foundPlayersStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
+import { useViewStore } from '../../stores/viewStore'
 
 export default function Search() {
     const state = useAppSelector((state) => state)
     const inputRef = useRef<HTMLInputElement>(null)
 
     const [searchValue, setSearchValue] = useState('')
-    const dispatch = useAppDispatch()
     const { foundPlayers, setFoundPlayers } = useFoundPlayersStore()
     const { navButtons: { coh3 } } = useNavButtonsStore()
     const { setPlayerCard } = usePlayerCardStore()
+    const { setView } = useViewStore()
 
     const handleSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value)
@@ -106,13 +107,7 @@ export default function Search() {
             steamId: player.name.substring(7),
         }
         setPlayerCard(playerData, extraInfoData)
-        dispatch({
-            type: 'PLAYER_CARD_ON',
-            data: {
-                player: playerData,
-                extraInfo: extraInfoData,
-            },
-        })
+        setView('playerCard')
     }
 
     const players =

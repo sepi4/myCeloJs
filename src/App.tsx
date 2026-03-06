@@ -83,7 +83,7 @@ function App() {
                 readLog(coh3, state.settings.logLocation).then(
                     (data) => {
                         if (data) {
-                            checkLogData({ data, state, dispatch })
+                            checkLogData({ data, state })
                         }
                     }
                 )
@@ -141,11 +141,10 @@ function App() {
                                 checkLogData({
                                     data,
                                     state,
-                                    dispatch,
                                     playAudio,
                                 })
                             } else {
-                                checkLogData({ data, state, dispatch })
+                                checkLogData({ data, state })
                             }
                         }
                     }
@@ -179,7 +178,7 @@ function App() {
             readLog(coh3, state.settings.logLocation).then(
                 (data) => {
                     if (data) {
-                        checkLogData({ data, state, dispatch })
+                        checkLogData({ data, state })
                     }
                 }
             )

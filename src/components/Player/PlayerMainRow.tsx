@@ -13,10 +13,10 @@ import MainRowSpan from './MainRowSpan'
 import { getTotalGames } from '../../functions/simpleFunctions'
 
 import { ExtraInfo, Player } from '../../types'
-import { useAppDispatch } from '../../hooks/customReduxHooks'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
+import { useViewStore } from '../../stores/viewStore'
 
 const countries = countriesJson as {
     [key: string]: {
@@ -66,18 +66,12 @@ function PlayerMainRow(props: Props) {
         }
     }
 
-    const dispatch = useAppDispatch()
     const { setPlayerCard } = usePlayerCardStore()
+    const { setView } = useViewStore()
 
     const handlePlayerCardOn = () => {
         setPlayerCard(player, extraInfo)
-        dispatch({
-            type: 'PLAYER_CARD_ON',
-            data: {
-                player,
-                extraInfo,
-            },
-        })
+        setView('playerCard')
     }
 
     const { countryFlags } = useCountryFlagsStore()

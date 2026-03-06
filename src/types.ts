@@ -280,5 +280,4 @@ updateCheckDone: boolean
         name: string
         reversed: boolean
     }
-    view: string
 }
