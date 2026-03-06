@@ -3,6 +3,7 @@ import { Player, Store } from '../types'
 import { useExtraInfoStore } from '../stores/extraInfoStore'
 import { useFromFileStore } from '../stores/fromFileStore'
 import { useNavButtonsStore } from '../stores/navButtonsStore'
+import { useOpenInfosStore } from '../stores/openInfosStore'
 
 interface Props {
     data: Player[]
@@ -22,6 +23,7 @@ export default function checkLogData({
     if (JSON.stringify(fromFile) !== JSON.stringify(data)) {
         setFromFile(data)
         useExtraInfoStore.getState().clearExtraInfo()
+        useOpenInfosStore.getState().resetOpenInfos()
         dispatch({
             type: 'SET_NEW_PLAYERS',
             data,

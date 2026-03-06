@@ -4,6 +4,7 @@ import { Player, Store } from '../types'
 import { useExtraInfoStore } from '../stores/extraInfoStore'
 import { useFromFileStore } from '../stores/fromFileStore'
 import { useNavButtonsStore } from '../stores/navButtonsStore'
+import { useOpenInfosStore } from '../stores/openInfosStore'
 
 export default function setPlayersWithoutChecking(
     data: Player[],
@@ -11,6 +12,7 @@ export default function setPlayersWithoutChecking(
     dispatch: ({ type, data }: { type: string; data: Player[] }) => void
 ) {
     useFromFileStore.getState().setFromFile(data)
+    useOpenInfosStore.getState().resetOpenInfos()
     const { navButtons: { coh3 } } = useNavButtonsStore.getState()
     useExtraInfoStore.getState().clearExtraInfo()
     dispatch({
