@@ -35,17 +35,6 @@ export function updateCheckDone(
     }
 }
 
-export function sorter(state = initialStore.sorter, action: AnyAction) {
-    switch (action.type) {
-        case 'SET_SORTER':
-            return state.name === action.data.name
-                ? { name: action.data.name, reversed: !state.reversed }
-                : { name: action.data.name, reversed: false }
-        default:
-            return state
-    }
-}
-
 function reducer(state: Store = initialStore, action: AnyAction) {
     switch (action.type) {
         default:

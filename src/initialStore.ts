@@ -7,10 +7,6 @@ const initialStore: Store = {
 
     updateCheckDone: false,
 
-    sorter: {
-        name: 'byRank',
-        reversed: false,
-    },
 }
 
 export default initialStore
