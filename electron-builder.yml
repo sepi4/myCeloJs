@@ -1,0 +1,39 @@
+appId: com.sepi4.mycelo
+productName: myCelo
+copyright: Copyright © 2024 Sergei Polishsuk
+
+directories:
+    output: dist
+    buildResources: img
+
+files:
+    - out/**
+    - countries.json
+    - img/**
+
+extraResources:
+    - from: localhostFiles/
+      to: localhostFiles/
+      filter:
+          - rankings.css
+          - rankings.html
+          - rankings.js
+
+win:
+    target:
+        - target: nsis
+          arch: [x64]
+    icon: img/icon/icon.ico
+
+linux:
+    target:
+        - target: deb
+          arch: [x64]
+        - target: AppImage
+          arch: [x64]
+    icon: img/icon/icon.png
+    maintainer: myCelo
+
+nsis:
+    oneClick: false
+    allowToChangeInstallationDirectory: true

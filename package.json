@@ -22,6 +22,7 @@
         "build": "electron-vite build",
         "preview": "electron-vite preview",
         "test": "jest",
+        "dist": "npm run build && electron-builder",
         "test:e2e": "npm run build && npx playwright test"
     },
     "dependencies": {
