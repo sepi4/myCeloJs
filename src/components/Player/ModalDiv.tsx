@@ -38,6 +38,7 @@ function ModalDiv(props: Props) {
         <Modal
             isOpen={modal}
             contentLabel="gameHistoryStats"
+            testId="game-modal"
             ariaHideApp={false}
             shouldCloseOnOverlayClick={true}
             onRequestClose={() => setModal(false)}
@@ -58,13 +59,13 @@ function ModalDiv(props: Props) {
             }}
         >
             <div>
-                <span className={styles.label}>
+                <span data-testid="game-start" className={styles.label}>
                     {getText('game_start_time', settings)}:
                 </span>
                 <span className={styles.value}>{startTime}</span>
             </div>
             <div>
-                <span className={styles.label}>
+                <span data-testid="game-end" className={styles.label}>
                     {getText('game_end_time', settings)}:
                 </span>
                 <span className={styles.value}>{endTime}</span>

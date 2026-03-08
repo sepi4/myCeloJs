@@ -61,7 +61,7 @@ export default function History(props: Props) {
     return (
         <>
             {history && (
-                <div className={styles.historyDivs}>
+                <div data-testid="game-history" className={styles.historyDivs}>
                     {history.matchHistoryStats.map((m, i) => {
                         return (
                             <GameHistoryDiv
@@ -80,6 +80,7 @@ export default function History(props: Props) {
 
                     {!fetching && (
                         <span
+                            data-testid="fetch-history"
                             className={styles.getHistory}
                             onClick={() => setGetHistory(true)}
                         >

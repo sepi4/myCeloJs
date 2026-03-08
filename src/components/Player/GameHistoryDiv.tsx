@@ -49,6 +49,7 @@ export default function GameHistoryDiv(props: Props) {
     return (
         <>
             <div
+                data-testid="game-history-item"
                 title={playersNames}
                 className={styles.container}
                 style={{ border: '.1em solid ' + backgroundColor }}

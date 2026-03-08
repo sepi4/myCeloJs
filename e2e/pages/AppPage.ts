@@ -52,6 +52,14 @@ export class AppPage {
     readonly linkCoh2stats: Locator
     readonly linkCoh2: Locator
     readonly linkSteam: Locator
+
+    // Game history
+    readonly fetchHistory: Locator
+    readonly gameHistory: Locator
+    readonly gameHistoryItems: Locator
+    readonly gameModal: Locator
+    readonly gameStart: Locator
+    readonly gameEnd: Locator
     readonly tableView: Locator
     readonly totalGames: Locator
     readonly rankRows: Locator
@@ -97,6 +105,13 @@ export class AppPage {
         this.linkCoh2stats = page.getByTestId('link-coh2stats')
         this.linkCoh2 = page.getByTestId('link-coh2')
         this.linkSteam = page.getByTestId('link-steam')
+
+        this.fetchHistory = page.getByTestId('fetch-history')
+        this.gameHistory = page.getByTestId('game-history')
+        this.gameHistoryItems = page.getByTestId('game-history-item')
+        this.gameModal = page.getByTestId('game-modal')
+        this.gameStart = page.getByTestId('game-start')
+        this.gameEnd = page.getByTestId('game-end')
         this.tableView = page.getByTestId('table-view')
         this.totalGames = page.getByTestId('total-games')
         this.rankRows = page.getByTestId('rank-row')
