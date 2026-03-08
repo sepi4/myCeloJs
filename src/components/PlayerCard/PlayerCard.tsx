@@ -83,12 +83,16 @@ export default function PlayerCard() {
             {!coh3 && (
                 <>
                     <img
+                        data-testid="link-coh2stats"
+                        data-url={linkCoh2stats}
                         src={logo_coh2stats}
                         alt="coh2stats"
                         title="coh2stats.com"
                         onClick={funCoh2stats}
                     />
                     <img
+                        data-testid="link-coh2"
+                        data-url={linkCoh2}
                         src={logo_coh2}
                         alt="coh2"
                         title="coh2.org"
@@ -97,6 +101,8 @@ export default function PlayerCard() {
                 </>
             )}
             <img
+                data-testid="link-steam"
+                data-url={linkSteam}
                 src={logo_steam}
                 alt="steam"
                 title="steam"

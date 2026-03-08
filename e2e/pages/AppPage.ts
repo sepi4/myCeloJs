@@ -49,6 +49,9 @@ export class AppPage {
 
     // Player card
     readonly steamIdValue: Locator
+    readonly linkCoh2stats: Locator
+    readonly linkCoh2: Locator
+    readonly linkSteam: Locator
     readonly tableView: Locator
     readonly totalGames: Locator
     readonly rankRows: Locator
@@ -91,6 +94,9 @@ export class AppPage {
         this.checkboxTable = page.getByTestId('checkbox-table')
 
         this.steamIdValue = page.getByTestId('steam-id-value')
+        this.linkCoh2stats = page.getByTestId('link-coh2stats')
+        this.linkCoh2 = page.getByTestId('link-coh2')
+        this.linkSteam = page.getByTestId('link-steam')
         this.tableView = page.getByTestId('table-view')
         this.totalGames = page.getByTestId('total-games')
         this.rankRows = page.getByTestId('rank-row')
@@ -102,4 +108,5 @@ export class AppPage {
                 Promise.resolve({ canceled: false, filePaths: [fp] })
         }, filePath)
     }
+
 }

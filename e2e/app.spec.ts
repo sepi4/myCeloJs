@@ -31,7 +31,7 @@ test.afterAll(async () => {
     fs.rmSync(tempUserDataDir, { recursive: true, force: true })
 })
 
-test('set log location and verify players appear', async () => {
+test('set warning.log location and verify players appear on main view', async () => {
     // Fresh start — no settings, prompt should be visible
     await expect(app.noLogPrompt).toBeVisible()
 
@@ -44,7 +44,7 @@ test('set log location and verify players appear', async () => {
     await app.logLocationButton.click()
     await app.closeButton.click()
 
-    // Players parsed from the example log should now be visible
+    // Players container
     await expect(app.playersContainer).toBeVisible()
 })
 
@@ -68,7 +68,6 @@ test('switch language to Russian and back to English', async () => {
 })
 
 test('steam id validation and player card', async () => {
-
     // Still in settings from the previous test — enter an invalid steam ID
     await app.steamIdInput.fill('12345')
     await app.steamIdSave.click()
@@ -162,4 +161,17 @@ test('OBS studio settings - format, orientation and copy buttons', async () => {
     // Copy the settings file path — notification should appear
     await app.copySettingsButton.click()
     await expect(app.copySettingsNotification).toBeVisible()
+    await app.closeButton.click()
+})
+
+test('player card external links have correct URLs', async () => {
+    // Open my player card
+    await app.userIcon.click()
+    await expect(app.steamIdValue).toBeVisible()
+
+    // Verify each link icon exists and points to the correct URL
+    await expect(app.linkCoh2stats).toHaveAttribute('data-url', `https://coh2stats.com/players/${STEAM_ID}`)
+    await expect(app.linkCoh2).toHaveAttribute('data-url', `https://www.coh2.org/ladders/playercard/steamid/${STEAM_ID}`)
+    await expect(app.linkSteam).toHaveAttribute('data-url', `https://steamcommunity.com/profiles/${STEAM_ID}`)
+    await app.closeButton.click()
 })
