@@ -25,7 +25,7 @@ function RanksList(props: Props) {
                 const streak = positive ? `+${r.streak}` : `${r.streak}`
 
                 return (
-                    <div className={styles.row} key={i}>
+                    <div data-testid="rank-row" className={styles.row} key={i}>
                         <Cell
                             title={`${getText('of', settings)} ${r.ranktotal}`}
                         >

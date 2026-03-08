@@ -11,6 +11,7 @@ export default function SettingsLocation(props: Props) {
         return (
             <SettingsDiv title={props.title}>
                 <CopyDiv
+                    testId="copy-settings"
                     text={window.electronAPI.settingsDir + '\\settings.json'}
                 />
             </SettingsDiv>

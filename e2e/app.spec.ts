@@ -109,6 +109,57 @@ test('search by steam ID and open player card', async () => {
     // Open that player's card
     await app.foundPlayers.click()
     await expect(app.steamIdValue).toHaveText(STEAM_ID)
+    await app.closeButton.click()
 
-    await page.pause()
+})
+
+test('navbar checkboxes - table, total and all ', async () => {
+    await app.userIcon.click()
+    await expect(app.steamIdValue).toBeVisible()
+
+    // Table toggle
+    await app.checkboxTable.click()
+    await expect(app.tableView).toBeVisible()
+    await app.checkboxTable.click()
+    await expect(app.tableView).not.toBeVisible()
+
+    // Total toggle
+    await app.checkboxTotal.click()
+    await expect(app.totalGames).toBeVisible()
+    await app.checkboxTotal.click()
+    await expect(app.totalGames).not.toBeVisible()
+
+    // All toggle — unranked rows are added when on, removed when off
+    const rowCountBefore = await app.rankRows.count()
+    await app.checkboxAll.click()
+    await expect(app.rankRows).not.toHaveCount(rowCountBefore)
+    await app.checkboxAll.click()
+    await expect(app.rankRows).toHaveCount(rowCountBefore)
+    await app.closeButton.click()
+})
+
+test('OBS studio settings - format, orientation and copy buttons', async () => {
+    // open settings
+    await app.settingsIcon.click()
+    await expect(app.languageSelect).toBeVisible()
+
+    // Copy sections should not be visible before selecting format and orientation
+    await expect(app.copyRankings).not.toBeVisible()
+    await expect(app.copySettings).not.toBeVisible()
+
+    // Select HTML format and horizontal orientation
+    await app.radioHtml.click()
+    await app.radioHorizontal.click()
+
+    // Both copy sections should now appear
+    await expect(app.copyRankings).toBeVisible()
+    await expect(app.copySettings).toBeVisible()
+
+    // Copy the rankings file path — notification should appear
+    await app.copyRankingsButton.click()
+    await expect(app.copyRankingsNotification).toBeVisible()
+
+    // Copy the settings file path — notification should appear
+    await app.copySettingsButton.click()
+    await expect(app.copySettingsNotification).toBeVisible()
 })

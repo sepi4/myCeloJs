@@ -32,8 +32,26 @@ export class AppPage {
     readonly steamIdError: Locator
     readonly steamIdSuccess: Locator
 
+    // Navbar checkboxes
+    readonly checkboxAll: Locator
+    readonly checkboxTotal: Locator
+    readonly checkboxTable: Locator
+
+    // OBS / rankings settings
+    readonly radioHtml: Locator
+    readonly radioHorizontal: Locator
+    readonly copyRankings: Locator
+    readonly copyRankingsButton: Locator
+    readonly copyRankingsNotification: Locator
+    readonly copySettings: Locator
+    readonly copySettingsButton: Locator
+    readonly copySettingsNotification: Locator
+
     // Player card
     readonly steamIdValue: Locator
+    readonly tableView: Locator
+    readonly totalGames: Locator
+    readonly rankRows: Locator
 
     constructor(page: Page) {
         this.page = page
@@ -59,7 +77,23 @@ export class AppPage {
         this.steamIdError = page.getByTestId('steam-id-error')
         this.steamIdSuccess = page.getByTestId('steam-id-success')
 
+        this.radioHtml = page.getByTestId('radio-html')
+        this.radioHorizontal = page.getByTestId('radio-horizontal')
+        this.copyRankings = page.getByTestId('copy-rankings')
+        this.copyRankingsButton = page.getByTestId('copy-rankings-button')
+        this.copyRankingsNotification = page.getByTestId('copy-rankings-notification')
+        this.copySettings = page.getByTestId('copy-settings')
+        this.copySettingsButton = page.getByTestId('copy-settings-button')
+        this.copySettingsNotification = page.getByTestId('copy-settings-notification')
+
+        this.checkboxAll = page.getByTestId('checkbox-all')
+        this.checkboxTotal = page.getByTestId('checkbox-total')
+        this.checkboxTable = page.getByTestId('checkbox-table')
+
         this.steamIdValue = page.getByTestId('steam-id-value')
+        this.tableView = page.getByTestId('table-view')
+        this.totalGames = page.getByTestId('total-games')
+        this.rankRows = page.getByTestId('rank-row')
     }
 
     async mockFileDialog(electronApp: ElectronApplication, filePath: string) {

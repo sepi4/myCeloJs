@@ -56,6 +56,7 @@ export default function SettingsAfterLog() {
                             handler={handleType}
                             value={'html'}
                             labelText={'html'}
+                            testId="radio-html"
                         />
                         <RadioButton
                             checked={
@@ -77,6 +78,7 @@ export default function SettingsAfterLog() {
                             handler={handleOrientation}
                             value={'horizontal'}
                             labelText={getText('horizontal', settings)}
+                            testId="radio-horizontal"
                         />
                         <RadioButton
                             checked={
@@ -90,6 +92,7 @@ export default function SettingsAfterLog() {
                     </RadioButtonsDiv>
 
                     <CopyDiv
+                        testId="copy-rankings"
                         text={fileTypeSet ? settings.rankingsFile : undefined}
                     />
                 </SettingsDiv>

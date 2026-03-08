@@ -40,7 +40,7 @@ function TableDiv({ ranksArr }: { ranksArr: Rank[] }) {
         )
     })
 
-    return <div className={styles.container}>{factionGrids}</div>
+    return <div data-testid="table-view" className={styles.container}>{factionGrids}</div>
 }
 
 export default TableDiv

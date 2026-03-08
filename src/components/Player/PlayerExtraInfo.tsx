@@ -31,7 +31,7 @@ function PlayerExtraInfo(props: Props) {
             }
         }
         return (
-            <div className={styles.total}>
+            <div data-testid="total-games" className={styles.total}>
                 {getText('total_games', settings)}: {sum}
             </div>
         )

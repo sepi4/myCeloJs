@@ -42,6 +42,7 @@ export default function Navbar(props: Props) {
         return (
             <NavCheckbox
                 key={text}
+                testId={`checkbox-${text}`}
                 text={getText(text, settings)}
                 checked={navButtons[text]}
                 handler={() => toggleNavButton(text)}

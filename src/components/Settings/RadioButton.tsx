@@ -19,6 +19,7 @@ interface Props {
     handler: (e: ChangeEvent<HTMLInputElement>) => void
     labelText?: string
     value: string
+    testId?: string
 }
 
 function RadioButton(props: Props) {
@@ -33,7 +34,7 @@ function RadioButton(props: Props) {
                 value={props.value}
                 onChange={(e) => props.handler(e)}
             />
-            <label htmlFor={id}>{props.labelText}</label>
+            <label data-testid={props.testId} htmlFor={id}>{props.labelText}</label>
         </Span>
     )
 }

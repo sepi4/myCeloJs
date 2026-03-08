@@ -10,6 +10,7 @@ import { useSettingsStore } from '../../stores/settingsStore'
 
 interface Props {
     text?: string
+    testId?: string
 }
 
 function CopyDiv(props: Props) {
@@ -27,17 +28,23 @@ function CopyDiv(props: Props) {
         return null
     }
     const notification = timed ? (
-        <Notification text={getText('copied', settings)} />
+        <Notification
+            testId={props.testId ? `${props.testId}-notification` : undefined}
+            text={getText('copied', settings)}
+        />
     ) : null
 
     return (
-        <div>
+        <div data-testid={props.testId}>
             <div className={styles.textDiv}>
                 {props.text}
                 {notification}
             </div>
 
-            <StyledButton onClick={handleCopy}>
+            <StyledButton
+                data-testid={props.testId ? `${props.testId}-button` : undefined}
+                onClick={handleCopy}
+            >
                 {getText('copy', settings)}
             </StyledButton>
         </div>
