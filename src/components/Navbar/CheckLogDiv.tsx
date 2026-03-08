@@ -37,10 +37,12 @@ function CheckLogDiv() {
                                 text={getText('alert', settings)}
                                 checked={alert}
                                 handler={toggleAlert}
+                                testId="alert-label"
                             />
                         </>
                     ) : null}
                     <button
+                        data-testid="check-log-button"
                         className={styles.btn}
                         onClick={() => {
                             readLog(coh3, settings!.logLocation).then(

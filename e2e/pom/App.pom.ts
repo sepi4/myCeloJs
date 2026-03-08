@@ -2,6 +2,7 @@ import { type Page, type Locator, type ElectronApplication } from '@playwright/t
 import path from 'path'
 
 export const LOG_PATH = path.join(__dirname, '../../dataExamples/warnings.log')
+export const LOG_PATH_2 = path.join(__dirname, '../../dataExamples/warnings2.log')
 export const STEAM_ID = '76561198006675368'
 
 export class App {
@@ -18,6 +19,9 @@ export class App {
     readonly searchIcon: Locator
     readonly closeButton: Locator
     readonly autoLabel: Locator
+    readonly alertLabel: Locator
+    readonly checkLogButton: Locator
+    readonly intervalInput: Locator
 
     // Search
     readonly searchInput: Locator
@@ -77,6 +81,9 @@ export class App {
         this.searchIcon = page.getByTestId('search-icon')
         this.closeButton = page.getByTestId('close-button')
         this.autoLabel = page.getByTestId('auto-label')
+        this.alertLabel = page.getByTestId('alert-label')
+        this.checkLogButton = page.getByTestId('check-log-button')
+        this.intervalInput = page.getByTestId('interval-input')
 
         this.searchInput = page.getByTestId('search-input')
         this.searchResults = page.getByTestId('search-results')

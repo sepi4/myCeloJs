@@ -22,8 +22,8 @@
         "build": "electron-vite build",
         "preview": "electron-vite preview",
         "test": "jest",
-        "dist": "npm run build && npx playwright test && electron-builder",
-        "test:e2e": "npm run build && npx playwright test"
+        "dist": "npm run e2e && electron-builder",
+        "e2e": "npm run build && npx playwright test"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.7.2",
@@ -57,6 +57,7 @@
         "eslint-plugin-react": "^7.37.5",
         "eslint-plugin-react-hooks": "^5.0.0",
         "jest": "^29.7.0",
+        "jest-environment-jsdom": "^30.2.0",
         "prettier": "^3.8.1",
         "ts-jest": "^29.4.6",
         "typescript": "^5.9.3",

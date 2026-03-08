@@ -3,7 +3,7 @@ import type { ElectronApplication, Page } from '@playwright/test'
 import path from 'path'
 import os from 'os'
 import fs from 'fs'
-import { App, LOG_PATH, STEAM_ID } from './pom/App.pom'
+import { App, LOG_PATH, LOG_PATH_2, STEAM_ID } from './pom/App.pom'
 
 let electronApp: ElectronApplication
 let page: Page
@@ -48,6 +48,52 @@ test('set warning.log location and verify players appear on main view', async ()
     await expect(app.playersContainer).toBeVisible()
     await expect(app.teamContainers).toHaveCount(2)
     await expect(app.page.getByText('Polmuadiv')).toBeVisible()
+})
+
+test('auto checkbox toggles interval input and alert visibility', async () => {
+    // Auto is enabled by default — interval input and alert should be visible
+    await expect(app.autoLabel).toBeVisible()
+    await expect(app.intervalInput).toBeVisible()
+    await expect(app.alertLabel).toBeVisible()
+
+    // Disable auto — interval and alert should disappear
+    await app.autoLabel.click()
+    await expect(app.intervalInput).not.toBeVisible()
+    await expect(app.alertLabel).not.toBeVisible()
+
+    // Check log button should still be visible
+    await expect(app.checkLogButton).toBeVisible()
+
+    // Re-enable auto — interval and alert should reappear
+    await app.autoLabel.click()
+    await expect(app.intervalInput).toBeVisible()
+    await expect(app.alertLabel).toBeVisible()
+})
+
+test('check log button loads players from a different log file', async () => {
+    // Switch log location to the second log file via settings
+    await app.settingsIcon.click()
+    await expect(app.languageSelect).toBeVisible()
+    await app.mockFileDialog(electronApp, LOG_PATH_2)
+    await app.logLocationButton.click()
+    await app.closeButton.click()
+
+    // The second log has different players — verify they appear
+    await expect(app.playersContainer).toBeVisible()
+    await expect(app.teamContainers).toHaveCount(2)
+    await expect(app.page.getByText('TestPlayerA')).toBeVisible()
+    await expect(app.page.getByText('Polmuadiv')).not.toBeVisible()
+
+    // Switch back to original log file and use "check log" button
+    await app.settingsIcon.click()
+    await app.mockFileDialog(electronApp, LOG_PATH)
+    await app.logLocationButton.click()
+    await app.closeButton.click()
+
+    // Click check log to re-read the original file
+    await app.checkLogButton.click()
+    await expect(app.page.getByText('Polmuadiv')).toBeVisible()
+    await expect(app.page.getByText('TestPlayerA')).not.toBeVisible()
 })
 
 test('switch language to Russian and back to English', async () => {

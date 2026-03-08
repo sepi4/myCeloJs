@@ -40,6 +40,7 @@ function IntervalInput() {
     return (
         <span className={styles.container}>
             <input
+                data-testid="interval-input"
                 className={styles.input}
                 defaultValue={logCheckInterval ? logCheckInterval : ''}
                 ref={refInputElement}
