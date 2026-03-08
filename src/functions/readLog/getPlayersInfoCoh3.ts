@@ -52,7 +52,7 @@ export function getPlayersInfoCoh3(arr: string[]): Player[] {
                 profileId: profileId === undefined ? -1 : pid,
                 teamSlot: teamSlot === undefined ? -1 : Number(teamSlot),
                 time,
-                ranking: ooo[pid].ranking,
+                ranking: ooo[pid]?.ranking,
             }
         }
     }

@@ -43,7 +43,7 @@ export default function SettingsAfterLog() {
         settings.rankingsHtml !== undefined
     )
 
-    if (settings && settings.logLocation) {
+    if (settings && (settings.logLocationCoh2 || settings.logLocationCoh3)) {
         return (
             <>
                 <SettingsDiv title={getText('rankings_file_title', settings)}>

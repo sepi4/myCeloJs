@@ -5,6 +5,9 @@ localhostFiles/rankings.txt
 test-results/
 playwright-report/
 
+# prompts
+prompts/
+
 .VSCodeCounter
 
 # Build folder and files #

@@ -5,6 +5,7 @@ import PlayerCard from './PlayerCard/PlayerCard'
 import getText from '../functions/getText'
 import Search from './Search/Search'
 import ClosingViewWrapper from './ClosingViewWrapper/ClosingViewWrapper'
+import { useNavButtonsStore } from '../stores/navButtonsStore'
 import { usePlayersStore } from '../stores/playersStore'
 import { useSettingsStore } from '../stores/settingsStore'
 import { useSettingsViewStore } from '../stores/settingsViewStore'
@@ -15,8 +16,12 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
     const { settingsView } = useSettingsViewStore()
     const teams: Player[][] = [[], []]
     const { settings } = useSettingsStore()
+    const { navButtons: { coh3 } } = useNavButtonsStore()
     const { players } = usePlayersStore()
     const { view } = useViewStore()
+    const activeLogLocation = settings
+        ? coh3 ? settings.logLocationCoh3 : settings.logLocationCoh2
+        : ''
 
     if (players) {
         players.forEach((p) => {
@@ -28,7 +33,7 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
         return <Settings handleSetSettingsView={props.handleSetSettingsView} />
     }
     // haven't add log location
-    if (!settings || !settings.logLocation) {
+    if (!settings || !activeLogLocation) {
         return (
             <div>
                 <h2 data-testid="no-log-prompt">{getText('add_log_location', settings)}</h2>

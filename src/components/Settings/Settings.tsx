@@ -109,7 +109,7 @@ function Settings(props: Props) {
             })
     }
 
-    const changeLogLocation = () => {
+    const changeLogLocation = (game: 'coh2' | 'coh3') => {
         window.electronAPI.dialog
             .showOpenDialog({
                 properties: ['openFile'],
@@ -120,9 +120,10 @@ function Settings(props: Props) {
             })
             .then(function (file) {
                 if (file !== undefined && file.filePaths[0]) {
+                    const key = game === 'coh2' ? 'logLocationCoh2' : 'logLocationCoh3'
                     const newSettings = {
                         ...settings,
-                        logLocation: file.filePaths[0],
+                        [key]: file.filePaths[0],
                     } as SettingsType
                     writeSettings(newSettings)
                 }
@@ -188,15 +189,29 @@ function Settings(props: Props) {
             </SettingsDiv>
 
             <SettingsDiv
-                title={getText('log_location_title', settings)}
+                title={`COH2 ${getText('log_location_title', settings)}`}
                 required
             >
                 <div className={styles.textDiv}>
-                    {settings && settings.logLocation
-                        ? settings.logLocation
+                    {settings && settings.logLocationCoh2
+                        ? settings.logLocationCoh2
                         : ''}
                 </div>
-                <StyledButton data-testid="log-location-button" onClick={changeLogLocation}>
+                <StyledButton data-testid="log-location-button-coh2" onClick={() => changeLogLocation('coh2')}>
+                    {getText('select', settings)}
+                </StyledButton>
+            </SettingsDiv>
+
+            <SettingsDiv
+                title={`COH3 ${getText('log_location_title', settings)}`}
+                required
+            >
+                <div className={styles.textDiv}>
+                    {settings && settings.logLocationCoh3
+                        ? settings.logLocationCoh3
+                        : ''}
+                </div>
+                <StyledButton data-testid="log-location-button-coh3" onClick={() => changeLogLocation('coh3')}>
                     {getText('select', settings)}
                 </StyledButton>
             </SettingsDiv>

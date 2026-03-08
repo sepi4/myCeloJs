@@ -41,9 +41,25 @@ function App() {
     const { logCheckInterval } = useLogCheckIntervalStore()
     const {
         navButtons: { coh3 },
+        toggleNavButton,
     } = useNavButtonsStore()
     const { players, setPlayers } = usePlayersStore()
     const { settings } = useSettingsStore()
+    const activeLogLocation = settings
+        ? coh3 ? settings.logLocationCoh3 : settings.logLocationCoh2
+        : ''
+
+    // Auto-select the game radio when only one log location is configured
+    useEffect(() => {
+        if (!settings) return
+        const hasCoh2 = !!settings.logLocationCoh2
+        const hasCoh3 = !!settings.logLocationCoh3
+        if (hasCoh3 && !hasCoh2 && !coh3) {
+            toggleNavButton('coh3')
+        } else if (hasCoh2 && !hasCoh3 && coh3) {
+            toggleNavButton('coh3')
+        }
+    }, [settings, coh3, toggleNavButton])
 
     const writeNewRankingsFile = useCallback(
         (data: Player[]) => {
@@ -83,8 +99,8 @@ function App() {
                 return
             }
 
-            if (settings && settings.logLocation) {
-                readLog(coh3, settings.logLocation).then((data) => {
+            if (settings && activeLogLocation) {
+                readLog(coh3, activeLogLocation).then((data) => {
                     if (data) {
                         checkLogData({ data })
                     }
@@ -130,8 +146,8 @@ function App() {
         }
 
         const intervalId = setInterval(() => {
-            if (settings && settings.logLocation) {
-                readLog(coh3, settings.logLocation).then((data) => {
+            if (settings && activeLogLocation) {
+                readLog(coh3, activeLogLocation).then((data) => {
                     if (data) {
                         if (alert) {
                             checkLogData({ data, playAudio })
@@ -147,24 +163,21 @@ function App() {
     })
 
     useEffect(() => {
-        if (!autoLogChecking) {
-            return
-        }
-        if (settings && settings.logLocation) {
-            readLog(coh3, settings.logLocation).then((data) => {
+        if (settings && activeLogLocation) {
+            readLog(coh3, activeLogLocation).then((data) => {
                 if (data) {
-                    writeNewRankingsFile(data)
+                    checkLogData({ data })
                 }
             })
         }
-    }, [settings, autoLogChecking, coh3, writeNewRankingsFile])
+    }, [coh3, settings, activeLogLocation])
 
     const handleSetSettingsView = () => {
         if (!autoLogChecking) {
             return
         }
-        if (settings && settings.logLocation) {
-            readLog(coh3, settings.logLocation).then((data) => {
+        if (settings && activeLogLocation) {
+            readLog(coh3, activeLogLocation).then((data) => {
                 if (data) {
                     checkLogData({ data })
                 }

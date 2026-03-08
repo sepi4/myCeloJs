@@ -41,7 +41,7 @@ test('set warning.log location and verify players appear on main view', async ()
     await app.mockFileDialog(electronApp, LOG_PATH)
 
     // Select the log file and return to main view
-    await app.logLocationButton.click()
+    await app.logLocationButtonCoh2.click()
     await app.closeButton.click()
 
     // Players from the example log should be visible with 2 teams
@@ -75,7 +75,7 @@ test('check log button loads players from a different log file', async () => {
     await app.settingsIcon.click()
     await expect(app.languageSelect).toBeVisible()
     await app.mockFileDialog(electronApp, LOG_PATH_2)
-    await app.logLocationButton.click()
+    await app.logLocationButtonCoh2.click()
     await app.closeButton.click()
 
     // The second log has different players — verify they appear
@@ -87,7 +87,7 @@ test('check log button loads players from a different log file', async () => {
     // Switch back to original log file and use "check log" button
     await app.settingsIcon.click()
     await app.mockFileDialog(electronApp, LOG_PATH)
-    await app.logLocationButton.click()
+    await app.logLocationButtonCoh2.click()
     await app.closeButton.click()
 
     // Click check log to re-read the original file

@@ -66,7 +66,8 @@ export interface CountryFlagsLocation {
 }
 
 export interface SettingsType {
-    logLocation: string
+    logLocationCoh2: string
+    logLocationCoh3: string
     language: string
     appLocation: string
     rankingsHtml: boolean

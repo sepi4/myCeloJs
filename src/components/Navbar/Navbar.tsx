@@ -175,6 +175,7 @@ export default function Navbar(props: Props) {
                                 type="radio"
                                 onChange={() => toggleNavButton('coh3')}
                                 checked={!navButtons['coh3']}
+                                disabled={!settings?.logLocationCoh2}
                             />{' '}
                             <label htmlFor="coh2">coh2</label>
                         </div>
@@ -184,21 +185,10 @@ export default function Navbar(props: Props) {
                                 type="radio"
                                 onChange={() => toggleNavButton('coh3')}
                                 checked={navButtons['coh3']}
+                                disabled={!settings?.logLocationCoh3}
                             />{' '}
                             <label htmlFor="coh3">coh3</label>
                         </div>
-
-                        {/* <NavCheckbox
-                            key={'coh3'}
-                            text={'coh3'}
-                            checked={navButtons['coh3']}
-                            handler={() =>
-                                dispatch({
-                                    type: 'TOGGLE_NAVBUTTON',
-                                    key: 'coh3',
-                                })
-                            }
-                        /> */}
                     </NavbarRow>
                 </div>
 

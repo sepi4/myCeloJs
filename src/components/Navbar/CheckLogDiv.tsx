@@ -19,6 +19,10 @@ function CheckLogDiv() {
         navButtons: { coh3 },
     } = useNavButtonsStore()
 
+    const activeLogLocation = settings
+        ? coh3 ? settings.logLocationCoh3 : settings.logLocationCoh2
+        : ''
+
     return (
         <div className={styles.container}>
             <NavCheckbox
@@ -45,7 +49,7 @@ function CheckLogDiv() {
                         data-testid="check-log-button"
                         className={styles.btn}
                         onClick={() => {
-                            readLog(coh3, settings!.logLocation).then(
+                            readLog(coh3, activeLogLocation).then(
                                 (data) => {
                                     if (data) {
                                         setPlayersWithoutChecking(data)
