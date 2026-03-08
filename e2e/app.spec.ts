@@ -44,8 +44,10 @@ test('set warning.log location and verify players appear on main view', async ()
     await app.logLocationButton.click()
     await app.closeButton.click()
 
-    // Players container
+    // Players from the example log should be visible with 2 teams
     await expect(app.playersContainer).toBeVisible()
+    await expect(app.teamContainers).toHaveCount(2)
+    await expect(app.page.getByText('Polmuadiv')).toBeVisible()
 })
 
 test('switch language to Russian and back to English', async () => {

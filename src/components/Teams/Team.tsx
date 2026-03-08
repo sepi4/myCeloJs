@@ -12,6 +12,7 @@ function Team(props: Props) {
     const { extraInfo } = useExtraInfoStore()
     return (
         <div
+            data-testid="team-container"
             style={{
                 background: '#181818',
                 padding: '0.5em 1.5em',

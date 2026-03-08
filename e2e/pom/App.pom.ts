@@ -10,6 +10,7 @@ export class App {
     // Main view
     readonly noLogPrompt: Locator
     readonly playersContainer: Locator
+    readonly teamContainers: Locator
 
     // Navbar
     readonly settingsIcon: Locator
@@ -69,6 +70,7 @@ export class App {
 
         this.noLogPrompt = page.getByTestId('no-log-prompt')
         this.playersContainer = page.getByTestId('players-container')
+        this.teamContainers = page.getByTestId('team-container')
 
         this.settingsIcon = page.getByTestId('settings-icon')
         this.userIcon = page.getByTestId('user-icon')
