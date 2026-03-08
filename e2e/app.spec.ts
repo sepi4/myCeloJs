@@ -93,3 +93,22 @@ test('steam id validation and player card', async () => {
     await app.closeButton.click()
     await expect(app.userIcon).toBeVisible()
 })
+
+test('search by steam ID and open player card', async () => {
+    // Open the search view from the navbar
+    await app.searchIcon.click()
+    await expect(app.searchInput).toBeVisible()
+
+    // Type the steam ID and submit with Enter — triggers two API calls
+    await app.searchInput.fill(STEAM_ID)
+    await app.searchInput.press('Enter')
+
+    // Exactly one player result should appear
+    await expect(app.foundPlayers).toHaveCount(1)
+
+    // Open that player's card
+    await app.foundPlayers.click()
+    await expect(app.steamIdValue).toHaveText(STEAM_ID)
+
+    await page.pause()
+})

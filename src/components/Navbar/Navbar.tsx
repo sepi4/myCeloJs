@@ -123,6 +123,7 @@ export default function Navbar(props: Props) {
         view !== 'search' ? (
             <NavBarIcon
                 title={getText('search', settings)}
+                testId="search-icon"
                 style={{
                     height: '.7em',
                     marginRight: '0',

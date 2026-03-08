@@ -60,7 +60,7 @@ export default function FoundPlayer(props: Props) {
     )
 
     return (
-        <div className={styles.container} onClick={props.clickFun}>
+        <div data-testid="found-player" className={styles.container} onClick={props.clickFun}>
             {name}
             {table}
         </div>

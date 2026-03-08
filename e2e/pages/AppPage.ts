@@ -14,8 +14,14 @@ export class AppPage {
     // Navbar
     readonly settingsIcon: Locator
     readonly userIcon: Locator
+    readonly searchIcon: Locator
     readonly closeButton: Locator
     readonly autoLabel: Locator
+
+    // Search
+    readonly searchInput: Locator
+    readonly searchResults: Locator
+    readonly foundPlayers: Locator
 
     // Settings
     readonly languageTitle: Locator
@@ -37,8 +43,13 @@ export class AppPage {
 
         this.settingsIcon = page.getByTestId('settings-icon')
         this.userIcon = page.getByTestId('user-icon')
+        this.searchIcon = page.getByTestId('search-icon')
         this.closeButton = page.getByTestId('close-button')
         this.autoLabel = page.getByTestId('auto-label')
+
+        this.searchInput = page.getByTestId('search-input')
+        this.searchResults = page.getByTestId('search-results')
+        this.foundPlayers = page.getByTestId('found-player')
 
         this.languageTitle = page.getByTestId('language-title')
         this.languageSelect = page.getByTestId('language-select')

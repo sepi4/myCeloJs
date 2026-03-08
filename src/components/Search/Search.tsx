@@ -120,6 +120,7 @@ export default function Search() {
         <div className={styles.container}>
             <div className={styles.inputDiv}>
                 <input
+                    data-testid="search-input"
                     ref={inputRef}
                     className={styles.input}
                     placeholder={getText('steam_alias_or_id', settings)}
@@ -127,7 +128,7 @@ export default function Search() {
                     onKeyUp={handleKeyUp}
                 />
             </div>
-            <div className={styles.content}>{players}</div>
+            <div data-testid="search-results" className={styles.content}>{players}</div>
         </div>
     )
 }
