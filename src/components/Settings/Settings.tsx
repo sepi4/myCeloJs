@@ -155,6 +155,7 @@ function Settings(props: Props) {
 
     const errorDiv = timedError ? (
         <Notification
+            testId="steam-id-error"
             style={{
                 backgroundColor: 'darkred',
                 color: 'white',
@@ -164,15 +165,16 @@ function Settings(props: Props) {
     ) : null
 
     const savedDiv = timedSetID ? (
-        <Notification text={getText('id_set', settings)} />
+        <Notification testId="steam-id-success" text={getText('id_set', settings)} />
     ) : null
 
     return (
         <div style={{ marginTop: '4em' }}>
             {req}
 
-            <SettingsDiv title={getText('language', settings)}>
+            <SettingsDiv title={getText('language', settings)} testId="language-title">
                 <select
+                    data-testid="language-select"
                     onChange={handleLanguage}
                     value={lg}
                     style={{
@@ -194,7 +196,7 @@ function Settings(props: Props) {
                         ? settings.logLocation
                         : ''}
                 </div>
-                <StyledButton onClick={changeLogLocation}>
+                <StyledButton data-testid="log-location-button" onClick={changeLogLocation}>
                     {getText('select', settings)}
                 </StyledButton>
             </SettingsDiv>
@@ -216,6 +218,7 @@ function Settings(props: Props) {
             <SettingsDiv title={getText('my_steam_id', settings)}>
                 <>
                     <input
+                        data-testid="steam-id-input"
                         className={styles.input}
                         ref={steamIdInputRef}
                         defaultValue={
@@ -223,7 +226,7 @@ function Settings(props: Props) {
                         }
                     />
 
-                    <StyledButton onClick={handleSteamId}>
+                    <StyledButton data-testid="steam-id-save" onClick={handleSteamId}>
                         {getText('save', settings)}
                     </StyledButton>
                     {errorDiv}

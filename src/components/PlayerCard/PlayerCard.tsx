@@ -55,7 +55,7 @@ export default function PlayerCard() {
                 <tbody>
                     <tr>
                         <th>steam id:</th>
-                        <td>{steamId}</td>
+                        <td data-testid="steam-id-value">{steamId}</td>
                     </tr>
                     <tr>
                         <th>profile id:</th>

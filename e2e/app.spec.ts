@@ -3,9 +3,11 @@ import type { ElectronApplication, Page } from '@playwright/test'
 import path from 'path'
 import os from 'os'
 import fs from 'fs'
+import { AppPage, LOG_PATH, STEAM_ID } from './pages/AppPage'
 
 let electronApp: ElectronApplication
 let page: Page
+let app: AppPage
 let tempUserDataDir: string
 
 test.describe.configure({ mode: 'serial' })
@@ -21,6 +23,7 @@ test.beforeAll(async () => {
     })
     page = await electronApp.firstWindow()
     await page.waitForLoadState('domcontentloaded')
+    app = new AppPage(page)
 })
 
 test.afterAll(async () => {
@@ -30,76 +33,63 @@ test.afterAll(async () => {
 
 test('set log location and verify players appear', async () => {
     // Fresh start — no settings, prompt should be visible
-    await expect(
-        page.getByText('Please, in settings specify location log file')
-    ).toBeVisible()
+    await expect(app.noLogPrompt).toBeVisible()
 
-    // Open settings
-    await page.getByRole('img', { name: 'settings' }).click()
-    await expect(page.locator('select').first()).toBeVisible()
+    // Open settings and mock the native file dialog
+    await app.settingsIcon.click()
+    await expect(app.languageSelect).toBeVisible()
+    await app.mockFileDialog(electronApp, LOG_PATH)
 
-    // Mock the native file dialog to return the example log path
-    const logPath = path.join(__dirname, '../dataExamples/warnings.log')
-    await electronApp.evaluate(async ({ dialog }, filePath) => {
-        dialog.showOpenDialog = () =>
-            Promise.resolve({ canceled: false, filePaths: [filePath] })
-    }, logPath)
+    // Select the log file and return to main view
+    await app.logLocationButton.click()
+    await app.closeButton.click()
 
-    // Click the log location select button and close settings
-    await page.getByRole('button', { name: 'select' }).click()
-    await page.locator('svg[data-icon="xmark"]').click()
-
-    // Players from the example log should now be visible
-    await expect(page.getByText('Unknown')).toBeVisible()
+    // Players parsed from the example log should now be visible
+    await expect(app.playersContainer).toBeVisible()
 })
 
 test('switch language to Russian and back to English', async () => {
     // Open settings and switch to Russian
-    await page.getByRole('img', { name: 'settings' }).click()
-    await expect(page.locator('select').first()).toBeVisible()
-    await page.locator('select').first().selectOption('ru')
+    await app.settingsIcon.click()
+    await expect(app.languageSelect).toBeVisible()
+    await app.languageSelect.selectOption('ru')
 
-    // Verify Russian language in settings
-    await expect(page.getByText('Язык')).toBeVisible()
+    // Verify Russian label is shown in settings
+    await expect(app.languageTitle).toHaveText('Язык')
 
-    // Close settings and verify Russian on main view
-    await page.locator('svg[data-icon="xmark"]').click()
-    await expect(page.getByText('авто')).toBeVisible()
+    // Close settings and verify Russian text on main view
+    await app.closeButton.click()
+    await expect(app.autoLabel).toHaveText('авто')
 
     // Open settings again and switch back to English
-    await page.getByRole('img', { name: 'настройки' }).click()
-    await expect(page.locator('select').first()).toBeVisible()
-    await page.locator('select').first().selectOption('en')
-    await expect(page.getByText('Language')).toBeVisible()
+    await app.settingsIcon.click()
+    await app.languageSelect.selectOption('en')
+    await expect(app.languageTitle).toHaveText('Language')
 })
 
 test('steam id validation and player card', async () => {
-    test.setTimeout(60_000)
 
     // Still in settings from the previous test — enter an invalid steam ID
-    await page.getByRole('textbox').fill('12345')
-    await page.getByRole('button', { name: 'save' }).click()
-    await expect(page.getByText('ID is wrong')).toBeVisible()
+    await app.steamIdInput.fill('12345')
+    await app.steamIdSave.click()
+    await expect(app.steamIdError).toBeVisible()
 
     // Enter the correct steam ID — requires an API call to validate and store profileId
-    await page.getByRole('textbox').fill('76561198006675368')
-    await page.getByRole('button', { name: 'save' }).click()
-    await expect(page.getByText('ID set')).toBeVisible()
+    await app.steamIdInput.fill(STEAM_ID)
+    await app.steamIdSave.click()
+    await expect(app.steamIdSuccess).toBeVisible()
 
     // Close settings
-    await page.locator('svg[data-icon="xmark"]').click()
+    await app.closeButton.click()
 
-    // User icon should appear on navbar now that steamId is set
-    const userIcon = page.getByRole('img', { name: 'my playercard' })
-    await expect(userIcon).toBeVisible()
+    // User icon should appear on the navbar now that steamId is set
+    await expect(app.userIcon).toBeVisible()
 
     // Click it — triggers getExtraInfo API call, then opens player card
-    await userIcon.click()
-    await expect(page.getByText('76561198006675368')).toBeVisible()
+    await app.userIcon.click()
+    await expect(app.steamIdValue).toHaveText(STEAM_ID)
 
     // Close player card
-    await page.locator('svg[data-icon="xmark"]').click()
-    await expect(userIcon).toBeVisible()
+    await app.closeButton.click()
+    await expect(app.userIcon).toBeVisible()
 })
-
-// await page.pause()

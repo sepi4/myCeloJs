@@ -25,6 +25,7 @@ function CheckLogDiv() {
                 text={getText('auto', settings)}
                 checked={autoLogChecking}
                 handler={toggleAutoLogChecking}
+                testId="auto-label"
             />
 
             {

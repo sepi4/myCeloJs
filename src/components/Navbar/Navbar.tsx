@@ -64,7 +64,7 @@ export default function Navbar(props: Props) {
                 className={styles.navbar}
                 style={{ justifyContent: 'flex-end' }}
             >
-                <NavBarIcon icon={faTimes} fun={settingsViewToggeler} />
+                <NavBarIcon icon={faTimes} fun={settingsViewToggeler} testId="close-button" />
             </div>
         )
     }
@@ -108,6 +108,7 @@ export default function Navbar(props: Props) {
         userIcon = (
             <NavBarIcon
                 title={getText('my_playercard', settings)}
+                testId="user-icon"
                 style={{
                     height: '.7em',
                     marginRight: '0',
@@ -138,6 +139,7 @@ export default function Navbar(props: Props) {
                 marginLeft: '0',
             }}
             title={getText('settings', settings)}
+            testId="settings-icon"
             icon={faCogs}
             fun={settingsViewToggeler}
         />

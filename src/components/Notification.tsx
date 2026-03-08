@@ -3,11 +3,13 @@ import { CSSProperties } from 'react'
 interface NotificationProps {
     style?: CSSProperties
     text?: string
+    testId?: string
 }
 
-function Notification({ text, style }: NotificationProps) {
+function Notification({ text, style, testId }: NotificationProps) {
     return (
         <div
+            data-testid={testId}
             style={{
                 display: 'inline-block',
                 color: '#ddd',

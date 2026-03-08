@@ -4,6 +4,7 @@ interface Props {
     text?: string
     handler: () => void
     checked: boolean
+    testId?: string
 }
 
 export default function NavCheckbox(props: Props) {
@@ -19,7 +20,7 @@ export default function NavCheckbox(props: Props) {
                 type="checkbox"
             />
 
-            <label className={moduleStyle.label} htmlFor={id}>
+            <label data-testid={props.testId} className={moduleStyle.label} htmlFor={id}>
                 {props.text}
             </label>
         </span>

@@ -4,6 +4,7 @@ interface Props {
     title?: string
     required?: boolean
     children?: JSX.Element | JSX.Element[]
+    testId?: string
 }
 
 function SettingsDiv(props: Props) {
@@ -23,6 +24,7 @@ function SettingsDiv(props: Props) {
         <StyledDiv>
             {props.title && (
                 <div
+                    data-testid={props.testId}
                     style={{
                         fontWeight: 'bold',
                         fontSize: '100%',

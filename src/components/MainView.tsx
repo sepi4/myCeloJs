@@ -31,7 +31,7 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
     if (!settings || !settings.logLocation) {
         return (
             <div>
-                <h2>{getText('add_log_location', settings)}</h2>
+                <h2 data-testid="no-log-prompt">{getText('add_log_location', settings)}</h2>
             </div>
         )
     }
@@ -52,7 +52,7 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
 
     if (players && players.length > 0) {
         return (
-            <div>
+            <div data-testid="players-container">
                 <Team players={teams[0]} teamIndex={0} />
                 <Team players={teams[1]} teamIndex={1} />
             </div>

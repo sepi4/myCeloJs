@@ -8,22 +8,25 @@ interface Props {
     fun?: () => void
     title?: string
     style?: CSSProperties
+    testId?: string
 }
 
 export default function NavBarIcon(props: Props) {
     return (
-        <FontAwesomeIcon
-            title={props.title}
-            icon={props.icon}
-            size="2x"
-            color="gray"
-            onClick={props.fun}
-            style={{
-                marginRight: '0.5em',
-                marginLeft: '0.5em',
-                cursor: 'pointer',
-                ...props.style,
-            }}
-        />
+        <span data-testid={props.testId} style={{ display: 'inline-flex' }}>
+            <FontAwesomeIcon
+                title={props.title}
+                icon={props.icon}
+                size="2x"
+                color="gray"
+                onClick={props.fun}
+                style={{
+                    marginRight: '0.5em',
+                    marginLeft: '0.5em',
+                    cursor: 'pointer',
+                    ...props.style,
+                }}
+            />
+        </span>
     )
 }

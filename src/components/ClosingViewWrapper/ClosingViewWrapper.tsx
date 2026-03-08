@@ -21,7 +21,7 @@ export default function ViewWrapper(props: Props) {
 
     return (
         <div className={styles.container}>
-            <Icon fun={handleToMainView} icon={faTimes} />
+            <Icon fun={handleToMainView} icon={faTimes} testId="close-button" />
             {props.children}
         </div>
     )
