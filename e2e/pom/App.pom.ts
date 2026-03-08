@@ -4,7 +4,7 @@ import path from 'path'
 export const LOG_PATH = path.join(__dirname, '../../dataExamples/warnings.log')
 export const STEAM_ID = '76561198006675368'
 
-export class AppPage {
+export class App {
     readonly page: Page
 
     // Main view

@@ -3,11 +3,11 @@ import type { ElectronApplication, Page } from '@playwright/test'
 import path from 'path'
 import os from 'os'
 import fs from 'fs'
-import { AppPage, LOG_PATH, STEAM_ID } from './pages/AppPage'
+import { App, LOG_PATH, STEAM_ID } from './pom/App.pom'
 
 let electronApp: ElectronApplication
 let page: Page
-let app: AppPage
+let app: App
 let tempUserDataDir: string
 
 test.describe.configure({ mode: 'serial' })
@@ -23,7 +23,7 @@ test.beforeAll(async () => {
     })
     page = await electronApp.firstWindow()
     await page.waitForLoadState('domcontentloaded')
-    app = new AppPage(page)
+    app = new App(page)
 })
 
 test.afterAll(async () => {
