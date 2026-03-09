@@ -1,8 +1,9 @@
 import { type Page, type Locator, type ElectronApplication } from '@playwright/test'
 import path from 'path'
 
-export const LOG_PATH = path.join(__dirname, '../../dataExamples/warnings.log')
-export const LOG_PATH_2 = path.join(__dirname, '../../dataExamples/warnings2.log')
+export const COH2_LOG_PATH = path.join(__dirname, '../../dataExamples/coh2-warnings.log')
+export const COH2_LOG_PATH_2 = path.join(__dirname, '../../dataExamples/coh2-warnings2.log')
+export const COH3_LOG_PATH = path.join(__dirname, '../../dataExamples/coh3-warnings.log')
 export const STEAM_ID = '76561198006675368'
 
 export class App {

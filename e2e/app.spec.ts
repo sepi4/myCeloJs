@@ -3,7 +3,7 @@ import type { ElectronApplication, Page } from '@playwright/test'
 import path from 'path'
 import os from 'os'
 import fs from 'fs'
-import { App, LOG_PATH, LOG_PATH_2, STEAM_ID } from './pom/App.pom'
+import { App, COH2_LOG_PATH, COH2_LOG_PATH_2, COH3_LOG_PATH, STEAM_ID } from './pom/App.pom'
 
 let electronApp: ElectronApplication
 let page: Page
@@ -38,7 +38,7 @@ test('set warning.log location and verify players appear on main view', async ()
     // Open settings and mock the native file dialog
     await app.settingsIcon.click()
     await expect(app.languageSelect).toBeVisible()
-    await app.mockFileDialog(electronApp, LOG_PATH)
+    await app.mockFileDialog(electronApp, COH2_LOG_PATH)
 
     // Select the log file and return to main view
     await app.logLocationButtonCoh2.click()
@@ -74,7 +74,7 @@ test('check log button loads players from a different log file', async () => {
     // Switch log location to the second log file via settings
     await app.settingsIcon.click()
     await expect(app.languageSelect).toBeVisible()
-    await app.mockFileDialog(electronApp, LOG_PATH_2)
+    await app.mockFileDialog(electronApp, COH2_LOG_PATH_2)
     await app.logLocationButtonCoh2.click()
     await app.closeButton.click()
 
@@ -86,7 +86,7 @@ test('check log button loads players from a different log file', async () => {
 
     // Switch back to original log file and use "check log" button
     await app.settingsIcon.click()
-    await app.mockFileDialog(electronApp, LOG_PATH)
+    await app.mockFileDialog(electronApp, COH2_LOG_PATH)
     await app.logLocationButtonCoh2.click()
     await app.closeButton.click()
 

@@ -99,7 +99,7 @@ function PlayerMainRow(props: Props) {
     )
 
     const teamMarker = player.teamMarker ? player.teamMarker : ''
-    const rank = (player.ranking === -1 ? '-' : player.ranking) + teamMarker
+    const rank = (player.ranking == null || player.ranking === -1 ? '-' : player.ranking) + teamMarker
 
     const factionFlag = coh3
         ? getFactionFlagLocationCoh3(player.faction)
