@@ -29,6 +29,8 @@ function Settings(props: Props) {
 
     const [timedError, setTimedError] = useTimedBoolean(1000)
     const [timedSetID, setTimedSetID] = useTimedBoolean(1000)
+    const [timedCopyCoh2, setTimedCopyCoh2] = useTimedBoolean(1000)
+    const [timedCopyCoh3, setTimedCopyCoh3] = useTimedBoolean(1000)
     const steamIdInputRef = useRef<HTMLInputElement>(null)
 
     const settingsViewToggeler = () => {
@@ -184,13 +186,19 @@ function Settings(props: Props) {
                 required
             >
                 <div className={styles.textDiv}>
-                    {settings && settings.logLocationCoh2
-                        ? settings.logLocationCoh2
-                        : ''}
+                    {settings?.logLocationCoh2 ?? ''}
+                    {timedCopyCoh2 && <Notification testId="copy-log-coh2-notification" text={getText('copied', settings)} />}
                 </div>
-                <StyledButton data-testid="log-location-button-coh2" onClick={() => changeLogLocation('coh2')}>
-                    {getText('select', settings)}
-                </StyledButton>
+                <div className={styles.buttonRow}>
+                    <StyledButton data-testid="log-location-button-coh2" onClick={() => changeLogLocation('coh2')}>
+                        {getText('select', settings)}
+                    </StyledButton>
+                    {settings?.logLocationCoh2 && (
+                        <StyledButton data-testid="copy-log-coh2-button" onClick={() => { setTimedCopyCoh2(true); window.electronAPI.clipboard.writeText(settings.logLocationCoh2!) }}>
+                            {getText('copy', settings)}
+                        </StyledButton>
+                    )}
+                </div>
             </SettingsDiv>
 
             <SettingsDiv
@@ -198,13 +206,19 @@ function Settings(props: Props) {
                 required
             >
                 <div className={styles.textDiv}>
-                    {settings && settings.logLocationCoh3
-                        ? settings.logLocationCoh3
-                        : ''}
+                    {settings?.logLocationCoh3 ?? ''}
+                    {timedCopyCoh3 && <Notification testId="copy-log-coh3-notification" text={getText('copied', settings)} />}
                 </div>
-                <StyledButton data-testid="log-location-button-coh3" onClick={() => changeLogLocation('coh3')}>
-                    {getText('select', settings)}
-                </StyledButton>
+                <div className={styles.buttonRow}>
+                    <StyledButton data-testid="log-location-button-coh3" onClick={() => changeLogLocation('coh3')}>
+                        {getText('select', settings)}
+                    </StyledButton>
+                    {settings?.logLocationCoh3 && (
+                        <StyledButton data-testid="copy-log-coh3-button" onClick={() => { setTimedCopyCoh3(true); window.electronAPI.clipboard.writeText(settings.logLocationCoh3!) }}>
+                            {getText('copy', settings)}
+                        </StyledButton>
+                    )}
+                </div>
             </SettingsDiv>
 
             <SettingsDiv title={getText('my_steam_id', settings)}>
