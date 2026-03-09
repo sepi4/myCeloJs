@@ -2,6 +2,7 @@ interface ElectronAPI {
     appVersion: string
     settingsDir: string
     appLocation: string
+    pathSep: string
     dialog: {
         showOpenDialog(options: {
             properties?: string[]

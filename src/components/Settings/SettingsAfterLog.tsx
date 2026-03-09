@@ -18,7 +18,8 @@ export default function SettingsAfterLog() {
 
     const handleType = (e: ChangeEvent<HTMLInputElement>) => {
         const newFormat = e.target.value
-        const loc = appLocation + '\\localhostFiles\\rankings.' + newFormat
+        const sep = window.electronAPI.pathSep
+        const loc = appLocation + sep + 'localhostFiles' + sep + 'rankings.' + newFormat
         const newSettings = {
             ...settings,
             rankingsHtml: newFormat === 'html',

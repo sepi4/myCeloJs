@@ -67,6 +67,7 @@ ipcMain.on('get-app-info', (event) => {
         version: app.getVersion(),
         settingsDir: app.getPath('userData'),
         appLocation: process.cwd(),
+        pathSep: path.sep,
     }
 })
 

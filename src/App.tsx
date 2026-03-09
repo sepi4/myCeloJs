@@ -75,9 +75,10 @@ function App() {
                 // update rankingsFile location, for cases where
                 // app location is different
                 if (newSettings.rankingsFile) {
+                    const sep = window.electronAPI.pathSep
                     newSettings.rankingsFile =
                         appLocation +
-                        '\\localhostFiles\\rankings.' +
+                        sep + 'localhostFiles' + sep + 'rankings.' +
                         (newSettings.rankingsHtml ? 'html' : 'txt')
                 }
                 writeSettings(newSettings)

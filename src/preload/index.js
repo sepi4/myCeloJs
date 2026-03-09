@@ -6,6 +6,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
     appVersion: appInfo.version,
     settingsDir: appInfo.settingsDir,
     appLocation: appInfo.appLocation,
+    pathSep: appInfo.pathSep,
     dialog: {
         showOpenDialog: (options) =>
             ipcRenderer.invoke('dialog:show-open', options),
