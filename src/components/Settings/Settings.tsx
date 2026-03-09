@@ -26,7 +26,6 @@ function Settings(props: Props) {
     const { toggleSettingsView } = useSettingsViewStore()
 
     const lg = settings && settings.language ? settings.language : 'en'
-    const siteLink = settings ? settings.siteLink : 'coh2stats.com'
 
     const [timedError, setTimedError] = useTimedBoolean(1000)
     const [timedSetID, setTimedSetID] = useTimedBoolean(1000)
@@ -138,14 +137,6 @@ function Settings(props: Props) {
         writeSettings(newSettings)
     }
 
-    const handleSiteLink = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const newSettings = {
-            ...settings,
-            siteLink: e.target.value,
-        } as SettingsType
-        writeSettings(newSettings)
-    }
-
     const star = <span className={styles.star}>*</span>
 
     const req = (
@@ -214,20 +205,6 @@ function Settings(props: Props) {
                 <StyledButton data-testid="log-location-button-coh3" onClick={() => changeLogLocation('coh3')}>
                     {getText('select', settings)}
                 </StyledButton>
-            </SettingsDiv>
-
-            <SettingsDiv title={getText('web_link', settings)}>
-                <select
-                    onChange={handleSiteLink}
-                    value={siteLink}
-                    style={{
-                        padding: '.5em',
-                        backgroundColor: '#999',
-                    }}
-                >
-                    <option value="coh2stats.com">coh2stats.com</option>
-                    <option value="coh2.org">coh2.org</option>
-                </select>
             </SettingsDiv>
 
             <SettingsDiv title={getText('my_steam_id', settings)}>

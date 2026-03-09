@@ -60,11 +60,6 @@ const text: Translations = {
         ru: 'Надо сначала указать расположение лог-файла',
     },
 
-    web_link: {
-        en: 'Site for player links',
-        ru: 'Сайт для ссылки игрока',
-    },
-
     my_steam_id: {
         en: 'My steam id',
         ru: 'Мой steam id',

@@ -73,7 +73,6 @@ export interface SettingsType {
     rankingsHtml: boolean
     rankingsFile: string
     rankingsHorizontal: boolean
-    siteLink: string
     steamId: string
     profileId: string
     ignoreUntil?: string
