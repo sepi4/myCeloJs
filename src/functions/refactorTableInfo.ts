@@ -70,7 +70,7 @@ export function refactronTableInfoCoh3(ranksArr: Rank[]): Result {
     }
 
     for (const r of ranksArr) {
-        const groups = r.name.match(/^(\d)v\d(.+)/)
+        const groups = r.name.match(/^(\d)v\d(DAK|American|British|German)/)
 
         if (groups) {
             if (groups[2] === 'DAK') {
