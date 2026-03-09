@@ -120,7 +120,6 @@ function App() {
                 }
 
                 const teams = guessRankings(
-                    coh3,
                     players,
                     x.personalStats,
                     x.cohTitles

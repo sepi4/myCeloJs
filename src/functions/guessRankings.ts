@@ -16,14 +16,14 @@ const AXIS_FACTIONS = ['west_german', 'german']
 
 function findLeaderboardId(
     name: string | undefined,
-    titles: AvailableLeaderboard
+    leaderboards: AvailableLeaderboard
 ): number | undefined {
-    return titles.leaderboards.find((lb) => lb.name === name)?.id
+    return leaderboards.leaderboards.find((lb) => lb.name === name)?.id
 }
 
-function getTeamStatGroups(team: Player[], data: PersonalStats): StatGroup[] {
+function getTeamStatGroups(team: Player[], stats: PersonalStats): StatGroup[] {
     for (let size = team.length; size > 1; size--) {
-        const groups = data.statGroups
+        const groups = stats.statGroups
             .filter((sg) => sg.type === size)
             .filter((sg) =>
                 sg.members.every((m) =>
@@ -52,39 +52,39 @@ function getTeamLeaderboardName(
 
 function assignTeamRanks(
     statGroups: StatGroup[],
-    data: PersonalStats,
+    stats: PersonalStats,
     leaderboardId: number | undefined
 ): void {
     const seen = new Set<number>()
     let teamIndex = 1
 
-    for (const ls of data.leaderboardStats) {
+    for (const ls of stats.leaderboardStats) {
         if (ls.leaderboard_id !== leaderboardId) continue
 
-        const sg = statGroups.find((sg) => sg.id === ls.statgroup_id)
-        if (!sg || seen.has(ls.statgroup_id)) continue
+        const matchedSg = statGroups.find((sg) => sg.id === ls.statgroup_id)
+        if (!matchedSg || seen.has(ls.statgroup_id)) continue
 
         seen.add(ls.statgroup_id)
-        sg.rank = ls.rank
-        sg.teamMarker = teamIndex === 1 ? ' ¹' : ' ²'
+        matchedSg.rank = ls.rank
+        matchedSg.teamMarker = teamIndex === 1 ? ' ¹' : ' ²'
         teamIndex++
     }
 }
 
-function getSolo1v1Rank(
+function getPlayerRank(
     player: Player,
     team: Player[],
-    data: PersonalStats,
-    titles: AvailableLeaderboard
+    stats: PersonalStats,
+    leaderboards: AvailableLeaderboard
 ): number | undefined {
     const matchTypeName = `${team.length}v${team.length}${getFactionName(player.faction)}`
-    const leaderboardId = findLeaderboardId(matchTypeName, titles)
+    const leaderboardId = findLeaderboardId(matchTypeName, leaderboards)
 
-    const playerSg = data.statGroups.find(
+    const playerSg = stats.statGroups.find(
         (sg) => sg.type === 1 && sg.members[0].profile_id === player.profileId
     )
 
-    const rank = data.leaderboardStats.find(
+    const rank = stats.leaderboardStats.find(
         (ls) =>
             ls.statgroup_id === playerSg?.id &&
             ls.leaderboard_id === leaderboardId
@@ -93,8 +93,8 @@ function getSolo1v1Rank(
     if (rank !== undefined) return rank
 
     // Fallback to unranked leaderboard (COH3 has both ranked and unranked variants)
-    const unrankedId = findLeaderboardId(matchTypeName + 'Unranked', titles)
-    return data.leaderboardStats.find(
+    const unrankedId = findLeaderboardId(matchTypeName + 'Unranked', leaderboards)
+    return stats.leaderboardStats.find(
         (ls) =>
             ls.statgroup_id === playerSg?.id &&
             ls.leaderboard_id === unrankedId
@@ -103,48 +103,47 @@ function getSolo1v1Rank(
 
 function findPlayerCountry(
     player: Player,
-    data: PersonalStats
+    stats: PersonalStats
 ): string | undefined {
-    for (const sg of data.statGroups) {
+    for (const sg of stats.statGroups) {
         const member = sg.members.find((m) => m.profile_id === player.profileId)
         if (member) return member.country
     }
 }
 
 export function guessRankings(
-    coh3: boolean,
     playersArr: Player[],
-    data: PersonalStats,
-    titles: AvailableLeaderboard
+    stats: PersonalStats,
+    leaderboards: AvailableLeaderboard
 ) {
     const players: Player[] = formatToNums(copyObj(playersArr))
     const teams: [Player[], Player[]] = separateTeams(players)
 
     for (const team of teams) {
-        const statGroups = getTeamStatGroups(team, data)
+        const statGroups = getTeamStatGroups(team, stats)
 
         if (statGroups.length > 0) {
             const leaderboardName = getTeamLeaderboardName(
                 statGroups[0].members.length,
                 team
             )
-            const leaderboardId = findLeaderboardId(leaderboardName, titles)
-            assignTeamRanks(statGroups, data, leaderboardId)
+            const leaderboardId = findLeaderboardId(leaderboardName, leaderboards)
+            assignTeamRanks(statGroups, stats, leaderboardId)
 
             for (const player of team) {
-                const sg = statGroups.find((sg) =>
+                const playerSg = statGroups.find((sg) =>
                     sg.members.some((m) => m.profile_id === player.profileId)
                 )
-                if (sg) {
-                    player.ranking = sg.rank
-                    player.teamMarker = sg.teamMarker
+                if (playerSg) {
+                    player.ranking = playerSg.rank
+                    player.teamMarker = playerSg.teamMarker
                 } else {
-                    player.ranking = getSolo1v1Rank(player, team, data, titles)
+                    player.ranking = getPlayerRank(player, team, stats, leaderboards)
                 }
             }
         } else {
             for (const player of team) {
-                player.ranking = getSolo1v1Rank(player, team, data, titles)
+                player.ranking = getPlayerRank(player, team, stats, leaderboards)
             }
         }
     }
@@ -152,7 +151,7 @@ export function guessRankings(
     for (const team of teams) {
         for (const player of team) {
             if (player.profileId) {
-                player.country = findPlayerCountry(player, data)
+                player.country = findPlayerCountry(player, stats)
             }
         }
     }
