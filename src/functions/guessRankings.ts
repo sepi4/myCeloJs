@@ -84,10 +84,20 @@ function getSolo1v1Rank(
         (sg) => sg.type === 1 && sg.members[0].profile_id === player.profileId
     )
 
-    return data.leaderboardStats.find(
+    const rank = data.leaderboardStats.find(
         (ls) =>
             ls.statgroup_id === playerSg?.id &&
             ls.leaderboard_id === leaderboardId
+    )?.rank
+
+    if (rank !== undefined) return rank
+
+    // Fallback to unranked leaderboard (COH3 has both ranked and unranked variants)
+    const unrankedId = findLeaderboardId(matchTypeName + 'Unranked', titles)
+    return data.leaderboardStats.find(
+        (ls) =>
+            ls.statgroup_id === playerSg?.id &&
+            ls.leaderboard_id === unrankedId
     )?.rank
 }
 
