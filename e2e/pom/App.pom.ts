@@ -23,6 +23,8 @@ export class App {
     readonly alertLabel: Locator
     readonly checkLogButton: Locator
     readonly intervalInput: Locator
+    readonly radioCoh2: Locator
+    readonly radioCoh3: Locator
 
     // Search
     readonly searchInput: Locator
@@ -86,6 +88,8 @@ export class App {
         this.alertLabel = page.getByTestId('alert-label')
         this.checkLogButton = page.getByTestId('check-log-button')
         this.intervalInput = page.getByTestId('interval-input')
+        this.radioCoh2 = page.getByTestId('radio-coh2')
+        this.radioCoh3 = page.getByTestId('radio-coh3')
 
         this.searchInput = page.getByTestId('search-input')
         this.searchResults = page.getByTestId('search-results')

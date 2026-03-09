@@ -50,6 +50,34 @@ test('set warning.log location and verify players appear on main view', async ()
     await expect(app.page.getByText('Polmuadiv')).toBeVisible()
 })
 
+test('set COH3 log and toggle between games', async () => {
+    // Only COH2 log is set — COH3 radio should be disabled
+    await expect(app.radioCoh2).toBeEnabled()
+    await expect(app.radioCoh3).toBeDisabled()
+
+    // Set COH3 log via settings
+    await app.settingsIcon.click()
+    await app.mockFileDialog(electronApp, COH3_LOG_PATH)
+    await app.logLocationButtonCoh3.click()
+    await app.closeButton.click()
+
+    // Both radios should now be enabled
+    await expect(app.radioCoh2).toBeEnabled()
+    await expect(app.radioCoh3).toBeEnabled()
+
+    // Switch to COH3 — COH3 players should appear
+    await app.radioCoh3.click()
+    await expect(app.playersContainer).toBeVisible()
+    await expect(app.teamContainers).toHaveCount(2)
+    await expect(app.page.getByText('Alhas')).toBeVisible()
+    await expect(app.page.getByText('Polmuadiv')).not.toBeVisible()
+
+    // Switch back to COH2 — COH2 players should reappear
+    await app.radioCoh2.click()
+    await expect(app.page.getByText('Polmuadiv')).toBeVisible()
+    await expect(app.page.getByText('Alhas')).not.toBeVisible()
+})
+
 test('auto checkbox toggles interval input and alert visibility', async () => {
     // Auto is enabled by default — interval input and alert should be visible
     await expect(app.autoLabel).toBeVisible()

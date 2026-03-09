@@ -171,6 +171,7 @@ export default function Navbar(props: Props) {
                     <NavbarRow>
                         <div className={styles.radio}>
                             <input
+                                data-testid="radio-coh2"
                                 id="coh2"
                                 type="radio"
                                 onChange={() => toggleNavButton('coh3')}
@@ -181,6 +182,7 @@ export default function Navbar(props: Props) {
                         </div>
                         <div className={styles.radio}>
                             <input
+                                data-testid="radio-coh3"
                                 id="coh3"
                                 type="radio"
                                 onChange={() => toggleNavButton('coh3')}
