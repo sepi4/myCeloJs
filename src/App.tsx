@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react'
+import { useEffect } from 'react'
 
 import useSound from 'use-sound'
 import audioLocation from './bell.mp3'
@@ -37,7 +37,7 @@ function App() {
     const { alert } = useAlertStore()
     const { appLocation } = useAppLocationStore()
     const { autoLogChecking } = useAutoLogCheckingStore()
-    const { extraInfo, setExtraInfo, clearExtraInfo } = useExtraInfoStore()
+    const { extraInfo, setExtraInfo } = useExtraInfoStore()
     const { logCheckInterval } = useLogCheckIntervalStore()
     const {
         navButtons: { coh3 },
@@ -60,16 +60,6 @@ function App() {
             toggleNavButton('coh3')
         }
     }, [settings, coh3, toggleNavButton])
-
-    const writeNewRankingsFile = useCallback(
-        (data: Player[]) => {
-            clearExtraInfo()
-            if (settings) {
-                writeRankings(coh3, data, settings.rankingsHorizontal)
-            }
-        },
-        [clearExtraInfo, settings, coh3]
-    )
 
     useEffect(() => {
         // initial readSettings location of log file
