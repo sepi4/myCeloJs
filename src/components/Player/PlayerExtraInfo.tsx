@@ -1,14 +1,11 @@
-import TableDiv from '../Table/TableDiv'
-import ListDiv from '../ListDiv/ListDiv'
-import History from './History'
-
 import getText from '../../functions/getText'
-
-import styles from './PlayerExtraInfo.module.css'
-
-import { ExtraInfo, Player } from '../../types'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useSettingsStore } from '../../stores/settingsStore'
+import { ExtraInfo, Player } from '../../types'
+import ListDiv from '../ListDiv/ListDiv'
+import TableDiv from '../Table/TableDiv'
+import History from './History'
+import styles from './PlayerExtraInfo.module.css'
 
 interface Props {
     player: Player

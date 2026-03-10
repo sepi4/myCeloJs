@@ -1,19 +1,18 @@
-import { useEffect, useState, useRef, KeyboardEvent, ChangeEvent } from 'react'
+import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react'
+
 import { getExtraInfo } from '../../functions/getExtraInfo'
 import getLastPlayedGame from '../../functions/getLastPlayedGame'
 import getText from '../../functions/getText'
-import { getTotalGames } from '../../functions/simpleFunctions'
-
 import searchPlayers from '../../functions/searchPlayers'
-import FoundPlayer from './FoundPlayer'
-
-import styles from './Search.module.css'
-import { Member } from '../../types'
-import { useSettingsStore } from '../../stores/settingsStore'
+import { getTotalGames } from '../../functions/simpleFunctions'
 import { useFoundPlayersStore } from '../../stores/foundPlayersStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
+import { useSettingsStore } from '../../stores/settingsStore'
 import { useViewStore } from '../../stores/viewStore'
+import { Member } from '../../types'
+import FoundPlayer from './FoundPlayer'
+import styles from './Search.module.css'
 
 export default function Search() {
     const { settings } = useSettingsStore()

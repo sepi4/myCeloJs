@@ -1,4 +1,5 @@
 import { JSX } from 'react'
+
 import { StyledContentDiv, StyledDiv } from '../styled/styledSettings'
 
 interface Props {

@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+
 import { ExtraInfo } from '../types'
 
 export interface PlayerCardData {

@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react'
 
-import writeSettings from '../functions/writeSettings'
-
-import styles from './UpdateBar.module.css'
-
+import { LATEST_RELEASES_URL } from '../constants'
 import funGetText from '../functions/getText'
+import writeSettings from '../functions/writeSettings'
 import { useSettingsStore } from '../stores/settingsStore'
 import { useUpdateCheckDoneStore } from '../stores/updateCheckDoneStore'
-import { LATEST_RELEASES_URL } from '../constants'
 import { SettingsType } from '../types'
+import styles from './UpdateBar.module.css'
 
 interface GitHubResult {
     tag_name: string

@@ -1,10 +1,8 @@
 import { refactronTableInfo, refactronTableInfoCoh3 } from '../../functions/refactorTableInfo'
-import TableRanksDiv from './TableRanksDiv'
-
-import styles from './TableDiv.module.css'
-
-import { FactionName, Rank } from '../../types'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
+import { FactionName, Rank } from '../../types'
+import styles from './TableDiv.module.css'
+import TableRanksDiv from './TableRanksDiv'
 
 function TableDiv({ ranksArr }: { ranksArr: Rank[] }) {
     const {

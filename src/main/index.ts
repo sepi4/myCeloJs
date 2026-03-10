@@ -1,7 +1,7 @@
-import path from 'path'
-import { app, BrowserWindow, ipcMain, dialog, shell } from 'electron'
+import { app, BrowserWindow, dialog, ipcMain, shell } from 'electron'
 import fs from 'fs'
 import http from 'http'
+import path from 'path'
 import portfinder from 'portfinder'
 
 let mainWindow: BrowserWindow | null = null

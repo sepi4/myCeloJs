@@ -1,4 +1,4 @@
-import { NormalizedExtraInfo, AvailableLeaderboard, PersonalStats, StatGroup } from '../types'
+import { AvailableLeaderboard, NormalizedExtraInfo, PersonalStats, StatGroup } from '../types'
 
 export function refactorData(
     leaderboard: PersonalStats,

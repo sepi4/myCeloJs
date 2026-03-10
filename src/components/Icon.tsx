@@ -1,6 +1,6 @@
-import { JSX } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconProp, SizeProp } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { JSX } from 'react'
 
 type IconProps = {
     icon: IconProp

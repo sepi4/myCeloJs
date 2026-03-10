@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+
 import getLocalStorage from '../functions/getLocalStorage'
 
 interface AlertStore {

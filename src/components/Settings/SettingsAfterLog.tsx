@@ -1,16 +1,15 @@
 import { ChangeEvent } from 'react'
 
-import writeSettings from '../../functions/writeSettings'
 import getText from '../../functions/getText'
-
-import SettingsDiv from './SettingsDiv'
-import RadioButton from './RadioButton'
-import RadioButtonsDiv from './RadioButtonsDiv'
-import CopyDiv from './CopyDiv'
-import SettingsLocation from './SettingsLocation'
+import writeSettings from '../../functions/writeSettings'
 import { useAppLocationStore } from '../../stores/appLocationStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { SettingsType } from '../../types'
+import CopyDiv from './CopyDiv'
+import RadioButton from './RadioButton'
+import RadioButtonsDiv from './RadioButtonsDiv'
+import SettingsDiv from './SettingsDiv'
+import SettingsLocation from './SettingsLocation'
 
 export default function SettingsAfterLog() {
     const { settings } = useSettingsStore()

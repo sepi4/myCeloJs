@@ -1,22 +1,18 @@
 import React, { useRef } from 'react'
 
-import SettingsDiv from './SettingsDiv'
-import SettingsAfterLog from './SettingsAfterLog'
-import Notification from '../Notification'
-
-import useTimedBoolean from '../../hooks/useTimedBoolean'
-
-import writeSettings from '../../functions/writeSettings'
 import { fetchCoh2ProfileId } from '../../functions/fetchCoh2ProfileId'
-
+import getText from '../../functions/getText'
+import writeSettings from '../../functions/writeSettings'
+import useEsc from '../../hooks/useEsc'
+import useTimedBoolean from '../../hooks/useTimedBoolean'
+import { useSettingsStore } from '../../stores/settingsStore'
+import { useSettingsViewStore } from '../../stores/settingsViewStore'
+import { SettingsType } from '../../types'
+import Notification from '../Notification'
 import { StyledButton } from '../styled/styledSettings'
 import styles from './Settings.module.css'
-
-import getText from '../../functions/getText'
-import useEsc from '../../hooks/useEsc'
-import { useSettingsStore } from '../../stores/settingsStore'
-import { SettingsType } from '../../types'
-import { useSettingsViewStore } from '../../stores/settingsViewStore'
+import SettingsAfterLog from './SettingsAfterLog'
+import SettingsDiv from './SettingsDiv'
 
 interface Props {
     handleSetSettingsView: () => void

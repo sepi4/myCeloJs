@@ -1,15 +1,13 @@
-import IntervalInput from './IntervalInput'
-
-import setPlayersWithoutChecking from '../../functions/setPlayersWithoutChecking'
-import { readLog } from '../../functions/readLog/readLog'
 import getText from '../../functions/getText'
-
-import NavCheckbox from './NavCheckBox'
-import styles from './CheckLogDiv.module.css'
+import { readLog } from '../../functions/readLog/readLog'
+import setPlayersWithoutChecking from '../../functions/setPlayersWithoutChecking'
 import { useAlertStore } from '../../stores/alertStore'
 import { useAutoLogCheckingStore } from '../../stores/autoLogCheckingStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useSettingsStore } from '../../stores/settingsStore'
+import styles from './CheckLogDiv.module.css'
+import IntervalInput from './IntervalInput'
+import NavCheckbox from './NavCheckBox'
 
 function CheckLogDiv() {
     const { settings } = useSettingsStore()

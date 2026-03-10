@@ -1,5 +1,5 @@
-import SettingsDiv from './SettingsDiv'
 import CopyDiv from './CopyDiv'
+import SettingsDiv from './SettingsDiv'
 
 interface Props {
     fileTypeSet: boolean

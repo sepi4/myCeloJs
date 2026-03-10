@@ -1,11 +1,6 @@
 import Modal from 'react-modal'
 
-import styles from './ModalDiv.module.css'
-
 import getText from '../../functions/getText'
-
-import ModalTableBody from './ModalTableBody'
-import ModalTableHeaders from './ModalTableHeaders'
 import { getDateTime, getTime } from '../../functions/time'
 import {
     MatchHistoryReportResult,
@@ -13,6 +8,9 @@ import {
     NormalizedProfiles,
     SettingsType,
 } from '../../types'
+import styles from './ModalDiv.module.css'
+import ModalTableBody from './ModalTableBody'
+import ModalTableHeaders from './ModalTableHeaders'
 
 interface Props {
     game: MatchObject

@@ -1,13 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
+
 import getText from '../../functions/getText'
-
-import GameHistoryDiv from './GameHistoryDiv'
-import Loading from './Loading'
-
-import styles from './History.module.css'
-import { parseHistoryData, getHistoryUrls } from '../../functions/historyFuns'
-import { Player, MatchObject, NormalizedProfiles } from '../../types'
+import { getHistoryUrls, parseHistoryData } from '../../functions/historyFuns'
 import { useSettingsStore } from '../../stores/settingsStore'
+import { MatchObject, NormalizedProfiles, Player } from '../../types'
+import GameHistoryDiv from './GameHistoryDiv'
+import styles from './History.module.css'
+import Loading from './Loading'
 
 interface Props {
     player: Player

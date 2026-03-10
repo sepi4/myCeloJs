@@ -1,4 +1,4 @@
-import { STEAM, COH2STATS_COM, COH3STATS_COM, COH2_ORG } from '../constants'
+import { COH2_ORG, COH2STATS_COM, COH3STATS_COM, STEAM } from '../constants'
 
 function getSiteLink(site: string) {
     switch (site) {

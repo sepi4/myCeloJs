@@ -1,17 +1,14 @@
+import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { JSX } from 'react'
 import { useEffect, useState } from 'react'
-import getTextFun from '../../functions/getText'
 
-import Members from './Members'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons'
-
-import star from '../../assets/img/star.png'
 import cross from '../../assets/img/cross.png'
-
-import { Rank as RankType } from '../../types'
+import star from '../../assets/img/star.png'
+import getTextFun from '../../functions/getText'
 import { useSettingsStore } from '../../stores/settingsStore'
+import { Rank as RankType } from '../../types'
+import Members from './Members'
 
 interface Props {
     rank: RankType

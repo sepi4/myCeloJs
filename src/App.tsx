@@ -1,23 +1,21 @@
 import { useEffect } from 'react'
-
 import useSound from 'use-sound'
-import audioLocation from './bell.mp3'
 
+import audioLocation from './bell.mp3'
+import MainView from './components/MainView'
 // components
 import Navbar from './components/Navbar/Navbar'
 import UpdateBar from './components/UpdateBar'
-import MainView from './components/MainView'
-
+import checkLogData from './functions/checkLogData'
+import { fetchCoh2ProfileId } from './functions/fetchCoh2ProfileId'
+import { getExtraInfo } from './functions/getExtraInfo'
+import { guessRankings } from './functions/guessRankings'
+import { getLocalUserInfoCoh3 } from './functions/readLog/getLocalUserInfoCoh3'
+import { readLog } from './functions/readLog/readLog'
+import { readSettings } from './functions/readSettings'
 // functions
 import { writeRankings } from './functions/writeRankings'
-import { readSettings } from './functions/readSettings'
-import { getExtraInfo } from './functions/getExtraInfo'
-import { readLog } from './functions/readLog/readLog'
-import { getLocalUserInfoCoh3 } from './functions/readLog/getLocalUserInfoCoh3'
 import writeSettings from './functions/writeSettings'
-import { fetchCoh2ProfileId } from './functions/fetchCoh2ProfileId'
-import checkLogData from './functions/checkLogData'
-
 import { useAlertStore } from './stores/alertStore'
 import { useAppLocationStore } from './stores/appLocationStore'
 import { useAutoLogCheckingStore } from './stores/autoLogCheckingStore'
@@ -27,7 +25,6 @@ import { useNavButtonsStore } from './stores/navButtonsStore'
 import { usePlayersStore } from './stores/playersStore'
 import { useSettingsStore } from './stores/settingsStore'
 import { Player, SettingsType } from './types'
-import { guessRankings } from './functions/guessRankings'
 const appVersion = window.electronAPI.appVersion
 const settingsDir = window.electronAPI.settingsDir
 

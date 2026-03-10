@@ -1,6 +1,6 @@
-import TableRankRow from './TableRankRow'
-import FactionIcon from './FactionIcon'
 import { FactionName, Rank } from '../../types'
+import FactionIcon from './FactionIcon'
+import TableRankRow from './TableRankRow'
 
 interface Props {
     solo: (Rank | undefined)[]

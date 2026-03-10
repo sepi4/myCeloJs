@@ -1,16 +1,13 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import PlayerExtraInfo from '../Player/PlayerExtraInfo'
-import styles from './PlayerCard.module.css'
-
 import logo_coh2 from '../../assets/img/logo_coh2.png'
 import logo_cohstats from '../../assets/img/logo_cohstats.png'
 import logo_steam from '../../assets/img/logo_steam.png'
-
 import getSiteLink from '../../functions/getSiteLink'
-
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
+import PlayerExtraInfo from '../Player/PlayerExtraInfo'
+import styles from './PlayerCard.module.css'
 
 export default function PlayerCard() {
     const { countryFlags } = useCountryFlagsStore()

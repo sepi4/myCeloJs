@@ -5,6 +5,7 @@ const reactPlugin = require('eslint-plugin-react')
 const reactHooksPlugin = require('eslint-plugin-react-hooks')
 const jestPlugin = require('eslint-plugin-jest')
 const prettierConfig = require('eslint-config-prettier')
+const simpleImportSort = require('eslint-plugin-simple-import-sort')
 
 module.exports = tseslint.config(
     js.configs.recommended,
@@ -14,10 +15,15 @@ module.exports = tseslint.config(
     reactHooksPlugin.configs.flat['recommended-latest'],
     prettierConfig,
     {
+        plugins: {
+            'simple-import-sort': simpleImportSort,
+        },
         settings: {
             react: { version: 'detect' },
         },
         rules: {
+            'simple-import-sort/imports': 'warn',
+            'simple-import-sort/exports': 'warn',
             'react-hooks/set-state-in-effect': 'off',
         },
     },

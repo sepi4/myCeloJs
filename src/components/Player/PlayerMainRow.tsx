@@ -1,25 +1,20 @@
-import styles from './PlayerMainRow.module.css'
+import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import countriesJson from '../../../countries.json'
 import {
     getFactionFlagLocation,
     getFactionFlagLocationCoh3,
 } from '../../functions/getFactionFlagLocation'
 import { commonName } from '../../functions/simpleFunctions'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCaretRight, faCaretDown } from '@fortawesome/free-solid-svg-icons'
-
-import countriesJson from '../../../countries.json'
-
-import MainRowSpan from './MainRowSpan'
-
 import { getTotalGames } from '../../functions/simpleFunctions'
-
-import { ExtraInfo, Player } from '../../types'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { useViewStore } from '../../stores/viewStore'
+import { ExtraInfo, Player } from '../../types'
+import MainRowSpan from './MainRowSpan'
+import styles from './PlayerMainRow.module.css'
 
 const countries = countriesJson as {
     [key: string]: {

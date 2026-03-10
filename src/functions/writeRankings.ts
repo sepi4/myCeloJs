@@ -1,8 +1,8 @@
-import { commonName, commonNameCoh3 } from './simpleFunctions'
-import countriesJson from '../../countries.json'
 import stringWidth from 'string-width'
 
+import countriesJson from '../../countries.json'
 import { Player, RankingsJson } from '../types'
+import { commonName, commonNameCoh3 } from './simpleFunctions'
 
 interface Countries {
     [key: string]: {

@@ -1,8 +1,7 @@
+import { useOpenInfosStore } from '../../stores/openInfosStore'
+import { ExtraInfo, Player as PlayerType } from '../../types'
 import PlayerExtraInfo from './PlayerExtraInfo'
 import PlayerMainRow from './PlayerMainRow'
-
-import { ExtraInfo, Player as PlayerType } from '../../types'
-import { useOpenInfosStore } from '../../stores/openInfosStore'
 
 interface Props {
     player: PlayerType

@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+
 import { CountryFlagsLocation } from '../types'
 
 const flagModules = import.meta.glob('../assets/img/countryFlags/*.png', {

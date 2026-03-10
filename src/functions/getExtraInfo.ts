@@ -1,7 +1,6 @@
-import { refactorData } from './refactorData'
-
 import { RELIC_SERVER_BASE_COH2, RELIC_SERVER_BASE_COH3 } from '../constants'
 import { AvailableLeaderboard, NormalizedExtraInfo, PersonalStats } from '../types'
+import { refactorData } from './refactorData'
 
 export function getExtraInfo(
     coh3: boolean,

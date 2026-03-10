@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+
 import { Member } from '../types'
 
 interface FoundPlayersStore {

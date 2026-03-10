@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 
-import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation'
-import { getFactionById } from '../../functions/simpleFunctions'
-import getText from '../../functions/getText'
-import { MatchHistoryReportResult, NormalizedProfiles, SettingsType } from '../../types'
 import { getExtraInfo } from '../../functions/getExtraInfo'
+import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation'
+import getText from '../../functions/getText'
+import { getFactionById } from '../../functions/simpleFunctions'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { useViewStore } from '../../stores/viewStore'
+import { MatchHistoryReportResult, NormalizedProfiles, SettingsType } from '../../types'
 
 const StyledTh = styled.th<{ len?: number }>`
     word-wrap: break-word;

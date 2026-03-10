@@ -1,9 +1,9 @@
-import styles from './FoundPlayer.module.css'
 import getText from '../../functions/getText'
 import { getTimeAgo } from '../../functions/time'
-import { Member } from '../../types'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { useSettingsStore } from '../../stores/settingsStore'
+import { Member } from '../../types'
+import styles from './FoundPlayer.module.css'
 
 interface Props {
     player: Member

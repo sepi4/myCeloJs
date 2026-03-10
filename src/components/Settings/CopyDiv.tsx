@@ -1,12 +1,9 @@
+import getText from '../../functions/getText'
+import useTimedBoolean from '../../hooks/useTimedBoolean'
+import { useSettingsStore } from '../../stores/settingsStore'
 import Notification from '../Notification'
-
 import { StyledButton } from '../styled/styledSettings'
 import styles from './Settings.module.css'
-
-import useTimedBoolean from '../../hooks/useTimedBoolean'
-
-import getText from '../../functions/getText'
-import { useSettingsStore } from '../../stores/settingsStore'
 
 interface Props {
     text?: string

@@ -1,17 +1,17 @@
 import { JSX } from 'react'
-import Team from './Teams/Team'
-import Settings from './Settings/Settings'
-import PlayerCard from './PlayerCard/PlayerCard'
 
 import getText from '../functions/getText'
-import Search from './Search/Search'
-import ClosingViewWrapper from './ClosingViewWrapper/ClosingViewWrapper'
 import { useNavButtonsStore } from '../stores/navButtonsStore'
 import { usePlayersStore } from '../stores/playersStore'
 import { useSettingsStore } from '../stores/settingsStore'
 import { useSettingsViewStore } from '../stores/settingsViewStore'
 import { useViewStore } from '../stores/viewStore'
 import { Player } from '../types'
+import ClosingViewWrapper from './ClosingViewWrapper/ClosingViewWrapper'
+import PlayerCard from './PlayerCard/PlayerCard'
+import Search from './Search/Search'
+import Settings from './Settings/Settings'
+import Team from './Teams/Team'
 
 function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
     const { settingsView } = useSettingsViewStore()

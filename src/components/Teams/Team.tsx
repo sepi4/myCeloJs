@@ -1,6 +1,5 @@
-import { Player as PlayerType } from '../../types'
 import { useExtraInfoStore } from '../../stores/extraInfoStore'
-
+import { Player as PlayerType } from '../../types'
 import Player from '../Player/Player'
 
 interface Props {

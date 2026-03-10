@@ -1,20 +1,18 @@
-import styles from './Navbar.module.css'
 import { faCogs, faSearch, faTimes, faUserAlt } from '@fortawesome/free-solid-svg-icons'
 
-import getText from '../../functions/getText'
-
-import NavCheckbox from './NavCheckBox'
-import NavBarIcon from './NavbarIcon'
-import CheckLogDiv from './CheckLogDiv'
-import NavbarRow from './NavbarRow'
 import { getExtraInfo } from '../../functions/getExtraInfo'
+import getText from '../../functions/getText'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
-import { useSettingsStore } from '../../stores/settingsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
+import { useSettingsStore } from '../../stores/settingsStore'
 import { useSettingsViewStore } from '../../stores/settingsViewStore'
 import { useViewStore } from '../../stores/viewStore'
-
 import { Rank } from '../../types'
+import CheckLogDiv from './CheckLogDiv'
+import styles from './Navbar.module.css'
+import NavBarIcon from './NavbarIcon'
+import NavbarRow from './NavbarRow'
+import NavCheckbox from './NavCheckBox'
 
 interface Props {
     handleSetSettingsView: () => void

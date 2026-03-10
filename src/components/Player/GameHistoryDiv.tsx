@@ -1,14 +1,12 @@
 import { useState } from 'react'
 
-import ModalDiv from './ModalDiv'
-
 import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation'
 import { getFactionById } from '../../functions/simpleFunctions'
 import { getTimeAgo } from '../../functions/time'
-
-import styles from './GameHistoryDiv.module.css'
-import { MatchObject, NormalizedProfiles } from '../../types'
 import { useSettingsStore } from '../../stores/settingsStore'
+import { MatchObject, NormalizedProfiles } from '../../types'
+import styles from './GameHistoryDiv.module.css'
+import ModalDiv from './ModalDiv'
 
 interface Props {
     game: MatchObject

@@ -1,19 +1,16 @@
+import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
 
-import { ranksArrSort, ranksArrFilter } from '../../functions/ranksArrFuns'
-
-import styles from './ListDiv.module.css'
-import RanksList from './RanksList'
-import RanksListTitles from './RanksListTitles'
-import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons'
-
-import { Rank } from '../../types'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import getText from '../../functions/getText'
+import { ranksArrFilter, ranksArrSort } from '../../functions/ranksArrFuns'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { useSorterStore } from '../../stores/sorterStore'
+import { Rank } from '../../types'
+import styles from './ListDiv.module.css'
+import RanksList from './RanksList'
+import RanksListTitles from './RanksListTitles'
 
 function ListDiv({ ranksArr }: { ranksArr: Rank[] }) {
     const {

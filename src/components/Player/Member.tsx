@@ -1,11 +1,10 @@
-import styles from './Members.module.css'
-
 import { getExtraInfo } from '../../functions/getExtraInfo'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
-import { Member as MemberType } from '../../types'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { useViewStore } from '../../stores/viewStore'
+import { Member as MemberType } from '../../types'
+import styles from './Members.module.css'
 
 interface Props {
     member: MemberType

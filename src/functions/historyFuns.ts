@@ -1,10 +1,10 @@
 import { RELIC_SERVER_BASE_COH2 } from '../constants'
 import {
-    RecentMatchHistory,
     AvailableLeaderboard,
-    Player,
     MatchObject,
     NormalizedProfiles,
+    Player,
+    RecentMatchHistory,
 } from '../types'
 
 export const getHistoryUrls = (id: number | undefined) => {

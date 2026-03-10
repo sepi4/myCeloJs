@@ -1,5 +1,5 @@
-import { getPlayersInfo } from './getPlayersInfo'
 import { Player } from '../../types'
+import { getPlayersInfo } from './getPlayersInfo'
 import { getPlayersInfoCoh3 } from './getPlayersInfoCoh3'
 
 export function getCurrentUserAlias(lines: string[]) {

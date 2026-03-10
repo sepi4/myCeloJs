@@ -1,4 +1,5 @@
 import { JSX } from 'react'
+
 import styles from './NavbarRow.module.css'
 
 interface Props {

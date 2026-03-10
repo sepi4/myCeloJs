@@ -2,8 +2,8 @@ import {
     getFactionFlagLocation,
     getFactionFlagLocationCoh3,
 } from '../../functions/getFactionFlagLocation'
-import { FactionName } from '../../types'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
+import { FactionName } from '../../types'
 
 interface Props {
     faction: FactionName

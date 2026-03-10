@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+
 import { SettingsType } from '../types'
 
 interface SettingsStore {

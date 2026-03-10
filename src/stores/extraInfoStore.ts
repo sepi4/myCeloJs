@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+
 import { NormalizedExtraInfo } from '../types'
 
 interface ExtraInfoStore {

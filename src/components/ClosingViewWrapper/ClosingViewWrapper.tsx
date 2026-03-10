@@ -1,11 +1,10 @@
-import { JSX } from 'react'
-import Icon from '../Icon'
-
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { JSX } from 'react'
 
-import styles from './ViewWrapper.module.css'
 import useEsc from '../../hooks/useEsc'
 import { useViewStore } from '../../stores/viewStore'
+import Icon from '../Icon'
+import styles from './ViewWrapper.module.css'
 
 interface Props {
     children: JSX.Element | JSX.Element[]

@@ -1,7 +1,6 @@
-import { CSSProperties } from 'react'
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { IconDefinition } from '@fortawesome/fontawesome-common-types'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { CSSProperties } from 'react'
 
 interface Props {
     icon: IconDefinition

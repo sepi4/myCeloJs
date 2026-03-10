@@ -1,6 +1,5 @@
 import getText from '../../functions/getText'
-import { MatchObject, SettingsType, MatchHistoryReportResult } from '../../types'
-
+import { MatchHistoryReportResult, MatchObject, SettingsType } from '../../types'
 import styles from './ModalTableBody.module.css'
 
 interface Props {

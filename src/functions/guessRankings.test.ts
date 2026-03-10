@@ -1,10 +1,10 @@
 import {
-    Player,
-    Member,
-    StatGroup,
-    LeaderboardStat,
-    PersonalStats,
     AvailableLeaderboard,
+    LeaderboardStat,
+    Member,
+    PersonalStats,
+    Player,
+    StatGroup,
 } from '../types'
 import { guessRankings } from './guessRankings'
 import _coh2Leaderboards from './unit-tests-data/coh2-get-available-leaderboards.json'
