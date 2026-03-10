@@ -69,10 +69,7 @@ function makeLbStat(overrides: Partial<LeaderboardStat> = {}): LeaderboardStat {
     }
 }
 
-function makeStats(
-    statGroups: StatGroup[],
-    leaderboardStats: LeaderboardStat[]
-): PersonalStats {
+function makeStats(statGroups: StatGroup[], leaderboardStats: LeaderboardStat[]): PersonalStats {
     return {
         result: { code: 0, message: 'SUCCESS' },
         statGroups,
@@ -85,8 +82,18 @@ function makeStats(
 describe('guessRankings', () => {
     test('COH2 1v1 — solo player gets ranking and country', () => {
         const players: Player[] = [
-            makePlayer({ name: 'P1', faction: 'german', teamSlot: 0, profileId: 1001 }),
-            makePlayer({ name: 'P2', faction: 'soviet', teamSlot: 1, profileId: 1002 }),
+            makePlayer({
+                name: 'P1',
+                faction: 'german',
+                teamSlot: 0,
+                profileId: 1001,
+            }),
+            makePlayer({
+                name: 'P2',
+                faction: 'soviet',
+                teamSlot: 1,
+                profileId: 1002,
+            }),
         ]
 
         const sg1 = makeStatGroup({
@@ -103,16 +110,12 @@ describe('guessRankings', () => {
         const stats = makeStats(
             [sg1, sg2],
             [
-                makeLbStat({ leaderboard_id: 4, statgroup_id: 100, rank: 50 }),  // 1v1German
-                makeLbStat({ leaderboard_id: 5, statgroup_id: 101, rank: 75 }),  // 1v1Soviet
+                makeLbStat({ leaderboard_id: 4, statgroup_id: 100, rank: 50 }), // 1v1German
+                makeLbStat({ leaderboard_id: 5, statgroup_id: 101, rank: 75 }), // 1v1Soviet
             ]
         )
 
-        const [team0, team1] = guessRankings(
-            players,
-            stats,
-            coh2Leaderboards
-        )
+        const [team0, team1] = guessRankings(players, stats, coh2Leaderboards)
 
         expect(team0[0].ranking).toBe(50)
         expect(team0[0].country).toBe('de')
@@ -125,8 +128,18 @@ describe('guessRankings', () => {
 
     test('COH2 2v2 team — players get team ranking and markers', () => {
         const players: Player[] = [
-            makePlayer({ name: 'P1', faction: 'aef', teamSlot: 0, profileId: 2001 }),
-            makePlayer({ name: 'P2', faction: 'aef', teamSlot: 0, profileId: 2002 }),
+            makePlayer({
+                name: 'P1',
+                faction: 'aef',
+                teamSlot: 0,
+                profileId: 2001,
+            }),
+            makePlayer({
+                name: 'P2',
+                faction: 'aef',
+                teamSlot: 0,
+                profileId: 2002,
+            }),
         ]
 
         const teamSg = makeStatGroup({
@@ -141,15 +154,11 @@ describe('guessRankings', () => {
         const stats = makeStats(
             [teamSg],
             [
-                makeLbStat({ leaderboard_id: 21, statgroup_id: 200, rank: 30 }),  // TeamOf2Allies
+                makeLbStat({ leaderboard_id: 21, statgroup_id: 200, rank: 30 }), // TeamOf2Allies
             ]
         )
 
-        const [team0] = guessRankings(
-            players,
-            stats,
-            coh2Leaderboards
-        )
+        const [team0] = guessRankings(players, stats, coh2Leaderboards)
 
         expect(team0[0].ranking).toBe(30)
         expect(team0[0].teamMarker).toBe(' ¹')
@@ -160,9 +169,24 @@ describe('guessRankings', () => {
     test('COH2 3v3 — player not in team stat group falls back to solo rank', () => {
         // 3 axis players on team 0; P1+P2 share a type-2 stat group, P3 does not
         const players: Player[] = [
-            makePlayer({ name: 'P1', faction: 'german', teamSlot: 0, profileId: 3001 }),
-            makePlayer({ name: 'P2', faction: 'german', teamSlot: 0, profileId: 3002 }),
-            makePlayer({ name: 'P3', faction: 'german', teamSlot: 0, profileId: 3003 }),
+            makePlayer({
+                name: 'P1',
+                faction: 'german',
+                teamSlot: 0,
+                profileId: 3001,
+            }),
+            makePlayer({
+                name: 'P2',
+                faction: 'german',
+                teamSlot: 0,
+                profileId: 3002,
+            }),
+            makePlayer({
+                name: 'P3',
+                faction: 'german',
+                teamSlot: 0,
+                profileId: 3003,
+            }),
         ]
 
         // Type-2 stat group containing P1 and P2 (both on team)
@@ -185,16 +209,16 @@ describe('guessRankings', () => {
         const stats = makeStats(
             [teamSg, soloSg],
             [
-                makeLbStat({ leaderboard_id: 20, statgroup_id: 300, rank: 10 }),  // TeamOf2Axis
-                makeLbStat({ leaderboard_id: 12, statgroup_id: 301, rank: 200 }), // 3v3German
+                makeLbStat({ leaderboard_id: 20, statgroup_id: 300, rank: 10 }), // TeamOf2Axis
+                makeLbStat({
+                    leaderboard_id: 12,
+                    statgroup_id: 301,
+                    rank: 200,
+                }), // 3v3German
             ]
         )
 
-        const [team0] = guessRankings(
-            players,
-            stats,
-            coh2Leaderboards
-        )
+        const [team0] = guessRankings(players, stats, coh2Leaderboards)
 
         // P1 and P2 get team rank + marker
         expect(team0[0].ranking).toBe(10)
@@ -209,8 +233,18 @@ describe('guessRankings', () => {
 
     test('COH3 1v1 — unranked fallback', () => {
         const players: Player[] = [
-            makePlayer({ name: 'P1', faction: 'americans', teamSlot: 0, profileId: 4001 }),
-            makePlayer({ name: 'P2', faction: 'germans', teamSlot: 1, profileId: 4002 }),
+            makePlayer({
+                name: 'P1',
+                faction: 'americans',
+                teamSlot: 0,
+                profileId: 4001,
+            }),
+            makePlayer({
+                name: 'P2',
+                faction: 'germans',
+                teamSlot: 1,
+                profileId: 4002,
+            }),
         ]
 
         const sg1 = makeStatGroup({
@@ -228,33 +262,39 @@ describe('guessRankings', () => {
             [sg1, sg2],
             [
                 // No ranked entry for 1v1American (2130256), only unranked (2130255)
-                makeLbStat({ leaderboard_id: 2130255, statgroup_id: 400, rank: 500 }),
+                makeLbStat({
+                    leaderboard_id: 2130255,
+                    statgroup_id: 400,
+                    rank: 500,
+                }),
             ]
         )
 
-        const [team0] = guessRankings(
-            players,
-            stats,
-            coh3Leaderboards
-        )
+        const [team0] = guessRankings(players, stats, coh3Leaderboards)
 
         expect(team0[0].ranking).toBe(500)
     })
 
     test('No matching stats — ranking stays undefined', () => {
         const players: Player[] = [
-            makePlayer({ name: 'P1', faction: 'german', teamSlot: 0, profileId: 5001 }),
-            makePlayer({ name: 'P2', faction: 'soviet', teamSlot: 1, profileId: 5002 }),
+            makePlayer({
+                name: 'P1',
+                faction: 'german',
+                teamSlot: 0,
+                profileId: 5001,
+            }),
+            makePlayer({
+                name: 'P2',
+                faction: 'soviet',
+                teamSlot: 1,
+                profileId: 5002,
+            }),
         ]
 
         // Empty stats — no stat groups match these profileIds
         const stats = makeStats([], [])
 
-        const [team0, team1] = guessRankings(
-            players,
-            stats,
-            coh2Leaderboards
-        )
+        const [team0, team1] = guessRankings(players, stats, coh2Leaderboards)
 
         expect(team0[0].ranking).toBeUndefined()
         expect(team0[0].country).toBeUndefined()
@@ -264,8 +304,18 @@ describe('guessRankings', () => {
 
     test('Mixed factions in team — no team leaderboard, falls back to individual', () => {
         const players: Player[] = [
-            makePlayer({ name: 'P1', faction: 'german', teamSlot: 0, profileId: 6001 }),
-            makePlayer({ name: 'P2', faction: 'aef', teamSlot: 0, profileId: 6002 }),
+            makePlayer({
+                name: 'P1',
+                faction: 'german',
+                teamSlot: 0,
+                profileId: 6001,
+            }),
+            makePlayer({
+                name: 'P2',
+                faction: 'aef',
+                teamSlot: 0,
+                profileId: 6002,
+            }),
         ]
 
         const sg1 = makeStatGroup({
@@ -282,16 +332,16 @@ describe('guessRankings', () => {
         const stats = makeStats(
             [sg1, sg2],
             [
-                makeLbStat({ leaderboard_id: 8, statgroup_id: 600, rank: 150 }),   // 2v2German
-                makeLbStat({ leaderboard_id: 11, statgroup_id: 601, rank: 250 }),  // 2v2AEF
+                makeLbStat({ leaderboard_id: 8, statgroup_id: 600, rank: 150 }), // 2v2German
+                makeLbStat({
+                    leaderboard_id: 11,
+                    statgroup_id: 601,
+                    rank: 250,
+                }), // 2v2AEF
             ]
         )
 
-        const [team0] = guessRankings(
-            players,
-            stats,
-            coh2Leaderboards
-        )
+        const [team0] = guessRankings(players, stats, coh2Leaderboards)
 
         expect(team0[0].ranking).toBe(150)
         expect(team0[0].teamMarker).toBeUndefined()

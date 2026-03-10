@@ -20,7 +20,9 @@ function CheckLogDiv() {
     } = useNavButtonsStore()
 
     const activeLogLocation = settings
-        ? coh3 ? settings.logLocationCoh3 : settings.logLocationCoh2
+        ? coh3
+            ? settings.logLocationCoh3
+            : settings.logLocationCoh2
         : ''
 
     return (
@@ -49,13 +51,11 @@ function CheckLogDiv() {
                         data-testid="check-log-button"
                         className={styles.btn}
                         onClick={() => {
-                            readLog(coh3, activeLogLocation).then(
-                                (data) => {
-                                    if (data) {
-                                        setPlayersWithoutChecking(data)
-                                    }
+                            readLog(coh3, activeLogLocation).then((data) => {
+                                if (data) {
+                                    setPlayersWithoutChecking(data)
                                 }
-                            )
+                            })
                         }}
                     >
                         {getText('check_log_button', settings)}

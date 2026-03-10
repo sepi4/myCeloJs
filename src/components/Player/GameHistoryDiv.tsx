@@ -56,9 +56,7 @@ export default function GameHistoryDiv(props: Props) {
                 onClick={() => setModal(true)}
             >
                 <img
-                    src={getFactionFlagLocation(
-                        getFactionById(props.game.result.race_id)
-                    )}
+                    src={getFactionFlagLocation(getFactionById(props.game.result.race_id))}
                     alt={`${getFactionById(props.game.result.race_id)}`}
                 />
 

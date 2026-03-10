@@ -68,11 +68,7 @@ export function formatToNums(arr: Player[]): Player[] {
         if (obj.profileId && !isNaN(obj.profileId)) {
             obj.profileId = Number(obj.profileId)
         }
-        if (
-            obj.ranking &&
-            typeof obj.ranking === 'number' &&
-            !isNaN(obj.ranking)
-        ) {
+        if (obj.ranking && typeof obj.ranking === 'number' && !isNaN(obj.ranking)) {
             obj.ranking = Number(obj.ranking)
         }
         if (obj.teamSlot && !isNaN(obj.teamSlot)) {

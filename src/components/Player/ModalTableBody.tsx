@@ -1,9 +1,5 @@
 import getText from '../../functions/getText'
-import {
-    MatchObject,
-    SettingsType,
-    MatchHistoryReportResult,
-} from '../../types'
+import { MatchObject, SettingsType, MatchHistoryReportResult } from '../../types'
 
 import styles from './ModalTableBody.module.css'
 
@@ -14,9 +10,7 @@ interface Props {
 }
 
 function ModalTableBody(props: Props) {
-    const infoArr: string[] = (
-        props.game?.counters ? Object.keys(props.game.counters) : []
-    )
+    const infoArr: string[] = (props.game?.counters ? Object.keys(props.game.counters) : [])
         .sort((a, b) => (a > b ? 1 : -1))
         .filter((k) => getText(k, props.settings) !== undefined)
 
@@ -24,9 +18,7 @@ function ModalTableBody(props: Props) {
         <tbody>
             {infoArr.map((key: string, i) => (
                 <tr className={styles.row} key={`${key} ${i}`}>
-                    <td className={styles.name}>
-                        {getText(key, props.settings)}
-                    </td>
+                    <td className={styles.name}>{getText(key, props.settings)}</td>
 
                     {props.players.map((p) => (
                         <td key={`${p.profile_id} ${i}`}>{p.counters[key]}</td>

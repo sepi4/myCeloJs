@@ -13,9 +13,7 @@ function MainRowSpan(props: Props) {
             className={styles.span}
             style={{
                 width: props.width,
-                justifyContent: props.justifyContent
-                    ? props.justifyContent
-                    : 'center',
+                justifyContent: props.justifyContent ? props.justifyContent : 'center',
             }}
         >
             {props.children}

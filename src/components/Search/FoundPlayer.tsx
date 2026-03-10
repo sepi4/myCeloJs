@@ -44,15 +44,11 @@ export default function FoundPlayer(props: Props) {
         <table className={styles.table}>
             <tbody>
                 <tr>
-                    <th className={styles.label}>
-                        {getText('mp_games', settings)}:
-                    </th>
+                    <th className={styles.label}>{getText('mp_games', settings)}:</th>
                     <td>{props.player.totalGames}</td>
                 </tr>
                 <tr>
-                    <th className={styles.label}>
-                        {getText('last_game', settings)}:
-                    </th>
+                    <th className={styles.label}>{getText('last_game', settings)}:</th>
                     <td>{timeAgo}</td>
                 </tr>
             </tbody>

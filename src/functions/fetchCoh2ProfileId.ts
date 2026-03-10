@@ -9,9 +9,7 @@ export function fetchCoh2ProfileId(steamId: string): Promise<number | null> {
         .then((res) => res.json())
         .then((data) => {
             if (data.result.message !== 'SUCCESS') return null
-            const group = data.statGroups.find(
-                (g: { type: number }) => g.type === 1
-            )
+            const group = data.statGroups.find((g: { type: number }) => g.type === 1)
             return group ? (group.members[0].profile_id as number) : null
         })
         .catch(() => null)

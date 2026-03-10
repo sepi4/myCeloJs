@@ -30,9 +30,7 @@ function ModalDiv(props: Props) {
 
     const startTime = getDateTime(game.startGameTime, lg)
     const endTime = getDateTime(game.endGameTime, lg)
-    const durationTime = getTime(
-        game.endGameTime.getTime() - game.startGameTime.getTime()
-    )
+    const durationTime = getTime(game.endGameTime.getTime() - game.startGameTime.getTime())
 
     return (
         <Modal
@@ -71,28 +69,16 @@ function ModalDiv(props: Props) {
                 <span className={styles.value}>{endTime}</span>
             </div>
             <div>
-                <span className={styles.label}>
-                    {getText('map', settings)}:
-                </span>
+                <span className={styles.label}>{getText('map', settings)}:</span>
                 <span className={styles.value}>{game.mapName}</span>
             </div>
             <div>
-                <span className={styles.label}>
-                    {getText('duration', settings)}:
-                </span>
+                <span className={styles.label}>{getText('duration', settings)}:</span>
                 <span className={styles.value}>{durationTime}</span>
             </div>
             <table className={styles.table}>
-                <ModalTableHeaders
-                    settings={settings}
-                    players={players}
-                    profiles={profiles}
-                />
-                <ModalTableBody
-                    game={game}
-                    settings={settings}
-                    players={players}
-                />
+                <ModalTableHeaders settings={settings} players={players} profiles={profiles} />
+                <ModalTableBody game={game} settings={settings} players={players} />
             </table>
         </Modal>
     )

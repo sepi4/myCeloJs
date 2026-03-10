@@ -16,10 +16,7 @@ test.beforeAll(async () => {
     tempUserDataDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mycelo-e2e-'))
 
     electronApp = await electron.launch({
-        args: [
-            path.join(__dirname, '../out/main/index.js'),
-            `--user-data-dir=${tempUserDataDir}`,
-        ],
+        args: [path.join(__dirname, '../out/main/index.js'), `--user-data-dir=${tempUserDataDir}`],
     })
     page = await electronApp.firstWindow()
     await page.waitForLoadState('domcontentloaded')
@@ -185,7 +182,6 @@ test('search by steam ID and open player card', async () => {
     await app.foundPlayers.click()
     await expect(app.steamIdValue).toHaveText(STEAM_ID)
     await app.closeButton.click()
-
 })
 
 test('navbar checkboxes - table, total and all ', async () => {
@@ -246,9 +242,18 @@ test('player card external links have correct URLs', async () => {
     await expect(app.steamIdValue).toBeVisible()
 
     // Verify each link icon exists and points to the correct URL
-    await expect(app.linkCoh2stats).toHaveAttribute('data-url', `https://coh2stats.com/players/${STEAM_ID}`)
-    await expect(app.linkCoh2).toHaveAttribute('data-url', `https://www.coh2.org/ladders/playercard/steamid/${STEAM_ID}`)
-    await expect(app.linkSteam).toHaveAttribute('data-url', `https://steamcommunity.com/profiles/${STEAM_ID}`)
+    await expect(app.linkCoh2stats).toHaveAttribute(
+        'data-url',
+        `https://coh2stats.com/players/${STEAM_ID}`
+    )
+    await expect(app.linkCoh2).toHaveAttribute(
+        'data-url',
+        `https://www.coh2.org/ladders/playercard/steamid/${STEAM_ID}`
+    )
+    await expect(app.linkSteam).toHaveAttribute(
+        'data-url',
+        `https://steamcommunity.com/profiles/${STEAM_ID}`
+    )
     await app.closeButton.click()
 })
 

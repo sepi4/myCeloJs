@@ -24,6 +24,7 @@
         "test": "jest",
         "dist": "npm run e2e && electron-builder",
         "e2e": "npm run build && npx playwright test",
+        "format": "prettier --write .",
         "prepare": "husky"
     },
     "dependencies": {
@@ -43,7 +44,7 @@
     "lint-staged": {
         "*.{ts,tsx}": [
             "prettier --write",
-            "eslint --max-warnings 0"
+            "eslint --max-warnings 0 --no-warn-ignored"
         ],
         "*.{js,json,css}": "prettier --write"
     },
@@ -60,6 +61,7 @@
         "electron-builder": "^26.8.1",
         "electron-vite": "^5.0.0",
         "eslint": "^9.0.0",
+        "eslint-config-prettier": "^10.1.8",
         "eslint-plugin-jest": "^29.15.0",
         "eslint-plugin-react": "^7.37.5",
         "eslint-plugin-react-hooks": "^7.0.1",

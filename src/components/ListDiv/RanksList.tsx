@@ -17,8 +17,7 @@ function RanksList(props: Props) {
     return (
         <div>
             {ranksArr.map((r, i) => {
-                const per: string =
-                    ((r.wins / (r.wins + r.losses)) * 100).toFixed(0) + '%'
+                const per: string = ((r.wins / (r.wins + r.losses)) * 100).toFixed(0) + '%'
                 const totalGames = r.wins + r.losses
                 const rank = r.rank <= 0 ? '-' : r.rank
                 const positive = r.streak > 0
@@ -26,11 +25,7 @@ function RanksList(props: Props) {
 
                 return (
                     <div data-testid="rank-row" className={styles.row} key={i}>
-                        <Cell
-                            title={`${getText('of', settings)} ${r.ranktotal}`}
-                        >
-                            {rank}
-                        </Cell>
+                        <Cell title={`${getText('of', settings)} ${r.ranktotal}`}>{rank}</Cell>
                         <Cell width="40%" justifyContent="flex-start">
                             <Rank allOpen={props.allOpen} rank={r} />
                         </Cell>

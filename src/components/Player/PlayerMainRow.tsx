@@ -99,7 +99,8 @@ function PlayerMainRow(props: Props) {
     )
 
     const teamMarker = player.teamMarker ? player.teamMarker : ''
-    const rank = (player.ranking == null || player.ranking === -1 ? '-' : player.ranking) + teamMarker
+    const rank =
+        (player.ranking == null || player.ranking === -1 ? '-' : player.ranking) + teamMarker
 
     const factionFlag = coh3
         ? getFactionFlagLocationCoh3(player.faction)
@@ -107,11 +108,7 @@ function PlayerMainRow(props: Props) {
     const factionTitle = coh3 ? player.faction : commonName(player.faction)
     const faction = (
         <span title={factionTitle}>
-            <img
-                className={styles.factionFlag}
-                src={factionFlag}
-                alt={player.faction}
-            />
+            <img className={styles.factionFlag} src={factionFlag} alt={player.faction} />
         </span>
     )
 

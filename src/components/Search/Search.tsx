@@ -57,12 +57,8 @@ export default function Search() {
                     const newPlayers = res
                         .map((p) => {
                             if (result[p.profile_id]) {
-                                p.totalGames = getTotalGames(
-                                    result[p.profile_id]?.ranks
-                                )
-                                p.lastGameTime = getLastPlayedGame(
-                                    result[p.profile_id]
-                                )
+                                p.totalGames = getTotalGames(result[p.profile_id]?.ranks)
+                                p.lastGameTime = getLastPlayedGame(result[p.profile_id])
                             } else {
                                 p.totalGames = 0
                             }
@@ -128,7 +124,9 @@ export default function Search() {
                     onKeyUp={handleKeyUp}
                 />
             </div>
-            <div data-testid="search-results" className={styles.content}>{players}</div>
+            <div data-testid="search-results" className={styles.content}>
+                {players}
+            </div>
         </div>
     )
 }

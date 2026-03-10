@@ -23,9 +23,7 @@ function Team(props: Props) {
                 <Player
                     key={p.profileId ? p.profileId : i}
                     player={p}
-                    extraInfo={
-                        extraInfo && p.profileId ? extraInfo[p.profileId] : null
-                    }
+                    extraInfo={extraInfo && p.profileId ? extraInfo[p.profileId] : null}
                     playerIndex={i}
                     teamIndex={props.teamIndex}
                 />

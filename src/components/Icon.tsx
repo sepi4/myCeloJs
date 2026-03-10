@@ -9,12 +9,7 @@ type IconProps = {
     testId?: string
 }
 
-export default function Icon({
-    icon,
-    fun,
-    size = '2x',
-    testId,
-}: IconProps): JSX.Element {
+export default function Icon({ icon, fun, size = '2x', testId }: IconProps): JSX.Element {
     return (
         <div
             data-testid={testId}

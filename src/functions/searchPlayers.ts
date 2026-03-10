@@ -16,9 +16,7 @@ export default function searchPlayers(
                     (p: StatGroup) => p.type === 1
                 )
 
-                const mm: Member[] = playerArr.map(
-                    (p: StatGroup) => p.members[0]
-                )
+                const mm: Member[] = playerArr.map((p: StatGroup) => p.members[0])
                 callback(mm)
             } else {
                 console.log('searchPlayers else:', data)

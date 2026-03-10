@@ -60,9 +60,7 @@ export function getLines(lines: string[]) {
  * Switch players so that current player is in first team
  */
 export function switchTeams(info: Player[], currentUser: string): Player[] {
-    const currentUserTeam: Player[] = info.filter(
-        (p) => p.name === currentUser && p.profileId
-    )
+    const currentUserTeam: Player[] = info.filter((p) => p.name === currentUser && p.profileId)
 
     if (currentUserTeam.length !== 1 || currentUserTeam[0].teamSlot === 0) {
         return info
@@ -87,9 +85,7 @@ export async function readLog(coh3: boolean, fileLocation: string) {
             return []
         }
 
-        const currentUserAlias = coh3
-            ? getCurrentUserAliasCoh3(lines)
-            : getCurrentUserAlias(lines)
+        const currentUserAlias = coh3 ? getCurrentUserAliasCoh3(lines) : getCurrentUserAlias(lines)
 
         const arr: string[] = getLines(lines)
         let psInfo = coh3 ? getPlayersInfoCoh3(arr) : getPlayersInfo(arr)

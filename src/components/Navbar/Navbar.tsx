@@ -1,10 +1,5 @@
 import styles from './Navbar.module.css'
-import {
-    faCogs,
-    faSearch,
-    faTimes,
-    faUserAlt,
-} from '@fortawesome/free-solid-svg-icons'
+import { faCogs, faSearch, faTimes, faUserAlt } from '@fortawesome/free-solid-svg-icons'
 
 import getText from '../../functions/getText'
 
@@ -61,15 +56,8 @@ export default function Navbar(props: Props) {
 
     if (settingsView) {
         return (
-            <div
-                className={styles.navbar}
-                style={{ justifyContent: 'flex-end' }}
-            >
-                <NavBarIcon
-                    icon={faTimes}
-                    fun={settingsViewToggeler}
-                    testId="close-button"
-                />
+            <div className={styles.navbar} style={{ justifyContent: 'flex-end' }}>
+                <NavBarIcon icon={faTimes} fun={settingsViewToggeler} testId="close-button" />
             </div>
         )
     }
@@ -79,9 +67,7 @@ export default function Navbar(props: Props) {
     }
 
     const handleOpenMyCard = () => {
-        const id = navButtons.coh3
-            ? settings!.profileIdCoh3
-            : settings!.profileIdCoh2
+        const id = navButtons.coh3 ? settings!.profileIdCoh3 : settings!.profileIdCoh2
 
         getExtraInfo(navButtons.coh3, [id], (result) => {
             const ex = result[id]
@@ -103,17 +89,12 @@ export default function Navbar(props: Props) {
         })
     }
 
-    const activeProfileId = navButtons.coh3
-        ? settings?.profileIdCoh3
-        : settings?.profileIdCoh2
+    const activeProfileId = navButtons.coh3 ? settings?.profileIdCoh3 : settings?.profileIdCoh2
     let userIcon = null
     if (
         settings &&
         activeProfileId &&
-        !(
-            view === 'playerCard' &&
-            playerCardPlayer?.profileId === activeProfileId
-        )
+        !(view === 'playerCard' && playerCardPlayer?.profileId === activeProfileId)
     ) {
         userIcon = (
             <NavBarIcon
@@ -163,16 +144,12 @@ export default function Navbar(props: Props) {
 
             <div className={styles.container}>
                 <div className={styles.column}>
-                    <NavbarRow fontSize="60%">
-                        {getText('dropdown_info', settings)}
-                    </NavbarRow>
+                    <NavbarRow fontSize="60%">{getText('dropdown_info', settings)}</NavbarRow>
                     <NavbarRow>{buttons}</NavbarRow>
                 </div>
 
                 <div className={styles.column}>
-                    <NavbarRow fontSize="60%">
-                        {getText('game', settings)}
-                    </NavbarRow>
+                    <NavbarRow fontSize="60%">{getText('game', settings)}</NavbarRow>
                     <NavbarRow>
                         <div className={styles.radio}>
                             <input
@@ -200,9 +177,7 @@ export default function Navbar(props: Props) {
                 </div>
 
                 <div className={styles.column}>
-                    <NavbarRow fontSize="60%">
-                        {getText('log_checking', settings)}
-                    </NavbarRow>
+                    <NavbarRow fontSize="60%">{getText('log_checking', settings)}</NavbarRow>
                     <NavbarRow>
                         <CheckLogDiv />
                     </NavbarRow>

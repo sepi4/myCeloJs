@@ -1,7 +1,4 @@
-import {
-    refactronTableInfo,
-    refactronTableInfoCoh3,
-} from '../../functions/refactorTableInfo'
+import { refactronTableInfo, refactronTableInfoCoh3 } from '../../functions/refactorTableInfo'
 import TableRanksDiv from './TableRanksDiv'
 
 import styles from './TableDiv.module.css'
@@ -37,7 +34,11 @@ function TableDiv({ ranksArr }: { ranksArr: Rank[] }) {
         )
     })
 
-    return <div data-testid="table-view" className={styles.container}>{factionGrids}</div>
+    return (
+        <div data-testid="table-view" className={styles.container}>
+            {factionGrids}
+        </div>
+    )
 }
 
 export default TableDiv

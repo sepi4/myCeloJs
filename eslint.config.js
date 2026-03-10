@@ -4,6 +4,7 @@ const globals = require('globals')
 const reactPlugin = require('eslint-plugin-react')
 const reactHooksPlugin = require('eslint-plugin-react-hooks')
 const jestPlugin = require('eslint-plugin-jest')
+const prettierConfig = require('eslint-config-prettier')
 
 module.exports = tseslint.config(
     js.configs.recommended,
@@ -11,15 +12,12 @@ module.exports = tseslint.config(
     reactPlugin.configs.flat.recommended,
     reactPlugin.configs.flat['jsx-runtime'],
     reactHooksPlugin.configs.flat['recommended-latest'],
+    prettierConfig,
     {
         settings: {
             react: { version: 'detect' },
         },
         rules: {
-            indent: ['error', 4, { SwitchCase: 1 }],
-            'linebreak-style': ['error', 'unix'],
-            quotes: ['error', 'single'],
-            semi: ['error', 'never'],
             'react-hooks/set-state-in-effect': 'off',
         },
     },

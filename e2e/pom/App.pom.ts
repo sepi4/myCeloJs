@@ -135,9 +135,7 @@ export class App {
 
     async mockFileDialog(electronApp: ElectronApplication, filePath: string) {
         await electronApp.evaluate(async ({ dialog }, fp) => {
-            dialog.showOpenDialog = () =>
-                Promise.resolve({ canceled: false, filePaths: [fp] })
+            dialog.showOpenDialog = () => Promise.resolve({ canceled: false, filePaths: [fp] })
         }, filePath)
     }
-
 }

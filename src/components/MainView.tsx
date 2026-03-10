@@ -17,11 +17,15 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
     const { settingsView } = useSettingsViewStore()
     const teams: Player[][] = [[], []]
     const { settings } = useSettingsStore()
-    const { navButtons: { coh3 } } = useNavButtonsStore()
+    const {
+        navButtons: { coh3 },
+    } = useNavButtonsStore()
     const { players } = usePlayersStore()
     const { view } = useViewStore()
     const activeLogLocation = settings
-        ? coh3 ? settings.logLocationCoh3 : settings.logLocationCoh2
+        ? coh3
+            ? settings.logLocationCoh3
+            : settings.logLocationCoh2
         : ''
 
     if (players) {

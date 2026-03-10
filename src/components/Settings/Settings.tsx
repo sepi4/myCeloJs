@@ -44,9 +44,7 @@ function Settings(props: Props) {
     const setError = () => {
         setTimedError(true)
         if (steamIdInputRef.current && settings) {
-            steamIdInputRef.current.value = settings.steamId
-                ? settings.steamId
-                : ''
+            steamIdInputRef.current.value = settings.steamId ? settings.steamId : ''
         }
     }
 
@@ -69,19 +67,18 @@ function Settings(props: Props) {
             return
         }
 
-        fetchCoh2ProfileId(num)
-            .then((profileId) => {
-                if (!profileId) {
-                    setError()
-                    return
-                }
-                writeSettings({
-                    ...settings,
-                    steamId: num,
-                    profileIdCoh2: profileId,
-                } as SettingsType)
-                setTimedSetID(true)
-            })
+        fetchCoh2ProfileId(num).then((profileId) => {
+            if (!profileId) {
+                setError()
+                return
+            }
+            writeSettings({
+                ...settings,
+                steamId: num,
+                profileIdCoh2: profileId,
+            } as SettingsType)
+            setTimedSetID(true)
+        })
     }
 
     const changeLogLocation = (game: 'coh2' | 'coh3') => {
@@ -155,40 +152,62 @@ function Settings(props: Props) {
                 </select>
             </SettingsDiv>
 
-            <SettingsDiv
-                title={`COH2 ${getText('log_location_title', settings)}`}
-                required
-            >
+            <SettingsDiv title={`COH2 ${getText('log_location_title', settings)}`} required>
                 <div className={styles.textDiv}>
                     {settings?.logLocationCoh2 ?? ''}
-                    {timedCopyCoh2 && <Notification testId="copy-log-coh2-notification" text={getText('copied', settings)} />}
+                    {timedCopyCoh2 && (
+                        <Notification
+                            testId="copy-log-coh2-notification"
+                            text={getText('copied', settings)}
+                        />
+                    )}
                 </div>
                 <div className={styles.buttonRow}>
-                    <StyledButton data-testid="log-location-button-coh2" onClick={() => changeLogLocation('coh2')}>
+                    <StyledButton
+                        data-testid="log-location-button-coh2"
+                        onClick={() => changeLogLocation('coh2')}
+                    >
                         {getText('select', settings)}
                     </StyledButton>
                     {settings?.logLocationCoh2 && (
-                        <StyledButton data-testid="copy-log-coh2-button" onClick={() => { setTimedCopyCoh2(true); navigator.clipboard.writeText(settings.logLocationCoh2!) }}>
+                        <StyledButton
+                            data-testid="copy-log-coh2-button"
+                            onClick={() => {
+                                setTimedCopyCoh2(true)
+                                navigator.clipboard.writeText(settings.logLocationCoh2!)
+                            }}
+                        >
                             {getText('copy', settings)}
                         </StyledButton>
                     )}
                 </div>
             </SettingsDiv>
 
-            <SettingsDiv
-                title={`COH3 ${getText('log_location_title', settings)}`}
-                required
-            >
+            <SettingsDiv title={`COH3 ${getText('log_location_title', settings)}`} required>
                 <div className={styles.textDiv}>
                     {settings?.logLocationCoh3 ?? ''}
-                    {timedCopyCoh3 && <Notification testId="copy-log-coh3-notification" text={getText('copied', settings)} />}
+                    {timedCopyCoh3 && (
+                        <Notification
+                            testId="copy-log-coh3-notification"
+                            text={getText('copied', settings)}
+                        />
+                    )}
                 </div>
                 <div className={styles.buttonRow}>
-                    <StyledButton data-testid="log-location-button-coh3" onClick={() => changeLogLocation('coh3')}>
+                    <StyledButton
+                        data-testid="log-location-button-coh3"
+                        onClick={() => changeLogLocation('coh3')}
+                    >
                         {getText('select', settings)}
                     </StyledButton>
                     {settings?.logLocationCoh3 && (
-                        <StyledButton data-testid="copy-log-coh3-button" onClick={() => { setTimedCopyCoh3(true); navigator.clipboard.writeText(settings.logLocationCoh3!) }}>
+                        <StyledButton
+                            data-testid="copy-log-coh3-button"
+                            onClick={() => {
+                                setTimedCopyCoh3(true)
+                                navigator.clipboard.writeText(settings.logLocationCoh3!)
+                            }}
+                        >
                             {getText('copy', settings)}
                         </StyledButton>
                     )}
@@ -201,9 +220,7 @@ function Settings(props: Props) {
                         data-testid="steam-id-input"
                         className={styles.input}
                         ref={steamIdInputRef}
-                        defaultValue={
-                            settings && settings.steamId ? settings.steamId : ''
-                        }
+                        defaultValue={settings && settings.steamId ? settings.steamId : ''}
                     />
 
                     <StyledButton data-testid="steam-id-save" onClick={handleSteamId}>

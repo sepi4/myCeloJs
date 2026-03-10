@@ -14,11 +14,7 @@ export function getPlayersInfo(arr: string[]): Player[] {
         if (row.match(/GAME --.* Player:/)) {
             const splitted = row.split(':')
             if (time === undefined) {
-                time = [
-                    splitted[0],
-                    splitted[1],
-                    splitted[2].split('   ')[0],
-                ].join(':')
+                time = [splitted[0], splitted[1], splitted[2].split('   ')[0]].join(':')
             }
 
             return splitted.slice(3).join(':').trim()

@@ -28,9 +28,7 @@ function country(country) {
 }
 function name(name, reversed) {
     return `
-        <span class="nameStyle ${
-            reversed ? 'textRight marginRight1' : 'marginLeft1'
-        }">
+        <span class="nameStyle ${reversed ? 'textRight marginRight1' : 'marginLeft1'}">
             ${name}
         </span>
     `
@@ -48,12 +46,7 @@ function makeArr(arr, reversed) {
                     </div>`
         }
         return `<div class="playerStyle">
-            ${
-                factionImage(p.faction) +
-                ranking(p.ranking) +
-                country(p.country) +
-                name(p.name)
-            }
+            ${factionImage(p.faction) + ranking(p.ranking) + country(p.country) + name(p.name)}
         </div>`
     })
 }

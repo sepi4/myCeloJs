@@ -1,14 +1,9 @@
-/* eslint-disable indent */
 import styled from 'styled-components'
 
 import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation'
 import { getFactionById } from '../../functions/simpleFunctions'
 import getText from '../../functions/getText'
-import {
-    MatchHistoryReportResult,
-    NormalizedProfiles,
-    SettingsType,
-} from '../../types'
+import { MatchHistoryReportResult, NormalizedProfiles, SettingsType } from '../../types'
 import { getExtraInfo } from '../../functions/getExtraInfo'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
@@ -45,9 +40,7 @@ function ModalTableHeaders(props: Props) {
                 {props.players.map((p) => (
                     <StyledTh key={p.profile_id} len={props.players.length}>
                         <img
-                            src={getFactionFlagLocation(
-                                getFactionById(p.race_id)
-                            )}
+                            src={getFactionFlagLocation(getFactionById(p.race_id))}
                             alt={`${getFactionById(p.race_id)}`}
                         />
                     </StyledTh>
@@ -80,29 +73,23 @@ function ModalTableHeaders(props: Props) {
                             <a
                                 title={props.profiles[p.profile_id].alias}
                                 onClick={() => {
-                                    getExtraInfo(
-                                        coh3,
-                                        [p.profile_id],
-                                        (result) => {
-                                            const pro =
-                                                props.profiles[p.profile_id]
-                                            const newPlayer = {
-                                                country: pro.country,
-                                                name: pro.alias,
-                                                profileId: pro.profile_id,
-                                            }
-                                            if (!newPlayer.profileId) {
-                                                return
-                                            }
-
-                                            const ex =
-                                                result[newPlayer.profileId]
-                                            if (result && ex) {
-                                                setPlayerCard(newPlayer, ex)
-                                                setView('playerCard')
-                                            }
+                                    getExtraInfo(coh3, [p.profile_id], (result) => {
+                                        const pro = props.profiles[p.profile_id]
+                                        const newPlayer = {
+                                            country: pro.country,
+                                            name: pro.alias,
+                                            profileId: pro.profile_id,
                                         }
-                                    )
+                                        if (!newPlayer.profileId) {
+                                            return
+                                        }
+
+                                        const ex = result[newPlayer.profileId]
+                                        if (result && ex) {
+                                            setPlayerCard(newPlayer, ex)
+                                            setView('playerCard')
+                                        }
+                                    })
                                 }}
                             >
                                 {props.profiles[p.profile_id].alias}

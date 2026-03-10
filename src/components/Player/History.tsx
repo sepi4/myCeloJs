@@ -63,13 +63,7 @@ export default function History(props: Props) {
             {history && (
                 <div data-testid="game-history" className={styles.historyDivs}>
                     {history.matchHistoryStats.map((m, i) => {
-                        return (
-                            <GameHistoryDiv
-                                key={i}
-                                game={m}
-                                profiles={history.profiles}
-                            />
-                        )
+                        return <GameHistoryDiv key={i} game={m} profiles={history.profiles} />
                     })}
                 </div>
             )}

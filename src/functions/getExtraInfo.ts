@@ -1,11 +1,7 @@
 import { refactorData } from './refactorData'
 
 import { RELIC_SERVER_BASE_COH2, RELIC_SERVER_BASE_COH3 } from '../constants'
-import {
-    AvailableLeaderboard,
-    NormalizedExtraInfo,
-    PersonalStats,
-} from '../types'
+import { AvailableLeaderboard, NormalizedExtraInfo, PersonalStats } from '../types'
 
 export function getExtraInfo(
     coh3: boolean,
@@ -35,11 +31,7 @@ export function getExtraInfo(
 
     Promise.all([promise1, promise2])
         .then(([personalStats, cohTitles]) => {
-            const result: NormalizedExtraInfo = refactorData(
-                personalStats,
-                cohTitles,
-                ids
-            )
+            const result: NormalizedExtraInfo = refactorData(personalStats, cohTitles, ids)
             callback(result, { personalStats, cohTitles })
         })
         .catch((error) => {

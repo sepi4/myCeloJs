@@ -48,7 +48,9 @@ function App() {
     const { players, setPlayers } = usePlayersStore()
     const { settings } = useSettingsStore()
     const activeLogLocation = settings
-        ? coh3 ? settings.logLocationCoh3 : settings.logLocationCoh2
+        ? coh3
+            ? settings.logLocationCoh3
+            : settings.logLocationCoh2
         : ''
 
     // Auto-select the game radio when only one log location is configured
@@ -80,7 +82,10 @@ function App() {
                     const sep = window.electronAPI.pathSep
                     newSettings.rankingsFile =
                         appLocation +
-                        sep + 'localhostFiles' + sep + 'rankings.' +
+                        sep +
+                        'localhostFiles' +
+                        sep +
+                        'rankings.' +
                         (newSettings.rankingsHtml ? 'html' : 'txt')
                 }
                 writeSettings(newSettings)
@@ -112,11 +117,7 @@ function App() {
                     return
                 }
 
-                const teams = guessRankings(
-                    players,
-                    x.personalStats,
-                    x.cohTitles
-                )
+                const teams = guessRankings(players, x.personalStats, x.cohTitles)
                 const newPlayers: Player[] = []
                 if (teams) {
                     teams.forEach((team: Player[]) => {

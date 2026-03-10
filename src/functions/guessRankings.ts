@@ -1,15 +1,5 @@
-import {
-    copyObj,
-    formatToNums,
-    separateTeams,
-    getFactionName,
-} from './simpleFunctions'
-import {
-    Player,
-    AvailableLeaderboard,
-    PersonalStats,
-    StatGroup,
-} from '../types'
+import { copyObj, formatToNums, separateTeams, getFactionName } from './simpleFunctions'
+import { Player, AvailableLeaderboard, PersonalStats, StatGroup } from '../types'
 
 const ALLIES_FACTIONS = ['british', 'aef', 'soviet']
 const AXIS_FACTIONS = ['west_german', 'german']
@@ -25,21 +15,14 @@ function getTeamStatGroups(team: Player[], stats: PersonalStats): StatGroup[] {
     for (let size = team.length; size > 1; size--) {
         const groups = stats.statGroups
             .filter((sg) => sg.type === size)
-            .filter((sg) =>
-                sg.members.every((m) =>
-                    team.some((p) => p.profileId === m.profile_id)
-                )
-            )
+            .filter((sg) => sg.members.every((m) => team.some((p) => p.profileId === m.profile_id)))
 
         if (groups.length > 0) return groups
     }
     return []
 }
 
-function getTeamLeaderboardName(
-    teamSize: number,
-    team: Player[]
-): string | undefined {
+function getTeamLeaderboardName(teamSize: number, team: Player[]): string | undefined {
     if (teamSize < 2) return undefined
 
     const isAllies = team.every((p) => ALLIES_FACTIONS.includes(p.faction))
@@ -85,9 +68,7 @@ function getPlayerRank(
     )
 
     const rank = stats.leaderboardStats.find(
-        (ls) =>
-            ls.statgroup_id === playerSg?.id &&
-            ls.leaderboard_id === leaderboardId
+        (ls) => ls.statgroup_id === playerSg?.id && ls.leaderboard_id === leaderboardId
     )?.rank
 
     if (rank !== undefined) return rank
@@ -95,16 +76,11 @@ function getPlayerRank(
     // Fallback to unranked leaderboard (COH3 has both ranked and unranked variants)
     const unrankedId = findLeaderboardId(matchTypeName + 'Unranked', leaderboards)
     return stats.leaderboardStats.find(
-        (ls) =>
-            ls.statgroup_id === playerSg?.id &&
-            ls.leaderboard_id === unrankedId
+        (ls) => ls.statgroup_id === playerSg?.id && ls.leaderboard_id === unrankedId
     )?.rank
 }
 
-function findPlayerCountry(
-    player: Player,
-    stats: PersonalStats
-): string | undefined {
+function findPlayerCountry(player: Player, stats: PersonalStats): string | undefined {
     for (const sg of stats.statGroups) {
         const member = sg.members.find((m) => m.profile_id === player.profileId)
         if (member) return member.country
@@ -123,10 +99,7 @@ export function guessRankings(
         const statGroups = getTeamStatGroups(team, stats)
 
         if (statGroups.length > 0) {
-            const leaderboardName = getTeamLeaderboardName(
-                statGroups[0].members.length,
-                team
-            )
+            const leaderboardName = getTeamLeaderboardName(statGroups[0].members.length, team)
             const leaderboardId = findLeaderboardId(leaderboardName, leaderboards)
             assignTeamRanks(statGroups, stats, leaderboardId)
 

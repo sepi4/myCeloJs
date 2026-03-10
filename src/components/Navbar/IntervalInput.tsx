@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 import React, { useRef, useState } from 'react'
 
 import getText from '../../functions/getText'
@@ -14,9 +13,7 @@ function IntervalInput() {
     const refInputElement = useRef<HTMLInputElement>(null)
 
     const checkNumbers = (
-        e:
-            | React.FocusEvent<HTMLInputElement>
-            | React.KeyboardEvent<HTMLInputElement>
+        e: React.FocusEvent<HTMLInputElement> | React.KeyboardEvent<HTMLInputElement>
     ) => {
         setError(false)
         const x = parseInt(e.currentTarget.value)
@@ -46,19 +43,11 @@ function IntervalInput() {
                 ref={refInputElement}
                 onBlur={checkNumbers}
                 onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
-                    e.key === 'Enter'
-                        ? checkNumbers(e)
-                        : error
-                          ? setError(false)
-                          : null
+                    e.key === 'Enter' ? checkNumbers(e) : error ? setError(false) : null
                 }
             />
             <span>{getText('sec', settings)}</span>
-            {error && (
-                <div className={styles.error}>
-                    {getText('integer_error', settings)}
-                </div>
-            )}
+            {error && <div className={styles.error}>{getText('integer_error', settings)}</div>}
         </span>
     )
 }

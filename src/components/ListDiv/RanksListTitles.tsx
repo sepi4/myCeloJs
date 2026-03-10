@@ -25,9 +25,7 @@ function RanksListTitles({ ranksArr }: { ranksArr: Rank[] }) {
         <>
             {ranksArr.length > 0 && (
                 <div className={`${styles.row} ${styles.title}`}>
-                    <ColumnTitle {...getSorter('byRank')}>
-                        {getText('rank', settings)}
-                    </ColumnTitle>
+                    <ColumnTitle {...getSorter('byRank')}>{getText('rank', settings)}</ColumnTitle>
                     <ColumnTitle {...getSorter('byName')} width="40%">
                         {getText('mode', settings)}
                     </ColumnTitle>

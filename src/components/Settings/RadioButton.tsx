@@ -34,7 +34,9 @@ function RadioButton(props: Props) {
                 value={props.value}
                 onChange={(e) => props.handler(e)}
             />
-            <label data-testid={props.testId} htmlFor={id}>{props.labelText}</label>
+            <label data-testid={props.testId} htmlFor={id}>
+                {props.labelText}
+            </label>
         </Span>
     )
 }

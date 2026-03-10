@@ -54,11 +54,7 @@ function getLimitedWord(str: string, limit: number, padLeft: boolean) {
     return newStr + ' '.repeat(limit - sum)
 }
 
-export function writeRankings(
-    coh3: boolean,
-    players: Player[],
-    rankingsHorizontal: boolean
-): void {
+export function writeRankings(coh3: boolean, players: Player[], rankingsHorizontal: boolean): void {
     const json: RankingsJson = {
         teams: {
             team1: [],
@@ -73,8 +69,7 @@ export function writeRankings(
         const country = players[i].country ? players[i].country : ''
         const name = players[i].name
 
-        let ranking =
-            players[i].ranking === -1 ? '-' : players[i].ranking?.toString()
+        let ranking = players[i].ranking === -1 ? '-' : players[i].ranking?.toString()
 
         if (ranking === undefined) {
             ranking = '-'

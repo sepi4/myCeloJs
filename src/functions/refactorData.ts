@@ -1,9 +1,4 @@
-import {
-    NormalizedExtraInfo,
-    AvailableLeaderboard,
-    PersonalStats,
-    StatGroup,
-} from '../types'
+import { NormalizedExtraInfo, AvailableLeaderboard, PersonalStats, StatGroup } from '../types'
 
 export function refactorData(
     leaderboard: PersonalStats,
@@ -50,16 +45,14 @@ export function refactorData(
                 players[id] &&
                 !players[id].ranks.find(
                     (y) =>
-                        y.statgroup_id === x.statgroup_id &&
-                        y.leaderboard_id === x.leaderboard_id
+                        y.statgroup_id === x.statgroup_id && y.leaderboard_id === x.leaderboard_id
                 ) &&
                 titlesLeadersboards[x.leaderboard_id]
             ) {
                 players[id].ranks.push({
                     members: group.members,
                     name: titlesLeadersboards[x.leaderboard_id].name,
-                    isModeRanked:
-                        titlesLeadersboards[x.leaderboard_id].isRanked,
+                    isModeRanked: titlesLeadersboards[x.leaderboard_id].isRanked,
                     ...x,
                 })
                 break

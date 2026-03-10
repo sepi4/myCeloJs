@@ -16,9 +16,7 @@ export const useOpenInfosStore = create<OpenInfosStore>((set) => ({
     toggleOpenInfo: (teamIndex, playerIndex) =>
         set((state) => ({
             openInfos: state.openInfos.map((t, i) =>
-                i === teamIndex
-                    ? t.map((p, j) => (j === playerIndex ? !p : p))
-                    : t
+                i === teamIndex ? t.map((p, j) => (j === playerIndex ? !p : p)) : t
             ),
         })),
     resetOpenInfos: () => set({ openInfos: defaultOpenInfos() }),

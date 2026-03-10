@@ -67,8 +67,7 @@ export default function PlayerCard() {
     )
 
     const linkSteam = getSiteLink('steam') + steamId
-    const funSteam = () =>
-        steamId ? window.electronAPI.shell.openExternal(linkSteam) : null
+    const funSteam = () => (steamId ? window.electronAPI.shell.openExternal(linkSteam) : null)
 
     const linkImages = coh3 ? (
         <div className={styles.links}>
@@ -79,7 +78,11 @@ export default function PlayerCard() {
                 alt="coh3stats"
                 title="coh3stats.com"
                 onClick={() =>
-                    player.profileId ? window.electronAPI.shell.openExternal(getSiteLink('coh3stats.com') + player.profileId) : null
+                    player.profileId
+                        ? window.electronAPI.shell.openExternal(
+                              getSiteLink('coh3stats.com') + player.profileId
+                          )
+                        : null
                 }
             />
             <img
@@ -100,7 +103,11 @@ export default function PlayerCard() {
                 alt="coh2stats"
                 title="coh2stats.com"
                 onClick={() =>
-                    steamId ? window.electronAPI.shell.openExternal(getSiteLink('coh2stats.com') + steamId) : null
+                    steamId
+                        ? window.electronAPI.shell.openExternal(
+                              getSiteLink('coh2stats.com') + steamId
+                          )
+                        : null
                 }
             />
             <img
@@ -110,7 +117,9 @@ export default function PlayerCard() {
                 alt="coh2"
                 title="coh2.org"
                 onClick={() =>
-                    steamId ? window.electronAPI.shell.openExternal(getSiteLink('coh2.org') + steamId) : null
+                    steamId
+                        ? window.electronAPI.shell.openExternal(getSiteLink('coh2.org') + steamId)
+                        : null
                 }
             />
             <img

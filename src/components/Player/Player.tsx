@@ -31,9 +31,7 @@ function Player(props: Props) {
                     showExtra,
                 }}
             />
-            {showExtra && extraInfo && (
-                <PlayerExtraInfo player={player} extraInfo={extraInfo} />
-            )}
+            {showExtra && extraInfo && <PlayerExtraInfo player={player} extraInfo={extraInfo} />}
         </div>
     )
 }

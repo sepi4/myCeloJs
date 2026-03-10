@@ -41,129 +41,97 @@
             "id": 4,
             "name": "1v1German",
             "isranked": 1,
-            "leaderboardmap": [
-                { "matchtype_id": 1, "statgroup_type": 1, "race_id": 0 }
-            ]
+            "leaderboardmap": [{ "matchtype_id": 1, "statgroup_type": 1, "race_id": 0 }]
         },
         {
             "id": 5,
             "name": "1v1Soviet",
             "isranked": 1,
-            "leaderboardmap": [
-                { "matchtype_id": 1, "statgroup_type": 1, "race_id": 1 }
-            ]
+            "leaderboardmap": [{ "matchtype_id": 1, "statgroup_type": 1, "race_id": 1 }]
         },
         {
             "id": 6,
             "name": "1v1WestGerman",
             "isranked": 1,
-            "leaderboardmap": [
-                { "matchtype_id": 1, "statgroup_type": 1, "race_id": 2 }
-            ]
+            "leaderboardmap": [{ "matchtype_id": 1, "statgroup_type": 1, "race_id": 2 }]
         },
         {
             "id": 7,
             "name": "1v1AEF",
             "isranked": 1,
-            "leaderboardmap": [
-                { "matchtype_id": 1, "statgroup_type": 1, "race_id": 3 }
-            ]
+            "leaderboardmap": [{ "matchtype_id": 1, "statgroup_type": 1, "race_id": 3 }]
         },
         {
             "id": 8,
             "name": "2v2German",
             "isranked": 1,
-            "leaderboardmap": [
-                { "matchtype_id": 2, "statgroup_type": 1, "race_id": 0 }
-            ]
+            "leaderboardmap": [{ "matchtype_id": 2, "statgroup_type": 1, "race_id": 0 }]
         },
         {
             "id": 9,
             "name": "2v2Soviet",
             "isranked": 1,
-            "leaderboardmap": [
-                { "matchtype_id": 2, "statgroup_type": 1, "race_id": 1 }
-            ]
+            "leaderboardmap": [{ "matchtype_id": 2, "statgroup_type": 1, "race_id": 1 }]
         },
         {
             "id": 10,
             "name": "2v2WestGerman",
             "isranked": 1,
-            "leaderboardmap": [
-                { "matchtype_id": 2, "statgroup_type": 1, "race_id": 2 }
-            ]
+            "leaderboardmap": [{ "matchtype_id": 2, "statgroup_type": 1, "race_id": 2 }]
         },
         {
             "id": 11,
             "name": "2v2AEF",
             "isranked": 1,
-            "leaderboardmap": [
-                { "matchtype_id": 2, "statgroup_type": 1, "race_id": 3 }
-            ]
+            "leaderboardmap": [{ "matchtype_id": 2, "statgroup_type": 1, "race_id": 3 }]
         },
         {
             "id": 12,
             "name": "3v3German",
             "isranked": 1,
-            "leaderboardmap": [
-                { "matchtype_id": 3, "statgroup_type": 1, "race_id": 0 }
-            ]
+            "leaderboardmap": [{ "matchtype_id": 3, "statgroup_type": 1, "race_id": 0 }]
         },
         {
             "id": 13,
             "name": "3v3Soviet",
             "isranked": 1,
-            "leaderboardmap": [
-                { "matchtype_id": 3, "statgroup_type": 1, "race_id": 1 }
-            ]
+            "leaderboardmap": [{ "matchtype_id": 3, "statgroup_type": 1, "race_id": 1 }]
         },
         {
             "id": 14,
             "name": "3v3WestGerman",
             "isranked": 1,
-            "leaderboardmap": [
-                { "matchtype_id": 3, "statgroup_type": 1, "race_id": 2 }
-            ]
+            "leaderboardmap": [{ "matchtype_id": 3, "statgroup_type": 1, "race_id": 2 }]
         },
         {
             "id": 15,
             "name": "3v3AEF",
             "isranked": 1,
-            "leaderboardmap": [
-                { "matchtype_id": 3, "statgroup_type": 1, "race_id": 3 }
-            ]
+            "leaderboardmap": [{ "matchtype_id": 3, "statgroup_type": 1, "race_id": 3 }]
         },
         {
             "id": 16,
             "name": "4v4German",
             "isranked": 1,
-            "leaderboardmap": [
-                { "matchtype_id": 4, "statgroup_type": 1, "race_id": 0 }
-            ]
+            "leaderboardmap": [{ "matchtype_id": 4, "statgroup_type": 1, "race_id": 0 }]
         },
         {
             "id": 17,
             "name": "4v4Soviet",
             "isranked": 1,
-            "leaderboardmap": [
-                { "matchtype_id": 4, "statgroup_type": 1, "race_id": 1 }
-            ]
+            "leaderboardmap": [{ "matchtype_id": 4, "statgroup_type": 1, "race_id": 1 }]
         },
         {
             "id": 18,
             "name": "4v4WestGerman",
             "isranked": 1,
-            "leaderboardmap": [
-                { "matchtype_id": 4, "statgroup_type": 1, "race_id": 2 }
-            ]
+            "leaderboardmap": [{ "matchtype_id": 4, "statgroup_type": 1, "race_id": 2 }]
         },
         {
             "id": 19,
             "name": "4v4AEF",
             "isranked": 1,
-            "leaderboardmap": [
-                { "matchtype_id": 4, "statgroup_type": 1, "race_id": 3 }
-            ]
+            "leaderboardmap": [{ "matchtype_id": 4, "statgroup_type": 1, "race_id": 3 }]
         },
         {
             "id": 20,
@@ -478,33 +446,25 @@
             "id": 51,
             "name": "1v1British",
             "isranked": 1,
-            "leaderboardmap": [
-                { "matchtype_id": 1, "statgroup_type": 1, "race_id": 4 }
-            ]
+            "leaderboardmap": [{ "matchtype_id": 1, "statgroup_type": 1, "race_id": 4 }]
         },
         {
             "id": 52,
             "name": "2v2British",
             "isranked": 1,
-            "leaderboardmap": [
-                { "matchtype_id": 2, "statgroup_type": 1, "race_id": 4 }
-            ]
+            "leaderboardmap": [{ "matchtype_id": 2, "statgroup_type": 1, "race_id": 4 }]
         },
         {
             "id": 53,
             "name": "3v3British",
             "isranked": 1,
-            "leaderboardmap": [
-                { "matchtype_id": 3, "statgroup_type": 1, "race_id": 4 }
-            ]
+            "leaderboardmap": [{ "matchtype_id": 3, "statgroup_type": 1, "race_id": 4 }]
         },
         {
             "id": 54,
             "name": "4v4British",
             "isranked": 1,
-            "leaderboardmap": [
-                { "matchtype_id": 4, "statgroup_type": 1, "race_id": 4 }
-            ]
+            "leaderboardmap": [{ "matchtype_id": 4, "statgroup_type": 1, "race_id": 4 }]
         }
     ],
     "matchTypes": [

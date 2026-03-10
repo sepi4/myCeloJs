@@ -26,11 +26,7 @@ function FactionIcon({ faction, size }: Props) {
                     width: size,
                     height: size,
                 }}
-                src={
-                    coh3
-                        ? getFactionFlagLocationCoh3(faction)
-                        : getFactionFlagLocation(faction)
-                }
+                src={coh3 ? getFactionFlagLocationCoh3(faction) : getFactionFlagLocation(faction)}
                 alt={`${faction}`}
             />
         </div>
