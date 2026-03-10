@@ -64,3 +64,4 @@ ehthumbs.db
 # Windows shortcuts #
 #####################
 *.lnk
+localhostFiles/port.js
