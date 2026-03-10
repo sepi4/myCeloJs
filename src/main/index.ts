@@ -1,9 +1,10 @@
-const path = require('path')
-const { app, BrowserWindow, ipcMain, dialog, shell } = require('electron')
-const fs = require('fs')
-const http = require('http')
+import path from 'path'
+import { app, BrowserWindow, ipcMain, dialog, shell } from 'electron'
+import fs from 'fs'
+import http from 'http'
+import portfinder from 'portfinder'
 
-let mainWindow
+let mainWindow: BrowserWindow | null = null
 
 function createMainWindow() {
     const icon =
@@ -34,16 +35,14 @@ function createMainWindow() {
     mainWindow.setMenu(null)
 
     mainWindow.once('ready-to-show', () => {
-        mainWindow.show()
+        mainWindow!.show()
         if (process.env['ELECTRON_RENDERER_URL']) {
-            const {
-                installExtension,
-                REACT_DEVELOPER_TOOLS,
-            } = require('electron-devtools-installer')
-            installExtension(REACT_DEVELOPER_TOOLS).catch((err) =>
-                console.log('Error loading React DevTools:', err)
-            )
-            mainWindow.webContents.openDevTools()
+            import('electron-devtools-installer').then(({ default: installExtension, REACT_DEVELOPER_TOOLS }) => {
+                installExtension(REACT_DEVELOPER_TOOLS).catch((err: Error) =>
+                    console.log('Error loading React DevTools:', err)
+                )
+            })
+            mainWindow!.webContents.openDevTools()
         }
     })
 
@@ -71,27 +70,27 @@ ipcMain.on('get-app-info', (event) => {
     }
 })
 
-ipcMain.handle('shell:open-external', (_event, url) => {
+ipcMain.handle('shell:open-external', (_event, url: string) => {
     return shell.openExternal(url)
 })
 
 ipcMain.handle('dialog:show-open', (_event, options) => {
-    return dialog.showOpenDialog(mainWindow, options)
+    return dialog.showOpenDialog(mainWindow!, options)
 })
 
-ipcMain.handle('settings:read', (_event, filePath) => {
+ipcMain.handle('settings:read', (_event, filePath: string) => {
     return fs.promises.readFile(filePath, 'utf-8').catch(() => null)
 })
 
-ipcMain.handle('settings:write', (_event, filePath, data) => {
+ipcMain.handle('settings:write', (_event, filePath: string, data: string) => {
     return fs.promises.writeFile(filePath, data, 'utf-8')
 })
 
-ipcMain.handle('log:read', (_event, filePath) => {
+ipcMain.handle('log:read', (_event, filePath: string) => {
     return fs.promises.readFile(filePath, 'utf-8').catch(() => null)
 })
 
-ipcMain.handle('rankings:write', (_event, jsonContent, txtContent) => {
+ipcMain.handle('rankings:write', (_event, jsonContent: string, txtContent: string) => {
     const dir = path.join(process.cwd(), 'localhostFiles')
     return Promise.all([
         fs.promises
@@ -105,7 +104,7 @@ ipcMain.handle('rankings:write', (_event, jsonContent, txtContent) => {
 
 // ── Local HTTP server for streaming overlays ──────────────────────────────────
 
-function serveJson(port) {
+function serveJson(port: string) {
     http.createServer(function (_request, response) {
         response.writeHead(200, {
             'Content-Type': 'text/json',
@@ -119,10 +118,9 @@ function serveJson(port) {
                 response.end()
             }
         )
-    }).listen(port, null, () => {})
+    }).listen(port, undefined, () => {})
 }
 
-const portfinder = require('portfinder')
 portfinder
     .getPortPromise({ port: 2222, stopPort: 3333 })
     .then((port) => {
