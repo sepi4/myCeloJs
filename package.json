@@ -23,7 +23,8 @@
         "preview": "electron-vite preview",
         "test": "jest",
         "dist": "npm run e2e && electron-builder",
-        "e2e": "npm run build && npx playwright test"
+        "e2e": "npm run build && npx playwright test",
+        "prepare": "husky"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^7.2.0",
@@ -38,6 +39,13 @@
         "styled-components": "^6.3.11",
         "use-sound": "^5.0.0",
         "zustand": "^5.0.11"
+    },
+    "lint-staged": {
+        "*.{ts,tsx}": [
+            "prettier --write",
+            "eslint --max-warnings 0"
+        ],
+        "*.{js,json,css}": "prettier --write"
     },
     "devDependencies": {
         "@eslint/js": "^9.0.0",
@@ -55,8 +63,10 @@
         "eslint-plugin-jest": "^29.15.0",
         "eslint-plugin-react": "^7.37.5",
         "eslint-plugin-react-hooks": "^7.0.1",
+        "husky": "^9.1.7",
         "jest": "^30.2.0",
         "jest-environment-jsdom": "^30.2.0",
+        "lint-staged": "^16.3.3",
         "prettier": "^3.8.1",
         "ts-jest": "^29.4.6",
         "typescript": "^5.9.3",
