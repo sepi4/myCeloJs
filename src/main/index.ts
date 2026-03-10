@@ -12,8 +12,10 @@ function createMainWindow() {
             ? path.join(__dirname, '../../assets/icon/icon.png')
             : path.join(__dirname, '../../assets/icon/icon.ico')
 
+    const isDev = !!process.env['ELECTRON_RENDERER_URL']
+
     mainWindow = new BrowserWindow({
-        width: 800,
+        width: isDev ? 1100 : 800,
         height: 600,
         show: false,
         icon,
