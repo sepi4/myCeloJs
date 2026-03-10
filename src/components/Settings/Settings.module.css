@@ -28,3 +28,22 @@
     display: flex;
     gap: 1rem;
 }
+
+.resetConfirmModal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: gray;
+    color: black;
+    font-weight: bold;
+    border: 1px solid #444;
+    padding: 2em;
+    text-align: center;
+}
+
+.resetConfirmOverlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(200, 200, 200, 0.5);
+}

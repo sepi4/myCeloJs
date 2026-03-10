@@ -280,3 +280,30 @@ test('fetch game history and open game modal', async () => {
     await page.keyboard.press('Escape')
     await expect(app.gameModal).not.toBeVisible()
 })
+
+test('reset all settings - cancel keeps settings, ok clears and reloads', async () => {
+    // Open settings — log location is set so the reset button should be enabled
+    await app.settingsIcon.click()
+    await expect(app.resetSettingsButton).toBeEnabled()
+
+    // Click reset — confirmation modal should appear
+    await app.resetSettingsButton.click()
+    await expect(app.resetConfirmOk).toBeVisible()
+    await expect(app.resetConfirmCancel).toBeVisible()
+
+    // Cancel — modal closes, settings are unchanged
+    await app.resetConfirmCancel.click()
+    await expect(app.resetConfirmOk).not.toBeVisible()
+    await expect(app.languageSelect).toBeVisible()
+
+    // Click reset again and confirm — page reloads to a fresh state
+    await app.resetSettingsButton.click()
+    await app.resetConfirmOk.click()
+    await page.waitForLoadState('domcontentloaded')
+
+    // After reset the no-log prompt should be visible and reset button disabled
+    await expect(app.noLogPrompt).toBeVisible()
+    await app.settingsIcon.click()
+    await expect(app.resetSettingsButton).toBeDisabled()
+    await app.closeButton.click()
+})

@@ -40,6 +40,9 @@ export class App {
     readonly steamIdSave: Locator
     readonly steamIdError: Locator
     readonly steamIdSuccess: Locator
+    readonly resetSettingsButton: Locator
+    readonly resetConfirmOk: Locator
+    readonly resetConfirmCancel: Locator
 
     // Navbar checkboxes
     readonly checkboxAll: Locator
@@ -103,6 +106,9 @@ export class App {
         this.steamIdSave = page.getByTestId('steam-id-save')
         this.steamIdError = page.getByTestId('steam-id-error')
         this.steamIdSuccess = page.getByTestId('steam-id-success')
+        this.resetSettingsButton = page.getByTestId('reset-settings-button')
+        this.resetConfirmOk = page.getByTestId('reset-confirm-ok')
+        this.resetConfirmCancel = page.getByTestId('reset-confirm-cancel')
 
         this.radioHtml = page.getByTestId('radio-html')
         this.radioHorizontal = page.getByTestId('radio-horizontal')

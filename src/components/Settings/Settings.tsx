@@ -1,4 +1,5 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
+import Modal from 'react-modal'
 
 import { fetchCoh2ProfileId } from '../../functions/fetchCoh2ProfileId'
 import getText from '../../functions/getText'
@@ -23,6 +24,8 @@ function Settings(props: Props) {
     const { toggleSettingsView } = useSettingsViewStore()
 
     const lg = settings && settings.language ? settings.language : 'en'
+
+    const [resetConfirmOpen, setResetConfirmOpen] = useState(false)
 
     const [timedError, setTimedError] = useTimedBoolean(1000)
     const [timedSetID, setTimedSetID] = useTimedBoolean(1000)
@@ -121,6 +124,15 @@ function Settings(props: Props) {
         <Notification testId="steam-id-success" text={getText('id_set', settings)} />
     ) : null
 
+    const isDefaultSettings =
+        !settings ||
+        (!settings.logLocationCoh2 &&
+            !settings.logLocationCoh3 &&
+            !settings.language &&
+            !settings.steamId &&
+            !settings.rankingsFile &&
+            !settings.ignoreUntil)
+
     return (
         <div style={{ marginTop: '4em' }}>
             <SettingsDiv title={getText('language', settings)} testId="language-title">
@@ -218,6 +230,61 @@ function Settings(props: Props) {
             </SettingsDiv>
 
             <SettingsAfterLog />
+
+            <Modal
+                isOpen={resetConfirmOpen}
+                ariaHideApp={false}
+                shouldCloseOnOverlayClick={true}
+                onRequestClose={() => setResetConfirmOpen(false)}
+                className={styles.resetConfirmModal}
+                overlayClassName={styles.resetConfirmOverlay}
+            >
+                <p>{getText('reset_all_settings_confirm', settings)}</p>
+                <div
+                    style={{
+                        display: 'flex',
+                        gap: '1em',
+                        justifyContent: 'center',
+                        marginTop: '1em',
+                    }}
+                >
+                    <StyledButton
+                        data-testid="reset-confirm-ok"
+                        onClick={() => {
+                            setResetConfirmOpen(false)
+                            const settingsPath =
+                                window.electronAPI.settingsDir +
+                                window.electronAPI.pathSep +
+                                'settings.json'
+                            const blank = JSON.stringify({
+                                appLocation: window.electronAPI.appLocation,
+                            })
+                            window.electronAPI.settings
+                                .write(settingsPath, blank)
+                                .then(() => window.location.reload())
+                        }}
+                    >
+                        {getText('ok', settings)}
+                    </StyledButton>
+                    <StyledButton
+                        data-testid="reset-confirm-cancel"
+                        onClick={() => setResetConfirmOpen(false)}
+                    >
+                        {getText('cancel', settings)}
+                    </StyledButton>
+                </div>
+            </Modal>
+
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '2em' }}>
+                <StyledButton
+                    data-testid="reset-settings-button"
+                    style={{ marginLeft: 'auto' }}
+                    disabled={isDefaultSettings}
+                    onClick={() => setResetConfirmOpen(true)}
+                >
+                    {getText('reset_all_settings', settings)}
+                </StyledButton>
+            </div>
         </div>
     )
 }

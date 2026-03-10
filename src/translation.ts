@@ -81,6 +81,22 @@ const text: Translations = {
         en: 'ID set',
         ru: 'ID установлен',
     },
+    reset_all_settings: {
+        en: 'Reset all settings',
+        ru: 'Сбросить все настройки',
+    },
+    reset_all_settings_confirm: {
+        en: 'Reset all settings?',
+        ru: 'Сбросить все настройки?',
+    },
+    cancel: {
+        en: 'cancel',
+        ru: 'отмена',
+    },
+    ok: {
+        en: 'ok',
+        ru: 'ок',
+    },
 
     // navbar  ---------------------------------
 

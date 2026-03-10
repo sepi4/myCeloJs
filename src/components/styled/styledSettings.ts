@@ -37,4 +37,8 @@ export const StyledButton = styled.button<{ $buttonColor?: string }>`
         color: black;
         background-color: #ddd;
     }
+    &:disabled {
+        opacity: 0.35;
+        cursor: default;
+    }
 `
