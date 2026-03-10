@@ -12,8 +12,8 @@ interface Props {
 function SettingsDiv(props: Props) {
     const req = props.required ? (
         <span
+            title="required"
             style={{
-                // marginLeft: '1em',
                 color: 'darkred',
                 fontWeight: 'bold',
                 fontSize: '150%',

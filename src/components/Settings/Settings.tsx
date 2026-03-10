@@ -106,14 +106,6 @@ function Settings(props: Props) {
         writeSettings(newSettings)
     }
 
-    const star = <span className={styles.star}>*</span>
-
-    const req = (
-        <div className={styles.req}>
-            {star} {getText('required', settings)}
-        </div>
-    )
-
     const errorDiv = timedError ? (
         <Notification
             testId="steam-id-error"
@@ -131,8 +123,6 @@ function Settings(props: Props) {
 
     return (
         <div style={{ marginTop: '4em' }}>
-            {req}
-
             <SettingsDiv title={getText('language', settings)} testId="language-title">
                 <select
                     data-testid="language-select"
