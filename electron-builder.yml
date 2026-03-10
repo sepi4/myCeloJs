@@ -4,12 +4,13 @@ copyright: Copyright © 2024 Sergei Polishsuk
 
 directories:
     output: dist
-    buildResources: img
+    buildResources: assets
 
 files:
     - out/**
     - countries.json
-    - img/**
+    - src/assets/img/**
+    - assets/**
 
 extraResources:
     - from: localhostFiles/
@@ -23,7 +24,7 @@ win:
     target:
         - target: nsis
           arch: [x64]
-    icon: img/icon/icon.ico
+    icon: assets/icon/icon.ico
 
 linux:
     target:
@@ -31,7 +32,7 @@ linux:
           arch: [x64]
         - target: AppImage
           arch: [x64]
-    icon: img/icon/icon.png
+    icon: assets/icon/icon.png
     maintainer: myCelo
 
 nsis:

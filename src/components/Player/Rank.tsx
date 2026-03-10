@@ -7,8 +7,8 @@ import Members from './Members'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons'
 
-import star from '../../../img/star.png'
-import cross from '../../../img/cross.png'
+import star from '../../assets/img/star.png'
+import cross from '../../assets/img/cross.png'
 
 import { Rank as RankType } from '../../types'
 import { useSettingsStore } from '../../stores/settingsStore'

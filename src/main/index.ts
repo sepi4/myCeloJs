@@ -9,8 +9,8 @@ let mainWindow: BrowserWindow | null = null
 function createMainWindow() {
     const icon =
         process.platform !== 'win32'
-            ? path.join(__dirname, '../../img/icon/icon.png')
-            : path.join(__dirname, '../../img/icon/icon.ico')
+            ? path.join(__dirname, '../../assets/icon/icon.png')
+            : path.join(__dirname, '../../assets/icon/icon.ico')
 
     mainWindow = new BrowserWindow({
         width: 800,
