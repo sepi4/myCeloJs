@@ -302,6 +302,64 @@ describe('guessRankings', () => {
         expect(team1[0].country).toBeUndefined()
     })
 
+    test('COH2 2v2 — team stat group exists but unranked, falls back to solo rank and keeps team marker', () => {
+        // P1 and P2 share a type-2 stat group but have no team leaderboard entry.
+        // They should fall back to their individual 2v2German ranks and still share a teamMarker.
+        const players: Player[] = [
+            makePlayer({
+                name: 'P1',
+                faction: 'german',
+                teamSlot: 0,
+                profileId: 7001,
+            }),
+            makePlayer({
+                name: 'P2',
+                faction: 'german',
+                teamSlot: 0,
+                profileId: 7002,
+            }),
+        ]
+
+        const teamSg = makeStatGroup({
+            id: 700,
+            type: 2,
+            members: [
+                makeMember({ profile_id: 7001, country: 'de' }),
+                makeMember({ profile_id: 7002, country: 'pl' }),
+            ],
+        })
+
+        const soloSg1 = makeStatGroup({
+            id: 701,
+            type: 1,
+            members: [makeMember({ profile_id: 7001, country: 'de' })],
+        })
+        const soloSg2 = makeStatGroup({
+            id: 702,
+            type: 1,
+            members: [makeMember({ profile_id: 7002, country: 'pl' })],
+        })
+
+        const stats = makeStats(
+            [teamSg, soloSg1, soloSg2],
+            [
+                // No team ranking for TeamOf2Axis — teamSg 700 has no leaderboard entry
+                makeLbStat({ leaderboard_id: 8, statgroup_id: 701, rank: 55 }), // 2v2German P1
+                makeLbStat({ leaderboard_id: 8, statgroup_id: 702, rank: 88 }), // 2v2German P2
+            ]
+        )
+
+        const [team0] = guessRankings(players, stats, coh2Leaderboards)
+
+        // Both fall back to individual 2v2German rankings
+        expect(team0[0].ranking).toBe(55)
+        expect(team0[1].ranking).toBe(88)
+
+        // But they still share a teamMarker because they are in the same stat group
+        expect(team0[0].teamMarker).toBe(' ¹')
+        expect(team0[1].teamMarker).toBe(' ¹')
+    })
+
     test('Mixed factions in team — no team leaderboard, falls back to individual', () => {
         const players: Player[] = [
             makePlayer({

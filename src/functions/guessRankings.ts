@@ -38,19 +38,14 @@ function assignTeamRanks(
     stats: PersonalStats,
     leaderboardId: number | undefined
 ): void {
-    const seen = new Set<number>()
-    let teamIndex = 1
+    statGroups.forEach((sg, i) => {
+        sg.teamMarker = i === 0 ? ' ¹' : ' ²'
+    })
 
     for (const ls of stats.leaderboardStats) {
         if (ls.leaderboard_id !== leaderboardId) continue
-
         const matchedSg = statGroups.find((sg) => sg.id === ls.statgroup_id)
-        if (!matchedSg || seen.has(ls.statgroup_id)) continue
-
-        seen.add(ls.statgroup_id)
-        matchedSg.rank = ls.rank
-        matchedSg.teamMarker = teamIndex === 1 ? ' ¹' : ' ²'
-        teamIndex++
+        if (matchedSg) matchedSg.rank = ls.rank
     }
 }
 
@@ -108,7 +103,8 @@ export function guessRankings(
                     sg.members.some((m) => m.profile_id === player.profileId)
                 )
                 if (playerSg) {
-                    player.ranking = playerSg.rank
+                    player.ranking =
+                        playerSg.rank ?? getPlayerRank(player, team, stats, leaderboards)
                     player.teamMarker = playerSg.teamMarker
                 } else {
                     player.ranking = getPlayerRank(player, team, stats, leaderboards)
