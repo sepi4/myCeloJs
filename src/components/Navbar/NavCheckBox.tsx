@@ -1,3 +1,4 @@
+import { useId } from 'react'
 import moduleStyle from './NavCheckBox.module.css'
 
 interface Props {
@@ -8,7 +9,7 @@ interface Props {
 }
 
 export default function NavCheckbox(props: Props) {
-    const id = Math.random().toString()
+    const id = useId()
 
     return (
         <span className={moduleStyle.span}>

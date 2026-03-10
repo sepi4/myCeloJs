@@ -16,11 +16,8 @@ function TableDiv({ ranksArr }: { ranksArr: Rank[] }) {
     const [solo, factionNames] = coh3
         ? refactronTableInfoCoh3(ranksArr)
         : refactronTableInfo(ranksArr)
-    let index = 0
-
     const factionGrids = factionNames.map((name, i) => {
-        const ii = index
-        index += 4
+        const ii = i * 4
         const faction: FactionName = name as FactionName
         return (
             <div

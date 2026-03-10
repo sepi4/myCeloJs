@@ -10,7 +10,7 @@ module.exports = tseslint.config(
     tseslint.configs.recommended,
     reactPlugin.configs.flat.recommended,
     reactPlugin.configs.flat['jsx-runtime'],
-    reactHooksPlugin.configs['recommended-latest'],
+    reactHooksPlugin.configs.flat['recommended-latest'],
     {
         settings: {
             react: { version: 'detect' },
@@ -20,6 +20,7 @@ module.exports = tseslint.config(
             'linebreak-style': ['error', 'unix'],
             quotes: ['error', 'single'],
             semi: ['error', 'never'],
+            'react-hooks/set-state-in-effect': 'off',
         },
     },
     {
@@ -27,7 +28,7 @@ module.exports = tseslint.config(
         ...jestPlugin.configs['flat/recommended'],
     },
     {
-        files: ['src/main/**/*.js', 'src/preload/**/*.js'],
+        files: ['src/main/**/*.ts', 'src/preload/**/*.ts'],
         languageOptions: {
             globals: globals.node,
         },

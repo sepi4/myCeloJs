@@ -1,3 +1,4 @@
+import { JSX } from 'react'
 interface Props {
     children?: string | number | JSX.Element
     title?: string

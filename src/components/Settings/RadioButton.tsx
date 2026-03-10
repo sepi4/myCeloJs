@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react'
+import { ChangeEvent, useId } from 'react'
 import styled from 'styled-components'
 
 const Span = styled.span`
@@ -23,7 +23,7 @@ interface Props {
 }
 
 function RadioButton(props: Props) {
-    const id = Math.random().toString()
+    const id = useId()
 
     return (
         <Span>

@@ -1,3 +1,4 @@
+import { JSX } from 'react'
 import styles from './RadioButtonsDiv.module.css'
 
 interface Props {
