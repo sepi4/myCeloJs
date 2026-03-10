@@ -82,12 +82,12 @@ const text: Translations = {
         ru: 'ID установлен',
     },
     reset_all_settings: {
-        en: 'Reset all settings',
-        ru: 'Сбросить все настройки',
+        en: 'Remove all settings',
+        ru: 'Удалить все настройки',
     },
     reset_all_settings_confirm: {
-        en: 'Reset all settings?',
-        ru: 'Сбросить все настройки?',
+        en: 'Remove all settings?',
+        ru: 'Удалить все настройки?',
     },
     cancel: {
         en: 'cancel',
