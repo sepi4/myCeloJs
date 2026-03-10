@@ -6,6 +6,21 @@
     padding: 0.3em;
     margin-bottom: 0.2em;
     border: solid 0.05em #555;
+    position: relative;
+}
+
+.clearButton {
+    position: absolute;
+    top: 50%;
+    right: 0.3em;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #cc0000;
+    font-size: 1.1em;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
 }
 
 .input {

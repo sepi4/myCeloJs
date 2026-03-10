@@ -97,6 +97,10 @@ const text: Translations = {
         en: 'ok',
         ru: 'ок',
     },
+    clear_log_location: {
+        en: 'Clear log location',
+        ru: 'Очистить путь к лог-файлу',
+    },
 
     // navbar  ---------------------------------
 

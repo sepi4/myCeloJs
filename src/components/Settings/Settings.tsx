@@ -80,6 +80,11 @@ function Settings(props: Props) {
         })
     }
 
+    const clearLogLocation = (game: 'coh2' | 'coh3') => {
+        const key = game === 'coh2' ? 'logLocationCoh2' : 'logLocationCoh3'
+        writeSettings({ ...settings!, [key]: undefined })
+    }
+
     const changeLogLocation = (game: 'coh2' | 'coh3') => {
         window.electronAPI.dialog
             .showOpenDialog({
@@ -153,6 +158,16 @@ function Settings(props: Props) {
             <SettingsDiv title={`COH2 ${getText('log_location_title', settings)}`} required>
                 <div className={styles.textDiv}>
                     {settings?.logLocationCoh2 ?? ''}
+                    {settings?.logLocationCoh2 && (
+                        <button
+                            data-testid="clear-log-coh2-button"
+                            className={styles.clearButton}
+                            onClick={() => clearLogLocation('coh2')}
+                            title={getText('clear_log_location', settings)}
+                        >
+                            ✕
+                        </button>
+                    )}
                     {timedCopyCoh2 && (
                         <Notification
                             testId="copy-log-coh2-notification"
@@ -184,6 +199,16 @@ function Settings(props: Props) {
             <SettingsDiv title={`COH3 ${getText('log_location_title', settings)}`} required>
                 <div className={styles.textDiv}>
                     {settings?.logLocationCoh3 ?? ''}
+                    {settings?.logLocationCoh3 && (
+                        <button
+                            data-testid="clear-log-coh3-button"
+                            className={styles.clearButton}
+                            onClick={() => clearLogLocation('coh3')}
+                            title={getText('clear_log_location', settings)}
+                        >
+                            ✕
+                        </button>
+                    )}
                     {timedCopyCoh3 && (
                         <Notification
                             testId="copy-log-coh3-notification"
