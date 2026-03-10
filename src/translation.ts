@@ -157,6 +157,10 @@ const text: Translations = {
         en: 'settings',
         ru: 'настройки',
     },
+    log_not_set: {
+        en: 'Game log file is not set',
+        ru: 'Лог-файл игры не указан',
+    },
 
     // dropdown menu  ---------------------------------
     of: {

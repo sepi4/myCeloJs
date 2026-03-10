@@ -46,6 +46,11 @@
     align-items: center;
 }
 
+.radio input {
+    cursor: pointer;
+}
+
 .radio label {
     margin-left: 0.2em;
+    cursor: pointer;
 }

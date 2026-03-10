@@ -149,7 +149,14 @@ export default function Navbar(props: Props) {
                 <div className={styles.column}>
                     <NavbarRow fontSize="60%">{getText('game', settings)}</NavbarRow>
                     <NavbarRow>
-                        <div className={styles.radio}>
+                        <div
+                            className={styles.radio}
+                            title={
+                                !settings?.logLocationCoh2
+                                    ? getText('log_not_set', settings)
+                                    : undefined
+                            }
+                        >
                             <input
                                 data-testid="radio-coh2"
                                 id="coh2"
@@ -160,7 +167,14 @@ export default function Navbar(props: Props) {
                             />{' '}
                             <label htmlFor="coh2">coh2</label>
                         </div>
-                        <div className={styles.radio}>
+                        <div
+                            className={styles.radio}
+                            title={
+                                !settings?.logLocationCoh3
+                                    ? getText('log_not_set', settings)
+                                    : undefined
+                            }
+                        >
                             <input
                                 data-testid="radio-coh3"
                                 id="coh3"
