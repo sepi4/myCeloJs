@@ -1,34 +1,42 @@
 .textDiv {
     min-height: 1em;
     font-size: 90%;
-    overflow-wrap: break-word;
     background-color: #999;
     padding: 0.3em;
     margin-bottom: 0.2em;
     border: solid 0.05em #555;
-    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5em;
+    overflow: hidden;
 }
 
-.clearButton {
+.textDivText {
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: break-all;
+}
+
+.inputWrapper {
+    position: relative;
+    margin-bottom: 0.2em;
+}
+
+.inputWrapper > button {
     position: absolute;
     top: 50%;
     right: 0.3em;
     transform: translateY(-50%);
-    background: none;
-    border: none;
-    color: #cc0000;
-    font-size: 1.1em;
-    cursor: pointer;
-    line-height: 1;
-    padding: 0;
 }
 
 .input {
     width: 100%;
     background-color: #dddddd;
     padding: 0.3em;
-    margin-bottom: 0.2em;
+    padding-right: 2em;
     border: solid 0.05em #555;
+    box-sizing: border-box;
 }
 
 .error {

@@ -77,6 +77,14 @@ const text: Translations = {
         en: 'required',
         ru: 'обязательно',
     },
+    required_for_coh2: {
+        en: 'Required for COH2',
+        ru: 'Обязательно для COH2',
+    },
+    required_for_coh3: {
+        en: 'Required for COH3',
+        ru: 'Обязательно для COH3',
+    },
     id_set: {
         en: 'ID set',
         ru: 'ID установлен',
@@ -100,6 +108,10 @@ const text: Translations = {
     clear_log_location: {
         en: 'Clear log location',
         ru: 'Очистить путь к лог-файлу',
+    },
+    clear_steam_id: {
+        en: 'Clear steam id',
+        ru: 'Очистить steam id',
     },
 
     // navbar  ---------------------------------

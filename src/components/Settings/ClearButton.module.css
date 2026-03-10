@@ -1,0 +1,16 @@
+.clearButton {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    color: #cc0000;
+    font-size: 1.1em;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+}
+
+.clearButton:hover {
+    background-color: rgba(204, 0, 0, 0.15);
+    color: #ff0000;
+}

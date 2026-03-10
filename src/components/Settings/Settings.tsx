@@ -11,6 +11,7 @@ import { useSettingsViewStore } from '../../stores/settingsViewStore'
 import { SettingsType } from '../../types'
 import Notification from '../Notification'
 import { StyledButton } from '../styled/styledSettings'
+import ClearButton from './ClearButton'
 import styles from './Settings.module.css'
 import SettingsAfterLog from './SettingsAfterLog'
 import SettingsDiv from './SettingsDiv'
@@ -78,6 +79,16 @@ function Settings(props: Props) {
             } as SettingsType)
             setTimedSetID(true)
         })
+    }
+
+    const clearSteamId = () => {
+        const newSettings = {
+            ...settings,
+            steamId: undefined,
+            profileIdCoh2: undefined,
+        } as unknown as SettingsType
+        writeSettings(newSettings)
+        if (steamIdInputRef.current) steamIdInputRef.current.value = ''
     }
 
     const clearLogLocation = (game: 'coh2' | 'coh3') => {
@@ -155,18 +166,19 @@ function Settings(props: Props) {
                 </select>
             </SettingsDiv>
 
-            <SettingsDiv title={`COH2 ${getText('log_location_title', settings)}`} required>
+            <SettingsDiv
+                title={`COH2 ${getText('log_location_title', settings)}`}
+                required
+                requiredTitle={getText('required_for_coh2', settings)}
+            >
                 <div className={styles.textDiv}>
-                    {settings?.logLocationCoh2 ?? ''}
+                    <span className={styles.textDivText}>{settings?.logLocationCoh2 ?? ''}</span>
                     {settings?.logLocationCoh2 && (
-                        <button
-                            data-testid="clear-log-coh2-button"
-                            className={styles.clearButton}
+                        <ClearButton
+                            testId="clear-log-coh2-button"
                             onClick={() => clearLogLocation('coh2')}
                             title={getText('clear_log_location', settings)}
-                        >
-                            ✕
-                        </button>
+                        />
                     )}
                     {timedCopyCoh2 && (
                         <Notification
@@ -196,18 +208,19 @@ function Settings(props: Props) {
                 </div>
             </SettingsDiv>
 
-            <SettingsDiv title={`COH3 ${getText('log_location_title', settings)}`} required>
+            <SettingsDiv
+                title={`COH3 ${getText('log_location_title', settings)}`}
+                required
+                requiredTitle={getText('required_for_coh3', settings)}
+            >
                 <div className={styles.textDiv}>
-                    {settings?.logLocationCoh3 ?? ''}
+                    <span className={styles.textDivText}>{settings?.logLocationCoh3 ?? ''}</span>
                     {settings?.logLocationCoh3 && (
-                        <button
-                            data-testid="clear-log-coh3-button"
-                            className={styles.clearButton}
+                        <ClearButton
+                            testId="clear-log-coh3-button"
                             onClick={() => clearLogLocation('coh3')}
                             title={getText('clear_log_location', settings)}
-                        >
-                            ✕
-                        </button>
+                        />
                     )}
                     {timedCopyCoh3 && (
                         <Notification
@@ -239,12 +252,21 @@ function Settings(props: Props) {
 
             <SettingsDiv title={getText('my_steam_id', settings)}>
                 <>
-                    <input
-                        data-testid="steam-id-input"
-                        className={styles.input}
-                        ref={steamIdInputRef}
-                        defaultValue={settings && settings.steamId ? settings.steamId : ''}
-                    />
+                    <div className={styles.inputWrapper}>
+                        <input
+                            data-testid="steam-id-input"
+                            className={styles.input}
+                            ref={steamIdInputRef}
+                            defaultValue={settings && settings.steamId ? settings.steamId : ''}
+                        />
+                        {settings?.steamId && (
+                            <ClearButton
+                                testId="clear-steam-id-button"
+                                onClick={clearSteamId}
+                                title={getText('clear_steam_id', settings)}
+                            />
+                        )}
+                    </div>
 
                     <StyledButton data-testid="steam-id-save" onClick={handleSteamId}>
                         {getText('save', settings)}
@@ -300,16 +322,17 @@ function Settings(props: Props) {
                 </div>
             </Modal>
 
-            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '2em' }}>
-                <StyledButton
-                    data-testid="reset-settings-button"
-                    style={{ marginLeft: 'auto' }}
-                    disabled={isDefaultSettings}
-                    onClick={() => setResetConfirmOpen(true)}
-                >
-                    {getText('reset_all_settings', settings)}
-                </StyledButton>
-            </div>
+            <SettingsDiv>
+                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                    <StyledButton
+                        data-testid="reset-settings-button"
+                        disabled={isDefaultSettings}
+                        onClick={() => setResetConfirmOpen(true)}
+                    >
+                        {getText('reset_all_settings', settings)}
+                    </StyledButton>
+                </div>
+            </SettingsDiv>
         </div>
     )
 }
