@@ -74,7 +74,8 @@ export interface SettingsType {
     rankingsFile: string
     rankingsHorizontal: boolean
     steamId: string
-    profileId: string
+    profileIdCoh2: number
+    profileIdCoh3: number
     ignoreUntil?: string
 }
 

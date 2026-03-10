@@ -65,7 +65,11 @@ export default function Navbar(props: Props) {
                 className={styles.navbar}
                 style={{ justifyContent: 'flex-end' }}
             >
-                <NavBarIcon icon={faTimes} fun={settingsViewToggeler} testId="close-button" />
+                <NavBarIcon
+                    icon={faTimes}
+                    fun={settingsViewToggeler}
+                    testId="close-button"
+                />
             </div>
         )
     }
@@ -75,7 +79,9 @@ export default function Navbar(props: Props) {
     }
 
     const handleOpenMyCard = () => {
-        const id: number = Number(settings!.profileId)
+        const id = navButtons.coh3
+            ? settings!.profileIdCoh3
+            : settings!.profileIdCoh2
 
         getExtraInfo(navButtons.coh3, [id], (result) => {
             const ex = result[id]
@@ -97,13 +103,16 @@ export default function Navbar(props: Props) {
         })
     }
 
+    const activeProfileId = navButtons.coh3
+        ? settings?.profileIdCoh3
+        : settings?.profileIdCoh2
     let userIcon = null
     if (
         settings &&
-        settings.steamId &&
+        activeProfileId &&
         !(
             view === 'playerCard' &&
-            playerCardPlayer?.profileId === settings.profileId
+            playerCardPlayer?.profileId === activeProfileId
         )
     ) {
         userIcon = (
@@ -149,12 +158,8 @@ export default function Navbar(props: Props) {
 
     return (
         <div className={styles.navbar}>
-            {!navButtons.coh3 && (
-                <>
-                    {userIcon}
-                    {searchIcon}
-                </>
-            )}
+            {userIcon}
+            {!navButtons.coh3 && searchIcon}
 
             <div className={styles.container}>
                 <div className={styles.column}>

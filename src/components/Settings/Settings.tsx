@@ -7,6 +7,7 @@ import Notification from '../Notification'
 import useTimedBoolean from '../../hooks/useTimedBoolean'
 
 import writeSettings from '../../functions/writeSettings'
+import { fetchCoh2ProfileId } from '../../functions/fetchCoh2ProfileId'
 
 import { StyledButton } from '../styled/styledSettings'
 import styles from './Settings.module.css'
@@ -55,7 +56,7 @@ function Settings(props: Props) {
             const newSettings = {
                 ...settings,
                 steamId: undefined,
-                profileId: undefined,
+                profileIdCoh2: undefined,
             } as unknown as SettingsType
             writeSettings(newSettings)
             setTimedSetID(true)
@@ -68,45 +69,18 @@ function Settings(props: Props) {
             return
         }
 
-        const url =
-            'https://coh2-api.reliclink.com/community/' +
-            'leaderboard/GetPersonalStat?title=coh2&profile_names=[' +
-            '%22%2Fsteam%2F' +
-            num +
-            '%22]'
-
-        fetch(url)
-            .then((res) => res.json())
-            .then((data) => {
-                try {
-                    if (data.result.message === 'SUCCESS') {
-                        const group = data.statGroups.find(
-                            (g: { type: number }) => g.type === 1
-                        )
-                        if (!group) {
-                            return
-                        }
-
-                        const profile = group.members[0]
-
-                        const newSettings = {
-                            ...settings,
-                            steamId: num,
-                            profileId: profile.profile_id,
-                        } as SettingsType
-                        writeSettings(newSettings)
-                        setTimedSetID(true)
-                    } else {
-                        console.error('data:', data)
-                        setError()
-                    }
-                } catch (error) {
-                    console.error('error:', error)
+        fetchCoh2ProfileId(num)
+            .then((profileId) => {
+                if (!profileId) {
                     setError()
+                    return
                 }
-            })
-            .catch((err) => {
-                console.error('err:', err)
+                writeSettings({
+                    ...settings,
+                    steamId: num,
+                    profileIdCoh2: profileId,
+                } as SettingsType)
+                setTimedSetID(true)
             })
     }
 

@@ -13,7 +13,9 @@ import { writeRankings } from './functions/writeRankings'
 import { readSettings } from './functions/readSettings'
 import { getExtraInfo } from './functions/getExtraInfo'
 import { readLog } from './functions/readLog/readLog'
+import { getLocalUserInfoCoh3 } from './functions/readLog/getLocalUserInfoCoh3'
 import writeSettings from './functions/writeSettings'
+import { fetchCoh2ProfileId } from './functions/fetchCoh2ProfileId'
 import checkLogData from './functions/checkLogData'
 
 import { useAlertStore } from './stores/alertStore'
@@ -24,7 +26,7 @@ import { useLogCheckIntervalStore } from './stores/logCheckIntervalStore'
 import { useNavButtonsStore } from './stores/navButtonsStore'
 import { usePlayersStore } from './stores/playersStore'
 import { useSettingsStore } from './stores/settingsStore'
-import { Player } from './types'
+import { Player, SettingsType } from './types'
 import { guessRankings } from './functions/guessRankings'
 const appVersion = window.electronAPI.appVersion
 const settingsDir = window.electronAPI.settingsDir
@@ -161,6 +163,29 @@ function App() {
             })
         }
     }, [coh3, settings, activeLogLocation])
+
+    useEffect(() => {
+        if (!coh3 || !settings?.logLocationCoh3) return
+        window.electronAPI.log.read(settings.logLocationCoh3).then((data) => {
+            if (!data) return
+            const info = getLocalUserInfoCoh3(data.split('\n'))
+            if (!info) return
+            if (settings.profileIdCoh3 === info.profileId) return
+            writeSettings({
+                ...settings,
+                profileIdCoh3: info.profileId,
+            } as SettingsType)
+        })
+    }, [coh3, settings, settings?.logLocationCoh3])
+
+    useEffect(() => {
+        if (!settings?.steamId) return
+        fetchCoh2ProfileId(settings.steamId).then((profileId) => {
+            if (!profileId || settings.profileIdCoh2 === profileId) return
+            writeSettings({ ...settings, profileIdCoh2: profileId })
+        })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [settings?.steamId])
 
     const handleSetSettingsView = () => {
         if (!autoLogChecking) {
