@@ -20,7 +20,7 @@ function CopyDiv(props: Props) {
     const handleCopy = () => {
         if (props.text) {
             setTimed(true)
-            window.electronAPI.clipboard.writeText(props.text)
+            navigator.clipboard.writeText(props.text)
         }
     }
 

@@ -9,9 +9,6 @@ interface ElectronAPI {
             filters?: { name: string; extensions: string[] }[]
         }): Promise<{ filePaths: string[]; canceled: boolean }>
     }
-    clipboard: {
-        writeText(text: string): void
-    }
     shell: {
         openExternal(url: string): Promise<void>
     }

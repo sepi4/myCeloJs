@@ -194,7 +194,7 @@ function Settings(props: Props) {
                         {getText('select', settings)}
                     </StyledButton>
                     {settings?.logLocationCoh2 && (
-                        <StyledButton data-testid="copy-log-coh2-button" onClick={() => { setTimedCopyCoh2(true); window.electronAPI.clipboard.writeText(settings.logLocationCoh2!) }}>
+                        <StyledButton data-testid="copy-log-coh2-button" onClick={() => { setTimedCopyCoh2(true); navigator.clipboard.writeText(settings.logLocationCoh2!) }}>
                             {getText('copy', settings)}
                         </StyledButton>
                     )}
@@ -214,7 +214,7 @@ function Settings(props: Props) {
                         {getText('select', settings)}
                     </StyledButton>
                     {settings?.logLocationCoh3 && (
-                        <StyledButton data-testid="copy-log-coh3-button" onClick={() => { setTimedCopyCoh3(true); window.electronAPI.clipboard.writeText(settings.logLocationCoh3!) }}>
+                        <StyledButton data-testid="copy-log-coh3-button" onClick={() => { setTimedCopyCoh3(true); navigator.clipboard.writeText(settings.logLocationCoh3!) }}>
                             {getText('copy', settings)}
                         </StyledButton>
                     )}

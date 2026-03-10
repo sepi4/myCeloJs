@@ -102,7 +102,7 @@ function UpdateBar() {
                     <button
                         className={styles.btn}
                         onClick={() => {
-                            window.electronAPI.clipboard.writeText(update.url)
+                            navigator.clipboard.writeText(update.url)
                         }}
                     >
                         {getText('copy_link')}
