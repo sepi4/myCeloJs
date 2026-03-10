@@ -1,5 +1,6 @@
 localhostFiles/rankings.json
 localhostFiles/rankings.txt
+localhostFiles/port.js
 
 # playwright
 test-results/
@@ -10,58 +11,9 @@ prompts/
 
 .VSCodeCounter
 
-# Build folder and files #
-##########################
-release-builds/
 out/
-
-# Development folders and files #
-#################################
-.tmp/
 dist/
 node_modules/
-*.compiled.*
 
-# Folder config file #
-######################
-Desktop.ini
-
-# Folder notes #
-################
-_ignore/
-
-# Log files & folders #
-#######################
-logs/
 npm-debug.log*
 .npm
-
-# Packages #
-############
-# it's better to unpack these files and commit the raw source
-# git has its own built in compression methods
-*.7z
-*.dmg
-*.gz
-*.iso
-*.jar
-*.rar
-*.tar
-*.zip
-
-# Photoshop & Illustrator files #
-#################################
-*.ai
-*.eps
-*.psd
-
-# Windows & Mac file caches #
-#############################
-.DS_Store
-Thumbs.db
-ehthumbs.db
-
-# Windows shortcuts #
-#####################
-*.lnk
-localhostFiles/port.js
