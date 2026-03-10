@@ -37,11 +37,6 @@ function createMainWindow() {
     mainWindow.once('ready-to-show', () => {
         mainWindow!.show()
         if (process.env['ELECTRON_RENDERER_URL']) {
-            import('electron-devtools-installer').then(({ default: installExtension, REACT_DEVELOPER_TOOLS }) => {
-                installExtension(REACT_DEVELOPER_TOOLS).catch((err: Error) =>
-                    console.log('Error loading React DevTools:', err)
-                )
-            })
             mainWindow!.webContents.openDevTools()
         }
     })
