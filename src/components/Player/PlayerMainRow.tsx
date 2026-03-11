@@ -2,6 +2,7 @@ import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import countriesJson from '../../../countries.json'
+import { getCountryName } from '../../countryTranslations'
 import {
     getFactionFlagLocation,
     getFactionFlagLocationCoh3,
@@ -124,7 +125,12 @@ function PlayerMainRow(props: Props) {
                 }}
                 src={countryFlagLocation}
                 alt={country}
-                title={countries[country] ? countries[country]['name'] : ''}
+                title={
+                    countries[country]
+                        ? getCountryName(country, settings?.language ?? '') ||
+                          countries[country]['name']
+                        : ''
+                }
             />
         ) : null
 
