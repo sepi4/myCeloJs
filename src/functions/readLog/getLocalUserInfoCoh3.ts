@@ -7,13 +7,19 @@ export function getLocalUserInfoCoh3(
     for (const line of lines) {
         if (!profileId) {
             const m = line.match(/login event\. LocalProfileID: (\d+)/)
-            if (m) profileId = Number(m[1])
+            if (m) {
+                profileId = Number(m[1])
+            }
         }
         if (!steamId) {
             const m = line.match(/Found \d+ profiles for account \/steam\/(\d+)/)
-            if (m) steamId = m[1]
+            if (m) {
+                steamId = m[1]
+            }
         }
-        if (profileId && steamId) break
+        if (profileId && steamId) {
+            break
+        }
     }
 
     return profileId && steamId ? { profileId, steamId } : null

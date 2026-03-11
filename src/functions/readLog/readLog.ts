@@ -77,7 +77,9 @@ export async function readLog(coh3: boolean, fileLocation: string) {
     fileLocation = fileLocation.replace(/\\/, '\\\\')
     try {
         const data = await window.electronAPI.log.read(fileLocation)
-        if (!data) return []
+        if (!data) {
+            return []
+        }
 
         const lines = data.split('\n')
 

@@ -74,14 +74,18 @@ function ModalTableHeaders(props: Props) {
                                 title={props.profiles[p.profile_id].alias}
                                 onClick={async () => {
                                     const x = await getExtraInfo(coh3, [p.profile_id])
-                                    if (!x) return
+                                    if (!x) {
+                                        return
+                                    }
                                     const pro = props.profiles[p.profile_id]
                                     const newPlayer = {
                                         country: pro.country,
                                         name: pro.alias,
                                         profileId: pro.profile_id,
                                     }
-                                    if (!newPlayer.profileId) return
+                                    if (!newPlayer.profileId) {
+                                        return
+                                    }
                                     const ex = x.result[newPlayer.profileId]
                                     if (ex) {
                                         setPlayerCard(newPlayer, ex)

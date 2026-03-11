@@ -16,7 +16,9 @@ export default function PlayerCard() {
     } = useNavButtonsStore()
     const { player, extraInfo } = usePlayerCardStore()
 
-    if (!player) return null
+    if (!player) {
+        return null
+    }
 
     if (!extraInfo) {
         return (

@@ -17,19 +17,27 @@ function getTeamStatGroups(team: Player[], stats: PersonalStats): StatGroup[] {
             .filter((sg) => sg.type === size)
             .filter((sg) => sg.members.every((m) => team.some((p) => p.profileId === m.profile_id)))
 
-        if (groups.length > 0) return groups
+        if (groups.length > 0) {
+            return groups
+        }
     }
     return []
 }
 
 function getTeamLeaderboardName(teamSize: number, team: Player[]): string | undefined {
-    if (teamSize < 2) return undefined
+    if (teamSize < 2) {
+        return undefined
+    }
 
     const isAllies = team.every((p) => ALLIES_FACTIONS.includes(p.faction))
     const isAxis = team.every((p) => AXIS_FACTIONS.includes(p.faction))
 
-    if (isAllies) return `TeamOf${teamSize}Allies`
-    if (isAxis) return `TeamOf${teamSize}Axis`
+    if (isAllies) {
+        return `TeamOf${teamSize}Allies`
+    }
+    if (isAxis) {
+        return `TeamOf${teamSize}Axis`
+    }
     return undefined
 }
 
@@ -43,9 +51,13 @@ function assignTeamRanks(
     })
 
     for (const ls of stats.leaderboardStats) {
-        if (ls.leaderboard_id !== leaderboardId) continue
+        if (ls.leaderboard_id !== leaderboardId) {
+            continue
+        }
         const matchedSg = statGroups.find((sg) => sg.id === ls.statgroup_id)
-        if (matchedSg) matchedSg.rank = ls.rank
+        if (matchedSg) {
+            matchedSg.rank = ls.rank
+        }
     }
 }
 
@@ -66,7 +78,9 @@ function getPlayerRank(
         (ls) => ls.statgroup_id === playerSg?.id && ls.leaderboard_id === leaderboardId
     )?.rank
 
-    if (rank !== undefined) return rank
+    if (rank !== undefined) {
+        return rank
+    }
 
     // Fallback to unranked leaderboard (COH3 has both ranked and unranked variants)
     const unrankedId = findLeaderboardId(matchTypeName + 'Unranked', leaderboards)
@@ -78,7 +92,9 @@ function getPlayerRank(
 function findPlayerCountry(player: Player, stats: PersonalStats): string | undefined {
     for (const sg of stats.statGroups) {
         const member = sg.members.find((m) => m.profile_id === player.profileId)
-        if (member) return member.country
+        if (member) {
+            return member.country
+        }
     }
 }
 

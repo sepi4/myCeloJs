@@ -67,11 +67,15 @@ export default function Navbar(props: Props) {
     const handleOpenMyCard = async () => {
         const id = navButtons.coh3 ? settings!.profileIdCoh3 : settings!.profileIdCoh2
         const x = await getExtraInfo(navButtons.coh3, [id])
-        if (!x) return
+        if (!x) {
+            return
+        }
         const result = x.result
         const ex = result[id]
         const rank = ex.ranks.find((x: Rank) => x.members?.length === 1)
-        if (!rank?.members) return
+        if (!rank?.members) {
+            return
+        }
         const profile = rank.members[0]
         if (ex) {
             const playerData = {

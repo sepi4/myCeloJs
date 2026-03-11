@@ -25,8 +25,12 @@ export default function Member(props: Props) {
             profileId: p.profile_id,
         }
         const x = await getExtraInfo(coh3, [p.profile_id])
-        if (!x) return
-        if (!newPlayer.profileId) return
+        if (!x) {
+            return
+        }
+        if (!newPlayer.profileId) {
+            return
+        }
         const ex = x.result[newPlayer.profileId]
         if (ex) {
             setPlayerCard(newPlayer, ex)

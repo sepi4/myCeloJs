@@ -22,6 +22,7 @@ module.exports = tseslint.config(
             react: { version: 'detect' },
         },
         rules: {
+            curly: ['warn', 'all'],
             'simple-import-sort/imports': 'warn',
             'simple-import-sort/exports': 'warn',
             'react-hooks/set-state-in-effect': 'off',

@@ -19,11 +19,15 @@ export async function getExtraInfo(
     try {
         const [personalStats, cohTitles] = await Promise.all([
             fetch(url).then((r) => {
-                if (!r.ok) throw new Error(`${r.status}`)
+                if (!r.ok) {
+                    throw new Error(`${r.status}`)
+                }
                 return r.json() as Promise<PersonalStats>
             }),
             fetch(url2).then((r) => {
-                if (!r.ok) throw new Error(`${r.status}`)
+                if (!r.ok) {
+                    throw new Error(`${r.status}`)
+                }
                 return r.json() as Promise<AvailableLeaderboard>
             }),
         ])

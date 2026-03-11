@@ -52,7 +52,9 @@ function App() {
 
     // Auto-select the game radio when only one log location is configured
     useEffect(() => {
-        if (!settings) return
+        if (!settings) {
+            return
+        }
         const hasCoh2 = !!settings.logLocationCoh2
         const hasCoh3 = !!settings.logLocationCoh3
         if (hasCoh3 && !hasCoh2 && !coh3) {
@@ -171,14 +173,22 @@ function App() {
     }, [coh3, settings, activeLogLocation])
 
     useEffect(() => {
-        if (!coh3 || !settings?.logLocationCoh3) return
+        if (!coh3 || !settings?.logLocationCoh3) {
+            return
+        }
         const currentSettings = settings
         async function updateCoh3ProfileId() {
             const data = await window.electronAPI.log.read(currentSettings.logLocationCoh3)
-            if (!data) return
+            if (!data) {
+                return
+            }
             const info = getLocalUserInfoCoh3(data.split('\n'))
-            if (!info) return
-            if (currentSettings.profileIdCoh3 === info.profileId) return
+            if (!info) {
+                return
+            }
+            if (currentSettings.profileIdCoh3 === info.profileId) {
+                return
+            }
             writeSettings({
                 ...currentSettings,
                 profileIdCoh3: info.profileId,
@@ -188,11 +198,15 @@ function App() {
     }, [coh3, settings, settings?.logLocationCoh3])
 
     useEffect(() => {
-        if (!settings?.steamId) return
+        if (!settings?.steamId) {
+            return
+        }
         const currentSettings = settings
         async function updateCoh2ProfileId() {
             const profileId = await fetchCoh2ProfileId(currentSettings.steamId)
-            if (!profileId || currentSettings.profileIdCoh2 === profileId) return
+            if (!profileId || currentSettings.profileIdCoh2 === profileId) {
+                return
+            }
             writeSettings({ ...currentSettings, profileIdCoh2: profileId })
         }
         updateCoh2ProfileId()

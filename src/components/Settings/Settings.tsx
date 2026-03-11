@@ -91,7 +91,9 @@ function Settings(props: Props) {
             profileIdCoh2: undefined,
         } as unknown as SettingsType
         writeSettings(newSettings)
-        if (steamIdInputRef.current) steamIdInputRef.current.value = ''
+        if (steamIdInputRef.current) {
+            steamIdInputRef.current.value = ''
+        }
     }
 
     const clearLogLocation = (game: 'coh2' | 'coh3') => {

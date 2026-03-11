@@ -49,11 +49,15 @@ function createMainWindow() {
 app.on('ready', createMainWindow)
 
 app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') app.quit()
+    if (process.platform !== 'darwin') {
+        app.quit()
+    }
 })
 
 app.on('activate', () => {
-    if (mainWindow === null) createMainWindow()
+    if (mainWindow === null) {
+        createMainWindow()
+    }
 })
 
 // ── IPC handlers ──────────────────────────────────────────────────────────────
