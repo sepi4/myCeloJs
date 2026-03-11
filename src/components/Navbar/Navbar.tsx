@@ -139,7 +139,7 @@ export default function Navbar(props: Props) {
     return (
         <div className={styles.navbar}>
             {userIcon}
-            {!navButtons.coh3 && searchIcon}
+            {searchIcon}
 
             <div className={styles.container}>
                 <div className={styles.column}>
