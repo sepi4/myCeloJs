@@ -64,27 +64,24 @@ export default function Navbar(props: Props) {
         setView('search')
     }
 
-    const handleOpenMyCard = () => {
+    const handleOpenMyCard = async () => {
         const id = navButtons.coh3 ? settings!.profileIdCoh3 : settings!.profileIdCoh2
-
-        getExtraInfo(navButtons.coh3, [id], (result) => {
-            const ex = result[id]
-            const rank = ex.ranks.find((x: Rank) => x.members?.length === 1)
-            if (!rank?.members) {
-                return
+        const x = await getExtraInfo(navButtons.coh3, [id])
+        if (!x) return
+        const result = x.result
+        const ex = result[id]
+        const rank = ex.ranks.find((x: Rank) => x.members?.length === 1)
+        if (!rank?.members) return
+        const profile = rank.members[0]
+        if (ex) {
+            const playerData = {
+                name: profile.alias,
+                profileId: profile.profile_id + '',
+                country: profile.country,
             }
-            const profile = rank.members[0]
-
-            if (result && ex) {
-                const playerData = {
-                    name: profile.alias,
-                    profileId: profile.profile_id + '',
-                    country: profile.country,
-                }
-                setPlayerCard(playerData, ex)
-                setView('playerCard')
-            }
-        })
+            setPlayerCard(playerData, ex)
+            setView('playerCard')
+        }
     }
 
     const activeProfileId = navButtons.coh3 ? settings?.profileIdCoh3 : settings?.profileIdCoh2

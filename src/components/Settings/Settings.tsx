@@ -67,7 +67,9 @@ function Settings(props: Props) {
             return
         }
 
-        fetchCoh2ProfileId(num).then((profileId) => {
+        const steamId = num
+        async function saveSteamId() {
+            const profileId = await fetchCoh2ProfileId(steamId)
             if (!profileId) {
                 setError()
                 return
@@ -78,7 +80,8 @@ function Settings(props: Props) {
                 profileIdCoh2: profileId,
             } as SettingsType)
             setTimedSetID(true)
-        })
+        }
+        saveSteamId()
     }
 
     const clearSteamId = () => {
@@ -96,25 +99,22 @@ function Settings(props: Props) {
         writeSettings({ ...settings!, [key]: undefined })
     }
 
-    const changeLogLocation = (game: 'coh2' | 'coh3') => {
-        window.electronAPI.dialog
-            .showOpenDialog({
-                properties: ['openFile'],
-                filters: [
-                    { name: 'Logs', extensions: ['log'] },
-                    { name: 'All Files', extensions: ['*'] },
-                ],
-            })
-            .then(function (file) {
-                if (file !== undefined && file.filePaths[0]) {
-                    const key = game === 'coh2' ? 'logLocationCoh2' : 'logLocationCoh3'
-                    const newSettings = {
-                        ...settings,
-                        [key]: file.filePaths[0],
-                    } as SettingsType
-                    writeSettings(newSettings)
-                }
-            })
+    const changeLogLocation = async (game: 'coh2' | 'coh3') => {
+        const file = await window.electronAPI.dialog.showOpenDialog({
+            properties: ['openFile'],
+            filters: [
+                { name: 'Logs', extensions: ['log'] },
+                { name: 'All Files', extensions: ['*'] },
+            ],
+        })
+        if (file !== undefined && file.filePaths[0]) {
+            const key = game === 'coh2' ? 'logLocationCoh2' : 'logLocationCoh3'
+            const newSettings = {
+                ...settings,
+                [key]: file.filePaths[0],
+            } as SettingsType
+            writeSettings(newSettings)
+        }
     }
 
     const handleLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -306,9 +306,11 @@ function Settings(props: Props) {
                             const blank = JSON.stringify({
                                 appLocation: window.electronAPI.appLocation,
                             })
-                            window.electronAPI.settings
-                                .write(settingsPath, blank)
-                                .then(() => window.location.reload())
+                            async function resetAndReload() {
+                                await window.electronAPI.settings.write(settingsPath, blank)
+                                window.location.reload()
+                            }
+                            resetAndReload()
                         }}
                     >
                         {getText('ok', settings)}

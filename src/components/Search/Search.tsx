@@ -30,53 +30,51 @@ export default function Search() {
         setSearchValue(e.target.value)
     }
 
-    const handleKeyUp = (e: KeyboardEvent) => {
+    const handleKeyUp = async (e: KeyboardEvent) => {
         if (e.key === 'Enter' && searchValue.trim().length > 0) {
-            searchPlayers(coh3, searchValue, (res) => {
-                const arrPlayers = res.map((p) => {
-                    return {
-                        country: p.country,
-                        name: p.name,
-                        profileId: p.profile_id,
-                    }
-                })
-
-                if (arrPlayers.length === 0) {
-                    setFoundPlayers([])
-                    return
+            const res = await searchPlayers(coh3, searchValue)
+            const arrPlayers = res.map((p) => {
+                return {
+                    country: p.country,
+                    name: p.name,
+                    profileId: p.profile_id,
                 }
-
-                const ids: number[] = []
-                for (const p of arrPlayers) {
-                    if (p.profileId) {
-                        ids.push(p.profileId)
-                    }
-                }
-                getExtraInfo(coh3, ids, (result) => {
-                    const newPlayers = res
-                        .map((p) => {
-                            if (result[p.profile_id]) {
-                                p.totalGames = getTotalGames(result[p.profile_id]?.ranks)
-                                p.lastGameTime = getLastPlayedGame(result[p.profile_id])
-                            } else {
-                                p.totalGames = 0
-                            }
-                            p.extraInfo = result[p.profile_id]
-                            return p
-                        })
-                        .sort((a, b) => {
-                            if (
-                                typeof a.totalGames === 'number' &&
-                                typeof b.totalGames === 'number'
-                            ) {
-                                return b.totalGames - a.totalGames
-                            }
-                            return 0
-                        })
-
-                    setFoundPlayers(newPlayers)
-                })
             })
+
+            if (arrPlayers.length === 0) {
+                setFoundPlayers([])
+                return
+            }
+
+            const ids: number[] = []
+            for (const p of arrPlayers) {
+                if (p.profileId) {
+                    ids.push(p.profileId)
+                }
+            }
+            const x = await getExtraInfo(coh3, ids)
+            if (x) {
+                const result = x.result
+                const newPlayers = res
+                    .map((p) => {
+                        if (result[p.profile_id]) {
+                            p.totalGames = getTotalGames(result[p.profile_id]?.ranks)
+                            p.lastGameTime = getLastPlayedGame(result[p.profile_id])
+                        } else {
+                            p.totalGames = 0
+                        }
+                        p.extraInfo = result[p.profile_id]
+                        return p
+                    })
+                    .sort((a, b) => {
+                        if (typeof a.totalGames === 'number' && typeof b.totalGames === 'number') {
+                            return b.totalGames - a.totalGames
+                        }
+                        return 0
+                    })
+
+                setFoundPlayers(newPlayers)
+            }
         }
     }
 

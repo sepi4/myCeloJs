@@ -27,24 +27,22 @@ export default function History(props: Props) {
         let mounted = true
         if (getHistory) {
             setFetching(true)
-
-            const [url, url2] = getHistoryUrls(props.player.profileId)
-            const fetch1 = fetch(url).then((r) => r.json())
-            const fetch2 = fetch(url2).then((r) => r.json())
-
-            Promise.all([fetch1, fetch2])
-                .then((result) => {
+            async function fetchHistory() {
+                try {
+                    const [url, url2] = getHistoryUrls(props.player.profileId)
+                    const [r1, r2] = await Promise.all([
+                        fetch(url).then((r) => r.json()),
+                        fetch(url2).then((r) => r.json()),
+                    ])
                     if (mounted) {
-                        const x = parseHistoryData(result, props.player)
-                        setHistory(x)
+                        setHistory(parseHistoryData([r1, r2], props.player))
                         setFetching(false)
                     }
-                })
-                .catch((error) => {
-                    if (error) {
-                        console.log('error get history: ', error)
-                    }
-                })
+                } catch (error) {
+                    console.log('error get history:', error)
+                }
+            }
+            fetchHistory()
         }
 
         return () => {

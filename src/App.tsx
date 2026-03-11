@@ -95,26 +95,31 @@ function App() {
             }
 
             if (settings && activeLogLocation) {
-                readLog(coh3, activeLogLocation).then((data) => {
+                async function readInitialLog() {
+                    const data = await readLog(coh3, activeLogLocation)
                     if (data) {
                         checkLogData({ data })
                     }
-                })
+                }
+                readInitialLog()
             }
         } else if (extraInfo === null && players.length > 0) {
+            const currentPlayers = players
+            const currentSettings = settings
             const ids: number[] = []
-            for (const p of players) {
+            for (const p of currentPlayers) {
                 if (p.profileId) {
                     ids.push(p.profileId)
                 }
             }
 
-            getExtraInfo(coh3, ids, (result, x) => {
+            async function fetchExtraInfo() {
+                const x = await getExtraInfo(coh3, ids)
                 if (!x) {
                     return
                 }
 
-                const teams = guessRankings(players, x.personalStats, x.cohTitles)
+                const teams = guessRankings(currentPlayers, x.personalStats, x.cohTitles)
                 const newPlayers: Player[] = []
                 if (teams) {
                     teams.forEach((team: Player[]) => {
@@ -124,77 +129,85 @@ function App() {
                     })
                 }
 
-                setExtraInfo(result)
+                setExtraInfo(x.result)
                 setPlayers(newPlayers)
 
-                writeRankings(coh3, newPlayers, settings.rankingsHorizontal)
-            })
+                writeRankings(coh3, newPlayers, currentSettings.rankingsHorizontal)
+            }
+            fetchExtraInfo()
         }
 
         if (!autoLogChecking) {
             return
         }
 
-        const intervalId = setInterval(() => {
+        async function checkLog() {
             if (settings && activeLogLocation) {
-                readLog(coh3, activeLogLocation).then((data) => {
-                    if (data) {
-                        if (alert) {
-                            checkLogData({ data, playAudio })
-                        } else {
-                            checkLogData({ data })
-                        }
+                const data = await readLog(coh3, activeLogLocation)
+                if (data) {
+                    if (alert) {
+                        checkLogData({ data, playAudio })
+                    } else {
+                        checkLogData({ data })
                     }
-                })
+                }
             }
-        }, logCheckInterval * 1000)
+        }
+        const intervalId = setInterval(checkLog, logCheckInterval * 1000)
 
         return () => clearInterval(intervalId)
     })
 
     useEffect(() => {
         if (settings && activeLogLocation) {
-            readLog(coh3, activeLogLocation).then((data) => {
+            async function readLogOnChange() {
+                const data = await readLog(coh3, activeLogLocation)
                 if (data) {
                     checkLogData({ data })
                 }
-            })
+            }
+            readLogOnChange()
         }
     }, [coh3, settings, activeLogLocation])
 
     useEffect(() => {
         if (!coh3 || !settings?.logLocationCoh3) return
-        window.electronAPI.log.read(settings.logLocationCoh3).then((data) => {
+        const currentSettings = settings
+        async function updateCoh3ProfileId() {
+            const data = await window.electronAPI.log.read(currentSettings.logLocationCoh3)
             if (!data) return
             const info = getLocalUserInfoCoh3(data.split('\n'))
             if (!info) return
-            if (settings.profileIdCoh3 === info.profileId) return
+            if (currentSettings.profileIdCoh3 === info.profileId) return
             writeSettings({
-                ...settings,
+                ...currentSettings,
                 profileIdCoh3: info.profileId,
             } as SettingsType)
-        })
+        }
+        updateCoh3ProfileId()
     }, [coh3, settings, settings?.logLocationCoh3])
 
     useEffect(() => {
         if (!settings?.steamId) return
-        fetchCoh2ProfileId(settings.steamId).then((profileId) => {
-            if (!profileId || settings.profileIdCoh2 === profileId) return
-            writeSettings({ ...settings, profileIdCoh2: profileId })
-        })
+        const currentSettings = settings
+        async function updateCoh2ProfileId() {
+            const profileId = await fetchCoh2ProfileId(currentSettings.steamId)
+            if (!profileId || currentSettings.profileIdCoh2 === profileId) return
+            writeSettings({ ...currentSettings, profileIdCoh2: profileId })
+        }
+        updateCoh2ProfileId()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [settings?.steamId])
 
-    const handleSetSettingsView = () => {
+    const handleSetSettingsView = async () => {
         if (!autoLogChecking) {
             return
         }
         if (settings && activeLogLocation) {
-            readLog(coh3, activeLogLocation).then((data) => {
-                if (data) {
-                    checkLogData({ data })
-                }
-            })
+            const data = await readLog(coh3, activeLogLocation)
+            if (data) {
+                checkLogData({ data })
+            }
         }
     }
 

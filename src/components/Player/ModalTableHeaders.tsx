@@ -72,24 +72,21 @@ function ModalTableHeaders(props: Props) {
                         >
                             <a
                                 title={props.profiles[p.profile_id].alias}
-                                onClick={() => {
-                                    getExtraInfo(coh3, [p.profile_id], (result) => {
-                                        const pro = props.profiles[p.profile_id]
-                                        const newPlayer = {
-                                            country: pro.country,
-                                            name: pro.alias,
-                                            profileId: pro.profile_id,
-                                        }
-                                        if (!newPlayer.profileId) {
-                                            return
-                                        }
-
-                                        const ex = result[newPlayer.profileId]
-                                        if (result && ex) {
-                                            setPlayerCard(newPlayer, ex)
-                                            setView('playerCard')
-                                        }
-                                    })
+                                onClick={async () => {
+                                    const x = await getExtraInfo(coh3, [p.profile_id])
+                                    if (!x) return
+                                    const pro = props.profiles[p.profile_id]
+                                    const newPlayer = {
+                                        country: pro.country,
+                                        name: pro.alias,
+                                        profileId: pro.profile_id,
+                                    }
+                                    if (!newPlayer.profileId) return
+                                    const ex = x.result[newPlayer.profileId]
+                                    if (ex) {
+                                        setPlayerCard(newPlayer, ex)
+                                        setView('playerCard')
+                                    }
                                 }}
                             >
                                 {props.profiles[p.profile_id].alias}

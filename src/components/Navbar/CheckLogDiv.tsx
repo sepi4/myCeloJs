@@ -48,12 +48,11 @@ function CheckLogDiv() {
                     <button
                         data-testid="check-log-button"
                         className={styles.btn}
-                        onClick={() => {
-                            readLog(coh3, activeLogLocation).then((data) => {
-                                if (data) {
-                                    setPlayersWithoutChecking(data)
-                                }
-                            })
+                        onClick={async () => {
+                            const data = await readLog(coh3, activeLogLocation)
+                            if (data) {
+                                setPlayersWithoutChecking(data)
+                            }
                         }}
                     >
                         {getText('check_log_button', settings)}

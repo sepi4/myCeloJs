@@ -18,23 +18,20 @@ export default function Member(props: Props) {
     const { setPlayerCard } = usePlayerCardStore()
     const { setView } = useViewStore()
 
-    const handlePlayerCardOn = (p: MemberType) => {
+    const handlePlayerCardOn = async (p: MemberType) => {
         const newPlayer = {
             country: p.country,
             name: p.alias,
             profileId: p.profile_id,
         }
-
-        getExtraInfo(coh3, [p.profile_id], (result) => {
-            if (!newPlayer.profileId) {
-                return
-            }
-            const ex = result[newPlayer.profileId]
-            if (result && ex) {
-                setPlayerCard(newPlayer, ex)
-                setView('playerCard')
-            }
-        })
+        const x = await getExtraInfo(coh3, [p.profile_id])
+        if (!x) return
+        if (!newPlayer.profileId) return
+        const ex = x.result[newPlayer.profileId]
+        if (ex) {
+            setPlayerCard(newPlayer, ex)
+            setView('playerCard')
+        }
     }
 
     return (

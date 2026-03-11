@@ -75,21 +75,29 @@ ipcMain.handle('dialog:show-open', (_event, options) => {
     return dialog.showOpenDialog(mainWindow!, options)
 })
 
-ipcMain.handle('settings:read', (_event, filePath: string) => {
-    return fs.promises.readFile(filePath, 'utf-8').catch(() => null)
+ipcMain.handle('settings:read', async (_event, filePath: string) => {
+    try {
+        return await fs.promises.readFile(filePath, 'utf-8')
+    } catch {
+        return null
+    }
 })
 
-ipcMain.handle('settings:write', (_event, filePath: string, data: string) => {
-    return fs.promises.writeFile(filePath, data, 'utf-8')
+ipcMain.handle('settings:write', async (_event, filePath: string, data: string) => {
+    await fs.promises.writeFile(filePath, data, 'utf-8')
 })
 
-ipcMain.handle('log:read', (_event, filePath: string) => {
-    return fs.promises.readFile(filePath, 'utf-8').catch(() => null)
+ipcMain.handle('log:read', async (_event, filePath: string) => {
+    try {
+        return await fs.promises.readFile(filePath, 'utf-8')
+    } catch {
+        return null
+    }
 })
 
-ipcMain.handle('rankings:write', (_event, jsonContent: string, txtContent: string) => {
+ipcMain.handle('rankings:write', async (_event, jsonContent: string, txtContent: string) => {
     const dir = path.join(process.cwd(), 'localhostFiles')
-    return Promise.all([
+    await Promise.all([
         fs.promises
             .writeFile(path.join(dir, 'rankings.json'), jsonContent, 'utf-8')
             .catch((err) => console.log('Error writing rankings.json:', err)),
@@ -118,18 +126,18 @@ function serveJson(port: string) {
     }).listen(port, undefined, () => {})
 }
 
-portfinder
-    .getPortPromise({ port: 2222, stopPort: 3333 })
-    .then((port) => {
+async function startPortServer() {
+    try {
+        const port = await portfinder.getPortPromise({ port: 2222, stopPort: 3333 })
         console.log('portfinder free port:', port)
         serveJson(port.toString())
-        fs.writeFile(
+        await fs.promises.writeFile(
             path.join(process.cwd(), 'localhostFiles', 'port.js'),
             'let port = ' + port,
-            'utf-8',
-            (err) => {
-                if (err) console.log('portfinder writing port.js error:', err)
-            }
+            'utf-8'
         )
-    })
-    .catch((err) => console.log('portfinder err:', err))
+    } catch (err) {
+        console.log('portfinder err:', err)
+    }
+}
+startPortServer()

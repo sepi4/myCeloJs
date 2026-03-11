@@ -48,26 +48,26 @@ function UpdateBar() {
         if (!updateCheckDone && settings) {
             console.log('CHECKING UPDATE')
             setUpdateCheckDone()
-
-            const url = LATEST_RELEASES_URL
-            fetch(url)
-                .then((res) => res.json())
-                .then((data: GitHubResult) => {
-                    if (data) {
-                        const newTagName = data.tag_name
-                        if (settings.ignoreUntil === newTagName) {
-                            return
-                        }
-                        if (isHigherVersion(newTagName, appVersion)) {
-                            if (data.assets[0]) {
-                                setUpdate({
-                                    url: data.assets[0].browser_download_url,
-                                    tagName: newTagName,
-                                })
-                            }
+            const currentSettings = settings
+            async function checkUpdate() {
+                const res = await fetch(LATEST_RELEASES_URL)
+                const data: GitHubResult = await res.json()
+                if (data) {
+                    const newTagName = data.tag_name
+                    if (currentSettings.ignoreUntil === newTagName) {
+                        return
+                    }
+                    if (isHigherVersion(newTagName, appVersion)) {
+                        if (data.assets[0]) {
+                            setUpdate({
+                                url: data.assets[0].browser_download_url,
+                                tagName: newTagName,
+                            })
                         }
                     }
-                })
+                }
+            }
+            checkUpdate()
         }
     }, [updateCheckDone, settings, setUpdateCheckDone])
 
