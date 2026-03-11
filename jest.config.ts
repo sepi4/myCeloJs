@@ -1,4 +1,6 @@
-module.exports = {
+import type { Config } from 'jest'
+
+const config: Config = {
     transform: { '^.+\\.ts?$': 'ts-jest' },
     testEnvironment: 'node',
     // testRegex: '/tests/.*\\.(test|spec)?\\.(ts|tsx)$',
@@ -8,3 +10,5 @@ module.exports = {
     coverageProvider: 'v8',
     coverageReporters: ['text', 'html'],
 }
+
+export default config
