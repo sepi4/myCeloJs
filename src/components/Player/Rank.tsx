@@ -33,13 +33,17 @@ function Rank(props: Props) {
                 return 'uk'
             case 'WestGerman':
                 return 'okw'
+            case 'American':
+                return 'usa'
+            case 'DAK':
+                return 'dak'
             default:
                 return x
         }
     }
     function betterRankName(rn: string) {
         const m = rn.match(/^\dv\d/)
-        rn = rn.replace(/^(\dv\d)/, '')
+        rn = rn.replace(/^(\dv\d)/, '').replace('Unranked', '')
         return m + ' ' + sw(rn)
     }
     useEffect(() => {
