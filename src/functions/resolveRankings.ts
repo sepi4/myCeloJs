@@ -98,7 +98,7 @@ function findPlayerCountry(player: Player, stats: PersonalStats): string | undef
     }
 }
 
-export function guessRankings(
+export function resolveRankings(
     playersArr: Player[],
     stats: PersonalStats,
     leaderboards: AvailableLeaderboard

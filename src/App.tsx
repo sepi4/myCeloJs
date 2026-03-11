@@ -9,10 +9,10 @@ import UpdateBar from './components/UpdateBar'
 import checkLogData from './functions/checkLogData'
 import { fetchCoh2ProfileId } from './functions/fetchCoh2ProfileId'
 import { getExtraInfo } from './functions/getExtraInfo'
-import { guessRankings } from './functions/guessRankings'
 import { getLocalUserInfoCoh3 } from './functions/readLog/getLocalUserInfoCoh3'
 import { readLog } from './functions/readLog/readLog'
 import { readSettings } from './functions/readSettings'
+import { resolveRankings } from './functions/resolveRankings'
 // functions
 import { writeRankings } from './functions/writeRankings'
 import writeSettings from './functions/writeSettings'
@@ -121,7 +121,7 @@ function App() {
                     return
                 }
 
-                const teams = guessRankings(currentPlayers, x.personalStats, x.cohTitles)
+                const teams = resolveRankings(currentPlayers, x.personalStats, x.cohTitles)
                 const newPlayers: Player[] = []
                 if (teams) {
                     teams.forEach((team: Player[]) => {

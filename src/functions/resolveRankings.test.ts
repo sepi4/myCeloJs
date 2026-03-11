@@ -6,7 +6,7 @@ import {
     Player,
     StatGroup,
 } from '../types'
-import { guessRankings } from './guessRankings'
+import { resolveRankings } from './resolveRankings'
 import _coh2Leaderboards from './unit-tests-data/coh2-get-available-leaderboards.json'
 import _coh3Leaderboards from './unit-tests-data/coh3-get-available-leaderboards.json'
 
@@ -115,7 +115,7 @@ describe('guessRankings', () => {
             ]
         )
 
-        const [team0, team1] = guessRankings(players, stats, coh2Leaderboards)
+        const [team0, team1] = resolveRankings(players, stats, coh2Leaderboards)
 
         expect(team0[0].ranking).toBe(50)
         expect(team0[0].country).toBe('de')
@@ -158,7 +158,7 @@ describe('guessRankings', () => {
             ]
         )
 
-        const [team0] = guessRankings(players, stats, coh2Leaderboards)
+        const [team0] = resolveRankings(players, stats, coh2Leaderboards)
 
         expect(team0[0].ranking).toBe(30)
         expect(team0[0].teamMarker).toBe(' ¹')
@@ -218,7 +218,7 @@ describe('guessRankings', () => {
             ]
         )
 
-        const [team0] = guessRankings(players, stats, coh2Leaderboards)
+        const [team0] = resolveRankings(players, stats, coh2Leaderboards)
 
         // P1 and P2 get team rank + marker
         expect(team0[0].ranking).toBe(10)
@@ -270,7 +270,7 @@ describe('guessRankings', () => {
             ]
         )
 
-        const [team0] = guessRankings(players, stats, coh3Leaderboards)
+        const [team0] = resolveRankings(players, stats, coh3Leaderboards)
 
         expect(team0[0].ranking).toBe(500)
     })
@@ -294,7 +294,7 @@ describe('guessRankings', () => {
         // Empty stats — no stat groups match these profileIds
         const stats = makeStats([], [])
 
-        const [team0, team1] = guessRankings(players, stats, coh2Leaderboards)
+        const [team0, team1] = resolveRankings(players, stats, coh2Leaderboards)
 
         expect(team0[0].ranking).toBeUndefined()
         expect(team0[0].country).toBeUndefined()
@@ -349,7 +349,7 @@ describe('guessRankings', () => {
             ]
         )
 
-        const [team0] = guessRankings(players, stats, coh2Leaderboards)
+        const [team0] = resolveRankings(players, stats, coh2Leaderboards)
 
         // Both fall back to individual 2v2German rankings
         expect(team0[0].ranking).toBe(55)
@@ -399,7 +399,7 @@ describe('guessRankings', () => {
             ]
         )
 
-        const [team0] = guessRankings(players, stats, coh2Leaderboards)
+        const [team0] = resolveRankings(players, stats, coh2Leaderboards)
 
         expect(team0[0].ranking).toBe(150)
         expect(team0[0].teamMarker).toBeUndefined()
