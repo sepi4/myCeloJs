@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import useSound from 'use-sound'
 
-import audioLocation from './bell.mp3'
+import audioLocation from './assets/audio/bell.mp3'
 import MainView from './components/MainView'
 // components
 import Navbar from './components/Navbar/Navbar'

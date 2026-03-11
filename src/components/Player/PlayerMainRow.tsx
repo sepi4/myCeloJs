@@ -1,8 +1,6 @@
 import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import countriesJson from '../../../countries.json'
-import { getCountryName } from '../../countryTranslations'
 import {
     getFactionFlagLocation,
     getFactionFlagLocationCoh3,
@@ -15,6 +13,8 @@ import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { useViewStore } from '../../stores/viewStore'
+import countriesJson from '../../translations/countries.json'
+import { getCountryName } from '../../translations/countryTranslations'
 import { ExtraInfo, Player } from '../../types'
 import MainRowSpan from './MainRowSpan'
 import styles from './PlayerMainRow.module.css'

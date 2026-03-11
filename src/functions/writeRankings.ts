@@ -1,6 +1,6 @@
 import stringWidth from 'string-width'
 
-import countriesJson from '../../countries.json'
+import countriesJson from '../translations/countries.json'
 import { Player, RankingsJson } from '../types'
 import { commonName, commonNameCoh3 } from './simpleFunctions'
 
