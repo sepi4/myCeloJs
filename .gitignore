@@ -11,6 +11,9 @@ prompts/
 
 .VSCodeCounter
 
+.claude/settings.local.json
+.claude/plans/
+
 out/
 dist/
 node_modules/
