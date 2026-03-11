@@ -19,6 +19,9 @@ out/
 dist/
 node_modules/
 
+# test coverage
+coverage/
+
 # npm
 npm-debug.log*
 .npm

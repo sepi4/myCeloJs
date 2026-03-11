@@ -22,6 +22,7 @@
         "build": "electron-vite build",
         "preview": "electron-vite preview",
         "test": "jest",
+        "coverage": "jest --coverage && xdg-open coverage/index.html",
         "dist": "npm run e2e && electron-builder",
         "e2e": "npm run build && npx playwright test",
         "format": "prettier --write .",
