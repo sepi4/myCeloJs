@@ -23,7 +23,8 @@
         "preview": "electron-vite preview",
         "test": "jest",
         "coverage": "jest --coverage && xdg-open coverage/index.html",
-        "dist": "npm run e2e && electron-builder",
+        "dist": "jest && npm run e2e && electron-builder",
+        "dist-win": "jest && npm run e2e && electron-builder --win",
         "e2e": "npm run build && npx playwright test",
         "format": "prettier --write .",
         "prepare": "husky"
