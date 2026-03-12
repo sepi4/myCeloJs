@@ -79,7 +79,7 @@ function makeStats(statGroups: StatGroup[], leaderboardStats: LeaderboardStat[])
 
 // --- Tests ---
 
-describe('guessRankings', () => {
+describe('resolveRankings', () => {
     test('COH2 1v1 — solo player gets ranking and country', () => {
         const players: Player[] = [
             makePlayer({
