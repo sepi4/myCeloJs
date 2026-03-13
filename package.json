@@ -34,7 +34,6 @@
         "@fortawesome/free-solid-svg-icons": "^7.2.0",
         "@fortawesome/react-fontawesome": "^3.2.0",
         "dayjs": "^1.11.19",
-        "portfinder": "^1.0.38",
         "react": "^19.2.4",
         "react-dom": "^19.2.4",
         "react-modal": "^3.16.3",

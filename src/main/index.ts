@@ -1,8 +1,8 @@
 import { app, BrowserWindow, dialog, ipcMain, shell } from 'electron'
 import fs from 'fs'
 import http from 'http'
+import net from 'net'
 import path from 'path'
-import portfinder from 'portfinder'
 
 let mainWindow: BrowserWindow | null = null
 
@@ -130,10 +130,27 @@ function serveJson(port: string) {
     }).listen(port, undefined, () => {})
 }
 
+function findFreePort(start: number, stop: number): Promise<number> {
+    return new Promise((resolve, reject) => {
+        const server = net.createServer()
+        server.listen(start, () => {
+            const port = (server.address() as net.AddressInfo).port
+            server.close(() => resolve(port))
+        })
+        server.on('error', () => {
+            if (start >= stop) {
+                reject(new Error('No free port found'))
+            } else {
+                findFreePort(start + 1, stop).then(resolve, reject)
+            }
+        })
+    })
+}
+
 async function startPortServer() {
     try {
-        const port = await portfinder.getPortPromise({ port: 2222, stopPort: 3333 })
-        console.log('portfinder free port:', port)
+        const port = await findFreePort(2222, 3333)
+        console.log('free port:', port)
         serveJson(port.toString())
         await fs.promises.writeFile(
             path.join(process.cwd(), 'localhostFiles', 'port.js'),
@@ -141,7 +158,7 @@ async function startPortServer() {
             'utf-8'
         )
     } catch (err) {
-        console.log('portfinder err:', err)
+        console.log('port server err:', err)
     }
 }
 startPortServer()
