@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import useSound from 'use-sound'
 
 import audioLocation from './assets/audio/bell.mp3'
 import MainView from './components/MainView'
@@ -31,7 +30,7 @@ const settingsDir = window.electronAPI.settingsDir
 document.title = 'myCelo ' + appVersion
 
 function App() {
-    const [playAudio] = useSound(audioLocation)
+    const playAudio = () => new Audio(audioLocation).play()
 
     const { alert } = useAlertStore()
     const { appLocation } = useAppLocationStore()
