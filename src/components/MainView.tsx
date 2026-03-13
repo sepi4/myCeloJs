@@ -8,6 +8,7 @@ import { useSettingsViewStore } from '../stores/settingsViewStore'
 import { useViewStore } from '../stores/viewStore'
 import { Player } from '../types'
 import ClosingViewWrapper from './ClosingViewWrapper/ClosingViewWrapper'
+import styles from './MainView.module.css'
 import PlayerCard from './PlayerCard/PlayerCard'
 import Search from './Search/Search'
 import Settings from './Settings/Settings'
@@ -40,7 +41,7 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
     // haven't add log location
     if (!settings || !activeLogLocation) {
         return (
-            <div>
+            <div className={styles.centered}>
                 <h2 data-testid="no-log-prompt">{getText('add_log_location', settings)}</h2>
             </div>
         )
@@ -69,7 +70,7 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
         )
     }
     return (
-        <div>
+        <div className={styles.centered}>
             <h2>{getText('no_info', settings)}</h2>
         </div>
     )

@@ -296,12 +296,12 @@ const text: Translations = {
 
     // main view ---------------------------------
     no_info: {
-        en: 'no game info in log file',
-        ru: 'нет информации об игре в лог-файле',
+        en: 'Watching log file — no match found yet',
+        ru: 'Слежу за лог-файлом — матч ещё не найден',
     },
     add_log_location: {
-        en: 'Please, in settings specify location log file (warnings.log)',
-        ru: 'Укажите в настройках расположение лог-файла (warnings.log)',
+        en: 'Open settings and set the log file location (warnings.log)',
+        ru: 'Откройте настройки и укажите расположение лог-файла (warnings.log)',
     },
 
     // update bar
