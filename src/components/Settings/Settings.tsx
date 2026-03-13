@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react'
-import Modal from 'react-modal'
 
 import { fetchCoh2ProfileId } from '../../functions/fetchCoh2ProfileId'
 import getText from '../../functions/getText'
@@ -9,6 +8,7 @@ import useTimedBoolean from '../../hooks/useTimedBoolean'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { useSettingsViewStore } from '../../stores/settingsViewStore'
 import { SettingsType } from '../../types'
+import Modal from '../Modal/Modal'
 import Notification from '../Notification'
 import ClearButton from './ClearButton'
 import styles from './Settings.module.css'
@@ -289,9 +289,7 @@ function Settings(props: Props) {
 
             <Modal
                 isOpen={resetConfirmOpen}
-                ariaHideApp={false}
-                shouldCloseOnOverlayClick={true}
-                onRequestClose={() => setResetConfirmOpen(false)}
+                onClose={() => setResetConfirmOpen(false)}
                 className={styles.resetConfirmModal}
                 overlayClassName={styles.resetConfirmOverlay}
             >
