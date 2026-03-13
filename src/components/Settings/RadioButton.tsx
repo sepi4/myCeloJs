@@ -1,18 +1,6 @@
 import { ChangeEvent, useId } from 'react'
-import styled from 'styled-components'
 
-const Span = styled.span`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 1em;
-    &:hover {
-        color: #ddd;
-    }
-    input {
-        margin-right: 0.5em;
-    }
-`
+import styles from './RadioButton.module.css'
 
 interface Props {
     checked: boolean
@@ -26,7 +14,7 @@ function RadioButton(props: Props) {
     const id = useId()
 
     return (
-        <Span>
+        <span className={styles.span}>
             <input
                 type="radio"
                 id={id}
@@ -37,7 +25,7 @@ function RadioButton(props: Props) {
             <label data-testid={props.testId} htmlFor={id}>
                 {props.labelText}
             </label>
-        </Span>
+        </span>
     )
 }
 

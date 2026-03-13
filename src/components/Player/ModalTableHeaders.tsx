@@ -1,5 +1,3 @@
-import styled from 'styled-components'
-
 import { getExtraInfo } from '../../functions/getExtraInfo'
 import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation'
 import getText from '../../functions/getText'
@@ -8,15 +6,7 @@ import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { useViewStore } from '../../stores/viewStore'
 import { MatchHistoryReportResult, NormalizedProfiles, SettingsType } from '../../types'
-
-const StyledTh = styled.th<{ len?: number }>`
-    word-wrap: break-word;
-    max-width: ${({ len }) => (len ? 99 / (len + 1) : null)} + '%';
-    img {
-        width: 1.4em;
-        height: 1.4em;
-    }
-`
+import styles from './ModalTableHeaders.module.css'
 
 interface Props {
     settings: SettingsType
@@ -33,33 +23,34 @@ function ModalTableHeaders(props: Props) {
     return (
         <thead>
             <tr>
-                <StyledTh style={{ textAlign: 'left' }}>
+                <th className={styles.th} style={{ textAlign: 'left' }}>
                     {getText('faction', props.settings)}
-                </StyledTh>
+                </th>
 
                 {props.players.map((p) => (
-                    <StyledTh key={p.profile_id} len={props.players.length}>
+                    <th key={p.profile_id} className={styles.th}>
                         <img
                             src={getFactionFlagLocation(getFactionById(p.race_id))}
                             alt={`${getFactionById(p.race_id)}`}
                         />
-                    </StyledTh>
+                    </th>
                 ))}
             </tr>
 
             <tr>
-                <StyledTh
+                <th
+                    className={styles.th}
                     style={{
                         textAlign: 'left',
                     }}
                 >
                     {getText('name', props.settings)}
-                </StyledTh>
+                </th>
                 {props.players.map((p) => {
                     return (
-                        <StyledTh
+                        <th
                             key={p.profile_id}
-                            len={props.players.length}
+                            className={styles.th}
                             style={{
                                 color:
                                     p.resulttype === 1
@@ -95,7 +86,7 @@ function ModalTableHeaders(props: Props) {
                             >
                                 {props.profiles[p.profile_id].alias}
                             </a>
-                        </StyledTh>
+                        </th>
                     )
                 })}
             </tr>

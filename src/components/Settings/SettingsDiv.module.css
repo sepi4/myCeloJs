@@ -1,0 +1,15 @@
+.settingsDiv {
+    padding: 1em;
+}
+
+.settingsDiv:hover {
+    background-color: #666;
+}
+
+.contentDiv {
+    margin: 0.2em 0 0 0;
+    min-width: 100%;
+    min-height: 1em;
+    color: black;
+    overflow-wrap: break-word;
+}

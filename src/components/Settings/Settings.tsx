@@ -10,7 +10,6 @@ import { useSettingsStore } from '../../stores/settingsStore'
 import { useSettingsViewStore } from '../../stores/settingsViewStore'
 import { SettingsType } from '../../types'
 import Notification from '../Notification'
-import { StyledButton } from '../styled/styledSettings'
 import ClearButton from './ClearButton'
 import styles from './Settings.module.css'
 import SettingsAfterLog from './SettingsAfterLog'
@@ -190,14 +189,16 @@ function Settings(props: Props) {
                     )}
                 </div>
                 <div className={styles.buttonRow}>
-                    <StyledButton
+                    <button
+                        className={styles.button}
                         data-testid="log-location-button-coh2"
                         onClick={() => changeLogLocation('coh2')}
                     >
                         {getText('select', settings)}
-                    </StyledButton>
+                    </button>
                     {settings?.logLocationCoh2 && (
-                        <StyledButton
+                        <button
+                            className={styles.button}
                             data-testid="copy-log-coh2-button"
                             onClick={() => {
                                 setTimedCopyCoh2(true)
@@ -205,7 +206,7 @@ function Settings(props: Props) {
                             }}
                         >
                             {getText('copy', settings)}
-                        </StyledButton>
+                        </button>
                     )}
                 </div>
             </SettingsDiv>
@@ -232,14 +233,16 @@ function Settings(props: Props) {
                     )}
                 </div>
                 <div className={styles.buttonRow}>
-                    <StyledButton
+                    <button
+                        className={styles.button}
                         data-testid="log-location-button-coh3"
                         onClick={() => changeLogLocation('coh3')}
                     >
                         {getText('select', settings)}
-                    </StyledButton>
+                    </button>
                     {settings?.logLocationCoh3 && (
-                        <StyledButton
+                        <button
+                            className={styles.button}
                             data-testid="copy-log-coh3-button"
                             onClick={() => {
                                 setTimedCopyCoh3(true)
@@ -247,7 +250,7 @@ function Settings(props: Props) {
                             }}
                         >
                             {getText('copy', settings)}
-                        </StyledButton>
+                        </button>
                     )}
                 </div>
             </SettingsDiv>
@@ -270,9 +273,13 @@ function Settings(props: Props) {
                         )}
                     </div>
 
-                    <StyledButton data-testid="steam-id-save" onClick={handleSteamId}>
+                    <button
+                        className={styles.button}
+                        data-testid="steam-id-save"
+                        onClick={handleSteamId}
+                    >
                         {getText('save', settings)}
-                    </StyledButton>
+                    </button>
                     {errorDiv}
                     {savedDiv}
                 </>
@@ -297,7 +304,8 @@ function Settings(props: Props) {
                         marginTop: '1em',
                     }}
                 >
-                    <StyledButton
+                    <button
+                        className={styles.button}
                         data-testid="reset-confirm-ok"
                         onClick={() => {
                             setResetConfirmOpen(false)
@@ -316,25 +324,27 @@ function Settings(props: Props) {
                         }}
                     >
                         {getText('ok', settings)}
-                    </StyledButton>
-                    <StyledButton
+                    </button>
+                    <button
+                        className={styles.button}
                         data-testid="reset-confirm-cancel"
                         onClick={() => setResetConfirmOpen(false)}
                     >
                         {getText('cancel', settings)}
-                    </StyledButton>
+                    </button>
                 </div>
             </Modal>
 
             <SettingsDiv>
                 <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    <StyledButton
+                    <button
+                        className={styles.button}
                         data-testid="reset-settings-button"
                         disabled={isDefaultSettings}
                         onClick={() => setResetConfirmOpen(true)}
                     >
                         {getText('reset_all_settings', settings)}
-                    </StyledButton>
+                    </button>
                 </div>
             </SettingsDiv>
         </div>

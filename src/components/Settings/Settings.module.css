@@ -70,3 +70,24 @@
     inset: 0;
     background-color: rgba(200, 200, 200, 0.5);
 }
+
+.button {
+    margin: 0.2em 0;
+    width: 25vw;
+    color: #ddd;
+    cursor: pointer;
+    background-color: #222;
+    padding: 0.2em 0;
+    font-size: 1em;
+    border: 0;
+}
+
+.button:active {
+    color: black;
+    background-color: #ddd;
+}
+
+.button:disabled {
+    opacity: 0.35;
+    cursor: default;
+}

@@ -2,7 +2,6 @@ import getText from '../../functions/getText'
 import useTimedBoolean from '../../hooks/useTimedBoolean'
 import { useSettingsStore } from '../../stores/settingsStore'
 import Notification from '../Notification'
-import { StyledButton } from '../styled/styledSettings'
 import styles from './Settings.module.css'
 
 interface Props {
@@ -38,12 +37,13 @@ function CopyDiv(props: Props) {
                 {notification}
             </div>
 
-            <StyledButton
+            <button
+                className={styles.button}
                 data-testid={props.testId ? `${props.testId}-button` : undefined}
                 onClick={handleCopy}
             >
                 {getText('copy', settings)}
-            </StyledButton>
+            </button>
         </div>
     )
 }

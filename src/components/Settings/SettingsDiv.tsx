@@ -2,7 +2,7 @@ import { JSX } from 'react'
 
 import getText from '../../functions/getText'
 import { useSettingsStore } from '../../stores/settingsStore'
-import { StyledContentDiv, StyledDiv } from '../styled/styledSettings'
+import styles from './SettingsDiv.module.css'
 
 interface Props {
     title?: string
@@ -27,7 +27,7 @@ function SettingsDiv(props: Props) {
         </span>
     ) : null
     return (
-        <StyledDiv>
+        <div className={styles.settingsDiv}>
             {props.title && (
                 <div
                     data-testid={props.testId}
@@ -39,8 +39,8 @@ function SettingsDiv(props: Props) {
                     {props.title} {req}
                 </div>
             )}
-            <StyledContentDiv>{props.children}</StyledContentDiv>
-        </StyledDiv>
+            <div className={styles.contentDiv}>{props.children}</div>
+        </div>
     )
 }
 

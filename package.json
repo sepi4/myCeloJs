@@ -39,7 +39,6 @@
         "react-dom": "^19.2.4",
         "react-modal": "^3.16.3",
         "string-width": "^8.2.0",
-        "styled-components": "^6.3.11",
         "use-sound": "^5.0.0",
         "zustand": "^5.0.11"
     },
