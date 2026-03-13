@@ -51,7 +51,7 @@
         "*.{js,json,css}": "prettier --write"
     },
     "devDependencies": {
-        "@eslint/js": "^9.0.0",
+        "@eslint/js": "^10.0.1",
         "@playwright/test": "^1.58.2",
         "@types/jest": "^30.0.0",
         "@types/react": "^19.2.14",
