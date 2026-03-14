@@ -1,13 +1,12 @@
 import { Rank } from '../types'
 import sorters from './sorters'
 
-export function ranksArrFilter(ranksArr: Rank[], tableView: boolean, showAll: boolean) {
-    const reg = tableView ? /^Team/ : /^./
+export function ranksArrFilter(ranksArr: Rank[], tableView: boolean, showAll: boolean): Rank[] {
+    const namePattern = tableView ? /^Team/ : /^./
     const rankedOnly = !showAll
-    ranksArr = ranksArr
-        .filter((r) => r.name.match(reg))
-        .filter((r) => (rankedOnly ? r.rank > 0 : true))
     return ranksArr
+        .filter((rank) => rank.name.match(namePattern))
+        .filter((rank) => (rankedOnly ? rank.rank > 0 : true))
 }
 
 type Sorter = {
@@ -15,42 +14,29 @@ type Sorter = {
     reversed: boolean
 }
 
-/**
- * Sorting array of Rank objects for rank list in drop menu
- * @param ranksArr unsorted array
- * @param sorter function for sorting
- * @returns sorted array
- */
-export function ranksArrSort(ranksArr: Rank[], sorter: Sorter) {
-    const byTotal = (a: Rank, b: Rank) => {
-        const aTotal = a.wins + a.losses
-        const bTotal = b.wins + b.losses
-        return bTotal - aTotal
-    }
+function byTotalGames(a: Rank, b: Rank): number {
+    return b.wins + b.losses - (a.wins + a.losses)
+}
 
-    const f = sorters[sorter.name]
+export function ranksArrSort(ranksArr: Rank[], sorter: Sorter): Rank[] {
+    const compareFn = sorters[sorter.name]
 
     if (sorter.name !== 'byRank') {
-        return ranksArr.sort(f)
+        return ranksArr.sort(compareFn)
     }
 
-    let pos = []
-    let neg = []
-    for (const r of ranksArr) {
-        if (r.rank < 0) {
-            neg.push(r)
+    const ranked: Rank[] = []
+    const unranked: Rank[] = []
+    for (const rank of ranksArr) {
+        if (rank.rank < 0) {
+            unranked.push(rank)
         } else {
-            pos.push(r)
+            ranked.push(rank)
         }
     }
-    neg = neg.sort(byTotal)
 
-    pos = pos.sort((a, b) => {
-        const diff = f(a, b)
-        if (diff !== 0) {
-            return diff
-        }
-        return byTotal(a, b)
-    })
-    return [...pos, ...neg]
+    ranked.sort((a, b) => compareFn(a, b) || byTotalGames(a, b))
+    unranked.sort(byTotalGames)
+
+    return [...ranked, ...unranked]
 }
