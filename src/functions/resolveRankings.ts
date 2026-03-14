@@ -1,5 +1,6 @@
 import { AvailableLeaderboard, PersonalStats, Player, StatGroup } from '../types'
-import { copyObj, formatToNums, getFactionName, separateTeams } from './simpleFunctions'
+import { getFactionName } from './factionMappings'
+import { copyObj, formatToNums, separateTeams } from './simpleFunctions'
 
 const ALLIES_FACTIONS = ['british', 'aef', 'soviet']
 const AXIS_FACTIONS = ['west_german', 'german']

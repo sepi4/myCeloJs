@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
+import { getFactionById } from '../../functions/factionMappings'
 import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation'
-import { getFactionById } from '../../functions/simpleFunctions'
 import { getTimeAgo } from '../../functions/time'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { MatchObject, NormalizedProfiles } from '../../types'

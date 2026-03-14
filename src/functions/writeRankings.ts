@@ -2,7 +2,7 @@ import stringWidth from 'string-width'
 
 import countriesJson from '../translations/countries.json'
 import { Player, RankingsJson } from '../types'
-import { commonName, commonNameCoh3 } from './simpleFunctions'
+import { commonName, commonNameCoh3 } from './factionMappings'
 
 interface Countries {
     [key: string]: {

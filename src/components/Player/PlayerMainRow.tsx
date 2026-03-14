@@ -1,12 +1,12 @@
 import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import { commonName } from '../../functions/factionMappings'
 import {
     getFactionFlagLocation,
     getFactionFlagLocationCoh3,
 } from '../../functions/getFactionFlagLocation'
 import getText from '../../functions/getText'
-import { commonName } from '../../functions/simpleFunctions'
 import { getTotalGames } from '../../functions/simpleFunctions'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'

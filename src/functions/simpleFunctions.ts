@@ -1,36 +1,4 @@
-import { FactionName, Player, Rank } from '../types'
-
-export function commonName(str: string): FactionName {
-    switch (str) {
-        case 'british':
-            return 'uk'
-        case 'aef':
-            return 'usa'
-        case 'soviet':
-            return 'sov'
-        case 'west_german':
-            return 'okw'
-        case 'german':
-            return 'wer'
-        default:
-            return 'wer'
-    }
-}
-
-export function commonNameCoh3(str: string): string {
-    switch (str) {
-        case 'americans':
-            return 'usa'
-        case 'afrika_korps':
-            return 'dak'
-        case 'british_africa':
-            return 'uk'
-        case 'germans':
-            return 'wer'
-        default:
-            return 'wer'
-    }
-}
+import { Player, Rank } from '../types'
 
 export function getTotalGames(ranks: Rank[]): number {
     let sum = 0
@@ -76,51 +44,4 @@ export function formatToNums(arr: Player[]): Player[] {
         }
     }
     return arr
-}
-
-export function getFactionName(x: string): string {
-    switch (x) {
-        // coh2
-        case 'soviet':
-            return 'Soviet'
-        case 'german':
-            return 'German'
-        case 'aef':
-            return 'AEF'
-        case 'british':
-            return 'British'
-        case 'west_german':
-            return 'WestGerman'
-
-        // coh3
-        case 'british_africa':
-            return 'British'
-        case 'americans':
-            return 'American'
-        case 'afrika_korps':
-            return 'DAK'
-        case 'germans':
-            return 'German'
-
-        // else
-        default:
-            return ''
-    }
-}
-
-export function getFactionById(id: number): FactionName {
-    switch (id) {
-        case 0:
-            return 'wer'
-        case 1:
-            return 'sov'
-        case 2:
-            return 'okw'
-        case 3:
-            return 'usa'
-        case 4:
-            return 'uk'
-        default:
-            return 'wer'
-    }
 }

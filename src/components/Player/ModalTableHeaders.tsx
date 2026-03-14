@@ -1,7 +1,7 @@
+import { getFactionById } from '../../functions/factionMappings'
 import { getExtraInfo } from '../../functions/getExtraInfo'
 import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation'
 import getText from '../../functions/getText'
-import { getFactionById } from '../../functions/simpleFunctions'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { useViewStore } from '../../stores/viewStore'
