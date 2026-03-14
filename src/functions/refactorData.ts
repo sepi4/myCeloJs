@@ -1,73 +1,67 @@
 import { AvailableLeaderboard, NormalizedExtraInfo, PersonalStats, StatGroup } from '../types'
 
+const STEAM_PREFIX = '/steam/'
+
 export function refactorData(
-    leaderboard: PersonalStats,
-    cohTitles: AvailableLeaderboard,
+    personalStats: PersonalStats,
+    availableLeaderboards: AvailableLeaderboard,
     ids: number[]
 ): NormalizedExtraInfo {
     const players: NormalizedExtraInfo = {}
     for (const id of ids) {
-        players[id] = {
-            ranks: [],
+        players[id] = { ranks: [] }
+    }
+
+    const statGroupsById: Record<number, StatGroup> = {}
+    for (const group of personalStats.statGroups) {
+        statGroupsById[group.id] = group
+    }
+
+    const leaderboardsById: Record<number, { name: string; isRanked: number }> = {}
+    for (const lb of availableLeaderboards.leaderboards) {
+        leaderboardsById[lb.id] = { name: lb.name, isRanked: lb.isranked }
+    }
+
+    for (const stat of personalStats.leaderboardStats) {
+        const group = statGroupsById[stat.statgroup_id]
+        const leaderboard = leaderboardsById[stat.leaderboard_id]
+
+        if (!leaderboard) {
+            continue
         }
-    }
-
-    const statGroups: { [key: number]: StatGroup } = {}
-    for (const x of leaderboard.statGroups) {
-        statGroups[x.id] = x
-    }
-
-    type TL = {
-        name: string
-        isRanked: number
-    }
-    const titlesLeadersboards: { [key: number]: TL } = {}
-    // get all that are ranked
-    // for (const x of cohTitles.leaderboards.filter(l => l.isranked === 1)) {
-
-    for (const x of cohTitles.leaderboards) {
-        titlesLeadersboards[x.id] = {
-            name: x.name,
-            isRanked: x.isranked,
-        }
-    }
-
-    // for (const x of leaderboard.leaderboardStats.filter(l => l.rank > -1)) {
-    for (const x of leaderboard.leaderboardStats) {
-        // check members
-
-        const group = statGroups[x.statgroup_id]
 
         for (const member of group.members) {
-            const id = member.profile_id
-
-            if (
-                players[id] &&
-                !players[id].ranks.find(
-                    (y) =>
-                        y.statgroup_id === x.statgroup_id && y.leaderboard_id === x.leaderboard_id
-                ) &&
-                titlesLeadersboards[x.leaderboard_id]
-            ) {
-                players[id].ranks.push({
-                    members: group.members,
-                    name: titlesLeadersboards[x.leaderboard_id].name,
-                    isModeRanked: titlesLeadersboards[x.leaderboard_id].isRanked,
-                    ...x,
-                })
-                break
+            const player = players[member.profile_id]
+            if (!player) {
+                continue
             }
+
+            const isDuplicate = player.ranks.some(
+                (r) =>
+                    r.statgroup_id === stat.statgroup_id && r.leaderboard_id === stat.leaderboard_id
+            )
+            if (isDuplicate) {
+                continue
+            }
+
+            player.ranks.push({
+                members: group.members,
+                name: leaderboard.name,
+                isModeRanked: leaderboard.isRanked,
+                ...stat,
+            })
+            break
         }
     }
 
-    // add steamId to extraInfo
     for (const id of Object.keys(players)) {
         if (players[id].steamId) {
             break
         }
-        for (const rankObj of players[id].ranks) {
-            if (rankObj.members?.length === 1) {
-                players[id].steamId = rankObj.members[0].name.substring(7)
+
+        for (const rank of players[id].ranks) {
+            if (rank.members?.length === 1) {
+                players[id].steamId = rank.members[0].name.substring(STEAM_PREFIX.length)
                 break
             }
         }
