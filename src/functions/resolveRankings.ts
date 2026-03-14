@@ -1,6 +1,6 @@
 import { AvailableLeaderboard, PersonalStats, Player, StatGroup } from '../types'
 import { getFactionName } from './factionMappings'
-import { copyObj, formatToNums, separateTeams } from './simpleFunctions'
+import { formatToNums, separateTeams } from './simpleFunctions'
 
 const ALLIES_FACTIONS = ['british', 'aef', 'soviet']
 const AXIS_FACTIONS = ['west_german', 'german']
@@ -104,7 +104,7 @@ export function resolveRankings(
     stats: PersonalStats,
     leaderboards: AvailableLeaderboard
 ) {
-    const players: Player[] = formatToNums(copyObj(playersArr))
+    const players: Player[] = formatToNums(structuredClone(playersArr))
     const teams: [Player[], Player[]] = separateTeams(players)
 
     for (const team of teams) {

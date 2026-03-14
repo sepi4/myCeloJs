@@ -22,15 +22,6 @@ export function separateTeams(arr: Player[]): [Player[], Player[]] {
     return teams
 }
 
-/**
- * Generic object copy
- * @param obj Object to copy
- * @returns Copy
- */
-export function copyObj<T>(obj: T): T {
-    return JSON.parse(JSON.stringify(obj))
-}
-
 export function formatToNums(arr: Player[]): Player[] {
     for (const obj of arr) {
         if (obj.profileId && !isNaN(obj.profileId)) {
