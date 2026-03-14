@@ -42,25 +42,6 @@ export interface Member {
     extraInfo?: ExtraInfo
 }
 
-export interface RankForTableView {
-    disputes: number
-    drops: number
-    isModeRanked: number
-    lastmatchdate: number
-    leaderboard_id: number
-    losses: number
-    members: Member[]
-    name: string
-    rank: number
-    ranklevel: number
-    ranktotal: number
-    regionrank: number
-    regionranktotal: number
-    statgroup_id: number
-    streak: number
-    wins: number
-}
-
 export interface CountryFlagsLocation {
     [key: string]: string
 }
@@ -102,12 +83,6 @@ export interface LeaderboardStat {
     statgroup_id: number
     streak: number
     wins: number
-}
-
-export interface SearchResult {
-    data: PersonalStats
-    status: number
-    statusText: string
 }
 
 export interface PersonalStats {
@@ -262,14 +237,4 @@ export interface ExtraInfo {
 }
 export interface NormalizedExtraInfo {
     [key: string]: ExtraInfo
-}
-
-export interface DataFromFile {
-    faction: string
-    name: string
-    profileId: string
-    ranking: string
-    slot: string
-    teamSlot: string
-    time: string
 }
