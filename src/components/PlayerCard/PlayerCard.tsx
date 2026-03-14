@@ -2,7 +2,7 @@
 import logo_coh2 from '../../assets/img/logo_coh2.png'
 import logo_cohstats from '../../assets/img/logo_cohstats.png'
 import logo_steam from '../../assets/img/logo_steam.png'
-import getSiteLink from '../../functions/getSiteLink'
+import { COH2_ORG, COH2STATS_COM, COH3STATS_COM, STEAM } from '../../constants'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
@@ -65,22 +65,20 @@ export default function PlayerCard() {
         </div>
     )
 
-    const linkSteam = getSiteLink('steam') + steamId
+    const linkSteam = STEAM + steamId
     const funSteam = () => (steamId ? window.electronAPI.shell.openExternal(linkSteam) : null)
 
     const linkImages = coh3 ? (
         <div className={styles.links}>
             <img
                 data-testid="link-coh3stats"
-                data-url={getSiteLink('coh3stats.com') + player.profileId}
+                data-url={COH3STATS_COM + player.profileId}
                 src={logo_cohstats}
                 alt="coh3stats"
                 title="coh3stats.com"
                 onClick={() =>
                     player.profileId
-                        ? window.electronAPI.shell.openExternal(
-                              getSiteLink('coh3stats.com') + player.profileId
-                          )
+                        ? window.electronAPI.shell.openExternal(COH3STATS_COM + player.profileId)
                         : null
                 }
             />
@@ -97,28 +95,22 @@ export default function PlayerCard() {
         <div className={styles.links}>
             <img
                 data-testid="link-coh2stats"
-                data-url={getSiteLink('coh2stats.com') + steamId}
+                data-url={COH2STATS_COM + steamId}
                 src={logo_cohstats}
                 alt="coh2stats"
                 title="coh2stats.com"
                 onClick={() =>
-                    steamId
-                        ? window.electronAPI.shell.openExternal(
-                              getSiteLink('coh2stats.com') + steamId
-                          )
-                        : null
+                    steamId ? window.electronAPI.shell.openExternal(COH2STATS_COM + steamId) : null
                 }
             />
             <img
                 data-testid="link-coh2"
-                data-url={getSiteLink('coh2.org') + steamId}
+                data-url={COH2_ORG + steamId}
                 src={logo_coh2}
                 alt="coh2"
                 title="coh2.org"
                 onClick={() =>
-                    steamId
-                        ? window.electronAPI.shell.openExternal(getSiteLink('coh2.org') + steamId)
-                        : null
+                    steamId ? window.electronAPI.shell.openExternal(COH2_ORG + steamId) : null
                 }
             />
             <img
