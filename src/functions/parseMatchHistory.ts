@@ -1,55 +1,74 @@
 import {
     AvailableLeaderboard,
+    MatchHistoryStat,
     MatchObject,
+    MatchType,
     NormalizedProfiles,
     Player,
     RecentMatchHistory,
 } from '../types'
 
-type Result = [RecentMatchHistory, AvailableLeaderboard]
+type HistoryResult = [RecentMatchHistory, AvailableLeaderboard]
 
-export const parseHistoryData = (result: Result, player: Player) => {
-    const data = result[0]
-    const { matchTypes } = result[1]
-    const { matchHistoryStats, profiles } = data
-    const matches = matchHistoryStats.sort((a, b) => {
-        return b.completiontime - a.completiontime
-    })
+type ParsedHistory = {
+    matchHistoryStats: MatchObject[]
+    profiles: NormalizedProfiles
+}
 
-    const matchesArr: MatchObject[] = []
+function toMatchObject(
+    match: MatchHistoryStat,
+    matchTypes: MatchType[],
+    player: Player
+): MatchObject | null {
+    const players = match.matchhistoryreportresults.map((report) => ({
+        ...report,
+        counters: JSON.parse(report.counters as unknown as string),
+    }))
 
-    matches.forEach((m) => {
-        const mObj = <MatchObject>{}
-        mObj.startGameTime = new Date(m.startgametime * 1000)
-        mObj.endGameTime = new Date(m.completiontime * 1000)
-        mObj.mapName = m.mapname
-        mObj.players = m.matchhistoryreportresults.map((p) => {
-            p.counters = JSON.parse(p.counters as unknown as string)
-            return p
-        })
-        mObj.matchType = matchTypes.find((t) => t.id === m.matchtype_id)
-        mObj.description = m.description
-        mObj.all = m
-        if (mObj.players.length === 0) {
-            return
-        }
-        mObj.result = m.matchhistoryreportresults.find((r) => {
-            // TODO === fix string profileId
-            return r.profile_id == player.profileId
-        })
-
-        mObj.counters = mObj.result?.counters
-        if (result) {
-            matchesArr.push(mObj)
-        }
-    })
-
-    const profilesObj: NormalizedProfiles = {}
-    for (const p of profiles) {
-        profilesObj[p.profile_id] = p
+    if (players.length === 0) {
+        return null
     }
+
+    // TODO === fix string profileId
+    const playerResult = players.find((r) => r.profile_id == player.profileId)
+
     return {
-        matchHistoryStats: matchesArr,
-        profiles: profilesObj,
+        startGameTime: new Date(match.startgametime * 1000),
+        endGameTime: new Date(match.completiontime * 1000),
+        mapName: match.mapname,
+        players,
+        matchType: matchTypes.find((t) => t.id === match.matchtype_id),
+        description: match.description,
+        all: match,
+        result: playerResult,
+        counters: playerResult?.counters,
+    }
+}
+
+function normalizeProfiles(profiles: RecentMatchHistory['profiles']): NormalizedProfiles {
+    const normalized: NormalizedProfiles = {}
+    for (const profile of profiles) {
+        normalized[profile.profile_id] = profile
+    }
+    return normalized
+}
+
+export function parseHistoryData(result: HistoryResult, player: Player): ParsedHistory {
+    const { matchHistoryStats, profiles } = result[0]
+    const { matchTypes } = result[1]
+
+    const sortedMatches = matchHistoryStats.sort((a, b) => b.completiontime - a.completiontime)
+
+    const matchObjects: MatchObject[] = []
+    for (const match of sortedMatches) {
+        const matchObject = toMatchObject(match, matchTypes, player)
+        if (matchObject) {
+            matchObjects.push(matchObject)
+        }
+    }
+
+    return {
+        matchHistoryStats: matchObjects,
+        profiles: normalizeProfiles(profiles),
     }
 }
