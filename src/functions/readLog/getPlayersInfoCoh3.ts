@@ -1,79 +1,125 @@
 import { Player } from '../../types'
 
-// TODO: ADD EXAMPLES
-/**
- *
- * @param arr string arr from warnings.log with players data
- * @returns  arr of players objects
- */
-export function getPlayersInfoCoh3(arr: string[]): Player[] {
-    let time: string | undefined
-
-    const playersData: string[] = arr.map((row) => {
-        if (row.match(/GAME --.* Player:/)) {
-            const splitted = row.split(':')
-            if (time === undefined) {
-                time = [splitted[0], splitted[1], splitted[2]].join(':')
-            }
-
-            return splitted.slice(4).join(':').trim()
-        } else {
-            const splited = row.split(':')
-            return splited[splited.length - 1].trim()
-        }
-    })
-
-    const ooo: Record<string, NonNullable<ReturnType<typeof parse>>> = {}
-    for (const row of playersData) {
-        const p = parse(row)
-        if (p?.profileId) {
-            ooo[p.profileId + ''] = p
-        }
-    }
-
-    const players: {
-        [key: string]: Player
-    } = {}
-
-    for (const pData of playersData) {
-        const playerArr: string[] = pData.split(' ')
-        const slot: string | undefined = playerArr.shift()
-
-        const faction: string | undefined = playerArr.pop()
-        const teamSlot: string | undefined = playerArr.pop()
-        const profileId: string | undefined = playerArr.pop()
-        const name: string = playerArr.join(' ')
-
-        if (slot && faction && teamSlot && time && Number(profileId)) {
-            const pid = Number(profileId)
-            players[slot] = {
-                faction,
-                name,
-                profileId: profileId === undefined ? -1 : pid,
-                teamSlot: teamSlot === undefined ? -1 : Number(teamSlot),
-                time,
-                ranking: ooo[pid]?.ranking,
-            }
-        }
-    }
-
-    //combine into one obj
-    return Object.keys(players).map((key) => {
-        const p = players[key]
-        return p
-    })
+type MatchStartedInfo = {
+    profileId: number
+    steamId: number
+    slot: number
+    ranking: number
 }
 
-function parse(row: string) {
-    const m = row.match(
+/**
+ * Extracts the player data portion from a COH3 log line, stripping the timestamp/prefix.
+ * Player line format: `(I) [HH:MM:SS.ms] [id]: GAME -- Human Player: <slot> <name> <profileId> <teamSlot> <faction>`
+ * Returns the part after "Human Player:" — e.g. `0 sepi 21518 0 germans`
+ */
+function extractPlayerData(lines: string[]): {
+    playerDataStrings: string[]
+    time: string | undefined
+} {
+    let time: string | undefined
+
+    const playerDataStrings: string[] = lines.map((line) => {
+        if (line.match(/GAME --.* Player:/)) {
+            const parts = line.split(':')
+            if (time === undefined) {
+                // Time includes the full prefix: "(I) [HH:MM:SS.ms] [id]"
+                time = [parts[0], parts[1], parts[2]].join(':')
+            }
+
+            // Player data starts after "Human Player:" (index 4 onward, one more than COH2)
+            return parts.slice(4).join(':').trim()
+        } else {
+            // Non-player lines (e.g. Match Started): take the last colon-separated segment
+            const parts = line.split(':')
+            return parts[parts.length - 1].trim()
+        }
+    })
+
+    return { playerDataStrings, time }
+}
+
+/**
+ * Parses a "Match Started" line to extract ranking info.
+ * Expected format: `Match Started - [<profileId> /steam/<steamId>], slot = <slot>, ranking = <ranking>`
+ */
+function parseMatchStarted(data: string): MatchStartedInfo | undefined {
+    const match = data.match(
         /Match Started - \[(\d+) \/steam\/(\d+)\], slot = +(\d+), ranking = +(-?\d+)/
     )
-    if (m) {
+    if (match) {
         return {
-            profileId: Number(m[1]),
-            steamId: Number(m[2]),
-            slot: Number(m[3]),
-            ranking: Number(m[4]),
+            profileId: Number(match[1]),
+            steamId: Number(match[2]),
+            slot: Number(match[3]),
+            ranking: Number(match[4]),
         }
     }
+}
+
+/**
+ * Parses a player data string into a Player object.
+ * Expected format: `<slot> <name...> <profileId> <teamSlot> <faction>`
+ */
+function parsePlayer(
+    data: string,
+    time: string,
+    rankings: Record<string, MatchStartedInfo>
+): { slot: string; player: Player } | undefined {
+    const tokens = data.split(' ')
+    const slot = tokens.shift()
+    const faction = tokens.pop()
+    const teamSlot = tokens.pop()
+    const profileId = tokens.pop()
+    const name = tokens.join(' ')
+
+    if (!slot || !faction || !teamSlot || !Number(profileId)) {
+        return undefined
+    }
+
+    const pid = Number(profileId)
+
+    return {
+        slot,
+        player: {
+            faction,
+            name,
+            profileId: profileId === undefined ? -1 : pid,
+            teamSlot: teamSlot === undefined ? -1 : Number(teamSlot),
+            time,
+            ranking: rankings[pid]?.ranking,
+        },
+    }
+}
+
+/**
+ * Parses COH3 log lines into Player objects.
+ * @param lines - log lines containing player data from warnings.log
+ * @returns array of parsed players
+ */
+export function getPlayersInfoCoh3(lines: string[]): Player[] {
+    const { playerDataStrings, time } = extractPlayerData(lines)
+
+    if (!time) {
+        return []
+    }
+
+    // Build a lookup of rankings from "Match Started" lines
+    const rankings: Record<string, MatchStartedInfo> = {}
+    for (const data of playerDataStrings) {
+        const info = parseMatchStarted(data)
+        if (info?.profileId) {
+            rankings[info.profileId] = info
+        }
+    }
+
+    const players: Record<string, Player> = {}
+
+    for (const data of playerDataStrings) {
+        const result = parsePlayer(data, time, rankings)
+        if (result) {
+            players[result.slot] = result.player
+        }
+    }
+
+    return Object.values(players)
 }
