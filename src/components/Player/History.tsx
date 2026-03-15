@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 
+import { RELIC_SERVER_BASE_COH2 } from '../../constants'
 import getText from '../../functions/getText'
-import { getHistoryUrls, parseHistoryData } from '../../functions/historyFuns'
+import { parseHistoryData } from '../../functions/historyFuns'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { MatchObject, NormalizedProfiles, Player } from '../../types'
 import GameHistoryDiv from './GameHistoryDiv'
@@ -29,7 +30,9 @@ export default function History(props: Props) {
             setFetching(true)
             async function fetchHistory() {
                 try {
-                    const [url, url2] = getHistoryUrls(props.player.profileId)
+                    const id = props.player.profileId
+                    const url = `${RELIC_SERVER_BASE_COH2}/getRecentMatchHistoryByProfileId?title=coh2&profile_id=${id}`
+                    const url2 = `${RELIC_SERVER_BASE_COH2}/GetAvailableLeaderboards?title=coh2`
                     const [r1, r2] = await Promise.all([
                         fetch(url).then((r) => r.json()),
                         fetch(url2).then((r) => r.json()),

@@ -1,4 +1,3 @@
-import { RELIC_SERVER_BASE_COH2 } from '../constants'
 import {
     AvailableLeaderboard,
     MatchObject,
@@ -6,12 +5,6 @@ import {
     Player,
     RecentMatchHistory,
 } from '../types'
-
-export const getHistoryUrls = (id: number | undefined) => {
-    const url = `${RELIC_SERVER_BASE_COH2}/getRecentMatchHistoryByProfileId?title=coh2&profile_id=${id}`
-    const url2 = `${RELIC_SERVER_BASE_COH2}/GetAvailableLeaderboards?title=coh2`
-    return [url, url2]
-}
 
 type Result = [RecentMatchHistory, AvailableLeaderboard]
 
