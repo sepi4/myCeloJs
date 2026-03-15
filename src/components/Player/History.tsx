@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { RELIC_SERVER_BASE_COH2 } from '../../constants'
 import getText from '../../functions/getText'
-import { parseHistoryData } from '../../functions/historyFuns'
+import { parseHistoryData } from '../../functions/parseMatchHistory'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { MatchObject, NormalizedProfiles, Player } from '../../types'
 import GameHistoryDiv from './GameHistoryDiv'
