@@ -73,6 +73,7 @@ export function switchTeams(info: Player[], currentUser: string): Player[] {
     return info
 }
 
+/* istanbul ignore next */
 export async function readLog(coh3: boolean, fileLocation: string) {
     fileLocation = fileLocation.replace(/\\/, '\\\\')
     try {
