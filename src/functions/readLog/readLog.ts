@@ -2,75 +2,72 @@ import { Player } from '../../types'
 import { getPlayersInfo } from './getPlayersInfo'
 import { getPlayersInfoCoh3 } from './getPlayersInfoCoh3'
 
-export function getCurrentUserAlias(lines: string[]) {
-    for (let i = 0; i < lines.length; i++) {
-        const row = lines[i]
-        const m = row.match(/GAME -- Current user name is \[(.+)\]/)
-        if (m) {
-            return m[1]
+export function getCurrentUserAlias(lines: string[]): string | undefined {
+    for (const line of lines) {
+        const match = line.match(/GAME -- Current user name is \[(.+)\]/)
+        if (match) {
+            return match[1]
         }
     }
 }
 
-export function getCurrentUserAliasCoh3(lines: string[]) {
-    for (let i = 0; i < lines.length; i++) {
-        const row = lines[i]
-        const m = row.match(/GAME -- Current Steam name is \[(.+)\]/)
-        if (m) {
-            return m[1]
+export function getCurrentUserAliasCoh3(lines: string[]): string | undefined {
+    for (const line of lines) {
+        const match = line.match(/GAME -- Current Steam name is \[(.+)\]/)
+        if (match) {
+            return match[1]
         }
     }
 }
 
-export function checkGameVersionIsCorrect(lines: string[], coh3: boolean) {
+export function checkGameVersionIsCorrect(lines: string[], coh3: boolean): RegExpMatchArray | null {
     if (coh3) {
         return lines[0].match(/RelicCoH3/)
     }
     return lines[0].match(/RELICCOH2/)
 }
 
-export function getLines(lines: string[]) {
-    const arr: string[] = []
-    let stop = false
-    let wasGame = false
-    let wasNone = false
+export function getLines(lines: string[]): string[] {
+    const playerLines: string[] = []
+    let hasMatchStarted = false
+    let foundPlayerLines = false
+    let gapAfterPlayers = false
 
     for (let i = lines.length - 1; i >= 0; i--) {
-        const row = lines[i]
-        if (row.match('GAME --.* Player:')) {
-            wasGame = true
-            if (wasGame && wasNone) {
+        const line = lines[i]
+        if (line.match('GAME --.* Player:')) {
+            foundPlayerLines = true
+            if (foundPlayerLines && gapAfterPlayers) {
                 break
             }
-            arr.push(row)
-        } else if (row.match('Match Started.*steam.*slot.*ranking')) {
-            stop = true
-            arr.push(row)
-        } else if (stop) {
+            playerLines.push(line)
+        } else if (line.match('Match Started.*steam.*slot.*ranking')) {
+            hasMatchStarted = true
+            playerLines.push(line)
+        } else if (hasMatchStarted) {
             break
-        } else if (wasGame) {
-            wasNone = true
+        } else if (foundPlayerLines) {
+            gapAfterPlayers = true
         }
     }
 
-    return arr
+    return playerLines
 }
 
-/**
- * Switch players so that current player is in first team
- */
-export function switchTeams(info: Player[], currentUser: string): Player[] {
-    const currentUserTeam: Player[] = info.filter((p) => p.name === currentUser && p.profileId)
+export function switchTeams(players: Player[], currentUser: string): Player[] {
+    const currentUserMatches = players.filter(
+        (player) => player.name === currentUser && player.profileId
+    )
 
-    if (currentUserTeam.length !== 1 || currentUserTeam[0].teamSlot === 0) {
-        return info
+    if (currentUserMatches.length !== 1 || currentUserMatches[0].teamSlot === 0) {
+        return players
     }
 
-    for (const p of info) {
-        p.teamSlot = p.teamSlot === 1 ? 0 : 1
+    for (const player of players) {
+        player.teamSlot = player.teamSlot === 1 ? 0 : 1
     }
 
-    return info
+    return players
 }
 
 /* istanbul ignore next */
@@ -90,14 +87,14 @@ export async function readLog(coh3: boolean, fileLocation: string) {
 
         const currentUserAlias = coh3 ? getCurrentUserAliasCoh3(lines) : getCurrentUserAlias(lines)
 
-        const arr: string[] = getLines(lines)
-        let psInfo = coh3 ? getPlayersInfoCoh3(arr) : getPlayersInfo(arr)
+        const playerLines = getLines(lines)
+        let players = coh3 ? getPlayersInfoCoh3(playerLines) : getPlayersInfo(playerLines)
 
         if (currentUserAlias) {
-            psInfo = switchTeams(psInfo, currentUserAlias)
+            players = switchTeams(players, currentUserAlias)
         }
 
-        return psInfo
+        return players
     } catch (err) {
         console.log('Error in reading logfile:', err)
         return []
