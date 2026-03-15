@@ -5,7 +5,7 @@ type Team = {
     ranking: string
 }
 
-export interface RankingsJson {
+export type RankingsJson = {
     teams: {
         team1: Team[]
         team2: Team[]
@@ -13,7 +13,7 @@ export interface RankingsJson {
     horizontal: boolean
 }
 
-export interface Player {
+export type Player = {
     country?: string
     faction: string
     name: string
@@ -26,7 +26,7 @@ export interface Player {
 
 export type FactionName = 'okw' | 'sov' | 'uk' | 'usa' | 'wer'
 
-export interface Member {
+export type Member = {
     alias: string
     country: string
     leaderboardregion_id: number
@@ -42,11 +42,11 @@ export interface Member {
     extraInfo?: ExtraInfo
 }
 
-export interface CountryFlagsLocation {
+export type CountryFlagsLocation = {
     [key: string]: string
 }
 
-export interface SettingsType {
+export type SettingsType = {
     logLocationCoh2: string
     logLocationCoh3: string
     language: string
@@ -60,7 +60,7 @@ export interface SettingsType {
     ignoreUntil?: string
 }
 
-export interface StatGroup {
+export type StatGroup = {
     id: number
     members: Member[]
     name: string
@@ -69,7 +69,7 @@ export interface StatGroup {
     teamMarker?: string
 }
 
-export interface LeaderboardStat {
+export type LeaderboardStat = {
     disputes: number
     drops: number
     lastmatchdate: number
@@ -85,13 +85,13 @@ export interface LeaderboardStat {
     wins: number
 }
 
-export interface PersonalStats {
+export type PersonalStats = {
     leaderboardStats: LeaderboardStat[]
     result: { code: number; message: string }
     statGroups: StatGroup[]
 }
 
-export interface Leaderboard {
+export type Leaderboard = {
     id: number
     isranked: number
     leaderboardmap: {
@@ -102,14 +102,14 @@ export interface Leaderboard {
     name: string
 }
 
-export interface MatchType {
+export type MatchType = {
     id: number
     localizedName: string
     locstringid: number
     name: string
 }
 
-export interface MatchObject {
+export type MatchObject = {
     startGameTime: Date
     endGameTime: Date
     mapName: string
@@ -121,11 +121,11 @@ export interface MatchObject {
     counters: { [key: string]: number } | undefined
 }
 
-export interface NormalizedProfiles {
+export type NormalizedProfiles = {
     [key: number]: Profile
 }
 
-interface Race {
+type Race = {
     faction_id: number
     id: number
     localizedName: string
@@ -133,7 +133,7 @@ interface Race {
     name: string
 }
 
-export interface AvailableLeaderboard {
+export type AvailableLeaderboard = {
     factions: {
         id: number
         localizedName: 'Allies' | 'Axis'
@@ -151,7 +151,7 @@ export interface AvailableLeaderboard {
     races: Race[]
 }
 
-export interface MatchHistoryReportResult {
+export type MatchHistoryReportResult = {
     matchhistory_id: number
     profile_id: number
     resulttype: number
@@ -164,7 +164,7 @@ export interface MatchHistoryReportResult {
     matchstartdate: number
 }
 
-export interface MatchHistoryStat {
+export type MatchHistoryStat = {
     completiontime: number
     creator_profile_id: number
     description: string
@@ -190,7 +190,7 @@ export interface MatchHistoryStat {
     startgametime: number
 }
 
-export interface Profile {
+export type Profile = {
     profile_id: number
     name: string
     alias: string
@@ -201,7 +201,7 @@ export interface Profile {
     country: string
 }
 
-export interface RecentMatchHistory {
+export type RecentMatchHistory = {
     result: {
         code: number
         message: string
@@ -210,7 +210,7 @@ export interface RecentMatchHistory {
     profiles: Profile[]
 }
 
-export interface Rank {
+export type Rank = {
     disputes: number
     drops: number
     lastmatchdate: number
@@ -231,10 +231,11 @@ export interface Rank {
     members?: Member[]
 }
 
-export interface ExtraInfo {
+export type ExtraInfo = {
     ranks: Rank[]
     steamId?: string
 }
-export interface NormalizedExtraInfo {
+
+export type NormalizedExtraInfo = {
     [key: string]: ExtraInfo
 }
