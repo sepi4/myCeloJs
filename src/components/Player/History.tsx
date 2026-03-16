@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { RELIC_SERVER_BASE_COH2 } from '../../constants'
+import { RELIC_SERVER_BASE_COH2 } from '../../constants/urls'
 import getText from '../../functions/getText'
 import { parseHistoryData } from '../../functions/parseMatchHistory'
 import { useSettingsStore } from '../../stores/settingsStore'

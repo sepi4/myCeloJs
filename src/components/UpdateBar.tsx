@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { LATEST_RELEASES_URL } from '../constants'
+import { LATEST_RELEASES_URL } from '../constants/urls'
 import funGetText from '../functions/getText'
 import writeSettings from '../functions/writeSettings'
 import { useSettingsStore } from '../stores/settingsStore'

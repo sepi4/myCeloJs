@@ -1,4 +1,4 @@
-import { RELIC_SERVER_BASE_COH2, RELIC_SERVER_BASE_COH3 } from '../constants'
+import { RELIC_SERVER_BASE_COH2, RELIC_SERVER_BASE_COH3 } from '../constants/urls'
 import { Member, StatGroup } from '../types'
 
 export default async function searchPlayers(coh3: boolean, searchValue: string): Promise<Member[]> {
