@@ -1,4 +1,4 @@
-import { getFactionById } from '../../functions/factionMappings'
+import { getFactionById } from '../../constants/factionMappings'
 import { getExtraInfo } from '../../functions/getExtraInfo'
 import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation'
 import getText from '../../functions/getText'

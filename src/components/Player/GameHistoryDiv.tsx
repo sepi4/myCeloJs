@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { getFactionById } from '../../functions/factionMappings'
+import { getFactionById } from '../../constants/factionMappings'
 import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation'
 import { getTimeAgo } from '../../functions/time'
 import { useSettingsStore } from '../../stores/settingsStore'

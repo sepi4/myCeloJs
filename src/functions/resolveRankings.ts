@@ -1,5 +1,5 @@
+import { getFactionName } from '../constants/factionMappings'
 import { AvailableLeaderboard, PersonalStats, Player, StatGroup } from '../types'
-import { getFactionName } from './factionMappings'
 import { formatToNums, separateTeams } from './simpleFunctions'
 
 const ALLIES_FACTIONS = ['british', 'aef', 'soviet']

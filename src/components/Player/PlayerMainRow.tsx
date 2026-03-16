@@ -1,7 +1,7 @@
 import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { commonName } from '../../functions/factionMappings'
+import { commonName } from '../../constants/factionMappings'
 import {
     getFactionFlagLocation,
     getFactionFlagLocationCoh3,
