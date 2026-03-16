@@ -54,7 +54,11 @@ function getLimitedWord(str: string, limit: number, padLeft: boolean) {
     return newStr + ' '.repeat(limit - sum)
 }
 
-export function writeRankings(coh3: boolean, players: Player[], rankingsHorizontal: boolean): void {
+export function buildRankings(
+    coh3: boolean,
+    players: Player[],
+    rankingsHorizontal: boolean
+): { json: RankingsJson; text: string } {
     const json: RankingsJson = {
         teams: {
             team1: [],
@@ -153,5 +157,10 @@ export function writeRankings(coh3: boolean, players: Player[], rankingsHorizont
         }
     }
 
+    return { json, text }
+}
+
+export function writeRankings(coh3: boolean, players: Player[], rankingsHorizontal: boolean): void {
+    const { json, text } = buildRankings(coh3, players, rankingsHorizontal)
     window.electronAPI.rankings.write(JSON.stringify(json, null, 4), text)
 }
