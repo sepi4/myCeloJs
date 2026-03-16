@@ -11,13 +11,12 @@ This is electron app for viewing ranks of current connected game of Company of H
 
 Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone/MakoCelo</a> for ideas. It's also rank display for COH2/COH3, check it out, maybe you like it better.
 
-<a name="install"></a>
-
 ## Install and setup:
 
-- download zip file (<a id="raw-url" href="https://github.com/sepi4/myCeloJs/releases/latest">latest release</a>)
-- extract
-- double click 'myCelo.exe'
+- download the installer from (<a id="raw-url" href="https://github.com/sepi4/myCeloJs/releases/latest">latest release</a>)
+    - **Windows:** .exe installer
+    - **Linux:** .deb or .AppImage
+- install and run
 - allow in firewall if asked _(permission is needed because app is serving ranking.json file to localhost, so that it can read by javascript in ranking.html file every second and update it if needed)_
 
 - in settings ![alt text](./readmeImages/settingsIcon.png 'settings icon') select location of 'warnings.log' file (Same folder where are replays saved, usually in "C:\Users\USERNAME\Documents\my games\company of heroes 2\" or "C:\Users\USERNAME\Documents\my games\company of heroes 3\")
@@ -35,20 +34,19 @@ _ONLY FOR STREAMERS_
 - simple way for OBS studio to display ranking:
     - select rankings output file format and orientations, **html**:
 
-              **horizontal**:
+        **horizontal**:
 
         ![alt text](./readmeImages/htmlOutputHorizontal.png 'html')
 
-              **vertical**:
+        **vertical**:
 
         ![alt text](./readmeImages/htmlOutput.png 'html')
 
-              or **txt**:
-              **horizontal**:
+        or **txt** **horizontal**:
 
         ![alt text](./readmeImages/txtOutputHorizontal.png 'html')
 
-              **vertical**:
+        **vertical**:
 
         ![alt text](./readmeImages/txtOutput.png 'html')
 
@@ -88,14 +86,15 @@ _ONLY FOR STREAMERS_
 
 ## Установка и настройка:
 
-- скачайте zip-файл (<a id="raw-url" href="https://github.com/sepi4/myCeloJs/releases/latest">latest release</a>)
-- распакуйте zip-файл
-- откройте "myCelo.exe"
+- скачайте установщик (<a id="raw-url" href="https://github.com/sepi4/myCeloJs/releases/latest">latest release</a>)
+    - **Windows:** .exe установщик
+    - **Linux:** .deb или .AppImage
+- установите и запустите
 - если фаервол попросит разрешения, разрешите _(программа использует localhost чтобы rankings.json можно было прочитать с помощью javascript и обновлять rankings.html если это необходимо)_
 
-- в настройках ![alt text](./readmeImages/settingsIcon.png 'settings icon') выберите местонахождение 'warnings.log'-файла (тоже место куда сохраняются реплеи, обычно находится в "C:\Users\USERNAME\Documents\my games\company of heroes 2\\" или "C:\Users\USERNAME\Documents\my games\company of heroes 3\\")
+- в настройках ![alt text](./readmeImages/settingsIcon.png 'settings icon') выберите местонахождение 'warnings.log'-файла (тоже место куда сохраняются реплеи, обычно находится в "Documents/my games/company of heroes 2/" или "Documents/my games/company of heroes 3/")
 - проверьте установку в игре против компьютера или в режиме просмотра
-      <hr>
+    <hr>
 
     **НЕОБЯЗАТЕЛЬНЫЕ НАСТРОЙКИ**
 
@@ -111,12 +110,15 @@ _ТОЛЬКО ДЛЯ СТРИМЕРОВ_
       ![alt text](./readmeImages/htmlOutputHorizontal.png 'html')
 
         **html вертикально**:
+
         ![alt text](./readmeImages/htmlOutput.png 'html')
 
         **txt горизонтально**:
+
         ![alt text](./readmeImages/txtOutputHorizontal.png 'html')
 
         **txt вертикально**:
+
         ![alt text](./readmeImages/txtOutput.png 'html')
 
     - Выберите формат. Скопируйте адрес нажав кнопку 'Copy'.
@@ -157,6 +159,16 @@ _ТОЛЬКО ДЛЯ СТРИМЕРОВ_
 
 ## Updates:
 
+- **version 2.1.0.**
+    - Separate log inputs for COH2 and COH3
+    - Auto-detect COH3 user identity (MY button for both games)
+    - COH3 search support
+    - Solo rank fallback when team rank is unranked
+    - Copy, clear, and reset buttons in settings
+    - Russian flag translations, rank total hover tooltip
+    - Fix: COH3 rankings display correctly
+    - Fix: cross-platform path handling
+    - Fix: cleaner list view (stripped unranked suffix, COH3 faction abbreviations)
 - **version 2.0.1.**
     - Bug fixes
     - First unit tests
