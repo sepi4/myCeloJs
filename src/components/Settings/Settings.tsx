@@ -1,3 +1,4 @@
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import React, { useRef, useState } from 'react'
 
 import { fetchCoh2ProfileId } from '../../functions/fetchCoh2ProfileId'
@@ -8,6 +9,7 @@ import useTimedBoolean from '../../hooks/useTimedBoolean'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { useSettingsViewStore } from '../../stores/settingsViewStore'
 import { SettingsType } from '../../types'
+import Icon from '../Icon'
 import Modal from '../Modal/Modal'
 import Notification from '../Notification'
 import ClearButton from './ClearButton'
@@ -151,7 +153,8 @@ function Settings(props: Props) {
             !settings.ignoreUntil)
 
     return (
-        <div style={{ marginTop: '4em' }}>
+        <div>
+            <Icon fun={settingsViewToggeler} icon={faTimes} testId="close-button" color="#222" />
             <SettingsDiv title={getText('language', settings)} testId="language-title">
                 <select
                     data-testid="language-select"

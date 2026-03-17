@@ -7,9 +7,16 @@ type IconProps = {
     fun: () => void
     size?: SizeProp
     testId?: string
+    color?: string
 }
 
-export default function Icon({ icon, fun, size = '2x', testId }: IconProps): JSX.Element {
+export default function Icon({
+    icon,
+    fun,
+    size = '2x',
+    testId,
+    color = '#dddddd',
+}: IconProps): JSX.Element {
     return (
         <div
             data-testid={testId}
@@ -24,7 +31,7 @@ export default function Icon({ icon, fun, size = '2x', testId }: IconProps): JSX
             <FontAwesomeIcon
                 icon={icon}
                 size={size}
-                color="#dddddd"
+                color={color}
                 style={{
                     marginRight: '0.2em',
                 }}

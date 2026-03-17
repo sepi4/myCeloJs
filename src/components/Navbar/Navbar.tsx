@@ -1,4 +1,4 @@
-import { faCogs, faSearch, faTimes, faUserAlt } from '@fortawesome/free-solid-svg-icons'
+import { faCogs, faSearch, faUserAlt } from '@fortawesome/free-solid-svg-icons'
 
 import { getExtraInfo } from '../../functions/getExtraInfo'
 import getText from '../../functions/getText'
@@ -20,7 +20,7 @@ interface Props {
 
 export default function Navbar(props: Props) {
     const { settings } = useSettingsStore()
-    const { settingsView, toggleSettingsView } = useSettingsViewStore()
+    const { toggleSettingsView } = useSettingsViewStore()
 
     const settingsViewToggeler = () => {
         toggleSettingsView()
@@ -109,15 +109,7 @@ export default function Navbar(props: Props) {
             />
         ) : null
 
-    const settingsIcon = settingsView ? (
-        <NavBarIcon
-            style={{ height: '.8em' }}
-            title={getText('settings', settings)}
-            testId="close-button"
-            icon={faTimes}
-            fun={settingsViewToggeler}
-        />
-    ) : (
+    const settingsIcon = (
         <NavBarIcon
             style={{ height: '.8em' }}
             title={getText('settings', settings)}
