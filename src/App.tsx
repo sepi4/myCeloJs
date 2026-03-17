@@ -226,9 +226,11 @@ function App() {
 
     return (
         <main
-            style={{
-                marginLeft: '8.5em',
-            }}
+            style={
+                settings?.sidebarPosition === 'right'
+                    ? { marginRight: '8.5em', marginLeft: '1em' }
+                    : { marginLeft: '8.5em', marginRight: '1em' }
+            }
         >
             <Navbar {...{ handleSetSettingsView }} />
             <MainView handleSetSettingsView={handleSetSettingsView} />

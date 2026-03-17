@@ -34,7 +34,7 @@ test('set warning.log location and verify players appear on main view', async ()
 
     // Open settings and mock the native file dialog
     await app.settingsIcon.click()
-    await expect(app.languageSelect).toBeVisible()
+    await expect(app.languageSelectEn).toBeVisible()
     await app.mockFileDialog(electronApp, COH2_LOG_PATH)
 
     // Select the log file and return to main view
@@ -98,7 +98,7 @@ test('auto checkbox toggles interval input and alert visibility', async () => {
 test('check log button loads players from a different log file', async () => {
     // Switch log location to the second log file via settings
     await app.settingsIcon.click()
-    await expect(app.languageSelect).toBeVisible()
+    await expect(app.languageSelectEn).toBeVisible()
     await app.mockFileDialog(electronApp, COH2_LOG_PATH_2)
     await app.logLocationButtonCoh2.click()
     await app.closeButton.click()
@@ -124,8 +124,8 @@ test('check log button loads players from a different log file', async () => {
 test('switch language to Russian and back to English', async () => {
     // Open settings and switch to Russian
     await app.settingsIcon.click()
-    await expect(app.languageSelect).toBeVisible()
-    await app.languageSelect.selectOption('ru')
+    await expect(app.languageSelectEn).toBeVisible()
+    await app.languageSelectRu.click()
 
     // Verify Russian label is shown in settings
     await expect(app.languageTitle).toHaveText('Язык')
@@ -136,7 +136,7 @@ test('switch language to Russian and back to English', async () => {
 
     // Open settings again and switch back to English
     await app.settingsIcon.click()
-    await app.languageSelect.selectOption('en')
+    await app.languageSelectEn.click()
     await expect(app.languageTitle).toHaveText('Language')
 })
 
@@ -212,7 +212,7 @@ test('navbar checkboxes - table, total and all ', async () => {
 test('OBS studio settings - format, orientation and copy buttons', async () => {
     // open settings
     await app.settingsIcon.click()
-    await expect(app.languageSelect).toBeVisible()
+    await expect(app.languageSelectEn).toBeVisible()
 
     // Copy sections should not be visible before selecting format and orientation
     await expect(app.copyRankings).not.toBeVisible()
@@ -294,7 +294,7 @@ test('reset all settings - cancel keeps settings, ok clears and reloads', async 
     // Cancel — modal closes, settings are unchanged
     await app.resetConfirmCancel.click()
     await expect(app.resetConfirmOk).not.toBeVisible()
-    await expect(app.languageSelect).toBeVisible()
+    await expect(app.languageSelectEn).toBeVisible()
 
     // Click reset again and confirm — page reloads to a fresh state
     await app.resetSettingsButton.click()

@@ -54,6 +54,18 @@ const text: Translations = {
         en: 'Language',
         ru: 'Язык',
     },
+    sidebar_position: {
+        en: 'Sidebar',
+        ru: 'Панель',
+    },
+    sidebar_left: {
+        en: 'Left',
+        ru: 'Слева',
+    },
+    sidebar_right: {
+        en: 'Right',
+        ru: 'Справа',
+    },
 
     log_location_first: {
         en: 'Add log location file first',

@@ -1,5 +1,5 @@
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import React, { useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 
 import { fetchCoh2ProfileId } from '../../functions/fetchCoh2ProfileId'
 import getText from '../../functions/getText'
@@ -26,6 +26,11 @@ function Settings(props: Props) {
     const { closeSettingsView } = useSettingsViewStore()
 
     const lg = settings && settings.language ? settings.language : 'en'
+    const sidebarPosition = settings?.sidebarPosition ?? 'left'
+
+    const handleSidebarPosition = (pos: 'left' | 'right') => {
+        writeSettings({ ...settings!, sidebarPosition: pos })
+    }
 
     const [resetConfirmOpen, setResetConfirmOpen] = useState(false)
 
@@ -120,12 +125,8 @@ function Settings(props: Props) {
         }
     }
 
-    const handleLanguage = (e: React.ChangeEvent<HTMLSelectElement>) => {
-        const newSettings = {
-            ...settings,
-            language: e.target.value,
-        } as SettingsType
-        writeSettings(newSettings)
+    const handleLanguage = (lang: string) => {
+        writeSettings({ ...settings!, language: lang })
     }
 
     const errorDiv = timedError ? (
@@ -155,19 +156,78 @@ function Settings(props: Props) {
     return (
         <div>
             <Icon fun={handleClose} icon={faTimes} testId="close-button" color="#222" />
-            <SettingsDiv title={getText('language', settings)} testId="language-title">
-                <select
-                    data-testid="language-select"
-                    onChange={handleLanguage}
-                    value={lg}
-                    style={{
-                        padding: '.5em',
-                        backgroundColor: '#999',
-                    }}
-                >
-                    <option value="en">EN</option>
-                    <option value="ru">RU</option>
-                </select>
+            <SettingsDiv>
+                <div style={{ display: 'flex', gap: '2em', flexWrap: 'wrap' }}>
+                    <div>
+                        <div style={{ fontWeight: 'bold' }} data-testid="language-title">
+                            {getText('language', settings)}
+                        </div>
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '0.3em',
+                                marginTop: '0.3em',
+                            }}
+                        >
+                            {(['en', 'ru'] as const).map((lang) => (
+                                <label
+                                    key={lang}
+                                    style={{
+                                        cursor: 'pointer',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                    }}
+                                >
+                                    <input
+                                        data-testid={`language-select-${lang}`}
+                                        type="radio"
+                                        name="language"
+                                        value={lang}
+                                        checked={lg === lang}
+                                        onChange={() => handleLanguage(lang)}
+                                        style={{ marginRight: '0.4em', accentColor: '#111' }}
+                                    />
+                                    {lang.toUpperCase()}
+                                </label>
+                            ))}
+                        </div>
+                    </div>
+                    <div>
+                        <div style={{ fontWeight: 'bold' }}>
+                            {getText('sidebar_position', settings)}
+                        </div>
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '0.3em',
+                                marginTop: '0.3em',
+                            }}
+                        >
+                            {(['left', 'right'] as const).map((pos) => (
+                                <label
+                                    key={pos}
+                                    style={{
+                                        cursor: 'pointer',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                    }}
+                                >
+                                    <input
+                                        type="radio"
+                                        name="sidebarPosition"
+                                        value={pos}
+                                        checked={sidebarPosition === pos}
+                                        onChange={() => handleSidebarPosition(pos)}
+                                        style={{ marginRight: '0.4em', accentColor: '#111' }}
+                                    />
+                                    {getText(`sidebar_${pos}`, settings)}
+                                </label>
+                            ))}
+                        </div>
+                    </div>
+                </div>
             </SettingsDiv>
 
             <SettingsDiv

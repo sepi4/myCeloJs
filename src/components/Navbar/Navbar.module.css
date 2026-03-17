@@ -8,11 +8,28 @@
 }
 
 .navbar {
-    background-color: #333;
+    background-color: #181818;
     color: #ddd;
     position: fixed;
     top: 0;
     left: 0;
+    height: 100%;
+    width: 7.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    z-index: 100;
+    cursor: default;
+    overflow: hidden;
+    font-size: 90%;
+}
+
+.navbarRight {
+    background-color: #181818;
+    color: #ddd;
+    position: fixed;
+    top: 0;
+    right: 0;
     height: 100%;
     width: 7.5em;
     display: flex;

@@ -117,8 +117,10 @@ export default function Navbar(props: Props) {
         />
     )
 
+    const navbarClass = settings?.sidebarPosition === 'right' ? styles.navbarRight : styles.navbar
+
     return (
-        <div className={styles.navbar}>
+        <div className={navbarClass}>
             <div className={styles.icons}>
                 {userIcon}
                 {searchIcon}
