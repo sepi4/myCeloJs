@@ -227,7 +227,7 @@ function App() {
     return (
         <main
             style={{
-                marginTop: '4em',
+                marginLeft: '8.5em',
             }}
         >
             <Navbar {...{ handleSetSettingsView }} />

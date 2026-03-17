@@ -16,12 +16,10 @@ export default function NavBarIcon(props: Props) {
             <FontAwesomeIcon
                 title={props.title}
                 icon={props.icon}
-                size="2x"
+                size="xl"
                 color="gray"
                 onClick={props.fun}
                 style={{
-                    marginRight: '0.5em',
-                    marginLeft: '0.5em',
                     cursor: 'pointer',
                     ...props.style,
                 }}

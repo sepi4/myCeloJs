@@ -25,6 +25,19 @@ function CheckLogDiv() {
 
     return (
         <div className={styles.container}>
+            <button
+                data-testid="check-log-button"
+                className={styles.btn}
+                onClick={async () => {
+                    const data = await readLog(coh3, activeLogLocation)
+                    if (data) {
+                        setPlayersWithoutChecking(data)
+                    }
+                }}
+            >
+                {getText('check_log_button', settings)}
+            </button>
+
             <NavCheckbox
                 text={getText('auto', settings)}
                 checked={autoLogChecking}
@@ -32,33 +45,17 @@ function CheckLogDiv() {
                 testId="auto-label"
             />
 
-            {
+            {autoLogChecking ? (
                 <>
-                    {autoLogChecking ? (
-                        <>
-                            <IntervalInput />
-                            <NavCheckbox
-                                text={getText('alert', settings)}
-                                checked={alert}
-                                handler={toggleAlert}
-                                testId="alert-label"
-                            />
-                        </>
-                    ) : null}
-                    <button
-                        data-testid="check-log-button"
-                        className={styles.btn}
-                        onClick={async () => {
-                            const data = await readLog(coh3, activeLogLocation)
-                            if (data) {
-                                setPlayersWithoutChecking(data)
-                            }
-                        }}
-                    >
-                        {getText('check_log_button', settings)}
-                    </button>
+                    <IntervalInput />
+                    <NavCheckbox
+                        text={getText('alert', settings)}
+                        checked={alert}
+                        handler={toggleAlert}
+                        testId="alert-label"
+                    />
                 </>
-            }
+            ) : null}
         </div>
     )
 }

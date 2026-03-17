@@ -52,14 +52,6 @@ export default function Navbar(props: Props) {
         </>
     )
 
-    if (settingsView) {
-        return (
-            <div className={styles.navbar} style={{ justifyContent: 'flex-end' }}>
-                <NavBarIcon icon={faTimes} fun={settingsViewToggeler} testId="close-button" />
-            </div>
-        )
-    }
-
     const handleSearchView = () => {
         setView('search')
     }
@@ -99,10 +91,7 @@ export default function Navbar(props: Props) {
             <NavBarIcon
                 title={getText('my_playercard', settings)}
                 testId="user-icon"
-                style={{
-                    height: '.7em',
-                    marginRight: '0',
-                }}
+                style={{ height: '.7em' }}
                 icon={faUserAlt}
                 fun={handleOpenMyCard}
             />
@@ -114,21 +103,23 @@ export default function Navbar(props: Props) {
             <NavBarIcon
                 title={getText('search', settings)}
                 testId="search-icon"
-                style={{
-                    height: '.7em',
-                    marginRight: '0',
-                }}
+                style={{ height: '.7em' }}
                 icon={faSearch}
                 fun={handleSearchView}
             />
         ) : null
 
-    const settingsIcon = (
+    const settingsIcon = settingsView ? (
         <NavBarIcon
-            style={{
-                height: '.8em',
-                marginLeft: '0',
-            }}
+            style={{ height: '.8em' }}
+            title={getText('settings', settings)}
+            testId="close-button"
+            icon={faTimes}
+            fun={settingsViewToggeler}
+        />
+    ) : (
+        <NavBarIcon
+            style={{ height: '.8em' }}
             title={getText('settings', settings)}
             testId="settings-icon"
             icon={faCogs}
@@ -138,8 +129,11 @@ export default function Navbar(props: Props) {
 
     return (
         <div className={styles.navbar}>
-            {userIcon}
-            {searchIcon}
+            <div className={styles.icons}>
+                {userIcon}
+                {searchIcon}
+                {settingsIcon}
+            </div>
 
             <div className={styles.container}>
                 <div className={styles.column}>
@@ -196,8 +190,6 @@ export default function Navbar(props: Props) {
                     </NavbarRow>
                 </div>
             </div>
-
-            {settingsIcon}
         </div>
     )
 }
