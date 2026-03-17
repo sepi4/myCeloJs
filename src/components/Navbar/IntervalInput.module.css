@@ -1,21 +1,24 @@
 .container {
     width: 6em;
+    position: relative;
 }
 
 .input {
-    background-color: #181818;
+    background-color: #333;
     color: #ddd;
     height: 1em;
-    width: 3.5em;
+    width: 2.8em;
     border: none;
     border-bottom: solid 0.1em gray;
-    font-size: 110%;
+    font-size: 100%;
     text-align: center;
 }
 
 .error {
     position: absolute;
-    top: 0.1em;
+    top: 100%;
+    left: 0;
     color: red;
     font-size: 70%;
+    white-space: nowrap;
 }

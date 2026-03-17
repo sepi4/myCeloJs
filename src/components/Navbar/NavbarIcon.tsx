@@ -17,7 +17,7 @@ export default function NavBarIcon(props: Props) {
                 title={props.title}
                 icon={props.icon}
                 size="xl"
-                color="gray"
+                color="#ccc"
                 onClick={props.fun}
                 style={{
                     cursor: 'pointer',

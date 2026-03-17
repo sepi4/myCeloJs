@@ -3,32 +3,32 @@
     flex-direction: column;
     gap: 0.8em;
     width: 100%;
-    color: gray;
+    color: #ccc;
     padding: 0.3em 0.5em;
 }
 
 .navbar {
-    background-color: #181818;
+    background-color: #333;
     color: #ddd;
     position: fixed;
     top: 0;
     left: 0;
     height: 100%;
     width: 7.5em;
-    border-right: 2px solid black;
     display: flex;
     flex-direction: column;
     align-items: stretch;
     z-index: 100;
     cursor: default;
     overflow: hidden;
+    font-size: 90%;
 }
 
 .icons {
     display: flex;
     justify-content: center;
-    gap: 0.3em;
-    padding: 0.6em 0.5em;
+    gap: 0.1em;
+    padding: 1.8em 0.5em 0.6em;
 }
 
 .row {
@@ -56,6 +56,7 @@
 
 .radio input {
     cursor: pointer;
+    accent-color: #111;
 }
 
 .radio label {
