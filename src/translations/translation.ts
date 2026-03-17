@@ -128,10 +128,6 @@ const text: Translations = {
         en: 'Show stats as a table',
         ru: 'Показать статистику в виде таблицы',
     },
-    tooltip_check_log: {
-        en: 'Read log file and update player list',
-        ru: 'Прочитать лог-файл и обновить список игроков',
-    },
     tooltip_auto: {
         en: 'Automatically re-check log on interval',
         ru: 'Автоматически проверять лог через интервал',
@@ -149,10 +145,6 @@ const text: Translations = {
         en: 'game',
         ru: 'игра',
     },
-    dropdown_info: {
-        en: 'dropdown info',
-        ru: 'раскрывающаяся инфо',
-    },
     table: {
         en: 'table',
         ru: 'таблица',
@@ -166,10 +158,6 @@ const text: Translations = {
         ru: 'количество игр',
     },
 
-    log_checking: {
-        en: 'log checking',
-        ru: 'проверка лог-файла',
-    },
     auto: {
         en: 'auto',
         ru: 'авто',
@@ -216,10 +204,6 @@ const text: Translations = {
         en: 'expand all',
         ru: 'открыть все',
     },
-    close_all: {
-        en: 'close all',
-        ru: 'закрыть все',
-    },
     rank: {
         en: 'rank',
         ru: 'ранг',
@@ -236,11 +220,6 @@ const text: Translations = {
         en: 'streak',
         ru: 'серия',
     },
-    total_dropdown: {
-        en: 'total',
-        ru: 'всего',
-    },
-
     fetch_history: {
         en: 'fetch game history',
         ru: 'загрузить историю игр',
@@ -252,14 +231,6 @@ const text: Translations = {
     team_of: {
         en: 'team',
         ru: 'команда',
-    },
-    Allies: {
-        en: '✰',
-        ru: '✰',
-    },
-    Axis: {
-        en: '✚',
-        ru: '✚',
     },
 
     // history ---------------------------------
