@@ -23,7 +23,7 @@ interface Props {
 
 function Settings(props: Props) {
     const { settings } = useSettingsStore()
-    const { toggleSettingsView } = useSettingsViewStore()
+    const { closeSettingsView } = useSettingsViewStore()
 
     const lg = settings && settings.language ? settings.language : 'en'
 
@@ -35,12 +35,12 @@ function Settings(props: Props) {
     const [timedCopyCoh3, setTimedCopyCoh3] = useTimedBoolean(1000)
     const steamIdInputRef = useRef<HTMLInputElement>(null)
 
-    const settingsViewToggeler = () => {
-        toggleSettingsView()
+    const handleClose = () => {
+        closeSettingsView()
         props.handleSetSettingsView()
     }
 
-    useEsc(settingsViewToggeler)
+    useEsc(handleClose)
 
     const setError = () => {
         setTimedError(true)
@@ -154,7 +154,7 @@ function Settings(props: Props) {
 
     return (
         <div>
-            <Icon fun={settingsViewToggeler} icon={faTimes} testId="close-button" color="#222" />
+            <Icon fun={handleClose} icon={faTimes} testId="close-button" color="#222" />
             <SettingsDiv title={getText('language', settings)} testId="language-title">
                 <select
                     data-testid="language-select"

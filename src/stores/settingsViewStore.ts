@@ -2,10 +2,12 @@ import { create } from 'zustand'
 
 interface SettingsViewStore {
     settingsView: boolean
-    toggleSettingsView: () => void
+    openSettingsView: () => void
+    closeSettingsView: () => void
 }
 
 export const useSettingsViewStore = create<SettingsViewStore>((set) => ({
     settingsView: false,
-    toggleSettingsView: () => set((state) => ({ settingsView: !state.settingsView })),
+    openSettingsView: () => set({ settingsView: true }),
+    closeSettingsView: () => set({ settingsView: false }),
 }))

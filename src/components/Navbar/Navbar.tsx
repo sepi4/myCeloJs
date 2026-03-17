@@ -20,10 +20,10 @@ interface Props {
 
 export default function Navbar(props: Props) {
     const { settings } = useSettingsStore()
-    const { toggleSettingsView } = useSettingsViewStore()
+    const { openSettingsView } = useSettingsViewStore()
 
-    const settingsViewToggeler = () => {
-        toggleSettingsView()
+    const handleOpenSettings = () => {
+        openSettingsView()
         props.handleSetSettingsView()
     }
 
@@ -81,33 +81,28 @@ export default function Navbar(props: Props) {
     }
 
     const activeProfileId = navButtons.coh3 ? settings?.profileIdCoh3 : settings?.profileIdCoh2
-    let userIcon = null
-    if (
-        settings &&
-        activeProfileId &&
-        !(view === 'playerCard' && playerCardPlayer?.profileId === activeProfileId)
-    ) {
-        userIcon = (
+    const alreadyViewingMyCard =
+        view === 'playerCard' && playerCardPlayer?.profileId === activeProfileId
+    const userIcon =
+        settings && activeProfileId ? (
             <NavBarIcon
                 title={getText('my_playercard', settings)}
                 testId="user-icon"
                 style={{ height: '.7em' }}
                 icon={faUserAlt}
-                fun={handleOpenMyCard}
-            />
-        )
-    }
-
-    const searchIcon =
-        view !== 'search' ? (
-            <NavBarIcon
-                title={getText('search', settings)}
-                testId="search-icon"
-                style={{ height: '.7em' }}
-                icon={faSearch}
-                fun={handleSearchView}
+                fun={alreadyViewingMyCard ? undefined : handleOpenMyCard}
             />
         ) : null
+
+    const searchIcon = (
+        <NavBarIcon
+            title={getText('search', settings)}
+            testId="search-icon"
+            style={{ height: '.7em' }}
+            icon={faSearch}
+            fun={handleSearchView}
+        />
+    )
 
     const settingsIcon = (
         <NavBarIcon
@@ -115,7 +110,7 @@ export default function Navbar(props: Props) {
             title={getText('settings', settings)}
             testId="settings-icon"
             icon={faCogs}
-            fun={settingsViewToggeler}
+            fun={handleOpenSettings}
         />
     )
 
