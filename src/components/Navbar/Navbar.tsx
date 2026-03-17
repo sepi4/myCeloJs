@@ -20,7 +20,7 @@ interface Props {
 
 export default function Navbar(props: Props) {
     const { settings } = useSettingsStore()
-    const { openSettingsView } = useSettingsViewStore()
+    const { openSettingsView, closeSettingsView } = useSettingsViewStore()
 
     const handleOpenSettings = () => {
         openSettingsView()
@@ -53,6 +53,7 @@ export default function Navbar(props: Props) {
     )
 
     const handleSearchView = () => {
+        closeSettingsView()
         setView('search')
     }
 
@@ -76,6 +77,7 @@ export default function Navbar(props: Props) {
                 country: profile.country,
             }
             setPlayerCard(playerData, ex)
+            closeSettingsView()
             setView('playerCard')
         }
     }
