@@ -12,7 +12,7 @@ interface Props {
 
 export default function NavBarIcon(props: Props) {
     return (
-        <span data-testid={props.testId} style={{ display: 'inline-flex' }}>
+        <span data-testid={props.testId} title={props.title} style={{ display: 'inline-flex' }}>
             <FontAwesomeIcon
                 title={props.title}
                 icon={props.icon}

@@ -116,6 +116,35 @@ const text: Translations = {
 
     // navbar  ---------------------------------
 
+    tooltip_all: {
+        en: 'Show all ranked modes in dropdown',
+        ru: 'Показать все режимы в раскрывающемся меню',
+    },
+    tooltip_total: {
+        en: 'Show total games count',
+        ru: 'Показать общее количество игр',
+    },
+    tooltip_table: {
+        en: 'Show stats as a table',
+        ru: 'Показать статистику в виде таблицы',
+    },
+    tooltip_check_log: {
+        en: 'Read log file and update player list',
+        ru: 'Прочитать лог-файл и обновить список игроков',
+    },
+    tooltip_auto: {
+        en: 'Automatically re-check log on interval',
+        ru: 'Автоматически проверять лог через интервал',
+    },
+    tooltip_interval: {
+        en: 'Interval in seconds between log checks',
+        ru: 'Интервал в секундах между проверками лога',
+    },
+    tooltip_alert: {
+        en: 'Play a sound when a new match is detected',
+        ru: 'Воспроизводить звук при обнаружении нового матча',
+    },
+
     game: {
         en: 'game',
         ru: 'игра',

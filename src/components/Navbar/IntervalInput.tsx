@@ -35,7 +35,7 @@ function IntervalInput() {
     }
 
     return (
-        <span className={styles.container}>
+        <span className={styles.container} title={getText('tooltip_interval', settings)}>
             <input
                 data-testid="interval-input"
                 className={styles.input}

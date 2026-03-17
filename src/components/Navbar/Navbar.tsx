@@ -39,6 +39,7 @@ export default function Navbar(props: Props) {
                 text={getText(text, settings)}
                 checked={navButtons[text]}
                 handler={() => toggleNavButton(text)}
+                title={getText(`tooltip_${text}`, settings)}
             />
         )
     }
@@ -126,19 +127,17 @@ export default function Navbar(props: Props) {
 
             <div className={styles.container}>
                 <div className={styles.column}>
-                    <NavbarRow fontSize="60%">{getText('dropdown_info', settings)}</NavbarRow>
                     <NavbarRow>{buttons}</NavbarRow>
                 </div>
 
                 <div className={styles.column}>
-                    <NavbarRow fontSize="60%">{getText('game', settings)}</NavbarRow>
                     <NavbarRow>
                         <div
                             className={styles.radio}
                             title={
                                 !settings?.logLocationCoh2
                                     ? getText('log_not_set', settings)
-                                    : undefined
+                                    : 'coh2'
                             }
                         >
                             <input
@@ -156,7 +155,7 @@ export default function Navbar(props: Props) {
                             title={
                                 !settings?.logLocationCoh3
                                     ? getText('log_not_set', settings)
-                                    : undefined
+                                    : 'coh3'
                             }
                         >
                             <input
@@ -173,10 +172,7 @@ export default function Navbar(props: Props) {
                 </div>
 
                 <div className={styles.column}>
-                    <NavbarRow fontSize="60%">{getText('log_checking', settings)}</NavbarRow>
-                    <NavbarRow>
-                        <CheckLogDiv />
-                    </NavbarRow>
+                    <CheckLogDiv />
                 </div>
             </div>
         </div>

@@ -7,13 +7,14 @@ interface Props {
     handler: () => void
     checked: boolean
     testId?: string
+    title?: string
 }
 
 export default function NavCheckbox(props: Props) {
     const id = useId()
 
     return (
-        <span className={moduleStyle.span}>
+        <span className={moduleStyle.span} title={props.title}>
             <input
                 className={moduleStyle.input}
                 onChange={props.handler}

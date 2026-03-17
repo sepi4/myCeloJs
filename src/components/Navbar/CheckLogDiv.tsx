@@ -43,6 +43,7 @@ function CheckLogDiv() {
                 checked={autoLogChecking}
                 handler={toggleAutoLogChecking}
                 testId="auto-label"
+                title={getText('tooltip_auto', settings)}
             />
 
             {autoLogChecking ? (
@@ -53,6 +54,7 @@ function CheckLogDiv() {
                         checked={alert}
                         handler={toggleAlert}
                         testId="alert-label"
+                        title={getText('tooltip_alert', settings)}
                     />
                 </>
             ) : null}
