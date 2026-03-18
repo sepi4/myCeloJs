@@ -159,6 +159,10 @@ _ТОЛЬКО ДЛЯ СТРИМЕРОВ_
 
 ## Updates:
 
+- **version 2.2.1.**
+    - Fix: OBS overlay images not loading in packaged builds
+    - Fix: orientation change not updating the HTML overlay
+    - Fix: dist scripts now run build before packaging
 - **version 2.2.0.**
     - Navbar position setting: left, right, or top
     - Team expand/collapse toggle button
