@@ -199,19 +199,22 @@ function Settings(props: Props) {
                         </div>
                         <div
                             style={{
-                                display: 'flex',
-                                flexDirection: 'column',
+                                display: 'grid',
+                                gridTemplateColumns: '1fr 1fr',
                                 gap: '0.3em',
                                 marginTop: '0.3em',
+                                width: '10em',
                             }}
                         >
-                            {(['left', 'right', 'top'] as const).map((pos) => (
+                            {(['top', 'left', 'right'] as const).map((pos) => (
                                 <label
                                     key={pos}
                                     style={{
                                         cursor: 'pointer',
                                         display: 'flex',
                                         alignItems: 'center',
+                                        justifyContent: 'center',
+                                        ...(pos === 'top' ? { gridColumn: '1 / -1' } : {}),
                                     }}
                                 >
                                     <input

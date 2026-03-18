@@ -55,8 +55,8 @@ const text: Translations = {
         ru: 'Язык',
     },
     sidebar_position: {
-        en: 'Sidebar',
-        ru: 'Панель',
+        en: 'Navbar position',
+        ru: 'Позиция панели',
     },
     sidebar_left: {
         en: 'Left',
