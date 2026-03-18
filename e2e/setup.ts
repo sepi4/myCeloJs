@@ -8,12 +8,26 @@ import { App } from './pom/App.pom'
 /**
  * Launches an isolated Electron app instance with a temporary user data directory.
  * Each test file calls this in `beforeAll` to get its own app, enabling parallel execution.
+ *
+ * Set `MYCELO_DIST_PATH` env var to test a packaged build (e.g. `dist/linux-unpacked/mycelo`).
+ * Without it, tests run against the dev build (`out/main/index.js`).
  */
 export async function launchApp() {
     const tempUserDataDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mycelo-e2e-'))
-    const electronApp = await electron.launch({
-        args: [path.join(__dirname, '../out/main/index.js'), `--user-data-dir=${tempUserDataDir}`],
-    })
+    const distPath = process.env.MYCELO_DIST_PATH
+
+    const electronApp = distPath
+        ? await electron.launch({
+              executablePath: path.resolve(distPath),
+              args: [`--user-data-dir=${tempUserDataDir}`],
+          })
+        : await electron.launch({
+              args: [
+                  path.join(__dirname, '../out/main/index.js'),
+                  `--user-data-dir=${tempUserDataDir}`,
+              ],
+          })
+
     const page = await electronApp.firstWindow()
     await page.waitForLoadState('domcontentloaded')
     const app = new App(page)

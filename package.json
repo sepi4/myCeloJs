@@ -23,9 +23,10 @@
         "preview": "electron-vite preview",
         "test": "jest",
         "coverage": "jest --coverage && xdg-open coverage/index.html",
-        "dist": "jest && npm run e2e && electron-builder",
-        "dist-win": "jest && npm run e2e && electron-builder --win",
+        "dist": "jest && electron-builder && npm run e2e:dist",
+        "dist-win": "jest electron-builder --win",
         "e2e": "npm run build && npx playwright test",
+        "e2e:dist": "MYCELO_DIST_PATH=dist/linux-unpacked/mycelo npx playwright test",
         "format": "prettier --write .",
         "prepare": "husky"
     },
