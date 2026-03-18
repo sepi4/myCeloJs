@@ -22,6 +22,19 @@ const localhostDir = isDev
  * into the writable {@link localhostDir}, so that dynamic files (rankings.json, port.js)
  * can be written alongside them.
  */
+function copyDirSync(src: string, dest: string) {
+    fs.mkdirSync(dest, { recursive: true })
+    for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
+        const srcPath = path.join(src, entry.name)
+        const destPath = path.join(dest, entry.name)
+        if (entry.isDirectory()) {
+            copyDirSync(srcPath, destPath)
+        } else {
+            fs.copyFileSync(srcPath, destPath)
+        }
+    }
+}
+
 function initLocalhostDir() {
     if (isDev) {
         return
@@ -34,6 +47,11 @@ function initLocalhostDir() {
         if (fs.existsSync(src)) {
             fs.copyFileSync(src, dest)
         }
+    }
+    // Copy image assets for the OBS overlay
+    const imgSrc = path.join(process.resourcesPath, 'img')
+    if (fs.existsSync(imgSrc)) {
+        copyDirSync(imgSrc, path.join(localhostDir, 'img'))
     }
 }
 initLocalhostDir()
@@ -185,9 +203,10 @@ async function startPortServer() {
         const port = await findFreePort(2222, 3333)
         console.log('free port:', port)
         serveJson(port.toString())
+        const imgBase = isDev ? '../src/assets/img' : './img'
         await fs.promises.writeFile(
             path.join(localhostDir, 'port.js'),
-            'let port = ' + port,
+            `let port = ${port}\nlet imgBase = '${imgBase}'`,
             'utf-8'
         )
     } catch (err) {

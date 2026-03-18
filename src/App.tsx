@@ -171,6 +171,14 @@ function App() {
         }
     }, [coh3, settings, activeLogLocation])
 
+    // Re-write rankings when orientation changes
+    useEffect(() => {
+        if (settings && players && players.length > 0) {
+            writeRankings(coh3, players, settings.rankingsHorizontal)
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [settings?.rankingsHorizontal])
+
     useEffect(() => {
         if (!coh3 || !settings?.logLocationCoh3) {
             return
