@@ -1,0 +1,21 @@
+.container {
+    background: #181818;
+    padding: 0.5em 1.5em;
+    margin: 1em 0;
+    position: relative;
+}
+
+.toggleAll {
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    color: #aaa;
+    font-size: 1.15em;
+    padding: 0.2em 0.2em;
+    z-index: 1;
+}
+
+.toggleAll:hover {
+    color: #ddd;
+}

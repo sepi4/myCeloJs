@@ -8,6 +8,7 @@ const defaultOpenInfos = (): boolean[][] => [
 interface OpenInfosStore {
     openInfos: boolean[][]
     toggleOpenInfo: (teamIndex: number, playerIndex: number) => void
+    setTeamOpenInfos: (teamIndex: number, open: boolean) => void
     resetOpenInfos: () => void
 }
 
@@ -18,6 +19,10 @@ export const useOpenInfosStore = create<OpenInfosStore>((set) => ({
             openInfos: state.openInfos.map((t, i) =>
                 i === teamIndex ? t.map((p, j) => (j === playerIndex ? !p : p)) : t
             ),
+        })),
+    setTeamOpenInfos: (teamIndex, open) =>
+        set((state) => ({
+            openInfos: state.openInfos.map((t, i) => (i === teamIndex ? t.map(() => open) : t)),
         })),
     resetOpenInfos: () => set({ openInfos: defaultOpenInfos() }),
 }))

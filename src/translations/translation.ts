@@ -224,6 +224,14 @@ const text: Translations = {
         en: 'expand all',
         ru: 'открыть все',
     },
+    expand_all_team: {
+        en: 'Expand all',
+        ru: 'Развернуть всех',
+    },
+    collapse_all_team: {
+        en: 'Collapse all',
+        ru: 'Свернуть всех',
+    },
     rank: {
         en: 'rank',
         ru: 'ранг',
