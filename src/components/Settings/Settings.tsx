@@ -26,9 +26,9 @@ function Settings(props: Props) {
     const { closeSettingsView } = useSettingsViewStore()
 
     const lg = settings && settings.language ? settings.language : 'en'
-    const sidebarPosition = settings?.sidebarPosition ?? 'left'
+    const sidebarPosition = settings?.sidebarPosition ?? 'top'
 
-    const handleSidebarPosition = (pos: 'left' | 'right') => {
+    const handleSidebarPosition = (pos: 'left' | 'right' | 'top') => {
         writeSettings({ ...settings!, sidebarPosition: pos })
     }
 
@@ -205,7 +205,7 @@ function Settings(props: Props) {
                                 marginTop: '0.3em',
                             }}
                         >
-                            {(['left', 'right'] as const).map((pos) => (
+                            {(['left', 'right', 'top'] as const).map((pos) => (
                                 <label
                                     key={pos}
                                     style={{

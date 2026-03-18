@@ -228,8 +228,10 @@ function App() {
         <main
             style={
                 settings?.sidebarPosition === 'right'
-                    ? { marginRight: '8.5em', marginLeft: '1em' }
-                    : { marginLeft: '8.5em', marginRight: '1em' }
+                    ? { marginRight: '8em', marginLeft: '1em' }
+                    : settings?.sidebarPosition === 'top'
+                      ? { marginTop: '4em', marginLeft: '1em', marginRight: '1em' }
+                      : { marginLeft: '8em', marginRight: '1em' }
             }
         >
             <Navbar {...{ handleSetSettingsView }} />

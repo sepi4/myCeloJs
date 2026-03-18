@@ -5,3 +5,11 @@
     align-items: flex-start;
     gap: 0.4em;
 }
+
+.rowTop {
+    display: flex;
+    font-size: 90%;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 1em;
+}

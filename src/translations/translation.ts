@@ -66,6 +66,10 @@ const text: Translations = {
         en: 'Right',
         ru: 'Справа',
     },
+    sidebar_top: {
+        en: 'Top',
+        ru: 'Сверху',
+    },
 
     log_location_first: {
         en: 'Add log location file first',
@@ -167,7 +171,7 @@ const text: Translations = {
     },
     total: {
         en: 'total',
-        ru: 'количество игр',
+        ru: 'количество',
     },
 
     auto: {
@@ -185,6 +189,10 @@ const text: Translations = {
     check_log_button: {
         en: 'check log',
         ru: 'проверить',
+    },
+    tooltip_check_log: {
+        en: 'Check manually',
+        ru: 'Проверить вручную',
     },
     integer_error: {
         en: 'integer 1-999',

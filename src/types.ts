@@ -58,7 +58,7 @@ export type SettingsType = {
     profileIdCoh2: number
     profileIdCoh3: number
     ignoreUntil?: string
-    sidebarPosition?: 'left' | 'right'
+    sidebarPosition?: 'left' | 'right' | 'top'
 }
 
 export type StatGroup = {

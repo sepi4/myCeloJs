@@ -22,3 +22,9 @@
     align-items: flex-start;
     gap: 0.4em;
 }
+
+.containerTop {
+    display: flex;
+    gap: 0.6em;
+    align-items: center;
+}

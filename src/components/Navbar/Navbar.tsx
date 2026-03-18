@@ -117,23 +117,29 @@ export default function Navbar(props: Props) {
         />
     )
 
-    const navbarClass = settings?.sidebarPosition === 'right' ? styles.navbarRight : styles.navbar
+    const isTop = settings?.sidebarPosition === 'top'
+    const navbarClass =
+        settings?.sidebarPosition === 'right'
+            ? styles.navbarRight
+            : isTop
+              ? styles.navbarTop
+              : styles.navbar
 
     return (
         <div className={navbarClass}>
-            <div className={styles.icons}>
+            <div className={isTop ? styles.iconsTop : styles.icons}>
                 {userIcon}
                 {searchIcon}
                 {settingsIcon}
             </div>
 
-            <div className={styles.container}>
-                <div className={styles.column}>
-                    <NavbarRow>{buttons}</NavbarRow>
+            <div className={isTop ? styles.containerTop : styles.container}>
+                <div className={isTop ? styles.columnTop : styles.column}>
+                    <NavbarRow isTop={isTop}>{buttons}</NavbarRow>
                 </div>
 
-                <div className={styles.column}>
-                    <NavbarRow>
+                <div className={isTop ? styles.columnTop : styles.column}>
+                    <NavbarRow isTop={isTop}>
                         <div
                             className={styles.radio}
                             title={
@@ -173,7 +179,7 @@ export default function Navbar(props: Props) {
                     </NavbarRow>
                 </div>
 
-                <div className={styles.column}>
+                <div className={isTop ? styles.columnTop : styles.column}>
                     <CheckLogDiv />
                 </div>
             </div>

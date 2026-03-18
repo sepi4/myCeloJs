@@ -23,21 +23,10 @@ function CheckLogDiv() {
             : settings.logLocationCoh2
         : ''
 
-    return (
-        <div className={styles.container}>
-            <button
-                data-testid="check-log-button"
-                className={styles.btn}
-                onClick={async () => {
-                    const data = await readLog(coh3, activeLogLocation)
-                    if (data) {
-                        setPlayersWithoutChecking(data)
-                    }
-                }}
-            >
-                {getText('check_log_button', settings)}
-            </button>
+    const isTop = settings?.sidebarPosition === 'top'
 
+    return (
+        <div className={isTop ? styles.containerTop : styles.container}>
             <NavCheckbox
                 text={getText('auto', settings)}
                 checked={autoLogChecking}
@@ -58,6 +47,20 @@ function CheckLogDiv() {
                     />
                 </>
             ) : null}
+
+            <button
+                data-testid="check-log-button"
+                className={styles.btn}
+                title={getText('tooltip_check_log', settings)}
+                onClick={async () => {
+                    const data = await readLog(coh3, activeLogLocation)
+                    if (data) {
+                        setPlayersWithoutChecking(data)
+                    }
+                }}
+            >
+                {getText('check_log_button', settings)}
+            </button>
         </div>
     )
 }
