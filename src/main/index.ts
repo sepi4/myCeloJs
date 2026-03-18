@@ -4,6 +4,40 @@ import http from 'http'
 import net from 'net'
 import path from 'path'
 
+const isDev = !!process.env['ELECTRON_RENDERER_URL']
+
+/**
+ * Writable directory for OBS overlay files (rankings.html, rankings.json, port.js, etc.).
+ *
+ * - **Dev**: uses `<project>/localhostFiles/` which is directly writable.
+ * - **Production** (AppImage/deb/exe): `extraResources` are read-only, so we use
+ *   `app.getPath('userData')` (~/.config/myCelo on Linux) as a writable location.
+ */
+const localhostDir = isDev
+    ? path.join(process.cwd(), 'localhostFiles')
+    : path.join(app.getPath('userData'), 'localhostFiles')
+
+/**
+ * Copies static OBS overlay files (html, css, js) from the read-only extraResources
+ * into the writable {@link localhostDir}, so that dynamic files (rankings.json, port.js)
+ * can be written alongside them.
+ */
+function initLocalhostDir() {
+    if (isDev) {
+        return
+    }
+    fs.mkdirSync(localhostDir, { recursive: true })
+    const sourceDir = path.join(process.resourcesPath, 'localhostFiles')
+    for (const file of ['rankings.html', 'rankings.css', 'rankings.js']) {
+        const src = path.join(sourceDir, file)
+        const dest = path.join(localhostDir, file)
+        if (fs.existsSync(src)) {
+            fs.copyFileSync(src, dest)
+        }
+    }
+}
+initLocalhostDir()
+
 let mainWindow: BrowserWindow | null = null
 
 function createMainWindow() {
@@ -11,8 +45,6 @@ function createMainWindow() {
         process.platform !== 'win32'
             ? path.join(__dirname, '../../assets/icon/icon.png')
             : path.join(__dirname, '../../assets/icon/icon.ico')
-
-    const isDev = !!process.env['ELECTRON_RENDERER_URL']
 
     mainWindow = new BrowserWindow({
         width: isDev ? 1100 : 800,
@@ -66,7 +98,7 @@ ipcMain.on('get-app-info', (event) => {
     event.returnValue = {
         version: app.getVersion(),
         settingsDir: app.getPath('userData'),
-        appLocation: process.cwd(),
+        appLocation: path.dirname(localhostDir),
         pathSep: path.sep,
     }
 })
@@ -100,7 +132,7 @@ ipcMain.handle('log:read', async (_event, filePath: string) => {
 })
 
 ipcMain.handle('rankings:write', async (_event, jsonContent: string, txtContent: string) => {
-    const dir = path.join(process.cwd(), 'localhostFiles')
+    const dir = localhostDir
     await Promise.all([
         fs.promises
             .writeFile(path.join(dir, 'rankings.json'), jsonContent, 'utf-8')
@@ -120,13 +152,14 @@ function serveJson(port: string) {
             'Access-Control-Allow-Origin': '*',
             'X-Powered-By': 'nodejs',
         })
-        fs.readFile(
-            path.join(process.cwd(), 'localhostFiles', 'rankings.json'),
-            function (_err, content) {
+        fs.readFile(path.join(localhostDir, 'rankings.json'), function (err, content) {
+            if (err || !content) {
+                response.write('{}')
+            } else {
                 response.write(content)
-                response.end()
             }
-        )
+            response.end()
+        })
     }).listen(port, undefined, () => {})
 }
 
@@ -153,7 +186,7 @@ async function startPortServer() {
         console.log('free port:', port)
         serveJson(port.toString())
         await fs.promises.writeFile(
-            path.join(process.cwd(), 'localhostFiles', 'port.js'),
+            path.join(localhostDir, 'port.js'),
             'let port = ' + port,
             'utf-8'
         )
