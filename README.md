@@ -21,7 +21,7 @@ Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone
 
 - in settings ![alt text](./readmeImages/settingsIcon.png 'settings icon') select location of 'warnings.log' file (Same folder where are replays saved, usually in "C:\Users\USERNAME\Documents\my games\company of heroes 2\" or "C:\Users\USERNAME\Documents\my games\company of heroes 3\")
 - done (test installation by opening game in SPECTATE MODE or game vs AI.)
-      <hr>
+    <hr>
 
     **OPTIONAL SETTINGS**
 
@@ -94,7 +94,7 @@ _ONLY FOR STREAMERS_
 
 - в настройках ![alt text](./readmeImages/settingsIcon.png 'settings icon') выберите местонахождение 'warnings.log'-файла (тоже место куда сохраняются реплеи, обычно находится в "Documents/my games/company of heroes 2/" или "Documents/my games/company of heroes 3/")
 - проверьте установку в игре против компьютера или в режиме просмотра
-    <hr>
+  <hr>
 
     **НЕОБЯЗАТЕЛЬНЫЕ НАСТРОЙКИ**
 
@@ -159,6 +159,14 @@ _ТОЛЬКО ДЛЯ СТРИМЕРОВ_
 
 ## Updates:
 
+- **version 2.2.0.**
+    - Navbar position setting: left, right, or top
+    - Team expand/collapse toggle button
+    - Tooltips on sidebar controls and icons
+    - Language radio buttons in settings
+    - Fix: OBS overlay files (rankings HTML/text) not generated in packaged builds (AppImage/deb/exe)
+    - Fix: broken image paths in OBS rankings overlay
+    - E2e tests for packaged builds (`npm run e2e:dist`)
 - **version 2.1.0.**
     - Separate log inputs for COH2 and COH3
     - Auto-detect COH3 user identity (MY button for both games)
