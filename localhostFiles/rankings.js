@@ -6,7 +6,7 @@ let preJson = {}
 function factionImage(faction, reversed) {
     return `
         <div class="factionStyle ${reversed ? 'marginRight3' : 'marginLeft3'}">
-            <img src="../img/${faction}.png" width="100%" height="100%" />
+            <img src="../src/assets/img/${faction}.png" width="100%" height="100%" />
         </div>
     `
 }
@@ -20,7 +20,7 @@ function country(country) {
         <div class="countryStyle">
             ${
                 country
-                    ? `<img src="../img/countryFlags/${country}.png" width="100%" height="100%" />`
+                    ? `<img src="../src/assets/img/countryFlags/${country}.png" width="100%" height="100%" />`
                     : ''
             }
         </div>
