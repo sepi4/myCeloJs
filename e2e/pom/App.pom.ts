@@ -14,7 +14,12 @@ export class App {
     readonly playersContainer: Locator
     readonly teamContainers: Locator
 
+    // Teams
+    readonly teamToggles: Locator
+    readonly playerExtraInfos: Locator
+
     // Navbar
+    readonly navbar: Locator
     readonly settingsIcon: Locator
     readonly userIcon: Locator
     readonly searchIcon: Locator
@@ -32,6 +37,9 @@ export class App {
     readonly foundPlayers: Locator
 
     // Settings
+    readonly sidebarPositionLeft: Locator
+    readonly sidebarPositionRight: Locator
+    readonly sidebarPositionTop: Locator
     readonly languageTitle: Locator
     readonly languageSelectEn: Locator
     readonly languageSelectRu: Locator
@@ -83,7 +91,10 @@ export class App {
         this.noLogPrompt = page.getByTestId('no-log-prompt')
         this.playersContainer = page.getByTestId('players-container')
         this.teamContainers = page.getByTestId('team-container')
+        this.teamToggles = page.getByTestId('team-toggle')
+        this.playerExtraInfos = page.getByTestId('player-extra-info')
 
+        this.navbar = page.getByTestId('navbar')
         this.settingsIcon = page.getByTestId('settings-icon')
         this.userIcon = page.getByTestId('user-icon')
         this.searchIcon = page.getByTestId('search-icon')
@@ -99,6 +110,9 @@ export class App {
         this.searchResults = page.getByTestId('search-results')
         this.foundPlayers = page.getByTestId('found-player')
 
+        this.sidebarPositionLeft = page.getByTestId('sidebar-position-left')
+        this.sidebarPositionRight = page.getByTestId('sidebar-position-right')
+        this.sidebarPositionTop = page.getByTestId('sidebar-position-top')
         this.languageTitle = page.getByTestId('language-title')
         this.languageSelectEn = page.getByTestId('language-select-en')
         this.languageSelectRu = page.getByTestId('language-select-ru')

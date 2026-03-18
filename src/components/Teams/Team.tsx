@@ -29,6 +29,7 @@ function Team(props: Props) {
     return (
         <div data-testid="team-container" className={css.container}>
             <span
+                data-testid="team-toggle"
                 onClick={handleToggleAll}
                 className={css.toggleAll}
                 title={

@@ -281,6 +281,51 @@ test('fetch game history and open game modal', async () => {
     await expect(app.gameModal).not.toBeVisible()
 })
 
+test('team toggle expands and collapses all players in a team', async () => {
+    // Ensure we are on the main view with players loaded
+    await expect(app.teamContainers).toHaveCount(2)
+
+    // No player extra info should be visible initially
+    await expect(app.playerExtraInfos).toHaveCount(0)
+
+    // Click the first team's toggle — should expand all players in that team
+    await app.teamToggles.first().click()
+    const expandedCount = await app.playerExtraInfos.count()
+    expect(expandedCount).toBeGreaterThan(0)
+
+    // Click the same toggle again — should collapse all players
+    await app.teamToggles.first().click()
+    await expect(app.playerExtraInfos).toHaveCount(0)
+})
+
+test('sidebar position changes navbar layout', async () => {
+    // Open settings
+    await app.settingsIcon.click()
+    await expect(app.sidebarPositionLeft).toBeChecked()
+    await app.closeButton.click()
+
+    // Default 'left' — navbar should be to the left of the main content
+    const navLeft = await app.navbar.boundingBox()
+    const mainLeft = await app.playersContainer.boundingBox()
+    expect(navLeft!.x).toBeLessThan(mainLeft!.x)
+
+    // Switch to right — navbar should be to the right of the main content
+    await app.settingsIcon.click()
+    await app.sidebarPositionRight.click()
+    await app.closeButton.click()
+    const navRight = await app.navbar.boundingBox()
+    const mainRight = await app.playersContainer.boundingBox()
+    expect(navRight!.x).toBeGreaterThan(mainRight!.x)
+
+    // Switch to top — navbar should be above the main content
+    await app.settingsIcon.click()
+    await app.sidebarPositionTop.click()
+    await app.closeButton.click()
+    const navTop = await app.navbar.boundingBox()
+    const mainTop = await app.playersContainer.boundingBox()
+    expect(navTop!.y).toBeLessThan(mainTop!.y)
+})
+
 test('reset all settings - cancel keeps settings, ok clears and reloads', async () => {
     // Open settings — log location is set so the reset button should be enabled
     await app.settingsIcon.click()

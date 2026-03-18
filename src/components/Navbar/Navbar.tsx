@@ -126,7 +126,7 @@ export default function Navbar(props: Props) {
               : styles.navbar
 
     return (
-        <div className={navbarClass}>
+        <div data-testid="navbar" className={navbarClass}>
             <div className={isTop ? styles.iconsTop : styles.icons}>
                 {userIcon}
                 {searchIcon}

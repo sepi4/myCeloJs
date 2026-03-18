@@ -39,7 +39,7 @@ function PlayerExtraInfo(props: Props) {
     const table = navButtons.table && ranksArr ? <TableDiv ranksArr={ranksArr} /> : null
 
     return (
-        <div className={styles.container}>
+        <div data-testid="player-extra-info" className={styles.container}>
             {totalGames}
             {table}
             <ListDiv ranksArr={ranksArr} />

@@ -26,7 +26,7 @@ function Settings(props: Props) {
     const { closeSettingsView } = useSettingsViewStore()
 
     const lg = settings && settings.language ? settings.language : 'en'
-    const sidebarPosition = settings?.sidebarPosition ?? 'top'
+    const sidebarPosition = settings?.sidebarPosition ?? 'left'
 
     const handleSidebarPosition = (pos: 'left' | 'right' | 'top') => {
         writeSettings({ ...settings!, sidebarPosition: pos })
@@ -215,6 +215,7 @@ function Settings(props: Props) {
                                     }}
                                 >
                                     <input
+                                        data-testid={`sidebar-position-${pos}`}
                                         type="radio"
                                         name="sidebarPosition"
                                         value={pos}
