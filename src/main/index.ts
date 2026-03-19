@@ -64,6 +64,7 @@ function createMainWindow() {
 app.on('ready', createMainWindow)
 
 app.on('window-all-closed', () => {
+    pushToClients('')
     if (process.platform !== 'darwin') {
         app.quit()
     }
