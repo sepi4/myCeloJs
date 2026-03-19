@@ -8,7 +8,7 @@ import useEsc from '../../hooks/useEsc'
 import useTimedBoolean from '../../hooks/useTimedBoolean'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { useSettingsViewStore } from '../../stores/settingsViewStore'
-import { SettingsType } from '../../types'
+import { Language, SettingsType } from '../../types'
 import Icon from '../Icon'
 import Modal from '../Modal/Modal'
 import Notification from '../Notification'
@@ -125,7 +125,7 @@ function Settings(props: Props) {
         }
     }
 
-    const handleLanguage = (lang: string) => {
+    const handleLanguage = (lang: Language) => {
         writeSettings({ ...settings!, language: lang })
     }
 

@@ -10,7 +10,7 @@ import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { usePlayersStore } from '../../stores/playersStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { useViewStore } from '../../stores/viewStore'
-import { Player } from '../../types'
+import { Language, Player } from '../../types'
 import { writeRankings } from '../rankings/writeRankings'
 import checkLogData from './checkLogData'
 
@@ -37,7 +37,7 @@ const player2: Player = {
 const settings = {
     logLocationCoh2: '/path/coh2',
     logLocationCoh3: '/path/coh3',
-    language: 'en',
+    language: 'en' as Language,
     appLocation: '/app',
     rankingsHtml: true,
     rankingsPort: 2222,

@@ -46,10 +46,12 @@ export type CountryFlagsLocation = {
     [key: string]: string
 }
 
+export type Language = 'ru' | 'en'
+
 export type SettingsType = {
     logLocationCoh2: string
     logLocationCoh3: string
-    language: string
+    language: Language
     appLocation: string
     rankingsHtml: boolean
     rankingsPort: number
