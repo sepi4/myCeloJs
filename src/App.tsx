@@ -74,18 +74,12 @@ function App() {
                 const newSettings = JSON.parse(data)
                 newSettings.appLocation = appLocation
 
-                // update rankingsFile location, for cases where
-                // app location is different
-                if (newSettings.rankingsFile) {
-                    const sep = window.electronAPI.pathSep
-                    newSettings.rankingsFile =
-                        appLocation +
-                        sep +
-                        'localhostFiles' +
-                        sep +
-                        'rankings.' +
-                        (newSettings.rankingsHtml ? 'html' : 'txt')
+                // update overlay port for current session
+                if (newSettings.rankingsPort) {
+                    newSettings.rankingsPort = window.electronAPI.overlayPort
                 }
+                // sync format to the overlay server
+                window.electronAPI.rankings.setFormat(newSettings.rankingsHtml ? 'html' : 'txt')
                 writeSettings(newSettings)
             })
             return

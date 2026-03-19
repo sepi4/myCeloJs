@@ -2,7 +2,6 @@ import { ChangeEvent } from 'react'
 
 import getText from '../../functions/getText'
 import writeSettings from '../../functions/writeSettings'
-import { useAppLocationStore } from '../../stores/appLocationStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { SettingsType } from '../../types'
 import CopyDiv from './CopyDiv'
@@ -13,18 +12,16 @@ import SettingsLocation from './SettingsLocation'
 
 export default function SettingsAfterLog() {
     const { settings } = useSettingsStore()
-    const { appLocation } = useAppLocationStore()
 
     const handleType = (e: ChangeEvent<HTMLInputElement>) => {
-        const newFormat = e.target.value
-        const sep = window.electronAPI.pathSep
-        const loc = appLocation + sep + 'localhostFiles' + sep + 'rankings.' + newFormat
+        const format = e.target.value as 'html' | 'txt'
         const newSettings = {
             ...settings,
-            rankingsHtml: newFormat === 'html',
-            rankingsFile: loc,
+            rankingsHtml: format === 'html',
+            rankingsPort: window.electronAPI.overlayPort,
         } as SettingsType
         writeSettings(newSettings)
+        window.electronAPI.rankings.setFormat(format)
     }
 
     const handleOrientation = (e: ChangeEvent<HTMLInputElement>) => {
@@ -36,12 +33,14 @@ export default function SettingsAfterLog() {
         writeSettings(newSettings)
     }
 
-    const fileTypeSet = !!(
+    const overlayConfigured = !!(
         settings &&
-        settings.rankingsFile !== undefined &&
+        settings.rankingsPort !== undefined &&
         settings.rankingsHorizontal !== undefined &&
         settings.rankingsHtml !== undefined
     )
+
+    const overlayUrl = overlayConfigured ? `http://localhost:${settings!.rankingsPort}` : undefined
 
     if (settings && (settings.logLocationCoh2 || settings.logLocationCoh3)) {
         return (
@@ -85,14 +84,11 @@ export default function SettingsAfterLog() {
                         />
                     </RadioButtonsDiv>
 
-                    <CopyDiv
-                        testId="copy-rankings"
-                        text={fileTypeSet ? settings.rankingsFile : undefined}
-                    />
+                    <CopyDiv testId="copy-rankings" text={overlayUrl} />
                 </SettingsDiv>
 
                 <SettingsLocation
-                    fileTypeSet={fileTypeSet}
+                    fileTypeSet={overlayConfigured}
                     title={getText('settings_file_location_title', settings)}
                 />
             </>

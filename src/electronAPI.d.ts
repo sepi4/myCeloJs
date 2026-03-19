@@ -19,8 +19,10 @@ interface ElectronAPI {
     log: {
         read(filePath: string): Promise<string | null>
     }
+    overlayPort: number
     rankings: {
         write(jsonContent: string, txtContent: string): Promise<void>
+        setFormat(format: 'html' | 'txt'): Promise<void>
     }
 }
 

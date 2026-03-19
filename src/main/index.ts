@@ -4,7 +4,11 @@ import http from 'http'
 import net from 'net'
 import path from 'path'
 
-import { renderRankingsBody, renderRankingsPage } from '../functions/renderRankingsHtml'
+import {
+    renderRankingsBody,
+    renderRankingsPage,
+    renderRankingsTxtBody,
+} from '../functions/renderRankingsHtml'
 import { RankingsJson } from '../types'
 
 const isDev = !!process.env['ELECTRON_RENDERER_URL']
@@ -117,11 +121,18 @@ ipcMain.handle('log:read', async (_event, filePath: string) => {
 
 // ── Rankings state & SSE ─────────────────────────────────────────────────────
 
-let currentRankingsHtml = ''
+let overlayPort = 0
+let currentHtmlBody = ''
+let currentTxtBody = ''
+let currentFormat: 'html' | 'txt' = 'html'
 const sseClients = new Set<http.ServerResponse>()
 
-function pushToClients(html: string) {
-    const data = `data: ${html.replace(/\n/g, '')}\n\n`
+function currentOverlayBody(): string {
+    return currentFormat === 'html' ? currentHtmlBody : currentTxtBody
+}
+
+function pushToClients(body: string) {
+    const data = `data: ${body.replace(/\n/g, '')}\n\n`
     for (const client of sseClients) {
         client.write(data)
     }
@@ -129,10 +140,11 @@ function pushToClients(html: string) {
 
 ipcMain.handle('rankings:write', async (_event, jsonContent: string, txtContent: string) => {
     const json: RankingsJson = JSON.parse(jsonContent)
-    currentRankingsHtml = renderRankingsBody(json)
-    pushToClients(currentRankingsHtml)
+    currentHtmlBody = renderRankingsBody(json)
+    currentTxtBody = renderRankingsTxtBody(txtContent)
+    pushToClients(currentOverlayBody())
 
-    // Still write text file for OBS text-source users + JSON for e2e tests
+    // Still write text and JSON files to disk as fallback
     await Promise.all([
         fs.promises
             .writeFile(path.join(localhostDir, 'rankings.json'), jsonContent, 'utf-8')
@@ -141,6 +153,15 @@ ipcMain.handle('rankings:write', async (_event, jsonContent: string, txtContent:
             .writeFile(path.join(localhostDir, 'rankings.txt'), txtContent, 'utf-8')
             .catch((err) => console.log('Error writing rankings.txt:', err)),
     ])
+})
+
+ipcMain.handle('rankings:set-format', (_event, format: 'html' | 'txt') => {
+    currentFormat = format
+    pushToClients(currentOverlayBody())
+})
+
+ipcMain.on('get-overlay-port', (event) => {
+    event.returnValue = overlayPort
 })
 
 // ── Local HTTP server for OBS overlay ────────────────────────────────────────
@@ -169,8 +190,9 @@ function serveOverlay(port: number) {
                 'Access-Control-Allow-Origin': '*',
             })
             // Send current state immediately so the overlay doesn't start blank
-            if (currentRankingsHtml) {
-                response.write(`data: ${currentRankingsHtml.replace(/\n/g, '')}\n\n`)
+            const body = currentOverlayBody()
+            if (body) {
+                response.write(`data: ${body.replace(/\n/g, '')}\n\n`)
             }
             sseClients.add(response)
             request.on('close', () => sseClients.delete(response))
@@ -220,13 +242,14 @@ function findFreePort(start: number, stop: number): Promise<number> {
 
 async function startOverlayServer() {
     try {
-        const port = await findFreePort(2222, 3333)
-        console.log('free port:', port)
-        serveOverlay(port)
-        // Write port file so e2e tests and users can discover the port
+        const foundPort = await findFreePort(2222, 3333)
+        console.log('free port:', foundPort)
+        overlayPort = foundPort
+        serveOverlay(foundPort)
+        // Write port file so e2e tests can discover the port
         await fs.promises.writeFile(
             path.join(localhostDir, 'port.js'),
-            `let port = ${port}`,
+            `let port = ${foundPort}`,
             'utf-8'
         )
     } catch (err) {

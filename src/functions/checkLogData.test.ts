@@ -40,7 +40,7 @@ const settings = {
     language: 'en',
     appLocation: '/app',
     rankingsHtml: true,
-    rankingsFile: '/rankings',
+    rankingsPort: 2222,
     rankingsHorizontal: true,
     steamId: '123',
     profileIdCoh2: 456,

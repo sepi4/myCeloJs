@@ -121,6 +121,11 @@ const CSS = `
 }
 `
 
+export function renderRankingsTxtBody(text: string): string {
+    const lines = text.split('\n').map((line) => escapeHtml(line))
+    return `<pre style="font-family: 'Work Sans', monospace; font-size: 32px; color: white; margin: 0;">${lines.join('<br>')}</pre>`
+}
+
 export function renderRankingsPage(): string {
     return `<!doctype html>
 <html lang="en">

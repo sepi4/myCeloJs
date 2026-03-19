@@ -150,7 +150,7 @@ function Settings(props: Props) {
             !settings.logLocationCoh3 &&
             !settings.language &&
             !settings.steamId &&
-            !settings.rankingsFile &&
+            !settings.rankingsPort &&
             !settings.ignoreUntil)
 
     return (

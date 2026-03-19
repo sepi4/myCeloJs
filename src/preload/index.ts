@@ -27,8 +27,10 @@ contextBridge.exposeInMainWorld('electronAPI', {
     log: {
         read: (filePath: string) => ipcRenderer.invoke('log:read', filePath),
     },
+    overlayPort: ipcRenderer.sendSync('get-overlay-port') as number,
     rankings: {
         write: (jsonContent: string, txtContent: string) =>
             ipcRenderer.invoke('rankings:write', jsonContent, txtContent),
+        setFormat: (format: 'html' | 'txt') => ipcRenderer.invoke('rankings:set-format', format),
     },
 })

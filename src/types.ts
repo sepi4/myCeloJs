@@ -52,7 +52,7 @@ export type SettingsType = {
     language: string
     appLocation: string
     rankingsHtml: boolean
-    rankingsFile: string
+    rankingsPort: number
     rankingsHorizontal: boolean
     steamId: string
     profileIdCoh2: number
