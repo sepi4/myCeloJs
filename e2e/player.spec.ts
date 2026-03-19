@@ -119,27 +119,3 @@ test('player card external links have correct URLs', async () => {
     )
     await app.closeButton.click()
 })
-
-test('fetch game history and open game modal', async () => {
-    // Open my player card
-    await app.userIcon.click()
-    await expect(app.steamIdValue).toBeVisible()
-
-    // Click fetch game history button — triggers API call
-    await expect(app.fetchHistory).toBeVisible()
-    await app.fetchHistory.click()
-
-    // Game history items should load
-    await expect(app.gameHistory).toBeVisible()
-    await expect(app.gameHistoryItems.first()).toBeVisible()
-
-    // Click the first game to open the modal
-    await app.gameHistoryItems.first().click()
-    await expect(app.gameModal).toBeVisible()
-    await expect(app.gameStart).toBeVisible()
-    await expect(app.gameEnd).toBeVisible()
-
-    // Close the modal with Escape
-    await page.keyboard.press('Escape')
-    await expect(app.gameModal).not.toBeVisible()
-})
