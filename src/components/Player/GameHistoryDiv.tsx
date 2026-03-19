@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
 import { getFactionById } from '../../constants/factionMappings'
-import { getFactionFlagLocation } from '../../functions/getFactionFlagLocation'
-import { getTimeAgo } from '../../functions/time'
+import { getFactionFlagLocation } from '../../functions/utils/getFactionFlagLocation'
+import { getTimeAgo } from '../../functions/utils/time'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { MatchObject, NormalizedProfiles } from '../../types'
 import styles from './GameHistoryDiv.module.css'

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 
 import { LATEST_RELEASES_URL } from '../constants/urls'
-import funGetText from '../functions/getText'
-import writeSettings from '../functions/writeSettings'
+import writeSettings from '../functions/settings/writeSettings'
+import funGetText from '../functions/utils/getText'
 import { useSettingsStore } from '../stores/settingsStore'
 import { useUpdateCheckDoneStore } from '../stores/updateCheckDoneStore'
 import { SettingsType } from '../types'

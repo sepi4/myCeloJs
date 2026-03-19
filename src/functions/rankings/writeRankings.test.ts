@@ -3,7 +3,7 @@ jest.mock('string-width', () => ({
     default: (s: string) => s.length,
 }))
 
-import { Player } from '../types'
+import { Player } from '../../types'
 import { buildRankings } from './writeRankings'
 
 const player = (overrides: Partial<Player> = {}): Player => ({

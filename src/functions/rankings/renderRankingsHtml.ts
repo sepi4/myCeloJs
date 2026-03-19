@@ -1,4 +1,4 @@
-import { RankingsJson } from '../types'
+import { RankingsJson } from '../../types'
 
 function escapeHtml(str: string): string {
     return str
@@ -24,10 +24,18 @@ function renderPlayer(
     const factionMargin = reversed ? 'marginRight3' : 'marginLeft3'
     const nameMargin = reversed ? 'textRight marginRight1' : 'marginLeft1'
 
-    const factionDiv = `<div class="factionStyle ${factionMargin}" data-testid="faction">${img(`/img/${faction}.png`)}</div>`
-    const rankSpan = `<span class="rankingStyle" data-testid="ranking">${ranking}</span>`
-    const countryDiv = `<div class="countryStyle" data-testid="country">${country ? img(`/img/countryFlags/${country}.png`) : ''}</div>`
-    const nameSpan = `<span class="nameStyle ${nameMargin}" data-testid="name">${name}</span>`
+    const factionDiv = `<div class="factionStyle ${factionMargin}" data-testid="faction">
+        ${img(`/img/${faction}.png`)}
+    </div>`
+    const rankSpan = `<span class="rankingStyle" data-testid="ranking">
+        ${ranking}
+    </span>`
+    const countryDiv = `<div class="countryStyle" data-testid="country">
+        ${country ? img(`/img/countryFlags/${country}.png`) : ''}
+    </div>`
+    const nameSpan = `<span class="nameStyle ${nameMargin}" data-testid="name">
+        ${name}
+    </span>`
 
     const parts = reversed
         ? [nameSpan, countryDiv, rankSpan, factionDiv]

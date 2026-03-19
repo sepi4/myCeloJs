@@ -1,4 +1,4 @@
-import { RankingsJson } from '../types'
+import { RankingsJson } from '../../types'
 import { renderRankingsBody, renderRankingsPage, renderRankingsTxtBody } from './renderRankingsHtml'
 
 const team = (overrides: Partial<RankingsJson['teams']['team1'][0]> = {}) => ({

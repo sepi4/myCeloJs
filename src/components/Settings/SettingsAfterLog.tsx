@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react'
 
-import getText from '../../functions/getText'
-import writeSettings from '../../functions/writeSettings'
+import writeSettings from '../../functions/settings/writeSettings'
+import getText from '../../functions/utils/getText'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { SettingsType } from '../../types'
 import CopyDiv from './CopyDiv'

@@ -1,6 +1,6 @@
 import { JSX } from 'react'
 
-import getText from '../../functions/getText'
+import getText from '../../functions/utils/getText'
 import { useSettingsStore } from '../../stores/settingsStore'
 import styles from './SettingsDiv.module.css'
 

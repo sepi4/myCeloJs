@@ -1,4 +1,4 @@
-import getText from '../../functions/getText'
+import getText from '../../functions/utils/getText'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { ExtraInfo, Player } from '../../types'

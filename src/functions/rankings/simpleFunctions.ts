@@ -1,4 +1,4 @@
-import { Player, Rank } from '../types'
+import { Player, Rank } from '../../types'
 
 export function getTotalGames(ranks: Rank[]): number {
     let sum = 0

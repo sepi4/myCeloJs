@@ -1,13 +1,13 @@
-import { useExtraInfoStore } from '../stores/extraInfoStore'
-import { useFromFileStore } from '../stores/fromFileStore'
-import { useNavButtonsStore } from '../stores/navButtonsStore'
-import { useOpenInfosStore } from '../stores/openInfosStore'
-import { usePlayerCardStore } from '../stores/playerCardStore'
-import { usePlayersStore } from '../stores/playersStore'
-import { useSettingsStore } from '../stores/settingsStore'
-import { useViewStore } from '../stores/viewStore'
-import { Player } from '../types'
-import { writeRankings } from './writeRankings'
+import { useExtraInfoStore } from '../../stores/extraInfoStore'
+import { useFromFileStore } from '../../stores/fromFileStore'
+import { useNavButtonsStore } from '../../stores/navButtonsStore'
+import { useOpenInfosStore } from '../../stores/openInfosStore'
+import { usePlayerCardStore } from '../../stores/playerCardStore'
+import { usePlayersStore } from '../../stores/playersStore'
+import { useSettingsStore } from '../../stores/settingsStore'
+import { useViewStore } from '../../stores/viewStore'
+import { Player } from '../../types'
+import { writeRankings } from '../rankings/writeRankings'
 
 interface Props {
     data: Player[]

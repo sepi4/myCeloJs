@@ -2,12 +2,12 @@ import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import { commonName } from '../../constants/factionMappings'
+import { getTotalGames } from '../../functions/rankings/simpleFunctions'
 import {
     getFactionFlagLocation,
     getFactionFlagLocationCoh3,
-} from '../../functions/getFactionFlagLocation'
-import getText from '../../functions/getText'
-import { getTotalGames } from '../../functions/simpleFunctions'
+} from '../../functions/utils/getFactionFlagLocation'
+import getText from '../../functions/utils/getText'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'

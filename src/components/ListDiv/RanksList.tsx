@@ -1,4 +1,4 @@
-import getText from '../../functions/getText'
+import getText from '../../functions/utils/getText'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { Rank as RankType } from '../../types'
 import Rank from '../Player/Rank'

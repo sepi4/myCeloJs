@@ -1,4 +1,4 @@
-import { getExtraInfo } from '../../functions/getExtraInfo'
+import { getExtraInfo } from '../../functions/api/getExtraInfo'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'

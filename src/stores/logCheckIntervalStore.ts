@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-import getLocalStorage from '../functions/getLocalStorage'
+import getLocalStorage from '../functions/settings/getLocalStorage'
 
 interface LogCheckIntervalStore {
     logCheckInterval: number

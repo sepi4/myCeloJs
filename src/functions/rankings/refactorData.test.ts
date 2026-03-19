@@ -1,4 +1,10 @@
-import { AvailableLeaderboard, LeaderboardStat, Member, PersonalStats, StatGroup } from '../types'
+import {
+    AvailableLeaderboard,
+    LeaderboardStat,
+    Member,
+    PersonalStats,
+    StatGroup,
+} from '../../types'
 import { refactorData } from './refactorData'
 
 // --- Helpers ---

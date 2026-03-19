@@ -1,4 +1,4 @@
-import text from '../translations/translation'
+import text from '../../translations/translation'
 
 type X = { language: string } | null
 

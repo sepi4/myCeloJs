@@ -1,8 +1,8 @@
 import stringWidth from 'string-width'
 
-import { commonName, commonNameCoh3 } from '../constants/factionMappings'
-import countriesJson from '../translations/countries.json'
-import { Player, RankingsJson } from '../types'
+import { commonName, commonNameCoh3 } from '../../constants/factionMappings'
+import countriesJson from '../../translations/countries.json'
+import { Player, RankingsJson } from '../../types'
 
 interface Countries {
     [key: string]: {

@@ -1,4 +1,4 @@
-import getText from '../../functions/getText'
+import getText from '../../functions/utils/getText'
 import { MatchHistoryReportResult, MatchObject, SettingsType } from '../../types'
 import styles from './ModalTableBody.module.css'
 

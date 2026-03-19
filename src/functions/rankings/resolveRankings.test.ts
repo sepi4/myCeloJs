@@ -5,10 +5,10 @@ import {
     PersonalStats,
     Player,
     StatGroup,
-} from '../types'
+} from '../../types'
+import _coh2Leaderboards from '../__fixtures__/coh2-get-available-leaderboards.json'
+import _coh3Leaderboards from '../__fixtures__/coh3-get-available-leaderboards.json'
 import { resolveRankings } from './resolveRankings'
-import _coh2Leaderboards from './unit-tests-data/coh2-get-available-leaderboards.json'
-import _coh3Leaderboards from './unit-tests-data/coh3-get-available-leaderboards.json'
 
 const coh2Leaderboards = _coh2Leaderboards as unknown as AvailableLeaderboard
 const coh3Leaderboards = _coh3Leaderboards as unknown as AvailableLeaderboard

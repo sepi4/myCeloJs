@@ -1,4 +1,4 @@
-import { Rank } from '../types'
+import { Rank } from '../../types'
 import { ranksArrFilter, ranksArrSort } from './ranksArrFuns'
 
 const makeRank = (overrides: Partial<Rank> = {}): Rank =>

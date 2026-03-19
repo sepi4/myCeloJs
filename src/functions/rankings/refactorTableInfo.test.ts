@@ -1,4 +1,4 @@
-import { Rank } from '../types'
+import { Rank } from '../../types'
 import { refactronTableInfo, refactronTableInfoCoh3 } from './refactorTableInfo'
 
 const makeRank = (name: string, wins = 5, losses = 3): Rank => ({

@@ -1,9 +1,9 @@
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { useRef, useState } from 'react'
 
-import { fetchCoh2ProfileId } from '../../functions/fetchCoh2ProfileId'
-import getText from '../../functions/getText'
-import writeSettings from '../../functions/writeSettings'
+import { fetchCoh2ProfileId } from '../../functions/api/fetchCoh2ProfileId'
+import writeSettings from '../../functions/settings/writeSettings'
+import getText from '../../functions/utils/getText'
 import useEsc from '../../hooks/useEsc'
 import useTimedBoolean from '../../hooks/useTimedBoolean'
 import { useSettingsStore } from '../../stores/settingsStore'

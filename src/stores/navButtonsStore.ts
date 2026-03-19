@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-import getLocalStorage from '../functions/getLocalStorage'
+import getLocalStorage from '../functions/settings/getLocalStorage'
 
 export interface NavButtons {
     all: boolean

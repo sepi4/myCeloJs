@@ -6,7 +6,7 @@ import {
     Player,
     Profile,
     RecentMatchHistory,
-} from '../types'
+} from '../../types'
 import { parseHistoryData } from './parseMatchHistory'
 
 // --- Helpers ---

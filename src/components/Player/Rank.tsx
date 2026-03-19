@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 
 import cross from '../../assets/img/cross.png'
 import star from '../../assets/img/star.png'
-import getTextFun from '../../functions/getText'
+import getTextFun from '../../functions/utils/getText'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { Rank as RankType } from '../../types'
 import Members from './Members'

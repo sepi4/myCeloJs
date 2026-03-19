@@ -1,4 +1,4 @@
-import { Rank } from '../types'
+import { Rank } from '../../types'
 
 type ModeObj = {
     [key: number]: Rank

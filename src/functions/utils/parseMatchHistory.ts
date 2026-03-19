@@ -6,7 +6,7 @@ import {
     NormalizedProfiles,
     Player,
     RecentMatchHistory,
-} from '../types'
+} from '../../types'
 
 type HistoryResult = [RecentMatchHistory, AvailableLeaderboard]
 

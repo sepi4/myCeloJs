@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 
 import { RELIC_SERVER_BASE_COH2 } from '../../constants/urls'
-import getText from '../../functions/getText'
-import { parseHistoryData } from '../../functions/parseMatchHistory'
+import getText from '../../functions/utils/getText'
+import { parseHistoryData } from '../../functions/utils/parseMatchHistory'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { MatchObject, NormalizedProfiles, Player } from '../../types'
 import GameHistoryDiv from './GameHistoryDiv'

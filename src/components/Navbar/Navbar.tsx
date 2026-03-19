@@ -1,7 +1,7 @@
 import { faCogs, faSearch, faUserAlt } from '@fortawesome/free-solid-svg-icons'
 
-import { getExtraInfo } from '../../functions/getExtraInfo'
-import getText from '../../functions/getText'
+import { getExtraInfo } from '../../functions/api/getExtraInfo'
+import getText from '../../functions/utils/getText'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { useSettingsStore } from '../../stores/settingsStore'

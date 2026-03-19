@@ -1,4 +1,4 @@
-import { ExtraInfo, Rank } from '../types'
+import { ExtraInfo, Rank } from '../../types'
 import getLastPlayedGame from './getLastPlayedGame'
 
 const makeRank = (lastmatchdate: number): Partial<Rank> => ({ lastmatchdate })

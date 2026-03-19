@@ -1,4 +1,4 @@
-import { AvailableLeaderboard, NormalizedExtraInfo, PersonalStats, StatGroup } from '../types'
+import { AvailableLeaderboard, NormalizedExtraInfo, PersonalStats, StatGroup } from '../../types'
 
 const STEAM_PREFIX = '/steam/'
 

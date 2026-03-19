@@ -1,4 +1,4 @@
-import { Rank } from '../types'
+import { Rank } from '../../types'
 import sorters from './sorters'
 
 export function ranksArrFilter(ranksArr: Rank[], tableView: boolean, showAll: boolean): Rank[] {

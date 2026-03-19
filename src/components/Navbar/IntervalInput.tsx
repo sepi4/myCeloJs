@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 
-import getText from '../../functions/getText'
+import getText from '../../functions/utils/getText'
 import { useLogCheckIntervalStore } from '../../stores/logCheckIntervalStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import styles from './IntervalInput.module.css'

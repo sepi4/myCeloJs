@@ -1,4 +1,4 @@
-import { ExtraInfo } from '../types'
+import { ExtraInfo } from '../../types'
 
 export default function getLastPlayedGame(playerData: ExtraInfo) {
     let last

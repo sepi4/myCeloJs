@@ -1,5 +1,5 @@
-import getText from '../../functions/getText'
-import { getDateTime, getTime } from '../../functions/time'
+import getText from '../../functions/utils/getText'
+import { getDateTime, getTime } from '../../functions/utils/time'
 import {
     MatchHistoryReportResult,
     MatchObject,

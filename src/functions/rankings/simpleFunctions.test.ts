@@ -1,4 +1,4 @@
-import { Player, Rank } from '../types'
+import { Player, Rank } from '../../types'
 import { formatToNums, getTotalGames, separateTeams } from './simpleFunctions'
 
 const makePlayer = (overrides: Partial<Player> = {}): Player => ({

@@ -1,6 +1,6 @@
-import { RELIC_SERVER_BASE_COH2, RELIC_SERVER_BASE_COH3 } from '../constants/urls'
-import { AvailableLeaderboard, NormalizedExtraInfo, PersonalStats } from '../types'
-import { refactorData } from './refactorData'
+import { RELIC_SERVER_BASE_COH2, RELIC_SERVER_BASE_COH3 } from '../../constants/urls'
+import { AvailableLeaderboard, NormalizedExtraInfo, PersonalStats } from '../../types'
+import { refactorData } from '../rankings/refactorData'
 
 export async function getExtraInfo(
     coh3: boolean,

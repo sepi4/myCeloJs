@@ -1,4 +1,7 @@
-import { refactronTableInfo, refactronTableInfoCoh3 } from '../../functions/refactorTableInfo'
+import {
+    refactronTableInfo,
+    refactronTableInfoCoh3,
+} from '../../functions/rankings/refactorTableInfo'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { FactionName, Rank } from '../../types'
 import styles from './TableDiv.module.css'

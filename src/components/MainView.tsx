@@ -1,6 +1,6 @@
 import { JSX } from 'react'
 
-import getText from '../functions/getText'
+import getText from '../functions/utils/getText'
 import { useNavButtonsStore } from '../stores/navButtonsStore'
 import { usePlayersStore } from '../stores/playersStore'
 import { useSettingsStore } from '../stores/settingsStore'

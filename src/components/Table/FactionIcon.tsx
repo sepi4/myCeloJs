@@ -1,7 +1,7 @@
 import {
     getFactionFlagLocation,
     getFactionFlagLocationCoh3,
-} from '../../functions/getFactionFlagLocation'
+} from '../../functions/utils/getFactionFlagLocation'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { FactionName } from '../../types'
 

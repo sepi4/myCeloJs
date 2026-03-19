@@ -1,7 +1,7 @@
 import { faAngleDoubleDown, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import getText from '../../functions/getText'
+import getText from '../../functions/utils/getText'
 import { useExtraInfoStore } from '../../stores/extraInfoStore'
 import { useOpenInfosStore } from '../../stores/openInfosStore'
 import { useSettingsStore } from '../../stores/settingsStore'

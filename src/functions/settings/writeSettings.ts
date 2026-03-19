@@ -1,5 +1,5 @@
-import { useSettingsStore } from '../stores/settingsStore'
-import { SettingsType } from '../types'
+import { useSettingsStore } from '../../stores/settingsStore'
+import { SettingsType } from '../../types'
 
 const settingsDir = window.electronAPI.settingsDir
 

@@ -8,7 +8,7 @@ import {
     renderRankingsBody,
     renderRankingsPage,
     renderRankingsTxtBody,
-} from '../functions/renderRankingsHtml'
+} from '../functions/rankings/renderRankingsHtml'
 import { RankingsJson } from '../types'
 
 const isDev = !!process.env['ELECTRON_RENDERER_URL']

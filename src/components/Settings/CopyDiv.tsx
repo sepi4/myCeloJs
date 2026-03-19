@@ -1,4 +1,4 @@
-import getText from '../../functions/getText'
+import getText from '../../functions/utils/getText'
 import useTimedBoolean from '../../hooks/useTimedBoolean'
 import { useSettingsStore } from '../../stores/settingsStore'
 import Notification from '../Notification'
