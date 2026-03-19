@@ -4,57 +4,22 @@ import http from 'http'
 import net from 'net'
 import path from 'path'
 
+import { renderRankingsBody, renderRankingsPage } from '../functions/renderRankingsHtml'
+import { RankingsJson } from '../types'
+
 const isDev = !!process.env['ELECTRON_RENDERER_URL']
 
-/**
- * Writable directory for OBS overlay files (rankings.html, rankings.json, port.js, etc.).
- *
- * - **Dev**: uses `<project>/localhostFiles/` which is directly writable.
- * - **Production** (AppImage/deb/exe): `extraResources` are read-only, so we use
- *   `app.getPath('userData')` (~/.config/myCelo on Linux) as a writable location.
- */
+/** Writable directory for rankings.txt (text overlay for OBS text source). */
 const localhostDir = isDev
     ? path.join(process.cwd(), 'localhostFiles')
     : path.join(app.getPath('userData'), 'localhostFiles')
 
-/**
- * Copies static OBS overlay files (html, css, js) from the read-only extraResources
- * into the writable {@link localhostDir}, so that dynamic files (rankings.json, port.js)
- * can be written alongside them.
- */
-function copyDirSync(src: string, dest: string) {
-    fs.mkdirSync(dest, { recursive: true })
-    for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
-        const srcPath = path.join(src, entry.name)
-        const destPath = path.join(dest, entry.name)
-        if (entry.isDirectory()) {
-            copyDirSync(srcPath, destPath)
-        } else {
-            fs.copyFileSync(srcPath, destPath)
-        }
-    }
-}
+/** Directory containing faction icons and country flag images. */
+const imgDir = isDev
+    ? path.join(process.cwd(), 'src/assets/img')
+    : path.join(process.resourcesPath, 'img')
 
-function initLocalhostDir() {
-    if (isDev) {
-        return
-    }
-    fs.mkdirSync(localhostDir, { recursive: true })
-    const sourceDir = path.join(process.resourcesPath, 'localhostFiles')
-    for (const file of ['rankings.html', 'rankings.css', 'rankings.js']) {
-        const src = path.join(sourceDir, file)
-        const dest = path.join(localhostDir, file)
-        if (fs.existsSync(src)) {
-            fs.copyFileSync(src, dest)
-        }
-    }
-    // Copy image assets for the OBS overlay
-    const imgSrc = path.join(process.resourcesPath, 'img')
-    if (fs.existsSync(imgSrc)) {
-        copyDirSync(imgSrc, path.join(localhostDir, 'img'))
-    }
-}
-initLocalhostDir()
+fs.mkdirSync(localhostDir, { recursive: true })
 
 let mainWindow: BrowserWindow | null = null
 
@@ -149,36 +114,90 @@ ipcMain.handle('log:read', async (_event, filePath: string) => {
     }
 })
 
+// ── Rankings state & SSE ─────────────────────────────────────────────────────
+
+let currentRankingsHtml = ''
+const sseClients = new Set<http.ServerResponse>()
+
+function pushToClients(html: string) {
+    const data = `data: ${html.replace(/\n/g, '')}\n\n`
+    for (const client of sseClients) {
+        client.write(data)
+    }
+}
+
 ipcMain.handle('rankings:write', async (_event, jsonContent: string, txtContent: string) => {
-    const dir = localhostDir
+    const json: RankingsJson = JSON.parse(jsonContent)
+    currentRankingsHtml = renderRankingsBody(json)
+    pushToClients(currentRankingsHtml)
+
+    // Still write text file for OBS text-source users + JSON for e2e tests
     await Promise.all([
         fs.promises
-            .writeFile(path.join(dir, 'rankings.json'), jsonContent, 'utf-8')
+            .writeFile(path.join(localhostDir, 'rankings.json'), jsonContent, 'utf-8')
             .catch((err) => console.log('Error writing rankings.json:', err)),
         fs.promises
-            .writeFile(path.join(dir, 'rankings.txt'), txtContent, 'utf-8')
+            .writeFile(path.join(localhostDir, 'rankings.txt'), txtContent, 'utf-8')
             .catch((err) => console.log('Error writing rankings.txt:', err)),
     ])
 })
 
-// ── Local HTTP server for streaming overlays ──────────────────────────────────
+// ── Local HTTP server for OBS overlay ────────────────────────────────────────
 
-function serveJson(port: string) {
-    http.createServer(function (_request, response) {
-        response.writeHead(200, {
-            'Content-Type': 'text/json',
-            'Access-Control-Allow-Origin': '*',
-            'X-Powered-By': 'nodejs',
-        })
-        fs.readFile(path.join(localhostDir, 'rankings.json'), function (err, content) {
-            if (err || !content) {
-                response.write('{}')
-            } else {
-                response.write(content)
+const MIME_TYPES: Record<string, string> = {
+    '.png': 'image/png',
+    '.jpg': 'image/jpeg',
+    '.svg': 'image/svg+xml',
+}
+
+function serveOverlay(port: number) {
+    http.createServer((request, response) => {
+        const url = request.url || '/'
+
+        if (url === '/') {
+            response.writeHead(200, { 'Content-Type': 'text/html' })
+            response.end(renderRankingsPage())
+            return
+        }
+
+        if (url === '/events') {
+            response.writeHead(200, {
+                'Content-Type': 'text/event-stream',
+                'Cache-Control': 'no-cache',
+                Connection: 'keep-alive',
+                'Access-Control-Allow-Origin': '*',
+            })
+            // Send current state immediately so the overlay doesn't start blank
+            if (currentRankingsHtml) {
+                response.write(`data: ${currentRankingsHtml.replace(/\n/g, '')}\n\n`)
             }
-            response.end()
-        })
-    }).listen(port, undefined, () => {})
+            sseClients.add(response)
+            request.on('close', () => sseClients.delete(response))
+            return
+        }
+
+        // Serve images from /img/*
+        if (url.startsWith('/img/')) {
+            const relativePath = url.slice('/img/'.length)
+            const filePath = path.join(imgDir, relativePath)
+            const ext = path.extname(filePath)
+            const mime = MIME_TYPES[ext] || 'application/octet-stream'
+
+            fs.readFile(filePath, (err, data) => {
+                if (err) {
+                    response.writeHead(404)
+                    response.end()
+                } else {
+                    response.writeHead(200, { 'Content-Type': mime })
+                    response.end(data)
+                }
+            })
+            return
+        }
+
+        response.writeHead(404)
+        response.end()
+    }).listen(port)
 }
 
 function findFreePort(start: number, stop: number): Promise<number> {
@@ -198,19 +217,19 @@ function findFreePort(start: number, stop: number): Promise<number> {
     })
 }
 
-async function startPortServer() {
+async function startOverlayServer() {
     try {
         const port = await findFreePort(2222, 3333)
         console.log('free port:', port)
-        serveJson(port.toString())
-        const imgBase = isDev ? '../src/assets/img' : './img'
+        serveOverlay(port)
+        // Write port file so e2e tests and users can discover the port
         await fs.promises.writeFile(
             path.join(localhostDir, 'port.js'),
-            `let port = ${port}\nlet imgBase = '${imgBase}'`,
+            `let port = ${port}`,
             'utf-8'
         )
     } catch (err) {
-        console.log('port server err:', err)
+        console.log('overlay server err:', err)
     }
 }
-startPortServer()
+startOverlayServer()

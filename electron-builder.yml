@@ -13,12 +13,6 @@ files:
     - assets/**
 
 extraResources:
-    - from: localhostFiles/
-      to: localhostFiles/
-      filter:
-          - rankings.css
-          - rankings.html
-          - rankings.js
     - from: src/assets/img/
       to: img/
 

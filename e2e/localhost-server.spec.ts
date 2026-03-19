@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test'
 import type { ElectronApplication, Page } from '@playwright/test'
 import fs from 'fs'
+import http from 'http'
 import path from 'path'
 import { App, COH2_LOG_PATH } from './pom/App.pom'
 import { launchApp, closeApp } from './setup'
@@ -31,35 +32,50 @@ test.afterAll(async () => {
     await closeApp(electronApp, tempUserDataDir)
 })
 
-test('localhost server serves rankings JSON matching the written file', async () => {
-    // Read the port from the generated port.js file (contains "let port = NNNN")
+test('localhost server serves HTML overlay page', async () => {
     const portFile = path.join(tempUserDataDir, 'localhostFiles', 'port.js')
     const portContent = fs.readFileSync(portFile, 'utf-8')
     const port = portContent.match(/\d+/)![0]
 
-    // Fetch rankings from the localhost server
+    // The root serves an HTML page with SSE script
     const response = await fetch(`http://localhost:${port}`)
     expect(response.ok).toBe(true)
+    const html = await response.text()
+    expect(html).toContain('EventSource')
+    expect(html).toContain('/events')
+})
 
-    const json = await response.json()
+test('SSE endpoint pushes rankings matching the written JSON file', async () => {
+    const portFile = path.join(tempUserDataDir, 'localhostFiles', 'port.js')
+    const portContent = fs.readFileSync(portFile, 'utf-8')
+    const port = portContent.match(/\d+/)![0]
 
-    // Verify the JSON has the expected structure
-    expect(json).toHaveProperty('teams')
-    expect(json).toHaveProperty('teams.team1')
-    expect(json).toHaveProperty('teams.team2')
-    expect(json.teams.team1.length).toBeGreaterThan(0)
-    expect(json.teams.team2.length).toBeGreaterThan(0)
+    // Connect to SSE via raw HTTP and read the first data line
+    const sseData = await new Promise<string>((resolve, reject) => {
+        const timeout = setTimeout(() => reject(new Error('SSE timeout')), 5000)
+        http.get(`http://localhost:${port}/events`, (res) => {
+            let buffer = ''
+            res.on('data', (chunk: Buffer) => {
+                buffer += chunk.toString()
+                // SSE format: "data: ...\n\n"
+                const match = buffer.match(/^data: (.+)\n\n/m)
+                if (match) {
+                    clearTimeout(timeout)
+                    res.destroy()
+                    resolve(match[1])
+                }
+            })
+            res.on('error', () => {
+                clearTimeout(timeout)
+                reject(new Error('SSE connection error'))
+            })
+        })
+    })
 
-    // Verify each player has the required fields
-    for (const player of [...json.teams.team1, ...json.teams.team2]) {
-        expect(player).toHaveProperty('name')
-        expect(player).toHaveProperty('ranking')
-        expect(player).toHaveProperty('country')
-        expect(player).toHaveProperty('faction')
-    }
-
-    // Verify the JSON matches what was written to disk
+    // The SSE data should contain player names from the rankings JSON file
     const jsonFile = path.join(tempUserDataDir, 'localhostFiles', 'rankings.json')
     const fileContent = JSON.parse(fs.readFileSync(jsonFile, 'utf-8'))
-    expect(json).toEqual(fileContent)
+    for (const player of [...fileContent.teams.team1, ...fileContent.teams.team2]) {
+        expect(sseData).toContain(player.name)
+    }
 })
