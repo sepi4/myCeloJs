@@ -173,88 +173,94 @@ const MIME_TYPES: Record<string, string> = {
     '.svg': 'image/svg+xml',
 }
 
-function serveOverlay(port: number) {
-    http.createServer((request, response) => {
-        const url = request.url || '/'
-
-        if (url === '/') {
-            response.writeHead(200, { 'Content-Type': 'text/html' })
-            response.end(renderRankingsPage())
-            return
-        }
-
-        if (url === '/events') {
-            response.writeHead(200, {
-                'Content-Type': 'text/event-stream',
-                'Cache-Control': 'no-cache',
-                Connection: 'keep-alive',
-                'Access-Control-Allow-Origin': '*',
-            })
-            // Send current state immediately so the overlay doesn't start blank
-            const body = currentOverlayBody()
-            if (body) {
-                response.write(`data: ${body.replace(/\n/g, '')}\n\n`)
-            }
-            sseClients.add(response)
-            request.on('close', () => sseClients.delete(response))
-            return
-        }
-
-        // Serve images from /img/*
-        if (url.startsWith('/img/')) {
-            const relativePath = url.slice('/img/'.length)
-            const filePath = path.join(imgDir, relativePath)
-            const ext = path.extname(filePath)
-            const mime = MIME_TYPES[ext] || 'application/octet-stream'
-
-            fs.readFile(filePath, (err, data) => {
-                if (err) {
-                    response.writeHead(404)
-                    response.end()
-                } else {
-                    response.writeHead(200, { 'Content-Type': mime })
-                    response.end(data)
-                }
-            })
-            return
-        }
-
-        response.writeHead(404)
-        response.end()
-    }).listen(port)
-}
-
-function findFreePort(start: number, stop: number): Promise<number> {
+function startOverlayServer(): Promise<void> {
     return new Promise((resolve, reject) => {
-        const server = net.createServer()
-        server.listen(start, () => {
-            const port = (server.address() as net.AddressInfo).port
-            server.close(() => resolve(port))
-        })
-        server.on('error', () => {
-            if (start >= stop) {
-                reject(new Error('No free port found'))
-            } else {
-                findFreePort(start + 1, stop).then(resolve, reject)
-            }
-        })
-    })
-}
+        const server = http.createServer((request, response) => {
+            const url = request.url || '/'
 
-async function startOverlayServer() {
-    try {
-        const foundPort = await findFreePort(2222, 3333)
-        console.log('free port:', foundPort)
-        overlayPort = foundPort
-        serveOverlay(foundPort)
-        // Write port file so e2e tests can discover the port
-        await fs.promises.writeFile(
-            path.join(localhostDir, 'port.js'),
-            `let port = ${foundPort}`,
-            'utf-8'
-        )
-    } catch (err) {
-        console.log('overlay server err:', err)
-    }
+            if (url === '/') {
+                response.writeHead(200, { 'Content-Type': 'text/html' })
+                response.end(renderRankingsPage())
+                return
+            }
+
+            if (url === '/events') {
+                response.writeHead(200, {
+                    'Content-Type': 'text/event-stream',
+                    'Cache-Control': 'no-cache',
+                    Connection: 'keep-alive',
+                    'Access-Control-Allow-Origin': '*',
+                })
+                // Send current state immediately so the overlay doesn't start blank
+                const body = currentOverlayBody()
+                if (body) {
+                    response.write(`data: ${body.replace(/\n/g, '')}\n\n`)
+                }
+                sseClients.add(response)
+                request.on('close', () => sseClients.delete(response))
+                return
+            }
+
+            // Serve images from /img/*
+            if (url.startsWith('/img/')) {
+                const relativePath = url.slice('/img/'.length)
+                const filePath = path.join(imgDir, relativePath)
+                const ext = path.extname(filePath)
+                const mime = MIME_TYPES[ext] || 'application/octet-stream'
+
+                fs.readFile(filePath, (err, data) => {
+                    if (err) {
+                        response.writeHead(404)
+                        response.end()
+                    } else {
+                        response.writeHead(200, { 'Content-Type': mime })
+                        response.end(data)
+                    }
+                })
+                return
+            }
+
+            response.writeHead(404)
+            response.end()
+        })
+
+        // In e2e tests (--user-data-dir flag), use port 0 so the OS assigns
+        // a free port atomically — avoids race conditions when multiple
+        // instances launch in parallel. For normal use, start at 2222 so the
+        // user gets a predictable port for OBS Studio.
+        const isTest = process.argv.some((arg) => arg.startsWith('--user-data-dir='))
+        const preferredPort = isTest ? 0 : 2222
+
+        function tryListen(port: number) {
+            const onListening = () => {
+                server.removeListener('error', onError)
+                overlayPort = (server.address() as net.AddressInfo).port
+                console.log('overlay server port:', overlayPort)
+                fs.promises
+                    .writeFile(
+                        path.join(localhostDir, 'port.js'),
+                        `let port = ${overlayPort}`,
+                        'utf-8'
+                    )
+                    .then(resolve, reject)
+            }
+
+            const onError = (err: NodeJS.ErrnoException) => {
+                server.removeListener('listening', onListening)
+                if (err.code === 'EADDRINUSE' && port > 0 && port < 3333) {
+                    tryListen(port + 1)
+                } else {
+                    console.log('overlay server err:', err)
+                    reject(err)
+                }
+            }
+
+            server.once('listening', onListening)
+            server.once('error', onError)
+            server.listen(port)
+        }
+
+        tryListen(preferredPort)
+    })
 }
 startOverlayServer()
