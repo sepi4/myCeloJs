@@ -19,9 +19,10 @@ const localhostDir = isDev
     : path.join(app.getPath('userData'), 'localhostFiles')
 
 /** Directory containing faction icons and country flag images. */
-const imgDir = isDev
-    ? path.join(process.cwd(), 'src/assets/img')
-    : path.join(process.resourcesPath, 'img')
+const packagedImgDir = path.join(process.resourcesPath, 'img')
+const imgDir = fs.existsSync(packagedImgDir)
+    ? packagedImgDir
+    : path.join(process.cwd(), 'src/assets/img')
 
 fs.mkdirSync(localhostDir, { recursive: true })
 
