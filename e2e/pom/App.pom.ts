@@ -155,6 +155,10 @@ export class App {
         this.rankRows = page.getByTestId('rank-row')
     }
 
+    /**
+     * Stubs Electron's native file-open dialog so it resolves immediately
+     * with the given {@link filePath} instead of showing a real OS dialog.
+     */
     async mockFileDialog(electronApp: ElectronApplication, filePath: string) {
         await electronApp.evaluate(async ({ dialog }, fp) => {
             dialog.showOpenDialog = () => Promise.resolve({ canceled: false, filePaths: [fp] })

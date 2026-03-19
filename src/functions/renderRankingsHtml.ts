@@ -24,17 +24,17 @@ function renderPlayer(
     const factionMargin = reversed ? 'marginRight3' : 'marginLeft3'
     const nameMargin = reversed ? 'textRight marginRight1' : 'marginLeft1'
 
-    const factionDiv = `<div class="factionStyle ${factionMargin}">${img(`/img/${faction}.png`)}</div>`
-    const rankSpan = `<span class="rankingStyle">${ranking}</span>`
-    const countryDiv = `<div class="countryStyle">${country ? img(`/img/countryFlags/${country}.png`) : ''}</div>`
-    const nameSpan = `<span class="nameStyle ${nameMargin}">${name}</span>`
+    const factionDiv = `<div class="factionStyle ${factionMargin}" data-testid="faction">${img(`/img/${faction}.png`)}</div>`
+    const rankSpan = `<span class="rankingStyle" data-testid="ranking">${ranking}</span>`
+    const countryDiv = `<div class="countryStyle" data-testid="country">${country ? img(`/img/countryFlags/${country}.png`) : ''}</div>`
+    const nameSpan = `<span class="nameStyle ${nameMargin}" data-testid="name">${name}</span>`
 
     const parts = reversed
         ? [nameSpan, countryDiv, rankSpan, factionDiv]
         : [factionDiv, rankSpan, countryDiv, nameSpan]
 
     const cls = reversed ? 'playerStyle reversed' : 'playerStyle'
-    return `<div class="${cls}">${parts.join('')}</div>`
+    return `<div class="${cls}" data-testid="player">${parts.join('')}</div>`
 }
 
 export function renderRankingsBody(data: RankingsJson): string {
@@ -46,8 +46,8 @@ export function renderRankingsBody(data: RankingsJson): string {
 
     return [
         `<div class="bodyStyle${suffix}">`,
-        `<div class="teamStyle${suffix}">${team1}</div>`,
-        `<div class="teamStyle${suffix}">${team2}</div>`,
+        `<div class="teamStyle${suffix}" data-testid="team">${team1}</div>`,
+        `<div class="teamStyle${suffix}" data-testid="team">${team2}</div>`,
         `</div>`,
     ].join('')
 }
