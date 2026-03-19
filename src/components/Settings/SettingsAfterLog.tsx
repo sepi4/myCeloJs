@@ -59,6 +59,7 @@ export default function SettingsAfterLog() {
                             handler={handleType}
                             value={'txt'}
                             labelText={'txt'}
+                            testId="radio-txt"
                         />
                     </RadioButtonsDiv>
 

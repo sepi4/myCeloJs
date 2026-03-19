@@ -89,3 +89,18 @@ test('all images loaded successfully', async () => {
         expect(naturalWidth, `image failed to load: ${src}`).toBeGreaterThan(0)
     }
 })
+
+test('txt format renders a line per player', async () => {
+    // Switch to txt format via the Electron app settings
+    await app.settingsIcon.click()
+    await app.radioTxt.click()
+    await app.closeButton.click()
+
+    // Wait for SSE to push the txt content
+    await overlayPage.locator('pre').waitFor({ timeout: 10000 })
+
+    const html = await overlayPage.locator('pre').innerHTML()
+    const lines = html.split('<br>').filter((line) => line.trim() !== '')
+    const playersPerTeam = expectedPlayers().length / 2
+    expect(lines).toHaveLength(playersPerTeam)
+})

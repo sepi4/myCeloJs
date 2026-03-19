@@ -60,6 +60,7 @@ export class App {
 
     // OBS / rankings settings
     readonly radioHtml: Locator
+    readonly radioTxt: Locator
     readonly radioHorizontal: Locator
     readonly copyRankings: Locator
     readonly copyRankingsButton: Locator
@@ -127,6 +128,7 @@ export class App {
         this.resetConfirmCancel = page.getByTestId('reset-confirm-cancel')
 
         this.radioHtml = page.getByTestId('radio-html')
+        this.radioTxt = page.getByTestId('radio-txt')
         this.radioHorizontal = page.getByTestId('radio-horizontal')
         this.copyRankings = page.getByTestId('copy-rankings')
         this.copyRankingsButton = page.getByTestId('copy-rankings-button')
