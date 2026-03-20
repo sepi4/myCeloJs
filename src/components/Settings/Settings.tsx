@@ -26,7 +26,7 @@ function Settings(props: Props) {
     const { closeSettingsView } = useSettingsViewStore()
 
     const lg = settings && settings.language ? settings.language : 'en'
-    const navbarPosition = settings?.navbarPosition ?? 'left'
+    const navbarPosition = settings?.navbarPosition ?? 'top'
 
     const handleNavbarPosition = (pos: 'left' | 'right' | 'top') => {
         writeSettings({ ...settings!, navbarPosition: pos })

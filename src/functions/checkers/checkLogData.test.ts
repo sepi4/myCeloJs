@@ -45,6 +45,7 @@ const settings = {
     steamId: '123',
     profileIdCoh2: 456,
     profileIdCoh3: 789,
+    navbarPosition: 'top' as const,
 }
 
 function resetAllStores() {

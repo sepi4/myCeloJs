@@ -50,13 +50,13 @@ test('team toggle expands and collapses all players in a team', async () => {
 test('navbar position changes navbar layout', async () => {
     // Open settings
     await app.settingsIcon.click()
-    await expect(app.navbarPositionLeft).toBeChecked()
+    await expect(app.navbarPositionTop).toBeChecked()
     await app.closeButton.click()
 
-    // Default 'left' — navbar should be to the left of the main content
-    const navLeft = await app.navbar.boundingBox()
-    const mainLeft = await app.playersContainer.boundingBox()
-    expect(navLeft!.x).toBeLessThan(mainLeft!.x)
+    // Default 'top' — navbar should be above the main content
+    const navTop = await app.navbar.boundingBox()
+    const mainTop = await app.playersContainer.boundingBox()
+    expect(navTop!.y).toBeLessThan(mainTop!.y)
 
     // Switch to right — navbar should be to the right of the main content
     await app.settingsIcon.click()
@@ -66,11 +66,11 @@ test('navbar position changes navbar layout', async () => {
     const mainRight = await app.playersContainer.boundingBox()
     expect(navRight!.x).toBeGreaterThan(mainRight!.x)
 
-    // Switch to top — navbar should be above the main content
+    // Switch to left — navbar should be to the left of the main content
     await app.settingsIcon.click()
-    await app.navbarPositionTop.click()
+    await app.navbarPositionLeft.click()
     await app.closeButton.click()
-    const navTop = await app.navbar.boundingBox()
-    const mainTop = await app.playersContainer.boundingBox()
-    expect(navTop!.y).toBeLessThan(mainTop!.y)
+    const navLeft = await app.navbar.boundingBox()
+    const mainLeft = await app.playersContainer.boundingBox()
+    expect(navLeft!.x).toBeLessThan(mainLeft!.x)
 })

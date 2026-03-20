@@ -73,6 +73,7 @@ function App() {
                 }
 
                 const newSettings = JSON.parse(data)
+                newSettings.navbarPosition ??= 'top'
                 newSettings.appLocation = appLocation
 
                 // update overlay port for current session
@@ -232,9 +233,9 @@ function App() {
             className={
                 settings?.navbarPosition === 'right'
                     ? styles.navbarRight
-                    : settings?.navbarPosition === 'top'
-                      ? styles.navbarTop
-                      : styles.navbarLeft
+                    : settings?.navbarPosition === 'left'
+                      ? styles.navbarLeft
+                      : styles.navbarTop
             }
         >
             <Navbar {...{ handleSetSettingsView }} />
