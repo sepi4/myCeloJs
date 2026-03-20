@@ -8,7 +8,7 @@ import useEsc from '../../hooks/useEsc'
 import useTimedBoolean from '../../hooks/useTimedBoolean'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { useSettingsViewStore } from '../../stores/settingsViewStore'
-import { Language, SettingsType } from '../../types'
+import { FontSize, Language, NavbarPosition, SettingsType } from '../../types'
 import Icon from '../Icon'
 import Modal from '../Modal/Modal'
 import Notification from '../Notification'
@@ -29,11 +29,11 @@ function Settings(props: Props) {
     const navbarPosition = settings?.navbarPosition ?? 'top'
     const fontSize = settings?.fontSize ?? 'small'
 
-    const handleNavbarPosition = (pos: 'left' | 'right' | 'top') => {
+    const handleNavbarPosition = (pos: NavbarPosition) => {
         writeSettings({ ...settings!, navbarPosition: pos })
     }
 
-    const handleFontSize = (size: 'small' | 'medium' | 'large') => {
+    const handleFontSize = (size: FontSize) => {
         writeSettings({ ...settings!, fontSize: size })
     }
 

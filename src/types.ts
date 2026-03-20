@@ -60,9 +60,12 @@ export type SettingsType = {
     profileIdCoh2: number
     profileIdCoh3: number
     ignoreUntil?: string
-    navbarPosition: 'left' | 'right' | 'top'
-    fontSize: 'small' | 'medium' | 'large'
+    navbarPosition: NavbarPosition
+    fontSize: FontSize
 }
+
+export type NavbarPosition = 'left' | 'right' | 'top'
+export type FontSize = 'small' | 'medium' | 'large'
 
 export type StatGroup = {
     id: number
