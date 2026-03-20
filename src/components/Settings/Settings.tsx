@@ -26,10 +26,10 @@ function Settings(props: Props) {
     const { closeSettingsView } = useSettingsViewStore()
 
     const lg = settings && settings.language ? settings.language : 'en'
-    const sidebarPosition = settings?.sidebarPosition ?? 'left'
+    const navbarPosition = settings?.navbarPosition ?? 'left'
 
-    const handleSidebarPosition = (pos: 'left' | 'right' | 'top') => {
-        writeSettings({ ...settings!, sidebarPosition: pos })
+    const handleNavbarPosition = (pos: 'left' | 'right' | 'top') => {
+        writeSettings({ ...settings!, navbarPosition: pos })
     }
 
     const [resetConfirmOpen, setResetConfirmOpen] = useState(false)
@@ -195,7 +195,7 @@ function Settings(props: Props) {
                     </div>
                     <div>
                         <div style={{ fontWeight: 'bold' }}>
-                            {getText('sidebar_position', settings)}
+                            {getText('navbar_position', settings)}
                         </div>
                         <div
                             style={{
@@ -218,15 +218,15 @@ function Settings(props: Props) {
                                     }}
                                 >
                                     <input
-                                        data-testid={`sidebar-position-${pos}`}
+                                        data-testid={`navbar-position-${pos}`}
                                         type="radio"
-                                        name="sidebarPosition"
+                                        name="navbarPosition"
                                         value={pos}
-                                        checked={sidebarPosition === pos}
-                                        onChange={() => handleSidebarPosition(pos)}
+                                        checked={navbarPosition === pos}
+                                        onChange={() => handleNavbarPosition(pos)}
                                         style={{ marginRight: '0.4em', accentColor: '#111' }}
                                     />
-                                    {getText(`sidebar_${pos}`, settings)}
+                                    {getText(`navbar_${pos}`, settings)}
                                 </label>
                             ))}
                         </div>

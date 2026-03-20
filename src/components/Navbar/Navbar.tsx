@@ -114,9 +114,9 @@ export default function Navbar(props: Props) {
         />
     )
 
-    const isTop = settings?.sidebarPosition === 'top'
+    const isTop = settings?.navbarPosition === 'top'
     const navbarVariant =
-        settings?.sidebarPosition === 'right'
+        settings?.navbarPosition === 'right'
             ? styles.navbarRight
             : isTop
               ? styles.navbarTop

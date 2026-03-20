@@ -47,10 +47,10 @@ test('team toggle expands and collapses all players in a team', async () => {
     await expect(app.playerExtraInfos).toHaveCount(0)
 })
 
-test('sidebar position changes navbar layout', async () => {
+test('navbar position changes navbar layout', async () => {
     // Open settings
     await app.settingsIcon.click()
-    await expect(app.sidebarPositionLeft).toBeChecked()
+    await expect(app.navbarPositionLeft).toBeChecked()
     await app.closeButton.click()
 
     // Default 'left' — navbar should be to the left of the main content
@@ -60,7 +60,7 @@ test('sidebar position changes navbar layout', async () => {
 
     // Switch to right — navbar should be to the right of the main content
     await app.settingsIcon.click()
-    await app.sidebarPositionRight.click()
+    await app.navbarPositionRight.click()
     await app.closeButton.click()
     const navRight = await app.navbar.boundingBox()
     const mainRight = await app.playersContainer.boundingBox()
@@ -68,7 +68,7 @@ test('sidebar position changes navbar layout', async () => {
 
     // Switch to top — navbar should be above the main content
     await app.settingsIcon.click()
-    await app.sidebarPositionTop.click()
+    await app.navbarPositionTop.click()
     await app.closeButton.click()
     const navTop = await app.navbar.boundingBox()
     const mainTop = await app.playersContainer.boundingBox()

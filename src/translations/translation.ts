@@ -54,19 +54,19 @@ const text: Translations = {
         en: 'Language',
         ru: 'Язык',
     },
-    sidebar_position: {
+    navbar_position: {
         en: 'Navbar position',
         ru: 'Позиция панели',
     },
-    sidebar_left: {
+    navbar_left: {
         en: 'Left',
         ru: 'Слева',
     },
-    sidebar_right: {
+    navbar_right: {
         en: 'Right',
         ru: 'Справа',
     },
-    sidebar_top: {
+    navbar_top: {
         en: 'Top',
         ru: 'Сверху',
     },

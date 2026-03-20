@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 
+import styles from './App.module.css'
 import audioLocation from './assets/audio/bell.mp3'
 import MainView from './components/MainView'
 // components
@@ -228,12 +229,12 @@ function App() {
 
     return (
         <main
-            style={
-                settings?.sidebarPosition === 'right'
-                    ? { marginRight: '8em', marginLeft: '1em' }
-                    : settings?.sidebarPosition === 'top'
-                      ? { marginTop: '4em', marginLeft: '1em', marginRight: '1em' }
-                      : { marginLeft: '8em', marginRight: '1em' }
+            className={
+                settings?.navbarPosition === 'right'
+                    ? styles.navbarRight
+                    : settings?.navbarPosition === 'top'
+                      ? styles.navbarTop
+                      : styles.navbarLeft
             }
         >
             <Navbar {...{ handleSetSettingsView }} />

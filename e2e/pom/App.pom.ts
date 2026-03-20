@@ -37,9 +37,9 @@ export class App {
     readonly foundPlayers: Locator
 
     // Settings
-    readonly sidebarPositionLeft: Locator
-    readonly sidebarPositionRight: Locator
-    readonly sidebarPositionTop: Locator
+    readonly navbarPositionLeft: Locator
+    readonly navbarPositionRight: Locator
+    readonly navbarPositionTop: Locator
     readonly languageTitle: Locator
     readonly languageSelectEn: Locator
     readonly languageSelectRu: Locator
@@ -111,9 +111,9 @@ export class App {
         this.searchResults = page.getByTestId('search-results')
         this.foundPlayers = page.getByTestId('found-player')
 
-        this.sidebarPositionLeft = page.getByTestId('sidebar-position-left')
-        this.sidebarPositionRight = page.getByTestId('sidebar-position-right')
-        this.sidebarPositionTop = page.getByTestId('sidebar-position-top')
+        this.navbarPositionLeft = page.getByTestId('navbar-position-left')
+        this.navbarPositionRight = page.getByTestId('navbar-position-right')
+        this.navbarPositionTop = page.getByTestId('navbar-position-top')
         this.languageTitle = page.getByTestId('language-title')
         this.languageSelectEn = page.getByTestId('language-select-en')
         this.languageSelectRu = page.getByTestId('language-select-ru')
