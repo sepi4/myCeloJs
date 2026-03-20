@@ -76,6 +76,32 @@ test('OBS studio settings - format, orientation and copy buttons', async () => {
     await app.closeButton.click()
 })
 
+test('font size changes update the root font size', async () => {
+    await app.settingsIcon.click()
+
+    // Default is small (100%)
+    await expect(app.fontSizeSmall).toBeChecked()
+    let rootFontSize = await page.evaluate(() => document.documentElement.style.fontSize)
+    expect(rootFontSize).toBe('100%')
+
+    // Switch to medium (125%)
+    await app.fontSizeMedium.click()
+    rootFontSize = await page.evaluate(() => document.documentElement.style.fontSize)
+    expect(rootFontSize).toBe('125%')
+
+    // Switch to large (150%)
+    await app.fontSizeLarge.click()
+    rootFontSize = await page.evaluate(() => document.documentElement.style.fontSize)
+    expect(rootFontSize).toBe('150%')
+
+    // Reset back to small
+    await app.fontSizeSmall.click()
+    rootFontSize = await page.evaluate(() => document.documentElement.style.fontSize)
+    expect(rootFontSize).toBe('100%')
+
+    await app.closeButton.click()
+})
+
 test('reset all settings - cancel keeps settings, ok clears and reloads', async () => {
     // Open settings — log location is set so the reset button should be enabled
     await app.settingsIcon.click()

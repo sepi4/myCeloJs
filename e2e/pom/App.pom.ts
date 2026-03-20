@@ -58,6 +58,11 @@ export class App {
     readonly checkboxTotal: Locator
     readonly checkboxTable: Locator
 
+    // Font size
+    readonly fontSizeSmall: Locator
+    readonly fontSizeMedium: Locator
+    readonly fontSizeLarge: Locator
+
     // OBS / rankings settings
     readonly radioHtml: Locator
     readonly radioTxt: Locator
@@ -126,6 +131,10 @@ export class App {
         this.resetSettingsButton = page.getByTestId('reset-settings-button')
         this.resetConfirmOk = page.getByTestId('reset-confirm-ok')
         this.resetConfirmCancel = page.getByTestId('reset-confirm-cancel')
+
+        this.fontSizeSmall = page.getByTestId('font-size-small')
+        this.fontSizeMedium = page.getByTestId('font-size-medium')
+        this.fontSizeLarge = page.getByTestId('font-size-large')
 
         this.radioHtml = page.getByTestId('radio-html')
         this.radioTxt = page.getByTestId('radio-txt')
