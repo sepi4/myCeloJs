@@ -114,13 +114,13 @@ export default function Navbar(props: Props) {
         />
     )
 
-    const isTop = settings?.navbarPosition === 'top'
+    const isTop = settings?.navbarPosition !== 'left' && settings?.navbarPosition !== 'right'
     const navbarVariant =
         settings?.navbarPosition === 'right'
             ? styles.navbarRight
-            : isTop
-              ? styles.navbarTop
-              : styles.navbarLeft
+            : settings?.navbarPosition === 'left'
+              ? styles.navbarLeft
+              : styles.navbarTop
 
     return (
         <div data-testid="navbar" className={`${styles.navbarBase} ${navbarVariant}`}>

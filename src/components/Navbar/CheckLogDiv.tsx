@@ -23,7 +23,7 @@ function CheckLogDiv() {
             : settings.logLocationCoh2
         : ''
 
-    const isTop = settings?.navbarPosition === 'top'
+    const isTop = settings?.navbarPosition !== 'left' && settings?.navbarPosition !== 'right'
 
     return (
         <div className={isTop ? styles.containerTop : styles.container}>
