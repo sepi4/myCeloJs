@@ -74,6 +74,7 @@ function App() {
 
                 const newSettings = JSON.parse(data)
                 newSettings.navbarPosition ??= 'top'
+                newSettings.fontSize ??= 'small'
                 newSettings.appLocation = appLocation
 
                 // update overlay port for current session
@@ -215,6 +216,12 @@ function App() {
         updateCoh2ProfileId()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [settings?.steamId])
+
+    useEffect(() => {
+        const sizeMap = { small: '100%', medium: '125%', large: '150%' } as const
+        const size = settings?.fontSize ?? 'small'
+        document.documentElement.style.fontSize = sizeMap[size]
+    }, [settings?.fontSize])
 
     const handleSetSettingsView = async () => {
         if (!autoLogChecking) {

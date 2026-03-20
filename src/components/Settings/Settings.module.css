@@ -37,6 +37,7 @@
     padding-right: 2em;
     border: solid 0.05em #555;
     box-sizing: border-box;
+    font: inherit;
 }
 
 .error {

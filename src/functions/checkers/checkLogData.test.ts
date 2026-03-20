@@ -46,6 +46,7 @@ const settings = {
     profileIdCoh2: 456,
     profileIdCoh3: 789,
     navbarPosition: 'top' as const,
+    fontSize: 'small' as const,
 }
 
 function resetAllStores() {

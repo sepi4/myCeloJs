@@ -8,6 +8,7 @@
     border: 0;
     cursor: pointer;
     padding: 0.2em 0;
+    font: inherit;
 }
 .btn:active {
     background-color: #fff;

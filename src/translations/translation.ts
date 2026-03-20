@@ -70,6 +70,22 @@ const text: Translations = {
         en: 'Top',
         ru: 'Сверху',
     },
+    font_size: {
+        en: 'Font size',
+        ru: 'Размер шрифта',
+    },
+    font_small: {
+        en: 'Small',
+        ru: 'Маленький',
+    },
+    font_medium: {
+        en: 'Medium',
+        ru: 'Средний',
+    },
+    font_large: {
+        en: 'Large',
+        ru: 'Большой',
+    },
 
     log_location_first: {
         en: 'Add log location file first',

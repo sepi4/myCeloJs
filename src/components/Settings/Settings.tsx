@@ -27,9 +27,14 @@ function Settings(props: Props) {
 
     const lg = settings && settings.language ? settings.language : 'en'
     const navbarPosition = settings?.navbarPosition ?? 'top'
+    const fontSize = settings?.fontSize ?? 'small'
 
     const handleNavbarPosition = (pos: 'left' | 'right' | 'top') => {
         writeSettings({ ...settings!, navbarPosition: pos })
+    }
+
+    const handleFontSize = (size: 'small' | 'medium' | 'large') => {
+        writeSettings({ ...settings!, fontSize: size })
     }
 
     const [resetConfirmOpen, setResetConfirmOpen] = useState(false)
@@ -227,6 +232,39 @@ function Settings(props: Props) {
                                         style={{ marginRight: '0.4em', accentColor: '#111' }}
                                     />
                                     {getText(`navbar_${pos}`, settings)}
+                                </label>
+                            ))}
+                        </div>
+                    </div>
+                    <div>
+                        <div style={{ fontWeight: 'bold' }}>{getText('font_size', settings)}</div>
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '0.3em',
+                                marginTop: '0.3em',
+                            }}
+                        >
+                            {(['small', 'medium', 'large'] as const).map((size) => (
+                                <label
+                                    key={size}
+                                    style={{
+                                        cursor: 'pointer',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                    }}
+                                >
+                                    <input
+                                        data-testid={`font-size-${size}`}
+                                        type="radio"
+                                        name="fontSize"
+                                        value={size}
+                                        checked={fontSize === size}
+                                        onChange={() => handleFontSize(size)}
+                                        style={{ marginRight: '0.4em', accentColor: '#111' }}
+                                    />
+                                    {getText(`font_${size}`, settings)}
                                 </label>
                             ))}
                         </div>
