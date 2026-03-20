@@ -91,7 +91,6 @@ export default function Navbar(props: Props) {
             <NavBarIcon
                 title={getText('my_playercard', settings)}
                 testId="user-icon"
-                style={{ height: '.7em' }}
                 icon={faUserAlt}
                 fun={alreadyViewingMyCard ? undefined : handleOpenMyCard}
             />
@@ -101,7 +100,6 @@ export default function Navbar(props: Props) {
         <NavBarIcon
             title={getText('search', settings)}
             testId="search-icon"
-            style={{ height: '.7em' }}
             icon={faSearch}
             fun={handleSearchView}
         />
@@ -109,7 +107,6 @@ export default function Navbar(props: Props) {
 
     const settingsIcon = (
         <NavBarIcon
-            style={{ height: '.8em' }}
             title={getText('settings', settings)}
             testId="settings-icon"
             icon={faCogs}
@@ -118,16 +115,16 @@ export default function Navbar(props: Props) {
     )
 
     const isTop = settings?.sidebarPosition === 'top'
-    const navbarClass =
+    const navbarVariant =
         settings?.sidebarPosition === 'right'
             ? styles.navbarRight
             : isTop
               ? styles.navbarTop
-              : styles.navbar
+              : styles.navbarLeft
 
     return (
-        <div data-testid="navbar" className={navbarClass}>
-            <div className={isTop ? styles.iconsTop : styles.icons}>
+        <div data-testid="navbar" className={`${styles.navbarBase} ${navbarVariant}`}>
+            <div className={`${styles.iconsBase} ${isTop ? styles.iconsTop : styles.icons}`}>
                 {userIcon}
                 {searchIcon}
                 {settingsIcon}
