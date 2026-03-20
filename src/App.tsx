@@ -219,8 +219,10 @@ function App() {
 
     useEffect(() => {
         const sizeMap = { small: '100%', medium: '125%', large: '150%' } as const
+        const scaleMap = { small: '1', medium: '1.25', large: '1.5' } as const
         const size = settings?.fontSize ?? 'small'
         document.documentElement.style.fontSize = sizeMap[size]
+        document.documentElement.style.setProperty('--input-scale', scaleMap[size])
     }, [settings?.fontSize])
 
     const handleSetSettingsView = async () => {
