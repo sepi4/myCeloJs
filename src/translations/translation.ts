@@ -379,6 +379,10 @@ const text: Translations = {
         en: 'last game',
         ru: 'последняя игра',
     },
+    games_played: {
+        en: 'games played',
+        ru: 'игр сыграно',
+    },
 }
 
 export default text
