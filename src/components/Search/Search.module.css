@@ -18,6 +18,7 @@
     background-color: #dddddd;
     padding: 0.3em;
     border: solid 0.05em #555;
+    font-size: inherit;
 }
 
 .content {
