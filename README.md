@@ -1,159 +1,109 @@
 - [About](#about)
-- [Install and setup:](#install-and-setup)
-- [Установка и настройка:](#установка-и-настройка)
-- [Updates:](#updates)
+- [Install and Setup](#install-and-setup)
+- [Settings](#settings)
+- [OBS Overlay for Streamers](#obs-overlay)
+- [Updates](#updates)
+
+[На русском](./README.ru.md)
 
 <a name="about"></a>
 
 ## About
 
-This is electron app for viewing ranks of current connected game of Company of Heroes 2/3 and display ranks in OBS.
+Electron app for viewing player rankings in Company of Heroes 2/3 matches. Reads the game log file, fetches rankings from the COH API, and optionally displays them as an OBS overlay for streamers.
 
-Thanks to <a id="raw-url" href="https://github.com/RosboneMako/MakoCelo">Rosbone/MakoCelo</a> for ideas. It's also rank display for COH2/COH3, check it out, maybe you like it better.
+![alt text](./readmeImages/mainView.png 'main view')
 
-## Install and setup:
+Thanks to <a href="https://github.com/RosboneMako/MakoCelo">Rosbone/MakoCelo</a> for ideas.
 
-- download the installer from (<a id="raw-url" href="https://github.com/sepi4/myCeloJs/releases/latest">latest release</a>)
+<a name="install-and-setup"></a>
+
+## Install and Setup
+
+1. Download the installer from the <a href="https://github.com/sepi4/myCeloJs/releases/latest">latest release</a>
     - **Windows:** .exe installer
     - **Linux:** .deb or .AppImage
-- install and run
-- allow in firewall if asked _(permission is needed because app is serving ranking.json file to localhost, so that it can read by javascript in ranking.html file every second and update it if needed)_
+2. Install and run
+3. Windows may show a warning about an unknown application — click "Run anyway" to proceed
+4. Open settings ![alt text](./readmeImages/settingsIcon.png 'settings icon') and select the folder containing `warnings.log` for your game:
+    - **COH2:** usually `C:\Users\USERNAME\Documents\my games\company of heroes 2\`
+    - **COH3:** usually `C:\Users\USERNAME\Documents\my games\company of heroes 3\`
+    - You can set one or both. If only one is set, that game is selected automatically.
+5. Test by opening a game in **spectate mode** or starting a game **vs AI**
 
-- in settings ![alt text](./readmeImages/settingsIcon.png 'settings icon') select location of 'warnings.log' file (Same folder where are replays saved, usually in "C:\Users\USERNAME\Documents\my games\company of heroes 2\" or "C:\Users\USERNAME\Documents\my games\company of heroes 3\")
-- done (test installation by opening game in SPECTATE MODE or game vs AI.)
-      <hr>
+<a name="settings"></a>
 
-    **OPTIONAL SETTINGS**
+## Settings
 
-- select language
-- add your steam ID. This will make your player card icon appear on navbar
-- default player link site. Used only in history view player links.
+**Display**
 
-_ONLY FOR STREAMERS_
+- **Language** — English or Russian
+- **Navbar position** — top, left, or right
+- **Font size** — small, medium, or large
 
-- simple way for OBS studio to display ranking:
-    - select rankings output file format and orientations, **html**:
+**Player identity**
 
-        **horizontal**:
+- **Steam ID** — enter your 17-digit Steam ID to show your player card icon on the navbar (COH2 only)
 
-        ![alt text](./readmeImages/htmlOutputHorizontal.png 'html')
+**Navbar controls (on the main screen)**
 
-        **vertical**:
+- **COH2 / COH3 toggle** — switch between games (disabled if that game's log is not set)
+- **check log** — manually re-read the log file
+- **auto** — automatically re-check the log on an interval (configurable, 1-999 seconds)
+- **alert** — play a sound when a new match is detected (when auto-check is on)
+- **all** — show all ranked modes in dropdown
+- **total** — show total games count
+- **table** — display stats in table format
 
-        ![alt text](./readmeImages/htmlOutput.png 'html')
+**Views**
 
-        or **txt** **horizontal**:
+- **Team view** — default view showing both teams with expandable player stats
+- **Player card** — detailed stats for a single player, with links to external profile sites
+- **Search** — find any player by Steam alias or ID
 
-        ![alt text](./readmeImages/txtOutputHorizontal.png 'html')
+<a name="obs-overlay"></a>
 
-        **vertical**:
+## OBS Overlay for Streamers
 
-        ![alt text](./readmeImages/txtOutput.png 'html')
+After setting a log location, overlay options appear in settings:
 
-    - Location can be copied to clipboard by pressing 'copy' button.
+1. Select output format and orientation:
 
-        ![alt text](./readmeImages/locationCopied.png 'location copied').
+    **HTML horizontal:**
+    ![alt text](./readmeImages/htmlOutputHorizontal.png 'html horizontal')
 
-    - make OBS studio to display rankings file info:
-        - for **HTML**:
-            - Sources > Add (plus) > Browser
+    **HTML vertical:**
+    ![alt text](./readmeImages/htmlOutput.png 'html vertical')
 
-                ![alt text](./readmeImages/plusBrowser.png '+ browser').
+    **TXT horizontal:**
+    ![alt text](./readmeImages/txtOutputHorizontal.png 'txt horizontal')
 
-            - Paste rankings.html file location (copied above) to URL input
-            - Set the same width and height that your display screen resolution is
-              ![alt text](./readmeImages/urlPaste.png 'url')
+    **TXT vertical:**
+    ![alt text](./readmeImages/txtOutput.png 'txt vertical')
 
-            - Select checkbox 'Refresh browser when scene becomes active'
+2. Copy the overlay URL by pressing the **Copy** button
 
-                ![alt text](./readmeImages/refreshBrowser.png 'refresh browser')
+    ![alt text](./readmeImages/locationCopied.png 'location copied')
 
-            - Modify size of new window. Test in game vs AI.
+3. Set up in OBS Studio:
 
-        - for **TXT**:
-            - Sources > Add (plus) > Text.
+    **For HTML format:**
+    - In Sources panel, click the + button
 
-                ![alt text](./readmeImages/plusText.png '+ text')
+        ![alt text](./readmeImages/addSource.png 'add source')
 
-            - select checkbox 'read from file'
-            - select location of rankings output file
+    - Select **Browser**
 
-                ![alt text](./readmeImages/readFromFile.png 'read from file')
+        ![alt text](./readmeImages/addBrowser.png 'add browser')
 
-            - modify size of output, font (for horizontal view you have to find monospace font, Consolas worked for me), etc.
+    - Paste the copied URL into the URL input
+    - Set width and height to your screen resolution
 
-<a name="installRus"></a>
+        ![alt text](./readmeImages/sourceSettings.png 'source settings')
 
-## Установка и настройка:
+    - Resize the source as needed. Test with a game vs AI.
 
-- скачайте установщик (<a id="raw-url" href="https://github.com/sepi4/myCeloJs/releases/latest">latest release</a>)
-    - **Windows:** .exe установщик
-    - **Linux:** .deb или .AppImage
-- установите и запустите
-- если фаервол попросит разрешения, разрешите _(программа использует localhost чтобы rankings.json можно было прочитать с помощью javascript и обновлять rankings.html если это необходимо)_
-
-- в настройках ![alt text](./readmeImages/settingsIcon.png 'settings icon') выберите местонахождение 'warnings.log'-файла (тоже место куда сохраняются реплеи, обычно находится в "Documents/my games/company of heroes 2/" или "Documents/my games/company of heroes 3/")
-- проверьте установку в игре против компьютера или в режиме просмотра
-      <hr>
-
-    **НЕОБЯЗАТЕЛЬНЫЕ НАСТРОЙКИ**
-
-- выбор языка
-- установка вашего стеам ID. После чего на верхней панели появится иконка со ссылкой на вашу статистику.
-- выбор дефолтного сайта для ссылок игрока. Используется только на окне истории игры.
-
-_ТОЛЬКО ДЛЯ СТРИМЕРОВ_
-
-- отображение рангов на стриме через OBS-studio:
-    - выберите формат и ориентацию:  
-       **html горизонтально**:
-      ![alt text](./readmeImages/htmlOutputHorizontal.png 'html')
-
-        **html вертикально**:
-
-        ![alt text](./readmeImages/htmlOutput.png 'html')
-
-        **txt горизонтально**:
-
-        ![alt text](./readmeImages/txtOutputHorizontal.png 'html')
-
-        **txt вертикально**:
-
-        ![alt text](./readmeImages/txtOutput.png 'html')
-
-    - Выберите формат. Скопируйте адрес нажав кнопку 'Copy'.
-
-        ![alt text](./readmeImages/locationCopied.png 'location copied')
-
-    - **Настойки в OBS-studio**:
-        - для формата **HTML**:
-            - Источники > Добавить(плюс) > Браузер
-
-                ![alt text](./readmeImages/plusBrowserRus.png '+ browser').
-
-            - вставьте в "Адрес URL" местонахождение файла rankings.html (скопировали из настроек myCelo)
-            - сделайте ширину 1920 и высоту 1080
-
-                ![alt text](./readmeImages/urlPasteRus.png 'url')
-
-            - поставьте галочку на "Обновить браузер, когда сцена становится активной"
-
-                ![alt text](./readmeImages/refreshBrowserRus.png 'frame rate')
-
-            - сделайте новое окно подходящего размера и поместите куда хотите на экране
-
-        - для формата **TXT**:
-            - Источники > Добавить(плюс) > Текст
-
-                ![alt text](./readmeImages/plusTextRus.png '+ text')
-
-            - поставьте галочку на "чтение из файла"
-            - выберите местонахождение файла (скопировали его из настроек myCelo)
-
-                ![alt text](./readmeImages/readFromFileRus.png 'read from file')
-
-            - сделайте новое окно подходящего размера, выберите подходящий фонт и поместите окно куда хотите на экране (для горизонтального формата, вам надо найти подходящий фонт, например Consolas)
-            - проверьте установку в игре против компьютера
+        ![alt text](./readmeImages/resize.png 'resize browser source')
 
 <a name="updates"></a>
 
