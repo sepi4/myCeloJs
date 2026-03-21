@@ -77,6 +77,7 @@ export class App {
     // Player card
     readonly steamIdValue: Locator
     readonly linkCoh2stats: Locator
+    readonly linkCoh3stats: Locator
     readonly linkCoh2: Locator
     readonly linkSteam: Locator
 
@@ -152,6 +153,7 @@ export class App {
 
         this.steamIdValue = page.getByTestId('steam-id-value')
         this.linkCoh2stats = page.getByTestId('link-coh2stats')
+        this.linkCoh3stats = page.getByTestId('link-coh3stats')
         this.linkCoh2 = page.getByTestId('link-coh2')
         this.linkSteam = page.getByTestId('link-steam')
 
