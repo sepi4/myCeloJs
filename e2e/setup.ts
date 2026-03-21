@@ -6,14 +6,12 @@ import fs from 'fs'
 import { App } from './pom/App.pom'
 
 /**
- * Launches an isolated Electron app instance with a temporary user data directory.
- * Each test file calls this in `beforeAll` to get its own app, enabling parallel execution.
+ * Launches an Electron app instance with the given user data directory.
  *
  * Set `MYCELO_DIST_PATH` env var to test a packaged build (e.g. `dist/linux-unpacked/mycelo`).
  * Without it, tests run against the dev build (`out/main/index.js`).
  */
-export async function launchApp() {
-    const tempUserDataDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mycelo-e2e-'))
+async function launch(tempUserDataDir: string) {
     const distPath = process.env.MYCELO_DIST_PATH
 
     const electronApp = distPath
@@ -31,7 +29,26 @@ export async function launchApp() {
     const page = await electronApp.firstWindow()
     await page.waitForLoadState('domcontentloaded')
     const app = new App(page)
-    return { electronApp, page, app, tempUserDataDir }
+    return { electronApp, page, app }
+}
+
+/**
+ * Launches an isolated Electron app instance with a temporary user data directory.
+ * Each test file calls this in `beforeAll` to get its own app, enabling parallel execution.
+ */
+export async function launchApp() {
+    const tempUserDataDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mycelo-e2e-'))
+    const result = await launch(tempUserDataDir)
+    return { ...result, tempUserDataDir }
+}
+
+/**
+ * Relaunches the Electron app reusing the same user data directory.
+ * Settings persisted to disk (settings.json, localStorage) survive the restart.
+ */
+export async function relaunchApp(electronApp: ElectronApplication, tempUserDataDir: string) {
+    await electronApp.close()
+    return launch(tempUserDataDir)
 }
 
 /**
