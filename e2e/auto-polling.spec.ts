@@ -41,7 +41,7 @@ test.afterAll(async () => {
     await closeApp(electronApp, tempUserDataDir)
 })
 
-test('auto-polling detects log file change', async () => {
+test('auto-polling detects log file changes', async () => {
     // Verify initial players are from the first log
     await expect(app.page.getByText('Polmuadiv')).toBeVisible()
     await expect(app.page.getByText('TestPlayerA')).not.toBeVisible()
@@ -52,9 +52,7 @@ test('auto-polling detects log file change', async () => {
     // The app should pick up the new players within a few seconds
     await expect(app.page.getByText('TestPlayerA')).toBeVisible({ timeout: 10000 })
     await expect(app.page.getByText('Polmuadiv')).not.toBeVisible()
-})
 
-test('auto-polling detects log file changing back', async () => {
     // Overwrite back to the original log
     fs.copyFileSync(COH2_LOG_PATH, tempLogFile)
 

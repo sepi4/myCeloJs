@@ -69,6 +69,21 @@ test('set COH3 log and toggle between games', async () => {
     await expect(app.page.getByText('Alhas')).not.toBeVisible()
 })
 
+test('remove COH3 log disables its radio and keeps COH2 active', async () => {
+    // Both logs are set at this point — remove COH3 log
+    await app.settingsIcon.click()
+    await app.clearLogCoh3Button.click()
+    await app.closeButton.click()
+
+    // COH3 radio should be disabled, COH2 should remain enabled
+    await expect(app.radioCoh3).toBeDisabled()
+    await expect(app.radioCoh2).toBeEnabled()
+
+    // COH2 players should still be visible
+    await expect(app.playersContainer).toBeVisible()
+    await expect(app.page.getByText('Polmuadiv')).toBeVisible()
+})
+
 test('auto checkbox toggles interval input and alert visibility', async () => {
     // Auto is enabled by default — interval input and alert should be visible
     await expect(app.autoLabel).toBeVisible()

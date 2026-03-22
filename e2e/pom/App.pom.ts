@@ -45,6 +45,8 @@ export class App {
     readonly languageSelectRu: Locator
     readonly logLocationButtonCoh2: Locator
     readonly logLocationButtonCoh3: Locator
+    readonly clearLogCoh2Button: Locator
+    readonly clearLogCoh3Button: Locator
     readonly steamIdInput: Locator
     readonly steamIdSave: Locator
     readonly steamIdError: Locator
@@ -125,6 +127,8 @@ export class App {
         this.languageSelectRu = page.getByTestId('language-select-ru')
         this.logLocationButtonCoh2 = page.getByTestId('log-location-button-coh2')
         this.logLocationButtonCoh3 = page.getByTestId('log-location-button-coh3')
+        this.clearLogCoh2Button = page.getByTestId('clear-log-coh2-button')
+        this.clearLogCoh3Button = page.getByTestId('clear-log-coh3-button')
         this.steamIdInput = page.getByTestId('steam-id-input')
         this.steamIdSave = page.getByTestId('steam-id-save')
         this.steamIdError = page.getByTestId('steam-id-error')
