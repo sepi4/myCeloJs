@@ -150,24 +150,24 @@ function PlayerMainRow(props: Props) {
 
     return (
         <div className={styles.container}>
-            <MainRowSpan width="20%" justifyContent="flex-start">
+            <MainRowSpan width="15%" justifyContent="flex-start">
                 <>
                     {dropDownArrow}{' '}
-                    <span data-testid="player-rank" title={rankTitle}>
+                    <span data-testid="player-rank" title={rankTitle} style={{ fontWeight: 600 }}>
                         {rank}
                     </span>
                 </>
             </MainRowSpan>
             {coh3 && elo && (
                 <MainRowSpan width="15%">
-                    <span data-testid="player-elo">
+                    <span data-testid="player-elo" style={{ fontWeight: 300 }}>
                         {player.rating ? `(${player.rating})` : '-'}
                     </span>
                 </MainRowSpan>
             )}
             <MainRowSpan width="15%">{faction}</MainRowSpan>
             <MainRowSpan width="15%">{countryFlag}</MainRowSpan>
-            <MainRowSpan width={coh3 && elo ? '35%' : '50%'}>{alias}</MainRowSpan>
+            <MainRowSpan width={coh3 && elo ? '40%' : '55%'}>{alias}</MainRowSpan>
         </div>
     )
 }

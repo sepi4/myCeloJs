@@ -105,12 +105,14 @@ const CSS = `
     min-width: 3.5em;
     display: flex;
     justify-content: center;
+    font-weight: 600;
 }
 .eloStyle {
     width: 4.5em;
     min-width: 4.5em;
     display: flex;
     justify-content: center;
+    font-weight: 300;
 }
 .countryStyle {
     width: 1.4em;
