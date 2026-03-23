@@ -156,6 +156,14 @@ const text: Translations = {
         en: 'Show total games count',
         ru: 'Показать общее количество игр',
     },
+    elo: {
+        en: 'elo',
+        ru: 'эло',
+    },
+    tooltip_elo: {
+        en: 'Show ELO rating',
+        ru: 'Показать рейтинг ELO',
+    },
     tooltip_table: {
         en: 'Show stats as a table',
         ru: 'Показать статистику в виде таблицы',

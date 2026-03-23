@@ -44,12 +44,23 @@ export default function Navbar(props: Props) {
         )
     }
 
+    const eloCheckBox = navButtons.coh3 ? (
+        <NavCheckbox
+            key="elo"
+            testId="checkbox-elo"
+            text={getText('elo', settings)}
+            checked={navButtons.elo}
+            handler={() => toggleNavButton('elo')}
+            title={getText('tooltip_elo', settings)}
+        />
+    ) : null
+
     const buttons = (
         <>
             {getNavCheckBox('all')}
             {getNavCheckBox('total')}
             {getNavCheckBox('table')}
-            {/* {!state.navButtons.coh3 && getNavCheckBox('table')} */}
+            {eloCheckBox}
         </>
     )
 

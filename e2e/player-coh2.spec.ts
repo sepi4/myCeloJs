@@ -29,6 +29,10 @@ test.afterAll(async () => {
     await closeApp(electronApp, tempUserDataDir)
 })
 
+test('ELO checkbox is not visible in COH2 mode', async () => {
+    await expect(app.checkboxElo).not.toBeVisible()
+})
+
 test('steam id validation and player card', async () => {
     // Open settings and enter an invalid steam ID
     await app.settingsIcon.click()

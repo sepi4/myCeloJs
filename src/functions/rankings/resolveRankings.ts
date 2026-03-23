@@ -58,16 +58,19 @@ function assignTeamRanks(
         const matchedSg = statGroups.find((sg) => sg.id === ls.statgroup_id)
         if (matchedSg) {
             matchedSg.rank = ls.rank
+            matchedSg.rating = ls.rating
         }
     }
 }
+
+type RankResult = { rank?: number; rating?: number }
 
 function getPlayerRank(
     player: Player,
     team: Player[],
     stats: PersonalStats,
     leaderboards: AvailableLeaderboard
-): number | undefined {
+): RankResult {
     const matchTypeName = `${team.length}v${team.length}${getFactionName(player.faction)}`
     const leaderboardId = findLeaderboardId(matchTypeName, leaderboards)
 
@@ -75,19 +78,20 @@ function getPlayerRank(
         (sg) => sg.type === 1 && sg.members[0].profile_id === player.profileId
     )
 
-    const rank = stats.leaderboardStats.find(
+    const ls = stats.leaderboardStats.find(
         (ls) => ls.statgroup_id === playerSg?.id && ls.leaderboard_id === leaderboardId
-    )?.rank
+    )
 
-    if (rank !== undefined) {
-        return rank
+    if (ls !== undefined) {
+        return { rank: ls.rank, rating: ls.rating }
     }
 
     // Fallback to unranked leaderboard (COH3 has both ranked and unranked variants)
     const unrankedId = findLeaderboardId(matchTypeName + 'Unranked', leaderboards)
-    return stats.leaderboardStats.find(
+    const unrankedLs = stats.leaderboardStats.find(
         (ls) => ls.statgroup_id === playerSg?.id && ls.leaderboard_id === unrankedId
-    )?.rank
+    )
+    return { rank: unrankedLs?.rank, rating: unrankedLs?.rating }
 }
 
 function findPlayerCountry(player: Player, stats: PersonalStats): string | undefined {
@@ -120,16 +124,26 @@ export function resolveRankings(
                     sg.members.some((m) => m.profile_id === player.profileId)
                 )
                 if (playerSg) {
-                    player.ranking =
-                        playerSg.rank ?? getPlayerRank(player, team, stats, leaderboards)
+                    if (playerSg.rank !== undefined) {
+                        player.ranking = playerSg.rank
+                        player.rating = playerSg.rating
+                    } else {
+                        const result = getPlayerRank(player, team, stats, leaderboards)
+                        player.ranking = result.rank
+                        player.rating = result.rating
+                    }
                     player.teamMarker = playerSg.teamMarker
                 } else {
-                    player.ranking = getPlayerRank(player, team, stats, leaderboards)
+                    const result = getPlayerRank(player, team, stats, leaderboards)
+                    player.ranking = result.rank
+                    player.rating = result.rating
                 }
             }
         } else {
             for (const player of team) {
-                player.ranking = getPlayerRank(player, team, stats, leaderboards)
+                const result = getPlayerRank(player, team, stats, leaderboards)
+                player.ranking = result.rank
+                player.rating = result.rating
             }
         }
     }

@@ -39,7 +39,7 @@ function App() {
     const { extraInfo, setExtraInfo } = useExtraInfoStore()
     const { logCheckInterval } = useLogCheckIntervalStore()
     const {
-        navButtons: { coh3 },
+        navButtons: { coh3, elo },
         toggleNavButton,
     } = useNavButtonsStore()
     const { players, setPlayers } = usePlayersStore()
@@ -130,7 +130,7 @@ function App() {
                 setExtraInfo(x.result)
                 setPlayers(newPlayers)
 
-                writeRankings(coh3, newPlayers, currentSettings.rankingsHorizontal)
+                writeRankings(coh3, newPlayers, currentSettings.rankingsHorizontal, coh3 && elo)
             }
             fetchExtraInfo()
         }
@@ -171,10 +171,10 @@ function App() {
     // Re-write rankings when orientation changes
     useEffect(() => {
         if (settings && players && players.length > 0) {
-            writeRankings(coh3, players, settings.rankingsHorizontal)
+            writeRankings(coh3, players, settings.rankingsHorizontal, coh3 && elo)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [settings?.rankingsHorizontal])
+    }, [settings?.rankingsHorizontal, elo])
 
     useEffect(() => {
         if (!coh3 || !settings?.logLocationCoh3) {

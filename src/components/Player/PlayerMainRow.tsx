@@ -44,7 +44,7 @@ interface Props {
 
 function PlayerMainRow(props: Props) {
     const {
-        navButtons: { coh3 },
+        navButtons: { coh3, elo },
     } = useNavButtonsStore()
     const { settings } = useSettingsStore()
     const { player, handleSetShowExtra, extraInfo, showExtra } = props
@@ -98,8 +98,9 @@ function PlayerMainRow(props: Props) {
     )
 
     const teamMarker = player.teamMarker ? player.teamMarker : ''
-    const rank =
-        (player.ranking == null || player.ranking === -1 ? '-' : player.ranking) + teamMarker
+    const rankValue = player.ranking == null || player.ranking === -1 ? '-' : player.ranking
+    const ratingStr = coh3 && elo && player.rating ? ` (${player.rating})` : ''
+    const rank = `${rankValue}${ratingStr}${teamMarker}`
 
     const ranktotal =
         player.ranking && player.ranking > 0
@@ -152,7 +153,10 @@ function PlayerMainRow(props: Props) {
         <div className={styles.container}>
             <MainRowSpan width="20%" justifyContent="flex-start">
                 <>
-                    {dropDownArrow} <span title={rankTitle}>{rank}</span>
+                    {dropDownArrow}{' '}
+                    <span data-testid="player-rank" title={rankTitle}>
+                        {rank}
+                    </span>
                 </>
             </MainRowSpan>
             <MainRowSpan width="15%">{faction}</MainRowSpan>

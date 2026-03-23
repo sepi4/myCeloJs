@@ -102,4 +102,50 @@ describe('buildRankings', () => {
             expect(text).toContain('A'.repeat(20))
         })
     })
+
+    describe('rating output', () => {
+        it('includes rating in json when showElo is true', () => {
+            const { json } = buildRankings(
+                true,
+                [player({ faction: 'germans', rating: 1523 })],
+                false,
+                true
+            )
+
+            expect(json.teams.team1[0].rating).toBe(1523)
+        })
+
+        it('omits rating from json when showElo is false', () => {
+            const { json } = buildRankings(
+                true,
+                [player({ faction: 'germans', rating: 1523 })],
+                false,
+                false
+            )
+
+            expect(json.teams.team1[0].rating).toBeUndefined()
+        })
+
+        it('includes rating in text output when showElo is true', () => {
+            const { text } = buildRankings(
+                true,
+                [player({ faction: 'germans', rating: 1523 })],
+                false,
+                true
+            )
+
+            expect(text).toContain('(1523)')
+        })
+
+        it('does not include rating in text when showElo is false', () => {
+            const { text } = buildRankings(
+                true,
+                [player({ faction: 'germans', rating: 1523 })],
+                false,
+                false
+            )
+
+            expect(text).not.toMatch(/\(\d+\)/)
+        })
+    })
 })

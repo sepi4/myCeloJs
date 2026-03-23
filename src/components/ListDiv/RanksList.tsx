@@ -1,4 +1,5 @@
 import getText from '../../functions/utils/getText'
+import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { Rank as RankType } from '../../types'
 import Rank from '../Player/Rank'
@@ -12,13 +13,18 @@ interface Props {
 
 function RanksList(props: Props) {
     const { settings } = useSettingsStore()
+    const {
+        navButtons: { coh3, elo },
+    } = useNavButtonsStore()
     const { ranksArr } = props
     return (
         <div>
             {ranksArr.map((r, i) => {
                 const per: string = ((r.wins / (r.wins + r.losses)) * 100).toFixed(0) + '%'
                 const totalGames = r.wins + r.losses
-                const rank = r.rank <= 0 ? '-' : r.rank
+                const rankValue = r.rank <= 0 ? '-' : r.rank
+                const ratingStr = coh3 && elo && r.rating ? ` (${r.rating})` : ''
+                const rank = `${rankValue}${ratingStr}`
                 const positive = r.streak > 0
                 const streak = positive ? `+${r.streak}` : `${r.streak}`
 

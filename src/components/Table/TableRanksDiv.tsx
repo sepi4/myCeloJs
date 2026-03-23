@@ -1,3 +1,4 @@
+import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { FactionName, Rank } from '../../types'
 import FactionIcon from './FactionIcon'
 import TableRankRow from './TableRankRow'
@@ -9,6 +10,9 @@ interface Props {
 }
 
 function TableRanksDiv({ solo, index, name }: Props) {
+    const {
+        navButtons: { coh3, elo },
+    } = useNavButtonsStore()
     const rows = [0, 1, 2, 3].map((x, i) => {
         const num = x + 1
         const r = solo[index]
@@ -27,10 +31,11 @@ function TableRanksDiv({ solo, index, name }: Props) {
             }
             streak = r.streak
         }
+        const rating = coh3 && elo && r?.rating ? r.rating : undefined
         return (
             <TableRankRow
                 key={x + i + 'rank'}
-                {...{ rank, num, per, streak, totalGames, ranktotal }}
+                {...{ rank, num, per, streak, totalGames, ranktotal, rating }}
             />
         )
     })

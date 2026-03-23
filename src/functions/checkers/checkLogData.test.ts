@@ -52,7 +52,7 @@ const settings = {
 function resetAllStores() {
     useFromFileStore.setState({ fromFile: null })
     useNavButtonsStore.setState({
-        navButtons: { all: true, table: true, total: true, coh3: false },
+        navButtons: { all: true, table: true, total: true, coh3: false, elo: false },
     })
     useSettingsStore.setState({ settings: null })
     useExtraInfoStore.setState({ extraInfo: null })
@@ -121,18 +121,18 @@ describe('checkLogData', () => {
 
         checkLogData({ data: [player1] })
 
-        expect(mockWriteRankings).toHaveBeenCalledWith(false, [player1], true)
+        expect(mockWriteRankings).toHaveBeenCalledWith(false, [player1], true, false)
     })
 
     it('passes coh3 nav button value to writeRankings', () => {
         useSettingsStore.setState({ settings })
         useNavButtonsStore.setState({
-            navButtons: { all: true, table: true, total: true, coh3: true },
+            navButtons: { all: true, table: true, total: true, coh3: true, elo: false },
         })
 
         checkLogData({ data: [player1] })
 
-        expect(mockWriteRankings).toHaveBeenCalledWith(true, [player1], true)
+        expect(mockWriteRankings).toHaveBeenCalledWith(true, [player1], true, false)
     })
 
     it('does not call writeRankings when settings are null', () => {

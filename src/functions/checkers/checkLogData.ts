@@ -17,7 +17,7 @@ interface Props {
 export default function checkLogData({ data, playAudio }: Props) {
     const { fromFile, setFromFile } = useFromFileStore.getState()
     const {
-        navButtons: { coh3 },
+        navButtons: { coh3, elo },
     } = useNavButtonsStore.getState()
     const { settings } = useSettingsStore.getState()
     if (JSON.stringify(fromFile) !== JSON.stringify(data)) {
@@ -28,7 +28,7 @@ export default function checkLogData({ data, playAudio }: Props) {
         usePlayersStore.getState().setPlayers(data)
         useViewStore.getState().setView('main')
         if (settings) {
-            writeRankings(coh3, data, settings.rankingsHorizontal)
+            writeRankings(coh3, data, settings.rankingsHorizontal, coh3 && elo)
             if (playAudio && data.length > 0) {
                 playAudio()
             }

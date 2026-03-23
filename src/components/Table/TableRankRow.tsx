@@ -9,9 +9,10 @@ interface Props {
     streak: number | string
     totalGames: number | string
     ranktotal: number | string
+    rating?: number | string
 }
 
-function TableRankRow({ rank, num, per, streak, totalGames, ranktotal }: Props) {
+function TableRankRow({ rank, num, per, streak, totalGames, ranktotal, rating }: Props) {
     const { settings } = useSettingsStore()
     // prettier-ignore
     const color = (
@@ -27,7 +28,11 @@ function TableRankRow({ rank, num, per, streak, totalGames, ranktotal }: Props) 
         Number(ranktotal) > 0 || ranktotal === '?' ? `${getText('of', settings)} ${ranktotal}` : ''
     return (
         <div className={styles.container}>
-            <span title={ranktotal}> {rank} </span>
+            <span title={ranktotal}>
+                {' '}
+                {rank}
+                {rating ? ` (${rating})` : ''}{' '}
+            </span>
             <span>
                 {num}v{num}
             </span>

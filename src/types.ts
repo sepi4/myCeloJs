@@ -3,6 +3,7 @@ type Team = {
     faction: string
     name: string
     ranking: string
+    rating?: number
 }
 
 export type RankingsJson = {
@@ -19,6 +20,7 @@ export type Player = {
     name: string
     profileId?: number
     ranking?: number
+    rating?: number
     teamMarker?: string
     teamSlot: number
     time: string
@@ -73,6 +75,7 @@ export type StatGroup = {
     name: string
     type: number
     rank?: number
+    rating?: number
     teamMarker?: string
 }
 
@@ -90,6 +93,7 @@ export type LeaderboardStat = {
     statgroup_id: number
     streak: number
     wins: number
+    rating?: number
 }
 
 export type PersonalStats = {
@@ -231,6 +235,7 @@ export type Rank = {
     statgroup_id: number
     streak: number
     wins: number
+    rating?: number
 
     name: string
 

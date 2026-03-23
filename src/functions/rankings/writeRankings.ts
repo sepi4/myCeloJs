@@ -57,7 +57,8 @@ function getLimitedWord(str: string, limit: number, padLeft: boolean) {
 export function buildRankings(
     coh3: boolean,
     players: Player[],
-    rankingsHorizontal: boolean
+    rankingsHorizontal: boolean,
+    showElo: boolean = false
 ): { json: RankingsJson; text: string } {
     const json: RankingsJson = {
         teams: {
@@ -77,6 +78,10 @@ export function buildRankings(
 
         if (ranking === undefined) {
             ranking = '-'
+        }
+
+        if (showElo && players[i].rating !== undefined) {
+            ranking += `(${players[i].rating})`
         }
 
         const faction = players[i].faction
@@ -123,20 +128,18 @@ export function buildRankings(
             }
         }
 
+        const ratingValue = showElo ? players[i].rating : undefined
+        const teamEntry = {
+            name,
+            ranking,
+            country,
+            faction: coh3 ? faction : commonName(faction),
+            ...(ratingValue !== undefined ? { rating: ratingValue } : {}),
+        }
         if (teamSlot % 2 === 0) {
-            json.teams.team1.push({
-                name,
-                ranking,
-                country,
-                faction: coh3 ? faction : commonName(faction),
-            })
+            json.teams.team1.push(teamEntry)
         } else {
-            json.teams.team2.push({
-                name,
-                ranking,
-                country,
-                faction: coh3 ? faction : commonName(faction),
-            })
+            json.teams.team2.push(teamEntry)
         }
     }
 
@@ -160,7 +163,12 @@ export function buildRankings(
     return { json, text }
 }
 
-export function writeRankings(coh3: boolean, players: Player[], rankingsHorizontal: boolean): void {
-    const { json, text } = buildRankings(coh3, players, rankingsHorizontal)
+export function writeRankings(
+    coh3: boolean,
+    players: Player[],
+    rankingsHorizontal: boolean,
+    showElo: boolean = false
+): void {
+    const { json, text } = buildRankings(coh3, players, rankingsHorizontal, showElo)
     window.electronAPI.rankings.write(JSON.stringify(json, null, 4), text)
 }

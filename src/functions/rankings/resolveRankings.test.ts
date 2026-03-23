@@ -360,6 +360,148 @@ describe('resolveRankings', () => {
         expect(team0[1].teamMarker).toBe(' ¹')
     })
 
+    test('COH3 1v1 — player gets rating from leaderboard stat', () => {
+        const players: Player[] = [
+            makePlayer({
+                name: 'P1',
+                faction: 'americans',
+                teamSlot: 0,
+                profileId: 8001,
+            }),
+            makePlayer({
+                name: 'P2',
+                faction: 'germans',
+                teamSlot: 1,
+                profileId: 8002,
+            }),
+        ]
+
+        const sg1 = makeStatGroup({
+            id: 800,
+            type: 1,
+            members: [makeMember({ profile_id: 8001, country: 'us' })],
+        })
+        const sg2 = makeStatGroup({
+            id: 801,
+            type: 1,
+            members: [makeMember({ profile_id: 8002, country: 'de' })],
+        })
+
+        const stats = makeStats(
+            [sg1, sg2],
+            [
+                makeLbStat({
+                    leaderboard_id: 2130256,
+                    statgroup_id: 800,
+                    rank: 50,
+                    rating: 1523,
+                }),
+                makeLbStat({
+                    leaderboard_id: 2130262,
+                    statgroup_id: 801,
+                    rank: 75,
+                    rating: 1400,
+                }),
+            ]
+        )
+
+        const [team0, team1] = resolveRankings(players, stats, coh3Leaderboards)
+
+        expect(team0[0].ranking).toBe(50)
+        expect(team0[0].rating).toBe(1523)
+        expect(team1[0].ranking).toBe(75)
+        expect(team1[0].rating).toBe(1400)
+    })
+
+    test('COH2 1v1 — rating stays undefined when not in API response', () => {
+        const players: Player[] = [
+            makePlayer({
+                name: 'P1',
+                faction: 'german',
+                teamSlot: 0,
+                profileId: 9001,
+            }),
+            makePlayer({
+                name: 'P2',
+                faction: 'soviet',
+                teamSlot: 1,
+                profileId: 9002,
+            }),
+        ]
+
+        const sg1 = makeStatGroup({
+            id: 900,
+            type: 1,
+            members: [makeMember({ profile_id: 9001, country: 'de' })],
+        })
+        const sg2 = makeStatGroup({
+            id: 901,
+            type: 1,
+            members: [makeMember({ profile_id: 9002, country: 'ru' })],
+        })
+
+        const stats = makeStats(
+            [sg1, sg2],
+            [
+                makeLbStat({ leaderboard_id: 4, statgroup_id: 900, rank: 50 }),
+                makeLbStat({ leaderboard_id: 5, statgroup_id: 901, rank: 75 }),
+            ]
+        )
+
+        const [team0, team1] = resolveRankings(players, stats, coh2Leaderboards)
+
+        expect(team0[0].ranking).toBe(50)
+        expect(team0[0].rating).toBeUndefined()
+        expect(team1[0].ranking).toBe(75)
+        expect(team1[0].rating).toBeUndefined()
+    })
+
+    test('COH3 1v1 — unranked fallback also resolves rating', () => {
+        const players: Player[] = [
+            makePlayer({
+                name: 'P1',
+                faction: 'americans',
+                teamSlot: 0,
+                profileId: 10001,
+            }),
+            makePlayer({
+                name: 'P2',
+                faction: 'germans',
+                teamSlot: 1,
+                profileId: 10002,
+            }),
+        ]
+
+        const sg1 = makeStatGroup({
+            id: 1000,
+            type: 1,
+            members: [makeMember({ profile_id: 10001, country: 'us' })],
+        })
+        const sg2 = makeStatGroup({
+            id: 1001,
+            type: 1,
+            members: [makeMember({ profile_id: 10002, country: 'de' })],
+        })
+
+        const stats = makeStats(
+            [sg1, sg2],
+            [
+                // Only unranked entry (1v1AmericanUnranked = 2130255)
+                makeLbStat({
+                    leaderboard_id: 2130255,
+                    statgroup_id: 1000,
+                    rank: 500,
+                    rating: 1200,
+                }),
+            ]
+        )
+
+        const [team0] = resolveRankings(players, stats, coh3Leaderboards)
+
+        expect(team0[0].ranking).toBe(500)
+        expect(team0[0].rating).toBe(1200)
+    })
+
     test('Mixed factions in team — no team leaderboard, falls back to individual', () => {
         const players: Player[] = [
             makePlayer({

@@ -59,6 +59,8 @@ export class App {
     readonly checkboxAll: Locator
     readonly checkboxTotal: Locator
     readonly checkboxTable: Locator
+    readonly checkboxElo: Locator
+    readonly playerRanks: Locator
 
     // Font size
     readonly fontSizeSmall: Locator
@@ -154,6 +156,8 @@ export class App {
         this.checkboxAll = page.getByTestId('checkbox-all')
         this.checkboxTotal = page.getByTestId('checkbox-total')
         this.checkboxTable = page.getByTestId('checkbox-table')
+        this.checkboxElo = page.getByTestId('checkbox-elo')
+        this.playerRanks = page.getByTestId('player-rank')
 
         this.steamIdValue = page.getByTestId('steam-id-value')
         this.linkCoh2stats = page.getByTestId('link-coh2stats')

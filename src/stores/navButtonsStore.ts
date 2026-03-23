@@ -7,6 +7,7 @@ export interface NavButtons {
     table: boolean
     total: boolean
     coh3: boolean
+    elo: boolean
 }
 
 interface NavButtonsStore {
@@ -20,6 +21,7 @@ export const useNavButtonsStore = create<NavButtonsStore>((set) => ({
         table: false,
         total: false,
         coh3: false,
+        elo: false,
         ...getLocalStorage({
             key: 'navButtons',
             def: { all: false, table: false, total: false },

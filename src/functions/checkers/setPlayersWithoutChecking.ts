@@ -16,11 +16,11 @@ export default function setPlayersWithoutChecking(data: Player[]) {
     usePlayersStore.getState().setPlayers(data)
     useViewStore.getState().setView('main')
     const {
-        navButtons: { coh3 },
+        navButtons: { coh3, elo },
     } = useNavButtonsStore.getState()
     const { settings } = useSettingsStore.getState()
     useExtraInfoStore.getState().clearExtraInfo()
     if (settings) {
-        writeRankings(coh3, data, settings.rankingsHorizontal)
+        writeRankings(coh3, data, settings.rankingsHorizontal, coh3 && elo)
     }
 }
