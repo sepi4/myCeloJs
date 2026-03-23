@@ -99,8 +99,7 @@ function PlayerMainRow(props: Props) {
 
     const teamMarker = player.teamMarker ? player.teamMarker : ''
     const rankValue = player.ranking == null || player.ranking === -1 ? '-' : player.ranking
-    const ratingStr = coh3 && elo && player.rating ? ` (${player.rating})` : ''
-    const rank = `${rankValue}${ratingStr}${teamMarker}`
+    const rank = `${rankValue}${teamMarker}`
 
     const ranktotal =
         player.ranking && player.ranking > 0
@@ -159,9 +158,16 @@ function PlayerMainRow(props: Props) {
                     </span>
                 </>
             </MainRowSpan>
+            {coh3 && elo && (
+                <MainRowSpan width="15%">
+                    <span data-testid="player-elo">
+                        {player.rating ? `(${player.rating})` : '-'}
+                    </span>
+                </MainRowSpan>
+            )}
             <MainRowSpan width="15%">{faction}</MainRowSpan>
             <MainRowSpan width="15%">{countryFlag}</MainRowSpan>
-            <MainRowSpan width="50%">{alias}</MainRowSpan>
+            <MainRowSpan width={coh3 && elo ? '35%' : '50%'}>{alias}</MainRowSpan>
         </div>
     )
 }

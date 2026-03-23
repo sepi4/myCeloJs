@@ -1,4 +1,5 @@
 import getText from '../../functions/utils/getText'
+import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { useSorterStore } from '../../stores/sorterStore'
 import { Rank } from '../../types'
@@ -10,6 +11,9 @@ type SorterName = 'byRank' | 'byWinRate' | 'byStreak' | 'byName' | 'byTotal'
 function RanksListTitles({ ranksArr }: { ranksArr: Rank[] }) {
     const { sorter, setSorter } = useSorterStore()
     const { settings } = useSettingsStore()
+    const {
+        navButtons: { coh3, elo },
+    } = useNavButtonsStore()
 
     const getSorter = (name: SorterName) => {
         return {
@@ -27,11 +31,16 @@ function RanksListTitles({ ranksArr }: { ranksArr: Rank[] }) {
                     <ColumnTitle {...getSorter('byName')} width="40%">
                         {getText('mode', settings)}
                     </ColumnTitle>
-                    <ColumnTitle {...getSorter('byWinRate')}>
-                        {getText('win', settings)}
-                    </ColumnTitle>
+                    {coh3 && elo && (
+                        <ColumnTitle click={() => {}} active={false} reversed={false}>
+                            ELO
+                        </ColumnTitle>
+                    )}
                     <ColumnTitle {...getSorter('byStreak')}>
                         {getText('streak', settings)}
+                    </ColumnTitle>
+                    <ColumnTitle {...getSorter('byWinRate')}>
+                        {getText('win', settings)}
                     </ColumnTitle>
                     <ColumnTitle {...getSorter('byTotal')}>
                         {getText('total', settings)}

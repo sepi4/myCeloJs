@@ -13,7 +13,7 @@ function img(src: string): string {
 }
 
 function renderPlayer(
-    player: { name: string; ranking: string; country?: string; faction: string },
+    player: { name: string; ranking: string; country?: string; faction: string; rating?: number },
     reversed: boolean
 ): string {
     const faction = escapeHtml(player.faction)
@@ -30,6 +30,10 @@ function renderPlayer(
     const rankSpan = `<span class="rankingStyle" data-testid="ranking">
         ${ranking}
     </span>`
+    const eloSpan =
+        player.rating !== undefined
+            ? `<span class="eloStyle" data-testid="elo">(${player.rating})</span>`
+            : ''
     const countryDiv = `<div class="countryStyle" data-testid="country">
         ${country ? img(`/img/countryFlags/${country}.png`) : ''}
     </div>`
@@ -38,8 +42,8 @@ function renderPlayer(
     </span>`
 
     const parts = reversed
-        ? [nameSpan, countryDiv, rankSpan, factionDiv]
-        : [factionDiv, rankSpan, countryDiv, nameSpan]
+        ? [nameSpan, countryDiv, eloSpan, rankSpan, factionDiv]
+        : [factionDiv, rankSpan, eloSpan, countryDiv, nameSpan]
 
     const cls = reversed ? 'playerStyle reversed' : 'playerStyle'
     return `<div class="${cls}" data-testid="player">${parts.join('')}</div>`
@@ -88,6 +92,7 @@ const CSS = `
 .playerStyle {
     display: flex;
     align-items: center;
+    gap: 1em;
 }
 .factionStyle {
     width: 1.6em;
@@ -98,6 +103,12 @@ const CSS = `
 .rankingStyle {
     width: 3.5em;
     min-width: 3.5em;
+    display: flex;
+    justify-content: center;
+}
+.eloStyle {
+    width: 4.5em;
+    min-width: 4.5em;
     display: flex;
     justify-content: center;
 }

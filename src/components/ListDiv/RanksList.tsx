@@ -22,9 +22,7 @@ function RanksList(props: Props) {
             {ranksArr.map((r, i) => {
                 const per: string = ((r.wins / (r.wins + r.losses)) * 100).toFixed(0) + '%'
                 const totalGames = r.wins + r.losses
-                const rankValue = r.rank <= 0 ? '-' : r.rank
-                const ratingStr = coh3 && elo && r.rating ? ` (${r.rating})` : ''
-                const rank = `${rankValue}${ratingStr}`
+                const rank = r.rank <= 0 ? '-' : r.rank
                 const positive = r.streak > 0
                 const streak = positive ? `+${r.streak}` : `${r.streak}`
 
@@ -34,8 +32,9 @@ function RanksList(props: Props) {
                         <Cell width="40%" justifyContent="flex-start">
                             <Rank allOpen={props.allOpen} rank={r} />
                         </Cell>
-                        <Cell color={'#FFFF66'}>{per}</Cell>
+                        {coh3 && elo && <Cell>{r.rating ? `(${r.rating})` : '-'}</Cell>}
                         <Cell color={positive ? 'green' : 'red'}>{streak}</Cell>
+                        <Cell color={'#FFFF66'}>{per}</Cell>
                         <Cell>{totalGames}</Cell>
                     </div>
                 )

@@ -32,22 +32,21 @@ test.afterAll(async () => {
 test('ELO checkbox toggles rating visibility in player rows', async () => {
     await expect(app.checkboxElo).toBeVisible()
 
-    // Before toggling: no ELO ratings shown in player rank spans
-    const rankTexts = app.playerRanks
-    const firstRankBefore = await rankTexts.first().textContent()
-    expect(firstRankBefore).not.toMatch(/\(\d+\)/)
+    // Before toggling: no ELO elements visible
+    await expect(app.playerElos.first()).not.toBeVisible()
 
     // Enable ELO
     await app.checkboxElo.click()
 
-    // After toggling: ELO ratings should appear as (number) in at least one rank
-    await expect(rankTexts.first()).toContainText(/\(\d+\)/)
+    // After toggling: ELO element visible and shows (number) format
+    await expect(app.playerElos.first()).toBeVisible()
+    await expect(app.playerElos.first()).toContainText(/\(\d+\)/)
 
     // Disable ELO
     await app.checkboxElo.click()
 
-    // After toggling off: no ELO ratings shown
-    await expect(rankTexts.first()).not.toContainText(/\(\d+\)/)
+    // After toggling off: no ELO elements visible
+    await expect(app.playerElos.first()).not.toBeVisible()
 })
 
 test('search by steam ID and open COH3 player card', async () => {

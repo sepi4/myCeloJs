@@ -80,12 +80,12 @@ export function buildRankings(
             ranking = '-'
         }
 
-        if (showElo && players[i].rating !== undefined) {
-            ranking += `(${players[i].rating})`
-        }
-
         const faction = players[i].faction
         const teamSlot = Number(players[i].teamSlot)
+        const ratingPad =
+            showElo && players[i].rating !== undefined
+                ? players[i].rating!.toString().padEnd(7)
+                : ''
 
         const nameFun = coh3 ? commonNameCoh3 : commonName
         const maxNameLength = 20
@@ -96,6 +96,7 @@ export function buildRankings(
                     ' ' +
                     countryText(country, true, 5) +
                     ' ' +
+                    (ratingPad ? ratingPad.trimEnd().padStart(7) + ' ' : '') +
                     ranking.padStart(5) +
                     ' ' +
                     nameFun(faction).padStart(5).toUpperCase()
@@ -105,6 +106,7 @@ export function buildRankings(
                     nameFun(faction).padEnd(5).toUpperCase() +
                     ' ' +
                     ranking.padEnd(5) +
+                    (ratingPad ? ' ' + ratingPad : '') +
                     ' ' +
                     countryText(country, false, 5) +
                     ' ' +
@@ -116,6 +118,7 @@ export function buildRankings(
                 nameFun(faction).padEnd(5).toUpperCase() +
                 ' ' +
                 ranking.padEnd(5) +
+                (ratingPad ? ' ' + ratingPad : '') +
                 ' ' +
                 countryText(country, false, 5) +
                 ' ' +

@@ -28,16 +28,13 @@ function TableRankRow({ rank, num, per, streak, totalGames, ranktotal, rating }:
         Number(ranktotal) > 0 || ranktotal === '?' ? `${getText('of', settings)} ${ranktotal}` : ''
     return (
         <div className={styles.container}>
-            <span title={ranktotal}>
-                {' '}
-                {rank}
-                {rating ? ` (${rating})` : ''}{' '}
-            </span>
+            <span title={ranktotal}> {rank} </span>
             <span>
                 {num}v{num}
             </span>
-            <span>{per} </span>
+            {rating !== undefined && <span>{rating !== '-' ? `(${rating})` : '-'}</span>}
             <span style={{ color }}> {streak} </span>
+            <span>{per} </span>
             <span> {totalGames} </span>
         </div>
     )

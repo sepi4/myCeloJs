@@ -31,7 +31,7 @@ function TableRanksDiv({ solo, index, name }: Props) {
             }
             streak = r.streak
         }
-        const rating = coh3 && elo && r?.rating ? r.rating : undefined
+        const rating = coh3 && elo ? (r?.rating ?? '-') : undefined
         return (
             <TableRankRow
                 key={x + i + 'rank'}
