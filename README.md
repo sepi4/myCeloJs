@@ -109,6 +109,8 @@ After setting a log location, overlay options appear in settings:
 
 ## Updates:
 
+- **version 2.4.0.**
+    - COH3: ELO rating displayed as a separate column next to rank
 - **version 2.3.0.**
     - Font size setting: small, medium, and large options
     - OBS overlay clears automatically when the application closes
