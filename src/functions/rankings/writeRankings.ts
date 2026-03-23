@@ -83,9 +83,7 @@ export function buildRankings(
         const faction = players[i].faction
         const teamSlot = Number(players[i].teamSlot)
         const ratingPad =
-            showElo && players[i].rating !== undefined
-                ? players[i].rating!.toString().padEnd(7)
-                : ''
+            showElo && players[i].rating !== undefined ? `(${players[i].rating!})`.padEnd(7) : ''
 
         const nameFun = coh3 ? commonNameCoh3 : commonName
         const maxNameLength = 20
