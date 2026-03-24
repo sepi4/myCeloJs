@@ -32,7 +32,7 @@ describe('buildRankings', () => {
             expect(json.teams.team2.map((t) => t.name)).toEqual(['B', 'D'])
         })
 
-        it('maps faction via commonName for coh2', () => {
+        it('maps faction via getFactionCode for coh2', () => {
             const { json } = buildRankings(false, [player({ faction: 'german' })], false)
 
             expect(json.teams.team1[0].faction).toBe('wer')

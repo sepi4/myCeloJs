@@ -1,4 +1,4 @@
-import { getFactionById } from '../../constants/factionMappings'
+import { getFactionCodeById } from '../../constants/factionMappings'
 import { getExtraInfo } from '../../functions/api/getExtraInfo'
 import { getFactionFlagLocation } from '../../functions/utils/getFactionFlagLocation'
 import getText from '../../functions/utils/getText'
@@ -30,8 +30,8 @@ function ModalTableHeaders(props: Props) {
                 {props.players.map((p) => (
                     <th key={p.profile_id} className={styles.th}>
                         <img
-                            src={getFactionFlagLocation(getFactionById(p.race_id))}
-                            alt={`${getFactionById(p.race_id)}`}
+                            src={getFactionFlagLocation(getFactionCodeById(p.race_id))}
+                            alt={`${getFactionCodeById(p.race_id)}`}
                         />
                     </th>
                 ))}

@@ -1,12 +1,12 @@
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
-import { FactionName, Rank } from '../../types'
+import { Rank } from '../../types'
 import FactionIcon from './FactionIcon'
 import TableRankRow from './TableRankRow'
 
 interface Props {
     solo: (Rank | undefined)[]
     index: number
-    name: FactionName
+    name: string
 }
 
 function TableRanksDiv({ solo, index, name }: Props) {

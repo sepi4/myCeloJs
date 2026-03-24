@@ -1,6 +1,6 @@
 import { FactionName } from '../types'
 
-const COMMON_NAMES: Record<string, FactionName> = {
+const FACTION_CODES: Record<string, FactionName> = {
     british: 'uk',
     aef: 'usa',
     soviet: 'sov',
@@ -8,19 +8,19 @@ const COMMON_NAMES: Record<string, FactionName> = {
     german: 'wer',
 }
 
-export function commonName(str: string): FactionName {
-    return COMMON_NAMES[str] ?? 'wer'
+export function getFactionCode(faction: string): string {
+    return FACTION_CODES[faction] ?? ''
 }
 
-const COMMON_NAMES_COH3: Record<string, string> = {
+const FACTION_CODES_COH3: Record<string, string> = {
     americans: 'usa',
     afrika_korps: 'dak',
     british_africa: 'uk',
     germans: 'wer',
 }
 
-export function commonNameCoh3(str: string): string {
-    return COMMON_NAMES_COH3[str] ?? 'wer'
+export function getFactionCodeCoh3(faction: string): string {
+    return FACTION_CODES_COH3[faction] ?? ''
 }
 
 const FACTION_NAMES: Record<string, string> = {
@@ -37,8 +37,8 @@ const FACTION_NAMES: Record<string, string> = {
     germans: 'German',
 }
 
-export function getFactionName(x: string): string {
-    return FACTION_NAMES[x] ?? ''
+export function getFactionName(faction: string): string {
+    return FACTION_NAMES[faction] ?? ''
 }
 
 const FACTION_BY_ID: Record<number, FactionName> = {
@@ -49,6 +49,6 @@ const FACTION_BY_ID: Record<number, FactionName> = {
     4: 'uk',
 }
 
-export function getFactionById(id: number): FactionName {
-    return FACTION_BY_ID[id] ?? 'wer'
+export function getFactionCodeById(id: number): string {
+    return FACTION_BY_ID[id] ?? ''
 }

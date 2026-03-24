@@ -7,9 +7,8 @@ import flagSov from '../../assets/img/sov.png'
 import flagUk from '../../assets/img/uk.png'
 import flagUsa from '../../assets/img/usa.png'
 import flagWer from '../../assets/img/wer.png'
-import { FactionName } from '../../types'
 
-export function getFactionFlagLocation(code: FactionName) {
+export function getFactionFlagLocation(code: string) {
     switch (code) {
         case 'okw':
             return flagOkw

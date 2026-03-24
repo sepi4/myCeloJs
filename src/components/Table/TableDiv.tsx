@@ -3,7 +3,7 @@ import {
     refactronTableInfoCoh3,
 } from '../../functions/rankings/refactorTableInfo'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
-import { FactionName, Rank } from '../../types'
+import { Rank } from '../../types'
 import styles from './TableDiv.module.css'
 import TableRanksDiv from './TableRanksDiv'
 
@@ -16,7 +16,6 @@ function TableDiv({ ranksArr }: { ranksArr: Rank[] }) {
         : refactronTableInfo(ranksArr)
     const factionGrids = factionNames.map((name, i) => {
         const ii = i * 4
-        const faction: FactionName = name as FactionName
         return (
             <div
                 className={styles.factionGrid}
@@ -30,7 +29,7 @@ function TableDiv({ ranksArr }: { ranksArr: Rank[] }) {
                             : undefined,
                 }}
             >
-                <TableRanksDiv solo={solo} name={faction} index={ii} />
+                <TableRanksDiv solo={solo} name={name} index={ii} />
             </div>
         )
     })
