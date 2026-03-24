@@ -1,3 +1,4 @@
+import { commonNameCoh3 } from '../../constants/factionMappings'
 import {
     getFactionFlagLocation,
     getFactionFlagLocationCoh3,
@@ -28,6 +29,7 @@ function FactionIcon({ faction, size }: Props) {
                 }}
                 src={coh3 ? getFactionFlagLocationCoh3(faction) : getFactionFlagLocation(faction)}
                 alt={`${faction}`}
+                title={coh3 ? commonNameCoh3(faction) : faction}
             />
         </div>
     )
