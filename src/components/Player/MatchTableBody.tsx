@@ -1,6 +1,6 @@
 import getText from '../../functions/utils/getText'
 import { MatchHistoryReportResult, MatchObject, SettingsType } from '../../types'
-import styles from './ModalTableBody.module.css'
+import styles from './MatchTableBody.module.css'
 
 interface Props {
     settings: SettingsType
@@ -8,7 +8,7 @@ interface Props {
     game: MatchObject
 }
 
-function ModalTableBody(props: Props) {
+function MatchTableBody(props: Props) {
     const infoArr: string[] = (props.game?.counters ? Object.keys(props.game.counters) : [])
         .sort((a, b) => (a > b ? 1 : -1))
         .filter((k) => getText(k, props.settings) !== undefined)
@@ -28,4 +28,4 @@ function ModalTableBody(props: Props) {
     )
 }
 
-export default ModalTableBody
+export default MatchTableBody

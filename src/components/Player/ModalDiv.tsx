@@ -7,9 +7,9 @@ import {
     SettingsType,
 } from '../../types'
 import Modal from '../Modal/Modal'
+import MatchTableBody from './MatchTableBody'
+import MatchTableHeaders from './MatchTableHeaders'
 import styles from './ModalDiv.module.css'
-import ModalTableBody from './ModalTableBody'
-import ModalTableHeaders from './ModalTableHeaders'
 
 interface Props {
     game: MatchObject
@@ -58,8 +58,8 @@ function ModalDiv(props: Props) {
                 <span className={styles.value}>{durationTime}</span>
             </div>
             <table className={styles.table}>
-                <ModalTableHeaders settings={settings} players={players} profiles={profiles} />
-                <ModalTableBody game={game} settings={settings} players={players} />
+                <MatchTableHeaders settings={settings} players={players} profiles={profiles} />
+                <MatchTableBody game={game} settings={settings} players={players} />
             </table>
         </Modal>
     )

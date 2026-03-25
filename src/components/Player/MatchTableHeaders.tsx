@@ -6,7 +6,7 @@ import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { useViewStore } from '../../stores/viewStore'
 import { MatchHistoryReportResult, NormalizedProfiles, SettingsType } from '../../types'
-import styles from './ModalTableHeaders.module.css'
+import styles from './MatchTableHeaders.module.css'
 
 interface Props {
     settings: SettingsType
@@ -14,7 +14,7 @@ interface Props {
     profiles: NormalizedProfiles
 }
 
-function ModalTableHeaders(props: Props) {
+function MatchTableHeaders(props: Props) {
     const {
         navButtons: { coh3 },
     } = useNavButtonsStore()
@@ -93,4 +93,4 @@ function ModalTableHeaders(props: Props) {
         </thead>
     )
 }
-export default ModalTableHeaders
+export default MatchTableHeaders
