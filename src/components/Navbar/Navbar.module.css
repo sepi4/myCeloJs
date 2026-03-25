@@ -54,7 +54,8 @@
 .columnTop {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
+    align-self: stretch;
 }
 
 .columnTop:last-child {
@@ -70,6 +71,8 @@
 
 .iconsTop {
     padding: 0 0.5em;
+    align-self: stretch;
+    align-items: center;
 }
 
 .icons {
@@ -92,6 +95,19 @@
     padding: 0 0.4em;
     gap: 0.2em;
     padding-top: 0.5em;
+}
+
+.separatorV {
+    width: 1px;
+    align-self: stretch;
+    background-color: #444;
+    flex-shrink: 0;
+}
+
+.separatorH {
+    height: 1px;
+    background-color: #444;
+    margin: 0 -0.5em;
 }
 
 .radio {

@@ -133,6 +133,8 @@ export default function Navbar(props: Props) {
               ? styles.navbarLeft
               : styles.navbarTop
 
+    const sep = <div className={isTop ? styles.separatorV : styles.separatorH} />
+
     return (
         <div data-testid="navbar" className={`${styles.navbarBase} ${navbarVariant}`}>
             <div className={`${styles.iconsBase} ${isTop ? styles.iconsTop : styles.icons}`}>
@@ -141,10 +143,16 @@ export default function Navbar(props: Props) {
                 {settingsIcon}
             </div>
 
+            {!isTop && sep}
+
             <div className={isTop ? styles.containerTop : styles.container}>
+                {isTop && sep}
+
                 <div className={isTop ? styles.columnTop : styles.column}>
                     <NavbarRow isTop={isTop}>{buttons}</NavbarRow>
                 </div>
+
+                {sep}
 
                 <div className={isTop ? styles.columnTop : styles.column}>
                     <NavbarRow isTop={isTop}>
@@ -186,6 +194,8 @@ export default function Navbar(props: Props) {
                         </div>
                     </NavbarRow>
                 </div>
+
+                {sep}
 
                 <div className={isTop ? styles.columnTop : styles.column}>
                     <CheckLogDiv />
