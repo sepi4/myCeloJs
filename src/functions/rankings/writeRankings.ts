@@ -1,6 +1,6 @@
 import stringWidth from 'string-width'
 
-import { getFactionCode, getFactionCodeCoh3 } from '../../constants/factionMappings'
+import { getFactionCodeCoh2, getFactionCodeCoh3 } from '../../constants/factionMappings'
 import countriesJson from '../../translations/countries.json'
 import { Player, RankingsJson } from '../../types'
 
@@ -85,7 +85,7 @@ export function buildRankings(
         const ratingPad =
             showElo && players[i].rating !== undefined ? `(${players[i].rating!})`.padEnd(7) : ''
 
-        const nameFun = coh3 ? getFactionCodeCoh3 : getFactionCode
+        const nameFun = coh3 ? getFactionCodeCoh3 : getFactionCodeCoh2
         const maxNameLength = 20
         if (rankingsHorizontal) {
             if (teamSlot % 2 === 0) {
@@ -134,7 +134,7 @@ export function buildRankings(
             name,
             ranking,
             country,
-            faction: coh3 ? faction : getFactionCode(faction),
+            faction: coh3 ? faction : getFactionCodeCoh2(faction),
             ...(ratingValue !== undefined ? { rating: ratingValue } : {}),
         }
         if (teamSlot % 2 === 0) {

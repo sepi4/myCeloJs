@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { getFactionCodeById } from '../../constants/factionMappings'
+import { getFactionCodeCoh2ById } from '../../constants/factionMappings'
 import { getFactionFlagLocation } from '../../functions/utils/getFactionFlagLocation'
 import { getTimeAgo } from '../../functions/utils/time'
 import { useSettingsStore } from '../../stores/settingsStore'
@@ -54,8 +54,8 @@ export default function GameHistoryDiv(props: Props) {
                 onClick={() => setModal(true)}
             >
                 <img
-                    src={getFactionFlagLocation(getFactionCodeById(props.game.result.race_id))}
-                    alt={`${getFactionCodeById(props.game.result.race_id)}`}
+                    src={getFactionFlagLocation(getFactionCodeCoh2ById(props.game.result.race_id))}
+                    alt={`${getFactionCodeCoh2ById(props.game.result.race_id)}`}
                 />
 
                 <div className={styles.name}>

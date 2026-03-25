@@ -1,6 +1,6 @@
 import { FactionName } from '../types'
 
-const FACTION_CODES: Record<string, FactionName> = {
+const FACTION_CODES_COH2: Record<string, FactionName> = {
     british: 'uk',
     aef: 'usa',
     soviet: 'sov',
@@ -8,8 +8,8 @@ const FACTION_CODES: Record<string, FactionName> = {
     german: 'wer',
 }
 
-export function getFactionCode(faction: string): string {
-    return FACTION_CODES[faction] ?? ''
+export function getFactionCodeCoh2(faction: string): string {
+    return FACTION_CODES_COH2[faction] ?? ''
 }
 
 const FACTION_CODES_COH3: Record<string, string> = {
@@ -49,6 +49,6 @@ const FACTION_BY_ID: Record<number, FactionName> = {
     4: 'uk',
 }
 
-export function getFactionCodeById(id: number): string {
+export function getFactionCodeCoh2ById(id: number): string {
     return FACTION_BY_ID[id] ?? ''
 }

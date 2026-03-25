@@ -1,7 +1,7 @@
 import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { getFactionCode, getFactionCodeCoh3 } from '../../constants/factionMappings'
+import { getFactionCodeCoh2, getFactionCodeCoh3 } from '../../constants/factionMappings'
 import { getTotalGames } from '../../functions/rankings/simpleFunctions'
 import {
     getFactionFlagLocation,
@@ -109,8 +109,10 @@ function PlayerMainRow(props: Props) {
 
     const factionFlag = coh3
         ? getFactionFlagLocationCoh3(player.faction)
-        : getFactionFlagLocation(getFactionCode(player.faction))
-    const factionTitle = coh3 ? getFactionCodeCoh3(player.faction) : getFactionCode(player.faction)
+        : getFactionFlagLocation(getFactionCodeCoh2(player.faction))
+    const factionTitle = coh3
+        ? getFactionCodeCoh3(player.faction)
+        : getFactionCodeCoh2(player.faction)
     const faction = (
         <span title={factionTitle}>
             <img className={styles.factionFlag} src={factionFlag} alt={player.faction} />
