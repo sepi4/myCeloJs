@@ -2,7 +2,7 @@
 set -e
 
 VERSION=$(node -p "require('./package.json').version")
-TAG="v$VERSION"
+TAG="$VERSION"
 APPIMAGE="dist/myCelo-${VERSION}.AppImage"
 DEB="dist/mycelo_${VERSION}_amd64.deb"
 EXE="dist/myCelo Setup ${VERSION}.exe"
