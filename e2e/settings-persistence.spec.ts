@@ -37,7 +37,7 @@ test('set all settings to non-default values', async () => {
     await app.fontSizeLarge.click()
 
     // Theme: default → nord
-    await app.themeNord.click()
+    await app.themeSelect.selectOption('nord')
 
     // Log locations
     await app.mockFileDialog(electronApp, COH2_LOG_PATH)
@@ -129,7 +129,7 @@ test('settings persist after restart', async () => {
     expect(rootFontSize).toBe('150%')
 
     // Theme is nord
-    await expect(app.themeNord).toBeChecked()
+    await expect(app.themeSelect).toHaveValue('nord')
     const theme = await page.evaluate(() => document.documentElement.getAttribute('data-theme'))
     expect(theme).toBe('nord')
 
