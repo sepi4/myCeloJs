@@ -107,6 +107,10 @@ const text: Translations = {
         en: 'Nord',
         ru: 'Норд',
     },
+    theme_dark: {
+        en: 'Dark',
+        ru: 'Тёмная',
+    },
 
     log_location_first: {
         en: 'Add log location file first',

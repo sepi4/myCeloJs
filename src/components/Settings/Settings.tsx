@@ -288,7 +288,7 @@ function Settings(props: Props) {
                             className={styles.select}
                             style={{ marginTop: '0.3em' }}
                         >
-                            {(['default', 'ember', 'nord', 'light'] as const).map((t) => (
+                            {(['default', 'ember', 'nord', 'dark', 'light'] as const).map((t) => (
                                 <option key={t} value={t}>
                                     {getText(`theme_${t}`, settings)}
                                 </option>
