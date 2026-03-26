@@ -37,9 +37,10 @@ Thanks to <a href="https://github.com/RosboneMako/MakoCelo">Rosbone/MakoCelo</a>
 
 **Display**
 
-- **Language** — English or Russian
-- **Navbar position** — top, left, or right
-- **Font size** — small, medium, or large
+- **Language**
+- **Navbar position**
+- **Font size**
+- **Theme**
 
 **Player identity**
 
