@@ -102,6 +102,37 @@ test('font size changes update the root font size', async () => {
     await app.closeButton.click()
 })
 
+test('theme changes update the data-theme attribute', async () => {
+    await app.settingsIcon.click()
+
+    // Default theme should be selected
+    await expect(app.themeDefault).toBeChecked()
+    let theme = await page.evaluate(() => document.documentElement.getAttribute('data-theme'))
+    expect(theme).toBe('default')
+
+    // Switch to ember
+    await app.themeEmber.click()
+    theme = await page.evaluate(() => document.documentElement.getAttribute('data-theme'))
+    expect(theme).toBe('ember')
+
+    // Switch to nord
+    await app.themeNord.click()
+    theme = await page.evaluate(() => document.documentElement.getAttribute('data-theme'))
+    expect(theme).toBe('nord')
+
+    // Switch to light
+    await app.themeLight.click()
+    theme = await page.evaluate(() => document.documentElement.getAttribute('data-theme'))
+    expect(theme).toBe('light')
+
+    // Reset back to default
+    await app.themeDefault.click()
+    theme = await page.evaluate(() => document.documentElement.getAttribute('data-theme'))
+    expect(theme).toBe('default')
+
+    await app.closeButton.click()
+})
+
 test('reset all settings - cancel keeps settings, ok clears and reloads', async () => {
     // Open settings — log location is set so the reset button should be enabled
     await app.settingsIcon.click()

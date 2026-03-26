@@ -68,6 +68,12 @@ export class App {
     readonly fontSizeMedium: Locator
     readonly fontSizeLarge: Locator
 
+    // Theme
+    readonly themeDefault: Locator
+    readonly themeEmber: Locator
+    readonly themeNord: Locator
+    readonly themeLight: Locator
+
     // OBS / rankings settings
     readonly radioHtml: Locator
     readonly radioTxt: Locator
@@ -143,6 +149,11 @@ export class App {
         this.fontSizeSmall = page.getByTestId('font-size-small')
         this.fontSizeMedium = page.getByTestId('font-size-medium')
         this.fontSizeLarge = page.getByTestId('font-size-large')
+
+        this.themeDefault = page.getByTestId('theme-default')
+        this.themeEmber = page.getByTestId('theme-ember')
+        this.themeNord = page.getByTestId('theme-nord')
+        this.themeLight = page.getByTestId('theme-light')
 
         this.radioHtml = page.getByTestId('radio-html')
         this.radioTxt = page.getByTestId('radio-txt')
