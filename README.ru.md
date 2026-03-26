@@ -2,6 +2,7 @@
 - [Установка и настройка](#install)
 - [Настройки](#settings)
 - [OBS оверлей для стримеров](#obs-overlay)
+- [Changelog](./CHANGELOG.md)
 
 [English version](./README.md)
 
