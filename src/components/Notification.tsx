@@ -12,8 +12,8 @@ function Notification({ text, style, testId }: NotificationProps) {
             data-testid={testId}
             style={{
                 display: 'inline-block',
-                color: '#ddd',
-                backgroundColor: '#222',
+                color: 'var(--text-primary)',
+                backgroundColor: 'var(--bg-secondary)',
                 padding: '0 .2em',
                 margin: '0 0 0 .2em',
                 ...style,

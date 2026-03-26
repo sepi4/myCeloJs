@@ -2,7 +2,7 @@
     flex-shrink: 0;
     background: none;
     border: none;
-    color: #cc0000;
+    color: var(--text-danger);
     font-size: 1.1em;
     cursor: pointer;
     line-height: 1;
@@ -11,6 +11,6 @@
 }
 
 .clearButton:hover {
-    background-color: rgba(204, 0, 0, 0.15);
-    color: #ff0000;
+    background-color: var(--bg-danger-hover);
+    color: var(--text-danger-hover);
 }

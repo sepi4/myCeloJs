@@ -2,7 +2,7 @@
     text-align: center;
 }
 .row:hover {
-    background-color: rgb(38, 38, 38);
+    background-color: var(--bg-hover);
 }
 
 .row td {
@@ -12,6 +12,6 @@
 
 .name {
     font-weight: bold;
-    color: gray;
+    color: var(--text-muted);
     text-align: left;
 }

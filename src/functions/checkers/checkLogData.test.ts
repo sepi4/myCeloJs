@@ -47,6 +47,7 @@ const settings = {
     profileIdCoh3: 789,
     navbarPosition: 'top' as const,
     fontSize: 'small' as const,
+    theme: 'default' as const,
 }
 
 function resetAllStores() {

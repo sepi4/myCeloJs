@@ -14,5 +14,5 @@
     font-style: italic;
     font-size: 80%;
     margin-bottom: 0.6em;
-    color: gray;
+    color: var(--text-muted);
 }

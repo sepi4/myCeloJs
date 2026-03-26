@@ -1,7 +1,7 @@
 .overlay {
     position: fixed;
     inset: 0;
-    background-color: rgba(200, 200, 200, 0.5);
+    background-color: var(--bg-overlay);
 }
 
 .content {
@@ -12,21 +12,21 @@
     right: 0;
     margin: 5em 2em 2em 2em;
     padding: 1em;
-    border: 1px solid #fff;
-    background-color: #181818;
-    color: #ddd;
+    border: 1px solid var(--modal-border);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
     overflow-y: auto;
 }
 
 .label {
     display: inline-block;
-    color: gray;
+    color: var(--text-muted);
     font-size: 90%;
     min-width: 40%;
 }
 
 .value {
-    color: yellow;
+    color: var(--accent-highlight);
 }
 
 .table {

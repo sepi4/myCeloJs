@@ -1,5 +1,5 @@
 .container {
-    background: #181818;
+    background: var(--bg-primary);
     padding: 0.5em 1.5em;
     margin: 1em 0;
     position: relative;
@@ -10,12 +10,12 @@
     top: 0;
     left: 0;
     cursor: pointer;
-    color: #aaa;
+    color: var(--text-muted);
     font-size: 1.15em;
     padding: 0.2em 0.2em;
     z-index: 1;
 }
 
 .toggleAll:hover {
-    color: #ddd;
+    color: var(--text-primary);
 }

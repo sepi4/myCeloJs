@@ -9,5 +9,5 @@
 }
 
 .container:hover {
-    background-color: #2b2b2b;
+    background-color: var(--bg-hover);
 }

@@ -8,5 +8,5 @@ span .label {
 }
 span .input {
     cursor: pointer;
-    accent-color: #111;
+    accent-color: var(--accent-input);
 }

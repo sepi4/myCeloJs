@@ -88,7 +88,7 @@ function PlayerMainRow(props: Props) {
                     icon={showExtra ? faCaretDown : faCaretRight}
                     size="lg"
                     style={{
-                        color: '#ddd',
+                        color: 'var(--text-primary)',
                         cursor: 'pointer',
                     }}
                     onClick={extraInfo ? handleSetShowExtra : undefined}

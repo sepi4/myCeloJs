@@ -1,5 +1,5 @@
 .span {
-    color: #ddd;
+    color: var(--text-primary);
     font-weight: bold;
     display: flex;
     align-items: center;

@@ -64,10 +64,12 @@ export type SettingsType = {
     ignoreUntil?: string
     navbarPosition: NavbarPosition
     fontSize: FontSize
+    theme: Theme
 }
 
 export type NavbarPosition = 'left' | 'right' | 'top'
 export type FontSize = 'small' | 'medium' | 'large'
+export type Theme = 'default' | 'ember' | 'nord' | 'light'
 
 export type StatGroup = {
     id: number

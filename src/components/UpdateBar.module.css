@@ -1,6 +1,6 @@
 .container {
-    background-color: #181818;
-    color: #ddd;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
     height: 2.5em;
     width: 100%;
     position: fixed;
@@ -10,21 +10,21 @@
     align-items: center;
     justify-content: center;
     font-size: 90%;
-    border-top: 2px solid black;
+    border-top: 2px solid var(--text-on-surface);
 }
 
 .btn {
     display: inline;
-    background-color: #181818;
-    border: 0.1em solid gray;
+    background-color: var(--bg-primary);
+    border: 0.1em solid var(--bg-body);
     margin-left: 1em;
     padding: 0.1em 0.3em;
-    color: gray;
+    color: var(--bg-body);
     cursor: pointer;
     font-size: 1em;
 }
 
 .btn:hover {
-    background-color: #252525;
-    color: #ddd;
+    background-color: var(--bg-hover);
+    color: var(--text-primary);
 }

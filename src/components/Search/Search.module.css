@@ -1,8 +1,8 @@
 .container {
-    background: #181818;
+    background: var(--bg-primary);
     padding: 0.5em;
     margin: 1em 0;
-    color: #dddddd;
+    color: var(--text-primary);
 
     display: flex;
     flex-wrap: wrap;
@@ -15,9 +15,10 @@
 }
 
 .input {
-    background-color: #dddddd;
+    background-color: var(--bg-input-light);
+    color: var(--text-on-surface);
     padding: 0.3em;
-    border: solid 0.05em #555;
+    border: solid 0.05em var(--border-secondary);
     font-size: inherit;
 }
 

@@ -18,7 +18,7 @@ function SettingsDiv(props: Props) {
         <span
             title={props.requiredTitle ?? getText('required', settings)}
             style={{
-                color: 'darkred',
+                color: 'var(--text-danger)',
                 fontWeight: 'bold',
                 fontSize: '150%',
             }}

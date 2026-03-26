@@ -3,12 +3,12 @@
 }
 
 .input {
-    background-color: #181818;
-    color: #ddd;
+    background-color: var(--bg-input);
+    color: var(--text-primary);
     height: 1em;
     width: 2.8em;
     border: none;
-    border-bottom: solid 0.1em gray;
+    border-bottom: solid 0.1em var(--bg-body);
     font-size: 100%;
     text-align: center;
 }
@@ -17,7 +17,7 @@
     position: absolute;
     top: 100%;
     left: 0;
-    color: red;
+    color: var(--text-error);
     font-size: 70%;
     white-space: nowrap;
 }

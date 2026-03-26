@@ -54,10 +54,10 @@ function MatchTableHeaders(props: Props) {
                             style={{
                                 color:
                                     p.resulttype === 1
-                                        ? 'green'
+                                        ? 'var(--accent-positive)'
                                         : p.resulttype === 0
-                                          ? 'red'
-                                          : 'blue',
+                                          ? 'var(--accent-negative)'
+                                          : 'var(--accent-neutral)',
                                 cursor: 'pointer',
                             }}
                         >

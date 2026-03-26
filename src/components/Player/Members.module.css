@@ -2,7 +2,7 @@
     margin-left: 1em;
     font-size: 0.9em;
     cursor: pointer;
-    color: green;
+    color: var(--accent-positive);
 }
 
 .flagImage {

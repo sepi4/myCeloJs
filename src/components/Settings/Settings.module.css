@@ -1,10 +1,10 @@
 .textDiv {
     min-height: 1em;
     font-size: 90%;
-    background-color: #999;
+    background-color: var(--bg-settings-text);
     padding: 0.3em;
     margin-bottom: 0.2em;
-    border: solid 0.05em #555;
+    border: solid 0.05em var(--border-secondary);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -32,17 +32,18 @@
 
 .input {
     width: 100%;
-    background-color: #dddddd;
+    background-color: var(--bg-input-light);
+    color: var(--text-on-surface);
     padding: 0.3em;
     padding-right: 2em;
-    border: solid 0.05em #555;
+    border: solid 0.05em var(--border-secondary);
     box-sizing: border-box;
     font: inherit;
 }
 
 .error {
-    background-color: darkred;
-    color: white;
+    background-color: var(--bg-danger);
+    color: var(--spinner-color);
     font-size: 90%;
     padding: 0.2em;
     margin-left: 1em;
@@ -58,10 +59,10 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: gray;
-    color: black;
+    background-color: var(--bg-body);
+    color: var(--text-on-surface);
     font-weight: bold;
-    border: 1px solid #444;
+    border: 1px solid var(--border-separator);
     padding: 2em;
     text-align: center;
 }
@@ -69,26 +70,35 @@
 .resetConfirmOverlay {
     position: fixed;
     inset: 0;
-    background-color: rgba(200, 200, 200, 0.5);
+    background-color: var(--bg-overlay);
 }
 
 .button {
     margin: 0.2em 0;
     width: 25vw;
-    color: #ddd;
+    color: var(--text-primary);
     cursor: pointer;
-    background-color: #222;
+    background-color: var(--bg-secondary);
     padding: 0.2em 0;
     font-size: 1em;
     border: 0;
 }
 
 .button:active {
-    color: black;
-    background-color: #ddd;
+    color: var(--text-on-surface);
+    background-color: var(--text-primary);
 }
 
 .button:disabled {
     opacity: 0.35;
     cursor: default;
+}
+
+.radio {
+    margin-right: 0.4em;
+    accent-color: var(--accent-input);
+}
+
+.dangerText {
+    color: var(--text-danger);
 }

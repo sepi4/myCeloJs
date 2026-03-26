@@ -75,6 +75,7 @@ function App() {
                 const newSettings = JSON.parse(data)
                 newSettings.navbarPosition ??= 'top'
                 newSettings.fontSize ??= 'small'
+                newSettings.theme ??= 'default'
                 newSettings.appLocation = appLocation
 
                 // update overlay port for current session
@@ -224,6 +225,10 @@ function App() {
         document.documentElement.style.fontSize = sizeMap[size]
         document.documentElement.style.setProperty('--input-scale', scaleMap[size])
     }, [settings?.fontSize])
+
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', settings?.theme ?? 'default')
+    }, [settings?.theme])
 
     const handleSetSettingsView = async () => {
         if (!autoLogChecking) {

@@ -1,5 +1,5 @@
 .active {
-    color: yellow;
+    color: var(--accent-highlight);
     font-weight: bold;
     cursor: pointer;
 }

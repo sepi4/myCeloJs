@@ -33,8 +33,12 @@ function RanksList(props: Props) {
                             <Rank allOpen={props.allOpen} rank={r} />
                         </Cell>
                         {coh3 && elo && <Cell>{r.rating ? `(${r.rating})` : '-'}</Cell>}
-                        <Cell color={positive ? 'green' : 'red'}>{streak}</Cell>
-                        <Cell color={'#FFFF66'}>{per}</Cell>
+                        <Cell
+                            color={positive ? 'var(--accent-positive)' : 'var(--accent-negative)'}
+                        >
+                            {streak}
+                        </Cell>
+                        <Cell color={'var(--accent-highlight-soft)'}>{per}</Cell>
                         <Cell>{totalGames}</Cell>
                     </div>
                 )

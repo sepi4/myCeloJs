@@ -15,7 +15,7 @@ export default function Icon({
     fun,
     size = '2x',
     testId,
-    color = '#dddddd',
+    color = 'var(--text-primary)',
 }: IconProps): JSX.Element {
     return (
         <div

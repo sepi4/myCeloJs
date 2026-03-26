@@ -99,7 +99,7 @@ export default function SettingsAfterLog() {
     // if log-file not set
     return (
         <SettingsDiv title={getText('settings_file_location_title', settings)}>
-            <p style={{ color: 'darkred' }}>{getText('log_location_first', settings)}</p>
+            <p style={{ color: 'var(--text-danger)' }}>{getText('log_location_first', settings)}</p>
         </SettingsDiv>
     )
 }

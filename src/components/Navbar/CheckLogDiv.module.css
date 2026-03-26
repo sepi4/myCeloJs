@@ -2,8 +2,8 @@
     text-align: center;
     margin: 0;
     width: 6em;
-    color: black;
-    background-color: gray;
+    color: var(--text-on-surface);
+    background-color: var(--bg-body);
     border-radius: 0.2em;
     border: 0;
     cursor: pointer;
@@ -11,7 +11,7 @@
     font: inherit;
 }
 .btn:active {
-    background-color: #fff;
+    background-color: var(--modal-border);
 }
 .btn:hover {
     opacity: 70%;

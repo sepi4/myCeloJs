@@ -1,15 +1,16 @@
 .settingsDiv {
     padding: 1em;
+    color: var(--text-on-surface);
 }
 
 .settingsDiv:hover {
-    background-color: #666;
+    background-color: var(--bg-hover-alt);
 }
 
 .contentDiv {
     margin: 0.2em 0 0 0;
     min-width: 100%;
     min-height: 1em;
-    color: black;
+    color: var(--text-on-surface);
     overflow-wrap: break-word;
 }

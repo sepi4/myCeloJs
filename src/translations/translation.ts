@@ -87,6 +87,27 @@ const text: Translations = {
         ru: 'Большой',
     },
 
+    theme: {
+        en: 'Theme',
+        ru: 'Тема',
+    },
+    theme_default: {
+        en: 'Default',
+        ru: 'По умолчанию',
+    },
+    theme_light: {
+        en: 'Light',
+        ru: 'Светлая',
+    },
+    theme_ember: {
+        en: 'Ember',
+        ru: 'Угли',
+    },
+    theme_nord: {
+        en: 'Nord',
+        ru: 'Норд',
+    },
+
     log_location_first: {
         en: 'Add log location file first',
         ru: 'Надо сначала указать расположение лог-файла',

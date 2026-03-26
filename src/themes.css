@@ -1,0 +1,168 @@
+/* Default theme */
+:root,
+[data-theme='default'] {
+    --bg-body: gray;
+    --bg-primary: #181818;
+    --bg-secondary: #222;
+    --bg-hover: #2b2b2b;
+    --bg-hover-alt: #666;
+    --bg-input: #181818;
+    --bg-input-light: #dddddd;
+    --bg-settings-text: #999;
+    --bg-overlay: rgba(200, 200, 200, 0.5);
+    --bg-danger: darkred;
+    --bg-danger-hover: rgba(204, 0, 0, 0.15);
+
+    --text-primary: #ddd;
+    --text-secondary: #ccc;
+    --text-muted: #aaa;
+    --text-info: #cfcfcf;
+    --text-on-surface: black;
+    --text-danger: #cc0000;
+    --text-danger-hover: #ff0000;
+    --text-error: red;
+
+    --border-primary: #ddd;
+    --border-secondary: #555;
+    --border-separator: #444;
+
+    --accent-highlight: yellow;
+    --accent-positive: green;
+    --accent-negative: red;
+    --accent-neutral: blue;
+    --accent-input: #111;
+    --accent-highlight-soft: #ffff66;
+
+    --scrollbar-track: gray;
+    --scrollbar-thumb: rgb(66, 66, 66);
+    --scrollbar-thumb-hover: rgb(50, 50, 50);
+
+    --spinner-color: #fff;
+    --modal-border: #fff;
+}
+
+/* Light theme */
+[data-theme='light'] {
+    --bg-body: #e0e0e0;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f5f5;
+    --bg-hover: #e8e8e8;
+    --bg-hover-alt: #d0d0d0;
+    --bg-input: #ffffff;
+    --bg-input-light: #f0f0f0;
+    --bg-settings-text: #e0e0e0;
+    --bg-overlay: rgba(0, 0, 0, 0.4);
+    --bg-danger: #ffebee;
+    --bg-danger-hover: rgba(204, 0, 0, 0.08);
+
+    --text-primary: #222222;
+    --text-secondary: #444444;
+    --text-muted: #666666;
+    --text-info: #555555;
+    --text-on-surface: #222222;
+    --text-danger: #cc0000;
+    --text-danger-hover: #ff0000;
+    --text-error: #cc0000;
+
+    --border-primary: #aaaaaa;
+    --border-secondary: #aaaaaa;
+    --border-separator: #bbbbbb;
+
+    --accent-highlight: #b8860b;
+    --accent-positive: #2e7d32;
+    --accent-negative: #c62828;
+    --accent-neutral: #1565c0;
+    --accent-input: #1565c0;
+    --accent-highlight-soft: #c49000;
+
+    --scrollbar-track: #e0e0e0;
+    --scrollbar-thumb: #b0b0b0;
+    --scrollbar-thumb-hover: #909090;
+
+    --spinner-color: #333;
+    --modal-border: #999;
+}
+
+/* Ember — warm dark theme with amber/orange glow */
+[data-theme='ember'] {
+    --bg-body: #5a3828;
+    --bg-primary: #1c1210;
+    --bg-secondary: #281a16;
+    --bg-hover: #30201c;
+    --bg-hover-alt: #4a3028;
+    --bg-input: #1c1210;
+    --bg-input-light: #3a2820;
+    --bg-settings-text: #4a3530;
+    --bg-overlay: rgba(10, 5, 0, 0.6);
+    --bg-danger: #4a1515;
+    --bg-danger-hover: rgba(200, 50, 30, 0.2);
+
+    --text-primary: #e8d8c8;
+    --text-secondary: #c8b098;
+    --text-muted: #a08870;
+    --text-info: #c0a888;
+    --text-on-surface: #e8d8c8;
+    --text-danger: #ff6044;
+    --text-danger-hover: #ff4422;
+    --text-error: #ff6044;
+
+    --border-primary: #6a4a38;
+    --border-secondary: #4a3028;
+    --border-separator: #4a3028;
+
+    --accent-highlight: #f0a030;
+    --accent-positive: #80c840;
+    --accent-negative: #e85040;
+    --accent-neutral: #50a0d0;
+    --accent-input: #3a2018;
+    --accent-highlight-soft: #e8b040;
+
+    --scrollbar-track: #2a1a14;
+    --scrollbar-thumb: #4a3028;
+    --scrollbar-thumb-hover: #6a4a38;
+
+    --spinner-color: #e8d8c8;
+    --modal-border: #6a4a38;
+}
+
+/* Nord — cool blue-gray inspired by arctic twilight */
+[data-theme='nord'] {
+    --bg-body: #3b4252;
+    --bg-primary: #272c36;
+    --bg-secondary: #2e3440;
+    --bg-hover: #353b48;
+    --bg-hover-alt: #434c5e;
+    --bg-input: #272c36;
+    --bg-input-light: #2e3440;
+    --bg-settings-text: #3b4252;
+    --bg-overlay: rgba(10, 15, 25, 0.6);
+    --bg-danger: #3b2230;
+    --bg-danger-hover: rgba(190, 70, 80, 0.2);
+
+    --text-primary: #d8dee9;
+    --text-secondary: #b8c4d4;
+    --text-muted: #8090a8;
+    --text-info: #a0b4c8;
+    --text-on-surface: #d8dee9;
+    --text-danger: #bf616a;
+    --text-danger-hover: #d06070;
+    --text-error: #bf616a;
+
+    --border-primary: #5a6578;
+    --border-secondary: #4c566a;
+    --border-separator: #4c566a;
+
+    --accent-highlight: #ebcb8b;
+    --accent-positive: #a3be8c;
+    --accent-negative: #bf616a;
+    --accent-neutral: #81a1c1;
+    --accent-input: #3b4252;
+    --accent-highlight-soft: #d4b06a;
+
+    --scrollbar-track: #2e3440;
+    --scrollbar-thumb: #3b4252;
+    --scrollbar-thumb-hover: #4c566a;
+
+    --spinner-color: #d8dee9;
+    --modal-border: #4c566a;
+}

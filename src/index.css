@@ -10,7 +10,8 @@
 
 body {
     cursor: default;
-    background-color: gray;
+    background-color: var(--bg-body);
+    color: var(--text-primary);
     font-size: 100%;
 }
 
@@ -27,15 +28,15 @@ table {
 }
 /* Track */
 ::-webkit-scrollbar-track {
-    background: gray;
+    background: var(--scrollbar-track);
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: rgb(66, 66, 66);
+    background: var(--scrollbar-thumb);
 }
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: rgb(50, 50, 50);
+    background: var(--scrollbar-thumb-hover);
 }
 
 input[type='checkbox'],

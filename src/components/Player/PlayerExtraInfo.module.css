@@ -1,5 +1,5 @@
 .container {
-    color: #ddd;
+    color: var(--text-primary);
     padding: 0.5em 0;
 }
 

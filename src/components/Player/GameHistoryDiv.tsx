@@ -23,12 +23,12 @@ export default function GameHistoryDiv(props: Props) {
         return null
     }
 
-    let backgroundColor = 'blue'
+    let backgroundColor = 'var(--accent-neutral)'
     if (props.game.result.resulttype === 1) {
-        backgroundColor = 'green'
+        backgroundColor = 'var(--accent-positive)'
     }
     if (props.game.result.resulttype === 0) {
-        backgroundColor = 'red'
+        backgroundColor = 'var(--accent-negative)'
     }
 
     const players = props.game.players.sort((a, b) => b.teamid - a.teamid)

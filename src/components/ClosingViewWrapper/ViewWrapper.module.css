@@ -1,6 +1,6 @@
 .container {
-    background: #181818;
+    background: var(--bg-primary);
     padding: 0.5em;
     margin: 1em 0;
-    color: #dddddd;
+    color: var(--text-primary);
 }

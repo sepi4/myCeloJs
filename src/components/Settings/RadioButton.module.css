@@ -6,10 +6,10 @@
 }
 
 .span:hover {
-    color: #ddd;
+    color: var(--text-primary);
 }
 
 .span input {
     margin-right: 0.5em;
-    accent-color: #111;
+    accent-color: var(--accent-input);
 }

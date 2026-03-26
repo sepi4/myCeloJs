@@ -2,13 +2,13 @@
     display: flex;
     flex-direction: column;
     gap: 2em;
-    color: #ccc;
+    color: var(--text-secondary);
     padding: 0.3em 0.5em;
 }
 
 .navbarBase {
-    background-color: #181818;
-    color: #ddd;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
     position: fixed;
     top: 0;
     display: flex;
@@ -48,7 +48,7 @@
 
 .containerTop {
     display: contents;
-    color: #ccc;
+    color: var(--text-secondary);
 }
 
 .columnTop {
@@ -100,13 +100,13 @@
 .separatorV {
     width: 1px;
     align-self: stretch;
-    background-color: #444;
+    background-color: var(--border-separator);
     flex-shrink: 0;
 }
 
 .separatorH {
     height: 1px;
-    background-color: #444;
+    background-color: var(--border-separator);
     margin: 0 -0.5em;
 }
 
@@ -117,7 +117,7 @@
 
 .radio input {
     cursor: pointer;
-    accent-color: #111;
+    accent-color: var(--accent-input);
 }
 
 .radio label {

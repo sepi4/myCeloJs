@@ -8,7 +8,7 @@ import useEsc from '../../hooks/useEsc'
 import useTimedBoolean from '../../hooks/useTimedBoolean'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { useSettingsViewStore } from '../../stores/settingsViewStore'
-import { FontSize, Language, NavbarPosition, SettingsType } from '../../types'
+import { FontSize, Language, NavbarPosition, SettingsType, Theme } from '../../types'
 import Icon from '../Icon'
 import Modal from '../Modal/Modal'
 import Notification from '../Notification'
@@ -28,6 +28,7 @@ function Settings(props: Props) {
     const lg = settings && settings.language ? settings.language : 'en'
     const navbarPosition = settings?.navbarPosition ?? 'top'
     const fontSize = settings?.fontSize ?? 'small'
+    const theme = settings?.theme ?? 'default'
 
     const handleNavbarPosition = (pos: NavbarPosition) => {
         writeSettings({ ...settings!, navbarPosition: pos })
@@ -35,6 +36,10 @@ function Settings(props: Props) {
 
     const handleFontSize = (size: FontSize) => {
         writeSettings({ ...settings!, fontSize: size })
+    }
+
+    const handleTheme = (t: Theme) => {
+        writeSettings({ ...settings!, theme: t })
     }
 
     const [resetConfirmOpen, setResetConfirmOpen] = useState(false)
@@ -138,8 +143,8 @@ function Settings(props: Props) {
         <Notification
             testId="steam-id-error"
             style={{
-                backgroundColor: 'darkred',
-                color: 'white',
+                backgroundColor: 'var(--bg-danger)',
+                color: 'var(--spinner-color)',
             }}
             text={getText('id_is_wrong', settings)}
         />
@@ -160,7 +165,12 @@ function Settings(props: Props) {
 
     return (
         <div>
-            <Icon fun={handleClose} icon={faTimes} testId="close-button" color="#222" />
+            <Icon
+                fun={handleClose}
+                icon={faTimes}
+                testId="close-button"
+                color="var(--text-on-surface)"
+            />
             <SettingsDiv>
                 <div style={{ display: 'flex', gap: '2em', flexWrap: 'wrap' }}>
                     <div>
@@ -191,7 +201,7 @@ function Settings(props: Props) {
                                         value={lang}
                                         checked={lg === lang}
                                         onChange={() => handleLanguage(lang)}
-                                        style={{ marginRight: '0.4em', accentColor: '#111' }}
+                                        className={styles.radio}
                                     />
                                     {lang.toUpperCase()}
                                 </label>
@@ -229,7 +239,7 @@ function Settings(props: Props) {
                                         value={pos}
                                         checked={navbarPosition === pos}
                                         onChange={() => handleNavbarPosition(pos)}
-                                        style={{ marginRight: '0.4em', accentColor: '#111' }}
+                                        className={styles.radio}
                                     />
                                     {getText(`navbar_${pos}`, settings)}
                                 </label>
@@ -262,9 +272,42 @@ function Settings(props: Props) {
                                         value={size}
                                         checked={fontSize === size}
                                         onChange={() => handleFontSize(size)}
-                                        style={{ marginRight: '0.4em', accentColor: '#111' }}
+                                        className={styles.radio}
                                     />
                                     {getText(`font_${size}`, settings)}
+                                </label>
+                            ))}
+                        </div>
+                    </div>
+                    <div>
+                        <div style={{ fontWeight: 'bold' }}>{getText('theme', settings)}</div>
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '0.3em',
+                                marginTop: '0.3em',
+                            }}
+                        >
+                            {(['default', 'ember', 'nord', 'light'] as const).map((t) => (
+                                <label
+                                    key={t}
+                                    style={{
+                                        cursor: 'pointer',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                    }}
+                                >
+                                    <input
+                                        data-testid={`theme-${t}`}
+                                        type="radio"
+                                        name="theme"
+                                        value={t}
+                                        checked={theme === t}
+                                        onChange={() => handleTheme(t)}
+                                        className={styles.radio}
+                                    />
+                                    {getText(`theme_${t}`, settings)}
                                 </label>
                             ))}
                         </div>
