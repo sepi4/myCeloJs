@@ -109,6 +109,10 @@ After setting a log location, overlay options appear in settings:
 
 ## Updates:
 
+- **version 2.5.0.**
+    - Theme selector with 5 color themes (Default, Ember, Nord, Dark, Light)
+    - Separator lines between navbar groups
+    - Fix: show correct faction title on hover for COH3
 - **version 2.4.0.**
     - COH3: ELO rating displayed as a separate column next to rank
 - **version 2.3.0.**
