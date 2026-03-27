@@ -4,45 +4,52 @@ import FactionIcon from './FactionIcon'
 import TableRankRow from './TableRankRow'
 
 interface Props {
-    solo: (Rank | undefined)[]
-    index: number
-    name: string
+    ranks: (Rank | undefined)[]
+    startIndex: number
+    faction: string
 }
 
-function TableRanksDiv({ solo, index, name }: Props) {
+function TableRanksDiv({ ranks, startIndex, faction }: Props) {
     const {
         navButtons: { coh3, elo },
     } = useNavButtonsStore()
-    const rows = [0, 1, 2, 3].map((x, i) => {
-        const num = x + 1
-        const r = solo[index]
-        index++
-        let per = '-'
+    const rows = [0, 1, 2, 3].map((offset) => {
+        const teamSize = offset + 1
+        const rankData = ranks[startIndex + offset]
+        let winPercent = '-'
         let totalGames = 0
         let rank: number | string = '-'
         let streak: number | string = '-'
-        const ranktotal = r?.ranktotal ?? '?'
-        if (r) {
-            const x = (r.wins / (r.wins + r.losses)) * 100
-            per = x.toFixed(0) + '%'
-            totalGames = r.wins + r.losses
-            if (r.rank > 0) {
-                rank = r.rank
+        const rankTotal = rankData?.ranktotal ?? '?'
+        if (rankData) {
+            const winRate = (rankData.wins / (rankData.wins + rankData.losses)) * 100
+            winPercent = winRate.toFixed(0) + '%'
+            totalGames = rankData.wins + rankData.losses
+            if (rankData.rank > 0) {
+                rank = rankData.rank
             }
-            streak = r.streak
+            streak = rankData.streak
         }
-        const rating = coh3 && elo ? (r?.rating ?? '-') : undefined
+        const rating = coh3 && elo ? (rankData?.rating ?? '-') : undefined
         return (
             <TableRankRow
-                key={x + i + 'rank'}
-                {...{ rank, num, per, streak, totalGames, ranktotal, rating }}
+                key={offset + 'rank'}
+                {...{
+                    rank,
+                    teamSize,
+                    winPercent,
+                    streak,
+                    totalGames,
+                    rankTotal,
+                    rating,
+                }}
             />
         )
     })
 
     return (
         <>
-            <FactionIcon faction={name} size="2.2em" />
+            <FactionIcon faction={faction} size="2.2em" />
             <div style={{ gridColumn: '2 / 7' }}>{rows}</div>
         </>
     )

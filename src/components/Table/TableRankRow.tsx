@@ -4,18 +4,26 @@ import styles from './TableRankRow.module.css'
 
 interface Props {
     rank: number | string
-    num: number
-    per: string
+    teamSize: number
+    winPercent: string
     streak: number | string
     totalGames: number | string
-    ranktotal: number | string
+    rankTotal: number | string
     rating?: number | string
 }
 
-function TableRankRow({ rank, num, per, streak, totalGames, ranktotal, rating }: Props) {
+function TableRankRow({
+    rank,
+    teamSize,
+    winPercent,
+    streak,
+    totalGames,
+    rankTotal,
+    rating,
+}: Props) {
     const { settings } = useSettingsStore()
     // prettier-ignore
-    const color = (
+    const streakColor = (
         Number(streak)
             ? Number(streak) > 0
                 ? 'green'
@@ -23,18 +31,18 @@ function TableRankRow({ rank, num, per, streak, totalGames, ranktotal, rating }:
             : '#ddd'
     )
 
-    streak = Number(streak) > 0 ? '+' + streak : streak
-    ranktotal =
-        Number(ranktotal) > 0 || ranktotal === '?' ? `${getText('of', settings)} ${ranktotal}` : ''
+    const streakDisplay = Number(streak) > 0 ? '+' + streak : streak
+    const rankTotalDisplay =
+        Number(rankTotal) > 0 || rankTotal === '?' ? `${getText('of', settings)} ${rankTotal}` : ''
     return (
         <div className={styles.container}>
-            <span title={ranktotal}> {rank} </span>
+            <span title={rankTotalDisplay}> {rank} </span>
             <span>
-                {num}v{num}
+                {teamSize}v{teamSize}
             </span>
             {rating !== undefined && <span>{rating !== '-' ? `(${rating})` : '-'}</span>}
-            <span style={{ color }}> {streak} </span>
-            <span>{per} </span>
+            <span style={{ color: streakColor }}> {streakDisplay} </span>
+            <span>{winPercent} </span>
             <span> {totalGames} </span>
         </div>
     )

@@ -7,29 +7,29 @@ import { Rank } from '../../types'
 import styles from './TableDiv.module.css'
 import TableRanksDiv from './TableRanksDiv'
 
-function TableDiv({ ranksArr }: { ranksArr: Rank[] }) {
+function TableDiv({ playerRanks }: { playerRanks: Rank[] }) {
     const {
         navButtons: { coh3 },
     } = useNavButtonsStore()
-    const [solo, factionNames] = coh3
-        ? refactronTableInfoCoh3(ranksArr)
-        : refactronTableInfo(ranksArr)
-    const factionGrids = factionNames.map((name, i) => {
-        const ii = i * 4
+    const [ranks, factionNames] = coh3
+        ? refactronTableInfoCoh3(playerRanks)
+        : refactronTableInfo(playerRanks)
+    const factionGrids = factionNames.map((faction, factionIndex) => {
+        const startIndex = factionIndex * 4
         return (
             <div
                 className={styles.factionGrid}
-                key={name}
+                key={faction}
                 style={{
-                    borderRight: i % 2 === 0 ? '0.1em solid gray' : undefined,
+                    borderRight: factionIndex % 2 === 0 ? '0.1em solid gray' : undefined,
                     borderBottom:
-                        i < factionNames.length - 1 &&
-                        (!coh3 || (coh3 && i < factionNames.length - 2))
+                        factionIndex < factionNames.length - 1 &&
+                        (!coh3 || (coh3 && factionIndex < factionNames.length - 2))
                             ? '0.1em solid gray'
                             : undefined,
                 }}
             >
-                <TableRanksDiv solo={solo} name={name} index={ii} />
+                <TableRanksDiv ranks={ranks} faction={faction} startIndex={startIndex} />
             </div>
         )
     })

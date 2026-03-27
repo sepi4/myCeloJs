@@ -36,7 +36,7 @@ function PlayerExtraInfo(props: Props) {
 
     ranksArr = ranksArr.filter((r) => r.isModeRanked === 1)
 
-    const table = navButtons.table && ranksArr ? <TableDiv ranksArr={ranksArr} /> : null
+    const table = navButtons.table && ranksArr ? <TableDiv playerRanks={ranksArr} /> : null
 
     return (
         <div data-testid="player-extra-info" className={styles.container}>
