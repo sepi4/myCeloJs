@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 
 interface Sorter {
-    name: 'byRank' | 'byWinRate' | 'byStreak' | 'byName' | 'byTotal'
+    name: 'byRank' | 'byWinRate' | 'byStreak' | 'byName' | 'byTotal' | 'byRating'
     reversed: boolean
 }
 

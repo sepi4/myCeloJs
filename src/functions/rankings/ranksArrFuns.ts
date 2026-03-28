@@ -10,7 +10,7 @@ export function ranksArrFilter(ranksArr: Rank[], tableView: boolean, showAll: bo
 }
 
 type Sorter = {
-    name: 'byRank' | 'byWinRate' | 'byStreak' | 'byName' | 'byTotal'
+    name: 'byRank' | 'byWinRate' | 'byStreak' | 'byName' | 'byTotal' | 'byRating'
     reversed: boolean
 }
 

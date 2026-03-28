@@ -4,6 +4,7 @@ interface Rank {
     losses: number
     streak: number
     name: string
+    rating?: number
 }
 
 const byRank = (a: Rank, b: Rank): number => a.rank - b.rank
@@ -32,4 +33,6 @@ const byTotal = (a: Rank, b: Rank): number => {
     return bTotal - aTotal
 }
 
-export default { byRank, byWinRate, byStreak, byName, byTotal }
+const byRating = (a: Rank, b: Rank): number => (b.rating ?? 0) - (a.rating ?? 0)
+
+export default { byRank, byWinRate, byStreak, byName, byTotal, byRating }

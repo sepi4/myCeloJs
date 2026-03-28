@@ -6,7 +6,7 @@ import { Rank } from '../../types'
 import ColumnTitle from './ColumnTitle'
 import styles from './ListDiv.module.css'
 
-type SorterName = 'byRank' | 'byWinRate' | 'byStreak' | 'byName' | 'byTotal'
+type SorterName = 'byRank' | 'byWinRate' | 'byStreak' | 'byName' | 'byTotal' | 'byRating'
 
 function RanksListTitles({ ranksArr }: { ranksArr: Rank[] }) {
     const { sorter, setSorter } = useSorterStore()
@@ -31,11 +31,7 @@ function RanksListTitles({ ranksArr }: { ranksArr: Rank[] }) {
                     <ColumnTitle {...getSorter('byName')} width="40%">
                         {getText('mode', settings)}
                     </ColumnTitle>
-                    {coh3 && elo && (
-                        <ColumnTitle click={() => {}} active={false} reversed={false}>
-                            ELO
-                        </ColumnTitle>
-                    )}
+                    {coh3 && elo && <ColumnTitle {...getSorter('byRating')}>ELO</ColumnTitle>}
                     <ColumnTitle {...getSorter('byStreak')}>
                         {getText('streak', settings)}
                     </ColumnTitle>
