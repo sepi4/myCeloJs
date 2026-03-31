@@ -1,5 +1,7 @@
 # Changelog
 
+- **version 2.5.2.**
+    - Fix: skip Match Started lines before parsing COH3 players
 - **version 2.5.1.**
     - Fix: filter out bogus COH3 player lines introduced by a game update
     - Sort by ELO rating in list view
