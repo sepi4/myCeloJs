@@ -1,5 +1,8 @@
 # Changelog
 
+- **version 2.5.1.**
+    - Fix: filter out bogus COH3 player lines introduced by a game update
+    - Sort by ELO rating in list view
 - **version 2.5.0.**
     - Theme selector with 5 color themes (Default, Ember, Nord, Dark, Light)
     - Separator lines between navbar groups
