@@ -174,8 +174,7 @@ function App() {
         if (settings && players && players.length > 0) {
             writeRankings(coh3, players, settings.rankingsHorizontal, coh3 && elo)
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [settings?.rankingsHorizontal, elo])
+    }, [settings, settings?.rankingsHorizontal, elo, coh3, players])
 
     useEffect(() => {
         if (!coh3 || !settings?.logLocationCoh3) {
@@ -215,8 +214,7 @@ function App() {
             writeSettings({ ...currentSettings, profileIdCoh2: profileId })
         }
         updateCoh2ProfileId()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [settings?.steamId])
+    }, [settings, settings?.steamId])
 
     useEffect(() => {
         const sizeMap = { small: '100%', medium: '125%', large: '150%' } as const

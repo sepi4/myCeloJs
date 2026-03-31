@@ -14,7 +14,9 @@ interface Props {
 function Modal(props: Props) {
     useEsc(props.isOpen ? props.onClose : () => {})
 
-    if (!props.isOpen) {return null}
+    if (!props.isOpen) {
+        return null
+    }
 
     return (
         <div className={props.overlayClassName} onClick={props.onClose}>
