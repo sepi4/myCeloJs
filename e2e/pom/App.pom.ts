@@ -3,7 +3,9 @@ import path from 'path'
 
 export const COH2_LOG_PATH = path.join(__dirname, '../../dataExamples/coh2-warnings.log')
 export const COH2_LOG_PATH_2 = path.join(__dirname, '../../dataExamples/coh2-warnings2.log')
+export const COH2_AI_LOG_PATH = path.join(__dirname, '../../dataExamples/coh2-warnings-ai.log')
 export const COH3_LOG_PATH = path.join(__dirname, '../../dataExamples/coh3-warnings.log')
+export const COH3_AI_LOG_PATH = path.join(__dirname, '../../dataExamples/coh3-warnings-ai.log')
 export const STEAM_ID = '76561198006675368'
 
 export class App {
