@@ -86,6 +86,32 @@ describe('getPlayersInfoCoh3', () => {
         expect(result[1].ranking).toBe(1800)
     })
 
+    it('filters out fake player lines with empty names', () => {
+        const lines = [
+            '(I) [22:00:54.362] [000000340]: GAME -- Human Player: 0  -2 0 frontend',
+            '(I) [22:00:54.362] [000000340]: GAME -- Human Player: 0  -2 1 americans',
+            '(I) [22:00:54.362] [000000340]: GAME -- Human Player: 0  -2 0 americans',
+            '(I) [22:00:54.362] [000000340]: GAME -- Human Player: 0  -2 1 americans',
+        ]
+        const result = getPlayersInfoCoh3(lines)
+
+        expect(result).toEqual([])
+    })
+
+    it('keeps AI players with negative profileId', () => {
+        const lines = [
+            '(I) [22:16:14.040] [000000340]: GAME -- Human Player: 0 sepi 21518 0 americans',
+            '(I) [22:16:14.040] [000000340]: GAME -- AI Player: 1 CPU - Expert -1 1 afrika_korps',
+        ]
+        const result = getPlayersInfoCoh3(lines)
+
+        expect(result).toHaveLength(2)
+        expect(result[0].name).toBe('sepi')
+        expect(result[1].name).toBe('CPU - Expert')
+        expect(result[1].profileId).toBe(-1)
+        expect(result[1].faction).toBe('afrika_korps')
+    })
+
     it('returns empty array when no valid lines', () => {
         const result = getPlayersInfoCoh3([])
         expect(result).toEqual([])

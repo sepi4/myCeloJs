@@ -72,7 +72,7 @@ function parsePlayer(
     const profileId = tokens.pop()
     const name = tokens.join(' ')
 
-    if (!slot || !faction || !teamSlot || !Number(profileId)) {
+    if (!slot || !faction || !teamSlot || !profileId || !name) {
         return undefined
     }
 
