@@ -113,8 +113,9 @@ export function getPlayersInfoCoh3(lines: string[]): Player[] {
     }
 
     const players: Record<string, Player> = {}
+    const playerLines = playerDataStrings.filter((x) => !x.startsWith('Match Started'))
 
-    for (const data of playerDataStrings) {
+    for (const data of playerLines) {
         const result = parsePlayer(data, time, rankings)
         if (result) {
             players[result.slot] = result.player
