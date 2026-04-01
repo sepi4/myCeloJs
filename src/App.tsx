@@ -50,7 +50,7 @@ function App() {
             : settings.logLocationCoh2
         : ''
 
-    // Auto-select the game radio when only one log location is configured
+    // Auto-select COH2/COH3 radio when only one log location is configured
     useEffect(() => {
         if (!settings) {
             return
@@ -64,8 +64,8 @@ function App() {
         }
     }, [settings, coh3, toggleNavButton])
 
+    // Main polling loop: read settings → read log → fetch extra info, then poll on interval
     useEffect(() => {
-        // initial readSettings location of log file
         if (settings === null) {
             readSettings(settingsDir + '/settings.json', (data) => {
                 if (!data) {
@@ -157,6 +157,7 @@ function App() {
         return () => clearInterval(intervalId)
     })
 
+    // Re-read log when game toggle or log location changes
     useEffect(() => {
         if (settings && activeLogLocation) {
             async function readLogOnChange() {
@@ -169,13 +170,14 @@ function App() {
         }
     }, [coh3, settings, activeLogLocation])
 
-    // Re-write rankings when orientation changes
+    // Re-write rankings overlay when orientation or game toggle changes
     useEffect(() => {
         if (settings && players && players.length > 0) {
             writeRankings(coh3, players, settings.rankingsHorizontal, coh3 && elo)
         }
     }, [settings, settings?.rankingsHorizontal, elo, coh3, players])
 
+    // Sync COH3 profile ID from log file into settings
     useEffect(() => {
         if (!coh3 || !settings?.logLocationCoh3) {
             return
@@ -201,6 +203,7 @@ function App() {
         updateCoh3ProfileId()
     }, [coh3, settings, settings?.logLocationCoh3])
 
+    // Fetch and sync COH2 profile ID from Steam ID
     useEffect(() => {
         if (!settings?.steamId) {
             return
@@ -216,6 +219,7 @@ function App() {
         updateCoh2ProfileId()
     }, [settings, settings?.steamId])
 
+    // Apply font size to document root
     useEffect(() => {
         const sizeMap = { small: '100%', medium: '125%', large: '150%' } as const
         const scaleMap = { small: '1', medium: '1.25', large: '1.5' } as const
@@ -224,6 +228,7 @@ function App() {
         document.documentElement.style.setProperty('--input-scale', scaleMap[size])
     }, [settings?.fontSize])
 
+    // Apply theme to document root
     useEffect(() => {
         document.documentElement.setAttribute('data-theme', settings?.theme ?? 'default')
     }, [settings?.theme])
