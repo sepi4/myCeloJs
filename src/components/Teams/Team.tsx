@@ -45,7 +45,7 @@ function Team(props: Props) {
             </span>
             {props.players.map((p, i) => (
                 <Player
-                    key={p.profileId ? p.profileId : i}
+                    key={p.profileId && p.profileId > 0 ? p.profileId : `${props.teamIndex}-${i}`}
                     player={p}
                     extraInfo={extraInfo && p.profileId ? extraInfo[p.profileId] : null}
                     playerIndex={i}
