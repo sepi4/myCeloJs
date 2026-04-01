@@ -1,5 +1,7 @@
 # Changelog
 
+- **version 2.5.3.**
+    - Fix: switching games coh2/coh3 not reset players correctly on main view
 - **version 2.5.2.**
     - Fix: skip Match Started lines before parsing COH3 players
 - **version 2.5.1.**
