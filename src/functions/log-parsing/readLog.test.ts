@@ -105,6 +105,55 @@ describe('getLines', () => {
         const lines = ['some line', 'another line']
         expect(getLines(lines)).toEqual([])
     })
+
+    it('skips buggy frontend group at end of log and returns real game players', () => {
+        const lines = [
+            'GAME -- Human Player: 0 alice 12345 0 british_africa',
+            'GAME -- Human Player: 1 bob 67890 1 afrika_korps',
+            'GAME -- Human Player: 2 charlie 11111 0 british_africa',
+            'GAME -- Human Player: 3 dave 22222 1 germans',
+            'some other log line',
+            'another log line',
+            'GAME -- Human Player: 0  -2 0 frontend',
+            'GAME -- Human Player: 0  -2 1 americans',
+            'GAME -- Human Player: 0  -2 0 americans',
+            'GAME -- Human Player: 0  -2 1 americans',
+            'GAME -- Human Player: 0  -2 0 americans',
+            'GAME -- Human Player: 0  -2 1 americans',
+            'GameApp::SetState : new (LoadingGame) old (UnloadedGame)',
+        ]
+        const result = getLines(lines)
+        expect(result).toHaveLength(4)
+        expect(result[0]).toContain('dave')
+        expect(result[1]).toContain('charlie')
+        expect(result[2]).toContain('bob')
+        expect(result[3]).toContain('alice')
+    })
+
+    it('skips multiple buggy frontend groups between games', () => {
+        const lines = [
+            'GAME -- Human Player: 0 old1 11111 0 soviet',
+            'GAME -- Human Player: 1 old2 22222 1 german',
+            'some gap',
+            'GAME -- Human Player: 0  -2 0 frontend',
+            'GAME -- Human Player: 0  -2 1 americans',
+            'GAME -- Human Player: 0  -2 0 americans',
+            'GAME -- Human Player: 0  -2 1 americans',
+            'another gap',
+            'GAME -- Human Player: 0 alice 12345 0 americans',
+            'GAME -- Human Player: 1 bob 67890 1 germans',
+            'some log line',
+            'GAME -- Human Player: 0  -2 0 frontend',
+            'GAME -- Human Player: 0  -2 1 americans',
+            'GAME -- Human Player: 0  -2 0 americans',
+            'GAME -- Human Player: 0  -2 1 americans',
+            'GameApp::SetState',
+        ]
+        const result = getLines(lines)
+        expect(result).toHaveLength(2)
+        expect(result[0]).toContain('bob')
+        expect(result[1]).toContain('alice')
+    })
 })
 
 describe('switchTeams', () => {

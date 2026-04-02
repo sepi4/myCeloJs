@@ -35,6 +35,12 @@ export function getLines(lines: string[]): string[] {
 
     for (let i = lines.length - 1; i >= 0; i--) {
         const line = lines[i]
+
+        // skip this lines, this is relic bug in log files (probably temp)
+        if (line.match('GAME -- Human Player: 0  -2 (0|1) (frontend|americans)')) {
+            continue
+        }
+
         if (line.match('GAME --.* Player:')) {
             foundPlayerLines = true
             if (foundPlayerLines && gapAfterPlayers) {
