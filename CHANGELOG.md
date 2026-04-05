@@ -1,7 +1,8 @@
 # Changelog
 
-- **version 2.6.0.**
+- **version 2.7.0.**
     - Auto-update: app now downloads and installs updates in-app instead of opening a browser
+    - Release page button in the update bar
     - Linux builds are now AppImage only (deb removed)
 - **version 2.5.4.**
     - Fix: ignore bogus lobby player lines that appeared after returning from a COH3 match
