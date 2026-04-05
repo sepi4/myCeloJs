@@ -16,6 +16,10 @@ const text: Translations = {
         ru: 'выбрать',
     },
 
+    log_check_interval_title: {
+        en: 'Log check interval',
+        ru: 'Интервал проверки лога',
+    },
     rankings_file_title: {
         en: 'Rankings file (for OBS-studio)',
         ru: 'Файл рангов (для OBS-studio)',

@@ -84,23 +84,20 @@ test('remove COH3 log disables its radio and keeps COH2 active', async () => {
     await expect(app.page.getByText('Polmuadiv')).toBeVisible()
 })
 
-test('auto checkbox toggles interval input and alert visibility', async () => {
-    // Auto is enabled by default — interval input and alert should be visible
+test('auto checkbox toggles alert visibility', async () => {
+    // Auto is enabled by default — alert should be visible
     await expect(app.autoLabel).toBeVisible()
-    await expect(app.intervalInput).toBeVisible()
     await expect(app.alertLabel).toBeVisible()
 
-    // Disable auto — interval and alert should disappear
+    // Disable auto — alert should disappear
     await app.autoLabel.click()
-    await expect(app.intervalInput).not.toBeVisible()
     await expect(app.alertLabel).not.toBeVisible()
 
     // Check log button should still be visible
     await expect(app.checkLogButton).toBeVisible()
 
-    // Re-enable auto — interval and alert should reappear
+    // Re-enable auto — alert should reappear
     await app.autoLabel.click()
-    await expect(app.intervalInput).toBeVisible()
     await expect(app.alertLabel).toBeVisible()
 })
 

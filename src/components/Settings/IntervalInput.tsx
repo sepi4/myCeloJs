@@ -3,7 +3,8 @@ import React, { useRef, useState } from 'react'
 import getText from '../../functions/utils/getText'
 import { useLogCheckIntervalStore } from '../../stores/logCheckIntervalStore'
 import { useSettingsStore } from '../../stores/settingsStore'
-import styles from './IntervalInput.module.css'
+import styles from './Settings.module.css'
+import SettingsDiv from './SettingsDiv'
 
 function IntervalInput() {
     const { settings } = useSettingsStore()
@@ -34,21 +35,30 @@ function IntervalInput() {
         }
     }
 
+    if (!settings || (!settings.logLocationCoh2 && !settings.logLocationCoh3)) {
+        return null
+    }
+
     return (
-        <span className={styles.container} title={getText('tooltip_interval', settings)}>
-            <input
-                data-testid="interval-input"
-                className={styles.input}
-                defaultValue={logCheckInterval ? logCheckInterval : ''}
-                ref={refInputElement}
-                onBlur={checkNumbers}
-                onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
-                    e.key === 'Enter' ? checkNumbers(e) : error ? setError(false) : null
-                }
-            />
-            <span>{getText('sec', settings)}</span>
-            {error && <div className={styles.error}>{getText('integer_error', settings)}</div>}
-        </span>
+        <SettingsDiv title={getText('log_check_interval_title', settings)}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
+                <input
+                    data-testid="interval-input"
+                    className={styles.input}
+                    style={{ width: '5em', paddingRight: '0.3em', textAlign: 'center' }}
+                    defaultValue={logCheckInterval ? logCheckInterval : ''}
+                    ref={refInputElement}
+                    onBlur={checkNumbers}
+                    onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) =>
+                        e.key === 'Enter' ? checkNumbers(e) : error ? setError(false) : null
+                    }
+                />
+                <span>{getText('sec', settings)}</span>
+                {error && (
+                    <span className={styles.error}>{getText('integer_error', settings)}</span>
+                )}
+            </div>
+        </SettingsDiv>
     )
 }
 

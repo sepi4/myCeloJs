@@ -6,7 +6,6 @@ import { useAutoLogCheckingStore } from '../../stores/autoLogCheckingStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import styles from './CheckLogDiv.module.css'
-import IntervalInput from './IntervalInput'
 import NavCheckbox from './NavCheckBox'
 
 function CheckLogDiv() {
@@ -36,16 +35,13 @@ function CheckLogDiv() {
             />
 
             {autoLogChecking ? (
-                <>
-                    <IntervalInput />
-                    <NavCheckbox
-                        text={getText('alert', settings)}
-                        checked={alert}
-                        handler={toggleAlert}
-                        testId="alert-label"
-                        title={getText('tooltip_alert', settings)}
-                    />
-                </>
+                <NavCheckbox
+                    text={getText('alert', settings)}
+                    checked={alert}
+                    handler={toggleAlert}
+                    testId="alert-label"
+                    title={getText('tooltip_alert', settings)}
+                />
             ) : null}
 
             <button

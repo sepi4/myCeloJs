@@ -13,6 +13,7 @@ import Icon from '../Icon'
 import Modal from '../Modal/Modal'
 import Notification from '../Notification'
 import ClearButton from './ClearButton'
+import IntervalInput from './IntervalInput'
 import styles from './Settings.module.css'
 import SettingsAfterLog from './SettingsAfterLog'
 import SettingsDiv from './SettingsDiv'
@@ -415,6 +416,8 @@ function Settings(props: Props) {
                     {savedDiv}
                 </>
             </SettingsDiv>
+
+            <IntervalInput />
 
             <SettingsAfterLog />
 

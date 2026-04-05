@@ -28,13 +28,13 @@ test.beforeAll(async () => {
     await app.settingsIcon.click()
     await app.mockFileDialog(electronApp, tempLogFile)
     await app.logLocationButtonCoh2.click()
-    await app.closeButton.click()
-    await expect(app.playersContainer).toBeVisible()
-    await expect(app.page.getByText('Polmuadiv')).toBeVisible()
-
     // Set interval to 1 second (minimum)
     await app.intervalInput.fill('1')
     await app.intervalInput.press('Enter')
+
+    await app.closeButton.click()
+    await expect(app.playersContainer).toBeVisible()
+    await expect(app.page.getByText('Polmuadiv')).toBeVisible()
 })
 
 test.afterAll(async () => {

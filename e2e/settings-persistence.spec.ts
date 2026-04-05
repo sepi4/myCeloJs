@@ -54,12 +54,12 @@ test('set all settings to non-default values', async () => {
     await app.radioHtml.click()
     await app.radioHorizontal.click()
 
+    // Interval: 3 → 7
+    await app.intervalInput.fill('7')
+
     // Close settings
     await app.closeButton.click()
     await expect(app.playersContainer).toBeVisible()
-
-    // Interval: 3 → 7 (auto is on by default so input is visible)
-    await app.intervalInput.fill('7')
 
     // Alert: off → on
     await app.alertLabel.click()
@@ -94,9 +94,6 @@ test('settings persist after restart', async () => {
     const mainBox = await app.playersContainer.boundingBox()
     expect(navBox!.x).toBeGreaterThan(mainBox!.x)
 
-    // Interval should be 7
-    await expect(app.intervalInput).toHaveValue('7')
-
     // Alert checkbox should be checked
     const alertCheckbox = app.alertLabel.locator('..').locator('input')
     await expect(alertCheckbox).toBeChecked()
@@ -116,6 +113,9 @@ test('settings persist after restart', async () => {
     // --- Settings page checks ---
 
     await app.settingsIcon.click()
+
+    // Interval should be 7
+    await expect(app.intervalInput).toHaveValue('7')
 
     // Language is Russian
     await expect(app.languageTitle).toHaveText('Язык')
