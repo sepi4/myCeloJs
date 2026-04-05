@@ -27,7 +27,7 @@
         "dist-win": "npm run typecheck && npm test && npm run build && electron-builder --win",
         "release": "npm run typecheck && npm test && npm run build && electron-builder --linux --win --publish always",
         "e2e": "npm run build && npx playwright test",
-        "e2e:debug": "npm run build && npx playwright test --debug",
+        "e2e:debug": "npm run build && npx playwright test --debug inspector",
         "e2e:dist": "MYCELO_DIST_PATH=dist/linux-unpacked/mycelo npx playwright test",
         "typecheck": "tsc --noEmit",
         "format": "prettier --write .",
