@@ -4,7 +4,7 @@ set -e
 VERSION=$(node -p "require('./package.json').version")
 TAG="$VERSION"
 APPIMAGE="dist/myCelo-${VERSION}.AppImage"
-EXE="dist/myCelo Setup ${VERSION}.exe"
+EXE="dist/myCelo-Setup-${VERSION}.exe"
 
 echo "=== myCelo Release $TAG ==="
 echo ""
