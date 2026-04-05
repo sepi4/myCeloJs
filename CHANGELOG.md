@@ -1,6 +1,6 @@
 # Changelog
 
-- **version 2.5.5.**
+- **version 2.6.0.**
     - Auto-update: app now downloads and installs updates in-app instead of opening a browser
     - Linux builds are now AppImage only (deb removed)
 - **version 2.5.4.**
