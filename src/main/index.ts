@@ -1,4 +1,4 @@
-import { app, BrowserWindow, dialog, globalShortcut, ipcMain, shell } from 'electron'
+import { app, BrowserWindow, dialog, ipcMain, shell } from 'electron'
 import { autoUpdater } from 'electron-updater'
 import fs from 'fs'
 import http from 'http'
@@ -67,15 +67,16 @@ function createMainWindow() {
         }
     })
 
+    mainWindow.webContents.on('before-input-event', (_event, input) => {
+        if (input.control && input.shift && input.key === 'I') {
+            mainWindow?.webContents.toggleDevTools()
+        }
+    })
+
     mainWindow.on('closed', () => (mainWindow = null))
 }
 
-app.on('ready', () => {
-    createMainWindow()
-    globalShortcut.register('Ctrl+Shift+I', () => {
-        mainWindow?.webContents.toggleDevTools()
-    })
-})
+app.on('ready', createMainWindow)
 
 app.on('window-all-closed', () => {
     pushToClients('')
