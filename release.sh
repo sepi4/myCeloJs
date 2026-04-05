@@ -4,7 +4,6 @@ set -e
 VERSION=$(node -p "require('./package.json').version")
 TAG="$VERSION"
 APPIMAGE="dist/myCelo-${VERSION}.AppImage"
-DEB="dist/mycelo_${VERSION}_amd64.deb"
 EXE="dist/myCelo Setup ${VERSION}.exe"
 
 echo "=== myCelo Release $TAG ==="
@@ -23,7 +22,7 @@ npm run dist-win
 # Verify artifacts exist
 echo ""
 echo "Build artifacts:"
-for f in "$APPIMAGE" "$DEB" "$EXE"; do
+for f in "$APPIMAGE" "$EXE"; do
     if [[ -f "$f" ]]; then
         echo "  OK: $f"
     else
@@ -53,7 +52,6 @@ echo ""
 
 gh release create "$TAG" \
   "$APPIMAGE" \
-  "$DEB" \
   "$EXE" \
   --title "$TAG" \
   --notes "$NOTES"
