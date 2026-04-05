@@ -53,6 +53,8 @@ echo ""
 gh release create "$TAG" \
   "$APPIMAGE" \
   "$EXE" \
+  dist/latest-linux.yml \
+  dist/latest.yml \
   --title "$TAG" \
   --notes "$NOTES"
 
