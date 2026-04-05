@@ -390,9 +390,13 @@ const text: Translations = {
         en: 'download',
         ru: 'скачать',
     },
-    copy_link: {
-        en: 'copy link',
-        ru: 'скопировать ссылку',
+    update_downloading: {
+        en: 'downloading update...',
+        ru: 'загрузка обновления...',
+    },
+    update_restart: {
+        en: 'restart to update',
+        ru: 'перезапустить для обновления',
     },
     skip_this_version: {
         en: 'skip this version',

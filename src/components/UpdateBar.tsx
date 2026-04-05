@@ -1,117 +1,87 @@
 import { useEffect, useState } from 'react'
 
-import { LATEST_RELEASES_URL } from '../constants/urls'
 import writeSettings from '../functions/settings/writeSettings'
 import funGetText from '../functions/utils/getText'
 import { useSettingsStore } from '../stores/settingsStore'
-import { useUpdateCheckDoneStore } from '../stores/updateCheckDoneStore'
 import { SettingsType } from '../types'
 import styles from './UpdateBar.module.css'
 
-interface GitHubResult {
-    tag_name: string
-    assets: {
-        browser_download_url: string
-    }[]
-}
-
-interface A {
-    url: string
-    tagName: string
-}
-
-export const isHigherVersion = (tag: string, current: string) => {
-    const arrTag = tag.split('.')
-    const arrCurrent = current.split('.')
-    for (let i = 0; i < arrCurrent.length; i++) {
-        if (Number(arrTag[i]) > Number(arrCurrent[i])) {
-            return true
-        } else if (Number(arrTag[i]) < Number(arrCurrent[i])) {
-            return false
-        }
-    }
-    return false
-}
-
-const appVersion = window.electronAPI.appVersion
+type UpdateState =
+    | { step: 'available'; version: string }
+    | { step: 'downloading' }
+    | { step: 'downloaded'; version: string }
 
 function UpdateBar() {
-    const [update, setUpdate] = useState<A | null>(null)
-    const { updateCheckDone, setUpdateCheckDone } = useUpdateCheckDoneStore()
+    const [update, setUpdate] = useState<UpdateState | null>(null)
     const { settings } = useSettingsStore()
 
-    const getText = function (x: string) {
-        return funGetText(x, settings)
-    }
+    const getText = (x: string) => funGetText(x, settings)
 
     useEffect(() => {
-        if (!updateCheckDone && settings) {
-            console.log('CHECKING UPDATE')
-            setUpdateCheckDone()
-            const currentSettings = settings
-            async function checkUpdate() {
-                const res = await fetch(LATEST_RELEASES_URL)
-                const data: GitHubResult = await res.json()
-                if (data) {
-                    const newTagName = data.tag_name
-                    if (currentSettings.ignoreUntil === newTagName) {
-                        return
-                    }
-                    if (isHigherVersion(newTagName, appVersion)) {
-                        if (data.assets[0]) {
-                            setUpdate({
-                                url: data.assets[0].browser_download_url,
-                                tagName: newTagName,
-                            })
-                        }
-                    }
+        window.electronAPI.updater.onStatus((status) => {
+            if (status.status === 'available' && status.version) {
+                if (settings?.ignoreUntil === status.version) {
+                    return
                 }
+                setUpdate({ step: 'available', version: status.version })
+            } else if (status.status === 'downloaded' && status.version) {
+                setUpdate({ step: 'downloaded', version: status.version })
             }
-            checkUpdate()
-        }
-    }, [updateCheckDone, settings, setUpdateCheckDone])
+        })
+    }, [settings?.ignoreUntil])
+
+    if (!update) {
+        return null
+    }
 
     const ignoreHandler = () => {
-        const newSettings = {
-            ...settings,
-            ignoreUntil: update?.tagName,
-        } as SettingsType
-        setUpdate(null)
-        writeSettings(newSettings)
+        if (update.step === 'available') {
+            const newSettings = {
+                ...settings,
+                ignoreUntil: update.version,
+            } as SettingsType
+            setUpdate(null)
+            writeSettings(newSettings)
+        }
+    }
+
+    const downloadHandler = () => {
+        setUpdate({ step: 'downloading' })
+        window.electronAPI.updater.download()
     }
 
     return (
-        <>
-            {update ? (
-                <div className={styles.container}>
+        <div className={styles.container}>
+            {update.step === 'available' && (
+                <>
                     <span>
-                        {getText('update_to_version')} {update.tagName}
+                        {getText('update_to_version')} {update.version}
                     </span>
-
-                    <button
-                        className={styles.btn}
-                        onClick={() => {
-                            window.electronAPI.shell.openExternal(update.url)
-                        }}
-                    >
+                    <button className={styles.btn} onClick={downloadHandler}>
                         {getText('download')}
                     </button>
-
-                    <button
-                        className={styles.btn}
-                        onClick={() => {
-                            navigator.clipboard.writeText(update.url)
-                        }}
-                    >
-                        {getText('copy_link')}
-                    </button>
-
                     <button className={styles.btn} onClick={ignoreHandler}>
                         {getText('skip_this_version')}
                     </button>
-                </div>
-            ) : null}
-        </>
+                </>
+            )}
+
+            {update.step === 'downloading' && <span>{getText('update_downloading')}</span>}
+
+            {update.step === 'downloaded' && (
+                <>
+                    <span>
+                        {getText('update_to_version')} {update.version}
+                    </span>
+                    <button
+                        className={styles.btn}
+                        onClick={() => window.electronAPI.updater.install()}
+                    >
+                        {getText('update_restart')}
+                    </button>
+                </>
+            )}
+        </div>
     )
 }
 

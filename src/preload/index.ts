@@ -33,4 +33,11 @@ contextBridge.exposeInMainWorld('electronAPI', {
             ipcRenderer.invoke('rankings:write', jsonContent, txtContent),
         setFormat: (format: 'html' | 'txt') => ipcRenderer.invoke('rankings:set-format', format),
     },
+    updater: {
+        onStatus: (callback: (status: { status: string; version?: string }) => void) => {
+            ipcRenderer.on('updater:status', (_e, status) => callback(status))
+        },
+        download: () => ipcRenderer.invoke('updater:download'),
+        install: () => ipcRenderer.invoke('updater:install'),
+    },
 })

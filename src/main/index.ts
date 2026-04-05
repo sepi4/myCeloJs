@@ -1,4 +1,5 @@
 import { app, BrowserWindow, dialog, ipcMain, shell } from 'electron'
+import { autoUpdater } from 'electron-updater'
 import fs from 'fs'
 import http from 'http'
 import net from 'net'
@@ -60,6 +61,9 @@ function createMainWindow() {
         mainWindow!.show()
         if (process.env['ELECTRON_RENDERER_URL']) {
             mainWindow!.webContents.openDevTools()
+            autoUpdater.checkForUpdates()
+        } else {
+            autoUpdater.checkForUpdates()
         }
     })
 
@@ -118,6 +122,34 @@ ipcMain.handle('log:read', async (_event, filePath: string) => {
     } catch {
         return null
     }
+})
+
+// ── Auto-updater ─────────────────────────────────────────────────────────────
+
+autoUpdater.autoDownload = false
+
+function sendUpdaterStatus(status: string, version?: string) {
+    mainWindow?.webContents.send('updater:status', { status, version })
+}
+
+autoUpdater.on('update-available', (info) => {
+    sendUpdaterStatus('available', info.version)
+})
+
+autoUpdater.on('update-downloaded', (info) => {
+    sendUpdaterStatus('downloaded', info.version)
+})
+
+autoUpdater.on('error', () => {
+    sendUpdaterStatus('error')
+})
+
+ipcMain.handle('updater:download', () => {
+    return autoUpdater.downloadUpdate()
+})
+
+ipcMain.handle('updater:install', () => {
+    autoUpdater.quitAndInstall()
 })
 
 // ── Rankings state & SSE ─────────────────────────────────────────────────────

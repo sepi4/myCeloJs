@@ -1,3 +1,8 @@
+interface UpdateStatus {
+    status: 'available' | 'downloaded' | 'error'
+    version?: string
+}
+
 interface ElectronAPI {
     appVersion: string
     settingsDir: string
@@ -23,6 +28,11 @@ interface ElectronAPI {
     rankings: {
         write(jsonContent: string, txtContent: string): Promise<void>
         setFormat(format: 'html' | 'txt'): Promise<void>
+    }
+    updater: {
+        onStatus(callback: (status: UpdateStatus) => void): void
+        download(): Promise<void>
+        install(): Promise<void>
     }
 }
 
