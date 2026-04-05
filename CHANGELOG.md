@@ -1,5 +1,7 @@
 # Changelog
 
+- **version 2.7.1.**
+    - Move log check interval setting from navbar to settings view
 - **version 2.7.0.**
     - Auto-update: app now downloads and installs updates in-app instead of opening a browser
     - Release page button in the update bar
