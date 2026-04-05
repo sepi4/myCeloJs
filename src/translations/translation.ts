@@ -398,6 +398,10 @@ const text: Translations = {
         en: 'restart to update',
         ru: 'перезапустить для обновления',
     },
+    update_error: {
+        en: 'update failed',
+        ru: 'ошибка обновления',
+    },
     skip_this_version: {
         en: 'skip this version',
         ru: 'пропустить эту версию',

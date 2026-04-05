@@ -1,4 +1,4 @@
-import { app, BrowserWindow, dialog, ipcMain, shell } from 'electron'
+import { app, BrowserWindow, dialog, globalShortcut, ipcMain, shell } from 'electron'
 import { autoUpdater } from 'electron-updater'
 import fs from 'fs'
 import http from 'http'
@@ -70,7 +70,12 @@ function createMainWindow() {
     mainWindow.on('closed', () => (mainWindow = null))
 }
 
-app.on('ready', createMainWindow)
+app.on('ready', () => {
+    createMainWindow()
+    globalShortcut.register('Ctrl+Shift+I', () => {
+        mainWindow?.webContents.toggleDevTools()
+    })
+})
 
 app.on('window-all-closed', () => {
     pushToClients('')
@@ -140,7 +145,8 @@ autoUpdater.on('update-downloaded', (info) => {
     sendUpdaterStatus('downloaded', info.version)
 })
 
-autoUpdater.on('error', () => {
+autoUpdater.on('error', (err) => {
+    console.log('autoUpdater error:', err)
     sendUpdaterStatus('error')
 })
 

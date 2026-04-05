@@ -10,6 +10,7 @@ type UpdateState =
     | { step: 'available'; version: string }
     | { step: 'downloading' }
     | { step: 'downloaded'; version: string }
+    | { step: 'error' }
 
 function UpdateBar() {
     const [update, setUpdate] = useState<UpdateState | null>(null)
@@ -26,6 +27,8 @@ function UpdateBar() {
                 setUpdate({ step: 'available', version: status.version })
             } else if (status.status === 'downloaded' && status.version) {
                 setUpdate({ step: 'downloaded', version: status.version })
+            } else if (status.status === 'error') {
+                setUpdate({ step: 'error' })
             }
         })
     }, [settings?.ignoreUntil])
@@ -67,6 +70,8 @@ function UpdateBar() {
             )}
 
             {update.step === 'downloading' && <span>{getText('update_downloading')}</span>}
+
+            {update.step === 'error' && <span>{getText('update_error')}</span>}
 
             {update.step === 'downloaded' && (
                 <>
