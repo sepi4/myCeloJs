@@ -9,3 +9,6 @@ export const STEAM = 'https://steamcommunity.com/profiles/'
 // relic
 export const RELIC_SERVER_BASE_COH2 = 'https://coh2-api.reliclink.com/community/leaderboard'
 export const RELIC_SERVER_BASE_COH3 = 'https://coh3-api.reliclink.com/community/leaderboard'
+
+// github
+export const GITHUB_RELEASES_URL = 'https://github.com/sepi4/myCeloJs/releases'

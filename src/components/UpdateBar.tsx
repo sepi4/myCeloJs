@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 
+import { GITHUB_RELEASES_URL } from '../constants/urls'
 import writeSettings from '../functions/settings/writeSettings'
 import funGetText from '../functions/utils/getText'
 import { useSettingsStore } from '../stores/settingsStore'
@@ -62,6 +63,12 @@ function UpdateBar() {
                     </span>
                     <button className={styles.btn} onClick={downloadHandler}>
                         {getText('download')}
+                    </button>
+                    <button
+                        className={styles.btn}
+                        onClick={() => window.electronAPI.shell.openExternal(GITHUB_RELEASES_URL)}
+                    >
+                        {getText('release_page')}
                     </button>
                     <button className={styles.btn} onClick={ignoreHandler}>
                         {getText('skip_this_version')}

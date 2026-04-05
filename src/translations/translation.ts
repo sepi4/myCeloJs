@@ -402,6 +402,10 @@ const text: Translations = {
         en: 'update failed',
         ru: 'ошибка обновления',
     },
+    release_page: {
+        en: 'release page',
+        ru: 'страница релиза',
+    },
     skip_this_version: {
         en: 'skip this version',
         ru: 'пропустить эту версию',
