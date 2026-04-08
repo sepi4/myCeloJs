@@ -37,7 +37,8 @@ export default function GameHistoryDiv(props: Props) {
 
     const players = props.game.players.sort((a, b) => b.teamid - a.teamid)
 
-    const matchType = props.game.matchType ? props.game.matchType.name : '???'
+    const rawName = props.game.matchType?.name ?? '???'
+    const matchType = rawName.match(/^(\dv\d)/i)?.[1]?.toLowerCase() ?? rawName
     const timeAgo = getTimeAgo(props.game.endGameTime, lg)
 
     let playersNames = ''
