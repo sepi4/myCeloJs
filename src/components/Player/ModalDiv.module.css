@@ -4,6 +4,20 @@
     background-color: var(--bg-overlay);
 }
 
+.overlayLeft {
+    left: 7em;
+    top: -3em;
+}
+
+.overlayRight {
+    right: 7em;
+    top: -3em;
+}
+
+.overlayTop {
+    top: 0em;
+}
+
 .content {
     position: absolute;
     top: 0;

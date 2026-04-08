@@ -11,6 +11,12 @@ import MatchTableBody from './MatchTableBody'
 import MatchTableHeaders from './MatchTableHeaders'
 import styles from './ModalDiv.module.css'
 
+const overlayClasses: Record<string, string> = {
+    left: `${styles.overlay} ${styles.overlayLeft}`,
+    right: `${styles.overlay} ${styles.overlayRight}`,
+    top: `${styles.overlay} ${styles.overlayTop}`,
+}
+
 interface Props {
     game: MatchObject
     modal: boolean
@@ -29,11 +35,13 @@ function ModalDiv(props: Props) {
     const endTime = getDateTime(game.endGameTime, lg)
     const durationTime = getTime(game.endGameTime.getTime() - game.startGameTime.getTime())
 
+    const navbarPosition = settings?.navbarPosition ?? 'top'
+
     return (
         <Modal
             isOpen={modal}
             onClose={() => setModal(false)}
-            overlayClassName={styles.overlay}
+            overlayClassName={overlayClasses[navbarPosition] ?? styles.overlay}
             className={styles.content}
             data-testid="game-modal"
         >
