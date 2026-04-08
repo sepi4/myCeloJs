@@ -1,6 +1,9 @@
-import { getFactionCodeCoh2ById } from '../../constants/factionMappings'
+import { getFactionCodeCoh2ById, getFactionCodeCoh3ById } from '../../constants/factionMappings'
 import { getExtraInfo } from '../../functions/api/getExtraInfo'
-import { getFactionFlagLocation } from '../../functions/utils/getFactionFlagLocation'
+import {
+    getFactionFlagLocation,
+    getFactionFlagLocationCoh3,
+} from '../../functions/utils/getFactionFlagLocation'
 import getText from '../../functions/utils/getText'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
@@ -27,14 +30,19 @@ function MatchTableHeaders(props: Props) {
                     {getText('faction', props.settings)}
                 </th>
 
-                {props.players.map((p) => (
-                    <th key={p.profile_id} className={styles.th}>
-                        <img
-                            src={getFactionFlagLocation(getFactionCodeCoh2ById(p.race_id))}
-                            alt={`${getFactionCodeCoh2ById(p.race_id)}`}
-                        />
-                    </th>
-                ))}
+                {props.players.map((p) => {
+                    const factionCode = coh3
+                        ? getFactionCodeCoh3ById(p.race_id)
+                        : getFactionCodeCoh2ById(p.race_id)
+                    const factionFlag = coh3
+                        ? getFactionFlagLocationCoh3(factionCode)
+                        : getFactionFlagLocation(factionCode)
+                    return (
+                        <th key={p.profile_id} className={styles.th}>
+                            <img src={factionFlag} alt={factionCode} />
+                        </th>
+                    )
+                })}
             </tr>
 
             <tr>
@@ -47,6 +55,7 @@ function MatchTableHeaders(props: Props) {
                     {getText('name', props.settings)}
                 </th>
                 {props.players.map((p) => {
+                    const pro = props.profiles[p.profile_id]
                     return (
                         <th
                             key={p.profile_id}
@@ -62,17 +71,16 @@ function MatchTableHeaders(props: Props) {
                             }}
                         >
                             <a
-                                title={props.profiles[p.profile_id].alias}
+                                title={pro?.alias ?? `${p.profile_id}`}
                                 onClick={async () => {
                                     const x = await getExtraInfo(coh3, [p.profile_id])
                                     if (!x) {
                                         return
                                     }
-                                    const pro = props.profiles[p.profile_id]
                                     const newPlayer = {
-                                        country: pro.country,
-                                        name: pro.alias,
-                                        profileId: pro.profile_id,
+                                        country: pro?.country,
+                                        name: pro?.alias ?? `${p.profile_id}`,
+                                        profileId: p.profile_id,
                                     }
                                     if (!newPlayer.profileId) {
                                         return
@@ -84,7 +92,7 @@ function MatchTableHeaders(props: Props) {
                                     }
                                 }}
                             >
-                                {props.profiles[p.profile_id].alias}
+                                {pro?.alias ?? `${p.profile_id}`}
                             </a>
                         </th>
                     )

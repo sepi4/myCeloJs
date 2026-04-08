@@ -1,7 +1,10 @@
 import { useState } from 'react'
 
-import { getFactionCodeCoh2ById } from '../../constants/factionMappings'
-import { getFactionFlagLocation } from '../../functions/utils/getFactionFlagLocation'
+import { getFactionCodeCoh2ById, getFactionCodeCoh3ById } from '../../constants/factionMappings'
+import {
+    getFactionFlagLocation,
+    getFactionFlagLocationCoh3,
+} from '../../functions/utils/getFactionFlagLocation'
 import { getTimeAgo } from '../../functions/utils/time'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { MatchObject, NormalizedProfiles } from '../../types'
@@ -11,6 +14,7 @@ import ModalDiv from './ModalDiv'
 interface Props {
     game: MatchObject
     profiles: NormalizedProfiles
+    coh3: boolean
 }
 
 export default function GameHistoryDiv(props: Props) {
@@ -41,8 +45,16 @@ export default function GameHistoryDiv(props: Props) {
         if (i !== 0 && players.length / i === 2) {
             playersNames += '\t----- vs -----\t\n'
         }
-        playersNames += props.profiles[p.profile_id].alias + '\n'
+        const profile = props.profiles[p.profile_id]
+        playersNames += (profile ? profile.alias : `${p.profile_id}`) + '\n'
     })
+
+    const factionCode = props.coh3
+        ? getFactionCodeCoh3ById(props.game.result.race_id)
+        : getFactionCodeCoh2ById(props.game.result.race_id)
+    const factionFlag = props.coh3
+        ? getFactionFlagLocationCoh3(factionCode)
+        : getFactionFlagLocation(factionCode)
 
     return (
         <>
@@ -53,10 +65,7 @@ export default function GameHistoryDiv(props: Props) {
                 style={{ border: '.1em solid ' + backgroundColor }}
                 onClick={() => setModal(true)}
             >
-                <img
-                    src={getFactionFlagLocation(getFactionCodeCoh2ById(props.game.result.race_id))}
-                    alt={`${getFactionCodeCoh2ById(props.game.result.race_id)}`}
-                />
+                <img src={factionFlag} alt={factionCode} />
 
                 <div className={styles.name}>
                     <div>{matchType}</div>

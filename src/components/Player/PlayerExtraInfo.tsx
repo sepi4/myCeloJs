@@ -43,7 +43,7 @@ function PlayerExtraInfo(props: Props) {
             {totalGames}
             {table}
             <ListDiv ranksArr={ranksArr} />
-            {!navButtons.coh3 && <History player={props.player} />}
+            <History player={props.player} coh3={navButtons.coh3} />
         </div>
     )
 }

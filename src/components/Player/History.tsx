@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { RELIC_SERVER_BASE_COH2 } from '../../constants/urls'
+import { RELIC_SERVER_BASE_COH2, RELIC_SERVER_BASE_COH3 } from '../../constants/urls'
 import getText from '../../functions/utils/getText'
 import { parseHistoryData } from '../../functions/utils/parseMatchHistory'
 import { useSettingsStore } from '../../stores/settingsStore'
@@ -11,6 +11,7 @@ import Loading from './Loading'
 
 interface Props {
     player: Player
+    coh3: boolean
 }
 interface X {
     matchHistoryStats: MatchObject[]
@@ -31,8 +32,10 @@ export default function History(props: Props) {
             async function fetchHistory() {
                 try {
                     const id = props.player.profileId
-                    const url = `${RELIC_SERVER_BASE_COH2}/getRecentMatchHistoryByProfileId?title=coh2&profile_id=${id}`
-                    const url2 = `${RELIC_SERVER_BASE_COH2}/GetAvailableLeaderboards?title=coh2`
+                    const base = props.coh3 ? RELIC_SERVER_BASE_COH3 : RELIC_SERVER_BASE_COH2
+                    const title = props.coh3 ? 'coh3' : 'coh2'
+                    const url = `${base}/getRecentMatchHistoryByProfileId?title=${title}&profile_id=${id}`
+                    const url2 = `${base}/GetAvailableLeaderboards?title=${title}`
                     const [r1, r2] = await Promise.all([
                         fetch(url).then((r) => r.json()),
                         fetch(url2).then((r) => r.json()),
@@ -51,7 +54,7 @@ export default function History(props: Props) {
         return () => {
             mounted = false
         }
-    }, [getHistory, props.player])
+    }, [getHistory, props.player, props.coh3])
 
     useEffect(() => {
         setHistory(null)
@@ -63,7 +66,14 @@ export default function History(props: Props) {
             {history && (
                 <div data-testid="game-history" className={styles.historyDivs}>
                     {history.matchHistoryStats.map((m, i) => {
-                        return <GameHistoryDiv key={i} game={m} profiles={history.profiles} />
+                        return (
+                            <GameHistoryDiv
+                                key={i}
+                                game={m}
+                                profiles={history.profiles}
+                                coh3={props.coh3}
+                            />
+                        )
                     })}
                 </div>
             )}

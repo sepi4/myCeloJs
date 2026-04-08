@@ -54,7 +54,7 @@ function normalizeProfiles(profiles: RecentMatchHistory['profiles']): Normalized
 }
 
 export function parseHistoryData(result: HistoryResult, player: Player): ParsedHistory {
-    const { matchHistoryStats, profiles } = result[0]
+    const { matchHistoryStats, profiles = [] } = result[0]
     const { matchTypes } = result[1]
 
     const sortedMatches = matchHistoryStats.sort((a, b) => b.completiontime - a.completiontime)
