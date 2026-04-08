@@ -1,4 +1,5 @@
 import getText from '../../functions/utils/getText'
+import { getTime } from '../../functions/utils/time'
 import { MatchHistoryReportResult, MatchObject, SettingsType } from '../../types'
 import styles from './MatchTableBody.module.css'
 
@@ -20,7 +21,9 @@ function MatchTableBody(props: Props) {
                     <td className={styles.name}>{getText(key, props.settings)}</td>
 
                     {props.players.map((p) => (
-                        <td key={`${p.profile_id} ${i}`}>{p.counters[key]}</td>
+                        <td key={`${p.profile_id} ${i}`}>
+                            {key === 'gt' ? getTime(p.counters[key] * 1000) : p.counters[key]}
+                        </td>
                     ))}
                 </tr>
             ))}

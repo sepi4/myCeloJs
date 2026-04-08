@@ -374,6 +374,14 @@ const text: Translations = {
         en: 'vehicle losts',
         ru: 'техники потеряно',
     },
+    gt: {
+        en: 'game time',
+        ru: 'время игры',
+    },
+    sqkill: {
+        en: 'squad killed',
+        ru: 'отрядов убито',
+    },
 
     // main view ---------------------------------
     no_info: {
