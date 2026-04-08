@@ -46,6 +46,9 @@ export default function History(props: Props) {
                     }
                 } catch (error) {
                     console.log('error get history:', error)
+                    if (mounted) {
+                        setFetching(false)
+                    }
                 }
             }
             fetchHistory()
@@ -59,6 +62,7 @@ export default function History(props: Props) {
     useEffect(() => {
         setHistory(null)
         setGetHistory(false)
+        setFetching(false)
     }, [props.player.profileId])
 
     return (
