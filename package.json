@@ -39,8 +39,8 @@
         "@fortawesome/react-fontawesome": "^3.3.0",
         "dayjs": "^1.11.20",
         "electron-updater": "^6.8.3",
-        "react": "^19.2.4",
-        "react-dom": "^19.2.4",
+        "react": "^19.2.5",
+        "react-dom": "^19.2.5",
         "string-width": "^8.2.0",
         "zustand": "^5.0.12"
     },
@@ -58,7 +58,7 @@
         "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",
         "@vitejs/plugin-react": "^5.2.0",
-        "electron": "^41.1.1",
+        "electron": "^41.2.0",
         "electron-builder": "^26.8.1",
         "electron-vite": "^5.0.0",
         "eslint": "^9.39.4",
@@ -74,7 +74,7 @@
         "prettier": "^3.8.1",
         "ts-jest": "^29.4.9",
         "typescript": "^5.9.3",
-        "typescript-eslint": "^8.58.0",
+        "typescript-eslint": "^8.58.1",
         "typescript-plugin-css-modules": "^5.2.0"
     }
 }
