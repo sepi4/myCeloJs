@@ -190,8 +190,8 @@ const text: Translations = {
         ru: 'эло',
     },
     tooltip_elo: {
-        en: 'Show ELO rating',
-        ru: 'Показать рейтинг ELO',
+        en: 'Show ELO ranking for coh3',
+        ru: 'Показать рейтинг ELO для coh3',
     },
     tooltip_table: {
         en: 'Show stats as a table',
