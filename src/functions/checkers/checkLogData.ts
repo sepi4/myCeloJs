@@ -24,9 +24,12 @@ export default function checkLogData({ data, playAudio }: Props) {
         setFromFile(data)
         useExtraInfoStore.getState().clearExtraInfo()
         useOpenInfosStore.getState().resetOpenInfos()
-        usePlayerCardStore.getState().resetPlayerCard()
+        const currentView = useViewStore.getState().view
+        if (currentView !== 'playerCard') {
+            usePlayerCardStore.getState().resetPlayerCard()
+            useViewStore.getState().setView('main')
+        }
         usePlayersStore.getState().setPlayers(data)
-        useViewStore.getState().setView('main')
         if (settings) {
             writeRankings(coh3, data, settings.rankingsHorizontal, coh3 && elo)
             if (playAudio && data.length > 0) {

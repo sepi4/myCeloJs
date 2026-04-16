@@ -1,11 +1,17 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+import { useEffect, useRef } from 'react'
+
 import logo_coh2 from '../../assets/img/logo_coh2.png'
 import logo_cohstats from '../../assets/img/logo_cohstats.png'
 import logo_steam from '../../assets/img/logo_steam.png'
 import { COH2_ORG, COH2STATS_COM, COH3STATS_COM, STEAM } from '../../constants/urls'
+import { getExtraInfo } from '../../functions/api/getExtraInfo'
+import searchPlayers from '../../functions/api/searchPlayers'
+import getText from '../../functions/utils/getText'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
+import { useSettingsStore } from '../../stores/settingsStore'
 import PlayerExtraInfo from '../Player/PlayerExtraInfo'
 import styles from './PlayerCard.module.css'
 
@@ -14,10 +20,86 @@ export default function PlayerCard() {
     const {
         navButtons: { coh3 },
     } = useNavButtonsStore()
-    const { player, extraInfo } = usePlayerCardStore()
+    const { player, extraInfo, noProfileGame, setPlayerCard, setNoProfile } = usePlayerCardStore()
+    const { settings } = useSettingsStore()
+    const lastGameToggle = useRef(coh3)
+
+    useEffect(() => {
+        if (lastGameToggle.current === coh3) {
+            return
+        }
+        lastGameToggle.current = coh3
+
+        const steamId = extraInfo?.steamId
+        if (!steamId || !player?.name) {
+            setNoProfile(coh3 ? 'coh3' : 'coh2')
+            return
+        }
+
+        // Guards against rapid toggles: if the effect re-runs before
+        // the previous async lookup finishes, the old one is ignored.
+        let stale = false
+
+        async function switchGame() {
+            const results = await searchPlayers(coh3, player!.name!)
+            if (stale) {
+                return
+            }
+
+            const match = results.find((p) => p.name === `/steam/${steamId}`)
+            if (!match) {
+                setNoProfile(coh3 ? 'coh3' : 'coh2')
+                return
+            }
+
+            const response = await getExtraInfo(coh3, [match.profile_id])
+            if (stale) {
+                return
+            }
+
+            const playerExtraInfo = response?.result[match.profile_id]
+            if (playerExtraInfo) {
+                setPlayerCard(
+                    {
+                        name: match.alias,
+                        profileId: match.profile_id + '',
+                        country: match.country,
+                    },
+                    playerExtraInfo
+                )
+            } else {
+                setNoProfile(coh3 ? 'coh3' : 'coh2')
+            }
+        }
+
+        switchGame()
+        return () => {
+            stale = true
+        }
+        // Only fire on game toggle — including player/extraInfo would loop since the effect updates them
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [coh3])
 
     if (!player) {
         return null
+    }
+
+    if (noProfileGame) {
+        return (
+            <>
+                <div className={styles.nameDiv}>
+                    <img
+                        src={countryFlags[player.country ?? '']}
+                        alt={`${player.country}`}
+                        title={`${player.country}`}
+                    />
+                    <span>{player.name}</span>
+                </div>
+                <p className={styles.noProfile}>
+                    {getText(`no_profile_${noProfileGame}`, settings)}
+                </p>
+            </>
+        )
     }
 
     if (!extraInfo) {

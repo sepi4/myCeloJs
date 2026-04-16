@@ -440,6 +440,16 @@ const text: Translations = {
         en: 'games played',
         ru: 'игр сыграно',
     },
+
+    // player card
+    no_profile_coh2: {
+        en: 'No profile for COH2',
+        ru: 'Нет профиля для COH2',
+    },
+    no_profile_coh3: {
+        en: 'No profile for COH3',
+        ru: 'Нет профиля для COH3',
+    },
 }
 
 export default text

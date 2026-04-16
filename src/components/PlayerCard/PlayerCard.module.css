@@ -48,3 +48,10 @@
     height: 1.7em;
     margin: 0 2em;
 }
+
+.noProfile {
+    text-align: center;
+    margin-top: 3rem;
+    color: var(--text-primary);
+    font-size: 1.2em;
+}
