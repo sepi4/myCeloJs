@@ -11,17 +11,13 @@ export interface PlayerCardData {
 interface PlayerCardStore {
     player: PlayerCardData | null
     extraInfo: ExtraInfo | null
-    noProfileGame: string | null
     setPlayerCard: (player: PlayerCardData, extraInfo: ExtraInfo | null) => void
-    setNoProfile: (game: string) => void
     resetPlayerCard: () => void
 }
 
 export const usePlayerCardStore = create<PlayerCardStore>((set) => ({
     player: null,
     extraInfo: null,
-    noProfileGame: null,
-    setPlayerCard: (player, extraInfo) => set({ player, extraInfo, noProfileGame: null }),
-    setNoProfile: (game) => set({ noProfileGame: game }),
-    resetPlayerCard: () => set({ player: null, extraInfo: null, noProfileGame: null }),
+    setPlayerCard: (player, extraInfo) => set({ player, extraInfo }),
+    resetPlayerCard: () => set({ player: null, extraInfo: null }),
 }))
