@@ -85,6 +85,7 @@ export class App {
     readonly copySettingsNotification: Locator
 
     // Player card
+    readonly profileIdValue: Locator
     readonly steamIdValue: Locator
     readonly linkCoh2stats: Locator
     readonly linkCoh3stats: Locator
@@ -168,6 +169,7 @@ export class App {
         this.playerRanks = page.getByTestId('player-rank')
         this.playerElos = page.getByTestId('player-elo')
 
+        this.profileIdValue = page.getByTestId('profile-id-value')
         this.steamIdValue = page.getByTestId('steam-id-value')
         this.linkCoh2stats = page.getByTestId('link-coh2stats')
         this.linkCoh3stats = page.getByTestId('link-coh3stats')
