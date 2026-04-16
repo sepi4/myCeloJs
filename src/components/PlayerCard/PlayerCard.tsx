@@ -140,7 +140,7 @@ export default function PlayerCard() {
                     </tr>
                     <tr>
                         <th>profile id:</th>
-                        <td data-testid="profile-id-value">{player.profileId}</td>
+                        <td>{player.profileId}</td>
                     </tr>
                 </tbody>
             </table>
