@@ -10,7 +10,7 @@
     gap: 1em;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1300px) {
     .teamsContainer {
         flex-direction: row;
         align-items: flex-start;
