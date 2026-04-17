@@ -63,7 +63,7 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
 
     if (players && players.length > 0) {
         return (
-            <div data-testid="players-container">
+            <div data-testid="players-container" className={styles.teamsContainer}>
                 <Team players={teams[0]} teamIndex={0} />
                 <Team players={teams[1]} teamIndex={1} />
             </div>
