@@ -3,21 +3,3 @@
     margin-top: 6rem;
     color: var(--text-on-surface);
 }
-
-.teamsContainer {
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
-}
-
-@media (min-width: 1200px) {
-    .teamsContainer {
-        flex-direction: row;
-        align-items: flex-start;
-    }
-
-    .teamsContainer > * {
-        flex: 1;
-        min-width: 0;
-    }
-}
