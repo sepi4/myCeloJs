@@ -36,6 +36,30 @@
     border-spacing: 0.5em;
 }
 
+.gameRadio {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5em;
+    margin: 0.5em 0;
+}
+
+.radioOption {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+    cursor: pointer;
+}
+
+.radioOption input:disabled + * {
+    opacity: 0.5;
+}
+
+.radioOption:has(input:disabled) {
+    cursor: default;
+    opacity: 0.5;
+}
+
 .links {
     display: flex;
     justify-content: center;

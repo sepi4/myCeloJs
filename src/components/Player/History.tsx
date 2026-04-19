@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { RELIC_SERVER_BASE_COH2, RELIC_SERVER_BASE_COH3 } from '../../constants/urls'
 import getText from '../../functions/utils/getText'
 import { parseHistoryData } from '../../functions/utils/parseMatchHistory'
+import { useDisplayCoh3 } from '../../hooks/useDisplayCoh3'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { MatchObject, NormalizedProfiles, Player } from '../../types'
 import GameHistoryDiv from './GameHistoryDiv'
@@ -11,7 +12,6 @@ import Loading from './Loading'
 
 interface Props {
     player: Player
-    coh3: boolean
 }
 interface X {
     matchHistoryStats: MatchObject[]
@@ -20,6 +20,7 @@ interface X {
 
 export default function History(props: Props) {
     const { settings } = useSettingsStore()
+    const coh3 = useDisplayCoh3()
 
     const [getHistory, setGetHistory] = useState(false)
     const [history, setHistory] = useState<X | null>(null)
@@ -32,8 +33,8 @@ export default function History(props: Props) {
             async function fetchHistory() {
                 try {
                     const id = props.player.profileId
-                    const base = props.coh3 ? RELIC_SERVER_BASE_COH3 : RELIC_SERVER_BASE_COH2
-                    const title = props.coh3 ? 'coh3' : 'coh2'
+                    const base = coh3 ? RELIC_SERVER_BASE_COH3 : RELIC_SERVER_BASE_COH2
+                    const title = coh3 ? 'coh3' : 'coh2'
                     const url = `${base}/getRecentMatchHistoryByProfileId?title=${title}&profile_id=${id}`
                     const url2 = `${base}/GetAvailableLeaderboards?title=${title}`
                     const [r1, r2] = await Promise.all([
@@ -57,7 +58,7 @@ export default function History(props: Props) {
         return () => {
             mounted = false
         }
-    }, [getHistory, props.player, props.coh3])
+    }, [getHistory, props.player, coh3])
 
     useEffect(() => {
         setHistory(null)
@@ -75,7 +76,7 @@ export default function History(props: Props) {
                                 key={i}
                                 game={m}
                                 profiles={history.profiles}
-                                coh3={props.coh3}
+                                coh3={coh3}
                             />
                         )
                     })}

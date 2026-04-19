@@ -1,10 +1,13 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+import { useEffect, useRef } from 'react'
+
 import logo_coh2 from '../../assets/img/logo_coh2.png'
 import logo_cohstats from '../../assets/img/logo_cohstats.png'
 import logo_steam from '../../assets/img/logo_steam.png'
 import { COH2_ORG, COH2STATS_COM, COH3STATS_COM, STEAM } from '../../constants/urls'
+import { fetchProfileIdBySteamId } from '../../functions/api/fetchProfileIdBySteamId'
+import { getExtraInfo } from '../../functions/api/getExtraInfo'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
-import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 import PlayerExtraInfo from '../Player/PlayerExtraInfo'
 import styles from './PlayerCard.module.css'
@@ -12,9 +15,70 @@ import styles from './PlayerCard.module.css'
 export default function PlayerCard() {
     const { countryFlags } = useCountryFlagsStore()
     const {
-        navButtons: { coh3 },
-    } = useNavButtonsStore()
-    const { player, extraInfo } = usePlayerCardStore()
+        player,
+        extraInfo,
+        initialCoh3,
+        selectedCoh3,
+        otherGameLoading,
+        otherGameChecked,
+        otherPlayer,
+        setOtherGameData,
+        setOtherGameLoading,
+        setSelectedCoh3,
+    } = usePlayerCardStore()
+
+    const lookupKeyRef = useRef<string | null>(null)
+
+    const steamIdForLookup = selectedCoh3 === initialCoh3 ? extraInfo?.steamId : null
+
+    useEffect(() => {
+        if (!steamIdForLookup) {
+            return
+        }
+        const otherCoh3 = !initialCoh3
+        const key = `${steamIdForLookup}:${otherCoh3}`
+        if (lookupKeyRef.current === key) {
+            return
+        }
+        lookupKeyRef.current = key
+
+        let cancelled = false
+        setOtherGameLoading(true)
+
+        async function lookup() {
+            const profileId = await fetchProfileIdBySteamId(otherCoh3, steamIdForLookup as string)
+            if (cancelled) {
+                return
+            }
+            if (!profileId) {
+                setOtherGameData(null, null)
+                return
+            }
+            const x = await getExtraInfo(otherCoh3, [profileId])
+            if (cancelled) {
+                return
+            }
+            const ex = x?.result[profileId]
+            if (!ex || ex.ranks.length === 0) {
+                setOtherGameData(null, null)
+                return
+            }
+            const otherAlias = ex.ranks[0].members?.find((m) => m.profile_id === profileId)?.alias
+            setOtherGameData(
+                {
+                    country: player?.country,
+                    name: otherAlias ?? player?.name,
+                    profileId,
+                },
+                ex
+            )
+        }
+        lookup()
+
+        return () => {
+            cancelled = true
+        }
+    }, [steamIdForLookup, initialCoh3, player, setOtherGameData, setOtherGameLoading])
 
     if (!player) {
         return null
@@ -48,6 +112,37 @@ export default function PlayerCard() {
 
     const steamId = extraInfo.steamId
 
+    const otherAvailable = otherGameChecked && otherPlayer !== null
+    const coh2Disabled = selectedCoh3 && (otherGameLoading || !otherAvailable)
+    const coh3Disabled = !selectedCoh3 && (otherGameLoading || !otherAvailable)
+
+    const gameRadio = (
+        <div className={styles.gameRadio}>
+            <label className={styles.radioOption}>
+                <input
+                    data-testid="player-card-radio-coh2"
+                    type="radio"
+                    name="player-card-game"
+                    checked={!selectedCoh3}
+                    disabled={coh2Disabled}
+                    onChange={() => setSelectedCoh3(false)}
+                />
+                coh2
+            </label>
+            <label className={styles.radioOption}>
+                <input
+                    data-testid="player-card-radio-coh3"
+                    type="radio"
+                    name="player-card-game"
+                    checked={selectedCoh3}
+                    disabled={coh3Disabled}
+                    onChange={() => setSelectedCoh3(true)}
+                />
+                coh3
+            </label>
+        </div>
+    )
+
     const table = (
         <div className={styles.info}>
             <table>
@@ -68,7 +163,7 @@ export default function PlayerCard() {
     const linkSteam = STEAM + steamId
     const funSteam = () => (steamId ? window.electronAPI.shell.openExternal(linkSteam) : null)
 
-    const linkImages = coh3 ? (
+    const linkImages = selectedCoh3 ? (
         <div className={styles.links}>
             <img
                 data-testid="link-coh3stats"
@@ -133,6 +228,7 @@ export default function PlayerCard() {
         <>
             {name}
             {table}
+            {gameRadio}
             {linkImages}
             {card}
         </>

@@ -74,7 +74,7 @@ function PlayerMainRow(props: Props) {
     const { setView } = useViewStore()
 
     const handlePlayerCardOn = () => {
-        setPlayerCard(player, extraInfo)
+        setPlayerCard(player, extraInfo, coh3)
         setView('playerCard')
     }
 

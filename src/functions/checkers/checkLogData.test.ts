@@ -63,7 +63,7 @@ function resetAllStores() {
             [false, false, false, false],
         ],
     })
-    usePlayerCardStore.setState({ player: null, extraInfo: null })
+    usePlayerCardStore.getState().resetPlayerCard()
     usePlayersStore.setState({ players: null })
     useViewStore.setState({ view: 'main' })
 }
@@ -102,10 +102,7 @@ describe('checkLogData', () => {
                 [false, false, false, false],
             ],
         })
-        usePlayerCardStore.setState({
-            player: { name: 'Old' },
-            extraInfo: {} as never,
-        })
+        usePlayerCardStore.getState().setPlayerCard({ name: 'Old' }, {} as never, false)
 
         checkLogData({ data: [player1] })
 

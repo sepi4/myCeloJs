@@ -87,7 +87,7 @@ function MatchTableHeaders(props: Props) {
                                     }
                                     const ex = x.result[newPlayer.profileId]
                                     if (ex) {
-                                        setPlayerCard(newPlayer, ex)
+                                        setPlayerCard(newPlayer, ex, coh3)
                                         setView('playerCard')
                                     }
                                 }}

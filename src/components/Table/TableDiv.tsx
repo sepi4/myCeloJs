@@ -2,15 +2,13 @@ import {
     refactronTableInfo,
     refactronTableInfoCoh3,
 } from '../../functions/rankings/refactorTableInfo'
-import { useNavButtonsStore } from '../../stores/navButtonsStore'
+import { useDisplayCoh3 } from '../../hooks/useDisplayCoh3'
 import { Rank } from '../../types'
 import styles from './TableDiv.module.css'
 import TableRanksDiv from './TableRanksDiv'
 
 function TableDiv({ playerRanks }: { playerRanks: Rank[] }) {
-    const {
-        navButtons: { coh3 },
-    } = useNavButtonsStore()
+    const coh3 = useDisplayCoh3()
     const [ranks, factionNames] = coh3
         ? refactronTableInfoCoh3(playerRanks)
         : refactronTableInfo(playerRanks)

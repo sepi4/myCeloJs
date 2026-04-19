@@ -3,16 +3,14 @@ import {
     getFactionFlagLocation,
     getFactionFlagLocationCoh3,
 } from '../../functions/utils/getFactionFlagLocation'
-import { useNavButtonsStore } from '../../stores/navButtonsStore'
+import { useDisplayCoh3 } from '../../hooks/useDisplayCoh3'
 interface Props {
     faction: string
     size: string
 }
 
 function FactionIcon({ faction, size }: Props) {
-    const {
-        navButtons: { coh3 },
-    } = useNavButtonsStore()
+    const coh3 = useDisplayCoh3()
     return (
         <div
             style={{

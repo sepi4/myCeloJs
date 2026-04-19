@@ -89,7 +89,7 @@ export default function Search() {
             ranks: player.extraInfo?.ranks ?? [],
             steamId: player.name.substring(7),
         }
-        setPlayerCard(playerData, extraInfoData)
+        setPlayerCard(playerData, extraInfoData, coh3)
         setView('playerCard')
     }
 

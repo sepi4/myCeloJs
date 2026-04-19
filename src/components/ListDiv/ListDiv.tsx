@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 import { ranksArrFilter, ranksArrSort } from '../../functions/rankings/ranksArrFuns'
 import getText from '../../functions/utils/getText'
+import { useDisplayCoh3 } from '../../hooks/useDisplayCoh3'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { useSorterStore } from '../../stores/sorterStore'
@@ -14,8 +15,9 @@ import RanksListTitles from './RanksListTitles'
 
 function ListDiv({ ranksArr }: { ranksArr: Rank[] }) {
     const {
-        navButtons: { table: tableView, all: showAll, coh3 },
+        navButtons: { table: tableView, all: showAll },
     } = useNavButtonsStore()
+    const coh3 = useDisplayCoh3()
     const { sorter } = useSorterStore()
     const { settings } = useSettingsStore()
 

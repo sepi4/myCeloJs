@@ -1,4 +1,5 @@
 import getText from '../../functions/utils/getText'
+import { useDisplayCoh3 } from '../../hooks/useDisplayCoh3'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { useSorterStore } from '../../stores/sorterStore'
@@ -12,8 +13,9 @@ function RanksListTitles({ ranksArr }: { ranksArr: Rank[] }) {
     const { sorter, setSorter } = useSorterStore()
     const { settings } = useSettingsStore()
     const {
-        navButtons: { coh3, elo },
+        navButtons: { elo },
     } = useNavButtonsStore()
+    const coh3 = useDisplayCoh3()
 
     const getSorter = (name: SorterName) => {
         return {

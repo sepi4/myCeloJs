@@ -88,7 +88,7 @@ export default function Navbar(props: Props) {
                 profileId: profile.profile_id + '',
                 country: profile.country,
             }
-            setPlayerCard(playerData, ex)
+            setPlayerCard(playerData, ex, navButtons.coh3)
             closeSettingsView()
             setView('playerCard')
         }

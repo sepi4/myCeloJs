@@ -1,6 +1,6 @@
 import { getExtraInfo } from '../../functions/api/getExtraInfo'
+import { useDisplayCoh3 } from '../../hooks/useDisplayCoh3'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
-import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { useViewStore } from '../../stores/viewStore'
 import { Member as MemberType } from '../../types'
@@ -12,9 +12,7 @@ interface Props {
 
 export default function Member(props: Props) {
     const { countryFlags } = useCountryFlagsStore()
-    const {
-        navButtons: { coh3 },
-    } = useNavButtonsStore()
+    const coh3 = useDisplayCoh3()
     const { setPlayerCard } = usePlayerCardStore()
     const { setView } = useViewStore()
 
@@ -33,7 +31,7 @@ export default function Member(props: Props) {
         }
         const ex = x.result[newPlayer.profileId]
         if (ex) {
-            setPlayerCard(newPlayer, ex)
+            setPlayerCard(newPlayer, ex, coh3)
             setView('playerCard')
         }
     }

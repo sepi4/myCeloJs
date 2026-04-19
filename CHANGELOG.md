@@ -1,5 +1,7 @@
 # Changelog
 
+- **version 2.8.0.**
+    - Player card: toggle between COH2 and COH3 profile views for the same player (radio disabled when the other game profile is missing)
 - **version 2.7.1.**
     - Move log check interval setting from navbar to settings view
 - **version 2.7.0.**
