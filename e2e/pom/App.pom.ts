@@ -90,6 +90,8 @@ export class App {
     readonly linkCoh3stats: Locator
     readonly linkCoh2: Locator
     readonly linkSteam: Locator
+    readonly playerCardRadioCoh2: Locator
+    readonly playerCardRadioCoh3: Locator
 
     // Game history
     readonly fetchHistory: Locator
@@ -173,6 +175,8 @@ export class App {
         this.linkCoh3stats = page.getByTestId('link-coh3stats')
         this.linkCoh2 = page.getByTestId('link-coh2')
         this.linkSteam = page.getByTestId('link-steam')
+        this.playerCardRadioCoh2 = page.getByTestId('player-card-radio-coh2')
+        this.playerCardRadioCoh3 = page.getByTestId('player-card-radio-coh3')
 
         this.fetchHistory = page.getByTestId('fetch-history')
         this.gameHistory = page.getByTestId('game-history')
