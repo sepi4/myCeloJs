@@ -7,13 +7,16 @@ import logo_steam from '../../assets/img/logo_steam.png'
 import { COH2_ORG, COH2STATS_COM, COH3STATS_COM, STEAM } from '../../constants/urls'
 import { fetchProfileIdBySteamId } from '../../functions/api/fetchProfileIdBySteamId'
 import { getExtraInfo } from '../../functions/api/getExtraInfo'
+import getText from '../../functions/utils/getText'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
+import { useSettingsStore } from '../../stores/settingsStore'
 import PlayerExtraInfo from '../Player/PlayerExtraInfo'
 import styles from './PlayerCard.module.css'
 
 export default function PlayerCard() {
     const { countryFlags } = useCountryFlagsStore()
+    const { settings } = useSettingsStore()
     const {
         player,
         extraInfo,
@@ -115,10 +118,14 @@ export default function PlayerCard() {
     const otherAvailable = otherGameChecked && otherPlayer !== null
     const coh2Disabled = selectedCoh3 && (otherGameLoading || !otherAvailable)
     const coh3Disabled = !selectedCoh3 && (otherGameLoading || !otherAvailable)
+    const noProfileTitle =
+        otherGameChecked && !otherPlayer ? getText('no_profile_for_game', settings) : undefined
+    const coh2Title = selectedCoh3 ? noProfileTitle : undefined
+    const coh3Title = !selectedCoh3 ? noProfileTitle : undefined
 
     const gameRadio = (
         <div className={styles.gameRadio}>
-            <label className={styles.radioOption}>
+            <label className={styles.radioOption} title={coh2Title}>
                 <input
                     data-testid="player-card-radio-coh2"
                     type="radio"
@@ -129,7 +136,7 @@ export default function PlayerCard() {
                 />
                 coh2
             </label>
-            <label className={styles.radioOption}>
+            <label className={styles.radioOption} title={coh3Title}>
                 <input
                     data-testid="player-card-radio-coh3"
                     type="radio"

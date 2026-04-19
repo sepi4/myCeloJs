@@ -267,6 +267,10 @@ const text: Translations = {
         en: 'Game log file is not set',
         ru: 'Лог-файл игры не указан',
     },
+    no_profile_for_game: {
+        en: 'No profile for that game',
+        ru: 'Нет профиля для этой игры',
+    },
 
     // dropdown menu  ---------------------------------
     of: {
