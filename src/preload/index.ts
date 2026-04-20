@@ -27,6 +27,9 @@ contextBridge.exposeInMainWorld('electronAPI', {
     log: {
         read: (filePath: string) => ipcRenderer.invoke('log:read', filePath),
     },
+    steam: {
+        fetchAvatar: (steamId: string) => ipcRenderer.invoke('steam:fetch-avatar', steamId),
+    },
     overlayPort: ipcRenderer.sendSync('get-overlay-port') as number,
     rankings: {
         write: (jsonContent: string, txtContent: string) =>

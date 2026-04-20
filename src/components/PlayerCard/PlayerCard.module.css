@@ -21,6 +21,13 @@
     margin-right: 1em;
 }
 
+.nameDiv .avatar {
+    height: 2.2em;
+    width: 2.2em;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 .info {
     display: flex;
     justify-content: center;

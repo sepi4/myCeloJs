@@ -8,6 +8,7 @@ import { COH2_ORG, COH2STATS_COM, COH3STATS_COM, STEAM } from '../../constants/u
 import { fetchProfileIdBySteamId } from '../../functions/api/fetchProfileIdBySteamId'
 import { getExtraInfo } from '../../functions/api/getExtraInfo'
 import getText from '../../functions/utils/getText'
+import useSteamAvatar from '../../hooks/useSteamAvatar'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { useSettingsStore } from '../../stores/settingsStore'
@@ -31,6 +32,8 @@ export default function PlayerCard() {
     } = usePlayerCardStore()
 
     const lookupKeyRef = useRef<string | null>(null)
+
+    const avatarUrl = useSteamAvatar(extraInfo?.steamId)
 
     const steamIdForLookup = selectedCoh3 === initialCoh3 ? extraInfo?.steamId : null
 
@@ -104,6 +107,14 @@ export default function PlayerCard() {
 
     const name = (
         <div className={styles.nameDiv}>
+            {avatarUrl && (
+                <img
+                    data-testid="steam-avatar"
+                    className={styles.avatar}
+                    src={avatarUrl}
+                    alt="steam avatar"
+                />
+            )}
             <img
                 src={countryFlags[player.country ?? '']}
                 alt={`${player.country}`}
