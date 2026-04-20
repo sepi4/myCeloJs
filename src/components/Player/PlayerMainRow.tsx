@@ -136,6 +136,7 @@ function PlayerMainRow(props: Props) {
             />
         ) : null
 
+    const isRealPlayer = Number(player.profileId) > 0
     const alias = (
         <span
             style={{ cursor: steamId ? 'pointer' : undefined }}
@@ -144,7 +145,7 @@ function PlayerMainRow(props: Props) {
                     ? getTotalGames(extraInfo.ranks) + ' ' + getText('games_played', settings)
                     : ''
             }
-            onClick={handlePlayerCardOn}
+            onClick={isRealPlayer ? handlePlayerCardOn : undefined}
         >
             {player.name}
         </span>
