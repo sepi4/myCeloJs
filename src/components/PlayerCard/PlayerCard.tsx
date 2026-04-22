@@ -105,16 +105,16 @@ export default function PlayerCard() {
         )
     }
 
+    const avatar = (
+        <div className={styles.avatarRow}>
+            <div className={styles.avatar}>
+                {avatarUrl && <img data-testid="steam-avatar" src={avatarUrl} alt="steam avatar" />}
+            </div>
+        </div>
+    )
+
     const name = (
         <div className={styles.nameDiv}>
-            {avatarUrl && (
-                <img
-                    data-testid="steam-avatar"
-                    className={styles.avatar}
-                    src={avatarUrl}
-                    alt="steam avatar"
-                />
-            )}
             <img
                 src={countryFlags[player.country ?? '']}
                 alt={`${player.country}`}
@@ -244,6 +244,7 @@ export default function PlayerCard() {
 
     return (
         <>
+            {avatar}
             {name}
             {table}
             {gameRadio}

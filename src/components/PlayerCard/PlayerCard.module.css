@@ -21,10 +21,26 @@
     margin-right: 1em;
 }
 
-.nameDiv .avatar {
-    height: 3em;
-    width: 3em;
+.avatarRow {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.5em;
+}
+
+.avatar {
+    height: 4em;
+    width: 4em;
+    background: var(--bg-secondary, #2a2a2a);
+    border: 1px solid var(--border-color, #444);
+    overflow: hidden;
+}
+
+.avatar img {
+    height: 100%;
+    width: 100%;
     object-fit: cover;
+    display: block;
+    margin: 0;
 }
 
 .info {
