@@ -26,17 +26,29 @@ function Team(props: Props) {
         setTeamOpenInfos(props.teamIndex, !anyOpen)
     }
 
+    const teamClass = props.teamIndex === 0 ? css.teamA : css.teamB
+    const toggleTitle = anyOpen
+        ? getText('collapse_all_team', settings)
+        : getText('expand_all_team', settings)
+
     return (
         <div data-testid="team-container" className={css.container}>
             <button
                 data-testid="team-toggle"
                 onClick={handleToggleAll}
-                className={`${css.toggleAll} ${props.teamIndex === 0 ? css.teamA : css.teamB}`}
-                title={
-                    anyOpen
-                        ? getText('collapse_all_team', settings)
-                        : getText('expand_all_team', settings)
-                }
+                className={`${css.toggleAll} ${css.toggleLeft} ${teamClass}`}
+                title={toggleTitle}
+            >
+                <FontAwesomeIcon
+                    icon={anyOpen ? faAngleDoubleDown : faAngleDoubleRight}
+                    size="sm"
+                />
+            </button>
+            <button
+                data-testid="team-toggle-right"
+                onClick={handleToggleAll}
+                className={`${css.toggleAll} ${css.toggleRight} ${teamClass}`}
+                title={toggleTitle}
             >
                 <FontAwesomeIcon
                     icon={anyOpen ? faAngleDoubleDown : faAngleDoubleRight}
