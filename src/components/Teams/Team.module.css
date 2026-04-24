@@ -1,6 +1,6 @@
 .container {
     background: var(--bg-primary);
-    padding: 0.5em 1.5em;
+    padding: 0.5em 1.5em 0.5em 2.5em;
     margin: 1em 0;
     position: relative;
 }
@@ -9,13 +9,41 @@
     position: absolute;
     top: 0;
     left: 0;
+    bottom: 0;
+    width: 2em;
+    border: none;
+    padding: 0;
     cursor: pointer;
     color: var(--text-muted);
-    font-size: 1.15em;
-    padding: 0.2em 0.2em;
     z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+        background-color 0.15s ease,
+        color 0.15s ease;
+}
+
+.toggleAll svg {
+    font-size: 1.15em;
+}
+
+.teamA {
+    background-color: rgba(52, 120, 220, 0.3);
+}
+
+.teamB {
+    background-color: rgba(220, 60, 60, 0.3);
 }
 
 .toggleAll:hover {
     color: var(--text-primary);
+}
+
+.teamA:hover {
+    background-color: rgba(52, 120, 220, 0.55);
+}
+
+.teamB:hover {
+    background-color: rgba(220, 60, 60, 0.55);
 }

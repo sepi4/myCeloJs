@@ -28,10 +28,10 @@ function Team(props: Props) {
 
     return (
         <div data-testid="team-container" className={css.container}>
-            <span
+            <button
                 data-testid="team-toggle"
                 onClick={handleToggleAll}
-                className={css.toggleAll}
+                className={`${css.toggleAll} ${props.teamIndex === 0 ? css.teamA : css.teamB}`}
                 title={
                     anyOpen
                         ? getText('collapse_all_team', settings)
@@ -42,7 +42,7 @@ function Team(props: Props) {
                     icon={anyOpen ? faAngleDoubleDown : faAngleDoubleRight}
                     size="sm"
                 />
-            </span>
+            </button>
             {props.players.map((p, i) => (
                 <Player
                     key={p.profileId && p.profileId > 0 ? p.profileId : `${props.teamIndex}-${i}`}
