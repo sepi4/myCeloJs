@@ -36,7 +36,7 @@
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^7.2.0",
         "@fortawesome/free-solid-svg-icons": "^7.2.0",
-        "@fortawesome/react-fontawesome": "^3.3.0",
+        "@fortawesome/react-fontawesome": "^3.3.1",
         "dayjs": "^1.11.20",
         "electron-updater": "^6.8.3",
         "react": "^19.2.5",
@@ -58,7 +58,7 @@
         "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",
         "@vitejs/plugin-react": "^5.2.0",
-        "electron": "^41.2.1",
+        "electron": "^41.3.0",
         "electron-builder": "^26.8.1",
         "electron-vite": "^5.0.0",
         "eslint": "^9.39.4",
@@ -74,7 +74,7 @@
         "prettier": "^3.8.3",
         "ts-jest": "^29.4.9",
         "typescript": "^5.9.3",
-        "typescript-eslint": "^8.58.2",
+        "typescript-eslint": "^8.59.0",
         "typescript-plugin-css-modules": "^5.2.0"
     }
 }
