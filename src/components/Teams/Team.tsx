@@ -49,12 +49,7 @@ function Team(props: Props) {
                 onClick={handleToggleAll}
                 className={`${css.toggleAll} ${css.toggleRight} ${teamClass}`}
                 title={toggleTitle}
-            >
-                <FontAwesomeIcon
-                    icon={anyOpen ? faAngleDoubleDown : faAngleDoubleRight}
-                    size="sm"
-                />
-            </button>
+            />
             {props.players.map((p, i) => (
                 <Player
                     key={p.profileId && p.profileId > 0 ? p.profileId : `${props.teamIndex}-${i}`}
