@@ -5,7 +5,7 @@ import {
     getFactionFlagLocationCoh3,
 } from '../../functions/utils/getFactionFlagLocation'
 import getText from '../../functions/utils/getText'
-import { useNavButtonsStore } from '../../stores/navButtonsStore'
+import { useDisplayCoh3 } from '../../hooks/useDisplayCoh3'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { useViewStore } from '../../stores/viewStore'
 import { MatchHistoryReportResult, NormalizedProfiles, SettingsType } from '../../types'
@@ -18,9 +18,7 @@ interface Props {
 }
 
 function MatchTableHeaders(props: Props) {
-    const {
-        navButtons: { coh3 },
-    } = useNavButtonsStore()
+    const coh3 = useDisplayCoh3()
     const { setPlayerCard } = usePlayerCardStore()
     const { setView } = useViewStore()
     return (
