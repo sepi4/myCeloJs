@@ -4,8 +4,8 @@ function useSteamAvatar(steamId: string | null | undefined): string | null {
     const [url, setUrl] = useState<string | null>(null)
 
     useEffect(() => {
+        setUrl(null)
         if (!steamId) {
-            setUrl(null)
             return
         }
         let cancelled = false
