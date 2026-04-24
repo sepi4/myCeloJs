@@ -38,19 +38,19 @@
 }
 
 .toggleLeft.teamA {
-    background-image: linear-gradient(to right, rgba(52, 120, 220, 0.5), rgba(52, 120, 220, 0));
+    background-image: linear-gradient(to right, rgba(52, 120, 220, 0.3), rgba(52, 120, 220, 0));
 }
 
 .toggleLeft.teamB {
-    background-image: linear-gradient(to right, rgba(220, 60, 60, 0.5), rgba(220, 60, 60, 0));
+    background-image: linear-gradient(to right, rgba(220, 60, 60, 0.3), rgba(220, 60, 60, 0));
 }
 
 .toggleRight.teamA {
-    background-image: linear-gradient(to left, rgba(52, 120, 220, 0.5), rgba(52, 120, 220, 0));
+    background-image: linear-gradient(to left, rgba(52, 120, 220, 0.3), rgba(52, 120, 220, 0));
 }
 
 .toggleRight.teamB {
-    background-image: linear-gradient(to left, rgba(220, 60, 60, 0.5), rgba(220, 60, 60, 0));
+    background-image: linear-gradient(to left, rgba(220, 60, 60, 0.3), rgba(220, 60, 60, 0));
 }
 
 .toggleAll:hover {
@@ -58,17 +58,17 @@
 }
 
 .toggleLeft.teamA:hover {
-    background-image: linear-gradient(to right, rgba(52, 120, 220, 0.75), rgba(52, 120, 220, 0));
+    background-image: linear-gradient(to right, rgba(52, 120, 220, 0.5), rgba(52, 120, 220, 0));
 }
 
 .toggleLeft.teamB:hover {
-    background-image: linear-gradient(to right, rgba(220, 60, 60, 0.75), rgba(220, 60, 60, 0));
+    background-image: linear-gradient(to right, rgba(220, 60, 60, 0.5), rgba(220, 60, 60, 0));
 }
 
 .toggleRight.teamA:hover {
-    background-image: linear-gradient(to left, rgba(52, 120, 220, 0.75), rgba(52, 120, 220, 0));
+    background-image: linear-gradient(to left, rgba(52, 120, 220, 0.5), rgba(52, 120, 220, 0));
 }
 
 .toggleRight.teamB:hover {
-    background-image: linear-gradient(to left, rgba(220, 60, 60, 0.75), rgba(220, 60, 60, 0));
+    background-image: linear-gradient(to left, rgba(220, 60, 60, 0.5), rgba(220, 60, 60, 0));
 }
