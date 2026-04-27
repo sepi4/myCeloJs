@@ -5,12 +5,12 @@ import http from 'http'
 import net from 'net'
 import path from 'path'
 
+import { RankingsJson } from '../types'
 import {
     renderRankingsBody,
     renderRankingsPage,
     renderRankingsTxtBody,
-} from '../functions/rankings/renderRankingsHtml'
-import { RankingsJson } from '../types'
+} from './localhost/renderRankingsHtml'
 
 const isDev = !!process.env['ELECTRON_RENDERER_URL']
 
