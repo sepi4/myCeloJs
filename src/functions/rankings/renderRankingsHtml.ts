@@ -69,7 +69,7 @@ const CSS = `
     margin: 0;
     padding: 0;
     font-family: 'Work Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-    font-size: 32px;
+    font-size: 16px;
     color: white;
 }
 .bodyStyle {
@@ -144,7 +144,7 @@ const CSS = `
 
 export function renderRankingsTxtBody(text: string): string {
     const lines = text.split('\n').map((line) => escapeHtml(line))
-    return `<pre style="font-family: 'Work Sans', monospace; font-size: 32px; color: white; margin: 0;">${lines.join('<br>')}</pre>`
+    return `<pre style="font-family: 'Work Sans', monospace; font-size: 16px; color: white; margin: 0;">${lines.join('<br>')}</pre>`
 }
 
 export function renderRankingsPage(): string {
