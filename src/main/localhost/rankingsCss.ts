@@ -6,11 +6,7 @@ export const RANKINGS_CSS = /* css */ `
     font-size: 16px;
     color: white;
 }
-.bodyStyle {
-    font-family: 'Work Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-}
 .bodyStyleHorizontal {
-    font-family: 'Work Sans', 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
     display: flex;
 }
 .teamStyle {
@@ -51,7 +47,6 @@ export const RANKINGS_CSS = /* css */ `
 .countryStyle {
     width: 1.4em;
     min-width: 1.4em;
-    display: inline-block;
     display: flex;
     align-items: center;
 }
