@@ -123,7 +123,7 @@ const text: Translations = {
 
     my_steam_id: {
         en: 'My steam id',
-        ru: 'Мой steam id',
+        ru: 'Мой Steam ID',
     },
     save: {
         en: 'save',
@@ -172,7 +172,7 @@ const text: Translations = {
     },
     clear_steam_id: {
         en: 'Clear steam id',
-        ru: 'Очистить steam id',
+        ru: 'Очистить Steam ID',
     },
 
     // navbar  ---------------------------------
@@ -187,11 +187,11 @@ const text: Translations = {
     },
     elo: {
         en: 'elo',
-        ru: 'эло',
+        ru: 'ELO',
     },
     tooltip_elo: {
         en: 'Show ELO ranking for coh3',
-        ru: 'Показать рейтинг ELO для coh3',
+        ru: 'Показать рейтинг ELO для COH3',
     },
     tooltip_table: {
         en: 'Show stats as a table',
@@ -199,7 +199,7 @@ const text: Translations = {
     },
     tooltip_auto: {
         en: 'Automatically re-check log on interval',
-        ru: 'Автоматически проверять лог через интервал',
+        ru: 'Автоматически проверять лог с заданным интервалом',
     },
     tooltip_interval: {
         en: 'Interval in seconds between log checks',
@@ -224,7 +224,7 @@ const text: Translations = {
     },
     total: {
         en: 'total',
-        ru: 'количество',
+        ru: 'всего',
     },
 
     auto: {
@@ -237,7 +237,7 @@ const text: Translations = {
     },
     alert: {
         en: 'alert',
-        ru: 'звонок',
+        ru: 'сигнал',
     },
     check_log_button: {
         en: 'check log',
@@ -253,7 +253,7 @@ const text: Translations = {
     },
     my_playercard: {
         en: 'my playercard',
-        ru: 'моя карта игрока',
+        ru: 'моя карточка игрока',
     },
     search: {
         en: 'search',
@@ -279,7 +279,7 @@ const text: Translations = {
     },
     expand_all: {
         en: 'expand all',
-        ru: 'открыть все',
+        ru: 'развернуть все',
     },
     expand_all_team: {
         en: 'Expand all',
@@ -295,7 +295,7 @@ const text: Translations = {
     },
     mode: {
         en: 'mode',
-        ru: 'мод',
+        ru: 'режим',
     },
     win: {
         en: 'win %',
@@ -351,7 +351,7 @@ const text: Translations = {
         ru: 'урон',
     },
     edeaths: {
-        en: 'losts',
+        en: 'losses',
         ru: 'потери',
     },
     ekills: {
@@ -360,23 +360,23 @@ const text: Translations = {
     },
     sqlost: {
         en: 'squad lost',
-        ru: 'отрядов потеряно',
+        ru: 'потеряно отрядов',
     },
     sqkilled: {
         en: 'squad killed',
-        ru: 'отрядов убито',
+        ru: 'уничтожено отрядов',
     },
     pcap: {
         en: 'point cap',
-        ru: 'точек захвачено',
+        ru: 'захвачено точек',
     },
     vkill: {
         en: 'vehicle kills',
-        ru: 'техники убито',
+        ru: 'уничтожено техники',
     },
     vlost: {
-        en: 'vehicle losts',
-        ru: 'техники потеряно',
+        en: 'vehicle losses',
+        ru: 'потеряно техники',
     },
     gt: {
         en: 'game time',
@@ -384,7 +384,7 @@ const text: Translations = {
     },
     sqkill: {
         en: 'squad killed',
-        ru: 'отрядов убито',
+        ru: 'уничтожено отрядов',
     },
 
     // main view ---------------------------------
@@ -400,7 +400,7 @@ const text: Translations = {
     // update bar
     update_to_version: {
         en: 'update to version',
-        ru: 'обновить на версию',
+        ru: 'обновить до версии',
     },
     download: {
         en: 'download',
@@ -430,7 +430,7 @@ const text: Translations = {
     // search
     steam_alias_or_id: {
         en: 'steam alias or id',
-        ru: 'ник или ID стима',
+        ru: 'Steam-ник или ID',
     },
     mp_games: {
         en: 'total games',
