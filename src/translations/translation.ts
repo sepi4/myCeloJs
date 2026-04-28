@@ -21,8 +21,8 @@ const text: Translations = {
         ru: 'Интервал проверки лога',
     },
     rankings_file_title: {
-        en: 'Rankings file (for OBS-studio)',
-        ru: 'Файл рангов (для OBS-studio)',
+        en: 'Rankings file (for OBS Studio)',
+        ru: 'Файл рангов (для OBS Studio)',
     },
     format: {
         en: 'format',
@@ -117,12 +117,12 @@ const text: Translations = {
     },
 
     log_location_first: {
-        en: 'Add log location file first',
+        en: 'Set the log file location first',
         ru: 'Надо сначала указать расположение лог-файла',
     },
 
     my_steam_id: {
-        en: 'My steam id',
+        en: 'My Steam ID',
         ru: 'Мой Steam ID',
     },
     save: {
@@ -130,7 +130,7 @@ const text: Translations = {
         ru: 'сохранить',
     },
     id_is_wrong: {
-        en: 'ID is wrong',
+        en: 'Invalid ID',
         ru: 'неправильный ID',
     },
 
@@ -171,7 +171,7 @@ const text: Translations = {
         ru: 'Очистить путь к лог-файлу',
     },
     clear_steam_id: {
-        en: 'Clear steam id',
+        en: 'Clear Steam ID',
         ru: 'Очистить Steam ID',
     },
 
@@ -182,7 +182,7 @@ const text: Translations = {
         ru: 'Показать все режимы в раскрывающемся меню',
     },
     tooltip_total: {
-        en: 'Show total games count',
+        en: 'Show total number of games',
         ru: 'Показать общее количество игр',
     },
     elo: {
@@ -190,7 +190,7 @@ const text: Translations = {
         ru: 'ELO',
     },
     tooltip_elo: {
-        en: 'Show ELO ranking for coh3',
+        en: 'Show ELO ranking for COH3',
         ru: 'Показать рейтинг ELO для COH3',
     },
     tooltip_table: {
@@ -198,7 +198,7 @@ const text: Translations = {
         ru: 'Показать статистику в виде таблицы',
     },
     tooltip_auto: {
-        en: 'Automatically re-check log on interval',
+        en: 'Automatically re-check log at a set interval',
         ru: 'Автоматически проверять лог с заданным интервалом',
     },
     tooltip_interval: {
@@ -252,7 +252,7 @@ const text: Translations = {
         ru: 'целое число 1-999',
     },
     my_playercard: {
-        en: 'my playercard',
+        en: 'my player card',
         ru: 'моя карточка игрока',
     },
     search: {
@@ -359,11 +359,11 @@ const text: Translations = {
         ru: 'убийства',
     },
     sqlost: {
-        en: 'squad lost',
+        en: 'squads lost',
         ru: 'потеряно отрядов',
     },
     sqkilled: {
-        en: 'squad killed',
+        en: 'squads killed',
         ru: 'уничтожено отрядов',
     },
     pcap: {
@@ -383,7 +383,7 @@ const text: Translations = {
         ru: 'время игры',
     },
     sqkill: {
-        en: 'squad killed',
+        en: 'squads killed',
         ru: 'уничтожено отрядов',
     },
 
@@ -429,7 +429,7 @@ const text: Translations = {
 
     // search
     steam_alias_or_id: {
-        en: 'steam alias or id',
+        en: 'Steam alias or ID',
         ru: 'Steam-ник или ID',
     },
     mp_games: {
