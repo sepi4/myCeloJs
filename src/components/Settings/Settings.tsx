@@ -29,7 +29,7 @@ function Settings(props: Props) {
     const lg = settings && settings.language ? settings.language : 'en'
     const navbarPosition = settings?.navbarPosition ?? 'top'
     const fontSize = settings?.fontSize ?? 'small'
-    const theme = settings?.theme ?? 'default'
+    const theme = settings?.theme ?? 'dark'
 
     const handleNavbarPosition = (pos: NavbarPosition) => {
         writeSettings({ ...settings!, navbarPosition: pos })
@@ -289,7 +289,7 @@ function Settings(props: Props) {
                             className={styles.select}
                             style={{ marginTop: '0.3em' }}
                         >
-                            {(['default', 'ember', 'nord', 'dark', 'light'] as const).map((t) => (
+                            {(['dark', 'light'] as const).map((t) => (
                                 <option key={t} value={t}>
                                     {getText(`theme_${t}`, settings)}
                                 </option>

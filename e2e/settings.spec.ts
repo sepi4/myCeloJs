@@ -105,30 +105,20 @@ test('font size changes update the root font size', async () => {
 test('theme changes update the data-theme attribute', async () => {
     await app.settingsIcon.click()
 
-    // Default theme should be selected
-    await expect(app.themeSelect).toHaveValue('default')
+    // Dark theme should be selected by default
+    await expect(app.themeSelect).toHaveValue('dark')
     let theme = await page.evaluate(() => document.documentElement.getAttribute('data-theme'))
-    expect(theme).toBe('default')
-
-    // Switch to ember
-    await app.themeSelect.selectOption('ember')
-    theme = await page.evaluate(() => document.documentElement.getAttribute('data-theme'))
-    expect(theme).toBe('ember')
-
-    // Switch to nord
-    await app.themeSelect.selectOption('nord')
-    theme = await page.evaluate(() => document.documentElement.getAttribute('data-theme'))
-    expect(theme).toBe('nord')
+    expect(theme).toBe('dark')
 
     // Switch to light
     await app.themeSelect.selectOption('light')
     theme = await page.evaluate(() => document.documentElement.getAttribute('data-theme'))
     expect(theme).toBe('light')
 
-    // Reset back to default
-    await app.themeSelect.selectOption('default')
+    // Switch back to dark
+    await app.themeSelect.selectOption('dark')
     theme = await page.evaluate(() => document.documentElement.getAttribute('data-theme'))
-    expect(theme).toBe('default')
+    expect(theme).toBe('dark')
 
     await app.closeButton.click()
 })

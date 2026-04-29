@@ -36,8 +36,8 @@ test('set all settings to non-default values', async () => {
     // Font size: small → large
     await app.fontSizeLarge.click()
 
-    // Theme: default → nord
-    await app.themeSelect.selectOption('nord')
+    // Theme: dark → light
+    await app.themeSelect.selectOption('light')
 
     // Log locations
     await app.mockFileDialog(electronApp, COH2_LOG_PATH)
@@ -128,10 +128,10 @@ test('settings persist after restart', async () => {
     const rootFontSize = await page.evaluate(() => document.documentElement.style.fontSize)
     expect(rootFontSize).toBe('150%')
 
-    // Theme is nord
-    await expect(app.themeSelect).toHaveValue('nord')
+    // Theme is light
+    await expect(app.themeSelect).toHaveValue('light')
     const theme = await page.evaluate(() => document.documentElement.getAttribute('data-theme'))
-    expect(theme).toBe('nord')
+    expect(theme).toBe('light')
 
     // Steam ID is saved
     await expect(app.steamIdInput).toHaveValue(STEAM_ID)

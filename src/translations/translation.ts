@@ -95,25 +95,13 @@ const text: Translations = {
         en: 'Theme',
         ru: 'Тема',
     },
-    theme_default: {
-        en: 'Default',
-        ru: 'По умолчанию',
+    theme_dark: {
+        en: 'Dark',
+        ru: 'Тёмная',
     },
     theme_light: {
         en: 'Light',
         ru: 'Светлая',
-    },
-    theme_ember: {
-        en: 'Ember',
-        ru: 'Угли',
-    },
-    theme_nord: {
-        en: 'Nord',
-        ru: 'Норд',
-    },
-    theme_dark: {
-        en: 'Dark',
-        ru: 'Тёмная',
     },
 
     log_location_first: {

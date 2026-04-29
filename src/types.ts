@@ -69,7 +69,7 @@ export type SettingsType = {
 
 export type NavbarPosition = 'left' | 'right' | 'top'
 export type FontSize = 'small' | 'medium' | 'large'
-export type Theme = 'default' | 'ember' | 'nord' | 'dark' | 'light'
+export type Theme = 'dark' | 'light'
 
 export type StatGroup = {
     id: number

@@ -75,7 +75,9 @@ function App() {
                 const newSettings = JSON.parse(data)
                 newSettings.navbarPosition ??= 'top'
                 newSettings.fontSize ??= 'small'
-                newSettings.theme ??= 'default'
+                if (newSettings.theme !== 'dark' && newSettings.theme !== 'light') {
+                    newSettings.theme = 'dark'
+                }
                 newSettings.appLocation = appLocation
 
                 // update overlay port for current session
@@ -230,7 +232,7 @@ function App() {
 
     // Apply theme to document root
     useEffect(() => {
-        document.documentElement.setAttribute('data-theme', settings?.theme ?? 'default')
+        document.documentElement.setAttribute('data-theme', settings?.theme ?? 'dark')
     }, [settings?.theme])
 
     const handleSetSettingsView = async () => {
