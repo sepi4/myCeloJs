@@ -1,6 +1,7 @@
 .overlay {
     position: fixed;
     inset: 0;
+    z-index: 200;
     background-color: var(--bg-overlay);
 }
 
