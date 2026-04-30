@@ -106,17 +106,17 @@ test('theme changes update the data-theme attribute', async () => {
     await app.settingsIcon.click()
 
     // Dark theme should be selected by default
-    await expect(app.themeSelect).toHaveValue('dark')
+    await expect(app.themeDark).toBeChecked()
     let theme = await page.evaluate(() => document.documentElement.getAttribute('data-theme'))
     expect(theme).toBe('dark')
 
     // Switch to light
-    await app.themeSelect.selectOption('light')
+    await app.themeLight.click()
     theme = await page.evaluate(() => document.documentElement.getAttribute('data-theme'))
     expect(theme).toBe('light')
 
     // Switch back to dark
-    await app.themeSelect.selectOption('dark')
+    await app.themeDark.click()
     theme = await page.evaluate(() => document.documentElement.getAttribute('data-theme'))
     expect(theme).toBe('dark')
 

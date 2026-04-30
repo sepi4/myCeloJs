@@ -282,19 +282,36 @@ function Settings(props: Props) {
                     </div>
                     <div>
                         <div style={{ fontWeight: 'bold' }}>{getText('theme', settings)}</div>
-                        <select
-                            data-testid="theme-select"
-                            value={theme}
-                            onChange={(e) => handleTheme(e.target.value as Theme)}
-                            className={styles.select}
-                            style={{ marginTop: '0.3em' }}
+                        <div
+                            style={{
+                                display: 'flex',
+                                flexDirection: 'column',
+                                gap: '0.3em',
+                                marginTop: '0.3em',
+                            }}
                         >
                             {(['dark', 'light'] as const).map((t) => (
-                                <option key={t} value={t}>
+                                <label
+                                    key={t}
+                                    style={{
+                                        cursor: 'pointer',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                    }}
+                                >
+                                    <input
+                                        data-testid={`theme-${t}`}
+                                        type="radio"
+                                        name="theme"
+                                        value={t}
+                                        checked={theme === t}
+                                        onChange={() => handleTheme(t)}
+                                        className={styles.radio}
+                                    />
                                     {getText(`theme_${t}`, settings)}
-                                </option>
+                                </label>
                             ))}
-                        </select>
+                        </div>
                     </div>
                 </div>
             </SettingsDiv>

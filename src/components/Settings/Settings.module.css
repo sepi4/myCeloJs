@@ -99,15 +99,6 @@
     accent-color: var(--accent-input);
 }
 
-.select {
-    background-color: var(--bg-secondary);
-    color: var(--text-primary);
-    border: solid 0.05em var(--border-secondary);
-    padding: 0.3em;
-    font: inherit;
-    cursor: pointer;
-}
-
 .dangerText {
     color: var(--text-danger);
 }

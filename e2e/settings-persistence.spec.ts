@@ -37,7 +37,7 @@ test('set all settings to non-default values', async () => {
     await app.fontSizeLarge.click()
 
     // Theme: dark → light
-    await app.themeSelect.selectOption('light')
+    await app.themeLight.click()
 
     // Log locations
     await app.mockFileDialog(electronApp, COH2_LOG_PATH)
@@ -129,7 +129,7 @@ test('settings persist after restart', async () => {
     expect(rootFontSize).toBe('150%')
 
     // Theme is light
-    await expect(app.themeSelect).toHaveValue('light')
+    await expect(app.themeLight).toBeChecked()
     const theme = await page.evaluate(() => document.documentElement.getAttribute('data-theme'))
     expect(theme).toBe('light')
 
