@@ -1,5 +1,12 @@
 # Changelog
 
+- **version 2.9.0.**
+    - Show Steam avatar in player card
+    - team toggle gradient tint
+    - Reduce themes to dark and light
+    - rankings font size 32px → 16px
+    - translations updated
+    - don't open player card for AI players
 - **version 2.8.0.**
     - Player card: toggle between COH2 and COH3 profile views for the same player (radio disabled when the other game profile is missing)
     - Match history support for COH3
