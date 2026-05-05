@@ -42,7 +42,7 @@
         "react": "^19.2.5",
         "react-dom": "^19.2.5",
         "string-width": "^8.2.1",
-        "zustand": "^5.0.12"
+        "zustand": "^5.0.13"
     },
     "lint-staged": {
         "*.{ts,tsx}": [
@@ -58,7 +58,7 @@
         "@types/react": "^19.2.14",
         "@types/react-dom": "^19.2.3",
         "@vitejs/plugin-react": "^5.2.0",
-        "electron": "^41.4.0",
+        "electron": "^41.5.0",
         "electron-builder": "^26.8.1",
         "electron-vite": "^5.0.0",
         "eslint": "^9.39.4",
@@ -74,7 +74,7 @@
         "prettier": "^3.8.3",
         "ts-jest": "^29.4.9",
         "typescript": "^5.9.3",
-        "typescript-eslint": "^8.59.1",
+        "typescript-eslint": "^8.59.2",
         "typescript-plugin-css-modules": "^5.2.0"
     }
 }
