@@ -39,8 +39,8 @@
         "@fortawesome/react-fontawesome": "^3.3.1",
         "dayjs": "^1.11.20",
         "electron-updater": "^6.8.3",
-        "react": "^19.2.5",
-        "react-dom": "^19.2.5",
+        "react": "^19.2.6",
+        "react-dom": "^19.2.6",
         "string-width": "^8.2.1",
         "zustand": "^5.0.13"
     },
