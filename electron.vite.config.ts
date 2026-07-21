@@ -26,9 +26,6 @@ export default defineConfig({
     renderer: {
         root: resolve(__dirname, 'src'),
         plugins: [react()],
-        optimizeDeps: {
-            include: ['howler'],
-        },
         build: {
             outDir: resolve(__dirname, 'out/renderer'),
             rollupOptions: {
