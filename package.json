@@ -18,6 +18,7 @@
     },
     "main": "out/main/index.js",
     "scripts": {
+        "predev": "install-electron --no",
         "dev": "electron-vite dev",
         "build": "electron-vite build",
         "preview": "electron-vite preview",
@@ -58,7 +59,7 @@
         "@types/react": "^19.3.0",
         "@types/react-dom": "^19.3.0",
         "@vitejs/plugin-react": "^5.2.0",
-        "electron": "^41.10.7",
+        "electron": "^44.5.1",
         "electron-builder": "^26.15.3",
         "electron-vite": "^5.0.0",
         "eslint": "^9.39.5",
@@ -78,8 +79,5 @@
         "typescript-eslint": "^8.71.0",
         "typescript-plugin-css-modules": "^5.2.0",
         "vite": "^7.3.6"
-    },
-    "allowScripts": {
-        "electron@41.10.7": true
     }
 }
