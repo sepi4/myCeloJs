@@ -31,7 +31,8 @@
         "e2e:debug": "npm run build && npx playwright test --debug inspector",
         "e2e:dist": "MYCELO_DIST_PATH=dist/linux-unpacked/mycelo npx playwright test",
         "typecheck": "tsc --noEmit",
-        "format": "prettier --write .",
+        "format": "oxfmt --write .",
+        "format:check": "oxfmt --check .",
         "prepare": "husky"
     },
     "dependencies": {
@@ -47,10 +48,10 @@
     },
     "lint-staged": {
         "*.{ts,tsx}": [
-            "prettier --write",
+            "oxfmt --write",
             "eslint --fix --max-warnings 0 --no-warn-ignored"
         ],
-        "*.{js,json,css}": "prettier --write"
+        "*.{js,json,css}": "oxfmt --write"
     },
     "devDependencies": {
         "@eslint/js": "^9.39.5",
@@ -73,7 +74,7 @@
         "jest": "^30.5.2",
         "jest-environment-jsdom": "^30.5.2",
         "lint-staged": "^17.6.0",
-        "prettier": "^3.9.9",
+        "oxfmt": "^0.72.0",
         "ts-jest": "^29.4.14",
         "typescript": "^5.9.3",
         "typescript-eslint": "^8.71.1",
