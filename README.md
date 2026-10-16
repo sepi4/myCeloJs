@@ -2,7 +2,6 @@
 - [Install and Setup](#install-and-setup)
 - [Settings](#settings)
 - [OBS Overlay for Streamers](#obs-overlay)
-- [Code Formatting](#code-formatting)
 - [Changelog](./CHANGELOG.md)
 
 [На русском](./README.ru.md)
@@ -110,9 +109,3 @@ After setting a log location, overlay options appear in settings:
 <a name="updates"></a>
 
 See [Changelog](./CHANGELOG.md) for version history.
-
-## Code Formatting
-
-Run `npm run format` to format the project with Oxfmt, or `npm run format:check` to check formatting without changing files. Formatting settings are in `.oxfmtrc.json`.
-
-For formatting on save in VS Code, install the recommended **Oxc** extension (`oxc.oxc-vscode`). ESLint still handles lint fixes, and the existing pre-commit hook runs Oxfmt through lint-staged before linting and type checking.

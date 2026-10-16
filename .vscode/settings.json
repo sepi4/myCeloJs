@@ -1,6 +1,5 @@
 {
-    "editor.defaultFormatter": "oxc.oxc-vscode",
-    "oxc.enable.oxlint": false,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": "explicit",
