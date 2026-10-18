@@ -1,5 +1,9 @@
 # Changelog
 
+- **version 2.9.1.**
+    - Fix: Escape closes only the topmost modal, view, or settings panel instead of every open layer at once
+    - Electron updated to version 44
+    - Dependencies updated and npm audit issues fixed
 - **version 2.9.0.**
     - Show Steam avatar in player card
     - team toggle gradient tint
