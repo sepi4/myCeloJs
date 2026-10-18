@@ -50,9 +50,15 @@ test.describe('COH2 game history', () => {
         await expect(app.gameStart).toBeVisible()
         await expect(app.gameEnd).toBeVisible()
 
-        // Close the modal with Escape
+        // Escape closes only the topmost layer: the game modal, not the player card
         await page.keyboard.press('Escape')
         await expect(app.gameModal).not.toBeVisible()
+        await expect(app.steamIdValue).toBeVisible()
+
+        // A second Escape closes the player card and returns to the main view
+        await page.keyboard.press('Escape')
+        await expect(app.steamIdValue).not.toBeVisible()
+        await expect(app.playersContainer).toBeVisible()
     })
 })
 
@@ -100,8 +106,14 @@ test.describe('COH3 game history', () => {
         await expect(app.gameStart).toBeVisible()
         await expect(app.gameEnd).toBeVisible()
 
-        // Close the modal with Escape
+        // Escape closes only the topmost layer: the game modal, not the player card
         await page.keyboard.press('Escape')
         await expect(app.gameModal).not.toBeVisible()
+        await expect(app.steamIdValue).toBeVisible()
+
+        // A second Escape closes the player card and returns to the main view
+        await page.keyboard.press('Escape')
+        await expect(app.steamIdValue).not.toBeVisible()
+        await expect(app.playersContainer).toBeVisible()
     })
 })

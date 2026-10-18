@@ -12,7 +12,7 @@ interface Props {
 }
 
 function Modal(props: Props) {
-    useEsc(props.isOpen ? props.onClose : () => {})
+    useEsc(props.onClose, props.isOpen)
 
     if (!props.isOpen) {
         return null

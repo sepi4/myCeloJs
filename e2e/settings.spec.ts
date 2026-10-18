@@ -123,7 +123,7 @@ test('theme changes update the data-theme attribute', async () => {
     await app.closeButton.click()
 })
 
-test('reset all settings - cancel keeps settings, ok clears and reloads', async () => {
+test('reset all settings - Esc and cancel keep settings, ok clears and reloads', async () => {
     // Open settings — log location is set so the reset button should be enabled
     await app.settingsIcon.click()
     await expect(app.resetSettingsButton).toBeEnabled()
@@ -133,12 +133,19 @@ test('reset all settings - cancel keeps settings, ok clears and reloads', async 
     await expect(app.resetConfirmOk).toBeVisible()
     await expect(app.resetConfirmCancel).toBeVisible()
 
-    // Cancel — modal closes, settings are unchanged
+    // Escape closes only the confirmation modal, settings stay open
+    await page.keyboard.press('Escape')
+    await expect(app.resetConfirmOk).not.toBeVisible()
+    await expect(app.languageSelectEn).toBeVisible()
+
+    // Click reset again — cancel closes the modal, settings are unchanged
+    await app.resetSettingsButton.click()
+    await expect(app.resetConfirmCancel).toBeVisible()
     await app.resetConfirmCancel.click()
     await expect(app.resetConfirmOk).not.toBeVisible()
     await expect(app.languageSelectEn).toBeVisible()
 
-    // Click reset again and confirm — page reloads to a fresh state
+    // Click reset once more and confirm — page reloads to a fresh state
     await app.resetSettingsButton.click()
     await app.resetConfirmOk.click()
     await page.waitForLoadState('domcontentloaded')
