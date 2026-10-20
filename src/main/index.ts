@@ -11,6 +11,7 @@ import {
     renderRankingsPage,
     renderRankingsTxtBody,
 } from './localhost/renderRankingsHtml'
+import { fetchSteamAvatar } from './steamAvatar'
 
 const isDev = !!process.env['ELECTRON_RENDERER_URL']
 
@@ -130,33 +131,7 @@ ipcMain.handle('log:read', async (_event, filePath: string) => {
     }
 })
 
-// Steam avatars — no API key needed: the public profile XML endpoint
-// returns <avatarMedium> as a CDATA-wrapped CDN URL.
-const steamAvatarCache = new Map<string, string | null>()
-
-ipcMain.handle('steam:fetch-avatar', async (_event, steamId: string) => {
-    if (!steamId || !/^\d+$/.test(steamId)) {
-        return null
-    }
-    if (steamAvatarCache.has(steamId)) {
-        return steamAvatarCache.get(steamId) ?? null
-    }
-    try {
-        const res = await fetch(`https://steamcommunity.com/profiles/${steamId}?xml=1`)
-        if (!res.ok) {
-            steamAvatarCache.set(steamId, null)
-            return null
-        }
-        const xml = await res.text()
-        const match = xml.match(/<avatarMedium><!\[CDATA\[([^\]]+)\]\]><\/avatarMedium>/)
-        const url = match ? match[1] : null
-        steamAvatarCache.set(steamId, url)
-        return url
-    } catch (err) {
-        console.log('steam avatar fetch error:', err)
-        return null
-    }
-})
+ipcMain.handle('steam:fetch-avatar', (_event, steamId: string) => fetchSteamAvatar(steamId))
 
 // ── Auto-updater ─────────────────────────────────────────────────────────────
 
