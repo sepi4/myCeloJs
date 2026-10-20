@@ -1,5 +1,7 @@
 # Changelog
 
+- **version 2.9.2.**
+    - Fix: temporary Steam avatar lookup failures no longer leave player cards blank until the app is restarted; reopening the card retries the lookup
 - **version 2.9.1.**
     - Fix: Escape closes only the topmost modal, view, or settings panel instead of every open layer at once
     - Electron updated to version 44
