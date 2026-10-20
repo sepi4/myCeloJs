@@ -1,5 +1,7 @@
 # Changelog
 
+- **version 2.9.3.**
+    - Pin Electron to 41.10.2 after extended testing found Steam avatars failing on Electron 44 but working on Electron 41
 - **version 2.9.2.**
     - Fix: temporary Steam avatar lookup failures no longer leave player cards blank until the app is restarted; reopening the card retries the lookup
 - **version 2.9.1.**
