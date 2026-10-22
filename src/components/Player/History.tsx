@@ -1,3 +1,5 @@
+import { faAngleDoubleDown, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useState } from 'react'
 
 import { RELIC_SERVER_BASE_COH2, RELIC_SERVER_BASE_COH3 } from '../../constants/urls'
@@ -22,13 +24,15 @@ export default function History(props: Props) {
     const { settings } = useSettingsStore()
     const coh3 = useDisplayCoh3()
 
-    const [getHistory, setGetHistory] = useState(false)
+    // bumped on each fetch request so a failed fetch can be retried
+    const [fetchRequest, setFetchRequest] = useState(0)
     const [history, setHistory] = useState<X | null>(null)
     const [fetching, setFetching] = useState(false)
+    const [historyOpen, setHistoryOpen] = useState(false)
 
     useEffect(() => {
         let mounted = true
-        if (getHistory) {
+        if (fetchRequest > 0) {
             setFetching(true)
             async function fetchHistory() {
                 try {
@@ -49,6 +53,7 @@ export default function History(props: Props) {
                     console.log('error get history:', error)
                     if (mounted) {
                         setFetching(false)
+                        setHistoryOpen(false)
                     }
                 }
             }
@@ -58,17 +63,45 @@ export default function History(props: Props) {
         return () => {
             mounted = false
         }
-    }, [getHistory, props.player, coh3])
+    }, [fetchRequest, props.player, coh3])
 
     useEffect(() => {
         setHistory(null)
-        setGetHistory(false)
+        setFetchRequest(0)
         setFetching(false)
+        setHistoryOpen(false)
     }, [props.player.profileId])
+
+    const handleToggle = () => {
+        if (fetching) {
+            return
+        }
+        if (!history) {
+            setFetchRequest((n) => n + 1)
+        }
+        setHistoryOpen(!historyOpen)
+    }
 
     return (
         <>
-            {history && (
+            <div className={styles.fetchDiv}>
+                <button
+                    data-testid="history-toggle"
+                    className={styles.toggle}
+                    onClick={handleToggle}
+                >
+                    <FontAwesomeIcon icon={historyOpen ? faAngleDoubleDown : faAngleDoubleRight} />
+                    {getText('game_history', settings)}
+                </button>
+            </div>
+
+            {fetching && (
+                <div className={`${styles.fetchDiv} ${styles.loading}`}>
+                    <Loading />
+                </div>
+            )}
+
+            {history && historyOpen && (
                 <div data-testid="game-history" className={styles.historyDivs}>
                     {history.matchHistoryStats.map((m, i) => {
                         return (
@@ -80,22 +113,6 @@ export default function History(props: Props) {
                             />
                         )
                     })}
-                </div>
-            )}
-
-            {!history && (
-                <div className={styles.fetchDiv}>
-                    {fetching && <Loading />}
-
-                    {!fetching && (
-                        <span
-                            data-testid="fetch-history"
-                            className={styles.getHistory}
-                            onClick={() => setGetHistory(true)}
-                        >
-                            {getText('fetch_history', settings)}
-                        </span>
-                    )}
                 </div>
             )}
         </>

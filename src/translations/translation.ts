@@ -289,9 +289,9 @@ const text: Translations = {
         en: 'streak',
         ru: 'серия',
     },
-    fetch_history: {
-        en: 'fetch game history',
-        ru: 'загрузить историю игр',
+    game_history: {
+        en: 'Game history',
+        ru: 'История игр',
     },
     total_games: {
         en: 'total games',

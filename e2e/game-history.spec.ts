@@ -36,12 +36,18 @@ test.describe('COH2 game history', () => {
         await app.userIcon.click()
         await expect(app.steamIdValue).toBeVisible()
 
-        // Click fetch game history button — triggers API call
-        await expect(app.fetchHistory).toBeVisible()
-        await app.fetchHistory.click()
+        // Click game history toggle — triggers API call
+        await expect(app.historyToggle).toBeVisible()
+        await app.historyToggle.click()
 
         // Game history items should load
         await expect(app.gameHistory).toBeVisible()
+        await expect(app.gameHistoryItems.first()).toBeVisible()
+
+        // Toggle hides the history and shows it again
+        await app.historyToggle.click()
+        await expect(app.gameHistory).not.toBeVisible()
+        await app.historyToggle.click()
         await expect(app.gameHistoryItems.first()).toBeVisible()
 
         // Click the first game to open the modal
@@ -92,9 +98,9 @@ test.describe('COH3 game history', () => {
         await app.userIcon.click()
         await expect(app.steamIdValue).toBeVisible()
 
-        // Click fetch game history button — triggers API call
-        await expect(app.fetchHistory).toBeVisible()
-        await app.fetchHistory.click()
+        // Click game history toggle — triggers API call
+        await expect(app.historyToggle).toBeVisible()
+        await app.historyToggle.click()
 
         // Game history items should load
         await expect(app.gameHistory).toBeVisible()

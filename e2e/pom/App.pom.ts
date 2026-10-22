@@ -95,9 +95,9 @@ export class App {
     readonly playerCardRadioCoh3: Locator
 
     // Game history
-    readonly fetchHistory: Locator
     readonly gameHistory: Locator
     readonly gameHistoryItems: Locator
+    readonly historyToggle: Locator
     readonly gameModal: Locator
     readonly gameStart: Locator
     readonly gameEnd: Locator
@@ -180,9 +180,9 @@ export class App {
         this.playerCardRadioCoh2 = page.getByTestId('player-card-radio-coh2')
         this.playerCardRadioCoh3 = page.getByTestId('player-card-radio-coh3')
 
-        this.fetchHistory = page.getByTestId('fetch-history')
         this.gameHistory = page.getByTestId('game-history')
         this.gameHistoryItems = page.getByTestId('game-history-item')
+        this.historyToggle = page.getByTestId('history-toggle')
         this.gameModal = page.getByTestId('game-modal')
         this.gameStart = page.getByTestId('game-start')
         this.gameEnd = page.getByTestId('game-end')

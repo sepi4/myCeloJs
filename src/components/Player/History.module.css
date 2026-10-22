@@ -3,10 +3,28 @@
     justify-content: center;
 }
 
-.getHistory {
+.loading {
+    margin: 1em 0 1.5em;
+}
+
+.toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: var(--text-muted);
+    background-color: transparent;
     cursor: pointer;
-    border: 0.05em solid var(--border-primary);
-    padding: 0.2em 0.6em;
+}
+
+.toggle:hover {
+    color: var(--text-primary);
+}
+
+.toggle svg {
+    color: var(--accent-positive);
 }
 
 .historyDivs {
