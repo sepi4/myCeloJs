@@ -1,7 +1,9 @@
 .container {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 0.5em;
+    /* same cap as the game history list below */
+    max-width: 70em;
+    margin: 0 auto 0.5em;
 }
 
 .factionGrid {
