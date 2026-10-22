@@ -28,7 +28,7 @@
 }
 
 .historyDivs {
-    max-width: 50em;
+    max-width: 70em;
     margin: 1em auto;
     padding: 0 min(2em, 2%);
     display: grid;
