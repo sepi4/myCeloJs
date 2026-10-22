@@ -1,3 +1,14 @@
+.entry {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-template-columns: subgrid;
+}
+
+/* open game: the row is the first part of the details box */
+.entryOpen {
+    border: 0.05em solid var(--border-separator);
+}
+
 .container {
     display: grid;
     grid-column: 1 / -1;

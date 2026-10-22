@@ -6,28 +6,19 @@ import {
     NormalizedProfiles,
     SettingsType,
 } from '../../types'
-import Modal from '../Modal/Modal'
+import styles from './GameDetails.module.css'
 import MatchTableBody from './MatchTableBody'
 import MatchTableHeaders from './MatchTableHeaders'
-import styles from './ModalDiv.module.css'
-
-const overlayClasses: Record<string, string> = {
-    left: `${styles.overlay} ${styles.overlayLeft}`,
-    right: `${styles.overlay} ${styles.overlayRight}`,
-    top: `${styles.overlay} ${styles.overlayTop}`,
-}
 
 interface Props {
     game: MatchObject
-    modal: boolean
     players: MatchHistoryReportResult[]
     profiles: NormalizedProfiles
-    setModal: (x: boolean) => void
     settings: SettingsType
 }
 
-function ModalDiv(props: Props) {
-    const { modal, setModal, settings, game, players, profiles } = props
+function GameDetails(props: Props) {
+    const { settings, game, players, profiles } = props
 
     const lg = settings && settings.language ? settings.language : 'en'
 
@@ -35,16 +26,8 @@ function ModalDiv(props: Props) {
     const endTime = getDateTime(game.endGameTime, lg)
     const durationTime = getTime(game.endGameTime.getTime() - game.startGameTime.getTime())
 
-    const navbarPosition = settings?.navbarPosition ?? 'top'
-
     return (
-        <Modal
-            isOpen={modal}
-            onClose={() => setModal(false)}
-            overlayClassName={overlayClasses[navbarPosition] ?? styles.overlay}
-            className={styles.content}
-            data-testid="game-modal"
-        >
+        <div data-testid="game-details" className={styles.content}>
             <div>
                 <span data-testid="game-start" className={styles.label}>
                     {getText('game_start_time', settings)}:
@@ -69,7 +52,7 @@ function ModalDiv(props: Props) {
                 <MatchTableHeaders settings={settings} players={players} profiles={profiles} />
                 <MatchTableBody game={game} settings={settings} players={players} />
             </table>
-        </Modal>
+        </div>
     )
 }
-export default ModalDiv
+export default GameDetails

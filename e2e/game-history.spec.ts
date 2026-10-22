@@ -31,7 +31,7 @@ test.describe('COH2 game history', () => {
         await closeApp(electronApp, tempUserDataDir)
     })
 
-    test('fetch game history and open game modal', async () => {
+    test('fetch game history and open game details', async () => {
         // Open my player card
         await app.userIcon.click()
         await expect(app.steamIdValue).toBeVisible()
@@ -50,18 +50,22 @@ test.describe('COH2 game history', () => {
         await app.historyToggle.click()
         await expect(app.gameHistoryItems.first()).toBeVisible()
 
-        // Click the first game to open the modal
+        // Click the first game to open its details below the row
         await app.gameHistoryItems.first().click()
-        await expect(app.gameModal).toBeVisible()
+        await expect(app.gameDetails).toBeVisible()
         await expect(app.gameStart).toBeVisible()
         await expect(app.gameEnd).toBeVisible()
 
-        // Escape closes only the topmost layer: the game modal, not the player card
-        await page.keyboard.press('Escape')
-        await expect(app.gameModal).not.toBeVisible()
+        // Opening another game closes the previous one
+        await app.gameHistoryItems.nth(1).click()
+        await expect(app.gameDetails).toHaveCount(1)
+
+        // Clicking the same game again closes the details
+        await app.gameHistoryItems.nth(1).click()
+        await expect(app.gameDetails).not.toBeVisible()
         await expect(app.steamIdValue).toBeVisible()
 
-        // A second Escape closes the player card and returns to the main view
+        // Escape closes the player card and returns to the main view
         await page.keyboard.press('Escape')
         await expect(app.steamIdValue).not.toBeVisible()
         await expect(app.playersContainer).toBeVisible()
@@ -93,7 +97,7 @@ test.describe('COH3 game history', () => {
         await closeApp(electronApp, tempUserDataDir)
     })
 
-    test('fetch game history and open game modal', async () => {
+    test('fetch game history and open game details', async () => {
         // Open my player card
         await app.userIcon.click()
         await expect(app.steamIdValue).toBeVisible()
@@ -106,18 +110,22 @@ test.describe('COH3 game history', () => {
         await expect(app.gameHistory).toBeVisible()
         await expect(app.gameHistoryItems.first()).toBeVisible()
 
-        // Click the first game to open the modal
+        // Click the first game to open its details below the row
         await app.gameHistoryItems.first().click()
-        await expect(app.gameModal).toBeVisible()
+        await expect(app.gameDetails).toBeVisible()
         await expect(app.gameStart).toBeVisible()
         await expect(app.gameEnd).toBeVisible()
 
-        // Escape closes only the topmost layer: the game modal, not the player card
-        await page.keyboard.press('Escape')
-        await expect(app.gameModal).not.toBeVisible()
+        // Opening another game closes the previous one
+        await app.gameHistoryItems.nth(1).click()
+        await expect(app.gameDetails).toHaveCount(1)
+
+        // Clicking the same game again closes the details
+        await app.gameHistoryItems.nth(1).click()
+        await expect(app.gameDetails).not.toBeVisible()
         await expect(app.steamIdValue).toBeVisible()
 
-        // A second Escape closes the player card and returns to the main view
+        // Escape closes the player card and returns to the main view
         await page.keyboard.press('Escape')
         await expect(app.steamIdValue).not.toBeVisible()
         await expect(app.playersContainer).toBeVisible()

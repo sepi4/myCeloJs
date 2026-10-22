@@ -1,4 +1,4 @@
-import { CSSProperties, useState } from 'react'
+import { CSSProperties } from 'react'
 
 import { getFactionCodeCoh2ById, getFactionCodeCoh3ById } from '../../constants/factionMappings'
 import {
@@ -8,17 +8,18 @@ import {
 import { getTimeAgo } from '../../functions/utils/time'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { MatchHistoryReportResult, MatchObject, NormalizedProfiles } from '../../types'
+import GameDetails from './GameDetails'
 import styles from './GameHistoryDiv.module.css'
-import ModalDiv from './ModalDiv'
 
 interface Props {
     game: MatchObject
     profiles: NormalizedProfiles
     coh3: boolean
+    open: boolean
+    onToggle: () => void
 }
 
 export default function GameHistoryDiv(props: Props) {
-    const [modal, setModal] = useState(false)
     const { settings } = useSettingsStore()
     const lg = settings && settings.language ? settings.language : 'en'
 
@@ -75,12 +76,12 @@ export default function GameHistoryDiv(props: Props) {
     )
 
     return (
-        <>
+        <div className={props.open ? `${styles.entry} ${styles.entryOpen}` : styles.entry}>
             <div
                 data-testid="game-history-item"
                 className={styles.container}
                 style={{ '--result-color': resultColor } as CSSProperties}
-                onClick={() => setModal(true)}
+                onClick={props.onToggle}
             >
                 <div className={styles.mode}>{matchType}</div>
                 {renderTeam(allies, styles.allies)}
@@ -88,14 +89,14 @@ export default function GameHistoryDiv(props: Props) {
                 {renderTeam(opponents)}
                 <div className={styles.time}>{timeAgo}</div>
             </div>
-            <ModalDiv
-                game={props.game}
-                modal={modal}
-                players={players}
-                profiles={props.profiles}
-                setModal={setModal}
-                settings={settings!}
-            />
-        </>
+            {props.open && (
+                <GameDetails
+                    game={props.game}
+                    players={players}
+                    profiles={props.profiles}
+                    settings={settings!}
+                />
+            )}
+        </div>
     )
 }

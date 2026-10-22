@@ -29,6 +29,8 @@ export default function History(props: Props) {
     const [history, setHistory] = useState<X | null>(null)
     const [fetching, setFetching] = useState(false)
     const [historyOpen, setHistoryOpen] = useState(false)
+    // index of the game whose details are shown, only one at a time
+    const [openGame, setOpenGame] = useState<number | null>(null)
 
     useEffect(() => {
         let mounted = true
@@ -47,6 +49,7 @@ export default function History(props: Props) {
                     ])
                     if (mounted) {
                         setHistory(parseHistoryData([r1, r2], props.player))
+                        setOpenGame(null)
                         setFetching(false)
                     }
                 } catch (error) {
@@ -70,6 +73,7 @@ export default function History(props: Props) {
         setFetchRequest(0)
         setFetching(false)
         setHistoryOpen(false)
+        setOpenGame(null)
     }, [props.player.profileId])
 
     const handleToggle = () => {
@@ -110,6 +114,8 @@ export default function History(props: Props) {
                                 game={m}
                                 profiles={history.profiles}
                                 coh3={coh3}
+                                open={openGame === i}
+                                onToggle={() => setOpenGame(openGame === i ? null : i)}
                             />
                         )
                     })}
