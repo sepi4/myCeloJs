@@ -26,14 +26,16 @@
     color: var(--text-muted);
 }
 
+/* mode and time columns shrink first, names only when the list is too narrow */
 .team {
     display: flex;
     flex-direction: column;
     gap: 0.1em;
-    min-width: 0;
+    max-width: calc(50cqw - 7em);
 }
 
 .allies {
+    justify-self: end;
     align-items: flex-end;
 }
 
@@ -67,5 +69,4 @@
     padding-right: 0.4em;
     color: var(--text-muted);
     text-align: right;
-    white-space: nowrap;
 }
