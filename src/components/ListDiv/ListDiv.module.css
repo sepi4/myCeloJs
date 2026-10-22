@@ -16,3 +16,24 @@
     margin-bottom: 0.6em;
     color: var(--text-muted);
 }
+
+.toggleAll {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    margin-bottom: 0.6em;
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: var(--text-muted);
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.toggleAll:hover {
+    color: var(--text-primary);
+}
+
+.toggleAll svg {
+    color: var(--accent-positive);
+}

@@ -1,4 +1,4 @@
-import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faAngleDoubleDown, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
 
@@ -9,6 +9,7 @@ import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { useSorterStore } from '../../stores/sorterStore'
 import { Rank } from '../../types'
+import Cell from './Cell'
 import styles from './ListDiv.module.css'
 import RanksList from './RanksList'
 import RanksListTitles from './RanksListTitles'
@@ -30,19 +31,34 @@ function ListDiv({ ranksArr }: { ranksArr: Rank[] }) {
         ranksArr = ranksArr.reverse()
     }
 
+    // only team ranks with several members can be expanded
+    const hasExpandable = ranksArr.some((r) => r.members && r.members.length > 1)
+
     return (
         ranksArr && (
             <div className={styles.container}>
-                {!coh3 && (
-                    <div>
-                        <FontAwesomeIcon
-                            style={{
-                                cursor: 'pointer',
-                            }}
-                            title={getText('expand_all', settings)}
-                            icon={allOpen ? faMinus : faPlus}
-                            onClick={() => setAllOpen(!allOpen)}
-                        />
+                {!coh3 && hasExpandable && (
+                    // same column widths as RanksList so the button sits above the row arrows
+                    <div className={styles.row}>
+                        <Cell />
+                        <Cell width="40%" justifyContent="flex-start">
+                            <button
+                                data-testid="ranks-toggle-all"
+                                className={styles.toggleAll}
+                                onClick={() => setAllOpen(!allOpen)}
+                            >
+                                <FontAwesomeIcon
+                                    icon={allOpen ? faAngleDoubleDown : faAngleDoubleRight}
+                                />
+                                {getText(
+                                    allOpen ? 'collapse_all_team' : 'expand_all_team',
+                                    settings
+                                )}
+                            </button>
+                        </Cell>
+                        <Cell />
+                        <Cell />
+                        <Cell />
                     </div>
                 )}
                 <RanksListTitles ranksArr={ranksArr} />

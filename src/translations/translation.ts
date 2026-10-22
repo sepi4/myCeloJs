@@ -265,10 +265,6 @@ const text: Translations = {
         en: 'of',
         ru: 'из',
     },
-    expand_all: {
-        en: 'expand all',
-        ru: 'развернуть все',
-    },
     expand_all_team: {
         en: 'Expand all',
         ru: 'Развернуть всех',
