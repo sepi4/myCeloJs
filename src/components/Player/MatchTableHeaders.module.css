@@ -6,3 +6,11 @@
     width: 1.4em;
     height: 1.4em;
 }
+
+.rowLabel {
+    /* fixed table layout takes column widths from the first row */
+    width: 11em;
+    text-align: left;
+    font-weight: normal;
+    color: var(--text-muted);
+}

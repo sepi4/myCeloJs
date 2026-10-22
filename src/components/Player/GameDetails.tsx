@@ -28,30 +28,20 @@ function GameDetails(props: Props) {
 
     return (
         <div data-testid="game-details" className={styles.content}>
-            <div>
-                <span data-testid="game-start" className={styles.label}>
-                    {getText('game_start_time', settings)}:
-                </span>
-                <span className={styles.value}>{startTime}</span>
-            </div>
-            <div>
-                <span data-testid="game-end" className={styles.label}>
-                    {getText('game_end_time', settings)}:
-                </span>
-                <span className={styles.value}>{endTime}</span>
-            </div>
-            <div>
-                <span className={styles.label}>{getText('map', settings)}:</span>
-                <span className={styles.value}>{game.mapName}</span>
-            </div>
-            <div>
-                <span className={styles.label}>{getText('duration', settings)}:</span>
-                <span className={styles.value}>{durationTime}</span>
-            </div>
             <table className={styles.table}>
                 <MatchTableHeaders settings={settings} players={players} profiles={profiles} />
                 <MatchTableBody game={game} settings={settings} players={players} />
             </table>
+            <dl className={styles.meta}>
+                <dt>{getText('map', settings)}</dt>
+                <dd>{game.mapName}</dd>
+                <dt>{getText('duration', settings)}</dt>
+                <dd>{durationTime}</dd>
+                <dt data-testid="game-start">{getText('game_start_time', settings)}</dt>
+                <dd>{startTime}</dd>
+                <dt data-testid="game-end">{getText('game_end_time', settings)}</dt>
+                <dd>{endTime}</dd>
+            </dl>
         </div>
     )
 }

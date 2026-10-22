@@ -7,11 +7,12 @@
 
 .row td {
     overflow: hidden;
-    font-size: 75%;
+    padding: 0.1em 0;
 }
 
 .name {
-    font-weight: bold;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     color: var(--text-muted);
     text-align: left;
 }

@@ -24,9 +24,7 @@ function MatchTableHeaders(props: Props) {
     return (
         <thead>
             <tr>
-                <th className={styles.th} style={{ textAlign: 'left' }}>
-                    {getText('faction', props.settings)}
-                </th>
+                <th className={styles.rowLabel}>{getText('faction', props.settings)}</th>
 
                 {props.players.map((p) => {
                     const factionCode = coh3
@@ -44,14 +42,7 @@ function MatchTableHeaders(props: Props) {
             </tr>
 
             <tr>
-                <th
-                    className={styles.th}
-                    style={{
-                        textAlign: 'left',
-                    }}
-                >
-                    {getText('name', props.settings)}
-                </th>
+                <th className={styles.rowLabel}>{getText('name', props.settings)}</th>
                 {props.players.map((p) => {
                     const pro = props.profiles[p.profile_id]
                     return (

@@ -1,22 +1,32 @@
 .content {
     grid-column: 1 / -1;
     padding: 0.8em 1em;
+    font-size: 75%;
     color: var(--text-primary);
 }
 
-.label {
-    display: inline-block;
-    color: var(--text-muted);
+/* background info, kept out of the way in the bottom right corner */
+.meta {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    justify-content: end;
+    gap: 0.1em 1em;
+    margin: 1em 0 0 0;
     font-size: 90%;
-    min-width: 40%;
+    font-style: italic;
+    text-align: right;
+    color: var(--text-secondary);
 }
 
-.value {
-    color: var(--accent-highlight);
+.meta dt {
+    color: var(--text-muted);
+}
+
+.meta dd {
+    margin: 0;
 }
 
 .table {
-    margin: 1em 0 0 0;
     table-layout: fixed;
     width: 100%;
     cursor: default;
