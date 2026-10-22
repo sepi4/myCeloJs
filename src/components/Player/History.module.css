@@ -10,7 +10,10 @@
 }
 
 .historyDivs {
-    margin: 1em 0;
-    display: flex;
-    flex-wrap: wrap;
+    max-width: 50em;
+    margin: 1em auto;
+    padding: 0 2em;
+    display: grid;
+    grid-template-columns: 7em minmax(0, 1fr) auto minmax(0, 1fr) 7em;
+    gap: 0.3em 0.8em;
 }

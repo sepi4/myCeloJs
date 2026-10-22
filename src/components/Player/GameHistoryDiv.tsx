@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { CSSProperties, useState } from 'react'
 
 import { getFactionCodeCoh2ById, getFactionCodeCoh3ById } from '../../constants/factionMappings'
 import {
@@ -7,7 +7,7 @@ import {
 } from '../../functions/utils/getFactionFlagLocation'
 import { getTimeAgo } from '../../functions/utils/time'
 import { useSettingsStore } from '../../stores/settingsStore'
-import { MatchObject, NormalizedProfiles } from '../../types'
+import { MatchHistoryReportResult, MatchObject, NormalizedProfiles } from '../../types'
 import styles from './GameHistoryDiv.module.css'
 import ModalDiv from './ModalDiv'
 
@@ -27,53 +27,67 @@ export default function GameHistoryDiv(props: Props) {
         return null
     }
 
-    let backgroundColor = 'var(--accent-neutral)'
+    let resultColor = 'var(--accent-neutral)'
     if (props.game.result.resulttype === 1) {
-        backgroundColor = 'var(--accent-positive)'
+        resultColor = 'var(--accent-positive)'
     }
     if (props.game.result.resulttype === 0) {
-        backgroundColor = 'var(--accent-negative)'
+        resultColor = 'var(--accent-negative)'
     }
 
     const players = props.game.players.sort((a, b) => b.teamid - a.teamid)
 
     const rawName = props.game.matchType?.name ?? '???'
     const matchType = rawName.match(/^(\dv\d)/i)?.[1]?.toLowerCase() ?? rawName
-    const timeAgo = getTimeAgo(props.game.endGameTime, lg)
+    const timeAgo = getTimeAgo(props.game.endGameTime, lg, true)
 
-    let playersNames = ''
-    players.forEach((p, i) => {
-        if (i !== 0 && players.length / i === 2) {
-            playersNames += '\t----- vs -----\t\n'
-        }
-        const profile = props.profiles[p.profile_id]
-        playersNames += (profile ? profile.alias : `${p.profile_id}`) + '\n'
-    })
+    const result = props.game.result
+    const getFlag = (raceId: number) => {
+        const code = props.coh3 ? getFactionCodeCoh3ById(raceId) : getFactionCodeCoh2ById(raceId)
+        const flag = props.coh3 ? getFactionFlagLocationCoh3(code) : getFactionFlagLocation(code)
+        return { code, flag }
+    }
 
-    const factionCode = props.coh3
-        ? getFactionCodeCoh3ById(props.game.result.race_id)
-        : getFactionCodeCoh2ById(props.game.result.race_id)
-    const factionFlag = props.coh3
-        ? getFactionFlagLocationCoh3(factionCode)
-        : getFactionFlagLocation(factionCode)
+    // own player first, then teammates
+    const isMe = (p: MatchHistoryReportResult) => p.profile_id === result.profile_id
+    const allies = players
+        .filter(isMe)
+        .concat(players.filter((p) => p.teamid === result.teamid && !isMe(p)))
+    const opponents = players.filter((p) => p.teamid !== result.teamid)
+
+    const renderTeam = (team: MatchHistoryReportResult[], className = '') => (
+        <div className={`${styles.team} ${className}`}>
+            {team.map((p) => {
+                const { code, flag } = getFlag(p.race_id)
+                const name = props.profiles[p.profile_id]?.alias ?? `${p.profile_id}`
+                return (
+                    <span
+                        key={p.profile_id}
+                        className={isMe(p) ? `${styles.player} ${styles.me}` : styles.player}
+                        title={name}
+                    >
+                        <img src={flag} alt={code} />
+                        <span>{name}</span>
+                    </span>
+                )
+            })}
+        </div>
+    )
 
     return (
         <>
             <div
                 data-testid="game-history-item"
-                title={playersNames}
                 className={styles.container}
-                style={{ border: '.1em solid ' + backgroundColor }}
+                style={{ '--result-color': resultColor } as CSSProperties}
                 onClick={() => setModal(true)}
             >
-                <img src={factionFlag} alt={factionCode} />
-
-                <div className={styles.name}>
-                    <div>{matchType}</div>
-                    <div>{timeAgo}</div>
-                </div>
+                <div className={styles.mode}>{matchType}</div>
+                {renderTeam(allies, styles.allies)}
+                <div className={styles.vs}>vs</div>
+                {renderTeam(opponents)}
+                <div className={styles.time}>{timeAgo}</div>
             </div>
-
             <ModalDiv
                 game={props.game}
                 modal={modal}
