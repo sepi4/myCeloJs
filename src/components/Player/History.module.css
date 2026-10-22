@@ -3,6 +3,56 @@
     justify-content: center;
 }
 
+/* same width as the list: toggle centered, period buttons at the list's right edge above the time column */
+.header {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 1.5em;
+    max-width: 70em;
+    margin: 0 auto;
+    padding: 0 min(2em, 2%);
+}
+
+.header .toggle {
+    grid-column: 2;
+}
+
+.periods {
+    justify-self: end;
+    display: flex;
+    gap: 0.8em;
+    font-size: 85%;
+}
+
+.period {
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: var(--text-muted);
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.period:hover {
+    color: var(--text-primary);
+}
+
+.period[aria-pressed='true'] {
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+}
+
+.empty {
+    grid-column: 1 / -1;
+    padding: 1em 0;
+    text-align: center;
+    font-size: 85%;
+    font-style: italic;
+    color: var(--text-muted);
+}
+
 .loading {
     margin: 1em 0 1.5em;
 }

@@ -19,7 +19,12 @@ interface NavButtons {
     }
 }
 
-type Props = LogCheckInterval | AutoLogChecking | Alert | NavButtons
+interface HistoryPeriod {
+    key: 'historyPeriod'
+    def: 'week' | 'month' | 'year' | 'all'
+}
+
+type Props = LogCheckInterval | AutoLogChecking | Alert | NavButtons | HistoryPeriod
 
 export default function getLocalStorage({ key, def }: Props) {
     const str = localStorage.getItem(key)

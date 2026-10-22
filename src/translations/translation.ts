@@ -293,6 +293,26 @@ const text: Translations = {
         en: 'Game history',
         ru: 'История игр',
     },
+    period_week: {
+        en: 'week',
+        ru: 'неделя',
+    },
+    period_month: {
+        en: 'month',
+        ru: 'месяц',
+    },
+    period_year: {
+        en: 'year',
+        ru: 'год',
+    },
+    period_all: {
+        en: 'all',
+        ru: 'все',
+    },
+    no_games_in_period: {
+        en: 'No games in this period',
+        ru: 'Нет игр за этот период',
+    },
     total_games: {
         en: 'total games',
         ru: 'количество игр',

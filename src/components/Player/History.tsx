@@ -6,6 +6,7 @@ import { RELIC_SERVER_BASE_COH2, RELIC_SERVER_BASE_COH3 } from '../../constants/
 import getText from '../../functions/utils/getText'
 import { parseHistoryData } from '../../functions/utils/parseMatchHistory'
 import { useDisplayCoh3 } from '../../hooks/useDisplayCoh3'
+import { HISTORY_PERIODS, isInPeriod, useHistoryPeriodStore } from '../../stores/historyPeriodStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { MatchObject, NormalizedProfiles, Player } from '../../types'
 import GameHistoryDiv from './GameHistoryDiv'
@@ -23,13 +24,14 @@ interface X {
 export default function History(props: Props) {
     const { settings } = useSettingsStore()
     const coh3 = useDisplayCoh3()
+    const { historyPeriod, setHistoryPeriod } = useHistoryPeriodStore()
 
     // bumped on each fetch request so a failed fetch can be retried
     const [fetchRequest, setFetchRequest] = useState(0)
     const [history, setHistory] = useState<X | null>(null)
     const [fetching, setFetching] = useState(false)
     const [historyOpen, setHistoryOpen] = useState(false)
-    // index of the game whose details are shown, only one at a time
+    // match id of the game whose details are shown, only one at a time
     const [openGame, setOpenGame] = useState<number | null>(null)
 
     useEffect(() => {
@@ -86,9 +88,13 @@ export default function History(props: Props) {
         setHistoryOpen(!historyOpen)
     }
 
+    const games = history
+        ? history.matchHistoryStats.filter((m) => isInPeriod(m.endGameTime, historyPeriod))
+        : []
+
     return (
         <>
-            <div className={styles.fetchDiv}>
+            <div className={styles.header}>
                 <button
                     data-testid="history-toggle"
                     className={styles.toggle}
@@ -97,6 +103,21 @@ export default function History(props: Props) {
                     <FontAwesomeIcon icon={historyOpen ? faAngleDoubleDown : faAngleDoubleRight} />
                     {getText('game_history', settings)}
                 </button>
+                {history && historyOpen && (
+                    <div className={styles.periods}>
+                        {HISTORY_PERIODS.map((period) => (
+                            <button
+                                key={period}
+                                data-testid={`history-period-${period}`}
+                                aria-pressed={historyPeriod === period}
+                                className={styles.period}
+                                onClick={() => setHistoryPeriod(period)}
+                            >
+                                {getText(`period_${period}`, settings)}
+                            </button>
+                        ))}
+                    </div>
+                )}
             </div>
 
             {fetching && (
@@ -107,18 +128,24 @@ export default function History(props: Props) {
 
             {history && historyOpen && (
                 <div data-testid="game-history" className={styles.historyDivs}>
-                    {history.matchHistoryStats.map((m, i) => {
+                    {games.map((m) => {
+                        const id = m.all.id
                         return (
                             <GameHistoryDiv
-                                key={i}
+                                key={id}
                                 game={m}
                                 profiles={history.profiles}
                                 coh3={coh3}
-                                open={openGame === i}
-                                onToggle={() => setOpenGame(openGame === i ? null : i)}
+                                open={openGame === id}
+                                onToggle={() => setOpenGame(openGame === id ? null : id)}
                             />
                         )
                     })}
+                    {games.length === 0 && (
+                        <div data-testid="history-empty" className={styles.empty}>
+                            {getText('no_games_in_period', settings)}
+                        </div>
+                    )}
                 </div>
             )}
         </>

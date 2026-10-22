@@ -44,6 +44,13 @@ test.describe('COH2 game history', () => {
         await expect(app.gameHistory).toBeVisible()
         await expect(app.gameHistoryItems.first()).toBeVisible()
 
+        // Period filter: week may hide every game, all shows them again
+        await app.historyPeriodWeek.click()
+        await expect(app.historyPeriodWeek).toHaveAttribute('aria-pressed', 'true')
+        await app.historyPeriodAll.click()
+        await expect(app.historyPeriodAll).toHaveAttribute('aria-pressed', 'true')
+        await expect(app.gameHistoryItems.first()).toBeVisible()
+
         // Toggle hides the history and shows it again
         await app.historyToggle.click()
         await expect(app.gameHistory).not.toBeVisible()
