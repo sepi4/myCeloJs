@@ -53,8 +53,7 @@ test.describe('COH2 game history', () => {
         // Click the first game to open its details below the row
         await app.gameHistoryItems.first().click()
         await expect(app.gameDetails).toBeVisible()
-        await expect(app.gameStart).toBeVisible()
-        await expect(app.gameEnd).toBeVisible()
+        await expect(app.gameTime).toBeVisible()
 
         // Opening another game closes the previous one
         await app.gameHistoryItems.nth(1).click()
@@ -113,8 +112,7 @@ test.describe('COH3 game history', () => {
         // Click the first game to open its details below the row
         await app.gameHistoryItems.first().click()
         await expect(app.gameDetails).toBeVisible()
-        await expect(app.gameStart).toBeVisible()
-        await expect(app.gameEnd).toBeVisible()
+        await expect(app.gameTime).toBeVisible()
 
         // Opening another game closes the previous one
         await app.gameHistoryItems.nth(1).click()

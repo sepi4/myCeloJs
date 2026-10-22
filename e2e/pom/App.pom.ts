@@ -99,8 +99,7 @@ export class App {
     readonly gameHistoryItems: Locator
     readonly historyToggle: Locator
     readonly gameDetails: Locator
-    readonly gameStart: Locator
-    readonly gameEnd: Locator
+    readonly gameTime: Locator
     readonly tableView: Locator
     readonly totalGames: Locator
     readonly rankRows: Locator
@@ -184,8 +183,7 @@ export class App {
         this.gameHistoryItems = page.getByTestId('game-history-item')
         this.historyToggle = page.getByTestId('history-toggle')
         this.gameDetails = page.getByTestId('game-details')
-        this.gameStart = page.getByTestId('game-start')
-        this.gameEnd = page.getByTestId('game-end')
+        this.gameTime = page.getByTestId('game-time')
         this.tableView = page.getByTestId('table-view')
         this.totalGames = page.getByTestId('total-games')
         this.rankRows = page.getByTestId('rank-row')

@@ -303,13 +303,9 @@ const text: Translations = {
     },
 
     // history ---------------------------------
-    game_start_time: {
-        en: 'game start time',
-        ru: 'время начала игры',
-    },
-    game_end_time: {
-        en: 'game end time',
-        ru: 'время конца игры',
+    time: {
+        en: 'time',
+        ru: 'время',
     },
     map: {
         en: 'map',

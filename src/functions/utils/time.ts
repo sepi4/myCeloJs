@@ -11,10 +11,16 @@ export function getTimeAgo(date: Date, lg: string, withoutSuffix = false): strin
     return dayjs(date).locale(lg).from(dayjs(), withoutSuffix)
 }
 
-// LL = localized long date (e.g. "March 14, 2026"), LTS = time with seconds (e.g. "2:30:15 PM")
-export function getDateTime(date: Date, lg: string): string {
+// LL = localized long date (e.g. "March 14, 2026"), LT = time (e.g. "2:30 PM").
+// The date is shown once when the game starts and ends on the same day.
+export function getTimeRange(start: Date, end: Date, lg: string): string {
     dayjs.extend(localizedFormat)
-    return dayjs(date).locale(lg).format('LL LTS')
+    const s = dayjs(start).locale(lg)
+    const e = dayjs(end).locale(lg)
+    if (s.isSame(e, 'day')) {
+        return `${s.format('LL LT')}–${e.format('LT')}`
+    }
+    return `${s.format('LL LT')} – ${e.format('LL LT')}`
 }
 
 export function getTime(ms: number): string {
