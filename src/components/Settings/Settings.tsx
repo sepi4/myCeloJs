@@ -165,7 +165,7 @@ function Settings(props: Props) {
             !settings.ignoreUntil)
 
     return (
-        <div>
+        <div className={styles.container}>
             <Icon
                 fun={handleClose}
                 icon={faTimes}

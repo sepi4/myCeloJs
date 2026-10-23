@@ -1,3 +1,9 @@
+.container {
+    /* same cap as the player rows and faction table */
+    max-width: 70em;
+    margin: 0 auto;
+}
+
 .textDiv {
     min-height: 1em;
     font-size: 90%;
@@ -75,7 +81,8 @@
 
 .button {
     margin: 0.2em 0;
-    width: 25vw;
+    /* a quarter of the window, but no wider than a quarter of .container */
+    width: min(25vw, 17.5em);
     color: var(--text-primary);
     cursor: pointer;
     background-color: var(--bg-secondary);
