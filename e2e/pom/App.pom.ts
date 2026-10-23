@@ -105,6 +105,7 @@ export class App {
 
     // Player card navigation
     readonly backButton: Locator
+    readonly forwardButton: Locator
     readonly playerCardName: Locator
     readonly gameTime: Locator
     readonly tableView: Locator
@@ -194,6 +195,7 @@ export class App {
         this.gameDetails = page.getByTestId('game-details')
         this.gameDetailsPlayers = page.getByTestId('game-details-player')
         this.backButton = page.getByTestId('back-button')
+        this.forwardButton = page.getByTestId('forward-button')
         this.playerCardName = page.getByTestId('player-card-name')
         this.gameTime = page.getByTestId('game-time')
         this.tableView = page.getByTestId('table-view')

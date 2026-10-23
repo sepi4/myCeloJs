@@ -26,16 +26,20 @@ interface PlayerCardState {
 interface PlayerCardStore extends PlayerCardState {
     /** Earlier cards, oldest first. Filled when a card is opened from inside another card. */
     history: PlayerCardState[]
+    /** Cards left with the back button, nearest last. Opening a new card clears them. */
+    future: PlayerCardState[]
     setPlayerCard: (player: PlayerCardData, extraInfo: ExtraInfo | null, coh3: boolean) => void
     setOtherGameData: (player: PlayerCardData | null, extraInfo: ExtraInfo | null) => void
     setOtherGameLoading: (loading: boolean) => void
     setSelectedCoh3: (coh3: boolean) => void
     goBack: () => void
+    goForward: () => void
     resetPlayerCard: () => void
 }
 
 const initialState = {
     history: [] as PlayerCardState[],
+    future: [] as PlayerCardState[],
     player: null,
     extraInfo: null,
     initialCoh3: false,
@@ -69,6 +73,7 @@ export const usePlayerCardStore = create<PlayerCardStore>((set) => ({
             const history = fromCard ? [...state.history, snapshot(state)].slice(-MAX_HISTORY) : []
             return {
                 history,
+                future: [],
                 player,
                 extraInfo,
                 initialCoh3: coh3,
@@ -106,14 +111,31 @@ export const usePlayerCardStore = create<PlayerCardStore>((set) => ({
             if (!previous) {
                 return state
             }
-            return { ...previous, history: state.history.slice(0, -1) }
+            return {
+                ...previous,
+                history: state.history.slice(0, -1),
+                future: [...state.future, snapshot(state)],
+            }
+        }),
+    goForward: () =>
+        set((state) => {
+            const next = state.future[state.future.length - 1]
+            if (!next) {
+                return state
+            }
+            return {
+                ...next,
+                history: [...state.history, snapshot(state)],
+                future: state.future.slice(0, -1),
+            }
         }),
     resetPlayerCard: () => set(initialState),
 }))
 
 // Closing the card (Escape, X or any other view) forgets its history.
 useViewStore.subscribe(({ view }) => {
-    if (view !== 'playerCard' && usePlayerCardStore.getState().history.length > 0) {
-        usePlayerCardStore.setState({ history: [] })
+    const { history, future } = usePlayerCardStore.getState()
+    if (view !== 'playerCard' && (history.length > 0 || future.length > 0)) {
+        usePlayerCardStore.setState({ history: [], future: [] })
     }
 })

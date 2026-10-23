@@ -67,8 +67,11 @@ describe('playerCardStore history', () => {
     test('closing the card clears the history', () => {
         openCard('A')
         openCard('B')
+        openCard('C')
+        usePlayerCardStore.getState().goBack()
         useViewStore.getState().setView('main')
         expect(usePlayerCardStore.getState().history).toEqual([])
+        expect(usePlayerCardStore.getState().future).toEqual([])
     })
 
     test('opening a card from another view clears the history', () => {
@@ -94,5 +97,47 @@ describe('playerCardStore history', () => {
         openCard('B')
         usePlayerCardStore.getState().resetPlayerCard()
         expect(usePlayerCardStore.getState().history).toEqual([])
+    })
+})
+
+describe('playerCardStore forward', () => {
+    const names = (cards: { player: { name?: string } | null }[]) =>
+        cards.map((c) => c.player?.name)
+
+    test('goForward returns to the cards left with goBack', () => {
+        openCard('A')
+        openCard('B')
+        openCard('C')
+        usePlayerCardStore.getState().goBack()
+        usePlayerCardStore.getState().goBack()
+        expect(names(usePlayerCardStore.getState().future)).toEqual(['C', 'B'])
+
+        usePlayerCardStore.getState().goForward()
+        expect(usePlayerCardStore.getState().player?.name).toBe('B')
+        expect(names(usePlayerCardStore.getState().history)).toEqual(['A'])
+
+        usePlayerCardStore.getState().goForward()
+        const state = usePlayerCardStore.getState()
+        expect(state.player?.name).toBe('C')
+        expect(names(state.history)).toEqual(['A', 'B'])
+        expect(state.future).toEqual([])
+    })
+
+    test('goForward with empty future keeps the current card', () => {
+        openCard('A')
+        openCard('B')
+        usePlayerCardStore.getState().goForward()
+        expect(usePlayerCardStore.getState().player?.name).toBe('B')
+    })
+
+    test('opening a new card from inside a card clears the future', () => {
+        openCard('A')
+        openCard('B')
+        openCard('C')
+        usePlayerCardStore.getState().goBack()
+        openCard('D')
+        const state = usePlayerCardStore.getState()
+        expect(state.future).toEqual([])
+        expect(names(state.history)).toEqual(['A', 'B'])
     })
 })

@@ -30,7 +30,7 @@ test.afterAll(async () => {
     await closeApp(electronApp, tempUserDataDir)
 })
 
-test('goes back to the previous player card', async () => {
+test('moves back and forward between player cards', async () => {
     // Open my player card and the details of the first game
     await app.userIcon.click()
     await expect(app.steamIdValue).toHaveText(STEAM_ID)
@@ -50,22 +50,32 @@ test('goes back to the previous player card', async () => {
 
     // Back button returns to my card and hides itself
     await openOtherPlayer()
+    await expect(app.forwardButton).not.toBeVisible()
     await app.backButton.click()
     await expect(app.steamIdValue).toHaveText(STEAM_ID)
     await expect(app.backButton).not.toBeVisible()
 
-    // Backspace does the same
-    await app.historyToggle.click()
-    await app.gameHistoryItems.first().click()
-    await openOtherPlayer()
+    // Forward button goes to the other player again
+    await expect(app.forwardButton).toBeVisible()
+    await app.forwardButton.click()
+    await expect(app.steamIdValue).not.toHaveText(STEAM_ID)
+    await expect(app.forwardButton).not.toBeVisible()
+    await expect(app.backButton).toBeVisible()
+
+    // Backspace goes back and Shift+Backspace forward
     await page.keyboard.press('Backspace')
     await expect(app.steamIdValue).toHaveText(STEAM_ID)
+    await page.keyboard.press('Shift+Backspace')
+    await expect(app.steamIdValue).not.toHaveText(STEAM_ID)
 
-    // The mouse back button does the same
-    await app.historyToggle.click()
-    await app.gameHistoryItems.first().click()
-    await openOtherPlayer()
-    await page.evaluate(() => window.dispatchEvent(new MouseEvent('mouseup', { button: 3 })))
+    // The mouse side buttons do the same
+    const mouseUp = (button: number) =>
+        page.evaluate((b) => window.dispatchEvent(new MouseEvent('mouseup', { button: b })), button)
+    await mouseUp(3)
+    await expect(app.steamIdValue).toHaveText(STEAM_ID)
+    await mouseUp(4)
+    await expect(app.steamIdValue).not.toHaveText(STEAM_ID)
+    await mouseUp(3)
     await expect(app.steamIdValue).toHaveText(STEAM_ID)
 
     // Escape still closes the whole card, even with history
@@ -80,4 +90,5 @@ test('goes back to the previous player card', async () => {
     await app.userIcon.click()
     await expect(app.steamIdValue).toHaveText(STEAM_ID)
     await expect(app.backButton).not.toBeVisible()
+    await expect(app.forwardButton).not.toBeVisible()
 })

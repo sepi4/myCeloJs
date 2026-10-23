@@ -13,11 +13,11 @@
     align-items: center;
 }
 
-.backButton {
+.navButton {
     display: inline-flex;
     flex-shrink: 0;
     align-items: center;
-    padding: 0.3em 0.6em;
+    padding: 0.3em 0.2em;
     border: none;
     background: none;
     color: var(--text-primary);
@@ -26,6 +26,10 @@
     cursor: pointer;
 }
 
-.backButton:hover {
+.hidden {
+    visibility: hidden;
+}
+
+.navButton:hover {
     opacity: 0.8;
 }

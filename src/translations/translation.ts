@@ -263,6 +263,10 @@ const text: Translations = {
         en: 'Back',
         ru: 'Назад',
     },
+    forward: {
+        en: 'Forward',
+        ru: 'Вперёд',
+    },
 
     // dropdown menu  ---------------------------------
     of: {

@@ -24,8 +24,10 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
     } = useNavButtonsStore()
     const { players } = usePlayersStore()
     const { view } = useViewStore()
-    const hasPreviousCard = usePlayerCardStore((s) => s.history.length > 0)
+    const canGoBack = usePlayerCardStore((s) => s.history.length > 0)
+    const canGoForward = usePlayerCardStore((s) => s.future.length > 0)
     const goBack = usePlayerCardStore((s) => s.goBack)
+    const goForward = usePlayerCardStore((s) => s.goForward)
     const activeLogLocation = settings
         ? coh3
             ? settings.logLocationCoh3
@@ -52,11 +54,19 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
     if (view === 'playerCard') {
         return (
             <ClosingViewWrapper
-                back={
-                    hasPreviousCard
+                navigation={
+                    canGoBack || canGoForward
                         ? {
-                              title: `${getText('back', settings)} (Backspace)`,
-                              onClick: goBack,
+                              back: {
+                                  title: `${getText('back', settings)} (Backspace)`,
+                                  enabled: canGoBack,
+                                  onClick: goBack,
+                              },
+                              forward: {
+                                  title: `${getText('forward', settings)} (Shift+Backspace)`,
+                                  enabled: canGoForward,
+                                  onClick: goForward,
+                              },
                           }
                         : undefined
                 }

@@ -30,22 +30,30 @@ export default function PlayerCard() {
         setOtherGameLoading,
         setSelectedCoh3,
         goBack,
+        goForward,
     } = usePlayerCardStore()
 
-    // Backspace and the mouse back button go to the previous card.
+    // Backspace and the mouse side buttons move through earlier cards, like in a browser.
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             const typing =
                 e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement
             if (e.key === 'Backspace' && !typing) {
                 e.preventDefault()
-                goBack()
+                if (e.shiftKey) {
+                    goForward()
+                } else {
+                    goBack()
+                }
             }
         }
         const handleMouseUp = (e: MouseEvent) => {
             if (e.button === 3) {
                 e.preventDefault()
                 goBack()
+            } else if (e.button === 4) {
+                e.preventDefault()
+                goForward()
             }
         }
         window.addEventListener('keydown', handleKeyDown)
@@ -54,7 +62,7 @@ export default function PlayerCard() {
             window.removeEventListener('keydown', handleKeyDown)
             window.removeEventListener('mouseup', handleMouseUp)
         }
-    }, [goBack])
+    }, [goBack, goForward])
 
     const avatarUrl = useSteamAvatar(extraInfo?.steamId)
 
