@@ -39,6 +39,7 @@
 
     --spinner-color: #fff;
     --modal-border: #fff;
+    --shadow-navbar: rgba(0, 0, 0, 0.35);
 }
 
 /* Light theme */
@@ -81,4 +82,5 @@
 
     --spinner-color: #333;
     --modal-border: #999;
+    --shadow-navbar: rgba(0, 0, 0, 0.15);
 }
