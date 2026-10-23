@@ -78,9 +78,9 @@ test('moves back and forward between player cards', async () => {
     await mouseUp(3)
     await expect(app.steamIdValue).toHaveText(STEAM_ID)
 
-    // Escape still closes the whole card, even with history
-    await app.historyToggle.click()
-    await app.gameHistoryItems.first().click()
+    // Escape still closes the whole card, even with history.
+    // My card kept its open game, so the other player can be opened right away.
+    await expect(app.gameDetails).toBeVisible()
     await openOtherPlayer()
     await page.keyboard.press('Escape')
     await expect(app.steamIdValue).not.toBeVisible()
@@ -91,4 +91,59 @@ test('moves back and forward between player cards', async () => {
     await expect(app.steamIdValue).toHaveText(STEAM_ID)
     await expect(app.backButton).not.toBeVisible()
     await expect(app.forwardButton).not.toBeVisible()
+})
+
+test('keeps the game history of a card when moving back and forward', async () => {
+    const historyRequests: string[] = []
+    page.on('request', (r) => {
+        if (r.url().includes('getRecentMatchHistoryByProfileId')) {
+            historyRequests.push(r.url())
+        }
+    })
+
+    // Open my card, its game history and the last game in the list
+    await app.userIcon.click()
+    await expect(app.steamIdValue).toHaveText(STEAM_ID)
+    const myName = (await app.playerCardName.textContent()) ?? ''
+    await app.historyToggle.click()
+    await expect(app.gameHistoryItems.first()).toBeVisible()
+    await app.historyPeriodAll.click()
+    await app.gameHistoryItems.last().click()
+    await expect(app.gameDetails).toBeVisible()
+    expect(historyRequests).toHaveLength(1)
+
+    // Open another player from the game, the page scrolls to the top
+    const otherPlayer = app.gameDetailsPlayers.filter({ hasNotText: myName }).first()
+    await otherPlayer.scrollIntoViewIfNeeded()
+    const scrollBefore = await page.evaluate(() => window.scrollY)
+    expect(scrollBefore).toBeGreaterThan(0)
+    await otherPlayer.click()
+    await expect(app.steamIdValue).not.toHaveText(STEAM_ID)
+    await expect(app.gameHistory).not.toBeVisible()
+    expect(await page.evaluate(() => window.scrollY)).toBe(0)
+
+    // Back restores the open history, the open game and the scroll position
+    await app.backButton.click()
+    await expect(app.steamIdValue).toHaveText(STEAM_ID)
+    await expect(app.gameHistory).toBeVisible()
+    await expect(app.gameDetails).toBeVisible()
+    await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(scrollBefore)
+    expect(historyRequests).toHaveLength(1)
+
+    // Forward shows the other player with a closed history
+    await app.forwardButton.click()
+    await expect(app.steamIdValue).not.toHaveText(STEAM_ID)
+    await expect(app.gameHistory).not.toBeVisible()
+
+    // Opening the other player's history fetches it once, going back and forward keeps it
+    await app.historyToggle.click()
+    await expect(app.gameHistoryItems.first()).toBeVisible()
+    expect(historyRequests).toHaveLength(2)
+    await app.backButton.click()
+    await expect(app.steamIdValue).toHaveText(STEAM_ID)
+    await app.forwardButton.click()
+    await expect(app.gameHistory).toBeVisible()
+    expect(historyRequests).toHaveLength(2)
+
+    await page.keyboard.press('Escape')
 })

@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-import { useEffect } from 'react'
+import { useEffect, useLayoutEffect } from 'react'
 
 import logo_coh2 from '../../assets/img/logo_coh2.png'
 import logo_cohstats from '../../assets/img/logo_cohstats.png'
@@ -12,6 +11,7 @@ import useSteamAvatar from '../../hooks/useSteamAvatar'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { useSettingsStore } from '../../stores/settingsStore'
+import { Player } from '../../types'
 import PlayerExtraInfo from '../Player/PlayerExtraInfo'
 import styles from './PlayerCard.module.css'
 
@@ -31,7 +31,16 @@ export default function PlayerCard() {
         setSelectedCoh3,
         goBack,
         goForward,
+        gameHistory,
+        updateGameHistory,
+        navigation,
     } = usePlayerCardStore()
+
+    // Each newly shown card starts where it was left, or at the top if it is new.
+    // Runs only when the card changes, not when the coh2/coh3 view is switched.
+    useLayoutEffect(() => {
+        window.scrollTo(0, usePlayerCardStore.getState().scrollY)
+    }, [navigation])
 
     // Backspace and the mouse side buttons move through earlier cards, like in a browser.
     useEffect(() => {
@@ -272,8 +281,13 @@ export default function PlayerCard() {
     )
 
     const card = extraInfo && (
-        // @ts-ignore player is a partial Player used only for display
-        <PlayerExtraInfo player={player} extraInfo={extraInfo} />
+        <PlayerExtraInfo
+            // player is a partial Player used only for display
+            player={player as Player}
+            extraInfo={extraInfo}
+            gameHistory={gameHistory}
+            updateGameHistory={updateGameHistory}
+        />
     )
 
     return (

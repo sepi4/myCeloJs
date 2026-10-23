@@ -1,24 +1,27 @@
 import { faAngleDoubleDown, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { RELIC_SERVER_BASE_COH2, RELIC_SERVER_BASE_COH3 } from '../../constants/urls'
 import getText from '../../functions/utils/getText'
 import { parseHistoryData } from '../../functions/utils/parseMatchHistory'
 import { useDisplayCoh3 } from '../../hooks/useDisplayCoh3'
 import { HISTORY_PERIODS, isInPeriod, useHistoryPeriodStore } from '../../stores/historyPeriodStore'
+import { EMPTY_GAME_HISTORY } from '../../stores/playerCardStore'
 import { useSettingsStore } from '../../stores/settingsStore'
-import { MatchObject, NormalizedProfiles, Player } from '../../types'
+import { GameHistoryState, Player } from '../../types'
 import GameHistoryDiv from './GameHistoryDiv'
 import styles from './History.module.css'
 import Loading from './Loading'
 
 interface Props {
     player: Player
-}
-interface X {
-    matchHistoryStats: MatchObject[]
-    profiles: NormalizedProfiles
+    /**
+     * Keeps the state outside the component, so the player card can restore it
+     * when moving back and forward. Without these the state is local.
+     */
+    state?: GameHistoryState
+    updateState?: (patch: Partial<GameHistoryState>) => void
 }
 
 export default function History(props: Props) {
@@ -26,18 +29,25 @@ export default function History(props: Props) {
     const coh3 = useDisplayCoh3()
     const { historyPeriod, setHistoryPeriod } = useHistoryPeriodStore()
 
-    // bumped on each fetch request so a failed fetch can be retried
-    const [fetchRequest, setFetchRequest] = useState(0)
-    const [history, setHistory] = useState<X | null>(null)
-    const [fetching, setFetching] = useState(false)
-    const [historyOpen, setHistoryOpen] = useState(false)
+    const [localState, setLocalState] = useState<GameHistoryState>(EMPTY_GAME_HISTORY)
+    const controlled = props.state !== undefined
+    const state = props.state ?? localState
+    const externalUpdate = props.updateState
+    const updateState = useCallback(
+        (patch: Partial<GameHistoryState>) =>
+            externalUpdate ? externalUpdate(patch) : setLocalState((s) => ({ ...s, ...patch })),
+        [externalUpdate]
+    )
+    const history = state.data
+    const historyOpen = state.open
     // match id of the game whose details are shown, only one at a time
-    const [openGame, setOpenGame] = useState<number | null>(null)
+    const openGame = state.openGame
+    // an open list without games is waiting for them
+    const fetching = historyOpen && !history
 
     useEffect(() => {
         let mounted = true
-        if (fetchRequest > 0) {
-            setFetching(true)
+        if (fetching) {
             async function fetchHistory() {
                 try {
                     const id = props.player.profileId
@@ -50,15 +60,15 @@ export default function History(props: Props) {
                         fetch(url2).then((r) => r.json()),
                     ])
                     if (mounted) {
-                        setHistory(parseHistoryData([r1, r2], props.player))
-                        setOpenGame(null)
-                        setFetching(false)
+                        updateState({
+                            data: parseHistoryData([r1, r2], props.player),
+                            openGame: null,
+                        })
                     }
                 } catch (error) {
                     console.log('error get history:', error)
                     if (mounted) {
-                        setFetching(false)
-                        setHistoryOpen(false)
+                        updateState({ open: false })
                     }
                 }
             }
@@ -68,24 +78,20 @@ export default function History(props: Props) {
         return () => {
             mounted = false
         }
-    }, [fetchRequest, props.player, coh3])
+    }, [fetching, props.player, coh3, updateState])
 
+    // The player card resets its own state when the player changes.
     useEffect(() => {
-        setHistory(null)
-        setFetchRequest(0)
-        setFetching(false)
-        setHistoryOpen(false)
-        setOpenGame(null)
-    }, [props.player.profileId])
+        if (!controlled) {
+            setLocalState(EMPTY_GAME_HISTORY)
+        }
+    }, [props.player.profileId, controlled])
 
     const handleToggle = () => {
         if (fetching) {
             return
         }
-        if (!history) {
-            setFetchRequest((n) => n + 1)
-        }
-        setHistoryOpen(!historyOpen)
+        updateState({ open: !historyOpen })
     }
 
     const games = history
@@ -137,7 +143,9 @@ export default function History(props: Props) {
                                 profiles={history.profiles}
                                 coh3={coh3}
                                 open={openGame === id}
-                                onToggle={() => setOpenGame(openGame === id ? null : id)}
+                                onToggle={() =>
+                                    updateState({ openGame: openGame === id ? null : id })
+                                }
                             />
                         )
                     })}

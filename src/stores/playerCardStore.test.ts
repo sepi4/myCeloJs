@@ -141,3 +141,59 @@ describe('playerCardStore forward', () => {
         expect(names(state.history)).toEqual(['A', 'B'])
     })
 })
+
+describe('playerCardStore game history', () => {
+    const data = { matchHistoryStats: [], profiles: {} }
+
+    test('a new card starts with a closed, empty game history', () => {
+        openCard('A')
+        usePlayerCardStore.getState().updateGameHistory({ open: true, data })
+        openCard('B')
+        expect(usePlayerCardStore.getState().gameHistory).toEqual({
+            data: null,
+            open: false,
+            openGame: null,
+        })
+    })
+
+    test('updateGameHistory merges the change into the current state', () => {
+        openCard('A')
+        usePlayerCardStore.getState().updateGameHistory({ open: true })
+        usePlayerCardStore.getState().updateGameHistory({ data, openGame: 7 })
+        expect(usePlayerCardStore.getState().gameHistory).toEqual({ data, open: true, openGame: 7 })
+    })
+
+    test('goBack and goForward restore the game history of each card', () => {
+        openCard('A')
+        usePlayerCardStore.getState().updateGameHistory({ open: true, data, openGame: 1 })
+        openCard('B')
+        usePlayerCardStore.getState().updateGameHistory({ open: true, data, openGame: 2 })
+
+        usePlayerCardStore.getState().goBack()
+        expect(usePlayerCardStore.getState().gameHistory).toEqual({ data, open: true, openGame: 1 })
+
+        usePlayerCardStore.getState().goForward()
+        expect(usePlayerCardStore.getState().gameHistory).toEqual({ data, open: true, openGame: 2 })
+    })
+
+    test('switching between coh2 and coh3 resets the game history', () => {
+        openCard('A')
+        const store = usePlayerCardStore.getState()
+        store.setOtherGameData({ name: 'A3' }, extraInfo('A'))
+        store.updateGameHistory({ open: true, data })
+        store.setSelectedCoh3(true)
+        expect(usePlayerCardStore.getState().gameHistory.open).toBe(false)
+        expect(usePlayerCardStore.getState().gameHistory.data).toBeNull()
+    })
+
+    test('navigation grows only when another card is shown', () => {
+        openCard('A')
+        const start = usePlayerCardStore.getState().navigation
+        openCard('B')
+        usePlayerCardStore.getState().goBack()
+        usePlayerCardStore.getState().goBack()
+        usePlayerCardStore.getState().goForward()
+        usePlayerCardStore.getState().goForward()
+        expect(usePlayerCardStore.getState().navigation).toBe(start + 3)
+    })
+})

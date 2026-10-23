@@ -1,10 +1,12 @@
 import { create } from 'zustand'
 
-import { ExtraInfo } from '../types'
+import { ExtraInfo, GameHistoryState } from '../types'
 import { useViewStore } from './viewStore'
 
 /** How many earlier player cards the back button can return to. */
 const MAX_HISTORY = 20
+
+export const EMPTY_GAME_HISTORY: GameHistoryState = { data: null, open: false, openGame: null }
 
 export interface PlayerCardData {
     name?: string
@@ -21,6 +23,9 @@ interface PlayerCardState {
     otherExtraInfo: ExtraInfo | null
     otherGameLoading: boolean
     otherGameChecked: boolean
+    gameHistory: GameHistoryState
+    /** Page scroll position to restore when the card is shown again. */
+    scrollY: number
 }
 
 interface PlayerCardStore extends PlayerCardState {
@@ -28,10 +33,13 @@ interface PlayerCardStore extends PlayerCardState {
     history: PlayerCardState[]
     /** Cards left with the back button, nearest last. Opening a new card clears them. */
     future: PlayerCardState[]
+    /** Grows each time another card is shown, so the page knows when to restore `scrollY`. */
+    navigation: number
     setPlayerCard: (player: PlayerCardData, extraInfo: ExtraInfo | null, coh3: boolean) => void
     setOtherGameData: (player: PlayerCardData | null, extraInfo: ExtraInfo | null) => void
     setOtherGameLoading: (loading: boolean) => void
     setSelectedCoh3: (coh3: boolean) => void
+    updateGameHistory: (patch: Partial<GameHistoryState>) => void
     goBack: () => void
     goForward: () => void
     resetPlayerCard: () => void
@@ -40,6 +48,7 @@ interface PlayerCardStore extends PlayerCardState {
 const initialState = {
     history: [] as PlayerCardState[],
     future: [] as PlayerCardState[],
+    navigation: 0,
     player: null,
     extraInfo: null,
     initialCoh3: false,
@@ -48,6 +57,12 @@ const initialState = {
     otherExtraInfo: null,
     otherGameLoading: false,
     otherGameChecked: false,
+    gameHistory: EMPTY_GAME_HISTORY,
+    scrollY: 0,
+}
+
+function currentScrollY() {
+    return typeof window === 'undefined' ? 0 : window.scrollY
 }
 
 function snapshot(state: PlayerCardStore): PlayerCardState {
@@ -60,6 +75,8 @@ function snapshot(state: PlayerCardStore): PlayerCardState {
         otherExtraInfo: state.otherExtraInfo,
         otherGameLoading: state.otherGameLoading,
         otherGameChecked: state.otherGameChecked,
+        gameHistory: state.gameHistory,
+        scrollY: currentScrollY(),
     }
 }
 
@@ -74,6 +91,7 @@ export const usePlayerCardStore = create<PlayerCardStore>((set) => ({
             return {
                 history,
                 future: [],
+                navigation: state.navigation + 1,
                 player,
                 extraInfo,
                 initialCoh3: coh3,
@@ -82,6 +100,8 @@ export const usePlayerCardStore = create<PlayerCardStore>((set) => ({
                 otherExtraInfo: null,
                 otherGameLoading: false,
                 otherGameChecked: false,
+                gameHistory: EMPTY_GAME_HISTORY,
+                scrollY: 0,
             }
         }),
     setOtherGameData: (otherPlayer, otherExtraInfo) =>
@@ -103,8 +123,12 @@ export const usePlayerCardStore = create<PlayerCardStore>((set) => ({
                 otherPlayer: state.player,
                 otherExtraInfo: state.extraInfo,
                 selectedCoh3: coh3,
+                // The history belongs to the profile of one game, so start over.
+                gameHistory: EMPTY_GAME_HISTORY,
             }
         }),
+    updateGameHistory: (patch) =>
+        set((state) => ({ gameHistory: { ...state.gameHistory, ...patch } })),
     goBack: () =>
         set((state) => {
             const previous = state.history[state.history.length - 1]
@@ -115,6 +139,7 @@ export const usePlayerCardStore = create<PlayerCardStore>((set) => ({
                 ...previous,
                 history: state.history.slice(0, -1),
                 future: [...state.future, snapshot(state)],
+                navigation: state.navigation + 1,
             }
         }),
     goForward: () =>
@@ -127,6 +152,7 @@ export const usePlayerCardStore = create<PlayerCardStore>((set) => ({
                 ...next,
                 history: [...state.history, snapshot(state)],
                 future: state.future.slice(0, -1),
+                navigation: state.navigation + 1,
             }
         }),
     resetPlayerCard: () => set(initialState),

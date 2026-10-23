@@ -1,7 +1,7 @@
 import getText from '../../functions/utils/getText'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useSettingsStore } from '../../stores/settingsStore'
-import { ExtraInfo, Player } from '../../types'
+import { ExtraInfo, GameHistoryState, Player } from '../../types'
 import ListDiv from '../ListDiv/ListDiv'
 import TableDiv from '../Table/TableDiv'
 import History from './History'
@@ -10,6 +10,8 @@ import styles from './PlayerExtraInfo.module.css'
 interface Props {
     player: Player
     extraInfo: ExtraInfo | null
+    gameHistory?: GameHistoryState
+    updateGameHistory?: (patch: Partial<GameHistoryState>) => void
 }
 
 function PlayerExtraInfo(props: Props) {
@@ -43,7 +45,11 @@ function PlayerExtraInfo(props: Props) {
             {totalGames}
             {table}
             <ListDiv ranksArr={ranksArr} />
-            <History player={props.player} />
+            <History
+                player={props.player}
+                state={props.gameHistory}
+                updateState={props.updateGameHistory}
+            />
         </div>
     )
 }

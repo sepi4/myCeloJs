@@ -253,3 +253,13 @@ export type ExtraInfo = {
 export type NormalizedExtraInfo = {
     [key: string]: ExtraInfo
 }
+
+/** Game history list of one player: fetched games, whether the list is open and which game is open. */
+export type GameHistoryState = {
+    data: {
+        matchHistoryStats: MatchObject[]
+        profiles: NormalizedProfiles
+    } | null
+    open: boolean
+    openGame: number | null
+}
