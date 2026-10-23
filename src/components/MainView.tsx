@@ -2,6 +2,7 @@ import { JSX } from 'react'
 
 import getText from '../functions/utils/getText'
 import { useNavButtonsStore } from '../stores/navButtonsStore'
+import { usePlayerCardStore } from '../stores/playerCardStore'
 import { usePlayersStore } from '../stores/playersStore'
 import { useSettingsStore } from '../stores/settingsStore'
 import { useSettingsViewStore } from '../stores/settingsViewStore'
@@ -23,6 +24,8 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
     } = useNavButtonsStore()
     const { players } = usePlayersStore()
     const { view } = useViewStore()
+    const hasPreviousCard = usePlayerCardStore((s) => s.history.length > 0)
+    const goBack = usePlayerCardStore((s) => s.goBack)
     const activeLogLocation = settings
         ? coh3
             ? settings.logLocationCoh3
@@ -48,7 +51,16 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
     }
     if (view === 'playerCard') {
         return (
-            <ClosingViewWrapper>
+            <ClosingViewWrapper
+                back={
+                    hasPreviousCard
+                        ? {
+                              title: `${getText('back', settings)} (Backspace)`,
+                              onClick: goBack,
+                          }
+                        : undefined
+                }
+            >
                 <PlayerCard />
             </ClosingViewWrapper>
         )

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 
 import logo_coh2 from '../../assets/img/logo_coh2.png'
 import logo_cohstats from '../../assets/img/logo_cohstats.png'
@@ -29,24 +29,43 @@ export default function PlayerCard() {
         setOtherGameData,
         setOtherGameLoading,
         setSelectedCoh3,
+        goBack,
     } = usePlayerCardStore()
 
-    const lookupKeyRef = useRef<string | null>(null)
+    // Backspace and the mouse back button go to the previous card.
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            const typing =
+                e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement
+            if (e.key === 'Backspace' && !typing) {
+                e.preventDefault()
+                goBack()
+            }
+        }
+        const handleMouseUp = (e: MouseEvent) => {
+            if (e.button === 3) {
+                e.preventDefault()
+                goBack()
+            }
+        }
+        window.addEventListener('keydown', handleKeyDown)
+        window.addEventListener('mouseup', handleMouseUp)
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown)
+            window.removeEventListener('mouseup', handleMouseUp)
+        }
+    }, [goBack])
 
     const avatarUrl = useSteamAvatar(extraInfo?.steamId)
 
     const steamIdForLookup = selectedCoh3 === initialCoh3 ? extraInfo?.steamId : null
 
     useEffect(() => {
-        if (!steamIdForLookup) {
+        // A card restored with the back button already knows its other-game profile.
+        if (!steamIdForLookup || otherGameChecked) {
             return
         }
         const otherCoh3 = !initialCoh3
-        const key = `${steamIdForLookup}:${otherCoh3}`
-        if (lookupKeyRef.current === key) {
-            return
-        }
-        lookupKeyRef.current = key
 
         let cancelled = false
         setOtherGameLoading(true)
@@ -84,7 +103,14 @@ export default function PlayerCard() {
         return () => {
             cancelled = true
         }
-    }, [steamIdForLookup, initialCoh3, player, setOtherGameData, setOtherGameLoading])
+    }, [
+        steamIdForLookup,
+        initialCoh3,
+        player,
+        otherGameChecked,
+        setOtherGameData,
+        setOtherGameLoading,
+    ])
 
     if (!player) {
         return null
@@ -120,7 +146,7 @@ export default function PlayerCard() {
                 alt={`${player.country}`}
                 title={`${player.country}`}
             />
-            <span>{player.name}</span>
+            <span data-testid="player-card-name">{player.name}</span>
         </div>
     )
 

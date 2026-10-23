@@ -60,6 +60,7 @@ function MatchTableHeaders(props: Props) {
                             }}
                         >
                             <a
+                                data-testid="game-details-player"
                                 title={pro?.alias ?? `${p.profile_id}`}
                                 onClick={async () => {
                                     const x = await getExtraInfo(coh3, [p.profile_id])

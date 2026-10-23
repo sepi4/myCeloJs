@@ -101,6 +101,11 @@ export class App {
     readonly historyPeriodWeek: Locator
     readonly historyPeriodAll: Locator
     readonly gameDetails: Locator
+    readonly gameDetailsPlayers: Locator
+
+    // Player card navigation
+    readonly backButton: Locator
+    readonly playerCardName: Locator
     readonly gameTime: Locator
     readonly tableView: Locator
     readonly totalGames: Locator
@@ -187,6 +192,9 @@ export class App {
         this.historyPeriodWeek = page.getByTestId('history-period-week')
         this.historyPeriodAll = page.getByTestId('history-period-all')
         this.gameDetails = page.getByTestId('game-details')
+        this.gameDetailsPlayers = page.getByTestId('game-details-player')
+        this.backButton = page.getByTestId('back-button')
+        this.playerCardName = page.getByTestId('player-card-name')
         this.gameTime = page.getByTestId('game-time')
         this.tableView = page.getByTestId('table-view')
         this.totalGames = page.getByTestId('total-games')

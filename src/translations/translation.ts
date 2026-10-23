@@ -259,6 +259,10 @@ const text: Translations = {
         en: 'No profile for that game',
         ru: 'Нет профиля для этой игры',
     },
+    back: {
+        en: 'Back',
+        ru: 'Назад',
+    },
 
     // dropdown menu  ---------------------------------
     of: {
