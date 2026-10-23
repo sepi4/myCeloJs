@@ -45,7 +45,8 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 0 0.5em;
+    /* background spans the window, content stays a bit wider than the player rows */
+    padding: 0 max(0.5em, calc((100% - 85em) / 2));
     box-shadow: 0 0.2em 0.6em var(--shadow-navbar);
 }
 
