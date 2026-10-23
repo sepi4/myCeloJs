@@ -1,6 +1,9 @@
 .container {
     background: var(--bg-primary);
     padding: 0.5em;
-    margin: 1em 0;
+    /* lines up with the top navbar content: 85em at the navbar's 90% font size */
+    max-width: 76.5em;
+    box-sizing: border-box;
+    margin: 1em auto;
     color: var(--text-primary);
 }
