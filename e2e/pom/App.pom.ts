@@ -125,7 +125,8 @@ export class App {
         this.settingsIcon = page.getByTestId('settings-icon')
         this.userIcon = page.getByTestId('user-icon')
         this.searchIcon = page.getByTestId('search-icon')
-        this.closeButton = page.getByTestId('close-button')
+        // hidden views behind the player card have their own close button
+        this.closeButton = page.getByTestId('close-button').filter({ visible: true })
         this.autoLabel = page.getByTestId('auto-label')
         this.alertLabel = page.getByTestId('alert-label')
         this.checkLogButton = page.getByTestId('check-log-button')

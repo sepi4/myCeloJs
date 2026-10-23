@@ -38,13 +38,9 @@ function NavigationButton(props: { button: NavButton; icon: IconDefinition; test
 }
 
 export default function ViewWrapper(props: Props) {
-    const { setView } = useViewStore()
+    const { closeView } = useViewStore()
 
-    const handleToMainView = () => {
-        setView('main')
-    }
-
-    useEsc(handleToMainView)
+    useEsc(closeView)
 
     return (
         <div className={styles.container}>
@@ -63,7 +59,7 @@ export default function ViewWrapper(props: Props) {
                         />
                     </>
                 )}
-                <Icon fun={handleToMainView} icon={faTimes} testId="close-button" />
+                <Icon fun={closeView} icon={faTimes} testId="close-button" />
             </div>
             {props.children}
         </div>

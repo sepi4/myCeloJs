@@ -75,7 +75,15 @@ test('search by steam ID and open player card', async () => {
     // Open that player's card
     await app.foundPlayers.click()
     await expect(app.steamIdValue).toHaveText(STEAM_ID)
+
+    // Closing the card returns to the same search results, closing those to the main view
     await app.closeButton.click()
+    await expect(app.steamIdValue).not.toBeVisible()
+    await expect(app.searchInput).toHaveValue(STEAM_ID)
+    await expect(app.foundPlayers).toHaveCount(1)
+    await app.page.keyboard.press('Escape')
+    await expect(app.foundPlayers).not.toBeVisible()
+    await expect(app.playersContainer).toBeVisible()
 })
 
 test('navbar checkboxes - table, total and all ', async () => {

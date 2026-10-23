@@ -7,6 +7,7 @@ import { COH2_ORG, COH2STATS_COM, COH3STATS_COM, STEAM } from '../../constants/u
 import { fetchProfileIdBySteamId } from '../../functions/api/fetchProfileIdBySteamId'
 import { getExtraInfo } from '../../functions/api/getExtraInfo'
 import getText from '../../functions/utils/getText'
+import { PlayerCardContext } from '../../hooks/useDisplayCoh3'
 import useSteamAvatar from '../../hooks/useSteamAvatar'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
@@ -291,13 +292,13 @@ export default function PlayerCard() {
     )
 
     return (
-        <>
+        <PlayerCardContext.Provider value={true}>
             {avatar}
             {name}
             {table}
             {gameRadio}
             {linkImages}
             {card}
-        </>
+        </PlayerCardContext.Provider>
     )
 }

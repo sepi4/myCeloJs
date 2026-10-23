@@ -1,4 +1,4 @@
-import { JSX } from 'react'
+import { JSX, useLayoutEffect } from 'react'
 
 import getText from '../functions/utils/getText'
 import { useNavButtonsStore } from '../stores/navButtonsStore'
@@ -23,7 +23,7 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
         navButtons: { coh3 },
     } = useNavButtonsStore()
     const { players } = usePlayersStore()
-    const { view } = useViewStore()
+    const { view, cardReturnView } = useViewStore()
     const canGoBack = usePlayerCardStore((s) => s.history.length > 0)
     const canGoForward = usePlayerCardStore((s) => s.future.length > 0)
     const goBack = usePlayerCardStore((s) => s.goBack)
@@ -40,6 +40,13 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
         })
     }
 
+    // The player card restores its own scroll position.
+    useLayoutEffect(() => {
+        if (view !== 'playerCard') {
+            window.scrollTo(0, useViewStore.getState().scrollPositions[view])
+        }
+    }, [view])
+
     if (settingsView) {
         return <Settings handleSetSettingsView={props.handleSetSettingsView} />
     }
@@ -51,50 +58,56 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
             </div>
         )
     }
-    if (view === 'playerCard') {
-        return (
-            <ClosingViewWrapper
-                navigation={
-                    canGoBack || canGoForward
-                        ? {
-                              back: {
-                                  title: `${getText('back', settings)} (Backspace)`,
-                                  enabled: canGoBack,
-                                  onClick: goBack,
-                              },
-                              forward: {
-                                  title: `${getText('forward', settings)} (Shift+Backspace)`,
-                                  enabled: canGoForward,
-                                  onClick: goForward,
-                              },
-                          }
-                        : undefined
-                }
-            >
-                <PlayerCard />
-            </ClosingViewWrapper>
-        )
-    }
-    if (view === 'search') {
-        return (
-            <ClosingViewWrapper>
-                <Search />
-            </ClosingViewWrapper>
-        )
-    }
+    // Main and search views stay mounted but hidden behind the player card,
+    // so their open lists, loaded histories and scroll position are kept.
+    const searchMounted =
+        view === 'search' || (view === 'playerCard' && cardReturnView === 'search')
 
-    if (players && players.length > 0) {
-        return (
+    const mainContent =
+        players && players.length > 0 ? (
             <div data-testid="players-container">
                 <Team players={teams[0]} teamIndex={0} />
                 <Team players={teams[1]} teamIndex={1} />
             </div>
+        ) : (
+            <div className={styles.centered}>
+                <h2>{getText('no_info', settings)}</h2>
+            </div>
         )
-    }
+
     return (
-        <div className={styles.centered}>
-            <h2>{getText('no_info', settings)}</h2>
-        </div>
+        <>
+            {view === 'playerCard' && (
+                <ClosingViewWrapper
+                    navigation={
+                        canGoBack || canGoForward
+                            ? {
+                                  back: {
+                                      title: `${getText('back', settings)} (Backspace)`,
+                                      enabled: canGoBack,
+                                      onClick: goBack,
+                                  },
+                                  forward: {
+                                      title: `${getText('forward', settings)} (Shift+Backspace)`,
+                                      enabled: canGoForward,
+                                      onClick: goForward,
+                                  },
+                              }
+                            : undefined
+                    }
+                >
+                    <PlayerCard />
+                </ClosingViewWrapper>
+            )}
+            {searchMounted && (
+                <div hidden={view !== 'search'}>
+                    <ClosingViewWrapper>
+                        <Search />
+                    </ClosingViewWrapper>
+                </div>
+            )}
+            <div hidden={view !== 'main'}>{mainContent}</div>
+        </>
     )
 }
 
