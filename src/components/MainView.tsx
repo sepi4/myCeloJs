@@ -83,12 +83,12 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
                         canGoBack || canGoForward
                             ? {
                                   back: {
-                                      title: `${getText('back', settings)} (Backspace)`,
+                                      title: `${getText('back', settings)} (←)`,
                                       enabled: canGoBack,
                                       onClick: goBack,
                                   },
                                   forward: {
-                                      title: `${getText('forward', settings)} (Shift+Backspace)`,
+                                      title: `${getText('forward', settings)} (→)`,
                                       enabled: canGoForward,
                                       onClick: goForward,
                                   },

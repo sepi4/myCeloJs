@@ -16,6 +16,19 @@ import { Player } from '../../types'
 import PlayerExtraInfo from '../Player/PlayerExtraInfo'
 import styles from './PlayerCard.module.css'
 
+const TEXT_INPUT_TYPES = ['text', 'search', 'number', 'email', 'password', 'url', 'tel']
+
+/** Arrow keys move the cursor in these, so they must not change the card. */
+function isTextField(target: EventTarget | null) {
+    if (target instanceof HTMLInputElement) {
+        return TEXT_INPUT_TYPES.includes(target.type)
+    }
+    return (
+        target instanceof HTMLTextAreaElement ||
+        (target instanceof HTMLElement && target.isContentEditable)
+    )
+}
+
 export default function PlayerCard() {
     const { countryFlags } = useCountryFlagsStore()
     const { settings } = useSettingsStore()
@@ -43,18 +56,18 @@ export default function PlayerCard() {
         window.scrollTo(0, usePlayerCardStore.getState().scrollY)
     }, [navigation])
 
-    // Backspace and the mouse side buttons move through earlier cards, like in a browser.
+    // Left and right arrows and the mouse side buttons move through earlier cards.
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            const typing =
-                e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement
-            if (e.key === 'Backspace' && !typing) {
+            if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey || isTextField(e.target)) {
+                return
+            }
+            if (e.key === 'ArrowLeft') {
                 e.preventDefault()
-                if (e.shiftKey) {
-                    goForward()
-                } else {
-                    goBack()
-                }
+                goBack()
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault()
+                goForward()
             }
         }
         const handleMouseUp = (e: MouseEvent) => {

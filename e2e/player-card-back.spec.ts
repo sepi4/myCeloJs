@@ -62,10 +62,10 @@ test('moves back and forward between player cards', async () => {
     await expect(app.forwardButton).not.toBeVisible()
     await expect(app.backButton).toBeVisible()
 
-    // Backspace goes back and Shift+Backspace forward
-    await page.keyboard.press('Backspace')
+    // Left arrow goes back and right arrow forward
+    await page.keyboard.press('ArrowLeft')
     await expect(app.steamIdValue).toHaveText(STEAM_ID)
-    await page.keyboard.press('Shift+Backspace')
+    await page.keyboard.press('ArrowRight')
     await expect(app.steamIdValue).not.toHaveText(STEAM_ID)
 
     // The mouse side buttons do the same
