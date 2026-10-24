@@ -64,6 +64,7 @@
     padding: 0;
     border: none;
     font: inherit;
+    font-size: 90%;
     color: var(--text-muted);
     background-color: transparent;
     cursor: pointer;

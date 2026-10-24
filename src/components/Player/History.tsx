@@ -1,4 +1,4 @@
-import { faAngleDoubleDown, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
+import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useCallback, useEffect, useState } from 'react'
 
@@ -106,7 +106,7 @@ export default function History(props: Props) {
                     className={styles.toggle}
                     onClick={handleToggle}
                 >
-                    <FontAwesomeIcon icon={historyOpen ? faAngleDoubleDown : faAngleDoubleRight} />
+                    <FontAwesomeIcon icon={historyOpen ? faCaretDown : faCaretRight} size="lg" />
                     {getText('game_history', settings)}
                 </button>
                 {history && historyOpen && (
