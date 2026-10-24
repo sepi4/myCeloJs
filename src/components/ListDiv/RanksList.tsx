@@ -7,9 +7,15 @@ import Rank from '../Player/Rank'
 import Cell from './Cell'
 import styles from './ListDiv.module.css'
 
+/** Identifies a rank row: one team can have ranks in several leaderboards. */
+export function rankKey(r: RankType): string {
+    return `${r.statgroup_id}-${r.leaderboard_id}`
+}
+
 interface Props {
     ranksArr: RankType[]
-    allOpen: boolean
+    openRanks: string[]
+    onToggleRank: (key: string) => void
 }
 
 function RanksList(props: Props) {
@@ -32,7 +38,11 @@ function RanksList(props: Props) {
                     <div data-testid="rank-row" className={styles.row} key={i}>
                         <Cell title={`${getText('of', settings)} ${r.ranktotal}`}>{rank}</Cell>
                         <Cell width="40%" justifyContent="flex-start">
-                            <Rank allOpen={props.allOpen} rank={r} />
+                            <Rank
+                                rank={r}
+                                open={props.openRanks.includes(rankKey(r))}
+                                onToggle={() => props.onToggleRank(rankKey(r))}
+                            />
                         </Cell>
                         {coh3 && elo && <Cell>{r.rating ? `(${r.rating})` : '-'}</Cell>}
                         <Cell

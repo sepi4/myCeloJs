@@ -4,6 +4,7 @@ import { useState } from 'react'
 
 import { ranksArrFilter, ranksArrSort } from '../../functions/rankings/ranksArrFuns'
 import getText from '../../functions/utils/getText'
+import { anyKeyOpen, toggleKey, toggleKeys } from '../../functions/utils/openKeys'
 import { useDisplayCoh3 } from '../../hooks/useDisplayCoh3'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useSettingsStore } from '../../stores/settingsStore'
@@ -11,7 +12,7 @@ import { useSorterStore } from '../../stores/sorterStore'
 import { Rank } from '../../types'
 import Cell from './Cell'
 import styles from './ListDiv.module.css'
-import RanksList from './RanksList'
+import RanksList, { rankKey } from './RanksList'
 import RanksListTitles from './RanksListTitles'
 
 function ListDiv({ ranksArr }: { ranksArr: Rank[] }) {
@@ -22,7 +23,8 @@ function ListDiv({ ranksArr }: { ranksArr: Rank[] }) {
     const { sorter } = useSorterStore()
     const { settings } = useSettingsStore()
 
-    const [allOpen, setAllOpen] = useState<boolean>(false)
+    // keys of the team ranks whose members are shown
+    const [openRanks, setOpenRanks] = useState<string[]>([])
 
     ranksArr = ranksArrFilter(ranksArr, tableView, showAll)
     ranksArr = ranksArrSort(ranksArr, sorter)
@@ -32,7 +34,9 @@ function ListDiv({ ranksArr }: { ranksArr: Rank[] }) {
     }
 
     // only team ranks with several members can be expanded
-    const hasExpandable = ranksArr.some((r) => r.members && r.members.length > 1)
+    const expandableKeys = ranksArr.filter((r) => r.members && r.members.length > 1).map(rankKey)
+    const hasExpandable = expandableKeys.length > 0
+    const allOpen = anyKeyOpen(openRanks, expandableKeys)
 
     return (
         ranksArr && (
@@ -45,7 +49,8 @@ function ListDiv({ ranksArr }: { ranksArr: Rank[] }) {
                             <button
                                 data-testid="ranks-toggle-all"
                                 className={styles.toggleAll}
-                                onClick={() => setAllOpen(!allOpen)}
+                                aria-expanded={allOpen}
+                                onClick={() => setOpenRanks(toggleKeys(openRanks, expandableKeys))}
                             >
                                 <FontAwesomeIcon
                                     icon={allOpen ? faAngleDoubleDown : faAngleDoubleRight}
@@ -62,7 +67,11 @@ function ListDiv({ ranksArr }: { ranksArr: Rank[] }) {
                     </div>
                 )}
                 <RanksListTitles ranksArr={ranksArr} />
-                <RanksList allOpen={allOpen} ranksArr={ranksArr} />
+                <RanksList
+                    ranksArr={ranksArr}
+                    openRanks={openRanks}
+                    onToggleRank={(key) => setOpenRanks(toggleKey(openRanks, key))}
+                />
             </div>
         )
     )

@@ -1,7 +1,6 @@
 import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { JSX } from 'react'
-import { useEffect, useState } from 'react'
 
 import cross from '../../assets/img/cross.png'
 import star from '../../assets/img/star.png'
@@ -12,7 +11,8 @@ import Members from './Members'
 
 interface Props {
     rank: RankType
-    allOpen: boolean
+    open: boolean
+    onToggle: () => void
 }
 
 function Rank(props: Props) {
@@ -20,7 +20,7 @@ function Rank(props: Props) {
     const { settings } = useSettingsStore()
     const getText = (x: string) => getTextFun(x, settings)
 
-    const [showMembers, setShowMembers] = useState(false)
+    const showMembers = props.open
     function sw(x: string) {
         switch (x) {
             case 'Soviet':
@@ -46,10 +46,6 @@ function Rank(props: Props) {
         rn = rn.replace(/^(\dv\d)/, '').replace('Unranked', '')
         return m + ' ' + sw(rn)
     }
-    useEffect(() => {
-        setShowMembers(props.allOpen)
-    }, [props.allOpen])
-
     const arrow = (
         <FontAwesomeIcon
             icon={showMembers ? faCaretDown : faCaretRight}
@@ -82,7 +78,9 @@ function Rank(props: Props) {
             {rank.members && rank.members.length > 1 ? (
                 <div>
                     <span
-                        onClick={() => setShowMembers(!showMembers)}
+                        data-testid="rank-toggle"
+                        aria-expanded={showMembers}
+                        onClick={props.onToggle}
                         style={{ cursor: 'pointer' }}
                     >
                         {arrow}

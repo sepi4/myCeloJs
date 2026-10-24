@@ -1,28 +1,21 @@
 import { create } from 'zustand'
 
-const defaultOpenInfos = (): boolean[][] => [
-    [false, false, false, false],
-    [false, false, false, false],
-]
+import { toggleKey, toggleKeys } from '../functions/utils/openKeys'
 
 interface OpenInfosStore {
-    openInfos: boolean[][]
-    toggleOpenInfo: (teamIndex: number, playerIndex: number) => void
-    setTeamOpenInfos: (teamIndex: number, open: boolean) => void
+    /** profile ids of the players whose extra info is open */
+    openInfos: number[]
+    toggleOpenInfo: (profileId: number) => void
+    /** Closes the given players when any of them is open, otherwise opens them all. */
+    toggleOpenInfos: (profileIds: number[]) => void
     resetOpenInfos: () => void
 }
 
 export const useOpenInfosStore = create<OpenInfosStore>((set) => ({
-    openInfos: defaultOpenInfos(),
-    toggleOpenInfo: (teamIndex, playerIndex) =>
-        set((state) => ({
-            openInfos: state.openInfos.map((t, i) =>
-                i === teamIndex ? t.map((p, j) => (j === playerIndex ? !p : p)) : t
-            ),
-        })),
-    setTeamOpenInfos: (teamIndex, open) =>
-        set((state) => ({
-            openInfos: state.openInfos.map((t, i) => (i === teamIndex ? t.map(() => open) : t)),
-        })),
-    resetOpenInfos: () => set({ openInfos: defaultOpenInfos() }),
+    openInfos: [],
+    toggleOpenInfo: (profileId) =>
+        set((state) => ({ openInfos: toggleKey(state.openInfos, profileId) })),
+    toggleOpenInfos: (profileIds) =>
+        set((state) => ({ openInfos: toggleKeys(state.openInfos, profileIds) })),
+    resetOpenInfos: () => set({ openInfos: [] }),
 }))

@@ -2,6 +2,7 @@ import { faAngleDoubleDown, faAngleDoubleRight } from '@fortawesome/free-solid-s
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import getText from '../../functions/utils/getText'
+import { anyKeyOpen } from '../../functions/utils/openKeys'
 import { useExtraInfoStore } from '../../stores/extraInfoStore'
 import { useOpenInfosStore } from '../../stores/openInfosStore'
 import { useSettingsStore } from '../../stores/settingsStore'
@@ -16,14 +17,17 @@ interface Props {
 
 function Team(props: Props) {
     const { extraInfo } = useExtraInfoStore()
-    const { openInfos, setTeamOpenInfos } = useOpenInfosStore()
+    const { openInfos, toggleOpenInfos } = useOpenInfosStore()
     const { settings } = useSettingsStore()
 
-    const teamOpenInfos = openInfos[props.teamIndex]
-    const anyOpen = teamOpenInfos.some((v) => v)
+    // only players with their own open arrow, so the team button matches the arrows
+    const toggleableIds = props.players
+        .map((p) => p.profileId)
+        .filter((id): id is number => id !== undefined && id > 0)
+    const anyOpen = anyKeyOpen(openInfos, toggleableIds)
 
     const handleToggleAll = () => {
-        setTeamOpenInfos(props.teamIndex, !anyOpen)
+        toggleOpenInfos(toggleableIds)
     }
 
     const teamClass = props.teamIndex === 0 ? css.teamA : css.teamB
@@ -38,6 +42,7 @@ function Team(props: Props) {
                 onClick={handleToggleAll}
                 className={`${css.toggleAll} ${css.toggleLeft} ${teamClass}`}
                 title={toggleTitle}
+                aria-expanded={anyOpen}
             >
                 <FontAwesomeIcon
                     icon={anyOpen ? faAngleDoubleDown : faAngleDoubleRight}
@@ -49,14 +54,13 @@ function Team(props: Props) {
                 onClick={handleToggleAll}
                 className={`${css.toggleAll} ${css.toggleRight} ${teamClass}`}
                 title={toggleTitle}
+                aria-expanded={anyOpen}
             />
             {props.players.map((p, i) => (
                 <Player
                     key={p.profileId && p.profileId > 0 ? p.profileId : `${props.teamIndex}-${i}`}
                     player={p}
                     extraInfo={extraInfo && p.profileId ? extraInfo[p.profileId] : null}
-                    playerIndex={i}
-                    teamIndex={props.teamIndex}
                 />
             ))}
         </div>

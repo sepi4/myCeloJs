@@ -6,20 +6,20 @@ import PlayerMainRow from './PlayerMainRow'
 interface Props {
     player: PlayerType
     extraInfo: ExtraInfo | null
-    teamIndex: number
-    playerIndex: number
 }
 
 function Player(props: Props) {
-    const { player, extraInfo, teamIndex, playerIndex } = props
+    const { player, extraInfo } = props
 
     const { openInfos, toggleOpenInfo } = useOpenInfosStore()
 
     const handleSetShowExtra = () => {
-        toggleOpenInfo(teamIndex, playerIndex)
+        if (player.profileId) {
+            toggleOpenInfo(player.profileId)
+        }
     }
 
-    const showExtra = openInfos[teamIndex][playerIndex]
+    const showExtra = player.profileId !== undefined && openInfos.includes(player.profileId)
     return (
         <div>
             <PlayerMainRow

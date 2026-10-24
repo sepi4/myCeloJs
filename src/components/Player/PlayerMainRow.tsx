@@ -85,13 +85,15 @@ function PlayerMainRow(props: Props) {
         <span style={{ width: '2em' }}>
             {Number(player.profileId) > 0 && (
                 <FontAwesomeIcon
+                    data-testid="player-toggle"
+                    aria-expanded={showExtra}
                     icon={showExtra ? faCaretDown : faCaretRight}
                     size="lg"
                     style={{
                         color: 'var(--text-primary)',
                         cursor: 'pointer',
                     }}
-                    onClick={extraInfo ? handleSetShowExtra : undefined}
+                    onClick={handleSetShowExtra}
                 />
             )}
         </span>

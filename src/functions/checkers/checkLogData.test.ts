@@ -57,12 +57,7 @@ function resetAllStores() {
     })
     useSettingsStore.setState({ settings: null })
     useExtraInfoStore.setState({ extraInfo: null })
-    useOpenInfosStore.setState({
-        openInfos: [
-            [false, false, false, false],
-            [false, false, false, false],
-        ],
-    })
+    useOpenInfosStore.setState({ openInfos: [] })
     usePlayerCardStore.getState().resetPlayerCard()
     usePlayersStore.setState({ players: null })
     useViewStore.setState({ view: 'main' })
@@ -96,21 +91,13 @@ describe('checkLogData', () => {
 
     it('clears extraInfo, openInfos, and playerCard on update', () => {
         useExtraInfoStore.setState({ extraInfo: { '1': {} as never } })
-        useOpenInfosStore.setState({
-            openInfos: [
-                [true, false, false, false],
-                [false, false, false, false],
-            ],
-        })
+        useOpenInfosStore.setState({ openInfos: [1] })
         usePlayerCardStore.getState().setPlayerCard({ name: 'Old' }, {} as never, false)
 
         checkLogData({ data: [player1] })
 
         expect(useExtraInfoStore.getState().extraInfo).toBeNull()
-        expect(useOpenInfosStore.getState().openInfos).toEqual([
-            [false, false, false, false],
-            [false, false, false, false],
-        ])
+        expect(useOpenInfosStore.getState().openInfos).toEqual([])
         expect(usePlayerCardStore.getState().player).toBeNull()
     })
 
