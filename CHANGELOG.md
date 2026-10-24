@@ -1,5 +1,14 @@
 # Changelog
 
+- **version 2.10.0.**
+    - Show players in match history rows
+    - Show game details below the history row instead of a modal, with stats as the focus
+    - Filter game history by period
+    - One toggle button loads and hides game history
+    - Player card: back and forward navigation, also with arrow keys
+    - Player card navigation keeps game history, scroll position and main and search view state
+    - Fix: expand all toggle shows the correct state
+    - UI improvements
 - **version 2.9.3.**
     - Pin Electron to 41.10.2 after extended testing found Steam avatars failing on Electron 44 but working on Electron 41
 - **version 2.9.2.**
