@@ -24,6 +24,7 @@ Judge each commit by what it changes in the app, not by its commit type. Read th
 - Include: new features, fixes, visible UI or styling changes, notable dependency changes such as an Electron version change.
 - Leave out: release tooling (`release.sh`, npm scripts), docs, tests, refactoring, CI and other developer-only changes.
 - Merge several commits about the same thing into one line.
+- Describe changes at the level a user notices, not implementation details. Group small visual tweaks such as colors, borders, spacing, widths or icons into one line like `UI improvements`. Name a UI change on its own line only when it changes how the user works with the app.
 
 ## 3. Choose the version bump
 
