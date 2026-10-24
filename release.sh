@@ -32,7 +32,10 @@ fi
 # gh also fails when not logged in, so this check passes and the error
 # shows up only at gh release create.
 if gh release view "$TAG" &>/dev/null; then
-    echo "STOP: release $TAG already exists, bump the version"
+    echo "STOP: release $TAG already exists, bump the version:"
+    echo "  npm version patch --no-git-tag-version"
+    echo "  npm version minor --no-git-tag-version"
+    echo "  npm version major --no-git-tag-version"
     exit 1
 fi
 
