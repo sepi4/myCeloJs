@@ -33,7 +33,3 @@
 .toggleAll:hover {
     color: var(--text-primary);
 }
-
-.toggleAll svg {
-    color: var(--accent-positive);
-}

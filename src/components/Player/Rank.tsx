@@ -51,7 +51,6 @@ function Rank(props: Props) {
             icon={showMembers ? faCaretDown : faCaretRight}
             size="lg"
             style={{
-                color: 'var(--accent-positive)',
                 marginRight: '.2em',
             }}
         />
