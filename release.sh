@@ -46,8 +46,11 @@ read -p "Start building? (y/n) " -n 1 -r
 echo ""
 [[ $REPLY =~ ^[Yy]$ ]] || exit 0
 
-npm run dist
-npm run dist-win
+npm run typecheck
+npm test
+npm run build
+npx electron-builder --linux --win
+npm run e2e:dist
 
 # Verify artifacts exist
 echo ""
