@@ -32,6 +32,14 @@ for f in "$APPIMAGE" "$EXE"; do
 done
 
 echo ""
+echo "CHANGELOG.md entry for $VERSION (copy and paste below):"
+awk -v header="- **version ${VERSION}.**" '
+    $0 == header { found = 1; next }
+    found && /^- \*\*version / { exit }
+    found { sub(/^    /, ""); print }
+' CHANGELOG.md
+
+echo ""
 echo "Enter release notes (end with an empty line):"
 NOTES=""
 while IFS= read -r line; do
