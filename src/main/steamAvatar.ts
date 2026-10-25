@@ -11,6 +11,7 @@ export async function fetchSteamAvatar(steamId: string): Promise<string | null> 
     try {
         const res = await fetch(`https://steamcommunity.com/profiles/${steamId}?xml=1`)
         if (!res.ok) {
+            console.log('steam avatar fetch failed:', steamId, res.status)
             return null
         }
         const xml = await res.text()
@@ -19,10 +20,13 @@ export async function fetchSteamAvatar(steamId: string): Promise<string | null> 
         // Leave failed lookups uncached so reopening the card can try again.
         if (url) {
             steamAvatarCache.set(steamId, url)
+        } else {
+            console.log('steam avatar missing from profile XML:', steamId)
         }
         return url
     } catch (err) {
-        console.log('steam avatar fetch error:', err)
+        // fetch wraps network errors, so the useful reason is in err.cause.
+        console.log('steam avatar fetch error:', steamId, err, (err as Error).cause)
         return null
     }
 }

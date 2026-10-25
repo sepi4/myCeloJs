@@ -165,7 +165,14 @@ export default function PlayerCard() {
     const avatar = (
         <div className={styles.avatarRow}>
             <div className={styles.avatar}>
-                {avatarUrl && <img data-testid="steam-avatar" src={avatarUrl} alt="steam avatar" />}
+                {avatarUrl && (
+                    <img
+                        data-testid="steam-avatar"
+                        src={avatarUrl}
+                        alt="steam avatar"
+                        onError={() => console.log('steam avatar image failed to load:', avatarUrl)}
+                    />
+                )}
             </div>
         </div>
     )
