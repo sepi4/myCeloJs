@@ -26,9 +26,9 @@ function TableRankRow({
     const streakColor = (
         Number(streak)
             ? Number(streak) > 0
-                ? 'green'
-                : 'red'
-            : '#ddd'
+                ? 'var(--accent-positive)'
+                : 'var(--accent-negative)'
+            : 'var(--text-primary)'
     )
 
     const streakDisplay = Number(streak) > 0 ? '+' + streak : streak

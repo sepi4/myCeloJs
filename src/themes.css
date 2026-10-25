@@ -27,8 +27,8 @@
     --border-separator: #444;
 
     --accent-highlight: yellow;
-    --accent-positive: green;
-    --accent-negative: red;
+    --accent-positive: #3b3;
+    --accent-negative: #f66;
     --accent-neutral: blue;
     --accent-input: #111;
     --accent-highlight-soft: #ffff66;
