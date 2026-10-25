@@ -8,6 +8,13 @@ updates:
       cooldown:
           default-days: 5
           semver-major-days: 14
+      # eslint-plugin-react does not support ESLint 10 yet, and the failing
+      # major blocked the rest of the eslint group. Remove once it does.
+      ignore:
+          - dependency-name: 'eslint'
+            update-types: ['version-update:semver-major']
+          - dependency-name: '@eslint/js'
+            update-types: ['version-update:semver-major']
       # Dependabot puts a dependency in the first group it matches,
       # so the catch-all minor-and-patch group must stay last.
       groups:
