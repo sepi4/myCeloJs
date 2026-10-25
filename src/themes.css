@@ -11,7 +11,6 @@
     --bg-settings-text: #999;
     --bg-overlay: rgba(200, 200, 200, 0.5);
     --bg-danger: darkred;
-    --bg-danger-hover: rgba(204, 0, 0, 0.15);
 
     --text-primary: #ddd;
     --text-secondary: #ccc;
@@ -53,7 +52,6 @@
     --bg-settings-text: #e0e0e0;
     --bg-overlay: rgba(0, 0, 0, 0.4);
     --bg-danger: #ffebee;
-    --bg-danger-hover: rgba(204, 0, 0, 0.08);
 
     --text-primary: #222222;
     --text-secondary: #444444;

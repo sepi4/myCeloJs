@@ -2,15 +2,13 @@
     flex-shrink: 0;
     background: none;
     border: none;
-    color: var(--text-danger);
+    color: var(--text-on-surface);
     font-size: 1.1em;
     cursor: pointer;
     line-height: 1;
     padding: 0.1em 0.3em;
-    border-radius: 3px;
 }
 
 .clearButton:hover {
-    background-color: var(--bg-danger-hover);
     color: var(--text-danger-hover);
 }
