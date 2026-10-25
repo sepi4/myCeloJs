@@ -55,6 +55,12 @@ test('steam id validation and player card', async () => {
     await app.userIcon.click()
     await expect(app.steamIdValue).toHaveText(STEAM_ID)
 
+    // Avatar comes from Steam, so check the image actually loaded
+    await expect(app.steamAvatar).toBeVisible()
+    await expect
+        .poll(() => app.steamAvatar.evaluate((img: HTMLImageElement) => img.naturalWidth))
+        .toBeGreaterThan(0)
+
     // Close player card
     await app.closeButton.click()
     await expect(app.userIcon).toBeVisible()
