@@ -31,7 +31,6 @@
     --accent-negative: #f66;
     --accent-neutral: blue;
     --accent-input: #111;
-    --accent-highlight-soft: #ffff66;
 
     --scrollbar-track: gray;
     --scrollbar-thumb: rgb(66, 66, 66);
@@ -74,7 +73,6 @@
     --accent-negative: #c62828;
     --accent-neutral: #1565c0;
     --accent-input: #1565c0;
-    --accent-highlight-soft: #c49000;
 
     --scrollbar-track: #e0e0e0;
     --scrollbar-thumb: #b0b0b0;

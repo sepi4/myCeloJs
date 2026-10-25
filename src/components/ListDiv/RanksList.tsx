@@ -58,7 +58,7 @@ function RanksList(props: Props) {
                         >
                             {streak}
                         </Cell>
-                        <Cell color={'var(--accent-highlight-soft)'}>{per}</Cell>
+                        <Cell>{per}</Cell>
                         <Cell title={`${r.wins} / ${r.losses}`}>{totalGames}</Cell>
                     </div>
                 )
