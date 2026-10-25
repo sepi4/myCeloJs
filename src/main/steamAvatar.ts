@@ -1,3 +1,5 @@
+import { net } from 'electron'
+
 // Steam's public profile XML includes the avatar URL; no API key is needed.
 const steamAvatarCache = new Map<string, string>()
 
@@ -9,7 +11,9 @@ export async function fetchSteamAvatar(steamId: string): Promise<string | null> 
         return steamAvatarCache.get(steamId) ?? null
     }
     try {
-        const res = await fetch(`https://steamcommunity.com/profiles/${steamId}?xml=1`)
+        // Node's fetch got HTTP 429 from Steam on Electron 44 while Chromium's
+        // network stack still worked, so use net.fetch instead.
+        const res = await net.fetch(`https://steamcommunity.com/profiles/${steamId}?xml=1`)
         if (!res.ok) {
             console.log('steam avatar fetch failed:', steamId, res.status)
             return null
@@ -25,8 +29,7 @@ export async function fetchSteamAvatar(steamId: string): Promise<string | null> 
         }
         return url
     } catch (err) {
-        // fetch wraps network errors, so the useful reason is in err.cause.
-        console.log('steam avatar fetch error:', steamId, err, (err as Error).cause)
+        console.log('steam avatar fetch error:', steamId, err)
         return null
     }
 }

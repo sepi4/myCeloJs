@@ -1,15 +1,21 @@
+import { net } from 'electron'
+
 import { fetchSteamAvatar } from './steamAvatar'
+
+jest.mock('electron', () => ({ net: { fetch: jest.fn() } }))
+
+const fetchMock = jest.mocked(net.fetch)
 
 const avatarUrl = 'https://avatars.steamstatic.com/example_medium.jpg'
 const avatarXml = `<avatarMedium><![CDATA[${avatarUrl}]]></avatarMedium>`
 
 afterEach(() => {
     jest.restoreAllMocks()
+    fetchMock.mockReset()
 })
 
 it.each([429, 503, 200])('retries after a failed avatar lookup with HTTP %i', async (status) => {
-    const fetchMock = jest
-        .spyOn(globalThis, 'fetch')
+    fetchMock
         .mockResolvedValueOnce(new Response('<error>Temporarily unavailable</error>', { status }))
         .mockResolvedValueOnce(new Response(avatarXml))
     const steamId = String(status)
@@ -25,8 +31,7 @@ it.each([429, 503, 200])('retries after a failed avatar lookup with HTTP %i', as
 
 it('retries after a network error', async () => {
     jest.spyOn(console, 'log').mockImplementation(() => {})
-    const fetchMock = jest
-        .spyOn(globalThis, 'fetch')
+    fetchMock
         .mockRejectedValueOnce(new Error('Network unavailable'))
         .mockResolvedValueOnce(new Response(avatarXml))
 
@@ -36,8 +41,6 @@ it('retries after a network error', async () => {
 })
 
 it.each(['', 'invalid'])('does not fetch an invalid Steam ID: %s', async (steamId) => {
-    const fetchMock = jest.spyOn(globalThis, 'fetch')
-
     expect(await fetchSteamAvatar(steamId)).toBeNull()
     expect(fetchMock).not.toHaveBeenCalled()
 })
