@@ -36,7 +36,7 @@
         "@fortawesome/free-solid-svg-icons": "^7.3.1",
         "@fortawesome/react-fontawesome": "^3.5.0",
         "dayjs": "^1.11.23",
-        "electron-updater": "^6.8.9",
+        "electron-updater": "^6.8.10",
         "react": "^19.3.1",
         "react-dom": "^19.3.1",
         "string-width": "^8.3.0",
