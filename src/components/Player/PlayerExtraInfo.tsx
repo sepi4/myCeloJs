@@ -23,15 +23,19 @@ function PlayerExtraInfo(props: Props) {
         if (!navButtons.total) {
             return null
         }
-        let sum = 0
+        let wins = 0
+        let losses = 0
         for (const rankObj of ranksArr) {
             if (rankObj?.isModeRanked === 1) {
-                sum += rankObj.wins + rankObj.losses
+                wins += rankObj.wins
+                losses += rankObj.losses
             }
         }
         return (
             <div data-testid="total-games" className={styles.total}>
-                {getText('total_games', settings)}: {sum}
+                <span title={`${wins} / ${losses}`}>
+                    {getText('total_games', settings)}: {wins + losses}
+                </span>
             </div>
         )
     })()

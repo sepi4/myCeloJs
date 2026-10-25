@@ -8,6 +8,7 @@ interface Props {
     winPercent: string
     streak: number | string
     totalGames: number | string
+    totalTitle?: string
     rankTotal: number | string
     rating?: number | string
 }
@@ -18,6 +19,7 @@ function TableRankRow({
     winPercent,
     streak,
     totalGames,
+    totalTitle,
     rankTotal,
     rating,
 }: Props) {
@@ -43,7 +45,7 @@ function TableRankRow({
             {rating !== undefined && <span>{rating !== '-' ? `(${rating})` : '-'}</span>}
             <span style={{ color: streakColor }}> {streakDisplay} </span>
             <span>{winPercent} </span>
-            <span> {totalGames} </span>
+            <span title={totalTitle}> {totalGames} </span>
         </div>
     )
 }

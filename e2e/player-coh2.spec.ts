@@ -105,6 +105,7 @@ test('navbar checkboxes - table, total and all ', async () => {
     // Total toggle
     await app.checkboxTotal.click()
     await expect(app.totalGames).toBeVisible()
+    await expect(app.totalGames.locator('[title]')).toHaveAttribute('title', /^\d+ \/ \d+$/)
     await app.checkboxTotal.click()
     await expect(app.totalGames).not.toBeVisible()
 
