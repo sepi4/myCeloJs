@@ -1,0 +1,35 @@
+# Delete this workflow together with the ESLint ignore rule in dependabot.yml.
+name: ESLint 10 reminder
+
+on:
+    schedule:
+        - cron: '0 6 * * 1'
+    workflow_dispatch:
+
+permissions:
+    issues: write
+
+jobs:
+    check:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Open an issue when eslint-plugin-react supports ESLint 10
+              env:
+                  GH_TOKEN: ${{ github.token }}
+                  GH_REPO: ${{ github.repository }}
+                  TITLE: Remove the ESLint major ignore rule from Dependabot
+              run: |
+                  range=$(npm view eslint-plugin-react peerDependencies.eslint)
+                  echo "eslint-plugin-react supports eslint $range"
+                  if ! npx --yes semver@7.7.2 --range "$range" 10.0.0 > /dev/null; then
+                      exit 0
+                  fi
+                  if [ -n "$(gh issue list --state open --search "in:title $TITLE" --json number --jq '.[].number')" ]; then
+                      exit 0
+                  fi
+                  gh issue create --title "$TITLE" --body "eslint-plugin-react now supports ESLint 10 (\`$range\`).
+
+                  1. Remove the \`ignore\` rule for \`eslint\` and \`@eslint/js\` from \`.github/dependabot.yml\`.
+                  2. Delete \`.github/workflows/eslint-10-reminder.yml\`.
+
+                  Dependabot will then suggest ESLint 10 in the eslint group."
