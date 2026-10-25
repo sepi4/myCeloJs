@@ -326,13 +326,15 @@ function Settings(props: Props) {
                 </div>
             </SettingsDiv>
 
-            <SettingsDiv
-                title={`COH2 ${getText('log_location_title', settings)}`}
-                required
-                requiredTitle={getText('required_for_coh2', settings)}
-            >
+            <SettingsDiv title={`COH2 ${getText('log_location_title', settings)}`}>
                 <div className={styles.textDiv}>
-                    <span className={styles.textDivText}>{settings?.logLocationCoh2 ?? ''}</span>
+                    {settings?.logLocationCoh2 ? (
+                        <span className={styles.textDivText}>{settings.logLocationCoh2}</span>
+                    ) : (
+                        <span className={styles.placeholder}>
+                            {getText('required_for_coh2', settings)}
+                        </span>
+                    )}
                     {settings?.logLocationCoh2 && (
                         <ClearButton
                             testId="clear-log-coh2-button"
@@ -375,13 +377,15 @@ function Settings(props: Props) {
                 </div>
             </SettingsDiv>
 
-            <SettingsDiv
-                title={`COH3 ${getText('log_location_title', settings)}`}
-                required
-                requiredTitle={getText('required_for_coh3', settings)}
-            >
+            <SettingsDiv title={`COH3 ${getText('log_location_title', settings)}`}>
                 <div className={styles.textDiv}>
-                    <span className={styles.textDivText}>{settings?.logLocationCoh3 ?? ''}</span>
+                    {settings?.logLocationCoh3 ? (
+                        <span className={styles.textDivText}>{settings.logLocationCoh3}</span>
+                    ) : (
+                        <span className={styles.placeholder}>
+                            {getText('required_for_coh3', settings)}
+                        </span>
+                    )}
                     {settings?.logLocationCoh3 && (
                         <ClearButton
                             testId="clear-log-coh3-button"

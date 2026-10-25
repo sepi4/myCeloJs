@@ -122,10 +122,6 @@ const text: Translations = {
         ru: 'неправильный ID',
     },
 
-    required: {
-        en: 'required',
-        ru: 'обязательно',
-    },
     required_for_coh2: {
         en: 'Required for COH2',
         ru: 'Обязательно для COH2',

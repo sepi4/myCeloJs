@@ -1,31 +1,14 @@
 import { JSX } from 'react'
 
-import getText from '../../functions/utils/getText'
-import { useSettingsStore } from '../../stores/settingsStore'
 import styles from './SettingsDiv.module.css'
 
 interface Props {
     title?: string
-    required?: boolean
-    requiredTitle?: string
     children?: JSX.Element | JSX.Element[]
     testId?: string
 }
 
 function SettingsDiv(props: Props) {
-    const { settings } = useSettingsStore()
-    const req = props.required ? (
-        <span
-            title={props.requiredTitle ?? getText('required', settings)}
-            style={{
-                color: 'var(--text-danger)',
-                fontWeight: 'bold',
-                fontSize: '150%',
-            }}
-        >
-            *
-        </span>
-    ) : null
     return (
         <div className={styles.settingsDiv}>
             {props.title && (
@@ -36,7 +19,7 @@ function SettingsDiv(props: Props) {
                         fontSize: '100%',
                     }}
                 >
-                    {props.title} {req}
+                    {props.title}
                 </div>
             )}
             <div className={styles.contentDiv}>{props.children}</div>
