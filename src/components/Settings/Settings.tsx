@@ -43,7 +43,7 @@ function Settings(props: Props) {
         writeSettings({ ...settings!, theme: t })
     }
 
-    const [resetConfirmOpen, setResetConfirmOpen] = useState(false)
+    const [confirm, setConfirm] = useState<{ text?: string; onOk: () => void } | null>(null)
 
     const [timedError, setTimedError] = useTimedBoolean(1000)
     const [timedSetID, setTimedSetID] = useTimedBoolean(1000)
@@ -116,6 +116,16 @@ function Settings(props: Props) {
     const clearLogLocation = (game: 'coh2' | 'coh3') => {
         const key = game === 'coh2' ? 'logLocationCoh2' : 'logLocationCoh3'
         writeSettings({ ...settings!, [key]: undefined })
+    }
+
+    const resetAllSettings = async () => {
+        const settingsPath =
+            window.electronAPI.settingsDir + window.electronAPI.pathSep + 'settings.json'
+        const blank = JSON.stringify({
+            appLocation: window.electronAPI.appLocation,
+        })
+        await window.electronAPI.settings.write(settingsPath, blank)
+        window.location.reload()
     }
 
     const changeLogLocation = async (game: 'coh2' | 'coh3') => {
@@ -326,7 +336,12 @@ function Settings(props: Props) {
                     {settings?.logLocationCoh2 && (
                         <ClearButton
                             testId="clear-log-coh2-button"
-                            onClick={() => clearLogLocation('coh2')}
+                            onClick={() =>
+                                setConfirm({
+                                    text: getText('clear_log_location_confirm', settings),
+                                    onOk: () => clearLogLocation('coh2'),
+                                })
+                            }
                             title={getText('clear_log_location', settings)}
                         />
                     )}
@@ -370,7 +385,12 @@ function Settings(props: Props) {
                     {settings?.logLocationCoh3 && (
                         <ClearButton
                             testId="clear-log-coh3-button"
-                            onClick={() => clearLogLocation('coh3')}
+                            onClick={() =>
+                                setConfirm({
+                                    text: getText('clear_log_location_confirm', settings),
+                                    onOk: () => clearLogLocation('coh3'),
+                                })
+                            }
                             title={getText('clear_log_location', settings)}
                         />
                     )}
@@ -416,7 +436,12 @@ function Settings(props: Props) {
                         {settings?.steamId && (
                             <ClearButton
                                 testId="clear-steam-id-button"
-                                onClick={clearSteamId}
+                                onClick={() =>
+                                    setConfirm({
+                                        text: getText('clear_steam_id_confirm', settings),
+                                        onOk: clearSteamId,
+                                    })
+                                }
                                 title={getText('clear_steam_id', settings)}
                             />
                         )}
@@ -439,12 +464,12 @@ function Settings(props: Props) {
             <SettingsAfterLog />
 
             <Modal
-                isOpen={resetConfirmOpen}
-                onClose={() => setResetConfirmOpen(false)}
-                className={styles.resetConfirmModal}
-                overlayClassName={styles.resetConfirmOverlay}
+                isOpen={confirm !== null}
+                onClose={() => setConfirm(null)}
+                className={styles.confirmModal}
+                overlayClassName={styles.confirmOverlay}
             >
-                <p>{getText('reset_all_settings_confirm', settings)}</p>
+                <p>{confirm?.text}</p>
                 <div
                     style={{
                         display: 'flex',
@@ -455,29 +480,18 @@ function Settings(props: Props) {
                 >
                     <button
                         className={styles.button}
-                        data-testid="reset-confirm-ok"
+                        data-testid="confirm-ok"
                         onClick={() => {
-                            setResetConfirmOpen(false)
-                            const settingsPath =
-                                window.electronAPI.settingsDir +
-                                window.electronAPI.pathSep +
-                                'settings.json'
-                            const blank = JSON.stringify({
-                                appLocation: window.electronAPI.appLocation,
-                            })
-                            async function resetAndReload() {
-                                await window.electronAPI.settings.write(settingsPath, blank)
-                                window.location.reload()
-                            }
-                            resetAndReload()
+                            confirm?.onOk()
+                            setConfirm(null)
                         }}
                     >
                         {getText('ok', settings)}
                     </button>
                     <button
                         className={styles.button}
-                        data-testid="reset-confirm-cancel"
-                        onClick={() => setResetConfirmOpen(false)}
+                        data-testid="confirm-cancel"
+                        onClick={() => setConfirm(null)}
                     >
                         {getText('cancel', settings)}
                     </button>
@@ -490,7 +504,12 @@ function Settings(props: Props) {
                         className={styles.button}
                         data-testid="reset-settings-button"
                         disabled={isDefaultSettings}
-                        onClick={() => setResetConfirmOpen(true)}
+                        onClick={() =>
+                            setConfirm({
+                                text: getText('reset_all_settings_confirm', settings),
+                                onOk: resetAllSettings,
+                            })
+                        }
                     >
                         {getText('reset_all_settings', settings)}
                     </button>

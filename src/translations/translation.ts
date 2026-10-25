@@ -158,9 +158,17 @@ const text: Translations = {
         en: 'Clear log location',
         ru: 'Очистить путь к лог-файлу',
     },
+    clear_log_location_confirm: {
+        en: 'Clear log location?',
+        ru: 'Очистить путь к лог-файлу?',
+    },
     clear_steam_id: {
         en: 'Clear Steam ID',
         ru: 'Очистить Steam ID',
+    },
+    clear_steam_id_confirm: {
+        en: 'Clear Steam ID?',
+        ru: 'Очистить Steam ID?',
     },
 
     // navbar  ---------------------------------

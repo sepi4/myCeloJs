@@ -130,24 +130,24 @@ test('reset all settings - Esc and cancel keep settings, ok clears and reloads',
 
     // Click reset — confirmation modal should appear
     await app.resetSettingsButton.click()
-    await expect(app.resetConfirmOk).toBeVisible()
-    await expect(app.resetConfirmCancel).toBeVisible()
+    await expect(app.confirmOk).toBeVisible()
+    await expect(app.confirmCancel).toBeVisible()
 
     // Escape closes only the confirmation modal, settings stay open
     await page.keyboard.press('Escape')
-    await expect(app.resetConfirmOk).not.toBeVisible()
+    await expect(app.confirmOk).not.toBeVisible()
     await expect(app.languageSelectEn).toBeVisible()
 
     // Click reset again — cancel closes the modal, settings are unchanged
     await app.resetSettingsButton.click()
-    await expect(app.resetConfirmCancel).toBeVisible()
-    await app.resetConfirmCancel.click()
-    await expect(app.resetConfirmOk).not.toBeVisible()
+    await expect(app.confirmCancel).toBeVisible()
+    await app.confirmCancel.click()
+    await expect(app.confirmOk).not.toBeVisible()
     await expect(app.languageSelectEn).toBeVisible()
 
     // Click reset once more and confirm — page reloads to a fresh state
     await app.resetSettingsButton.click()
-    await app.resetConfirmOk.click()
+    await app.confirmOk.click()
     await page.waitForLoadState('domcontentloaded')
 
     // After reset the no-log prompt should be visible and reset button disabled

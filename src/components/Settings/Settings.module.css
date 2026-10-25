@@ -60,7 +60,7 @@
     gap: 1rem;
 }
 
-.resetConfirmModal {
+.confirmModal {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -73,7 +73,7 @@
     text-align: center;
 }
 
-.resetConfirmOverlay {
+.confirmOverlay {
     position: fixed;
     inset: 0;
     background-color: var(--bg-overlay);

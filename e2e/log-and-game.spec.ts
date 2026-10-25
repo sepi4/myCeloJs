@@ -73,6 +73,14 @@ test('remove COH3 log disables its radio and keeps COH2 active', async () => {
     // Both logs are set at this point — remove COH3 log
     await app.settingsIcon.click()
     await app.clearLogCoh3Button.click()
+
+    // Cancel keeps the log location
+    await app.confirmCancel.click()
+    await expect(app.clearLogCoh3Button).toBeVisible()
+
+    await app.clearLogCoh3Button.click()
+    await app.confirmOk.click()
+    await expect(app.clearLogCoh3Button).not.toBeVisible()
     await app.closeButton.click()
 
     // COH3 radio should be disabled, COH2 should remain enabled
