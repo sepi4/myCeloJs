@@ -6,7 +6,7 @@
     "license": "GPL-3.0-or-later",
     "author": "Sergei Polishsuk",
     "engines": {
-        "node": ">=22.22.1"
+        "node": ">=24"
     },
     "repository": {
         "type": "git",
