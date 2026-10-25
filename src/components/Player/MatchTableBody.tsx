@@ -9,9 +9,28 @@ interface Props {
     game: MatchObject
 }
 
+// COH2 reports squads killed as sqkill and COH3 as sqkilled.
+const COUNTER_ORDER = [
+    'dmgdone',
+    'ekills',
+    'edeaths',
+    'sqkill',
+    'sqkilled',
+    'sqlost',
+    'vkill',
+    'vlost',
+    'pcap',
+    'gt',
+]
+
+function counterRank(key: string) {
+    const i = COUNTER_ORDER.indexOf(key)
+    return i === -1 ? COUNTER_ORDER.length : i
+}
+
 function MatchTableBody(props: Props) {
     const infoArr: string[] = (props.game?.counters ? Object.keys(props.game.counters) : [])
-        .sort((a, b) => (a > b ? 1 : -1))
+        .sort((a, b) => counterRank(a) - counterRank(b) || (a > b ? 1 : -1))
         .filter((k) => getText(k, props.settings) !== undefined)
 
     return (
