@@ -81,14 +81,18 @@
 
 .button {
     margin: 0.2em 0;
-    /* a quarter of the window, but no wider than a quarter of .container */
-    width: min(25vw, 17.5em);
+    min-width: 7em;
     color: var(--text-primary);
     cursor: pointer;
     background-color: var(--bg-secondary);
-    padding: 0.2em 0;
+    padding: 0.25em 1em;
     font-size: 1em;
-    border: 0;
+    border: 1px solid var(--border-secondary);
+    border-radius: 0.2em;
+}
+
+.button:hover:not(:disabled) {
+    background-color: var(--bg-hover);
 }
 
 .button:active {
