@@ -107,7 +107,8 @@ function PlayerMainRow(props: Props) {
         player.ranking && player.ranking > 0
             ? (extraInfo?.ranks.find((r) => r.rank === player.ranking)?.ranktotal ?? 0)
             : 0
-    const rankTitle = ranktotal > 0 ? `${getText('of', settings)} ${ranktotal}` : ''
+    const rankTitle =
+        ranktotal > 0 ? `${player.ranking} ${getText('of', settings)} ${ranktotal}` : ''
 
     const factionFlag = coh3
         ? getFactionFlagLocationCoh3(player.faction)

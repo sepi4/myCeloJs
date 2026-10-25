@@ -9,7 +9,7 @@ interface Props {
     streak: number | string
     totalGames: number | string
     totalTitle?: string
-    rankTotal: number | string
+    rankTotal: number
     rating?: number | string
 }
 
@@ -34,11 +34,13 @@ function TableRankRow({
     )
 
     const streakDisplay = Number(streak) > 0 ? '+' + streak : streak
-    const rankTotalDisplay =
-        Number(rankTotal) > 0 || rankTotal === '?' ? `${getText('of', settings)} ${rankTotal}` : ''
+    const rankTitle =
+        typeof rank === 'number' && rankTotal > 0
+            ? `${rank} ${getText('of', settings)} ${rankTotal}`
+            : undefined
     return (
         <div className={styles.container}>
-            <span title={rankTotalDisplay}> {rank} </span>
+            <span title={rankTitle}> {rank} </span>
             <span>
                 {teamSize}v{teamSize}
             </span>

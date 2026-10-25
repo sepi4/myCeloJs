@@ -36,7 +36,15 @@ function RanksList(props: Props) {
 
                 return (
                     <div data-testid="rank-row" className={styles.row} key={i}>
-                        <Cell title={`${getText('of', settings)} ${r.ranktotal}`}>{rank}</Cell>
+                        <Cell
+                            title={
+                                r.rank > 0 && r.ranktotal > 0
+                                    ? `${r.rank} ${getText('of', settings)} ${r.ranktotal}`
+                                    : undefined
+                            }
+                        >
+                            {rank}
+                        </Cell>
                         <Cell width="40%" justifyContent="flex-start">
                             <Rank
                                 rank={r}

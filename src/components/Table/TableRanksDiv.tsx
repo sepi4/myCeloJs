@@ -23,7 +23,7 @@ function TableRanksDiv({ ranks, startIndex, faction }: Props) {
         let totalTitle: string | undefined
         let rank: number | string = '-'
         let streak: number | string = '-'
-        const rankTotal = rankData?.ranktotal ?? '?'
+        const rankTotal = rankData?.ranktotal ?? 0
         if (rankData) {
             const winRate = (rankData.wins / (rankData.wins + rankData.losses)) * 100
             winPercent = winRate.toFixed(0) + '%'
