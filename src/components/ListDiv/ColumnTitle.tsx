@@ -1,5 +1,5 @@
-import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCaretDown, faCaretUp } from '../icons'
+import SvgIcon from '../SvgIcon'
 
 import styles from './ColumnTitle.module.css'
 
@@ -18,13 +18,13 @@ function ColumnTitle(props: Props) {
     if (active && reversed) {
         caret = (
             <>
-                <FontAwesomeIcon icon={faCaretUp} />{' '}
+                <SvgIcon icon={faCaretUp} />{' '}
             </>
         )
     } else if (active && !reversed) {
         caret = (
             <>
-                <FontAwesomeIcon icon={faCaretDown} />{' '}
+                <SvgIcon icon={faCaretDown} />{' '}
             </>
         )
     }

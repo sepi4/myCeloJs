@@ -1,13 +1,12 @@
-import { faAngleDoubleDown, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
 import getText from '../../functions/utils/getText'
 import { anyKeyOpen } from '../../functions/utils/openKeys'
 import { useExtraInfoStore } from '../../stores/extraInfoStore'
 import { useOpenInfosStore } from '../../stores/openInfosStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { Player as PlayerType } from '../../types'
+import { faAngleDoubleDown, faAngleDoubleRight } from '../icons'
 import Player from '../Player/Player'
+import SvgIcon from '../SvgIcon'
 
 import css from './Team.module.css'
 
@@ -45,10 +44,7 @@ function Team(props: Props) {
                 title={toggleTitle}
                 aria-expanded={anyOpen}
             >
-                <FontAwesomeIcon
-                    icon={anyOpen ? faAngleDoubleDown : faAngleDoubleRight}
-                    size="sm"
-                />
+                <SvgIcon icon={anyOpen ? faAngleDoubleDown : faAngleDoubleRight} size="sm" />
             </button>
             <button
                 data-testid="team-toggle-right"

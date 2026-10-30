@@ -1,4 +1,3 @@
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import { useRef, useState } from 'react'
 
 import { fetchCoh2ProfileId } from '../../functions/api/fetchCoh2ProfileId'
@@ -10,6 +9,7 @@ import { useSettingsStore } from '../../stores/settingsStore'
 import { useSettingsViewStore } from '../../stores/settingsViewStore'
 import { FontSize, Language, NavbarPosition, SettingsType, Theme } from '../../types'
 import Icon from '../Icon'
+import { faTimes } from '../icons'
 import Modal from '../Modal/Modal'
 import Notification from '../Notification'
 import ClearButton from './ClearButton'

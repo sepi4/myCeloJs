@@ -1,5 +1,3 @@
-import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { JSX } from 'react'
 
 import cross from '../../assets/img/cross.png'
@@ -7,6 +5,8 @@ import star from '../../assets/img/star.png'
 import getTextFun from '../../functions/utils/getText'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { Rank as RankType } from '../../types'
+import { faCaretDown, faCaretRight } from '../icons'
+import SvgIcon from '../SvgIcon'
 import Members from './Members'
 
 interface Props {
@@ -47,7 +47,7 @@ function Rank(props: Props) {
         return m + ' ' + sw(rn)
     }
     const arrow = (
-        <FontAwesomeIcon
+        <SvgIcon
             icon={showMembers ? faCaretDown : faCaretRight}
             size="lg"
             style={{

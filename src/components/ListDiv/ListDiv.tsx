@@ -1,5 +1,3 @@
-import { faAngleDoubleDown, faAngleDoubleRight } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useState } from 'react'
 
 import { ranksArrFilter, ranksArrSort } from '../../functions/rankings/ranksArrFuns'
@@ -10,6 +8,8 @@ import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { useSorterStore } from '../../stores/sorterStore'
 import { Rank } from '../../types'
+import { faAngleDoubleDown, faAngleDoubleRight } from '../icons'
+import SvgIcon from '../SvgIcon'
 import Cell from './Cell'
 import RanksList, { rankKey } from './RanksList'
 import RanksListTitles from './RanksListTitles'
@@ -53,9 +53,7 @@ function ListDiv({ ranksArr }: { ranksArr: Rank[] }) {
                                 aria-expanded={allOpen}
                                 onClick={() => setOpenRanks(toggleKeys(openRanks, expandableKeys))}
                             >
-                                <FontAwesomeIcon
-                                    icon={allOpen ? faAngleDoubleDown : faAngleDoubleRight}
-                                />
+                                <SvgIcon icon={allOpen ? faAngleDoubleDown : faAngleDoubleRight} />
                                 {getText(
                                     allOpen ? 'collapse_all_team' : 'expand_all_team',
                                     settings

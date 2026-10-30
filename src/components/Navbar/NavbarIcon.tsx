@@ -1,6 +1,7 @@
-import type { IconDefinition } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { CSSProperties } from 'react'
+
+import type { IconDefinition } from '../icons'
+import SvgIcon from '../SvgIcon'
 
 interface Props {
     icon: IconDefinition
@@ -13,7 +14,7 @@ interface Props {
 export default function NavBarIcon(props: Props) {
     return (
         <span data-testid={props.testId} title={props.title} style={{ display: 'inline-flex' }}>
-            <FontAwesomeIcon
+            <SvgIcon
                 title={props.title}
                 icon={props.icon}
                 size="xl"

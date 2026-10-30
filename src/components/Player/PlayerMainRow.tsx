@@ -1,6 +1,3 @@
-import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
 import { getFactionCodeCoh2, getFactionCodeCoh3 } from '../../constants/factionMappings'
 import { getTotalGames } from '../../functions/rankings/simpleFunctions'
 import {
@@ -16,6 +13,8 @@ import { useViewStore } from '../../stores/viewStore'
 import countriesJson from '../../translations/countries.json'
 import { getCountryName } from '../../translations/countryTranslations'
 import { ExtraInfo, Player } from '../../types'
+import { faCaretDown, faCaretRight } from '../icons'
+import SvgIcon from '../SvgIcon'
 import MainRowSpan from './MainRowSpan'
 
 import styles from './PlayerMainRow.module.css'
@@ -85,7 +84,7 @@ function PlayerMainRow(props: Props) {
     const dropDownArrow = (
         <span style={{ width: '2em' }}>
             {Number(player.profileId) > 0 && (
-                <FontAwesomeIcon
+                <SvgIcon
                     data-testid="player-toggle"
                     aria-expanded={showExtra}
                     icon={showExtra ? faCaretDown : faCaretRight}
