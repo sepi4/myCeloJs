@@ -52,7 +52,6 @@ module.exports = tseslint.config(
             'vitest.config.mts',
             'electron.vite.config.ts',
             'playwright.config.ts',
-            '.prettierrc.js',
         ],
     }
 )
