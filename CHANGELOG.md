@@ -1,5 +1,17 @@
 # Changelog
 
+- **version 2.11.0.**
+    - Show wins and losses when hovering game totals
+    - Show game stats in a fixed, logical order
+    - Confirm before clearing a log location or the Steam ID
+    - Empty log fields show a hint instead of a red asterisk
+    - Upgrade Electron to 44
+    - Fix: Steam avatars load on Electron 44
+    - Fix: rank titles show the full rank and are hidden when there is no rank
+    - Fix: opening the player card that is already shown no longer adds it to the card history again
+    - Fix: wrong Steam ID for CoH3 players read from the log
+    - Fix: better balance between green and red in the dark theme
+    - UI improvements
 - **version 2.10.0.**
     - Show players in match history rows
     - Show game details below the history row instead of a modal, with stats as the focus
