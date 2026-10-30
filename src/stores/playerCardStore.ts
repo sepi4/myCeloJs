@@ -87,6 +87,13 @@ export const usePlayerCardStore = create<PlayerCardStore>((set) => ({
             // Opening a card from inside another card remembers the current one,
             // opening it from anywhere else starts a new history.
             const fromCard = useViewStore.getState().view === 'playerCard' && state.player
+            if (
+                fromCard &&
+                player.profileId !== undefined &&
+                player.profileId === state.player?.profileId
+            ) {
+                return state
+            }
             const history = fromCard ? [...state.history, snapshot(state)].slice(-MAX_HISTORY) : []
             return {
                 history,

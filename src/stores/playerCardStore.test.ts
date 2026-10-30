@@ -82,6 +82,33 @@ describe('playerCardStore history', () => {
         expect(usePlayerCardStore.getState().history).toEqual([])
     })
 
+    test('opening the card that is already shown keeps the card and its history', () => {
+        const store = usePlayerCardStore.getState()
+        store.setPlayerCard({ name: 'A', profileId: 1 }, extraInfo('A'), false)
+        useViewStore.getState().setView('playerCard')
+        store.setPlayerCard({ name: 'B', profileId: 2 }, extraInfo('B'), false)
+        usePlayerCardStore.getState().updateGameHistory({ open: true })
+
+        usePlayerCardStore
+            .getState()
+            .setPlayerCard({ name: 'B', profileId: 2 }, extraInfo('B'), false)
+        const state = usePlayerCardStore.getState()
+        expect(state.history.map((h) => h.player?.name)).toEqual(['A'])
+        expect(state.gameHistory.open).toBe(true)
+    })
+
+    test('opening a profile seen earlier in the history adds it again', () => {
+        const store = usePlayerCardStore.getState()
+        store.setPlayerCard({ name: 'A', profileId: 1 }, extraInfo('A'), false)
+        useViewStore.getState().setView('playerCard')
+        store.setPlayerCard({ name: 'B', profileId: 2 }, extraInfo('B'), false)
+        store.setPlayerCard({ name: 'A', profileId: 1 }, extraInfo('A'), false)
+
+        const state = usePlayerCardStore.getState()
+        expect(state.player?.name).toBe('A')
+        expect(state.history.map((h) => h.player?.name)).toEqual(['A', 'B'])
+    })
+
     test('history keeps at most 20 cards', () => {
         for (let i = 0; i < 25; i++) {
             openCard(`P${i}`)
