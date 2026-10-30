@@ -1,6 +1,3 @@
-/**
- * @vitest-environment jsdom
- */
 import { useAlertStore } from './alertStore'
 
 beforeEach(() => {
