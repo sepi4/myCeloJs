@@ -83,7 +83,7 @@ export default function Search() {
         const playerData = {
             ...player,
             name: player.alias,
-            profileId: player.profile_id + '',
+            profileId: player.profile_id,
             country: player.country,
         }
         const extraInfoData = {

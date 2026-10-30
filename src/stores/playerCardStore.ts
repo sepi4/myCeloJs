@@ -11,7 +11,7 @@ export const EMPTY_GAME_HISTORY: GameHistoryState = { data: null, open: false, o
 export interface PlayerCardData {
     name?: string
     country?: string
-    profileId?: string | number
+    profileId?: number
 }
 
 interface PlayerCardState {

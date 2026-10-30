@@ -58,7 +58,7 @@ function PlayerMainRow(props: Props) {
             }
 
             for (const member of rank.members) {
-                if (member.profile_id == player.profileId) {
+                if (member.profile_id === player.profileId) {
                     country = member.country
                     steamId = member.name.substring(7)
                     break

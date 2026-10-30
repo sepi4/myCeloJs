@@ -85,7 +85,7 @@ export default function Navbar(props: Props) {
         if (ex) {
             const playerData = {
                 name: profile.alias,
-                profileId: profile.profile_id + '',
+                profileId: profile.profile_id,
                 country: profile.country,
             }
             setPlayerCard(playerData, ex, navButtons.coh3)
