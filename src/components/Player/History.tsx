@@ -85,6 +85,7 @@ export default function History(props: Props) {
         if (!controlled) {
             setLocalState(EMPTY_GAME_HISTORY)
         }
+        // oxlint-disable-next-line react/exhaustive-effect-dependencies
     }, [props.player.profileId, controlled])
 
     const handleToggle = () => {

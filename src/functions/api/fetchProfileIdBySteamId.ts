@@ -6,8 +6,7 @@ export async function fetchProfileIdBySteamId(
 ): Promise<number | null> {
     const base = coh3 ? RELIC_SERVER_BASE_COH3 : RELIC_SERVER_BASE_COH2
     const title = coh3 ? 'coh3' : 'coh2'
-    const url =
-        `${base}/GetPersonalStat?title=${title}&profile_names=` + `[%22%2Fsteam%2F${steamId}%22]`
+    const url = `${base}/GetPersonalStat?title=${title}&profile_names=[%22%2Fsteam%2F${steamId}%22]`
     try {
         const res = await fetch(url)
         const data = await res.json()

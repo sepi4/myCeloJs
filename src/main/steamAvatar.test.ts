@@ -3,7 +3,7 @@ import { afterEach, expect, it, vi } from 'vitest'
 
 import { fetchSteamAvatar } from './steamAvatar'
 
-vi.mock('electron', () => ({ net: { fetch: vi.fn() } }))
+vi.mock('electron', () => ({ net: { fetch: vi.fn<typeof net.fetch>() } }))
 
 const fetchMock = vi.mocked(net.fetch)
 
