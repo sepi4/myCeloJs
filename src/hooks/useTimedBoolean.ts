@@ -8,6 +8,8 @@ function useTimedBoolean(ms: number): [boolean, (x: boolean) => void] {
         return () => {
             clearTimeout(timerId)
         }
+        // Setting the status again restarts the timer.
+        // oxlint-disable-next-line react/exhaustive-effect-dependencies
     }, [status, ms])
 
     return [status, setStatus]

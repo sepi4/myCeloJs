@@ -15,7 +15,7 @@ import { writeRankings } from '../rankings/writeRankings'
 import checkLogData from './checkLogData'
 
 vi.mock('../rankings/writeRankings', () => ({
-    writeRankings: vi.fn(),
+    writeRankings: vi.fn<typeof writeRankings>(),
 }))
 
 const mockWriteRankings = vi.mocked(writeRankings)

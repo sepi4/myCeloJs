@@ -177,7 +177,7 @@ function App() {
         if (settings && players && players.length > 0) {
             writeRankings(coh3, players, settings.rankingsHorizontal, coh3 && elo)
         }
-    }, [settings, settings?.rankingsHorizontal, elo, coh3, players])
+    }, [settings, elo, coh3, players])
 
     // Sync COH3 profile ID from log file into settings
     useEffect(() => {
@@ -203,7 +203,7 @@ function App() {
             } as SettingsType)
         }
         updateCoh3ProfileId()
-    }, [coh3, settings, settings?.logLocationCoh3])
+    }, [coh3, settings])
 
     // Fetch and sync COH2 profile ID from Steam ID
     useEffect(() => {
@@ -219,7 +219,7 @@ function App() {
             writeSettings({ ...currentSettings, profileIdCoh2: profileId })
         }
         updateCoh2ProfileId()
-    }, [settings, settings?.steamId])
+    }, [settings])
 
     // Apply font size to document root
     useEffect(() => {

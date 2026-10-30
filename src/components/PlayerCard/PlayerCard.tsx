@@ -54,6 +54,7 @@ export default function PlayerCard() {
     // Runs only when the card changes, not when the coh2/coh3 view is switched.
     useLayoutEffect(() => {
         window.scrollTo(0, usePlayerCardStore.getState().scrollY)
+        // oxlint-disable-next-line react/exhaustive-effect-dependencies
     }, [navigation])
 
     // Left and right arrows and the mouse side buttons move through earlier cards.

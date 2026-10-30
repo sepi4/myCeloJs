@@ -79,7 +79,7 @@ function getPlayerRank(
     )
 
     const ls = stats.leaderboardStats.find(
-        (ls) => ls.statgroup_id === playerSg?.id && ls.leaderboard_id === leaderboardId
+        (stat) => stat.statgroup_id === playerSg?.id && stat.leaderboard_id === leaderboardId
     )
 
     if (ls !== undefined) {
@@ -89,7 +89,7 @@ function getPlayerRank(
     // Fallback to unranked leaderboard (COH3 has both ranked and unranked variants)
     const unrankedId = findLeaderboardId(matchTypeName + 'Unranked', leaderboards)
     const unrankedLs = stats.leaderboardStats.find(
-        (ls) => ls.statgroup_id === playerSg?.id && ls.leaderboard_id === unrankedId
+        (stat) => stat.statgroup_id === playerSg?.id && stat.leaderboard_id === unrankedId
     )
     return { rank: unrankedLs?.rank, rating: unrankedLs?.rating }
 }

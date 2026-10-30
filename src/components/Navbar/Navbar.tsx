@@ -77,7 +77,7 @@ export default function Navbar(props: Props) {
         }
         const result = x.result
         const ex = result[id]
-        const rank = ex.ranks.find((x: Rank) => x.members?.length === 1)
+        const rank = ex.ranks.find((r: Rank) => r.members?.length === 1)
         if (!rank?.members) {
             return
         }
