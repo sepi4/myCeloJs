@@ -12,6 +12,7 @@ import { useSettingsStore } from '../../stores/settingsStore'
 import { useViewStore } from '../../stores/viewStore'
 import { Member } from '../../types'
 import FoundPlayer from './FoundPlayer'
+
 import styles from './Search.module.css'
 
 export default function Search() {

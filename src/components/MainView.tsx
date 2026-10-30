@@ -9,11 +9,12 @@ import { useSettingsViewStore } from '../stores/settingsViewStore'
 import { useViewStore } from '../stores/viewStore'
 import { Player } from '../types'
 import ClosingViewWrapper from './ClosingViewWrapper/ClosingViewWrapper'
-import styles from './MainView.module.css'
 import PlayerCard from './PlayerCard/PlayerCard'
 import Search from './Search/Search'
 import Settings from './Settings/Settings'
 import Team from './Teams/Team'
+
+import styles from './MainView.module.css'
 
 function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
     const { settingsView } = useSettingsViewStore()

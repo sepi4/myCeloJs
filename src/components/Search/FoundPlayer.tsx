@@ -3,6 +3,7 @@ import { getTimeAgo } from '../../functions/utils/time'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { Member } from '../../types'
+
 import styles from './FoundPlayer.module.css'
 
 interface Props {

@@ -5,8 +5,9 @@ import { useAlertStore } from '../../stores/alertStore'
 import { useAutoLogCheckingStore } from '../../stores/autoLogCheckingStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useSettingsStore } from '../../stores/settingsStore'
-import styles from './CheckLogDiv.module.css'
 import NavCheckbox from './NavCheckBox'
+
+import styles from './CheckLogDiv.module.css'
 
 function CheckLogDiv() {
     const { settings } = useSettingsStore()

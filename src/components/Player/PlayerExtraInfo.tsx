@@ -5,6 +5,7 @@ import { ExtraInfo, GameHistoryState, Player } from '../../types'
 import ListDiv from '../ListDiv/ListDiv'
 import TableDiv from '../Table/TableDiv'
 import History from './History'
+
 import styles from './PlayerExtraInfo.module.css'
 
 interface Props {

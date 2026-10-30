@@ -1,9 +1,10 @@
-import { app, BrowserWindow, dialog, ipcMain, shell } from 'electron'
-import { autoUpdater } from 'electron-updater'
 import fs from 'fs'
 import http from 'http'
 import net from 'net'
 import path from 'path'
+
+import { app, BrowserWindow, dialog, ipcMain, shell } from 'electron'
+import { autoUpdater } from 'electron-updater'
 
 import { RankingsJson } from '../types'
 import {

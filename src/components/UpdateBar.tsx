@@ -5,6 +5,7 @@ import writeSettings from '../functions/settings/writeSettings'
 import funGetText from '../functions/utils/getText'
 import { useSettingsStore } from '../stores/settingsStore'
 import { SettingsType } from '../types'
+
 import styles from './UpdateBar.module.css'
 
 type UpdateState =

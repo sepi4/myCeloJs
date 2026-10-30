@@ -5,6 +5,7 @@ import { useSettingsStore } from '../../stores/settingsStore'
 import { Rank as RankType } from '../../types'
 import Rank from '../Player/Rank'
 import Cell from './Cell'
+
 import styles from './ListDiv.module.css'
 
 /** Identifies a rank row: one team can have ranks in several leaderboards. */

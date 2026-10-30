@@ -6,6 +6,7 @@ import { JSX } from 'react'
 import useEsc from '../../hooks/useEsc'
 import { useViewStore } from '../../stores/viewStore'
 import Icon from '../Icon'
+
 import styles from './ViewWrapper.module.css'
 
 interface NavButton {

@@ -1,5 +1,6 @@
 import getText from '../../functions/utils/getText'
 import { useSettingsStore } from '../../stores/settingsStore'
+
 import styles from './TableRankRow.module.css'
 
 interface Props {
