@@ -56,45 +56,50 @@ function UpdateBar() {
     }
 
     return (
-        <div className={styles.container}>
-            {update.step === 'available' && (
-                <>
-                    <span>
-                        {getText('update_to_version')} {update.version}
-                    </span>
-                    <button className={styles.btn} onClick={downloadHandler}>
-                        {getText('download')}
-                    </button>
-                    <button
-                        className={styles.btn}
-                        onClick={() => window.electronAPI.shell.openExternal(GITHUB_RELEASES_URL)}
-                    >
-                        {getText('release_page')}
-                    </button>
-                    <button className={styles.btn} onClick={ignoreHandler}>
-                        {getText('skip_this_version')}
-                    </button>
-                </>
-            )}
+        <>
+            <div className={styles.spacer} />
+            <div className={styles.container}>
+                {update.step === 'available' && (
+                    <>
+                        <span>
+                            {getText('update_to_version')} {update.version}
+                        </span>
+                        <button className={styles.btn} onClick={downloadHandler}>
+                            {getText('download')}
+                        </button>
+                        <button
+                            className={styles.btn}
+                            onClick={() =>
+                                window.electronAPI.shell.openExternal(GITHUB_RELEASES_URL)
+                            }
+                        >
+                            {getText('release_page')}
+                        </button>
+                        <button className={styles.btn} onClick={ignoreHandler}>
+                            {getText('skip_this_version')}
+                        </button>
+                    </>
+                )}
 
-            {update.step === 'downloading' && <span>{getText('update_downloading')}</span>}
+                {update.step === 'downloading' && <span>{getText('update_downloading')}</span>}
 
-            {update.step === 'error' && <span>{getText('update_error')}</span>}
+                {update.step === 'error' && <span>{getText('update_error')}</span>}
 
-            {update.step === 'downloaded' && (
-                <>
-                    <span>
-                        {getText('update_to_version')} {update.version}
-                    </span>
-                    <button
-                        className={styles.btn}
-                        onClick={() => window.electronAPI.updater.install()}
-                    >
-                        {getText('update_restart')}
-                    </button>
-                </>
-            )}
-        </div>
+                {update.step === 'downloaded' && (
+                    <>
+                        <span>
+                            {getText('update_to_version')} {update.version}
+                        </span>
+                        <button
+                            className={styles.btn}
+                            onClick={() => window.electronAPI.updater.install()}
+                        >
+                            {getText('update_restart')}
+                        </button>
+                    </>
+                )}
+            </div>
+        </>
     )
 }
 
