@@ -1,0 +1,36 @@
+{
+    "$schema": "./node_modules/oxlint/configuration_schema.json",
+    "plugins": ["typescript", "react", "vitest", "import", "oxc"],
+    "categories": {
+        "correctness": "error",
+        "suspicious": "warn"
+    },
+    "env": {
+        "browser": true,
+        "es2024": true
+    },
+    "rules": {
+        "curly": ["warn", "all"],
+        "react/react-in-jsx-scope": "off",
+        "react/set-state-in-effect": "off",
+        "import/no-unassigned-import": "off"
+    },
+    "overrides": [
+        {
+            "files": ["src/main/**/*.ts", "src/preload/**/*.ts"],
+            "env": {
+                "node": true
+            }
+        }
+    ],
+    "ignorePatterns": [
+        "dist/",
+        "out/",
+        "e2e/",
+        "dataExamples/",
+        "localhostFiles/",
+        "playwright-report/",
+        "test-results/",
+        "coverage/"
+    ]
+}
