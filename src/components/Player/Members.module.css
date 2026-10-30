@@ -1,11 +1,16 @@
 .membersDiv {
     margin-left: 1em;
-    font-size: 0.9em;
     cursor: pointer;
-    color: var(--accent-positive);
+    color: var(--text-muted);
 }
 
 .flagImage {
     width: 1em;
     margin-right: 1em;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid var(--border-secondary);
+    margin: 0.4em 0;
 }
