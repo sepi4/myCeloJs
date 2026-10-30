@@ -9,6 +9,7 @@ import { useDisplayCoh3 } from '../../hooks/useDisplayCoh3'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { useViewStore } from '../../stores/viewStore'
 import { MatchHistoryReportResult, NormalizedProfiles, SettingsType } from '../../types'
+
 import styles from './MatchTableHeaders.module.css'
 
 interface Props {

@@ -8,6 +8,7 @@ import { useOpenInfosStore } from '../../stores/openInfosStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { Player as PlayerType } from '../../types'
 import Player from '../Player/Player'
+
 import css from './Team.module.css'
 
 interface Props {

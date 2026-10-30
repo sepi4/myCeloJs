@@ -1,6 +1,7 @@
 import getText from '../../functions/utils/getText'
 import { getTime } from '../../functions/utils/time'
 import { MatchHistoryReportResult, MatchObject, SettingsType } from '../../types'
+
 import styles from './MatchTableBody.module.css'
 
 interface Props {

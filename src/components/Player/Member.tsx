@@ -4,6 +4,7 @@ import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { useViewStore } from '../../stores/viewStore'
 import { Member as MemberType } from '../../types'
+
 import styles from './Members.module.css'
 
 interface Props {

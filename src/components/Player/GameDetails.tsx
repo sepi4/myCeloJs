@@ -6,9 +6,10 @@ import {
     NormalizedProfiles,
     SettingsType,
 } from '../../types'
-import styles from './GameDetails.module.css'
 import MatchTableBody from './MatchTableBody'
 import MatchTableHeaders from './MatchTableHeaders'
+
+import styles from './GameDetails.module.css'
 
 interface Props {
     game: MatchObject

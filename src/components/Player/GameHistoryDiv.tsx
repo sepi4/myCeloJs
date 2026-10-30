@@ -9,6 +9,7 @@ import { getTimeAgo } from '../../functions/utils/time'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { MatchHistoryReportResult, MatchObject, NormalizedProfiles } from '../../types'
 import GameDetails from './GameDetails'
+
 import styles from './GameHistoryDiv.module.css'
 
 interface Props {

@@ -4,8 +4,9 @@ import {
 } from '../../functions/rankings/refactorTableInfo'
 import { useDisplayCoh3 } from '../../hooks/useDisplayCoh3'
 import { Rank } from '../../types'
-import styles from './TableDiv.module.css'
 import TableRanksDiv from './TableRanksDiv'
+
+import styles from './TableDiv.module.css'
 
 function TableDiv({ playerRanks }: { playerRanks: Rank[] }) {
     const coh3 = useDisplayCoh3()

@@ -1,7 +1,9 @@
-import { test, expect } from '@playwright/test'
-import type { ElectronApplication, Page } from '@playwright/test'
 import fs from 'fs'
 import path from 'path'
+
+import { test, expect } from '@playwright/test'
+import type { ElectronApplication, Page } from '@playwright/test'
+
 import { App, COH2_LOG_PATH, COH2_LOG_PATH_2 } from './pom/App.pom'
 import { launchApp, closeApp } from './setup'
 

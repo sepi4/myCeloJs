@@ -1,5 +1,6 @@
-import { type Page, type Locator, type ElectronApplication } from '@playwright/test'
 import path from 'path'
+
+import { type Page, type Locator, type ElectronApplication } from '@playwright/test'
 
 export const COH2_LOG_PATH = path.join(__dirname, '../../dataExamples/coh2-warnings.log')
 export const COH2_LOG_PATH_2 = path.join(__dirname, '../../dataExamples/coh2-warnings2.log')

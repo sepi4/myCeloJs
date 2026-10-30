@@ -17,6 +17,7 @@ import countriesJson from '../../translations/countries.json'
 import { getCountryName } from '../../translations/countryTranslations'
 import { ExtraInfo, Player } from '../../types'
 import MainRowSpan from './MainRowSpan'
+
 import styles from './PlayerMainRow.module.css'
 
 const countries = countriesJson as {

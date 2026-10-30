@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 
-import styles from './App.module.css'
 import audioLocation from './assets/audio/bell.mp3'
 import MainView from './components/MainView'
 // components
@@ -25,6 +24,8 @@ import { useNavButtonsStore } from './stores/navButtonsStore'
 import { usePlayersStore } from './stores/playersStore'
 import { useSettingsStore } from './stores/settingsStore'
 import { Player, SettingsType } from './types'
+
+import styles from './App.module.css'
 const appVersion = window.electronAPI.appVersion
 const settingsDir = window.electronAPI.settingsDir
 

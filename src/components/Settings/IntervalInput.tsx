@@ -3,8 +3,9 @@ import React, { useRef, useState } from 'react'
 import getText from '../../functions/utils/getText'
 import { useLogCheckIntervalStore } from '../../stores/logCheckIntervalStore'
 import { useSettingsStore } from '../../stores/settingsStore'
-import styles from './Settings.module.css'
 import SettingsDiv from './SettingsDiv'
+
+import styles from './Settings.module.css'
 
 function IntervalInput() {
     const { settings } = useSettingsStore()

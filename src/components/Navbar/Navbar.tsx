@@ -9,10 +9,11 @@ import { useSettingsViewStore } from '../../stores/settingsViewStore'
 import { useViewStore } from '../../stores/viewStore'
 import { Rank } from '../../types'
 import CheckLogDiv from './CheckLogDiv'
-import styles from './Navbar.module.css'
 import NavBarIcon from './NavbarIcon'
 import NavbarRow from './NavbarRow'
 import NavCheckbox from './NavCheckBox'
+
+import styles from './Navbar.module.css'
 
 interface Props {
     handleSetSettingsView: () => void

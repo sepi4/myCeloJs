@@ -11,8 +11,9 @@ import { EMPTY_GAME_HISTORY } from '../../stores/playerCardStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { GameHistoryState, Player } from '../../types'
 import GameHistoryDiv from './GameHistoryDiv'
-import styles from './History.module.css'
 import Loading from './Loading'
+
+import styles from './History.module.css'
 
 interface Props {
     player: Player

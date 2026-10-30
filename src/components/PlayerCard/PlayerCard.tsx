@@ -14,6 +14,7 @@ import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { Player } from '../../types'
 import PlayerExtraInfo from '../Player/PlayerExtraInfo'
+
 import styles from './PlayerCard.module.css'
 
 const TEXT_INPUT_TYPES = ['text', 'search', 'number', 'email', 'password', 'url', 'tel']

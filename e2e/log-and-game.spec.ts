@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test'
 import type { ElectronApplication, Page } from '@playwright/test'
+
 import { App, COH2_LOG_PATH, COH2_LOG_PATH_2, COH3_LOG_PATH } from './pom/App.pom'
 import { launchApp, closeApp } from './setup'
 

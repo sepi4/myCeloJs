@@ -11,9 +11,10 @@ import { useSettingsStore } from '../../stores/settingsStore'
 import { useSorterStore } from '../../stores/sorterStore'
 import { Rank } from '../../types'
 import Cell from './Cell'
-import styles from './ListDiv.module.css'
 import RanksList, { rankKey } from './RanksList'
 import RanksListTitles from './RanksListTitles'
+
+import styles from './ListDiv.module.css'
 
 function ListDiv({ ranksArr }: { ranksArr: Rank[] }) {
     const {
