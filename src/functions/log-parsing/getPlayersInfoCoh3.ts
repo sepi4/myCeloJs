@@ -2,7 +2,7 @@ import { Player } from '../../types'
 
 type MatchStartedInfo = {
     profileId: number
-    steamId: number
+    steamId: string
     slot: number
     ranking: number
 }
@@ -53,7 +53,7 @@ function parseMatchStarted(data: string): MatchStartedInfo | undefined {
     if (match) {
         return {
             profileId: Number(match[1]),
-            steamId: Number(match[2]),
+            steamId: match[2],
             slot: Number(match[3]),
             ranking: Number(match[4]),
         }
