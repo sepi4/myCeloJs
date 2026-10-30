@@ -1,7 +1,3 @@
-/**
- * @vitest-environment jsdom
- */
-
 import { useExtraInfoStore } from '../../stores/extraInfoStore'
 import { useFromFileStore } from '../../stores/fromFileStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'

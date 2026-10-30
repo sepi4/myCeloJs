@@ -1,6 +1,3 @@
-/**
- * @vitest-environment jsdom
- */
 import { useNavButtonsStore } from './navButtonsStore'
 
 beforeEach(() => {

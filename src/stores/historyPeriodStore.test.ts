@@ -1,6 +1,3 @@
-/**
- * @vitest-environment jsdom
- */
 import { isInPeriod, useHistoryPeriodStore } from './historyPeriodStore'
 
 beforeEach(() => {
