@@ -29,8 +29,7 @@ function toMatchObject(
         return null
     }
 
-    // TODO === fix string profileId
-    const playerResult = players.find((r) => r.profile_id == player.profileId)
+    const playerResult = players.find((r) => r.profile_id === player.profileId)
 
     return {
         startGameTime: new Date(match.startgametime * 1000),
