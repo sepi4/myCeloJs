@@ -1,5 +1,3 @@
-import { faCaretDown, faCaretRight } from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useCallback, useEffect, useState } from 'react'
 
 import { RELIC_SERVER_BASE_COH2, RELIC_SERVER_BASE_COH3 } from '../../constants/urls'
@@ -10,6 +8,8 @@ import { HISTORY_PERIODS, isInPeriod, useHistoryPeriodStore } from '../../stores
 import { EMPTY_GAME_HISTORY } from '../../stores/playerCardStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { GameHistoryState, Player } from '../../types'
+import { faCaretDown, faCaretRight } from '../icons'
+import SvgIcon from '../SvgIcon'
 import GameHistoryDiv from './GameHistoryDiv'
 import Loading from './Loading'
 
@@ -108,7 +108,7 @@ export default function History(props: Props) {
                     className={styles.toggle}
                     onClick={handleToggle}
                 >
-                    <FontAwesomeIcon icon={historyOpen ? faCaretDown : faCaretRight} size="lg" />
+                    <SvgIcon icon={historyOpen ? faCaretDown : faCaretRight} size="lg" />
                     {getText('game_history', settings)}
                 </button>
                 {history && historyOpen && (

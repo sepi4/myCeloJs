@@ -1,11 +1,12 @@
-import { IconProp, SizeProp } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { JSX } from 'react'
 
+import { IconDefinition } from './icons'
+import SvgIcon, { IconSize } from './SvgIcon'
+
 type IconProps = {
-    icon: IconProp
+    icon: IconDefinition
     fun: () => void
-    size?: SizeProp
+    size?: IconSize
     testId?: string
     color?: string
 }
@@ -28,7 +29,7 @@ export default function Icon({
                 cursor: 'pointer',
             }}
         >
-            <FontAwesomeIcon
+            <SvgIcon
                 icon={icon}
                 size={size}
                 color={color}

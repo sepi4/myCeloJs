@@ -1,5 +1,3 @@
-import { faCogs, faSearch, faUserAlt } from '@fortawesome/free-solid-svg-icons'
-
 import { getExtraInfo } from '../../functions/api/getExtraInfo'
 import getText from '../../functions/utils/getText'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
@@ -8,6 +6,7 @@ import { useSettingsStore } from '../../stores/settingsStore'
 import { useSettingsViewStore } from '../../stores/settingsViewStore'
 import { useViewStore } from '../../stores/viewStore'
 import { Rank } from '../../types'
+import { faCogs, faSearch, faUserAlt } from '../icons'
 import CheckLogDiv from './CheckLogDiv'
 import NavBarIcon from './NavbarIcon'
 import NavbarRow from './NavbarRow'
