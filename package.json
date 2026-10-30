@@ -27,7 +27,7 @@
         "e2e": "npm run build && npx playwright test",
         "e2e:debug": "npm run build && npx playwright test --debug inspector",
         "e2e:dist": "MYCELO_DIST_PATH=dist/linux-unpacked/mycelo npx playwright test",
-        "typecheck": "tsc --noEmit",
+        "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.node.json",
         "lint": "oxlint --max-warnings 0",
         "format": "oxfmt",
         "format:check": "oxfmt --check",
@@ -54,6 +54,7 @@
     },
     "devDependencies": {
         "@playwright/test": "^1.64.1",
+        "@types/node": "^24.19.2",
         "@types/react": "^19.3.0",
         "@types/react-dom": "^19.3.0",
         "@vitejs/plugin-react": "^6.1.2",
