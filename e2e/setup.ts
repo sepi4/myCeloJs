@@ -30,6 +30,21 @@ async function launch(tempUserDataDir: string) {
 
     const page = await electronApp.firstWindow()
     await page.waitForLoadState('domcontentloaded')
+    // When many instances start at once, the page sometimes loads without the
+    // preload API and the app renders nothing. A reload runs the preload again.
+    const hasPreloadApi = () =>
+        page
+            .waitForFunction(() => 'electronAPI' in window, null, { timeout: 2000 })
+            .then(
+                () => true,
+                () => false
+            )
+    if (!(await hasPreloadApi())) {
+        await page.reload({ waitUntil: 'domcontentloaded' })
+        if (!(await hasPreloadApi())) {
+            throw new Error('Preload API is missing after reload')
+        }
+    }
     const app = new App(page)
     return { electronApp, page, app }
 }
