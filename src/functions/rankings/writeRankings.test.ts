@@ -1,8 +1,3 @@
-jest.mock('string-width', () => ({
-    __esModule: true,
-    default: (s: string) => s.length,
-}))
-
 import { Player } from '../../types'
 import { buildRankings } from './writeRankings'
 

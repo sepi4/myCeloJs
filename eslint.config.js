@@ -3,7 +3,6 @@ const tseslint = require('typescript-eslint')
 const globals = require('globals')
 const reactPlugin = require('eslint-plugin-react')
 const reactHooksPlugin = require('eslint-plugin-react-hooks')
-const jestPlugin = require('eslint-plugin-jest')
 const prettierConfig = require('eslint-config-prettier')
 const simpleImportSort = require('eslint-plugin-simple-import-sort')
 
@@ -29,10 +28,6 @@ module.exports = tseslint.config(
         },
     },
     {
-        files: ['**/*.test.ts', '**/*.test.tsx', '**/*.spec.ts', '**/*.spec.tsx'],
-        ...jestPlugin.configs['flat/recommended'],
-    },
-    {
         files: ['src/main/**/*.ts', 'src/preload/**/*.ts'],
         languageOptions: {
             globals: globals.node,
@@ -54,7 +49,7 @@ module.exports = tseslint.config(
             'test-results/',
             'readmeImages/',
             'eslint.config.js',
-            'jest.config.js',
+            'vitest.config.mts',
             'electron.vite.config.ts',
             'playwright.config.ts',
             '.prettierrc.js',
