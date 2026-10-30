@@ -52,6 +52,7 @@ function Rank(props: Props) {
             size="lg"
             style={{
                 marginRight: '.2em',
+                verticalAlign: 'middle',
             }}
         />
     )
@@ -66,6 +67,8 @@ function Rank(props: Props) {
                     src={matched[2] === 'Axis' ? cross : star}
                     style={{
                         height: '1em',
+                        // centres the icon on the digits in "3v3", which sit higher than lowercase text
+                        verticalAlign: '-0.1em',
                     }}
                 />
             </>

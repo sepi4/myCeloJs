@@ -6,7 +6,7 @@
 .row {
     font-size: 90%;
     display: flex;
-    align-items: flex-start;
+    align-items: baseline;
     justify-content: center;
 }
 
