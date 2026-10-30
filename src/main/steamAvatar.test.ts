@@ -1,16 +1,17 @@
 import { net } from 'electron'
+import { afterEach, expect, it, vi } from 'vitest'
 
 import { fetchSteamAvatar } from './steamAvatar'
 
-jest.mock('electron', () => ({ net: { fetch: jest.fn() } }))
+vi.mock('electron', () => ({ net: { fetch: vi.fn() } }))
 
-const fetchMock = jest.mocked(net.fetch)
+const fetchMock = vi.mocked(net.fetch)
 
 const avatarUrl = 'https://avatars.steamstatic.com/example_medium.jpg'
 const avatarXml = `<avatarMedium><![CDATA[${avatarUrl}]]></avatarMedium>`
 
 afterEach(() => {
-    jest.restoreAllMocks()
+    vi.restoreAllMocks()
     fetchMock.mockReset()
 })
 
@@ -30,7 +31,7 @@ it.each([429, 503, 200])('retries after a failed avatar lookup with HTTP %i', as
 })
 
 it('retries after a network error', async () => {
-    jest.spyOn(console, 'log').mockImplementation(() => {})
+    vi.spyOn(console, 'log').mockImplementation(() => {})
     fetchMock
         .mockRejectedValueOnce(new Error('Network unavailable'))
         .mockResolvedValueOnce(new Response(avatarXml))

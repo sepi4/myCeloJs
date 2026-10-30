@@ -1,5 +1,5 @@
 /**
- * @jest-environment jsdom
+ * @vitest-environment jsdom
  */
 
 import { useExtraInfoStore } from '../../stores/extraInfoStore'
@@ -14,11 +14,11 @@ import { Language, Player } from '../../types'
 import { writeRankings } from '../rankings/writeRankings'
 import checkLogData from './checkLogData'
 
-jest.mock('../rankings/writeRankings', () => ({
-    writeRankings: jest.fn(),
+vi.mock('../rankings/writeRankings', () => ({
+    writeRankings: vi.fn(),
 }))
 
-const mockWriteRankings = writeRankings as jest.MockedFunction<typeof writeRankings>
+const mockWriteRankings = vi.mocked(writeRankings)
 
 const player1: Player = {
     name: 'Player1',
@@ -64,7 +64,7 @@ function resetAllStores() {
 }
 
 beforeEach(() => {
-    jest.clearAllMocks()
+    vi.clearAllMocks()
     resetAllStores()
 })
 

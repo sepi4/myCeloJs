@@ -1,3 +1,5 @@
+import { describe, expect, it } from 'vitest'
+
 import { RankingsJson } from '../../types'
 import { renderRankingsBody, renderRankingsPage, renderRankingsTxtBody } from './renderRankingsHtml'
 
