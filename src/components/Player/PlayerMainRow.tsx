@@ -1,3 +1,5 @@
+import { MouseEvent } from 'react'
+
 import { getFactionCodeCoh2, getFactionCodeCoh3 } from '../../constants/factionMappings'
 import { getTotalGames } from '../../functions/rankings/simpleFunctions'
 import {
@@ -73,7 +75,9 @@ function PlayerMainRow(props: Props) {
     const { setPlayerCard } = usePlayerCardStore()
     const { setView } = useViewStore()
 
-    const handlePlayerCardOn = () => {
+    const handlePlayerCardOn = (e: MouseEvent) => {
+        // the row itself toggles the extra info
+        e.stopPropagation()
         setPlayerCard(player, extraInfo, coh3)
         setView('playerCard')
     }
@@ -89,11 +93,7 @@ function PlayerMainRow(props: Props) {
                     aria-expanded={showExtra}
                     icon={showExtra ? faCaretDown : faCaretRight}
                     size="lg"
-                    style={{
-                        color: 'var(--text-primary)',
-                        cursor: 'pointer',
-                    }}
-                    onClick={handleSetShowExtra}
+                    style={{ color: 'var(--text-primary)' }}
                 />
             )}
         </span>
@@ -142,6 +142,7 @@ function PlayerMainRow(props: Props) {
     const isRealPlayer = Number(player.profileId) > 0
     const alias = (
         <span
+            data-testid="player-name"
             style={{ cursor: steamId ? 'pointer' : undefined }}
             title={
                 extraInfo && player.profileId
@@ -155,7 +156,11 @@ function PlayerMainRow(props: Props) {
     )
 
     return (
-        <div className={styles.container}>
+        <div
+            data-testid="player-row"
+            className={isRealPlayer ? `${styles.container} ${styles.toggleable}` : styles.container}
+            onClick={isRealPlayer ? handleSetShowExtra : undefined}
+        >
             <MainRowSpan width="14%" justifyContent="flex-start">
                 <>
                     {dropDownArrow}{' '}

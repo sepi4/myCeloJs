@@ -64,6 +64,7 @@ export class App {
     readonly checkboxTable: Locator
     readonly checkboxElo: Locator
     readonly playerRanks: Locator
+    readonly playerRows: Locator
     readonly playerElos: Locator
 
     // Font size
@@ -181,6 +182,7 @@ export class App {
         this.checkboxTable = page.getByTestId('checkbox-table')
         this.checkboxElo = page.getByTestId('checkbox-elo')
         this.playerRanks = page.getByTestId('player-rank')
+        this.playerRows = page.getByTestId('player-row')
         this.playerElos = page.getByTestId('player-elo')
 
         this.steamIdValue = page.getByTestId('steam-id-value')
