@@ -21,7 +21,8 @@
     cursor: pointer;
 }
 
-.container:hover {
+/* hovering a player name opens their card, not the details */
+.container:hover:not(:has(.name:hover)) {
     background-color: color-mix(in srgb, var(--result-color) 25%, transparent);
 }
 
@@ -52,10 +53,6 @@
 
 /* mirror left team like the OBS overlay: faction icon on the right */
 .allies .player {
-    flex-direction: row-reverse;
-}
-
-.player {
     display: inline-flex;
     align-items: center;
     max-width: 100%;
@@ -70,10 +67,25 @@
     flex: none;
 }
 
-.player span {
+.name {
+    min-width: 0;
+    padding: 0;
+    border: none;
+    /* a border, because overflow: hidden clips a text underline for some fonts */
+    border-bottom: 0.08em solid transparent;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    cursor: pointer;
+}
+
+.name:hover,
+.name:focus-visible {
+    color: var(--text-primary);
+    border-bottom-color: currentColor;
 }
 
 .time {

@@ -1,12 +1,15 @@
-import { CSSProperties } from 'react'
+import { CSSProperties, MouseEvent } from 'react'
 
 import { getFactionCodeCoh2ById, getFactionCodeCoh3ById } from '../../constants/factionMappings'
+import { getExtraInfo } from '../../functions/api/getExtraInfo'
 import {
     getFactionFlagLocation,
     getFactionFlagLocationCoh3,
 } from '../../functions/utils/getFactionFlagLocation'
 import { getTimeAgo } from '../../functions/utils/time'
+import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { useSettingsStore } from '../../stores/settingsStore'
+import { useViewStore } from '../../stores/viewStore'
 import { MatchHistoryReportResult, MatchObject, NormalizedProfiles } from '../../types'
 import GameDetails from './GameDetails'
 
@@ -23,6 +26,8 @@ interface Props {
 export default function GameHistoryDiv(props: Props) {
     const { settings } = useSettingsStore()
     const lg = settings && settings.language ? settings.language : 'en'
+    const { setPlayerCard } = usePlayerCardStore()
+    const { setView } = useViewStore()
 
     if (!props.game.result) {
         console.log('if return null')
@@ -57,6 +62,21 @@ export default function GameHistoryDiv(props: Props) {
         .concat(players.filter((p) => p.teamid === result.teamid && !isMe(p)))
     const opponents = players.filter((p) => p.teamid !== result.teamid)
 
+    const openPlayerCard = async (e: MouseEvent, p: MatchHistoryReportResult, name: string) => {
+        // the row itself toggles the game details
+        e.stopPropagation()
+        const x = await getExtraInfo(props.coh3, [p.profile_id])
+        const ex = x?.result[p.profile_id]
+        if (ex) {
+            setPlayerCard(
+                { country: props.profiles[p.profile_id]?.country, name, profileId: p.profile_id },
+                ex,
+                props.coh3
+            )
+            setView('playerCard')
+        }
+    }
+
     const renderTeam = (team: MatchHistoryReportResult[], className = '') => (
         <div className={`${styles.team} ${className}`}>
             {team.map((p) => {
@@ -66,10 +86,17 @@ export default function GameHistoryDiv(props: Props) {
                     <span
                         key={p.profile_id}
                         className={isMe(p) ? `${styles.player} ${styles.me}` : styles.player}
-                        title={name}
                     >
                         <img src={flag} alt={code} />
-                        <span>{name}</span>
+                        <button
+                            type="button"
+                            data-testid="game-history-player"
+                            className={styles.name}
+                            title={name}
+                            onClick={(e) => openPlayerCard(e, p, name)}
+                        >
+                            {name}
+                        </button>
                     </span>
                 )
             })}
