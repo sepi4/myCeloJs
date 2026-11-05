@@ -52,6 +52,10 @@ div:last-of-type > .toggleable::before {
 }
 
 .factionFlag {
+    /* inline images sit on the text baseline, leaving a gap below;
+       the margin keeps the row as tall as that gap made it */
+    display: block;
+    margin: 0.125em 0;
     width: 2em;
     height: 2em;
 }
