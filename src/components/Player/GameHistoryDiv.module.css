@@ -27,7 +27,17 @@
 }
 
 .mode {
-    padding-left: 1em;
+    padding-left: 0.5em;
+}
+
+.caret {
+    margin-right: 0.2em;
+    color: var(--text-muted);
+}
+
+.container:hover .caret,
+.entryOpen .caret {
+    color: var(--text-primary);
 }
 
 .player.me {

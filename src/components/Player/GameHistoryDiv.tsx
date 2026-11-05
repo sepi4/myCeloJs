@@ -11,6 +11,8 @@ import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { useViewStore } from '../../stores/viewStore'
 import { MatchHistoryReportResult, MatchObject, NormalizedProfiles } from '../../types'
+import { faCaretDown, faCaretRight } from '../icons'
+import SvgIcon from '../SvgIcon'
 import GameDetails from './GameDetails'
 
 import styles from './GameHistoryDiv.module.css'
@@ -111,7 +113,13 @@ export default function GameHistoryDiv(props: Props) {
                 style={{ '--result-color': resultColor } as CSSProperties}
                 onClick={props.onToggle}
             >
-                <div className={styles.mode}>{matchType}</div>
+                <div className={styles.mode}>
+                    <SvgIcon
+                        className={styles.caret}
+                        icon={props.open ? faCaretDown : faCaretRight}
+                    />
+                    {matchType}
+                </div>
                 {renderTeam(allies, styles.allies)}
                 <div className={styles.vs}>vs</div>
                 {renderTeam(opponents)}
