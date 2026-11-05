@@ -13,15 +13,15 @@
     cursor: pointer;
 }
 
-/* fills the team box out to its edges: 100cqw is its content width,
+/* spans the team box up to its 2em side toggles: 100cqw is its content width,
    0.5em and 2.5em its padding (Team.module.css) */
 .toggleable::before {
     content: '';
     position: absolute;
     top: 0;
     bottom: 0;
-    left: calc((100% - 100cqw) / 2 - 2.5em);
-    right: calc((100% - 100cqw) / 2 - 2.5em);
+    left: calc((100% - 100cqw) / 2 - 0.5em);
+    right: calc((100% - 100cqw) / 2 - 0.5em);
     z-index: -1;
     pointer-events: none;
 }
@@ -38,7 +38,13 @@ div:last-of-type > .toggleable::before {
 
 /* hovering the name opens the player card, not the extra info */
 .toggleable:hover:not(:has(.name:hover))::before {
-    background-color: var(--bg-hover);
+    background-image: linear-gradient(
+        to right,
+        transparent,
+        var(--bg-hover) 5em,
+        var(--bg-hover) calc(100% - 5em),
+        transparent
+    );
 }
 
 .name {
