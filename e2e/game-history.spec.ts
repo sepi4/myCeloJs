@@ -77,6 +77,32 @@ test.describe('COH2 game history', () => {
         await expect(app.steamIdValue).not.toBeVisible()
         await expect(app.playersContainer).toBeVisible()
     })
+
+    test('open a player card from a name in the game row', async () => {
+        await app.userIcon.click()
+        await expect(app.steamIdValue).toHaveText(STEAM_ID)
+        const myName = (await app.playerCardName.textContent()) ?? ''
+        if (!(await app.gameHistory.isVisible())) {
+            await app.historyToggle.click()
+        }
+        await expect(app.gameHistoryItems.first()).toBeVisible()
+        await expect(app.gameDetails).not.toBeVisible()
+
+        const otherPlayer = app.gameHistoryPlayers.filter({ hasNotText: myName }).first()
+        const otherName = (await otherPlayer.textContent()) ?? ''
+        await otherPlayer.click()
+        await expect(app.steamIdValue).not.toHaveText(STEAM_ID)
+        await expect(app.playerCardName).toHaveText(otherName)
+
+        // Back restores my card as it was: the name click did not open the game details
+        await app.backButton.click()
+        await expect(app.steamIdValue).toHaveText(STEAM_ID)
+        await expect(app.gameHistoryItems.first()).toBeVisible()
+        await expect(app.gameDetails).not.toBeVisible()
+
+        await page.keyboard.press('Escape')
+        await expect(app.playersContainer).toBeVisible()
+    })
 })
 
 test.describe('COH3 game history', () => {

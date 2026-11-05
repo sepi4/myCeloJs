@@ -99,6 +99,7 @@ export class App {
     // Game history
     readonly gameHistory: Locator
     readonly gameHistoryItems: Locator
+    readonly gameHistoryPlayers: Locator
     readonly historyToggle: Locator
     readonly historyPeriodWeek: Locator
     readonly historyPeriodAll: Locator
@@ -193,6 +194,7 @@ export class App {
 
         this.gameHistory = page.getByTestId('game-history')
         this.gameHistoryItems = page.getByTestId('game-history-item')
+        this.gameHistoryPlayers = page.getByTestId('game-history-player')
         this.historyToggle = page.getByTestId('history-toggle')
         this.historyPeriodWeek = page.getByTestId('history-period-week')
         this.historyPeriodAll = page.getByTestId('history-period-all')
