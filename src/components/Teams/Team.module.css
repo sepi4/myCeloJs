@@ -6,6 +6,7 @@
     box-sizing: border-box;
     margin: 1em auto;
     position: relative;
+    container-type: inline-size;
 }
 
 .toggleAll {

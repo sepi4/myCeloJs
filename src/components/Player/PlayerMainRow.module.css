@@ -13,27 +13,31 @@
     cursor: pointer;
 }
 
-/* reaches into the team box padding (Team.module.css) so the hover fills the full height */
+/* fills the team box out to its edges: 100cqw is its content width,
+   0.5em and 2.5em its padding (Team.module.css) */
 .toggleable::before {
     content: '';
     position: absolute;
-    inset: -0.5em 0;
+    top: 0;
+    bottom: 0;
+    left: calc((100% - 100cqw) / 2 - 2.5em);
+    right: calc((100% - 100cqw) / 2 - 2.5em);
     z-index: -1;
     pointer-events: none;
-    background-image: linear-gradient(
-        to right,
-        transparent,
-        color-mix(in srgb, var(--text-primary) 7%, transparent) 30%,
-        color-mix(in srgb, var(--text-primary) 7%, transparent) 70%,
-        transparent
-    );
-    mask-image: linear-gradient(to bottom, transparent, black 35%, black 65%, transparent);
-    opacity: 0;
+}
+
+/* first and last rows also cover the team box padding above and below */
+div:first-of-type > .toggleable::before {
+    top: -0.5em;
+}
+
+div:last-of-type > .toggleable:last-child::before {
+    bottom: -0.5em;
 }
 
 /* hovering the name opens the player card, not the extra info */
 .toggleable:hover:not(:has(.name:hover))::before {
-    opacity: 1;
+    background-color: var(--bg-hover);
 }
 
 .name {
