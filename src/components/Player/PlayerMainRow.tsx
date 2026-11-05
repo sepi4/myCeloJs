@@ -51,7 +51,6 @@ function PlayerMainRow(props: Props) {
     const { settings } = useSettingsStore()
     const { player, handleSetShowExtra, extraInfo, showExtra } = props
     let country: string | undefined
-    let steamId: string | undefined
 
     if (extraInfo && player.profileId) {
         for (const rank of extraInfo.ranks) {
@@ -62,7 +61,6 @@ function PlayerMainRow(props: Props) {
             for (const member of rank.members) {
                 if (member.profile_id === player.profileId) {
                     country = member.country
-                    steamId = member.name.substring(7)
                     break
                 }
             }
@@ -143,7 +141,7 @@ function PlayerMainRow(props: Props) {
     const alias = (
         <span
             data-testid="player-name"
-            style={{ cursor: steamId ? 'pointer' : undefined }}
+            className={isRealPlayer ? styles.name : undefined}
             title={
                 extraInfo && player.profileId
                     ? getTotalGames(extraInfo.ranks) + ' ' + getText('games_played', settings)
