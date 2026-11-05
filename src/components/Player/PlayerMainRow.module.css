@@ -26,12 +26,13 @@
     pointer-events: none;
 }
 
-/* first and last rows also cover the team box padding above and below */
+/* first and last rows also cover the team box padding above and below;
+   an open last row covers the top 0.5em of the extra info's padding instead */
 div:first-of-type > .toggleable::before {
     top: -0.5em;
 }
 
-div:last-of-type > .toggleable:last-child::before {
+div:last-of-type > .toggleable::before {
     bottom: -0.5em;
 }
 

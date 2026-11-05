@@ -1,6 +1,7 @@
 .container {
     color: var(--text-primary);
-    padding: 0.5em 0;
+    /* the open row's hover covers the top 0.5em (PlayerMainRow.module.css) */
+    padding: 1em 0 0.5em;
 }
 
 .total {
