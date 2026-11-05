@@ -53,6 +53,10 @@
 
 /* mirror left team like the OBS overlay: faction icon on the right */
 .allies .player {
+    flex-direction: row-reverse;
+}
+
+.player {
     display: inline-flex;
     align-items: center;
     max-width: 100%;
