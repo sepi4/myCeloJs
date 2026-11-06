@@ -24,12 +24,23 @@ div:last-of-type > .toggleable {
 
 /* hovering the name opens the player card, not the extra info */
 .toggleable:hover:not(:has(.name:hover)) {
-    background: linear-gradient(
+    --fade-sides: linear-gradient(
         to right,
         transparent,
-        var(--bg-hover) 5em calc(100% - 5em),
+        var(--bg-hover) 5em,
+        var(--bg-hover) calc(100% - 5em),
         transparent
     );
+    /* one gradient fades only one way, so this layer goes on top
+       and blends the top and bottom edges into the team background */
+    --fade-top-bottom: linear-gradient(
+        to bottom,
+        var(--bg-primary),
+        transparent 30%,
+        transparent 70%,
+        var(--bg-primary)
+    );
+    background: var(--fade-top-bottom), var(--fade-sides);
 }
 
 .name {
