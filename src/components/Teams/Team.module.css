@@ -17,6 +17,11 @@
     border-left: 0.25em solid rgba(220, 60, 60, 0.8);
 }
 
+.noToggleAll {
+    /* rows reach into the empty button space, so their hover covers it */
+    --row-gutter: 2em;
+}
+
 .toggleAll {
     position: absolute;
     top: 0;
