@@ -156,27 +156,33 @@ function PlayerMainRow(props: Props) {
     return (
         <div
             data-testid="player-row"
-            className={isRealPlayer ? `${styles.container} ${styles.toggleable}` : styles.container}
+            className={isRealPlayer ? styles.toggleable : undefined}
             onClick={isRealPlayer ? handleSetShowExtra : undefined}
         >
-            <MainRowSpan width="14%" justifyContent="flex-start">
-                <>
-                    {dropDownArrow}{' '}
-                    <span data-testid="player-rank" title={rankTitle} style={{ fontWeight: 600 }}>
-                        {rank}
-                    </span>
-                </>
-            </MainRowSpan>
-            {coh3 && elo && (
-                <MainRowSpan width="14%">
-                    <span data-testid="player-elo" style={{ fontWeight: 300 }}>
-                        {player.rating ? `(${player.rating})` : '-'}
-                    </span>
+            <div className={styles.content}>
+                <MainRowSpan width="14%" justifyContent="flex-start">
+                    <>
+                        {dropDownArrow}{' '}
+                        <span
+                            data-testid="player-rank"
+                            title={rankTitle}
+                            style={{ fontWeight: 600 }}
+                        >
+                            {rank}
+                        </span>
+                    </>
                 </MainRowSpan>
-            )}
-            <MainRowSpan width="14%">{faction}</MainRowSpan>
-            <MainRowSpan width="14%">{countryFlag}</MainRowSpan>
-            <MainRowSpan width={coh3 && elo ? '44%' : '58%'}>{alias}</MainRowSpan>
+                {coh3 && elo && (
+                    <MainRowSpan width="14%">
+                        <span data-testid="player-elo" style={{ fontWeight: 300 }}>
+                            {player.rating ? `(${player.rating})` : '-'}
+                        </span>
+                    </MainRowSpan>
+                )}
+                <MainRowSpan width="14%">{faction}</MainRowSpan>
+                <MainRowSpan width="14%">{countryFlag}</MainRowSpan>
+                <MainRowSpan width={coh3 && elo ? '44%' : '58%'}>{alias}</MainRowSpan>
+            </div>
         </div>
     )
 }
