@@ -31,21 +31,25 @@ function Team(props: Props) {
     }
 
     const teamClass = props.teamIndex === 0 ? css.teamA : css.teamB
+    const showToggleAll = toggleableIds.length > 1
     const toggleTitle = anyOpen
         ? getText('collapse_all_team', settings)
         : getText('expand_all_team', settings)
 
     return (
         <div data-testid="team-container" className={`${css.container} ${teamClass}`}>
-            <button
-                data-testid="team-toggle"
-                onClick={handleToggleAll}
-                className={css.toggleAll}
-                title={toggleTitle}
-                aria-expanded={anyOpen}
-            >
-                <SvgIcon icon={anyOpen ? faAngleDoubleDown : faAngleDoubleRight} size="sm" />
-            </button>
+            {/* with one row the button would only repeat that row's own toggle */}
+            {showToggleAll && (
+                <button
+                    data-testid="team-toggle"
+                    onClick={handleToggleAll}
+                    className={css.toggleAll}
+                    title={toggleTitle}
+                    aria-expanded={anyOpen}
+                >
+                    <SvgIcon icon={anyOpen ? faAngleDoubleDown : faAngleDoubleRight} size="sm" />
+                </button>
+            )}
             {props.players.map((p, i) => (
                 <Player
                     key={p.profileId && p.profileId > 0 ? p.profileId : `${props.teamIndex}-${i}`}
