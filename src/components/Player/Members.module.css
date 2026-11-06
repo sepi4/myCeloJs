@@ -4,6 +4,15 @@
     color: var(--text-muted);
 }
 
+.name {
+    /* a border, because a text underline can be clipped for some fonts */
+    border-bottom: 0.08em solid transparent;
+}
+
+.membersDiv:hover .name {
+    border-bottom-color: currentColor;
+}
+
 .flagImage {
     width: 1em;
     margin-right: 1em;
