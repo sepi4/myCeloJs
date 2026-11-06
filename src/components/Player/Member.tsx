@@ -49,7 +49,7 @@ export default function Member(props: Props) {
                 alt={`${props.member.country}`}
             />
 
-            {props.member.alias}
+            <span className={styles.name}>{props.member.alias}</span>
         </div>
     )
 }
