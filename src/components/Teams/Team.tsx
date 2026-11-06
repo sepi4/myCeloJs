@@ -37,7 +37,10 @@ function Team(props: Props) {
         : getText('expand_all_team', settings)
 
     return (
-        <div data-testid="team-container" className={`${css.container} ${teamClass}`}>
+        <div
+            data-testid="team-container"
+            className={`${css.container} ${teamClass} ${showToggleAll ? '' : css.noToggleAll}`}
+        >
             {/* with one row the button would only repeat that row's own toggle */}
             {showToggleAll && (
                 <button

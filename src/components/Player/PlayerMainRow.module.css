@@ -9,6 +9,9 @@
 
 .toggleable {
     cursor: pointer;
+    /* set by the team box */
+    margin-left: calc(-1 * var(--row-gutter, 0em));
+    padding-left: var(--row-gutter, 0em);
 }
 
 div:first-of-type > .toggleable {
