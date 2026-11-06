@@ -160,7 +160,7 @@ function PlayerMainRow(props: Props) {
             onClick={isRealPlayer ? handleSetShowExtra : undefined}
         >
             <div className={styles.content}>
-                <MainRowSpan width="14%" justifyContent="flex-start">
+                <MainRowSpan width="18%" justifyContent="flex-start">
                     <>
                         {dropDownArrow}{' '}
                         <span
@@ -181,7 +181,7 @@ function PlayerMainRow(props: Props) {
                 )}
                 <MainRowSpan width="14%">{faction}</MainRowSpan>
                 <MainRowSpan width="14%">{countryFlag}</MainRowSpan>
-                <MainRowSpan width={coh3 && elo ? '44%' : '58%'}>{alias}</MainRowSpan>
+                <MainRowSpan width={coh3 && elo ? '40%' : '54%'}>{alias}</MainRowSpan>
             </div>
         </div>
     )
