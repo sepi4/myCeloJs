@@ -9,16 +9,26 @@
     container-type: inline-size;
 }
 
+.teamA {
+    border-left: 0.25em solid rgba(52, 120, 220, 0.8);
+}
+
+.teamB {
+    border-left: 0.25em solid rgba(220, 60, 60, 0.8);
+}
+
 .toggleAll {
     position: absolute;
     top: 0;
     bottom: 0;
+    left: 0;
     width: 2em;
     border: none;
     padding: 0;
     font: inherit;
     cursor: pointer;
     color: var(--text-muted);
+    background-color: transparent;
     z-index: 1;
     display: flex;
     align-items: center;
@@ -28,34 +38,11 @@
         color 0.15s ease;
 }
 
-.toggleLeft {
-    left: 0;
-}
-
-.toggleRight {
-    right: 0;
-}
-
 .toggleAll svg {
     font-size: 1.15em;
 }
 
-.teamA {
-    background-color: rgba(52, 120, 220, 0.15);
-}
-
-.teamB {
-    background-color: rgba(220, 60, 60, 0.15);
-}
-
 .toggleAll:hover {
     color: var(--text-primary);
-}
-
-.teamA:hover {
-    background-color: rgba(52, 120, 220, 0.3);
-}
-
-.teamB:hover {
-    background-color: rgba(220, 60, 60, 0.3);
+    background-color: var(--bg-hover);
 }

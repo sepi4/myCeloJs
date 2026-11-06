@@ -36,23 +36,16 @@ function Team(props: Props) {
         : getText('expand_all_team', settings)
 
     return (
-        <div data-testid="team-container" className={css.container}>
+        <div data-testid="team-container" className={`${css.container} ${teamClass}`}>
             <button
                 data-testid="team-toggle"
                 onClick={handleToggleAll}
-                className={`${css.toggleAll} ${css.toggleLeft} ${teamClass}`}
+                className={css.toggleAll}
                 title={toggleTitle}
                 aria-expanded={anyOpen}
             >
                 <SvgIcon icon={anyOpen ? faAngleDoubleDown : faAngleDoubleRight} size="sm" />
             </button>
-            <button
-                data-testid="team-toggle-right"
-                onClick={handleToggleAll}
-                className={`${css.toggleAll} ${css.toggleRight} ${teamClass}`}
-                title={toggleTitle}
-                aria-expanded={anyOpen}
-            />
             {props.players.map((p, i) => (
                 <Player
                     key={p.profileId && p.profileId > 0 ? p.profileId : `${props.teamIndex}-${i}`}
