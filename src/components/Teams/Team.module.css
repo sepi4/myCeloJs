@@ -19,13 +19,12 @@
     font: inherit;
     cursor: pointer;
     color: var(--text-muted);
-    background-color: transparent;
     z-index: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     transition:
-        background-image 0.15s ease,
+        background-color 0.15s ease,
         color 0.15s ease;
 }
 
@@ -41,38 +40,22 @@
     font-size: 1.15em;
 }
 
-.toggleLeft.teamA {
-    background-image: linear-gradient(to right, rgba(52, 120, 220, 0.3), rgba(52, 120, 220, 0));
+.teamA {
+    background-color: rgba(52, 120, 220, 0.15);
 }
 
-.toggleLeft.teamB {
-    background-image: linear-gradient(to right, rgba(220, 60, 60, 0.3), rgba(220, 60, 60, 0));
-}
-
-.toggleRight.teamA {
-    background-image: linear-gradient(to left, rgba(52, 120, 220, 0.3), rgba(52, 120, 220, 0));
-}
-
-.toggleRight.teamB {
-    background-image: linear-gradient(to left, rgba(220, 60, 60, 0.3), rgba(220, 60, 60, 0));
+.teamB {
+    background-color: rgba(220, 60, 60, 0.15);
 }
 
 .toggleAll:hover {
     color: var(--text-primary);
 }
 
-.toggleLeft.teamA:hover {
-    background-image: linear-gradient(to right, rgba(52, 120, 220, 0.5), rgba(52, 120, 220, 0));
+.teamA:hover {
+    background-color: rgba(52, 120, 220, 0.3);
 }
 
-.toggleLeft.teamB:hover {
-    background-image: linear-gradient(to right, rgba(220, 60, 60, 0.5), rgba(220, 60, 60, 0));
-}
-
-.toggleRight.teamA:hover {
-    background-image: linear-gradient(to left, rgba(52, 120, 220, 0.5), rgba(52, 120, 220, 0));
-}
-
-.toggleRight.teamB:hover {
-    background-image: linear-gradient(to left, rgba(220, 60, 60, 0.5), rgba(220, 60, 60, 0));
+.teamB:hover {
+    background-color: rgba(220, 60, 60, 0.3);
 }
