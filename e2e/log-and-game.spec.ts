@@ -123,6 +123,8 @@ test('check log button loads players from a different log file', async () => {
     await expect(app.teamContainers).toHaveCount(2)
     await expect(app.page.getByText('TestPlayerA')).toBeVisible()
     await expect(app.page.getByText('Polmuadiv')).not.toBeVisible()
+    // one player per team, so no team button
+    await expect(app.teamToggles).toHaveCount(0)
 
     // Switch back to original log file and use "check log" button
     await app.settingsIcon.click()
@@ -134,4 +136,5 @@ test('check log button loads players from a different log file', async () => {
     await app.checkLogButton.click()
     await expect(app.page.getByText('Polmuadiv')).toBeVisible()
     await expect(app.page.getByText('TestPlayerA')).not.toBeVisible()
+    await expect(app.teamToggles).toHaveCount(2)
 })
