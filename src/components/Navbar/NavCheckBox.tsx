@@ -16,7 +16,6 @@ export default function NavCheckbox(props: Props) {
     return (
         <span className={moduleStyle.span} title={props.title}>
             <input
-                className={moduleStyle.input}
                 onChange={props.handler}
                 defaultChecked={props.checked}
                 id={id}

@@ -6,7 +6,3 @@ span .label {
     cursor: pointer;
     margin-left: 0.4em;
 }
-span .input {
-    cursor: pointer;
-    accent-color: var(--accent-input);
-}
