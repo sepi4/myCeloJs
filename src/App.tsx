@@ -117,7 +117,8 @@ function App() {
 
             async function fetchExtraInfo() {
                 const x = await getExtraInfo(coh3, ids)
-                if (!x) {
+                // The log may have been re-read while the request was in flight
+                if (!x || usePlayersStore.getState().players !== currentPlayers) {
                     return
                 }
 
