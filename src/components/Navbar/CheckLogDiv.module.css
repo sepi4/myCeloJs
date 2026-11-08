@@ -29,3 +29,8 @@
     gap: 0.6em;
     align-items: center;
 }
+
+.checkboxes {
+    display: contents;
+    font-size: 90%;
+}

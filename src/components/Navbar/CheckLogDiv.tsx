@@ -27,23 +27,25 @@ function CheckLogDiv() {
 
     return (
         <div className={isTop ? styles.containerTop : styles.container}>
-            <NavCheckbox
-                text={getText('auto', settings)}
-                checked={autoLogChecking}
-                handler={toggleAutoLogChecking}
-                testId="auto-label"
-                title={getText('tooltip_auto', settings)}
-            />
-
-            {autoLogChecking ? (
+            <div className={styles.checkboxes}>
                 <NavCheckbox
-                    text={getText('alert', settings)}
-                    checked={alert}
-                    handler={toggleAlert}
-                    testId="alert-label"
-                    title={getText('tooltip_alert', settings)}
+                    text={getText('auto', settings)}
+                    checked={autoLogChecking}
+                    handler={toggleAutoLogChecking}
+                    testId="auto-label"
+                    title={getText('tooltip_auto', settings)}
                 />
-            ) : null}
+
+                {autoLogChecking ? (
+                    <NavCheckbox
+                        text={getText('alert', settings)}
+                        checked={alert}
+                        handler={toggleAlert}
+                        testId="alert-label"
+                        title={getText('tooltip_alert', settings)}
+                    />
+                ) : null}
+            </div>
 
             <button
                 data-testid="check-log-button"
