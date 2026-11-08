@@ -6,11 +6,11 @@ import { useSettingsStore } from '../../stores/settingsStore'
 import { useSettingsViewStore } from '../../stores/settingsViewStore'
 import { useViewStore } from '../../stores/viewStore'
 import { Rank } from '../../types'
+import Choice from '../Choice'
 import { faCogs, faSearch, faUserAlt } from '../icons'
 import CheckLogDiv from './CheckLogDiv'
 import NavBarIcon from './NavbarIcon'
 import NavbarRow from './NavbarRow'
-import NavCheckbox from './NavCheckBox'
 
 import styles from './Navbar.module.css'
 
@@ -33,24 +33,26 @@ export default function Navbar(props: Props) {
 
     const getNavCheckBox = (text: 'all' | 'total' | 'table') => {
         return (
-            <NavCheckbox
+            <Choice
                 key={text}
+                type="checkbox"
                 testId={`checkbox-${text}`}
-                text={getText(text, settings)}
+                label={getText(text, settings)}
                 checked={navButtons[text]}
-                handler={() => toggleNavButton(text)}
+                onChange={() => toggleNavButton(text)}
                 title={getText(`tooltip_${text}`, settings)}
             />
         )
     }
 
     const eloCheckBox = navButtons.coh3 ? (
-        <NavCheckbox
+        <Choice
             key="elo"
+            type="checkbox"
             testId="checkbox-elo"
-            text={getText('elo', settings)}
+            label={getText('elo', settings)}
             checked={navButtons.elo}
-            handler={() => toggleNavButton('elo')}
+            onChange={() => toggleNavButton('elo')}
             title={getText('tooltip_elo', settings)}
         />
     ) : null
@@ -156,42 +158,24 @@ export default function Navbar(props: Props) {
 
                 <div className={isTop ? styles.columnTop : styles.column}>
                     <NavbarRow isTop={isTop}>
-                        <div
-                            className={styles.radio}
-                            title={
-                                !settings?.logLocationCoh2
-                                    ? getText('log_not_set', settings)
-                                    : 'coh2'
-                            }
-                        >
-                            <input
-                                data-testid="radio-coh2"
-                                id="coh2"
-                                type="radio"
-                                onChange={() => toggleNavButton('coh3')}
-                                checked={!navButtons['coh3']}
-                                disabled={!settings?.logLocationCoh2}
-                            />{' '}
-                            <label htmlFor="coh2">coh2</label>
-                        </div>
-                        <div
-                            className={styles.radio}
-                            title={
-                                !settings?.logLocationCoh3
-                                    ? getText('log_not_set', settings)
-                                    : 'coh3'
-                            }
-                        >
-                            <input
-                                data-testid="radio-coh3"
-                                id="coh3"
-                                type="radio"
-                                onChange={() => toggleNavButton('coh3')}
-                                checked={navButtons['coh3']}
-                                disabled={!settings?.logLocationCoh3}
-                            />{' '}
-                            <label htmlFor="coh3">coh3</label>
-                        </div>
+                        {(['coh2', 'coh3'] as const).map((game) => {
+                            const logLocation =
+                                game === 'coh3'
+                                    ? settings?.logLocationCoh3
+                                    : settings?.logLocationCoh2
+                            return (
+                                <Choice
+                                    key={game}
+                                    type="radio"
+                                    testId={`radio-${game}`}
+                                    label={game}
+                                    checked={navButtons.coh3 === (game === 'coh3')}
+                                    onChange={() => toggleNavButton('coh3')}
+                                    disabled={!logLocation}
+                                    title={logLocation ? game : getText('log_not_set', settings)}
+                                />
+                            )
+                        })}
                     </NavbarRow>
                 </div>
 

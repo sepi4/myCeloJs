@@ -57,6 +57,7 @@
 
 .columnTop {
     display: flex;
+    font-size: var(--text-xs);
     flex-direction: column;
     justify-content: center;
     align-self: stretch;
@@ -86,6 +87,7 @@
 
 .column {
     display: flex;
+    font-size: var(--text-xs);
     flex-direction: column;
     padding: 0 0.4em;
     gap: 0.2em;
@@ -103,15 +105,4 @@
     height: 1px;
     background-color: var(--border-separator);
     margin: 0 -0.5em;
-}
-
-.radio {
-    display: flex;
-    align-items: center;
-    font-size: var(--text-xs);
-}
-
-.radio label {
-    margin-left: 0.4em;
-    cursor: pointer;
 }

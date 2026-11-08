@@ -27,8 +27,8 @@ export class App {
     readonly userIcon: Locator
     readonly searchIcon: Locator
     readonly closeButton: Locator
-    readonly autoLabel: Locator
-    readonly alertLabel: Locator
+    readonly autoCheckbox: Locator
+    readonly alertCheckbox: Locator
     readonly checkLogButton: Locator
     readonly intervalInput: Locator
     readonly radioCoh2: Locator
@@ -131,8 +131,8 @@ export class App {
         this.searchIcon = page.getByTestId('search-icon')
         // hidden views behind the player card have their own close button
         this.closeButton = page.getByTestId('close-button').filter({ visible: true })
-        this.autoLabel = page.getByTestId('auto-label')
-        this.alertLabel = page.getByTestId('alert-label')
+        this.autoCheckbox = page.getByTestId('checkbox-auto')
+        this.alertCheckbox = page.getByTestId('checkbox-alert')
         this.checkLogButton = page.getByTestId('check-log-button')
         this.intervalInput = page.getByTestId('interval-input')
         this.radioCoh2 = page.getByTestId('radio-coh2')

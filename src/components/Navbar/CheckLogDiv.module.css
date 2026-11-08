@@ -9,6 +9,7 @@
     cursor: pointer;
     padding: 0.2em 0;
     font: inherit;
+    font-size: var(--text-sm);
 }
 .btn:active {
     background-color: var(--modal-border);

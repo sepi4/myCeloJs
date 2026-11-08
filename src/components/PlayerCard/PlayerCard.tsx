@@ -13,6 +13,7 @@ import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { Player } from '../../types'
+import Choice from '../Choice'
 import PlayerExtraInfo from '../Player/PlayerExtraInfo'
 
 import styles from './PlayerCard.module.css'
@@ -202,28 +203,26 @@ export default function PlayerCard() {
 
     const gameRadio = (
         <div className={styles.gameRadio}>
-            <label className={styles.radioOption} title={coh2Title}>
-                <input
-                    data-testid="player-card-radio-coh2"
-                    type="radio"
-                    name="player-card-game"
-                    checked={!selectedCoh3}
-                    disabled={coh2Disabled}
-                    onChange={() => setSelectedCoh3(false)}
-                />
-                coh2
-            </label>
-            <label className={styles.radioOption} title={coh3Title}>
-                <input
-                    data-testid="player-card-radio-coh3"
-                    type="radio"
-                    name="player-card-game"
-                    checked={selectedCoh3}
-                    disabled={coh3Disabled}
-                    onChange={() => setSelectedCoh3(true)}
-                />
-                coh3
-            </label>
+            <Choice
+                type="radio"
+                testId="player-card-radio-coh2"
+                name="player-card-game"
+                label="coh2"
+                checked={!selectedCoh3}
+                disabled={coh2Disabled}
+                onChange={() => setSelectedCoh3(false)}
+                title={coh2Title}
+            />
+            <Choice
+                type="radio"
+                testId="player-card-radio-coh3"
+                name="player-card-game"
+                label="coh3"
+                checked={selectedCoh3}
+                disabled={coh3Disabled}
+                onChange={() => setSelectedCoh3(true)}
+                title={coh3Title}
+            />
         </div>
     )
 

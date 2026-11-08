@@ -1,11 +1,9 @@
-import { ChangeEvent } from 'react'
-
 import writeSettings from '../../functions/settings/writeSettings'
 import getText from '../../functions/utils/getText'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { SettingsType } from '../../types'
+import Choice from '../Choice'
 import CopyDiv from './CopyDiv'
-import RadioButton from './RadioButton'
 import RadioButtonsDiv from './RadioButtonsDiv'
 import SettingsDiv from './SettingsDiv'
 import SettingsLocation from './SettingsLocation'
@@ -13,8 +11,7 @@ import SettingsLocation from './SettingsLocation'
 export default function SettingsAfterLog() {
     const { settings } = useSettingsStore()
 
-    const handleType = (e: ChangeEvent<HTMLInputElement>) => {
-        const format = e.target.value as 'html' | 'txt'
+    const handleType = (format: 'html' | 'txt') => {
         const newSettings = {
             ...settings,
             rankingsHtml: format === 'html',
@@ -24,11 +21,10 @@ export default function SettingsAfterLog() {
         window.electronAPI.rankings.setFormat(format)
     }
 
-    const handleOrientation = (e: ChangeEvent<HTMLInputElement>) => {
-        const newOriantation = e.target.value
+    const handleOrientation = (horizontal: boolean) => {
         const newSettings = {
             ...settings,
-            rankingsHorizontal: newOriantation === 'horizontal',
+            rankingsHorizontal: horizontal,
         } as SettingsType
         writeSettings(newSettings)
     }
@@ -47,41 +43,35 @@ export default function SettingsAfterLog() {
             <>
                 <SettingsDiv title={getText('rankings_file_title', settings)}>
                     <RadioButtonsDiv title={getText('format', settings)}>
-                        <RadioButton
-                            checked={settings.rankingsHtml !== undefined && settings.rankingsHtml}
-                            handler={handleType}
-                            value={'html'}
-                            labelText={'html'}
+                        <Choice
+                            type="radio"
                             testId="radio-html"
+                            label="html"
+                            checked={settings.rankingsHtml === true}
+                            onChange={() => handleType('html')}
                         />
-                        <RadioButton
-                            checked={settings.rankingsHtml !== undefined && !settings.rankingsHtml}
-                            handler={handleType}
-                            value={'txt'}
-                            labelText={'txt'}
+                        <Choice
+                            type="radio"
                             testId="radio-txt"
+                            label="txt"
+                            checked={settings.rankingsHtml === false}
+                            onChange={() => handleType('txt')}
                         />
                     </RadioButtonsDiv>
 
                     <RadioButtonsDiv title={getText('orientation', settings)}>
-                        <RadioButton
-                            checked={
-                                settings.rankingsHorizontal !== undefined &&
-                                settings.rankingsHorizontal
-                            }
-                            handler={handleOrientation}
-                            value={'horizontal'}
-                            labelText={getText('horizontal', settings)}
+                        <Choice
+                            type="radio"
                             testId="radio-horizontal"
+                            label={getText('horizontal', settings)}
+                            checked={settings.rankingsHorizontal === true}
+                            onChange={() => handleOrientation(true)}
                         />
-                        <RadioButton
-                            checked={
-                                settings.rankingsHorizontal !== undefined &&
-                                !settings.rankingsHorizontal
-                            }
-                            handler={handleOrientation}
-                            value={'vertical'}
-                            labelText={getText('vertical', settings)}
+                        <Choice
+                            type="radio"
+                            label={getText('vertical', settings)}
+                            checked={settings.rankingsHorizontal === false}
+                            onChange={() => handleOrientation(false)}
                         />
                     </RadioButtonsDiv>
 

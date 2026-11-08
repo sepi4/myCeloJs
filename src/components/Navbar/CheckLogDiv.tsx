@@ -5,7 +5,7 @@ import { useAlertStore } from '../../stores/alertStore'
 import { useAutoLogCheckingStore } from '../../stores/autoLogCheckingStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useSettingsStore } from '../../stores/settingsStore'
-import NavCheckbox from './NavCheckBox'
+import Choice from '../Choice'
 
 import styles from './CheckLogDiv.module.css'
 
@@ -27,20 +27,22 @@ function CheckLogDiv() {
 
     return (
         <div className={isTop ? styles.containerTop : styles.container}>
-            <NavCheckbox
-                text={getText('auto', settings)}
+            <Choice
+                type="checkbox"
+                label={getText('auto', settings)}
                 checked={autoLogChecking}
-                handler={toggleAutoLogChecking}
-                testId="auto-label"
+                onChange={toggleAutoLogChecking}
+                testId="checkbox-auto"
                 title={getText('tooltip_auto', settings)}
             />
 
             {autoLogChecking ? (
-                <NavCheckbox
-                    text={getText('alert', settings)}
+                <Choice
+                    type="checkbox"
+                    label={getText('alert', settings)}
                     checked={alert}
-                    handler={toggleAlert}
-                    testId="alert-label"
+                    onChange={toggleAlert}
+                    testId="checkbox-alert"
                     title={getText('tooltip_alert', settings)}
                 />
             ) : null}

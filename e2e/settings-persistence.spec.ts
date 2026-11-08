@@ -63,7 +63,7 @@ test('set all settings to non-default values', async () => {
     await expect(app.playersContainer).toBeVisible()
 
     // Alert: off → on
-    await app.alertLabel.click()
+    await app.alertCheckbox.click()
 
     // Navbar checkboxes: all off → on
     await app.checkboxAll.click()
@@ -96,16 +96,12 @@ test('settings persist after restart', async () => {
     expect(navBox!.x).toBeGreaterThan(mainBox!.x)
 
     // Alert checkbox should be checked
-    const alertCheckbox = app.alertLabel.locator('..').locator('input')
-    await expect(alertCheckbox).toBeChecked()
+    await expect(app.alertCheckbox).toBeChecked()
 
     // Navbar checkboxes should all be checked
-    const allCheckbox = app.checkboxAll.locator('..').locator('input')
-    const totalCheckbox = app.checkboxTotal.locator('..').locator('input')
-    const tableCheckbox = app.checkboxTable.locator('..').locator('input')
-    await expect(allCheckbox).toBeChecked()
-    await expect(totalCheckbox).toBeChecked()
-    await expect(tableCheckbox).toBeChecked()
+    await expect(app.checkboxAll).toBeChecked()
+    await expect(app.checkboxTotal).toBeChecked()
+    await expect(app.checkboxTable).toBeChecked()
 
     // Both COH2 and COH3 radios should be enabled (both logs set)
     await expect(app.radioCoh2).toBeEnabled()

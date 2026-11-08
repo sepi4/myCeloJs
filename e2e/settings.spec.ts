@@ -41,7 +41,7 @@ test('switch language to Russian and back to English', async () => {
 
     // Close settings and verify Russian text on main view
     await app.closeButton.click()
-    await expect(app.autoLabel).toHaveText('авто')
+    await expect(app.autoCheckbox.locator('..')).toHaveText('авто')
 
     // Open settings again and switch back to English
     await app.settingsIcon.click()

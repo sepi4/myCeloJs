@@ -1,0 +1,11 @@
+.choice {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    cursor: pointer;
+}
+
+.choice:has(input:disabled) {
+    cursor: default;
+    opacity: 0.5;
+}

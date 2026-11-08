@@ -1,9 +1,0 @@
-.span {
-    display: flex;
-    align-items: center;
-    font-size: var(--text-xs);
-}
-span .label {
-    cursor: pointer;
-    margin-left: 0.4em;
-}

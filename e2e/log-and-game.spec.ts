@@ -95,19 +95,19 @@ test('remove COH3 log disables its radio and keeps COH2 active', async () => {
 
 test('auto checkbox toggles alert visibility', async () => {
     // Auto is enabled by default — alert should be visible
-    await expect(app.autoLabel).toBeVisible()
-    await expect(app.alertLabel).toBeVisible()
+    await expect(app.autoCheckbox).toBeVisible()
+    await expect(app.alertCheckbox).toBeVisible()
 
     // Disable auto — alert should disappear
-    await app.autoLabel.click()
-    await expect(app.alertLabel).not.toBeVisible()
+    await app.autoCheckbox.click()
+    await expect(app.alertCheckbox).not.toBeVisible()
 
     // Check log button should still be visible
     await expect(app.checkLogButton).toBeVisible()
 
     // Re-enable auto — alert should reappear
-    await app.autoLabel.click()
-    await expect(app.alertLabel).toBeVisible()
+    await app.autoCheckbox.click()
+    await expect(app.alertCheckbox).toBeVisible()
 })
 
 test('check log button loads players from a different log file', async () => {

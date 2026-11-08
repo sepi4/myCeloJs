@@ -115,8 +115,12 @@
     cursor: default;
 }
 
-.radio {
-    margin-right: 0.4em;
+.positionOption {
+    justify-content: center;
+}
+
+.fullRow {
+    grid-column: 1 / -1;
 }
 
 .dangerText {

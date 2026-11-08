@@ -8,6 +8,7 @@ import useTimedBoolean from '../../hooks/useTimedBoolean'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { useSettingsViewStore } from '../../stores/settingsViewStore'
 import { FontSize, Language, NavbarPosition, SettingsType, Theme } from '../../types'
+import Choice from '../Choice'
 import Icon from '../Icon'
 import { faTimes } from '../icons'
 import Modal from '../Modal/Modal'
@@ -198,25 +199,16 @@ function Settings(props: Props) {
                             }}
                         >
                             {(['en', 'ru'] as const).map((lang) => (
-                                <label
+                                <Choice
                                     key={lang}
-                                    style={{
-                                        cursor: 'pointer',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                    }}
-                                >
-                                    <input
-                                        data-testid={`language-select-${lang}`}
-                                        type="radio"
-                                        name="language"
-                                        value={lang}
-                                        checked={lg === lang}
-                                        onChange={() => handleLanguage(lang)}
-                                        className={styles.radio}
-                                    />
-                                    {lang.toUpperCase()}
-                                </label>
+                                    type="radio"
+                                    testId={`language-select-${lang}`}
+                                    name="language"
+                                    value={lang}
+                                    label={lang.toUpperCase()}
+                                    checked={lg === lang}
+                                    onChange={() => handleLanguage(lang)}
+                                />
                             ))}
                         </div>
                     </div>
@@ -234,27 +226,21 @@ function Settings(props: Props) {
                             }}
                         >
                             {(['top', 'left', 'right'] as const).map((pos) => (
-                                <label
+                                <Choice
                                     key={pos}
-                                    style={{
-                                        cursor: 'pointer',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                        justifyContent: 'center',
-                                        ...(pos === 'top' ? { gridColumn: '1 / -1' } : {}),
-                                    }}
-                                >
-                                    <input
-                                        data-testid={`navbar-position-${pos}`}
-                                        type="radio"
-                                        name="navbarPosition"
-                                        value={pos}
-                                        checked={navbarPosition === pos}
-                                        onChange={() => handleNavbarPosition(pos)}
-                                        className={styles.radio}
-                                    />
-                                    {getText(`navbar_${pos}`, settings)}
-                                </label>
+                                    type="radio"
+                                    testId={`navbar-position-${pos}`}
+                                    name="navbarPosition"
+                                    value={pos}
+                                    label={getText(`navbar_${pos}`, settings)}
+                                    checked={navbarPosition === pos}
+                                    onChange={() => handleNavbarPosition(pos)}
+                                    className={
+                                        pos === 'top'
+                                            ? `${styles.positionOption} ${styles.fullRow}`
+                                            : styles.positionOption
+                                    }
+                                />
                             ))}
                         </div>
                     </div>
@@ -269,25 +255,16 @@ function Settings(props: Props) {
                             }}
                         >
                             {(['small', 'medium', 'large'] as const).map((size) => (
-                                <label
+                                <Choice
                                     key={size}
-                                    style={{
-                                        cursor: 'pointer',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                    }}
-                                >
-                                    <input
-                                        data-testid={`font-size-${size}`}
-                                        type="radio"
-                                        name="fontSize"
-                                        value={size}
-                                        checked={fontSize === size}
-                                        onChange={() => handleFontSize(size)}
-                                        className={styles.radio}
-                                    />
-                                    {getText(`font_${size}`, settings)}
-                                </label>
+                                    type="radio"
+                                    testId={`font-size-${size}`}
+                                    name="fontSize"
+                                    value={size}
+                                    label={getText(`font_${size}`, settings)}
+                                    checked={fontSize === size}
+                                    onChange={() => handleFontSize(size)}
+                                />
                             ))}
                         </div>
                     </div>
@@ -302,25 +279,16 @@ function Settings(props: Props) {
                             }}
                         >
                             {(['dark', 'light'] as const).map((t) => (
-                                <label
+                                <Choice
                                     key={t}
-                                    style={{
-                                        cursor: 'pointer',
-                                        display: 'flex',
-                                        alignItems: 'center',
-                                    }}
-                                >
-                                    <input
-                                        data-testid={`theme-${t}`}
-                                        type="radio"
-                                        name="theme"
-                                        value={t}
-                                        checked={theme === t}
-                                        onChange={() => handleTheme(t)}
-                                        className={styles.radio}
-                                    />
-                                    {getText(`theme_${t}`, settings)}
-                                </label>
+                                    type="radio"
+                                    testId={`theme-${t}`}
+                                    name="theme"
+                                    value={t}
+                                    label={getText(`theme_${t}`, settings)}
+                                    checked={theme === t}
+                                    onChange={() => handleTheme(t)}
+                                />
                             ))}
                         </div>
                     </div>
