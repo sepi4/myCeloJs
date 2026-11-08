@@ -15,7 +15,7 @@
     z-index: 100;
     cursor: default;
     overflow: hidden;
-    font-size: 90%;
+    font-size: var(--text-sm);
 }
 
 .navbarLeft {
@@ -84,15 +84,6 @@
     padding: 1em 0.5em 0.6em;
 }
 
-.row {
-    display: flex;
-    font-size: 90%;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4em;
-    margin: 0;
-}
-
 .column {
     display: flex;
     flex-direction: column;
@@ -117,6 +108,7 @@
 .radio {
     display: flex;
     align-items: center;
+    font-size: var(--text-xs);
 }
 
 .radio label {
