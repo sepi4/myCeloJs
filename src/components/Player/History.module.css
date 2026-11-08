@@ -22,7 +22,7 @@
     justify-self: end;
     display: flex;
     gap: 0.8em;
-    font-size: 85%;
+    font-size: var(--text-xs);
 }
 
 .period {
@@ -48,7 +48,7 @@
     grid-column: 1 / -1;
     padding: 1em 0;
     text-align: center;
-    font-size: 85%;
+    font-size: var(--text-xs);
     font-style: italic;
     color: var(--text-muted);
 }
@@ -64,7 +64,7 @@
     padding: 0;
     border: none;
     font: inherit;
-    font-size: 90%;
+    font-size: var(--text-sm);
     color: var(--text-muted);
     background-color: transparent;
     cursor: pointer;

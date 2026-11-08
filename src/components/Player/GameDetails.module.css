@@ -1,7 +1,7 @@
 .content {
     grid-column: 1 / -1;
     padding: 0.8em 1em;
-    font-size: 75%;
+    font-size: var(--text-2xs);
     color: var(--text-primary);
 }
 
@@ -12,7 +12,7 @@
     justify-content: end;
     gap: 0.1em 1em;
     margin: 1em 0 0 0;
-    font-size: 90%;
+    font-size: var(--text-3xs);
     font-style: italic;
     text-align: right;
     color: var(--text-secondary);
