@@ -9,7 +9,7 @@ interface Props {
 function RadioButtonsDiv(props: Props) {
     return (
         <>
-            <div style={{ fontSize: '70%' }}>{props.title}</div>
+            <div className={styles.title}>{props.title}</div>
 
             <form className={styles.form}>{props.children}</form>
         </>

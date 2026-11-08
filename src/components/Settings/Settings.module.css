@@ -11,7 +11,7 @@
 
 .textDiv {
     min-height: 1em;
-    font-size: 90%;
+    font-size: var(--text-sm);
     background-color: var(--bg-settings-text);
     padding: 0.3em;
     margin-bottom: 0.2em;
@@ -60,7 +60,7 @@
 .error {
     background-color: var(--bg-danger);
     color: var(--spinner-color);
-    font-size: 90%;
+    font-size: var(--text-sm);
     padding: 0.2em;
     margin-left: 1em;
 }
@@ -96,7 +96,7 @@
     cursor: pointer;
     background-color: var(--bg-secondary);
     padding: 0.25em 1em;
-    font-size: 1em;
+    font: inherit;
     border: 1px solid var(--border-secondary);
     border-radius: 0.2em;
 }

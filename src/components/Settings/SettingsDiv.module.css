@@ -7,6 +7,10 @@
     background-color: var(--bg-hover-alt);
 }
 
+.title {
+    font-weight: bold;
+}
+
 .contentDiv {
     margin: 0.2em 0 0 0;
     min-width: 100%;

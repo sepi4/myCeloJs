@@ -12,13 +12,7 @@ function SettingsDiv(props: Props) {
     return (
         <div className={styles.settingsDiv}>
             {props.title && (
-                <div
-                    data-testid={props.testId}
-                    style={{
-                        fontWeight: 'bold',
-                        fontSize: '100%',
-                    }}
-                >
+                <div data-testid={props.testId} className={styles.title}>
                     {props.title}
                 </div>
             )}
