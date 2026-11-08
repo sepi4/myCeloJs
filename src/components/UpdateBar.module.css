@@ -11,7 +11,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.6em;
-    font-size: 90%;
+    font-size: var(--text-sm);
     cursor: default;
     box-shadow: 0 -0.2em 0.6em var(--shadow-navbar);
 }
@@ -19,7 +19,7 @@
 /* the bar is fixed, so this keeps the last player card from hiding under it */
 .spacer {
     height: 4em;
-    font-size: 90%;
+    font-size: var(--text-sm);
 }
 
 .btn {

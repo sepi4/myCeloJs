@@ -4,7 +4,6 @@
     color: var(--text-primary);
     border: solid 0.05em var(--text-primary);
     cursor: pointer;
-    /* width: 10em; */
     width: 100%;
 }
 
@@ -28,5 +27,5 @@
 
 .table {
     color: var(--text-muted);
-    font-size: 80%;
+    font-size: var(--text-xs);
 }
