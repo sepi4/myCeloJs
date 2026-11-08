@@ -12,8 +12,8 @@
     margin-bottom: 1em;
 }
 
-.nameDiv span {
-    font-size: 1.5em;
+.name {
+    font-size: var(--text-xl);
 }
 
 .nameDiv img {
@@ -47,14 +47,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 80%;
+    font-size: var(--text-xs);
     color: var(--text-info);
-
-    /* margin-bottom: 1em; */
 }
 
 .info table {
-    /* width: 60%; */
     border-spacing: 0.5em;
 }
 

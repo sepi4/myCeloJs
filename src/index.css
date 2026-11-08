@@ -1,5 +1,6 @@
 /* rem, not % or em, so text keeps its size however deeply it is nested */
 :root {
+    --text-xl: 1.5rem;
     --text-sm: 0.9rem;
     --text-xs: 0.8rem;
     --text-2xs: 0.75rem;
