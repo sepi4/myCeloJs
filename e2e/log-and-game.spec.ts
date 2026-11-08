@@ -116,6 +116,7 @@ test('check log button loads players from a different log file', async () => {
     await expect(app.languageSelectEn).toBeVisible()
     await app.mockFileDialog(electronApp, COH2_LOG_PATH_2)
     await app.logLocationButtonCoh2.click()
+    await expect(app.page.getByText(COH2_LOG_PATH_2, { exact: true })).toBeVisible()
     await app.closeButton.click()
 
     // The second log has different players — verify they appear
@@ -130,6 +131,7 @@ test('check log button loads players from a different log file', async () => {
     await app.settingsIcon.click()
     await app.mockFileDialog(electronApp, COH2_LOG_PATH)
     await app.logLocationButtonCoh2.click()
+    await expect(app.page.getByText(COH2_LOG_PATH, { exact: true })).toBeVisible()
     await app.closeButton.click()
 
     // Click check log to re-read the original file
