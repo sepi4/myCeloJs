@@ -2,7 +2,7 @@
 :root {
     --text-sm: 0.9rem;
     --text-xs: 0.8rem;
-    --text-2xs: 0.7rem;
+    --text-2xs: 0.75rem;
 }
 
 * {

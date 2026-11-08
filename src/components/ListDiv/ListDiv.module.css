@@ -1,10 +1,10 @@
 .container {
-    font-size: 90%;
+    font-size: var(--text-sm);
     margin-bottom: 1.2em;
 }
 
 .row {
-    font-size: 90%;
+    font-size: var(--text-xs);
     display: flex;
     align-items: baseline;
     justify-content: center;
@@ -12,7 +12,7 @@
 
 .title {
     font-style: italic;
-    font-size: 80%;
+    font-size: var(--text-2xs);
     margin-bottom: 0.6em;
     color: var(--text-muted);
 }
