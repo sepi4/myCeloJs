@@ -4,6 +4,11 @@
     margin: 0 auto;
 }
 
+/* The default border is too light against the gray body background. */
+.container input[type='radio']:not(:checked) {
+    border-color: color-mix(in srgb, var(--text-on-surface) 55%, transparent);
+}
+
 .textDiv {
     min-height: 1em;
     font-size: 90%;
@@ -112,7 +117,6 @@
 
 .radio {
     margin-right: 0.4em;
-    accent-color: var(--accent-input);
 }
 
 .dangerText {

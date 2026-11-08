@@ -26,14 +26,17 @@ table {
 ::-webkit-scrollbar {
     width: 0.4em;
 }
+
 /* Track */
 ::-webkit-scrollbar-track {
     background: var(--scrollbar-track);
 }
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: var(--scrollbar-thumb);
 }
+
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
     background: var(--scrollbar-thumb-hover);
@@ -41,5 +44,46 @@ table {
 
 input[type='checkbox'],
 input[type='radio'] {
+    appearance: none;
+    width: 1.1em;
+    height: 1.1em;
+    border: 1.5px solid var(--text-muted);
+    border-radius: 4px;
+    background: transparent;
+    display: inline-grid;
+    place-content: center;
+    cursor: pointer;
     transform: scale(var(--input-scale, 1));
+}
+
+input[type='radio'] {
+    border-radius: 50%;
+}
+
+input:is([type='checkbox'], [type='radio']):checked {
+    border-color: var(--text-secondary);
+    background: var(--text-secondary);
+}
+
+input[type='checkbox']:checked::after {
+    content: '';
+    width: 0.3em;
+    height: 0.6em;
+    border: solid var(--bg-primary);
+    border-width: 0 2px 2px 0;
+    /* A rotated L sits low, so lift it to look centered. */
+    transform: translateY(-0.08em) rotate(45deg);
+}
+
+input[type='radio']:checked::after {
+    content: '';
+    width: 0.5em;
+    height: 0.5em;
+    border-radius: 50%;
+    background: var(--bg-primary);
+}
+
+input:is([type='checkbox'], [type='radio']):disabled {
+    opacity: 0.4;
+    cursor: default;
 }
