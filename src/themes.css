@@ -29,6 +29,8 @@
     --accent-positive: #3b3;
     --accent-negative: #f66;
     --accent-neutral: #6af;
+    --accent-input: #222;
+    --accent-input-on-primary: #e8e8e8;
 
     --scrollbar-track: gray;
     --scrollbar-thumb: rgb(66, 66, 66);
@@ -69,6 +71,8 @@
     --accent-positive: #2e7d32;
     --accent-negative: #c62828;
     --accent-neutral: #1565c0;
+    --accent-input: #444444;
+    --accent-input-on-primary: #444444;
 
     --scrollbar-track: #e0e0e0;
     --scrollbar-thumb: #b0b0b0;

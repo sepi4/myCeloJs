@@ -106,3 +106,8 @@
     background-color: var(--border-separator);
     margin: 0 -0.5em;
 }
+
+/* A dark accent would vanish into the dark bar. Radios stay dark because their white fill keeps them visible. */
+.navbarBase input[type='checkbox'] {
+    accent-color: var(--accent-input-on-primary);
+}
