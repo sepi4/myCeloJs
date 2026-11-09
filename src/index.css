@@ -54,8 +54,8 @@ table {
 input[type='checkbox'],
 input[type='radio'] {
     appearance: none;
-    width: 1.1em;
-    height: 1.1em;
+    width: 1em;
+    height: 1em;
     border: 1.5px solid var(--text-muted);
     border-radius: 4px;
     background: transparent;
