@@ -456,6 +456,10 @@ const text: Translations = {
         en: 'games played',
         ru: 'игр сыграно',
     },
+    no_name: {
+        en: '(no name)',
+        ru: '(без имени)',
+    },
 }
 
 export default text

@@ -7,6 +7,7 @@ import {
     getFactionFlagLocationCoh3,
 } from '../../functions/utils/getFactionFlagLocation'
 import getText from '../../functions/utils/getText'
+import hasVisibleText from '../../functions/utils/hasVisibleText'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useNavigationStore } from '../../stores/navigationStore'
@@ -146,7 +147,7 @@ function PlayerMainRow(props: Props) {
             }
             onClick={isRealPlayer ? handlePlayerCardOn : undefined}
         >
-            {player.name}
+            {hasVisibleText(player.name) ? player.name : <i>{getText('no_name', settings)}</i>}
         </span>
     )
 
