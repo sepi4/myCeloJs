@@ -6,8 +6,7 @@ import {
 } from '../../functions/utils/getFactionFlagLocation'
 import getText from '../../functions/utils/getText'
 import { useDisplayCoh3 } from '../../hooks/useDisplayCoh3'
-import { usePlayerCardStore } from '../../stores/playerCardStore'
-import { useViewStore } from '../../stores/viewStore'
+import { useNavigationStore } from '../../stores/navigationStore'
 import { MatchHistoryReportResult, NormalizedProfiles, SettingsType } from '../../types'
 
 import styles from './MatchTableHeaders.module.css'
@@ -20,8 +19,7 @@ interface Props {
 
 function MatchTableHeaders(props: Props) {
     const coh3 = useDisplayCoh3()
-    const { setPlayerCard } = usePlayerCardStore()
-    const { setView } = useViewStore()
+    const openPlayerCard = useNavigationStore((s) => s.openPlayerCard)
     return (
         <thead>
             <tr>
@@ -78,8 +76,7 @@ function MatchTableHeaders(props: Props) {
                                     }
                                     const ex = x.result[newPlayer.profileId]
                                     if (ex) {
-                                        setPlayerCard(newPlayer, ex, coh3)
-                                        setView('playerCard')
+                                        openPlayerCard(newPlayer, ex, coh3)
                                     }
                                 }}
                             >

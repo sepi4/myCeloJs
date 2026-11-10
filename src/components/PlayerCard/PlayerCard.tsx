@@ -18,19 +18,6 @@ import PlayerExtraInfo from '../Player/PlayerExtraInfo'
 
 import styles from './PlayerCard.module.css'
 
-const TEXT_INPUT_TYPES = ['text', 'search', 'number', 'email', 'password', 'url', 'tel']
-
-/** Arrow keys move the cursor in these, so they must not change the card. */
-function isTextField(target: EventTarget | null) {
-    if (target instanceof HTMLInputElement) {
-        return TEXT_INPUT_TYPES.includes(target.type)
-    }
-    return (
-        target instanceof HTMLTextAreaElement ||
-        (target instanceof HTMLElement && target.isContentEditable)
-    )
-}
-
 export default function PlayerCard() {
     const { countryFlags } = useCountryFlagsStore()
     const { settings } = useSettingsStore()
@@ -45,8 +32,6 @@ export default function PlayerCard() {
         setOtherGameData,
         setOtherGameLoading,
         setSelectedCoh3,
-        goBack,
-        goForward,
         gameHistory,
         updateGameHistory,
         navigation,
@@ -59,43 +44,12 @@ export default function PlayerCard() {
         // oxlint-disable-next-line react/exhaustive-effect-dependencies
     }, [navigation])
 
-    // Left and right arrows and the mouse side buttons move through earlier cards.
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.altKey || e.ctrlKey || e.metaKey || e.shiftKey || isTextField(e.target)) {
-                return
-            }
-            if (e.key === 'ArrowLeft') {
-                e.preventDefault()
-                goBack()
-            } else if (e.key === 'ArrowRight') {
-                e.preventDefault()
-                goForward()
-            }
-        }
-        const handleMouseUp = (e: MouseEvent) => {
-            if (e.button === 3) {
-                e.preventDefault()
-                goBack()
-            } else if (e.button === 4) {
-                e.preventDefault()
-                goForward()
-            }
-        }
-        window.addEventListener('keydown', handleKeyDown)
-        window.addEventListener('mouseup', handleMouseUp)
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown)
-            window.removeEventListener('mouseup', handleMouseUp)
-        }
-    }, [goBack, goForward])
-
     const avatarUrl = useSteamAvatar(extraInfo?.steamId)
 
     const steamIdForLookup = selectedCoh3 === initialCoh3 ? extraInfo?.steamId : null
 
     useEffect(() => {
-        // A card restored with the back button already knows its other-game profile.
+        // A card restored from the navigation history already knows its other-game profile.
         if (!steamIdForLookup || otherGameChecked) {
             return
         }

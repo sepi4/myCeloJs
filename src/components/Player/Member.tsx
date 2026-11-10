@@ -1,8 +1,7 @@
 import { getExtraInfo } from '../../functions/api/getExtraInfo'
 import { useDisplayCoh3 } from '../../hooks/useDisplayCoh3'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
-import { usePlayerCardStore } from '../../stores/playerCardStore'
-import { useViewStore } from '../../stores/viewStore'
+import { useNavigationStore } from '../../stores/navigationStore'
 import { Member as MemberType } from '../../types'
 
 import styles from './Members.module.css'
@@ -14,8 +13,7 @@ interface Props {
 export default function Member(props: Props) {
     const { countryFlags } = useCountryFlagsStore()
     const coh3 = useDisplayCoh3()
-    const { setPlayerCard } = usePlayerCardStore()
-    const { setView } = useViewStore()
+    const openPlayerCard = useNavigationStore((s) => s.openPlayerCard)
 
     const handlePlayerCardOn = async (p: MemberType) => {
         const newPlayer = {
@@ -32,8 +30,7 @@ export default function Member(props: Props) {
         }
         const ex = x.result[newPlayer.profileId]
         if (ex) {
-            setPlayerCard(newPlayer, ex, coh3)
-            setView('playerCard')
+            openPlayerCard(newPlayer, ex, coh3)
         }
     }
 

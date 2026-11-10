@@ -5,19 +5,10 @@ beforeEach(() => {
 })
 
 describe('viewStore', () => {
-    test('closing a card opened from the main view returns to the main view', () => {
-        useViewStore.getState().setView('playerCard')
-        useViewStore.getState().closeView()
-        expect(useViewStore.getState().view).toBe('main')
-    })
-
-    test('closing a card opened from search returns to search', () => {
+    test('a card opened from search remembers search as its return view', () => {
         useViewStore.getState().setView('search')
         useViewStore.getState().setView('playerCard')
-        useViewStore.getState().closeView()
-        expect(useViewStore.getState().view).toBe('search')
-        useViewStore.getState().closeView()
-        expect(useViewStore.getState().view).toBe('main')
+        expect(useViewStore.getState().cardReturnView).toBe('search')
     })
 
     test('setting the current view again changes nothing', () => {
@@ -25,5 +16,12 @@ describe('viewStore', () => {
         useViewStore.getState().setView('playerCard')
         useViewStore.getState().setView('playerCard')
         expect(useViewStore.getState().cardReturnView).toBe('search')
+    })
+
+    test('a given return view replaces the remembered one', () => {
+        useViewStore.getState().setView('search')
+        useViewStore.getState().setView('playerCard')
+        useViewStore.getState().setView('playerCard', 'main')
+        expect(useViewStore.getState().cardReturnView).toBe('main')
     })
 })

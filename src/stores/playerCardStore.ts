@@ -1,10 +1,6 @@
 import { create } from 'zustand'
 
 import { ExtraInfo, GameHistoryState } from '../types'
-import { useViewStore } from './viewStore'
-
-/** How many earlier player cards the back button can return to. */
-const MAX_HISTORY = 20
 
 export const EMPTY_GAME_HISTORY: GameHistoryState = { data: null, open: false, openGame: null }
 
@@ -14,7 +10,7 @@ export interface PlayerCardData {
     profileId?: number
 }
 
-interface PlayerCardState {
+export interface PlayerCardState {
     player: PlayerCardData | null
     extraInfo: ExtraInfo | null
     initialCoh3: boolean
@@ -29,10 +25,6 @@ interface PlayerCardState {
 }
 
 interface PlayerCardStore extends PlayerCardState {
-    /** Earlier cards, oldest first. Filled when a card is opened from inside another card. */
-    history: PlayerCardState[]
-    /** Cards left with the back button, nearest last. Opening a new card clears them. */
-    future: PlayerCardState[]
     /** Grows each time another card is shown, so the page knows when to restore `scrollY`. */
     navigation: number
     setPlayerCard: (player: PlayerCardData, extraInfo: ExtraInfo | null, coh3: boolean) => void
@@ -40,14 +32,12 @@ interface PlayerCardStore extends PlayerCardState {
     setOtherGameLoading: (loading: boolean) => void
     setSelectedCoh3: (coh3: boolean) => void
     updateGameHistory: (patch: Partial<GameHistoryState>) => void
-    goBack: () => void
-    goForward: () => void
+    /** Shows a card saved earlier with `snapshotPlayerCard`. */
+    restorePlayerCard: (card: PlayerCardState) => void
     resetPlayerCard: () => void
 }
 
 const initialState = {
-    history: [] as PlayerCardState[],
-    future: [] as PlayerCardState[],
     navigation: 0,
     player: null,
     extraInfo: null,
@@ -65,7 +55,8 @@ function currentScrollY() {
     return typeof window === 'undefined' ? 0 : window.scrollY
 }
 
-function snapshot(state: PlayerCardStore): PlayerCardState {
+export function snapshotPlayerCard(): PlayerCardState {
+    const state = usePlayerCardStore.getState()
     return {
         player: state.player,
         extraInfo: state.extraInfo,
@@ -83,34 +74,19 @@ function snapshot(state: PlayerCardStore): PlayerCardState {
 export const usePlayerCardStore = create<PlayerCardStore>((set) => ({
     ...initialState,
     setPlayerCard: (player, extraInfo, coh3) =>
-        set((state) => {
-            // Opening a card from inside another card remembers the current one,
-            // opening it from anywhere else starts a new history.
-            const fromCard = useViewStore.getState().view === 'playerCard' && state.player
-            if (
-                fromCard &&
-                player.profileId !== undefined &&
-                player.profileId === state.player?.profileId
-            ) {
-                return state
-            }
-            const history = fromCard ? [...state.history, snapshot(state)].slice(-MAX_HISTORY) : []
-            return {
-                history,
-                future: [],
-                navigation: state.navigation + 1,
-                player,
-                extraInfo,
-                initialCoh3: coh3,
-                selectedCoh3: coh3,
-                otherPlayer: null,
-                otherExtraInfo: null,
-                otherGameLoading: false,
-                otherGameChecked: false,
-                gameHistory: EMPTY_GAME_HISTORY,
-                scrollY: 0,
-            }
-        }),
+        set((state) => ({
+            navigation: state.navigation + 1,
+            player,
+            extraInfo,
+            initialCoh3: coh3,
+            selectedCoh3: coh3,
+            otherPlayer: null,
+            otherExtraInfo: null,
+            otherGameLoading: false,
+            otherGameChecked: false,
+            gameHistory: EMPTY_GAME_HISTORY,
+            scrollY: 0,
+        })),
     setOtherGameData: (otherPlayer, otherExtraInfo) =>
         set({
             otherPlayer,
@@ -136,39 +112,6 @@ export const usePlayerCardStore = create<PlayerCardStore>((set) => ({
         }),
     updateGameHistory: (patch) =>
         set((state) => ({ gameHistory: { ...state.gameHistory, ...patch } })),
-    goBack: () =>
-        set((state) => {
-            const previous = state.history[state.history.length - 1]
-            if (!previous) {
-                return state
-            }
-            return {
-                ...previous,
-                history: state.history.slice(0, -1),
-                future: [...state.future, snapshot(state)],
-                navigation: state.navigation + 1,
-            }
-        }),
-    goForward: () =>
-        set((state) => {
-            const next = state.future[state.future.length - 1]
-            if (!next) {
-                return state
-            }
-            return {
-                ...next,
-                history: [...state.history, snapshot(state)],
-                future: state.future.slice(0, -1),
-                navigation: state.navigation + 1,
-            }
-        }),
+    restorePlayerCard: (card) => set((state) => ({ ...card, navigation: state.navigation + 1 })),
     resetPlayerCard: () => set(initialState),
 }))
-
-// Closing the card (Escape, X or any other view) forgets its history.
-useViewStore.subscribe(({ view }) => {
-    const { history, future } = usePlayerCardStore.getState()
-    if (view !== 'playerCard' && (history.length > 0 || future.length > 0)) {
-        usePlayerCardStore.setState({ history: [], future: [] })
-    }
-})

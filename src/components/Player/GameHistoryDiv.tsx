@@ -7,9 +7,8 @@ import {
     getFactionFlagLocationCoh3,
 } from '../../functions/utils/getFactionFlagLocation'
 import { getTimeAgo } from '../../functions/utils/time'
-import { usePlayerCardStore } from '../../stores/playerCardStore'
+import { useNavigationStore } from '../../stores/navigationStore'
 import { useSettingsStore } from '../../stores/settingsStore'
-import { useViewStore } from '../../stores/viewStore'
 import { MatchHistoryReportResult, MatchObject, NormalizedProfiles } from '../../types'
 import { faCaretDown, faCaretRight } from '../icons'
 import SvgIcon from '../SvgIcon'
@@ -28,8 +27,7 @@ interface Props {
 export default function GameHistoryDiv(props: Props) {
     const { settings } = useSettingsStore()
     const lg = settings && settings.language ? settings.language : 'en'
-    const { setPlayerCard } = usePlayerCardStore()
-    const { setView } = useViewStore()
+    const openPlayerCard = useNavigationStore((s) => s.openPlayerCard)
 
     if (!props.game.result) {
         console.log('if return null')
@@ -64,18 +62,17 @@ export default function GameHistoryDiv(props: Props) {
         .concat(players.filter((p) => p.teamid === result.teamid && !isMe(p)))
     const opponents = players.filter((p) => p.teamid !== result.teamid)
 
-    const openPlayerCard = async (e: MouseEvent, p: MatchHistoryReportResult, name: string) => {
+    const handleOpenPlayer = async (e: MouseEvent, p: MatchHistoryReportResult, name: string) => {
         // the row itself toggles the game details
         e.stopPropagation()
         const x = await getExtraInfo(props.coh3, [p.profile_id])
         const ex = x?.result[p.profile_id]
         if (ex) {
-            setPlayerCard(
+            openPlayerCard(
                 { country: props.profiles[p.profile_id]?.country, name, profileId: p.profile_id },
                 ex,
                 props.coh3
             )
-            setView('playerCard')
         }
     }
 
@@ -95,7 +92,7 @@ export default function GameHistoryDiv(props: Props) {
                             data-testid="game-history-player"
                             className={styles.name}
                             title={name}
-                            onClick={(e) => openPlayerCard(e, p, name)}
+                            onClick={(e) => handleOpenPlayer(e, p, name)}
                         >
                             {name}
                         </button>

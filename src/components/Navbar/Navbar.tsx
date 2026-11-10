@@ -1,13 +1,14 @@
 import { getExtraInfo } from '../../functions/api/getExtraInfo'
 import getText from '../../functions/utils/getText'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
+import { useNavigationStore } from '../../stores/navigationStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { useSettingsViewStore } from '../../stores/settingsViewStore'
 import { useViewStore } from '../../stores/viewStore'
 import { Rank } from '../../types'
 import Choice from '../Choice'
-import { faCogs, faSearch, faUserAlt } from '../icons'
+import { faArrowLeft, faArrowRight, faCogs, faSearch, faUserAlt } from '../icons'
 import CheckLogDiv from './CheckLogDiv'
 import NavBarIcon from './NavbarIcon'
 import NavbarRow from './NavbarRow'
@@ -20,7 +21,7 @@ interface Props {
 
 export default function Navbar(props: Props) {
     const { settings } = useSettingsStore()
-    const { openSettingsView, closeSettingsView } = useSettingsViewStore()
+    const { settingsView, openSettingsView, closeSettingsView } = useSettingsViewStore()
 
     const handleOpenSettings = () => {
         openSettingsView()
@@ -28,8 +29,11 @@ export default function Navbar(props: Props) {
     }
 
     const { navButtons, toggleNavButton } = useNavButtonsStore()
-    const { setPlayerCard, player: playerCardPlayer } = usePlayerCardStore()
-    const { view, setView } = useViewStore()
+    const playerCardPlayer = usePlayerCardStore((s) => s.player)
+    const { view } = useViewStore()
+    const { openView, openPlayerCard, goBack, goForward } = useNavigationStore()
+    const canGoBack = useNavigationStore((s) => s.back.length > 0) && !settingsView
+    const canGoForward = useNavigationStore((s) => s.forward.length > 0) && !settingsView
 
     const getNavCheckBox = (text: 'all' | 'total' | 'table') => {
         return (
@@ -68,7 +72,7 @@ export default function Navbar(props: Props) {
 
     const handleSearchView = () => {
         closeSettingsView()
-        setView('search')
+        openView('search')
     }
 
     const handleOpenMyCard = async () => {
@@ -90,9 +94,8 @@ export default function Navbar(props: Props) {
                 profileId: profile.profile_id,
                 country: profile.country,
             }
-            setPlayerCard(playerData, ex, navButtons.coh3)
             closeSettingsView()
-            setView('playerCard')
+            openPlayerCard(playerData, ex, navButtons.coh3)
         }
     }
 
@@ -108,6 +111,26 @@ export default function Navbar(props: Props) {
                 fun={alreadyViewingMyCard ? undefined : handleOpenMyCard}
             />
         ) : null
+
+    const backIcon = (
+        <NavBarIcon
+            title={`${getText('back', settings)} (←)`}
+            testId="back-button"
+            icon={faArrowLeft}
+            fun={canGoBack ? goBack : undefined}
+            disabled={!canGoBack}
+        />
+    )
+
+    const forwardIcon = (
+        <NavBarIcon
+            title={`${getText('forward', settings)} (→)`}
+            testId="forward-button"
+            icon={faArrowRight}
+            fun={canGoForward ? goForward : undefined}
+            disabled={!canGoForward}
+        />
+    )
 
     const searchIcon = (
         <NavBarIcon
@@ -140,6 +163,8 @@ export default function Navbar(props: Props) {
     return (
         <div data-testid="navbar" className={`${styles.navbarBase} ${navbarVariant}`}>
             <div className={`${styles.iconsBase} ${isTop ? styles.iconsTop : styles.icons}`}>
+                {backIcon}
+                {forwardIcon}
                 {userIcon}
                 {searchIcon}
                 {settingsIcon}

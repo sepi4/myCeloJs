@@ -31,11 +31,18 @@ test.afterAll(async () => {
     await closeApp(electronApp, tempUserDataDir)
 })
 
-test('moves back and forward between player cards', async () => {
+test('moves back and forward between the main view and player cards', async () => {
+    const disabled = (button: typeof app.backButton) =>
+        expect(button).toHaveAttribute('aria-disabled', 'true')
+    const enabled = (button: typeof app.backButton) =>
+        expect(button).not.toHaveAttribute('aria-disabled')
+
     // Open my player card and the details of the first game
+    await disabled(app.backButton)
     await app.userIcon.click()
     await expect(app.steamIdValue).toHaveText(STEAM_ID)
-    await expect(app.backButton).not.toBeVisible()
+    await enabled(app.backButton)
+    await disabled(app.forwardButton)
     const myName = (await app.playerCardName.textContent()) ?? ''
 
     await app.historyToggle.click()
@@ -46,22 +53,17 @@ test('moves back and forward between player cards', async () => {
     const openOtherPlayer = async () => {
         await app.gameDetailsPlayers.filter({ hasNotText: myName }).first().click()
         await expect(app.steamIdValue).not.toHaveText(STEAM_ID)
-        await expect(app.backButton).toBeVisible()
     }
 
-    // Back button returns to my card and hides itself
+    // Back button returns to my card, forward to the other player
     await openOtherPlayer()
-    await expect(app.forwardButton).not.toBeVisible()
+    await disabled(app.forwardButton)
     await app.backButton.click()
     await expect(app.steamIdValue).toHaveText(STEAM_ID)
-    await expect(app.backButton).not.toBeVisible()
-
-    // Forward button goes to the other player again
-    await expect(app.forwardButton).toBeVisible()
+    await enabled(app.forwardButton)
     await app.forwardButton.click()
     await expect(app.steamIdValue).not.toHaveText(STEAM_ID)
-    await expect(app.forwardButton).not.toBeVisible()
-    await expect(app.backButton).toBeVisible()
+    await disabled(app.forwardButton)
 
     // Left arrow goes back and right arrow forward
     await page.keyboard.press('ArrowLeft')
@@ -79,19 +81,31 @@ test('moves back and forward between player cards', async () => {
     await mouseUp(3)
     await expect(app.steamIdValue).toHaveText(STEAM_ID)
 
-    // Escape still closes the whole card, even with history.
-    // My card kept its open game, so the other player can be opened right away.
-    await expect(app.gameDetails).toBeVisible()
+    // Back from the first card returns to the main view, forward to the card again
+    await app.backButton.click()
+    await expect(app.steamIdValue).not.toBeVisible()
+    await expect(app.playersContainer).toBeVisible()
+    await page.keyboard.press('ArrowRight')
+    await expect(app.steamIdValue).toHaveText(STEAM_ID)
+
+    // Escape closes the card and back opens it again with its open game
     await openOtherPlayer()
     await page.keyboard.press('Escape')
     await expect(app.steamIdValue).not.toBeVisible()
     await expect(app.playersContainer).toBeVisible()
-
-    // Opening a card again starts a new history
-    await app.userIcon.click()
+    await app.backButton.click()
+    await expect(app.steamIdValue).not.toHaveText(STEAM_ID)
+    await app.backButton.click()
     await expect(app.steamIdValue).toHaveText(STEAM_ID)
-    await expect(app.backButton).not.toBeVisible()
-    await expect(app.forwardButton).not.toBeVisible()
+    await expect(app.gameDetails).toBeVisible()
+
+    // Arrow keys type in the search field instead of moving in the history
+    await app.searchIcon.click()
+    await app.searchInput.fill('ab')
+    await app.searchInput.press('ArrowLeft')
+    await expect(app.steamIdValue).not.toBeVisible()
+    await page.keyboard.press('Escape')
+    await expect(app.playersContainer).toBeVisible()
 })
 
 test('keeps the game history of a card when moving back and forward', async () => {

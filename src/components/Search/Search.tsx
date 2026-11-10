@@ -7,9 +7,8 @@ import getLastPlayedGame from '../../functions/utils/getLastPlayedGame'
 import getText from '../../functions/utils/getText'
 import { useFoundPlayersStore } from '../../stores/foundPlayersStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
-import { usePlayerCardStore } from '../../stores/playerCardStore'
+import { useNavigationStore } from '../../stores/navigationStore'
 import { useSettingsStore } from '../../stores/settingsStore'
-import { useViewStore } from '../../stores/viewStore'
 import { Member } from '../../types'
 import FoundPlayer from './FoundPlayer'
 
@@ -24,8 +23,7 @@ export default function Search() {
     const {
         navButtons: { coh3 },
     } = useNavButtonsStore()
-    const { setPlayerCard } = usePlayerCardStore()
-    const { setView } = useViewStore()
+    const openPlayerCard = useNavigationStore((s) => s.openPlayerCard)
 
     const handleSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
         setSearchValue(e.target.value)
@@ -90,8 +88,7 @@ export default function Search() {
             ranks: player.extraInfo?.ranks ?? [],
             steamId: player.name.substring(7),
         }
-        setPlayerCard(playerData, extraInfoData, coh3)
-        setView('playerCard')
+        openPlayerCard(playerData, extraInfoData, coh3)
     }
 
     const players =

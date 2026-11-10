@@ -1,11 +1,10 @@
 import { useExtraInfoStore } from '../../stores/extraInfoStore'
 import { useFromFileStore } from '../../stores/fromFileStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
+import { useNavigationStore } from '../../stores/navigationStore'
 import { useOpenInfosStore } from '../../stores/openInfosStore'
-import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { usePlayersStore } from '../../stores/playersStore'
 import { useSettingsStore } from '../../stores/settingsStore'
-import { useViewStore } from '../../stores/viewStore'
 import { Player } from '../../types'
 import { writeRankings } from '../rankings/writeRankings'
 
@@ -24,9 +23,8 @@ export default function checkLogData({ data, playAudio }: Props) {
         setFromFile(data)
         useExtraInfoStore.getState().clearExtraInfo()
         useOpenInfosStore.getState().resetOpenInfos()
-        usePlayerCardStore.getState().resetPlayerCard()
         usePlayersStore.getState().setPlayers(data)
-        useViewStore.getState().setView('main')
+        useNavigationStore.getState().resetNavigation()
         if (settings) {
             writeRankings(coh3, data, settings.rankingsHorizontal, coh3 && elo)
             if (playAudio && data.length > 0) {

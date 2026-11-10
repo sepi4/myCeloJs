@@ -9,9 +9,8 @@ import {
 import getText from '../../functions/utils/getText'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
-import { usePlayerCardStore } from '../../stores/playerCardStore'
+import { useNavigationStore } from '../../stores/navigationStore'
 import { useSettingsStore } from '../../stores/settingsStore'
-import { useViewStore } from '../../stores/viewStore'
 import countriesJson from '../../translations/countries.json'
 import { getCountryName } from '../../translations/countryTranslations'
 import { ExtraInfo, Player } from '../../types'
@@ -70,14 +69,12 @@ function PlayerMainRow(props: Props) {
         }
     }
 
-    const { setPlayerCard } = usePlayerCardStore()
-    const { setView } = useViewStore()
+    const openPlayerCard = useNavigationStore((s) => s.openPlayerCard)
 
     const handlePlayerCardOn = (e: MouseEvent) => {
         // the row itself toggles the extra info
         e.stopPropagation()
-        setPlayerCard(player, extraInfo, coh3)
-        setView('playerCard')
+        openPlayerCard(player, extraInfo, coh3)
     }
 
     const { countryFlags } = useCountryFlagsStore()

@@ -9,11 +9,17 @@ interface Props {
     title?: string
     style?: CSSProperties
     testId?: string
+    disabled?: boolean
 }
 
 export default function NavBarIcon(props: Props) {
     return (
-        <span data-testid={props.testId} title={props.title} style={{ display: 'inline-flex' }}>
+        <span
+            data-testid={props.testId}
+            title={props.title}
+            aria-disabled={props.disabled || undefined}
+            style={{ display: 'inline-flex' }}
+        >
             <SvgIcon
                 title={props.title}
                 icon={props.icon}
@@ -21,7 +27,8 @@ export default function NavBarIcon(props: Props) {
                 color="var(--text-secondary)"
                 onClick={props.fun}
                 style={{
-                    cursor: 'pointer',
+                    cursor: props.disabled ? 'default' : 'pointer',
+                    opacity: props.disabled ? 0.35 : undefined,
                     ...props.style,
                 }}
             />

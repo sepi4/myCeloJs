@@ -1,8 +1,9 @@
 import { JSX, useLayoutEffect } from 'react'
 
 import getText from '../functions/utils/getText'
+import useNavigationKeys from '../hooks/useNavigationKeys'
 import { useNavButtonsStore } from '../stores/navButtonsStore'
-import { usePlayerCardStore } from '../stores/playerCardStore'
+import { Location, useNavigationStore } from '../stores/navigationStore'
 import { usePlayersStore } from '../stores/playersStore'
 import { useSettingsStore } from '../stores/settingsStore'
 import { useSettingsViewStore } from '../stores/settingsViewStore'
@@ -16,6 +17,13 @@ import Team from './Teams/Team'
 
 import styles from './MainView.module.css'
 
+function usesSearch(location: Location) {
+    return (
+        location.view === 'search' ||
+        (location.view === 'playerCard' && location.cardReturnView === 'search')
+    )
+}
+
 function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
     const { settingsView } = useSettingsViewStore()
     const teams: Player[][] = [[], []]
@@ -25,10 +33,8 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
     } = useNavButtonsStore()
     const { players } = usePlayersStore()
     const { view, cardReturnView } = useViewStore()
-    const canGoBack = usePlayerCardStore((s) => s.history.length > 0)
-    const canGoForward = usePlayerCardStore((s) => s.future.length > 0)
-    const goBack = usePlayerCardStore((s) => s.goBack)
-    const goForward = usePlayerCardStore((s) => s.goForward)
+    // Search stays loaded while the history can return to it, so its results are kept.
+    const searchInHistory = useNavigationStore((s) => [...s.back, ...s.forward].some(usesSearch))
     const activeLogLocation = settings
         ? coh3
             ? settings.logLocationCoh3
@@ -40,6 +46,8 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
             teams[p?.teamSlot]?.push(p)
         })
     }
+
+    useNavigationKeys()
 
     // The player card restores its own scroll position.
     useLayoutEffect(() => {
@@ -61,8 +69,7 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
     }
     // Main and search views stay mounted but hidden behind the player card,
     // so their open lists, loaded histories and scroll position are kept.
-    const searchMounted =
-        view === 'search' || (view === 'playerCard' && cardReturnView === 'search')
+    const searchMounted = usesSearch({ view, cardReturnView, card: null }) || searchInHistory
 
     const mainContent =
         players && players.length > 0 ? (
@@ -79,24 +86,7 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
     return (
         <>
             {view === 'playerCard' && (
-                <ClosingViewWrapper
-                    navigation={
-                        canGoBack || canGoForward
-                            ? {
-                                  back: {
-                                      title: `${getText('back', settings)} (←)`,
-                                      enabled: canGoBack,
-                                      onClick: goBack,
-                                  },
-                                  forward: {
-                                      title: `${getText('forward', settings)} (→)`,
-                                      enabled: canGoForward,
-                                      onClick: goForward,
-                                  },
-                              }
-                            : undefined
-                    }
-                >
+                <ClosingViewWrapper>
                     <PlayerCard />
                 </ClosingViewWrapper>
             )}
