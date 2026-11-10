@@ -3,6 +3,7 @@ import { getTimeAgo } from '../../functions/utils/time'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { Member } from '../../types'
+import PlayerName from '../PlayerName'
 
 import styles from './FoundPlayer.module.css'
 
@@ -37,7 +38,9 @@ export default function FoundPlayer(props: Props) {
                 src={countryFlags[props.player.country]}
                 alt={`${props.player.country}`}
             />
-            <span className={styles.alias}>{props.player.alias}</span>
+            <span className={styles.alias}>
+                <PlayerName name={props.player.alias} />
+            </span>
         </div>
     )
 

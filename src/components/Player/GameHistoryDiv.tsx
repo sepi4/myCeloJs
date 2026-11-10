@@ -11,6 +11,7 @@ import { useNavigationStore } from '../../stores/navigationStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { MatchHistoryReportResult, MatchObject, NormalizedProfiles } from '../../types'
 import { faCaretDown, faCaretRight } from '../icons'
+import PlayerName from '../PlayerName'
 import SvgIcon from '../SvgIcon'
 import GameDetails from './GameDetails'
 
@@ -94,7 +95,7 @@ export default function GameHistoryDiv(props: Props) {
                             title={name}
                             onClick={(e) => handleOpenPlayer(e, p, name)}
                         >
-                            {name}
+                            <PlayerName name={name} />
                         </button>
                     </span>
                 )

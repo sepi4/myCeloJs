@@ -8,6 +8,7 @@ import getText from '../../functions/utils/getText'
 import { useDisplayCoh3 } from '../../hooks/useDisplayCoh3'
 import { useNavigationStore } from '../../stores/navigationStore'
 import { MatchHistoryReportResult, NormalizedProfiles, SettingsType } from '../../types'
+import PlayerName from '../PlayerName'
 
 import styles from './MatchTableHeaders.module.css'
 
@@ -80,7 +81,7 @@ function MatchTableHeaders(props: Props) {
                                     }
                                 }}
                             >
-                                {pro?.alias ?? `${p.profile_id}`}
+                                <PlayerName name={pro?.alias ?? `${p.profile_id}`} />
                             </a>
                         </th>
                     )

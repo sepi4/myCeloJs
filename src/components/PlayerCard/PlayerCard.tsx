@@ -15,6 +15,7 @@ import { useSettingsStore } from '../../stores/settingsStore'
 import { Player } from '../../types'
 import Choice from '../Choice'
 import PlayerExtraInfo from '../Player/PlayerExtraInfo'
+import PlayerName from '../PlayerName'
 
 import styles from './PlayerCard.module.css'
 
@@ -113,7 +114,9 @@ export default function PlayerCard() {
                         alt={`${player.country}`}
                         title={`${player.country}`}
                     />
-                    <span className={styles.name}>{player.name}</span>
+                    <span className={styles.name}>
+                        <PlayerName name={player.name} />
+                    </span>
                 </div>
             </>
         )
@@ -142,7 +145,7 @@ export default function PlayerCard() {
                 title={`${player.country}`}
             />
             <span data-testid="player-card-name" className={styles.name}>
-                {player.name}
+                <PlayerName name={player.name} />
             </span>
         </div>
     )

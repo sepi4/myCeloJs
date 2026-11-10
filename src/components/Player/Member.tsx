@@ -3,6 +3,7 @@ import { useDisplayCoh3 } from '../../hooks/useDisplayCoh3'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { useNavigationStore } from '../../stores/navigationStore'
 import { Member as MemberType } from '../../types'
+import PlayerName from '../PlayerName'
 
 import styles from './Members.module.css'
 
@@ -46,7 +47,9 @@ export default function Member(props: Props) {
                 alt={`${props.member.country}`}
             />
 
-            <span className={styles.name}>{props.member.alias}</span>
+            <span className={styles.name}>
+                <PlayerName name={props.member.alias} />
+            </span>
         </div>
     )
 }
