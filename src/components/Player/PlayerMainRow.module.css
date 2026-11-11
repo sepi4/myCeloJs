@@ -30,6 +30,24 @@ div:last-of-type > .toggleable {
     background-color: var(--bg-hover);
 }
 
+/* an open player's row stays in view while its extra info scrolls,
+   until the next player's row pushes it out */
+.sticky {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background-color: var(--bg-primary);
+}
+
+/* matches the top navbar: 3em at its font size */
+.stickyBelowTopNavbar {
+    top: calc(3 * var(--text-sm));
+}
+
+.stuck {
+    box-shadow: 0 0.35em 0.4em -0.25em var(--shadow-navbar);
+}
+
 .name {
     /* a border, because a text underline can be clipped for some fonts */
     border-bottom: 0.08em solid transparent;
