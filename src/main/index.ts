@@ -248,6 +248,12 @@ function startOverlayServer(): Promise<void> {
             if (url.startsWith('/img/')) {
                 const relativePath = url.slice('/img/'.length)
                 const filePath = path.join(imgDir, relativePath)
+                // The URL is not normalized, so ".." could point outside the image directory.
+                if (!filePath.startsWith(imgDir + path.sep)) {
+                    response.writeHead(404)
+                    response.end()
+                    return
+                }
                 const ext = path.extname(filePath)
                 const mime = MIME_TYPES[ext] || 'application/octet-stream'
 
@@ -300,7 +306,8 @@ function startOverlayServer(): Promise<void> {
 
             server.once('listening', onListening)
             server.once('error', onError)
-            server.listen(port)
+            // Only OBS on this machine needs the overlay, so stay off the network.
+            server.listen(port, '127.0.0.1')
         }
 
         tryListen(preferredPort)
