@@ -16,7 +16,8 @@
     font-size: var(--text-xl);
 }
 
-.nameDiv img {
+.nameDiv img,
+.stickyBar img {
     height: 1.5em;
     margin-right: 1em;
 }
@@ -101,9 +102,4 @@
 
 .stickyBar[hidden] {
     display: none;
-}
-
-.stickyBar img {
-    height: 1.2em;
-    margin-right: 0.7em;
 }

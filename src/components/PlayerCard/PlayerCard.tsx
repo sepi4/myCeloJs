@@ -169,7 +169,7 @@ export default function PlayerCard() {
                 alt={`${player.country}`}
                 title={`${player.country}`}
             />
-            <span>
+            <span className={styles.name}>
                 <PlayerName name={player.name} />
             </span>
         </>
