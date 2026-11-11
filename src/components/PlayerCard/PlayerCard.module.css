@@ -75,3 +75,35 @@
     height: 1.7em;
     margin: 0 2em;
 }
+
+/* zero height so the bar overlays the card instead of pushing it down */
+.stickyAnchor {
+    position: sticky;
+    top: 0;
+    height: 0;
+    z-index: 50;
+}
+
+/* matches the top navbar: 3em at its font size */
+.stickyBelowTopNavbar {
+    top: calc(3 * var(--text-sm));
+}
+
+.stickyBar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 -0.5em;
+    padding: 0.4em 0;
+    background: var(--bg-primary);
+    box-shadow: 0 0.2em 0.6em var(--shadow-navbar);
+}
+
+.stickyBar[hidden] {
+    display: none;
+}
+
+.stickyBar img {
+    height: 1.2em;
+    margin-right: 0.7em;
+}

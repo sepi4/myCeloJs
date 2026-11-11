@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 
 import logo_coh2 from '../../assets/img/logo_coh2.png'
 import logo_cohstats from '../../assets/img/logo_cohstats.png'
@@ -46,6 +46,31 @@ export default function PlayerCard() {
     }, [navigation])
 
     const avatarUrl = useSteamAvatar(extraInfo?.steamId)
+
+    const nameRef = useRef<HTMLDivElement>(null)
+    const stickyRef = useRef<HTMLDivElement>(null)
+    const [nameScrolledAway, setNameScrolledAway] = useState(false)
+
+    useEffect(() => {
+        function check() {
+            const nameEl = nameRef.current
+            const stickyEl = stickyRef.current
+            if (!nameEl || !stickyEl) {
+                return
+            }
+            // The sticky anchor stops right under the navbar, so its top tells where the navbar ends.
+            const covered =
+                nameEl.getBoundingClientRect().bottom <= stickyEl.getBoundingClientRect().top
+            setNameScrolledAway(covered)
+        }
+        check()
+        window.addEventListener('scroll', check, { passive: true })
+        window.addEventListener('resize', check)
+        return () => {
+            window.removeEventListener('scroll', check)
+            window.removeEventListener('resize', check)
+        }
+    }, [])
 
     const steamIdForLookup = selectedCoh3 === initialCoh3 ? extraInfo?.steamId : null
 
@@ -137,8 +162,38 @@ export default function PlayerCard() {
         </div>
     )
 
+    const flagAndName = (
+        <>
+            <img
+                src={countryFlags[player.country ?? '']}
+                alt={`${player.country}`}
+                title={`${player.country}`}
+            />
+            <span>
+                <PlayerName name={player.name} />
+            </span>
+        </>
+    )
+
+    const isTopNavbar = settings?.navbarPosition !== 'left' && settings?.navbarPosition !== 'right'
+
+    const stickyBar = (
+        <div
+            ref={stickyRef}
+            className={`${styles.stickyAnchor} ${isTopNavbar ? styles.stickyBelowTopNavbar : ''}`}
+        >
+            <div
+                data-testid="player-card-sticky-name"
+                className={styles.stickyBar}
+                hidden={!nameScrolledAway}
+            >
+                {flagAndName}
+            </div>
+        </div>
+    )
+
     const name = (
-        <div className={styles.nameDiv}>
+        <div ref={nameRef} className={styles.nameDiv}>
             <img
                 src={countryFlags[player.country ?? '']}
                 alt={`${player.country}`}
@@ -273,6 +328,7 @@ export default function PlayerCard() {
 
     return (
         <PlayerCardContext.Provider value={true}>
+            {stickyBar}
             {avatar}
             {name}
             {table}
