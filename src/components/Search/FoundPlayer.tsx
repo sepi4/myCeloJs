@@ -44,25 +44,17 @@ export default function FoundPlayer(props: Props) {
         </div>
     )
 
-    const table = (
-        <table className={styles.table}>
-            <tbody>
-                <tr>
-                    <th className={styles.label}>{getText('mp_games', settings)}:</th>
-                    <td>{props.player.totalGames}</td>
-                </tr>
-                <tr>
-                    <th className={styles.label}>{getText('last_game', settings)}:</th>
-                    <td>{timeAgo}</td>
-                </tr>
-            </tbody>
-        </table>
-    )
-
     return (
         <div data-testid="found-player" className={styles.container} onClick={props.clickFun}>
             {name}
-            {table}
+            <span className={styles.stat}>
+                <span className={styles.label}>{getText('mp_games', settings)}:</span>
+                {props.player.totalGames}
+            </span>
+            <span className={styles.stat}>
+                <span className={styles.label}>{getText('last_game', settings)}:</span>
+                {timeAgo}
+            </span>
         </div>
     )
 }

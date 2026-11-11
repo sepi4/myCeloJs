@@ -12,18 +12,31 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-bottom: 1em;
 }
 
 .input {
-    background-color: var(--bg-input-light);
-    color: var(--text-on-surface);
-    padding: 0.3em;
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    padding: 0.4em 0.6em;
     border: solid 0.05em var(--border-secondary);
     font-size: inherit;
 }
 
+.input::placeholder {
+    color: var(--text-muted);
+}
+
+.input:focus {
+    outline: none;
+    border-color: var(--border-primary);
+}
+
 .content {
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
+    max-width: 40em;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    column-gap: 1.5em;
 }

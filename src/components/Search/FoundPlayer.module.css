@@ -1,31 +1,41 @@
 .container {
     padding: 0.5em;
-    margin: 1em;
+    margin: 0.25em 0;
     color: var(--text-primary);
-    border: solid 0.05em var(--text-primary);
+    background-color: var(--bg-secondary);
     cursor: pointer;
-    width: 100%;
+
+    /* subgrid lines up the stats across all results */
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+    align-items: center;
 }
 
 .container:hover {
     background-color: var(--bg-hover);
 }
 
+/* flags have different aspect ratios; a fixed box keeps the names aligned */
 .flagImage {
+    width: 1.5em;
     height: 1em;
-    margin-right: 1em;
+    object-fit: contain;
+    object-position: left center;
+    margin-right: 0.75em;
 }
 
 .alias {
     font-weight: bold;
 }
 
-.label {
-    text-align: left;
-    padding-right: 1em;
-}
-
-.table {
+.stat {
     color: var(--text-muted);
     font-size: var(--text-xs);
+    white-space: nowrap;
+}
+
+.label {
+    font-weight: bold;
+    margin-right: 0.5em;
 }
