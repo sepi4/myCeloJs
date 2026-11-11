@@ -100,6 +100,23 @@
     box-shadow: 0 0.2em 0.6em var(--shadow-navbar);
 }
 
+.stickyFlag {
+    position: relative;
+    display: flex;
+}
+
+.stickyBar .stickyAvatar {
+    position: absolute;
+    right: calc(100% + 0.5em);
+    top: 50%;
+    transform: translateY(-50%);
+    height: 2em;
+    width: 2em;
+    margin: 0;
+    object-fit: cover;
+    border: 1px solid var(--border-color, #444);
+}
+
 .stickyBar[hidden] {
     display: none;
 }

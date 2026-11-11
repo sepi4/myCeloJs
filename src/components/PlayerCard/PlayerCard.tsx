@@ -164,11 +164,22 @@ export default function PlayerCard() {
 
     const flagAndName = (
         <>
-            <img
-                src={countryFlags[player.country ?? '']}
-                alt={`${player.country}`}
-                title={`${player.country}`}
-            />
+            {/* the avatar sits outside the flow so the flag and name line up with the card's own name */}
+            <span className={styles.stickyFlag}>
+                {avatarUrl && (
+                    <img
+                        data-testid="sticky-steam-avatar"
+                        className={styles.stickyAvatar}
+                        src={avatarUrl}
+                        alt="steam avatar"
+                    />
+                )}
+                <img
+                    src={countryFlags[player.country ?? '']}
+                    alt={`${player.country}`}
+                    title={`${player.country}`}
+                />
+            </span>
             <span className={styles.name}>
                 <PlayerName name={player.name} />
             </span>
