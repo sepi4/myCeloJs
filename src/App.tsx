@@ -31,9 +31,9 @@ const settingsDir = window.electronAPI.settingsDir
 
 document.title = 'myCelo ' + appVersion
 
-function App() {
-    const playAudio = () => new Audio(audioLocation).play()
+const playAudio = () => new Audio(audioLocation).play()
 
+function App() {
     const { alert } = useAlertStore()
     const { appLocation } = useAppLocationStore()
     const { autoLogChecking } = useAutoLogCheckingStore()
@@ -65,101 +65,77 @@ function App() {
         }
     }, [settings, coh3, toggleNavButton])
 
-    // Main polling loop: read settings → read log → fetch extra info, then poll on interval
+    // Load settings from disk on startup
     useEffect(() => {
-        if (settings === null) {
-            readSettings(settingsDir + '/settings.json', (data) => {
-                if (!data) {
-                    return
-                }
-
-                const newSettings = JSON.parse(data)
-                newSettings.navbarPosition ??= 'top'
-                newSettings.fontSize ??= 'small'
-                if (newSettings.theme !== 'dark' && newSettings.theme !== 'light') {
-                    newSettings.theme = 'dark'
-                }
-                newSettings.appLocation = appLocation
-
-                // update overlay port for current session
-                if (newSettings.rankingsPort) {
-                    newSettings.rankingsPort = window.electronAPI.overlayPort
-                }
-                // sync format to the overlay server
-                window.electronAPI.rankings.setFormat(newSettings.rankingsHtml ? 'html' : 'txt')
-                writeSettings(newSettings)
-            })
+        if (settings !== null) {
             return
-        } else if (players === null) {
-            // initial readLog
-            if (!autoLogChecking) {
+        }
+        readSettings(settingsDir + '/settings.json', (data) => {
+            if (!data) {
                 return
             }
 
-            if (settings && activeLogLocation) {
-                async function readInitialLog() {
-                    const data = await readLog(coh3, activeLogLocation)
-                    if (data) {
-                        checkLogData({ data })
-                    }
-                }
-                readInitialLog()
+            const newSettings = JSON.parse(data)
+            newSettings.navbarPosition ??= 'top'
+            newSettings.fontSize ??= 'small'
+            if (newSettings.theme !== 'dark' && newSettings.theme !== 'light') {
+                newSettings.theme = 'dark'
             }
-        } else if (extraInfo === null && players.length > 0) {
-            const currentPlayers = players
-            const currentSettings = settings
-            const ids: number[] = []
-            for (const p of currentPlayers) {
-                if (p.profileId) {
-                    ids.push(p.profileId)
-                }
+            newSettings.appLocation = appLocation
+
+            // update overlay port for current session
+            if (newSettings.rankingsPort) {
+                newSettings.rankingsPort = window.electronAPI.overlayPort
             }
+            // sync format to the overlay server
+            window.electronAPI.rankings.setFormat(newSettings.rankingsHtml ? 'html' : 'txt')
+            writeSettings(newSettings)
+        })
+    }, [settings, appLocation])
 
-            async function fetchExtraInfo() {
-                const x = await getExtraInfo(coh3, ids)
-                // The log may have been re-read while the request was in flight
-                if (!x || usePlayersStore.getState().players !== currentPlayers) {
-                    return
-                }
-
-                const teams = resolveRankings(currentPlayers, x.personalStats, x.cohTitles)
-                const newPlayers: Player[] = []
-                if (teams) {
-                    teams.forEach((team: Player[]) => {
-                        team.forEach((player) => {
-                            newPlayers.push(player)
-                        })
-                    })
-                }
-
-                setExtraInfo(x.result)
-                setPlayers(newPlayers)
-
-                writeRankings(coh3, newPlayers, currentSettings.rankingsHorizontal, coh3 && elo)
-            }
-            fetchExtraInfo()
-        }
-
-        if (!autoLogChecking) {
+    // Fetch ranks and countries for the players read from the log
+    useEffect(() => {
+        if (!players || players.length === 0 || extraInfo !== null) {
             return
         }
-
-        async function checkLog() {
-            if (settings && activeLogLocation) {
-                const data = await readLog(coh3, activeLogLocation)
-                if (data) {
-                    if (alert) {
-                        checkLogData({ data, playAudio })
-                    } else {
-                        checkLogData({ data })
-                    }
-                }
+        const ids: number[] = []
+        for (const p of players) {
+            if (p.profileId) {
+                ids.push(p.profileId)
             }
+        }
+
+        // The log may be re-read while the request is in flight
+        let cancelled = false
+        async function fetchExtraInfo(currentPlayers: Player[]) {
+            const x = await getExtraInfo(coh3, ids)
+            if (!x || cancelled) {
+                return
+            }
+            const teams = resolveRankings(currentPlayers, x.personalStats, x.cohTitles)
+            setExtraInfo(x.result)
+            setPlayers(teams.flat())
+        }
+        fetchExtraInfo(players)
+
+        return () => {
+            cancelled = true
+        }
+    }, [coh3, players, extraInfo, setExtraInfo, setPlayers])
+
+    // Poll the log on an interval
+    useEffect(() => {
+        if (!autoLogChecking || !activeLogLocation) {
+            return
+        }
+        async function checkLog() {
+            const data = await readLog(coh3, activeLogLocation)
+            checkLogData({ data, playAudio: alert ? playAudio : undefined })
         }
         const intervalId = setInterval(checkLog, logCheckInterval * 1000)
 
         return () => clearInterval(intervalId)
-    })
+    }, [autoLogChecking, activeLogLocation, coh3, alert, logCheckInterval])
 
     // Re-read log when game toggle or log location changes
     useEffect(() => {
