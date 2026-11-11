@@ -1,5 +1,6 @@
 import getText from '../../functions/utils/getText'
 import { getTimeAgo } from '../../functions/utils/time'
+import useSteamAvatar from '../../hooks/useSteamAvatar'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { Member } from '../../types'
@@ -31,8 +32,17 @@ export default function FoundPlayer(props: Props) {
     // profile_id: 4578968
     // xp: 437372
 
+    const steamId = props.player.name.startsWith('/steam/') ? props.player.name.substring(7) : null
+    const avatarUrl = useSteamAvatar(steamId)
+
     const name = (
-        <div>
+        <div className={styles.name}>
+            {/* the empty box keeps rows from shifting while avatars load */}
+            <span className={styles.avatar}>
+                {avatarUrl && (
+                    <img data-testid="found-player-avatar" src={avatarUrl} alt="steam avatar" />
+                )}
+            </span>
             <img
                 className={styles.flagImage}
                 src={countryFlags[props.player.country]}
