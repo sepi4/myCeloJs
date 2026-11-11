@@ -50,13 +50,13 @@
         "*.{js,json,css}": "oxfmt --no-error-on-unmatched-pattern"
     },
     "devDependencies": {
-        "@playwright/test": "^1.64.1",
+        "@playwright/test": "^1.65.0",
         "@types/node": "^26.6.6",
         "@types/react": "^19.3.0",
         "@types/react-dom": "^19.3.0",
         "@vitejs/plugin-react": "^6.2.1",
         "@vitest/coverage-v8": "^5.1.0",
-        "electron": "45.2.1",
+        "electron": "45.2.3",
         "electron-builder": "^26.18.0",
         "electron-vite": "^6.0.0",
         "husky": "^9.1.7",
