@@ -1,4 +1,4 @@
-import { MouseEvent } from 'react'
+import { MouseEvent, useEffect, useRef, useState } from 'react'
 
 import { getFactionCodeCoh2, getFactionCodeCoh3 } from '../../constants/factionMappings'
 import { getTotalGames } from '../../functions/rankings/simpleFunctions'
@@ -151,37 +151,78 @@ function PlayerMainRow(props: Props) {
         </span>
     )
 
+    const sentinelRef = useRef<HTMLDivElement>(null)
+    const rowRef = useRef<HTMLDivElement>(null)
+    const [stuck, setStuck] = useState(false)
+
+    useEffect(() => {
+        if (!showExtra) {
+            setStuck(false)
+            return
+        }
+        function check() {
+            const sentinel = sentinelRef.current
+            const row = rowRef.current
+            if (!sentinel || !row) {
+                return
+            }
+            // The sentinel stays where the row would be without sticking, so a gap means it is stuck.
+            setStuck(sentinel.getBoundingClientRect().top < row.getBoundingClientRect().top - 1)
+        }
+        check()
+        window.addEventListener('scroll', check, { passive: true })
+        window.addEventListener('resize', check)
+        return () => {
+            window.removeEventListener('scroll', check)
+            window.removeEventListener('resize', check)
+        }
+    }, [showExtra])
+
+    const isTopNavbar = settings?.navbarPosition !== 'left' && settings?.navbarPosition !== 'right'
+    const rowClass = [
+        isRealPlayer && styles.toggleable,
+        showExtra && styles.sticky,
+        showExtra && isTopNavbar && styles.stickyBelowTopNavbar,
+        showExtra && stuck && styles.stuck,
+    ]
+        .filter(Boolean)
+        .join(' ')
+
     return (
-        <div
-            data-testid="player-row"
-            className={isRealPlayer ? styles.toggleable : undefined}
-            onClick={isRealPlayer ? handleSetShowExtra : undefined}
-        >
-            <div className={styles.content}>
-                <MainRowSpan width="18%" justifyContent="flex-start">
-                    <>
-                        {dropDownArrow}{' '}
-                        <span
-                            data-testid="player-rank"
-                            title={rankTitle}
-                            style={{ fontWeight: 600 }}
-                        >
-                            {rank}
-                        </span>
-                    </>
-                </MainRowSpan>
-                {coh3 && elo && (
-                    <MainRowSpan width="14%">
-                        <span data-testid="player-elo" style={{ fontWeight: 300 }}>
-                            {player.rating ? `(${player.rating})` : '-'}
-                        </span>
+        <>
+            <div ref={sentinelRef} />
+            <div
+                ref={rowRef}
+                data-testid="player-row"
+                className={rowClass || undefined}
+                onClick={isRealPlayer ? handleSetShowExtra : undefined}
+            >
+                <div className={styles.content}>
+                    <MainRowSpan width="18%" justifyContent="flex-start">
+                        <>
+                            {dropDownArrow}{' '}
+                            <span
+                                data-testid="player-rank"
+                                title={rankTitle}
+                                style={{ fontWeight: 600 }}
+                            >
+                                {rank}
+                            </span>
+                        </>
                     </MainRowSpan>
-                )}
-                <MainRowSpan width="14%">{faction}</MainRowSpan>
-                <MainRowSpan width="14%">{countryFlag}</MainRowSpan>
-                <MainRowSpan width={coh3 && elo ? '40%' : '54%'}>{alias}</MainRowSpan>
+                    {coh3 && elo && (
+                        <MainRowSpan width="14%">
+                            <span data-testid="player-elo" style={{ fontWeight: 300 }}>
+                                {player.rating ? `(${player.rating})` : '-'}
+                            </span>
+                        </MainRowSpan>
+                    )}
+                    <MainRowSpan width="14%">{faction}</MainRowSpan>
+                    <MainRowSpan width="14%">{countryFlag}</MainRowSpan>
+                    <MainRowSpan width={coh3 && elo ? '40%' : '54%'}>{alias}</MainRowSpan>
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 
