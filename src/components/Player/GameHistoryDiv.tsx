@@ -126,7 +126,6 @@ export default function GameHistoryDiv(props: Props) {
                     // same order as the row: own team first, then opponents
                     players={allies.concat(opponents)}
                     profiles={props.profiles}
-                    settings={settings}
                 />
             )}
         </div>

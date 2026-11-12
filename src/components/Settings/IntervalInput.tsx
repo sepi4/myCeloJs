@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 
-import getText from '../../functions/utils/getText'
+import useText from '../../hooks/useText'
 import { useLogCheckIntervalStore } from '../../stores/logCheckIntervalStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import SettingsDiv from './SettingsDiv'
@@ -8,6 +8,7 @@ import SettingsDiv from './SettingsDiv'
 import styles from './Settings.module.css'
 
 function IntervalInput() {
+    const getText = useText()
     const { settings } = useSettingsStore()
     const { logCheckInterval, setLogCheckInterval } = useLogCheckIntervalStore()
 
@@ -41,7 +42,7 @@ function IntervalInput() {
     }
 
     return (
-        <SettingsDiv title={getText('log_check_interval_title', settings)}>
+        <SettingsDiv title={getText('log_check_interval_title')}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
                 <input
                     data-testid="interval-input"
@@ -54,10 +55,8 @@ function IntervalInput() {
                         e.key === 'Enter' ? checkNumbers(e) : error ? setError(false) : null
                     }
                 />
-                <span>{getText('sec', settings)}</span>
-                {error && (
-                    <span className={styles.error}>{getText('integer_error', settings)}</span>
-                )}
+                <span>{getText('sec')}</span>
+                {error && <span className={styles.error}>{getText('integer_error')}</span>}
             </div>
         </SettingsDiv>
     )

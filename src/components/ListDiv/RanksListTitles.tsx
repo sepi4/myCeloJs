@@ -1,8 +1,7 @@
 import { GAME_CONFIG } from '../../constants/games'
-import getText from '../../functions/utils/getText'
 import { useDisplayGame } from '../../hooks/useDisplayGame'
+import useText from '../../hooks/useText'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
-import { useSettingsStore } from '../../stores/settingsStore'
 import { useSorterStore } from '../../stores/sorterStore'
 import { Rank } from '../../types'
 import ColumnTitle from './ColumnTitle'
@@ -12,8 +11,8 @@ import styles from './ListDiv.module.css'
 type SorterName = 'byRank' | 'byWinRate' | 'byStreak' | 'byName' | 'byTotal' | 'byRating'
 
 function RanksListTitles({ ranksArr }: { ranksArr: Rank[] }) {
+    const getText = useText()
     const { sorter, setSorter } = useSorterStore()
-    const { settings } = useSettingsStore()
     const {
         navButtons: { elo },
     } = useNavButtonsStore()
@@ -31,20 +30,14 @@ function RanksListTitles({ ranksArr }: { ranksArr: Rank[] }) {
         <>
             {ranksArr.length > 0 && (
                 <div className={`${styles.row} ${styles.title}`}>
-                    <ColumnTitle {...getSorter('byRank')}>{getText('rank', settings)}</ColumnTitle>
+                    <ColumnTitle {...getSorter('byRank')}>{getText('rank')}</ColumnTitle>
                     <ColumnTitle {...getSorter('byName')} width="40%">
-                        {getText('mode', settings)}
+                        {getText('mode')}
                     </ColumnTitle>
                     {showElo && <ColumnTitle {...getSorter('byRating')}>ELO</ColumnTitle>}
-                    <ColumnTitle {...getSorter('byStreak')}>
-                        {getText('streak', settings)}
-                    </ColumnTitle>
-                    <ColumnTitle {...getSorter('byWinRate')}>
-                        {getText('win', settings)}
-                    </ColumnTitle>
-                    <ColumnTitle {...getSorter('byTotal')}>
-                        {getText('total', settings)}
-                    </ColumnTitle>
+                    <ColumnTitle {...getSorter('byStreak')}>{getText('streak')}</ColumnTitle>
+                    <ColumnTitle {...getSorter('byWinRate')}>{getText('win')}</ColumnTitle>
+                    <ColumnTitle {...getSorter('byTotal')}>{getText('total')}</ColumnTitle>
                 </div>
             )}
         </>

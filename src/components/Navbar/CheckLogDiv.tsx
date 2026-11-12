@@ -1,7 +1,7 @@
 import { GAME_CONFIG } from '../../constants/games'
 import setPlayersWithoutChecking from '../../functions/checkers/setPlayersWithoutChecking'
 import { readLog } from '../../functions/log-parsing/readLog'
-import getText from '../../functions/utils/getText'
+import useText from '../../hooks/useText'
 import { useAlertStore } from '../../stores/alertStore'
 import { useAutoLogCheckingStore } from '../../stores/autoLogCheckingStore'
 import { useGameStore } from '../../stores/gameStore'
@@ -11,6 +11,7 @@ import Choice from '../Choice'
 import styles from './CheckLogDiv.module.css'
 
 function CheckLogDiv() {
+    const getText = useText()
     const { settings } = useSettingsStore()
     const { alert, toggleAlert } = useAlertStore()
     const { autoLogChecking, toggleAutoLogChecking } = useAutoLogCheckingStore()
@@ -24,28 +25,28 @@ function CheckLogDiv() {
         <div className={isTop ? styles.containerTop : styles.container}>
             <Choice
                 type="checkbox"
-                label={getText('auto', settings)}
+                label={getText('auto')}
                 checked={autoLogChecking}
                 onChange={toggleAutoLogChecking}
                 testId="checkbox-auto"
-                title={getText('tooltip_auto', settings)}
+                title={getText('tooltip_auto')}
             />
 
             {autoLogChecking ? (
                 <Choice
                     type="checkbox"
-                    label={getText('alert', settings)}
+                    label={getText('alert')}
                     checked={alert}
                     onChange={toggleAlert}
                     testId="checkbox-alert"
-                    title={getText('tooltip_alert', settings)}
+                    title={getText('tooltip_alert')}
                 />
             ) : null}
 
             <button
                 data-testid="check-log-button"
                 className={styles.btn}
-                title={getText('tooltip_check_log', settings)}
+                title={getText('tooltip_check_log')}
                 onClick={async () => {
                     const data = await readLog(game, activeLogLocation)
                     if (data) {
@@ -53,7 +54,7 @@ function CheckLogDiv() {
                     }
                 }}
             >
-                {getText('check_log_button', settings)}
+                {getText('check_log_button')}
             </button>
         </div>
     )

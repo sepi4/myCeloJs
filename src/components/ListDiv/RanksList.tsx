@@ -1,8 +1,7 @@
 import { GAME_CONFIG } from '../../constants/games'
-import getText from '../../functions/utils/getText'
 import { useDisplayGame } from '../../hooks/useDisplayGame'
+import useText from '../../hooks/useText'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
-import { useSettingsStore } from '../../stores/settingsStore'
 import { Rank as RankType } from '../../types'
 import Rank from '../Player/Rank'
 import Cell from './Cell'
@@ -21,7 +20,7 @@ interface Props {
 }
 
 function RanksList(props: Props) {
-    const { settings } = useSettingsStore()
+    const getText = useText()
     const {
         navButtons: { elo },
     } = useNavButtonsStore()
@@ -41,7 +40,7 @@ function RanksList(props: Props) {
                         <Cell
                             title={
                                 r.rank > 0 && r.ranktotal > 0
-                                    ? `${r.rank} ${getText('of', settings)} ${r.ranktotal}`
+                                    ? `${r.rank} ${getText('of')} ${r.ranktotal}`
                                     : undefined
                             }
                         >

@@ -1,11 +1,11 @@
-import getText from '../../functions/utils/getText'
 import { getTime } from '../../functions/utils/time'
-import { MatchHistoryReportResult, MatchObject, SettingsType } from '../../types'
+import useText from '../../hooks/useText'
+import { isTextKey } from '../../translations/translation'
+import { MatchHistoryReportResult, MatchObject } from '../../types'
 
 import styles from './MatchTableBody.module.css'
 
 interface Props {
-    settings: SettingsType | null
     players: MatchHistoryReportResult[]
     game: MatchObject
 }
@@ -30,15 +30,16 @@ function counterRank(key: string) {
 }
 
 function MatchTableBody(props: Props) {
-    const infoArr: string[] = (props.game?.counters ? Object.keys(props.game.counters) : [])
+    const getText = useText()
+    const infoArr = (props.game?.counters ? Object.keys(props.game.counters) : [])
         .sort((a, b) => counterRank(a) - counterRank(b) || (a > b ? 1 : -1))
-        .filter((k) => getText(k, props.settings) !== undefined)
+        .filter(isTextKey)
 
     return (
         <tbody>
-            {infoArr.map((key: string, i) => (
+            {infoArr.map((key, i) => (
                 <tr className={styles.row} key={`${key} ${i}`}>
-                    <td className={styles.name}>{getText(key, props.settings)}</td>
+                    <td className={styles.name}>{getText(key)}</td>
 
                     {props.players.map((p) => (
                         <td key={`${p.profile_id} ${i}`}>

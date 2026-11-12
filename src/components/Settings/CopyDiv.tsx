@@ -1,6 +1,5 @@
-import getText from '../../functions/utils/getText'
+import useText from '../../hooks/useText'
 import useTimedBoolean from '../../hooks/useTimedBoolean'
-import { useSettingsStore } from '../../stores/settingsStore'
 import Notification from '../Notification'
 
 import styles from './Settings.module.css'
@@ -11,7 +10,7 @@ interface Props {
 }
 
 function CopyDiv(props: Props) {
-    const { settings } = useSettingsStore()
+    const getText = useText()
 
     const [timed, setTimed] = useTimedBoolean(1000)
     const handleCopy = () => {
@@ -27,7 +26,7 @@ function CopyDiv(props: Props) {
     const notification = timed ? (
         <Notification
             testId={props.testId ? `${props.testId}-notification` : undefined}
-            text={getText('copied', settings)}
+            text={getText('copied')}
         />
     ) : null
 
@@ -43,7 +42,7 @@ function CopyDiv(props: Props) {
                 data-testid={props.testId ? `${props.testId}-button` : undefined}
                 onClick={handleCopy}
             >
-                {getText('copy', settings)}
+                {getText('copy')}
             </button>
         </div>
     )

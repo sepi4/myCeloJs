@@ -1,11 +1,8 @@
-interface Translations {
-    [key: string]: {
-        en: string
-        ru: string
-    }
-}
+import { Language } from '../types'
 
-const text: Translations = {
+type Translations = Record<string, Record<Language, string>>
+
+const text = {
     // settings ---------------------------------
     log_location_title: {
         en: 'Log location',
@@ -460,6 +457,12 @@ const text: Translations = {
         en: '(no name)',
         ru: '(без имени)',
     },
+} as const satisfies Translations
+
+export type TextKey = keyof typeof text
+
+export function isTextKey(key: string): key is TextKey {
+    return Object.hasOwn(text, key)
 }
 
 export default text

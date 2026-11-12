@@ -1,26 +1,26 @@
 import { getFactionCodeByRaceId, getFactionFlag } from '../../constants/games'
 import { getExtraInfo } from '../../functions/api/getExtraInfo'
-import getText from '../../functions/utils/getText'
 import { useDisplayGame } from '../../hooks/useDisplayGame'
+import useText from '../../hooks/useText'
 import { useNavigationStore } from '../../stores/navigationStore'
-import { MatchHistoryReportResult, NormalizedProfiles, SettingsType } from '../../types'
+import { MatchHistoryReportResult, NormalizedProfiles } from '../../types'
 import PlayerName from '../PlayerName'
 
 import styles from './MatchTableHeaders.module.css'
 
 interface Props {
-    settings: SettingsType | null
     players: MatchHistoryReportResult[]
     profiles: NormalizedProfiles
 }
 
 function MatchTableHeaders(props: Props) {
+    const getText = useText()
     const game = useDisplayGame()
     const openPlayerCard = useNavigationStore((s) => s.openPlayerCard)
     return (
         <thead>
             <tr>
-                <th className={styles.rowLabel}>{getText('faction', props.settings)}</th>
+                <th className={styles.rowLabel}>{getText('faction')}</th>
 
                 {props.players.map((p) => {
                     const factionCode = getFactionCodeByRaceId(game, p.race_id)
@@ -34,7 +34,7 @@ function MatchTableHeaders(props: Props) {
             </tr>
 
             <tr>
-                <th className={styles.rowLabel}>{getText('name', props.settings)}</th>
+                <th className={styles.rowLabel}>{getText('name')}</th>
                 {props.players.map((p) => {
                     const pro = props.profiles[p.profile_id]
                     return (

@@ -1,6 +1,6 @@
 import { GAME_CONFIG, GAMES } from '../../constants/games'
 import { getExtraInfo } from '../../functions/api/getExtraInfo'
-import getText from '../../functions/utils/getText'
+import useText from '../../hooks/useText'
 import { useGameStore } from '../../stores/gameStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useNavigationStore } from '../../stores/navigationStore'
@@ -22,6 +22,7 @@ interface Props {
 }
 
 export default function Navbar(props: Props) {
+    const getText = useText()
     const { settings } = useSettingsStore()
     const { settingsView, openSettingsView, closeSettingsView } = useSettingsViewStore()
 
@@ -44,10 +45,10 @@ export default function Navbar(props: Props) {
                 key={text}
                 type="checkbox"
                 testId={`checkbox-${text}`}
-                label={getText(text, settings)}
+                label={getText(text)}
                 checked={navButtons[text]}
                 onChange={() => toggleNavButton(text)}
-                title={getText(`tooltip_${text}`, settings)}
+                title={getText(`tooltip_${text}`)}
             />
         )
     }
@@ -57,10 +58,10 @@ export default function Navbar(props: Props) {
             key="elo"
             type="checkbox"
             testId="checkbox-elo"
-            label={getText('elo', settings)}
+            label={getText('elo')}
             checked={navButtons.elo}
             onChange={() => toggleNavButton('elo')}
-            title={getText('tooltip_elo', settings)}
+            title={getText('tooltip_elo')}
         />
     ) : null
 
@@ -112,7 +113,7 @@ export default function Navbar(props: Props) {
     const userIcon =
         settings && activeProfileId ? (
             <NavBarIcon
-                title={getText('my_playercard', settings)}
+                title={getText('my_playercard')}
                 testId="user-icon"
                 icon={faUserAlt}
                 fun={alreadyViewingMyCard ? undefined : handleOpenMyCard}
@@ -121,7 +122,7 @@ export default function Navbar(props: Props) {
 
     const backIcon = (
         <NavBarIcon
-            title={`${getText('back', settings)} (←)`}
+            title={`${getText('back')} (←)`}
             testId="back-button"
             icon={faArrowLeft}
             fun={canGoBack ? goBack : undefined}
@@ -131,7 +132,7 @@ export default function Navbar(props: Props) {
 
     const forwardIcon = (
         <NavBarIcon
-            title={`${getText('forward', settings)} (→)`}
+            title={`${getText('forward')} (→)`}
             testId="forward-button"
             icon={faArrowRight}
             fun={canGoForward ? goForward : undefined}
@@ -141,7 +142,7 @@ export default function Navbar(props: Props) {
 
     const searchIcon = (
         <NavBarIcon
-            title={getText('search', settings)}
+            title={getText('search')}
             testId="search-icon"
             icon={faSearch}
             fun={handleSearchView}
@@ -150,7 +151,7 @@ export default function Navbar(props: Props) {
 
     const settingsIcon = (
         <NavBarIcon
-            title={getText('settings', settings)}
+            title={getText('settings')}
             testId="settings-icon"
             icon={faCogs}
             fun={handleOpenSettings}
@@ -201,7 +202,7 @@ export default function Navbar(props: Props) {
                                     checked={game === option}
                                     onChange={() => setGame(option)}
                                     disabled={!logLocation}
-                                    title={logLocation ? option : getText('log_not_set', settings)}
+                                    title={logLocation ? option : getText('log_not_set')}
                                 />
                             )
                         })}

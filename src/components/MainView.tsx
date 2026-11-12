@@ -1,8 +1,8 @@
 import { JSX, useLayoutEffect } from 'react'
 
 import { GAME_CONFIG } from '../constants/games'
-import getText from '../functions/utils/getText'
 import useNavigationKeys from '../hooks/useNavigationKeys'
+import useText from '../hooks/useText'
 import { useGameStore } from '../stores/gameStore'
 import { Location, useNavigationStore } from '../stores/navigationStore'
 import { usePlayersStore } from '../stores/playersStore'
@@ -26,6 +26,7 @@ function usesSearch(location: Location) {
 }
 
 function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
+    const getText = useText()
     const { settingsView } = useSettingsViewStore()
     const teams: Player[][] = [[], []]
     const { settings } = useSettingsStore()
@@ -58,7 +59,7 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
     if (!settings || !activeLogLocation) {
         return (
             <div className={styles.centered}>
-                <h2 data-testid="no-log-prompt">{getText('add_log_location', settings)}</h2>
+                <h2 data-testid="no-log-prompt">{getText('add_log_location')}</h2>
             </div>
         )
     }
@@ -74,7 +75,7 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
             </div>
         ) : (
             <div className={styles.centered}>
-                <h2>{getText('no_info', settings)}</h2>
+                <h2>{getText('no_info')}</h2>
             </div>
         )
 

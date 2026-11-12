@@ -2,8 +2,7 @@ import { JSX } from 'react'
 
 import cross from '../../assets/img/cross.png'
 import star from '../../assets/img/star.png'
-import getTextFun from '../../functions/utils/getText'
-import { useSettingsStore } from '../../stores/settingsStore'
+import useText from '../../hooks/useText'
 import { Rank as RankType } from '../../types'
 import { faCaretDown, faCaretRight } from '../icons'
 import SvgIcon from '../SvgIcon'
@@ -17,8 +16,7 @@ interface Props {
 
 function Rank(props: Props) {
     const { rank } = props
-    const { settings } = useSettingsStore()
-    const getText = (x: string) => getTextFun(x, settings)
+    const getText = useText()
 
     const showMembers = props.open
     function sw(x: string) {

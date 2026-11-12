@@ -1,5 +1,5 @@
 import { updateSettings } from '../../functions/settings/writeSettings'
-import getText from '../../functions/utils/getText'
+import useText from '../../hooks/useText'
 import { useSettingsStore } from '../../stores/settingsStore'
 import Choice from '../Choice'
 import CopyDiv from './CopyDiv'
@@ -8,6 +8,7 @@ import SettingsDiv from './SettingsDiv'
 import SettingsLocation from './SettingsLocation'
 
 export default function SettingsAfterLog() {
+    const getText = useText()
     const { settings } = useSettingsStore()
 
     const handleType = (format: 'html' | 'txt') => {
@@ -32,8 +33,8 @@ export default function SettingsAfterLog() {
     if (settings && (settings.logLocationCoh2 || settings.logLocationCoh3)) {
         return (
             <>
-                <SettingsDiv title={getText('rankings_file_title', settings)}>
-                    <RadioButtonsDiv title={getText('format', settings)}>
+                <SettingsDiv title={getText('rankings_file_title')}>
+                    <RadioButtonsDiv title={getText('format')}>
                         <Choice
                             type="radio"
                             testId="radio-html"
@@ -50,17 +51,17 @@ export default function SettingsAfterLog() {
                         />
                     </RadioButtonsDiv>
 
-                    <RadioButtonsDiv title={getText('orientation', settings)}>
+                    <RadioButtonsDiv title={getText('orientation')}>
                         <Choice
                             type="radio"
                             testId="radio-horizontal"
-                            label={getText('horizontal', settings)}
+                            label={getText('horizontal')}
                             checked={settings.rankingsHorizontal === true}
                             onChange={() => handleOrientation(true)}
                         />
                         <Choice
                             type="radio"
-                            label={getText('vertical', settings)}
+                            label={getText('vertical')}
                             checked={settings.rankingsHorizontal === false}
                             onChange={() => handleOrientation(false)}
                         />
@@ -71,7 +72,7 @@ export default function SettingsAfterLog() {
 
                 <SettingsLocation
                     fileTypeSet={overlayConfigured}
-                    title={getText('settings_file_location_title', settings)}
+                    title={getText('settings_file_location_title')}
                 />
             </>
         )
@@ -79,8 +80,8 @@ export default function SettingsAfterLog() {
 
     // if log-file not set
     return (
-        <SettingsDiv title={getText('settings_file_location_title', settings)}>
-            <p style={{ color: 'var(--text-danger)' }}>{getText('log_location_first', settings)}</p>
+        <SettingsDiv title={getText('settings_file_location_title')}>
+            <p style={{ color: 'var(--text-danger)' }}>{getText('log_location_first')}</p>
         </SettingsDiv>
     )
 }

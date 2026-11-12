@@ -1,11 +1,7 @@
-import getText from '../../functions/utils/getText'
 import { getTime, getTimeRange } from '../../functions/utils/time'
-import {
-    MatchHistoryReportResult,
-    MatchObject,
-    NormalizedProfiles,
-    SettingsType,
-} from '../../types'
+import useText from '../../hooks/useText'
+import { useSettingsStore } from '../../stores/settingsStore'
+import { MatchHistoryReportResult, MatchObject, NormalizedProfiles } from '../../types'
 import MatchTableBody from './MatchTableBody'
 import MatchTableHeaders from './MatchTableHeaders'
 
@@ -15,29 +11,28 @@ interface Props {
     game: MatchObject
     players: MatchHistoryReportResult[]
     profiles: NormalizedProfiles
-    settings: SettingsType | null
 }
 
 function GameDetails(props: Props) {
-    const { settings, game, players, profiles } = props
+    const getText = useText()
+    const { game, players, profiles } = props
+    const language = useSettingsStore((state) => state.settings?.language) ?? 'en'
 
-    const lg = settings && settings.language ? settings.language : 'en'
-
-    const timeRange = getTimeRange(game.startGameTime, game.endGameTime, lg)
+    const timeRange = getTimeRange(game.startGameTime, game.endGameTime, language)
     const durationTime = getTime(game.endGameTime.getTime() - game.startGameTime.getTime())
 
     return (
         <div data-testid="game-details" className={styles.content}>
             <table className={styles.table}>
-                <MatchTableHeaders settings={settings} players={players} profiles={profiles} />
-                <MatchTableBody game={game} settings={settings} players={players} />
+                <MatchTableHeaders players={players} profiles={profiles} />
+                <MatchTableBody game={game} players={players} />
             </table>
             <dl className={styles.meta}>
-                <dt>{getText('map', settings)}</dt>
+                <dt>{getText('map')}</dt>
                 <dd>{game.mapName}</dd>
-                <dt data-testid="game-time">{getText('time', settings)}</dt>
+                <dt data-testid="game-time">{getText('time')}</dt>
                 <dd>{timeRange}</dd>
-                <dt>{getText('duration', settings)}</dt>
+                <dt>{getText('duration')}</dt>
                 <dd>{durationTime}</dd>
             </dl>
         </div>

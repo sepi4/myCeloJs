@@ -3,8 +3,8 @@ import { useRef, useState } from 'react'
 import { Game, GAME_CONFIG } from '../../constants/games'
 import { fetchCoh2ProfileId } from '../../functions/api/fetchCoh2ProfileId'
 import { updateSettings } from '../../functions/settings/writeSettings'
-import getText from '../../functions/utils/getText'
 import useEsc from '../../hooks/useEsc'
+import useText from '../../hooks/useText'
 import useTimedBoolean from '../../hooks/useTimedBoolean'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { useSettingsViewStore } from '../../stores/settingsViewStore'
@@ -26,6 +26,7 @@ interface Props {
 }
 
 function Settings(props: Props) {
+    const getText = useText()
     const { settings } = useSettingsStore()
     const { closeSettingsView } = useSettingsViewStore()
 
@@ -142,12 +143,12 @@ function Settings(props: Props) {
                 backgroundColor: 'var(--bg-danger)',
                 color: 'var(--spinner-color)',
             }}
-            text={getText('id_is_wrong', settings)}
+            text={getText('id_is_wrong')}
         />
     ) : null
 
     const savedDiv = timedSetID ? (
-        <Notification testId="steam-id-success" text={getText('id_set', settings)} />
+        <Notification testId="steam-id-success" text={getText('id_set')} />
     ) : null
 
     const isDefaultSettings =
@@ -171,7 +172,7 @@ function Settings(props: Props) {
                 <div style={{ display: 'flex', gap: '2em', flexWrap: 'wrap' }}>
                     <div>
                         <div style={{ fontWeight: 'bold' }} data-testid="language-title">
-                            {getText('language', settings)}
+                            {getText('language')}
                         </div>
                         <div
                             style={{
@@ -196,9 +197,7 @@ function Settings(props: Props) {
                         </div>
                     </div>
                     <div>
-                        <div style={{ fontWeight: 'bold' }}>
-                            {getText('navbar_position', settings)}
-                        </div>
+                        <div style={{ fontWeight: 'bold' }}>{getText('navbar_position')}</div>
                         <div
                             style={{
                                 display: 'grid',
@@ -215,7 +214,7 @@ function Settings(props: Props) {
                                     testId={`navbar-position-${pos}`}
                                     name="navbarPosition"
                                     value={pos}
-                                    label={getText(`navbar_${pos}`, settings)}
+                                    label={getText(`navbar_${pos}`)}
                                     checked={navbarPosition === pos}
                                     onChange={() => handleNavbarPosition(pos)}
                                     className={
@@ -228,7 +227,7 @@ function Settings(props: Props) {
                         </div>
                     </div>
                     <div>
-                        <div style={{ fontWeight: 'bold' }}>{getText('font_size', settings)}</div>
+                        <div style={{ fontWeight: 'bold' }}>{getText('font_size')}</div>
                         <div
                             style={{
                                 display: 'flex',
@@ -244,7 +243,7 @@ function Settings(props: Props) {
                                     testId={`font-size-${size}`}
                                     name="fontSize"
                                     value={size}
-                                    label={getText(`font_${size}`, settings)}
+                                    label={getText(`font_${size}`)}
                                     checked={fontSize === size}
                                     onChange={() => handleFontSize(size)}
                                 />
@@ -252,7 +251,7 @@ function Settings(props: Props) {
                         </div>
                     </div>
                     <div>
-                        <div style={{ fontWeight: 'bold' }}>{getText('theme', settings)}</div>
+                        <div style={{ fontWeight: 'bold' }}>{getText('theme')}</div>
                         <div
                             style={{
                                 display: 'flex',
@@ -268,7 +267,7 @@ function Settings(props: Props) {
                                     testId={`theme-${t}`}
                                     name="theme"
                                     value={t}
-                                    label={getText(`theme_${t}`, settings)}
+                                    label={getText(`theme_${t}`)}
                                     checked={theme === t}
                                     onChange={() => handleTheme(t)}
                                 />
@@ -278,31 +277,29 @@ function Settings(props: Props) {
                 </div>
             </SettingsDiv>
 
-            <SettingsDiv title={`COH2 ${getText('log_location_title', settings)}`}>
+            <SettingsDiv title={`COH2 ${getText('log_location_title')}`}>
                 <div className={styles.textDiv}>
                     {settings?.logLocationCoh2 ? (
                         <span className={styles.textDivText}>{settings.logLocationCoh2}</span>
                     ) : (
-                        <span className={styles.placeholder}>
-                            {getText('required_for_coh2', settings)}
-                        </span>
+                        <span className={styles.placeholder}>{getText('required_for_coh2')}</span>
                     )}
                     {settings?.logLocationCoh2 && (
                         <ClearButton
                             testId="clear-log-coh2-button"
                             onClick={() =>
                                 setConfirm({
-                                    text: getText('clear_log_location_confirm', settings),
+                                    text: getText('clear_log_location_confirm'),
                                     onOk: () => clearLogLocation('coh2'),
                                 })
                             }
-                            title={getText('clear_log_location', settings)}
+                            title={getText('clear_log_location')}
                         />
                     )}
                     {timedCopyCoh2 && (
                         <Notification
                             testId="copy-log-coh2-notification"
-                            text={getText('copied', settings)}
+                            text={getText('copied')}
                         />
                     )}
                 </div>
@@ -312,7 +309,7 @@ function Settings(props: Props) {
                         data-testid="log-location-button-coh2"
                         onClick={() => changeLogLocation('coh2')}
                     >
-                        {getText('select', settings)}
+                        {getText('select')}
                     </button>
                     {settings?.logLocationCoh2 && (
                         <button
@@ -323,37 +320,35 @@ function Settings(props: Props) {
                                 navigator.clipboard.writeText(settings.logLocationCoh2 ?? '')
                             }}
                         >
-                            {getText('copy', settings)}
+                            {getText('copy')}
                         </button>
                     )}
                 </div>
             </SettingsDiv>
 
-            <SettingsDiv title={`COH3 ${getText('log_location_title', settings)}`}>
+            <SettingsDiv title={`COH3 ${getText('log_location_title')}`}>
                 <div className={styles.textDiv}>
                     {settings?.logLocationCoh3 ? (
                         <span className={styles.textDivText}>{settings.logLocationCoh3}</span>
                     ) : (
-                        <span className={styles.placeholder}>
-                            {getText('required_for_coh3', settings)}
-                        </span>
+                        <span className={styles.placeholder}>{getText('required_for_coh3')}</span>
                     )}
                     {settings?.logLocationCoh3 && (
                         <ClearButton
                             testId="clear-log-coh3-button"
                             onClick={() =>
                                 setConfirm({
-                                    text: getText('clear_log_location_confirm', settings),
+                                    text: getText('clear_log_location_confirm'),
                                     onOk: () => clearLogLocation('coh3'),
                                 })
                             }
-                            title={getText('clear_log_location', settings)}
+                            title={getText('clear_log_location')}
                         />
                     )}
                     {timedCopyCoh3 && (
                         <Notification
                             testId="copy-log-coh3-notification"
-                            text={getText('copied', settings)}
+                            text={getText('copied')}
                         />
                     )}
                 </div>
@@ -363,7 +358,7 @@ function Settings(props: Props) {
                         data-testid="log-location-button-coh3"
                         onClick={() => changeLogLocation('coh3')}
                     >
-                        {getText('select', settings)}
+                        {getText('select')}
                     </button>
                     {settings?.logLocationCoh3 && (
                         <button
@@ -374,13 +369,13 @@ function Settings(props: Props) {
                                 navigator.clipboard.writeText(settings.logLocationCoh3 ?? '')
                             }}
                         >
-                            {getText('copy', settings)}
+                            {getText('copy')}
                         </button>
                     )}
                 </div>
             </SettingsDiv>
 
-            <SettingsDiv title={getText('my_steam_id', settings)}>
+            <SettingsDiv title={getText('my_steam_id')}>
                 <>
                     <div className={styles.inputWrapper}>
                         <input
@@ -394,11 +389,11 @@ function Settings(props: Props) {
                                 testId="clear-steam-id-button"
                                 onClick={() =>
                                     setConfirm({
-                                        text: getText('clear_steam_id_confirm', settings),
+                                        text: getText('clear_steam_id_confirm'),
                                         onOk: clearSteamId,
                                     })
                                 }
-                                title={getText('clear_steam_id', settings)}
+                                title={getText('clear_steam_id')}
                             />
                         )}
                     </div>
@@ -408,7 +403,7 @@ function Settings(props: Props) {
                         data-testid="steam-id-save"
                         onClick={handleSteamId}
                     >
-                        {getText('save', settings)}
+                        {getText('save')}
                     </button>
                     {errorDiv}
                     {savedDiv}
@@ -442,14 +437,14 @@ function Settings(props: Props) {
                             setConfirm(null)
                         }}
                     >
-                        {getText('ok', settings)}
+                        {getText('ok')}
                     </button>
                     <button
                         className={styles.button}
                         data-testid="confirm-cancel"
                         onClick={() => setConfirm(null)}
                     >
-                        {getText('cancel', settings)}
+                        {getText('cancel')}
                     </button>
                 </div>
             </Modal>
@@ -462,12 +457,12 @@ function Settings(props: Props) {
                         disabled={isDefaultSettings}
                         onClick={() =>
                             setConfirm({
-                                text: getText('reset_all_settings_confirm', settings),
+                                text: getText('reset_all_settings_confirm'),
                                 onOk: resetAllSettings,
                             })
                         }
                     >
-                        {getText('reset_all_settings', settings)}
+                        {getText('reset_all_settings')}
                     </button>
                 </div>
             </SettingsDiv>

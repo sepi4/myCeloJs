@@ -1,12 +1,8 @@
-import text from '../../translations/translation'
+import text, { TextKey } from '../../translations/translation'
+import { Language } from '../../types'
 
-type X = { language?: string } | null
-
-function getText(key: string, settings: X): string | undefined {
-    const lang = settings?.language === 'ru' ? settings.language : 'en'
-
-    if (text[key]) {
-        return text[key][lang]
-    }
+function getText(key: TextKey, language?: Language): string {
+    // The settings file is user-editable, so the saved language may be anything
+    return text[key][language === 'ru' ? 'ru' : 'en']
 }
 export default getText

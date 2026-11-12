@@ -1,6 +1,5 @@
-import getText from '../../functions/utils/getText'
+import useText from '../../hooks/useText'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
-import { useSettingsStore } from '../../stores/settingsStore'
 import { ExtraInfo, GameHistoryState, Player } from '../../types'
 import ListDiv from '../ListDiv/ListDiv'
 import TableDiv from '../Table/TableDiv'
@@ -16,8 +15,8 @@ interface Props {
 }
 
 function PlayerExtraInfo(props: Props) {
+    const getText = useText()
     let ranksArr = props.extraInfo?.ranks ?? []
-    const { settings } = useSettingsStore()
     const { navButtons } = useNavButtonsStore()
 
     const totalGames = (() => {
@@ -35,7 +34,7 @@ function PlayerExtraInfo(props: Props) {
         return (
             <div data-testid="total-games" className={styles.total}>
                 <span title={`${wins} / ${losses}`}>
-                    {getText('total_games', settings)}: {wins + losses}
+                    {getText('total_games')}: {wins + losses}
                 </span>
             </div>
         )

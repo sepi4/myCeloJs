@@ -1,6 +1,6 @@
-import getText from '../../functions/utils/getText'
 import { getTimeAgo } from '../../functions/utils/time'
 import useSteamAvatar from '../../hooks/useSteamAvatar'
+import useText from '../../hooks/useText'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { Member } from '../../types'
@@ -14,6 +14,7 @@ interface Props {
 }
 
 export default function FoundPlayer(props: Props) {
+    const getText = useText()
     const { countryFlags } = useCountryFlagsStore()
     const { settings } = useSettingsStore()
 
@@ -58,11 +59,11 @@ export default function FoundPlayer(props: Props) {
         <div data-testid="found-player" className={styles.container} onClick={props.clickFun}>
             {name}
             <span className={styles.stat}>
-                <span className={styles.label}>{getText('mp_games', settings)}:</span>
+                <span className={styles.label}>{getText('mp_games')}:</span>
                 {props.player.totalGames}
             </span>
             <span className={styles.stat}>
-                <span className={styles.label}>{getText('last_game', settings)}:</span>
+                <span className={styles.label}>{getText('last_game')}:</span>
                 {timeAgo}
             </span>
         </div>
