@@ -2,13 +2,13 @@ import { useRef, useState } from 'react'
 
 import { Game, GAME_CONFIG } from '../../constants/games'
 import { fetchCoh2ProfileId } from '../../functions/api/fetchCoh2ProfileId'
-import writeSettings from '../../functions/settings/writeSettings'
+import { updateSettings } from '../../functions/settings/writeSettings'
 import getText from '../../functions/utils/getText'
 import useEsc from '../../hooks/useEsc'
 import useTimedBoolean from '../../hooks/useTimedBoolean'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { useSettingsViewStore } from '../../stores/settingsViewStore'
-import { FontSize, Language, NavbarPosition, SettingsType, Theme } from '../../types'
+import { FontSize, Language, NavbarPosition, Theme } from '../../types'
 import Choice from '../Choice'
 import Icon from '../Icon'
 import { faTimes } from '../icons'
@@ -35,15 +35,15 @@ function Settings(props: Props) {
     const theme = settings?.theme ?? 'dark'
 
     const handleNavbarPosition = (pos: NavbarPosition) => {
-        writeSettings({ ...settings!, navbarPosition: pos })
+        updateSettings({ navbarPosition: pos })
     }
 
     const handleFontSize = (size: FontSize) => {
-        writeSettings({ ...settings!, fontSize: size })
+        updateSettings({ fontSize: size })
     }
 
     const handleTheme = (t: Theme) => {
-        writeSettings({ ...settings!, theme: t })
+        updateSettings({ theme: t })
     }
 
     const [confirm, setConfirm] = useState<{ text?: string; onOk: () => void } | null>(null)
@@ -71,12 +71,7 @@ function Settings(props: Props) {
     const handleSteamId = () => {
         const num = steamIdInputRef.current?.value.trim()
         if (num === '') {
-            const newSettings = {
-                ...settings,
-                steamId: undefined,
-                profileIdCoh2: undefined,
-            } as unknown as SettingsType
-            writeSettings(newSettings)
+            updateSettings({ steamId: undefined, profileIdCoh2: undefined })
             setTimedSetID(true)
             return
         }
@@ -94,23 +89,14 @@ function Settings(props: Props) {
                 setError()
                 return
             }
-            writeSettings({
-                ...settings,
-                steamId: num,
-                profileIdCoh2: profileId,
-            } as SettingsType)
+            updateSettings({ steamId, profileIdCoh2: profileId })
             setTimedSetID(true)
         }
         saveSteamId()
     }
 
     const clearSteamId = () => {
-        const newSettings = {
-            ...settings,
-            steamId: undefined,
-            profileIdCoh2: undefined,
-        } as unknown as SettingsType
-        writeSettings(newSettings)
+        updateSettings({ steamId: undefined, profileIdCoh2: undefined })
         if (steamIdInputRef.current) {
             steamIdInputRef.current.value = ''
         }
@@ -118,7 +104,7 @@ function Settings(props: Props) {
 
     const clearLogLocation = (game: Game) => {
         const key = GAME_CONFIG[game].logLocationKey
-        writeSettings({ ...settings!, [key]: undefined })
+        updateSettings({ [key]: undefined })
     }
 
     const resetAllSettings = async () => {
@@ -141,16 +127,12 @@ function Settings(props: Props) {
         })
         if (file !== undefined && file.filePaths[0]) {
             const key = GAME_CONFIG[game].logLocationKey
-            const newSettings = {
-                ...settings,
-                [key]: file.filePaths[0],
-            } as SettingsType
-            writeSettings(newSettings)
+            updateSettings({ [key]: file.filePaths[0] })
         }
     }
 
     const handleLanguage = (lang: Language) => {
-        writeSettings({ ...settings!, language: lang })
+        updateSettings({ language: lang })
     }
 
     const errorDiv = timedError ? (
@@ -338,7 +320,7 @@ function Settings(props: Props) {
                             data-testid="copy-log-coh2-button"
                             onClick={() => {
                                 setTimedCopyCoh2(true)
-                                navigator.clipboard.writeText(settings.logLocationCoh2!)
+                                navigator.clipboard.writeText(settings.logLocationCoh2 ?? '')
                             }}
                         >
                             {getText('copy', settings)}
@@ -389,7 +371,7 @@ function Settings(props: Props) {
                             data-testid="copy-log-coh3-button"
                             onClick={() => {
                                 setTimedCopyCoh3(true)
-                                navigator.clipboard.writeText(settings.logLocationCoh3!)
+                                navigator.clipboard.writeText(settings.logLocationCoh3 ?? '')
                             }}
                         >
                             {getText('copy', settings)}

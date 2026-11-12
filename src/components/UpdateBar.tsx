@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
 
 import { GITHUB_RELEASES_URL } from '../constants/urls'
-import writeSettings from '../functions/settings/writeSettings'
+import { updateSettings } from '../functions/settings/writeSettings'
 import funGetText from '../functions/utils/getText'
 import { useSettingsStore } from '../stores/settingsStore'
-import { SettingsType } from '../types'
 
 import styles from './UpdateBar.module.css'
 
@@ -41,12 +40,8 @@ function UpdateBar() {
 
     const ignoreHandler = () => {
         if (update.step === 'available') {
-            const newSettings = {
-                ...settings,
-                ignoreUntil: update.version,
-            } as SettingsType
             setUpdate(null)
-            writeSettings(newSettings)
+            updateSettings({ ignoreUntil: update.version })
         }
     }
 

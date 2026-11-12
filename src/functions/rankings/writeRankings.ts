@@ -168,7 +168,7 @@ export function buildRankings(
 export function writeRankings(
     game: Game,
     players: Player[],
-    rankingsHorizontal: boolean,
+    rankingsHorizontal = false,
     showElo: boolean = false
 ): void {
     const { json, text } = buildRankings(game, players, rankingsHorizontal, showElo)

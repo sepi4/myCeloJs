@@ -15,7 +15,7 @@ interface Props {
     game: MatchObject
     players: MatchHistoryReportResult[]
     profiles: NormalizedProfiles
-    settings: SettingsType
+    settings: SettingsType | null
 }
 
 function GameDetails(props: Props) {

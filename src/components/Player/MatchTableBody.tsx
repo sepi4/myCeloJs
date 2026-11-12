@@ -5,7 +5,7 @@ import { MatchHistoryReportResult, MatchObject, SettingsType } from '../../types
 import styles from './MatchTableBody.module.css'
 
 interface Props {
-    settings: SettingsType
+    settings: SettingsType | null
     players: MatchHistoryReportResult[]
     game: MatchObject
 }

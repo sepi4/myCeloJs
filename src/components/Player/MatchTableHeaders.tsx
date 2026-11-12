@@ -9,7 +9,7 @@ import PlayerName from '../PlayerName'
 import styles from './MatchTableHeaders.module.css'
 
 interface Props {
-    settings: SettingsType
+    settings: SettingsType | null
     players: MatchHistoryReportResult[]
     profiles: NormalizedProfiles
 }
