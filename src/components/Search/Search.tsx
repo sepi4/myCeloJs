@@ -8,7 +8,7 @@ import useText from '../../hooks/useText'
 import { useFoundPlayersStore } from '../../stores/foundPlayersStore'
 import { useGameStore } from '../../stores/gameStore'
 import { useNavigationStore } from '../../stores/navigationStore'
-import { Member } from '../../types'
+import { SearchResult } from '../../types'
 import FoundPlayer from './FoundPlayer'
 
 import styles from './Search.module.css'
@@ -52,30 +52,23 @@ export default function Search() {
             if (fetched) {
                 const result = fetched.result
                 const newPlayers = res
-                    .map((p) => {
+                    .map((p): SearchResult => {
                         const extraInfo = result[p.profile_id]
-                        if (extraInfo) {
-                            p.totalGames = getTotalGames(extraInfo.ranks)
-                            p.lastGameTime = getLastPlayedGame(extraInfo)
-                        } else {
-                            p.totalGames = 0
+                        return {
+                            ...p,
+                            extraInfo,
+                            totalGames: extraInfo ? getTotalGames(extraInfo.ranks) : 0,
+                            lastGameTime: extraInfo && getLastPlayedGame(extraInfo),
                         }
-                        p.extraInfo = extraInfo
-                        return p
                     })
-                    .sort((a, b) => {
-                        if (typeof a.totalGames === 'number' && typeof b.totalGames === 'number') {
-                            return b.totalGames - a.totalGames
-                        }
-                        return 0
-                    })
+                    .sort((a, b) => b.totalGames - a.totalGames)
 
                 setFoundPlayers(newPlayers)
             }
         }
     }
 
-    const handlePlayerCardOn = (player: Member) => {
+    const handlePlayerCardOn = (player: SearchResult) => {
         const playerData = {
             ...player,
             name: player.alias,

@@ -1,10 +1,10 @@
 import { create } from 'zustand'
 
-import { Member } from '../types'
+import { SearchResult } from '../types'
 
 interface FoundPlayersStore {
-    foundPlayers: Member[]
-    setFoundPlayers: (foundPlayers: Member[]) => void
+    foundPlayers: SearchResult[]
+    setFoundPlayers: (foundPlayers: SearchResult[]) => void
 }
 
 export const useFoundPlayersStore = create<FoundPlayersStore>((set) => ({
