@@ -118,33 +118,21 @@ export function resolveRankings(
             const leaderboardName = getTeamLeaderboardName(statGroups[0].members.length, team)
             const leaderboardId = findLeaderboardId(leaderboardName, leaderboards)
             assignTeamRanks(statGroups, stats, leaderboardId)
+        }
 
-            for (const player of team) {
-                const playerSg = statGroups.find((sg) =>
-                    sg.members.some((m) => m.profile_id === player.profileId)
-                )
-                if (playerSg) {
-                    if (playerSg.rank !== undefined) {
-                        player.ranking = playerSg.rank
-                        player.rating = playerSg.rating
-                    } else {
-                        const result = getPlayerRank(player, team, stats, leaderboards)
-                        player.ranking = result.rank
-                        player.rating = result.rating
-                    }
-                    player.teamMarker = playerSg.teamMarker
-                } else {
-                    const result = getPlayerRank(player, team, stats, leaderboards)
-                    player.ranking = result.rank
-                    player.rating = result.rating
-                }
-            }
-        } else {
-            for (const player of team) {
-                const result = getPlayerRank(player, team, stats, leaderboards)
-                player.ranking = result.rank
-                player.rating = result.rating
-            }
+        for (const player of team) {
+            const playerSg = statGroups.find((sg) =>
+                sg.members.some((m) => m.profile_id === player.profileId)
+            )
+            const result =
+                playerSg?.rank !== undefined
+                    ? { rank: playerSg.rank, rating: playerSg.rating }
+                    : getPlayerRank(player, team, stats, leaderboards)
+
+            // The API gives the rank -1 to a player with no rank.
+            player.ranking = result.rank === -1 ? undefined : result.rank
+            player.rating = result.rating
+            player.teamMarker = playerSg?.teamMarker
         }
     }
 

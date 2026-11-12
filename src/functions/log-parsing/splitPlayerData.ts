@@ -24,3 +24,9 @@ export function splitPlayerData(data: string): PlayerData | undefined {
     }
     return { slot, name, profileId, teamSlot, faction }
 }
+
+/** AI players have the profile id -1 in the log. */
+export function parseProfileId(profileId: string | undefined): number | undefined {
+    const id = Number(profileId)
+    return id > 0 ? id : undefined
+}

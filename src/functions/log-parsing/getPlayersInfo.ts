@@ -1,5 +1,5 @@
 import { Player } from '../../types'
-import { splitPlayerData } from './splitPlayerData'
+import { parseProfileId, splitPlayerData } from './splitPlayerData'
 
 /**
  * Extracts the player data portion from a log line, stripping the timestamp/prefix.
@@ -55,10 +55,9 @@ export function getPlayersInfo(lines: string[]): Player[] {
             players[fields.slot] = {
                 faction: fields.faction,
                 name: fields.name,
-                profileId: fields.profileId === undefined ? -1 : Number(fields.profileId),
+                profileId: parseProfileId(fields.profileId),
                 teamSlot: Number(fields.teamSlot),
                 time,
-                ranking: -1,
             }
         }
     }

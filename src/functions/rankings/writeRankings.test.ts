@@ -47,12 +47,6 @@ describe('buildRankings', () => {
             expect(v.horizontal).toBe(false)
         })
 
-        it('formats ranking -1 as dash', () => {
-            const { json } = buildRankings('coh2', [player({ ranking: -1 })], false)
-
-            expect(json.teams.team1[0].ranking).toBe('-')
-        })
-
         it('formats undefined ranking as dash', () => {
             const { json } = buildRankings('coh2', [player({ ranking: undefined })], false)
 

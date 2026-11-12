@@ -12,7 +12,6 @@ describe('getPlayersInfo', () => {
             profileId: 580525,
             teamSlot: 0,
             time: '21:01:16.90',
-            ranking: -1,
         })
     })
 
@@ -60,14 +59,22 @@ describe('getPlayersInfo', () => {
         expect(result[0].name).toBe('replaced')
     })
 
-    it('sets ranking to -1 for all players', () => {
+    it('leaves ranking undefined for all players', () => {
         const lines = [
             '21:01:16.90   GAME -- Human Player: 1 alice 11111 0 soviet',
             '21:01:16.90   GAME -- Human Player: 2 bob 22222 1 german',
         ]
         const result = getPlayersInfo(lines)
 
-        expect(result.every((p) => p.ranking === -1)).toBe(true)
+        expect(result.every((p) => p.ranking === undefined)).toBe(true)
+    })
+
+    it('leaves profileId undefined for an AI player', () => {
+        const lines = ['21:01:16.90   GAME -- AI Player: 1 CPU - Expert -1 1 german']
+        const result = getPlayersInfo(lines)
+
+        expect(result[0].name).toBe('CPU - Expert')
+        expect(result[0].profileId).toBeUndefined()
     })
 
     it('returns empty array when no valid lines', () => {

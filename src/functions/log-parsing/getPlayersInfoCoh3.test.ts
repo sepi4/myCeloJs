@@ -63,14 +63,14 @@ describe('getPlayersInfoCoh3', () => {
         expect(result[0].ranking).toBe(1500)
     })
 
-    it('handles negative ranking values', () => {
+    it('leaves ranking undefined when the log has -1', () => {
         const lines = [
             '(I) [20:19:11.164] [000021616]: GAME -- Human Player: 0 alice 11111 0 americans',
             'Match Started - [11111 /steam/76561], slot =  0, ranking =  -1',
         ]
         const result = getPlayersInfoCoh3(lines)
 
-        expect(result[0].ranking).toBe(-1)
+        expect(result[0].ranking).toBeUndefined()
     })
 
     it('matches ranking to correct player by profileId', () => {
@@ -98,7 +98,7 @@ describe('getPlayersInfoCoh3', () => {
         expect(result).toEqual([])
     })
 
-    it('keeps AI players with negative profileId', () => {
+    it('keeps AI players without a profileId', () => {
         const lines = [
             '(I) [22:16:14.040] [000000340]: GAME -- Human Player: 0 sepi 21518 0 americans',
             '(I) [22:16:14.040] [000000340]: GAME -- AI Player: 1 CPU - Expert -1 1 afrika_korps',
@@ -108,7 +108,7 @@ describe('getPlayersInfoCoh3', () => {
         expect(result).toHaveLength(2)
         expect(result[0].name).toBe('sepi')
         expect(result[1].name).toBe('CPU - Expert')
-        expect(result[1].profileId).toBe(-1)
+        expect(result[1].profileId).toBeUndefined()
         expect(result[1].faction).toBe('afrika_korps')
     })
 

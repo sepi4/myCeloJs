@@ -56,11 +56,7 @@ export function buildRankings(
         const country = players[i].country ? players[i].country : ''
         const name = players[i].name
 
-        let ranking = players[i].ranking === -1 ? '-' : players[i].ranking?.toString()
-
-        if (ranking === undefined) {
-            ranking = '-'
-        }
+        const ranking = players[i].ranking?.toString() ?? '-'
 
         const faction = players[i].faction
         const teamSlot = Number(players[i].teamSlot)
