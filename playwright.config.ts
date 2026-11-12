@@ -4,7 +4,7 @@ export default defineConfig({
     testDir: './e2e',
     timeout: 30000,
     retries: 1,
-    workers: 6,
+    workers: 12,
     reporter: 'html',
     use: {
         screenshot: 'only-on-failure',
