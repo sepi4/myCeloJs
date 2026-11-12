@@ -1,11 +1,11 @@
 import stringWidth from 'string-width'
 
 import { Game, getFactionCode } from '../../constants/games'
-import { countries } from '../../translations/countryTranslations'
+import { countryAlpha3 } from '../../translations/countryTranslations'
 import { Player, RankingsJson } from '../../types'
 
 function countryText(country: string | undefined, padLeft: boolean, width: number) {
-    const code = country ? (countries[country]?.['alpha-3'] ?? '') : ''
+    const code = country ? (countryAlpha3[country] ?? '') : ''
     return padLeft ? code.padStart(width) : code.padEnd(width)
 }
 
