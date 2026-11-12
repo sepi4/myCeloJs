@@ -1,7 +1,8 @@
 import { Game } from '../../constants/games'
 import { AvailableLeaderboard, ExtraInfo, NormalizedExtraInfo, PersonalStats } from '../../types'
 import { refactorData } from '../rankings/refactorData'
-import { availableLeaderboardsUrl, personalStatByIdsUrl } from './apiUrls'
+import { personalStatByIdsUrl } from './apiUrls'
+import { fetchAvailableLeaderboards } from './fetchAvailableLeaderboards'
 
 export async function getExtraInfo(
     game: Game,
@@ -11,8 +12,6 @@ export async function getExtraInfo(
     personalStats: PersonalStats
     cohTitles: AvailableLeaderboard
 } | null> {
-    // TODO - get rid of unnessary calls to server on app start
-
     try {
         const [personalStats, cohTitles] = await Promise.all([
             fetch(personalStatByIdsUrl(game, ids)).then((r) => {
@@ -21,12 +20,7 @@ export async function getExtraInfo(
                 }
                 return r.json() as Promise<PersonalStats>
             }),
-            fetch(availableLeaderboardsUrl(game)).then((r) => {
-                if (!r.ok) {
-                    throw new Error(`${r.status}`)
-                }
-                return r.json() as Promise<AvailableLeaderboard>
-            }),
+            fetchAvailableLeaderboards(game),
         ])
         return { result: refactorData(personalStats, cohTitles, ids), personalStats, cohTitles }
     } catch (error) {
