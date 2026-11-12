@@ -441,6 +441,10 @@ const text = {
         en: 'Steam alias or ID',
         ru: 'Steam-ник или ID',
     },
+    no_players_found: {
+        en: 'No players found',
+        ru: 'Игроки не найдены',
+    },
     mp_games: {
         en: 'total games',
         ru: 'количество игр',

@@ -3,11 +3,12 @@ import { create } from 'zustand'
 import { SearchResult } from '../types'
 
 interface FoundPlayersStore {
-    foundPlayers: SearchResult[]
+    /** null until the first search has finished */
+    foundPlayers: SearchResult[] | null
     setFoundPlayers: (foundPlayers: SearchResult[]) => void
 }
 
 export const useFoundPlayersStore = create<FoundPlayersStore>((set) => ({
-    foundPlayers: [],
+    foundPlayers: null,
     setFoundPlayers: (foundPlayers) => set({ foundPlayers }),
 }))

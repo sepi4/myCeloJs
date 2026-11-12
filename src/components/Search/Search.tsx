@@ -83,7 +83,7 @@ export default function Search() {
     }
 
     const players =
-        foundPlayers.length > 0 &&
+        foundPlayers &&
         foundPlayers.map((p) => (
             <FoundPlayer
                 key={p.profile_id}
@@ -112,6 +112,11 @@ export default function Search() {
             </div>
             <div data-testid="search-results" className={styles.content}>
                 {players}
+                {foundPlayers?.length === 0 && (
+                    <div data-testid="search-empty" className={styles.empty}>
+                        {getText('no_players_found')}
+                    </div>
+                )}
             </div>
         </div>
     )
