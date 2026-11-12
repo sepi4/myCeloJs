@@ -29,7 +29,7 @@ function RanksList(props: Props) {
     return (
         <div>
             {ranksArr.map((r, i) => {
-                const per: string = ((r.wins / (r.wins + r.losses)) * 100).toFixed(0) + '%'
+                const winPercent = ((r.wins / (r.wins + r.losses)) * 100).toFixed(0) + '%'
                 const totalGames = r.wins + r.losses
                 const rank = r.rank <= 0 ? '-' : r.rank
                 const positive = r.streak > 0
@@ -59,7 +59,7 @@ function RanksList(props: Props) {
                         >
                             {streak}
                         </Cell>
-                        <Cell>{per}</Cell>
+                        <Cell>{winPercent}</Cell>
                         <Cell title={`${r.wins} / ${r.losses}`}>{totalGames}</Cell>
                     </div>
                 )

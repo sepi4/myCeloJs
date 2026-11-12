@@ -135,7 +135,7 @@ function Settings(props: Props) {
     return (
         <div className={styles.container}>
             <Icon
-                fun={handleClose}
+                onClick={handleClose}
                 icon={faTimes}
                 testId="close-button"
                 color="var(--text-on-surface)"

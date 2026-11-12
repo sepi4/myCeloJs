@@ -1,4 +1,4 @@
-import { getTotalWinsAndLosses } from '../../functions/rankings/simpleFunctions'
+import { getTotalWinsAndLosses } from '../../functions/rankings/totalGames'
 import useText from '../../hooks/useText'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { ExtraInfo, GameHistoryState, Player } from '../../types'

@@ -5,7 +5,7 @@ import SvgIcon, { IconSize } from './SvgIcon'
 
 type IconProps = {
     icon: IconDefinition
-    fun: () => void
+    onClick: () => void
     size?: IconSize
     testId?: string
     color?: string
@@ -13,7 +13,7 @@ type IconProps = {
 
 export default function Icon({
     icon,
-    fun,
+    onClick,
     size = '2x',
     testId,
     color = 'var(--text-primary)',
@@ -21,7 +21,7 @@ export default function Icon({
     return (
         <div
             data-testid={testId}
-            onClick={fun}
+            onClick={onClick}
             style={{
                 width: '100%',
                 justifyContent: 'flex-end',

@@ -1,6 +1,6 @@
 import { getFactionLeaderboardName } from '../../constants/games'
 import { AvailableLeaderboard, PersonalStats, Player, StatGroup } from '../../types'
-import { separateTeams } from './simpleFunctions'
+import { separateTeams } from './separateTeams'
 
 const ALLIES_FACTIONS = ['british', 'aef', 'soviet']
 const AXIS_FACTIONS = ['west_german', 'german']

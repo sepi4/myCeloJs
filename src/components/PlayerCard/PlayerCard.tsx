@@ -97,22 +97,24 @@ export default function PlayerCard() {
                 setOtherGameData(null, null)
                 return
             }
-            const ex = await fetchPlayerExtraInfo(lookupGame, profileId)
+            const otherExtraInfo = await fetchPlayerExtraInfo(lookupGame, profileId)
             if (cancelled) {
                 return
             }
-            if (!ex || ex.ranks.length === 0) {
+            if (!otherExtraInfo || otherExtraInfo.ranks.length === 0) {
                 setOtherGameData(null, null)
                 return
             }
-            const otherAlias = ex.ranks[0].members?.find((m) => m.profile_id === profileId)?.alias
+            const otherAlias = otherExtraInfo.ranks[0].members?.find(
+                (m) => m.profile_id === profileId
+            )?.alias
             setOtherGameData(
                 {
                     country: player?.country,
                     name: otherAlias ?? player?.name,
                     profileId,
                 },
-                ex
+                otherExtraInfo
             )
         }
         lookup()

@@ -112,7 +112,7 @@ export default function Navbar(props: Props) {
                 title={getText('my_playercard')}
                 testId="user-icon"
                 icon={faUserAlt}
-                fun={alreadyViewingMyCard ? undefined : handleOpenMyCard}
+                onClick={alreadyViewingMyCard ? undefined : handleOpenMyCard}
             />
         ) : null
 
@@ -121,7 +121,7 @@ export default function Navbar(props: Props) {
             title={`${getText('back')} (←)`}
             testId="back-button"
             icon={faArrowLeft}
-            fun={canGoBack ? goBack : undefined}
+            onClick={canGoBack ? goBack : undefined}
             disabled={!canGoBack}
         />
     )
@@ -131,7 +131,7 @@ export default function Navbar(props: Props) {
             title={`${getText('forward')} (→)`}
             testId="forward-button"
             icon={faArrowRight}
-            fun={canGoForward ? goForward : undefined}
+            onClick={canGoForward ? goForward : undefined}
             disabled={!canGoForward}
         />
     )
@@ -141,7 +141,7 @@ export default function Navbar(props: Props) {
             title={getText('search')}
             testId="search-icon"
             icon={faSearch}
-            fun={handleSearchView}
+            onClick={handleSearchView}
         />
     )
 
@@ -150,7 +150,7 @@ export default function Navbar(props: Props) {
             title={getText('settings')}
             testId="settings-icon"
             icon={faCogs}
-            fun={handleOpenSettings}
+            onClick={handleOpenSettings}
         />
     )
 

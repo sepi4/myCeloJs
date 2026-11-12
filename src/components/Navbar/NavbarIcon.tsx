@@ -5,7 +5,7 @@ import SvgIcon from '../SvgIcon'
 
 interface Props {
     icon: IconDefinition
-    fun?: () => void
+    onClick?: () => void
     title?: string
     style?: CSSProperties
     testId?: string
@@ -25,7 +25,7 @@ export default function NavBarIcon(props: Props) {
                 icon={props.icon}
                 size="xl"
                 color="var(--text-secondary)"
-                onClick={props.fun}
+                onClick={props.onClick}
                 style={{
                     cursor: props.disabled ? 'default' : 'pointer',
                     opacity: props.disabled ? 0.35 : undefined,

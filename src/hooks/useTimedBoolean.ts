@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-function useTimedBoolean(ms: number): [boolean, (x: boolean) => void] {
+function useTimedBoolean(ms: number): [boolean, (value: boolean) => void] {
     const [status, setStatus] = useState(false)
 
     useEffect(() => {

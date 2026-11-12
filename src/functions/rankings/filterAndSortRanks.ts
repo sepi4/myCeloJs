@@ -1,7 +1,7 @@
 import { Rank } from '../../types'
 import sorters, { Sorter } from './sorters'
 
-export function ranksArrFilter(ranksArr: Rank[], tableView: boolean, showAll: boolean): Rank[] {
+export function filterRanks(ranksArr: Rank[], tableView: boolean, showAll: boolean): Rank[] {
     const namePattern = tableView ? /^Team/ : /^./
     const rankedOnly = !showAll
     return ranksArr
@@ -13,7 +13,7 @@ function byTotalGames(a: Rank, b: Rank): number {
     return b.wins + b.losses - (a.wins + a.losses)
 }
 
-export function ranksArrSort(ranksArr: Rank[], sorter: Sorter): Rank[] {
+export function sortRanks(ranksArr: Rank[], sorter: Sorter): Rank[] {
     const compareFn = sorters[sorter.name]
 
     if (sorter.name !== 'byRank') {
