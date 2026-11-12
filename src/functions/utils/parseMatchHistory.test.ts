@@ -1,10 +1,10 @@
 import {
     AvailableLeaderboard,
-    MatchHistoryReportResult,
     MatchHistoryStat,
     MatchType,
     Player,
     Profile,
+    RawMatchHistoryReportResult,
     RecentMatchHistory,
 } from '../../types'
 import { parseHistoryData } from './parseMatchHistory'
@@ -30,13 +30,13 @@ const makeProfile = (profileId: number): Profile =>
 const makeReportResult = (
     profileId: number,
     counters: Record<string, number> = { dmgdone: 100 }
-): MatchHistoryReportResult =>
+): RawMatchHistoryReportResult =>
     ({
         profile_id: profileId,
         resulttype: 1,
         race_id: 0,
-        counters: JSON.stringify(counters) as unknown as Record<string, number>,
-    }) as MatchHistoryReportResult
+        counters: JSON.stringify(counters),
+    }) as RawMatchHistoryReportResult
 
 const makeMatchStat = (overrides: Partial<MatchHistoryStat> = {}): MatchHistoryStat =>
     ({
