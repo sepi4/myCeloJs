@@ -21,8 +21,8 @@ export function getCurrentUserAliasCoh3(lines: string[]): string | undefined {
     }
 }
 
-export function checkGameVersionIsCorrect(lines: string[], game: Game): RegExpMatchArray | null {
-    return lines[0].match(GAME_CONFIG[game].logHeader)
+export function checkGameVersionIsCorrect(lines: string[], game: Game): boolean {
+    return GAME_CONFIG[game].logHeader.test(lines[0])
 }
 
 const logParsers: Record<
