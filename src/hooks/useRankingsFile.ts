@@ -7,7 +7,7 @@ import { useNavButtonsStore } from '../stores/navButtonsStore'
 import { usePlayersStore } from '../stores/playersStore'
 import { useSettingsStore } from '../stores/settingsStore'
 
-/** Re-writes the rankings overlay when orientation, ELO toggle, game or players change. */
+/** Writes the rankings overlay when orientation, ELO toggle, game or players change. */
 export default function useRankingsFile() {
     const { game } = useGameStore()
     const {
@@ -17,7 +17,8 @@ export default function useRankingsFile() {
     const { settings } = useSettingsStore()
 
     useEffect(() => {
-        if (settings && players && players.length > 0) {
+        // An empty list is written too, so the overlay is cleared when the game ends.
+        if (settings && players) {
             writeRankings(
                 game,
                 players,
