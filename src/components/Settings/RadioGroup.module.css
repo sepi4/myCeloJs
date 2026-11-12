@@ -1,0 +1,10 @@
+.title {
+    font-weight: bold;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+    margin-top: 0.3em;
+}
