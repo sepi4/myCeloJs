@@ -14,7 +14,7 @@ export function getLocalUserInfoCoh3(
         if (!steamId) {
             const m = line.match(/Found \d+ profiles for account \/steam\/(\d+)/)
             if (m) {
-                steamId = m[1]
+                steamId = m[1] ?? null
             }
         }
         if (profileId && steamId) {

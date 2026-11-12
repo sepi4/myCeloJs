@@ -30,13 +30,13 @@ describe('buildRankings', () => {
         it('maps faction via getFactionCode for coh2', () => {
             const { json } = buildRankings('coh2', [player({ faction: 'german' })], false)
 
-            expect(json.teams.team1[0].faction).toBe('wer')
+            expect(json.teams.team1[0]?.faction).toBe('wer')
         })
 
         it('keeps raw faction for coh3', () => {
             const { json } = buildRankings('coh3', [player({ faction: 'germans' })], false)
 
-            expect(json.teams.team1[0].faction).toBe('germans')
+            expect(json.teams.team1[0]?.faction).toBe('germans')
         })
 
         it('sets horizontal flag', () => {
@@ -50,7 +50,7 @@ describe('buildRankings', () => {
         it('formats undefined ranking as dash', () => {
             const { json } = buildRankings('coh2', [player({ ranking: undefined })], false)
 
-            expect(json.teams.team1[0].ranking).toBe('-')
+            expect(json.teams.team1[0]?.ranking).toBe('-')
         })
     })
 
@@ -101,7 +101,7 @@ describe('buildRankings', () => {
                 true
             )
 
-            expect(json.teams.team1[0].rating).toBe(1523)
+            expect(json.teams.team1[0]?.rating).toBe(1523)
         })
 
         it('omits rating from json when showElo is false', () => {
@@ -112,7 +112,7 @@ describe('buildRankings', () => {
                 false
             )
 
-            expect(json.teams.team1[0].rating).toBeUndefined()
+            expect(json.teams.team1[0]?.rating).toBeUndefined()
         })
 
         it('includes rating in text output when showElo is true', () => {

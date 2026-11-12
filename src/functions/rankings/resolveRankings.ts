@@ -75,7 +75,7 @@ function getPlayerRank(
     const leaderboardId = findLeaderboardId(matchTypeName, leaderboards)
 
     const playerSg = stats.statGroups.find(
-        (sg) => sg.type === 1 && sg.members[0].profile_id === player.profileId
+        (sg) => sg.type === 1 && sg.members.some((m) => m.profile_id === player.profileId)
     )
 
     const ls = stats.leaderboardStats.find(
@@ -114,8 +114,9 @@ export function resolveRankings(
     for (const team of teams) {
         const statGroups = getTeamStatGroups(team, stats)
 
-        if (statGroups.length > 0) {
-            const leaderboardName = getTeamLeaderboardName(statGroups[0].members.length, team)
+        const firstGroup = statGroups[0]
+        if (firstGroup) {
+            const leaderboardName = getTeamLeaderboardName(firstGroup.members.length, team)
             const leaderboardId = findLeaderboardId(leaderboardName, leaderboards)
             assignTeamRanks(statGroups, stats, leaderboardId)
         }

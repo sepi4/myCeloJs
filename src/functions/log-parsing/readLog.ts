@@ -21,8 +21,8 @@ export function getCurrentUserAliasCoh3(lines: string[]): string | undefined {
     }
 }
 
-export function checkGameVersionIsCorrect(lines: string[], game: Game): RegExpMatchArray | null {
-    return lines[0].match(GAME_CONFIG[game].logHeader)
+export function checkGameVersionIsCorrect(lines: string[], game: Game): boolean {
+    return GAME_CONFIG[game].logHeader.test(lines[0] ?? '')
 }
 
 const logParsers: Record<
@@ -48,7 +48,7 @@ export function getLines(lines: string[]): string[] {
     let gapAfterPlayers = false
 
     for (let i = lines.length - 1; i >= 0; i--) {
-        const line = lines[i]
+        const line = lines[i] ?? ''
 
         if (BROKEN_PLAYER_LINE.test(line)) {
             continue
@@ -78,7 +78,7 @@ export function switchTeams(players: Player[], currentUser: string): Player[] {
         (player) => player.name === currentUser && player.profileId
     )
 
-    if (currentUserMatches.length !== 1 || currentUserMatches[0].teamSlot === 0) {
+    if (currentUserMatches.length !== 1 || currentUserMatches[0]?.teamSlot === 0) {
         return players
     }
 

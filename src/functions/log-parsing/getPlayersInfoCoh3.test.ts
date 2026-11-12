@@ -26,10 +26,10 @@ describe('getPlayersInfoCoh3', () => {
         const result = getPlayersInfoCoh3(lines)
 
         expect(result).toHaveLength(2)
-        expect(result[0].name).toBe('alice')
-        expect(result[0].teamSlot).toBe(0)
-        expect(result[1].name).toBe('bob')
-        expect(result[1].teamSlot).toBe(1)
+        expect(result[0]?.name).toBe('alice')
+        expect(result[0]?.teamSlot).toBe(0)
+        expect(result[1]?.name).toBe('bob')
+        expect(result[1]?.teamSlot).toBe(1)
     })
 
     it('handles player names with spaces', () => {
@@ -38,8 +38,8 @@ describe('getPlayersInfoCoh3', () => {
         ]
         const result = getPlayersInfoCoh3(lines)
 
-        expect(result[0].name).toBe('player with spaces')
-        expect(result[0].profileId).toBe(99999)
+        expect(result[0]?.name).toBe('player with spaces')
+        expect(result[0]?.profileId).toBe(99999)
     })
 
     it('extracts time from the first player line', () => {
@@ -49,8 +49,8 @@ describe('getPlayersInfoCoh3', () => {
         ]
         const result = getPlayersInfoCoh3(lines)
 
-        expect(result[0].time).toBe('(I) [14:30:45.120] [000012345]')
-        expect(result[1].time).toBe('(I) [14:30:45.120] [000012345]')
+        expect(result[0]?.time).toBe('(I) [14:30:45.120] [000012345]')
+        expect(result[1]?.time).toBe('(I) [14:30:45.120] [000012345]')
     })
 
     it('attaches ranking from Match Started lines', () => {
@@ -60,7 +60,7 @@ describe('getPlayersInfoCoh3', () => {
         ]
         const result = getPlayersInfoCoh3(lines)
 
-        expect(result[0].ranking).toBe(1500)
+        expect(result[0]?.ranking).toBe(1500)
     })
 
     it('leaves ranking undefined when the log has -1', () => {
@@ -70,7 +70,7 @@ describe('getPlayersInfoCoh3', () => {
         ]
         const result = getPlayersInfoCoh3(lines)
 
-        expect(result[0].ranking).toBeUndefined()
+        expect(result[0]?.ranking).toBeUndefined()
     })
 
     it('matches ranking to correct player by profileId', () => {
@@ -82,8 +82,8 @@ describe('getPlayersInfoCoh3', () => {
         ]
         const result = getPlayersInfoCoh3(lines)
 
-        expect(result[0].ranking).toBe(1200)
-        expect(result[1].ranking).toBe(1800)
+        expect(result[0]?.ranking).toBe(1200)
+        expect(result[1]?.ranking).toBe(1800)
     })
 
     it('filters out fake player lines with empty names', () => {
@@ -106,10 +106,10 @@ describe('getPlayersInfoCoh3', () => {
         const result = getPlayersInfoCoh3(lines)
 
         expect(result).toHaveLength(2)
-        expect(result[0].name).toBe('sepi')
-        expect(result[1].name).toBe('CPU - Expert')
-        expect(result[1].profileId).toBeUndefined()
-        expect(result[1].faction).toBe('afrika_korps')
+        expect(result[0]?.name).toBe('sepi')
+        expect(result[1]?.name).toBe('CPU - Expert')
+        expect(result[1]?.profileId).toBeUndefined()
+        expect(result[1]?.faction).toBe('afrika_korps')
     })
 
     it('returns empty array when no valid lines', () => {

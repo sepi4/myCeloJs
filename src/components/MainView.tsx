@@ -26,7 +26,7 @@ function usesSearch(location: Location) {
 function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
     const getText = useText()
     const { settingsView } = useSettingsViewStore()
-    const teams: Player[][] = [[], []]
+    const teams: [Player[], Player[]] = [[], []]
     const { players } = usePlayersStore()
     const { view, cardReturnView } = useViewStore()
     // Search stays loaded while the history can return to it, so its results are kept.

@@ -52,7 +52,7 @@ function Team(props: Props) {
                 <Player
                     key={p.profileId ?? `${props.teamIndex}-${i}`}
                     player={p}
-                    extraInfo={extraInfo && p.profileId ? extraInfo[p.profileId] : null}
+                    extraInfo={(p.profileId && extraInfo?.[p.profileId]) || null}
                 />
             ))}
         </div>

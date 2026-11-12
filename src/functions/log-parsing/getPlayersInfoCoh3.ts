@@ -35,8 +35,7 @@ function extractPlayerData(lines: string[]): {
             playerDataStrings.push(parts.slice(4).join(':').trim())
         } else {
             // Non-player lines (e.g. Match Started): take the last colon-separated segment
-            const parts = line.split(':')
-            matchStartedStrings.push(parts[parts.length - 1].trim())
+            matchStartedStrings.push(line.slice(line.lastIndexOf(':') + 1).trim())
         }
     }
 
@@ -55,7 +54,7 @@ function parseMatchStarted(data: string): MatchStartedInfo | undefined {
         const ranking = Number(match[4])
         return {
             profileId: Number(match[1]),
-            steamId: match[2],
+            steamId: match[2] ?? '',
             slot: Number(match[3]),
             // -1 in the log means the player has no rank
             ranking: ranking === -1 ? undefined : ranking,

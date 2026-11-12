@@ -105,7 +105,7 @@ export default function PlayerCard() {
                 setOtherGameData(null, null)
                 return
             }
-            const otherAlias = otherExtraInfo.ranks[0].members?.find(
+            const otherAlias = otherExtraInfo.ranks[0]?.members?.find(
                 (m) => m.profile_id === profileId
             )?.alias
             setOtherGameData(

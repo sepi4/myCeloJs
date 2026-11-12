@@ -4,6 +4,7 @@
         "lib": ["es2023"],
         "skipLibCheck": true,
         "strict": true,
+        "noUncheckedIndexedAccess": true,
         "noFallthroughCasesInSwitch": true,
         "module": "esnext",
         "moduleResolution": "bundler",

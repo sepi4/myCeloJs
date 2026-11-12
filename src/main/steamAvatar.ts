@@ -20,7 +20,7 @@ export async function fetchSteamAvatar(steamId: string): Promise<string | null> 
         }
         const xml = await res.text()
         const match = xml.match(/<avatarMedium><!\[CDATA\[([^\]]+)\]\]><\/avatarMedium>/)
-        const url = match ? match[1] : null
+        const url = match?.[1] ?? null
         // Leave failed lookups uncached so reopening the card can try again.
         if (url) {
             steamAvatarCache.set(steamId, url)
