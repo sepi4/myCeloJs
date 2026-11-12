@@ -14,7 +14,7 @@ export function personalStatBySteamIdUrl(game: Game, steamId: string): string {
 }
 
 export function personalStatSearchUrl(game: Game, searchValue: string): string {
-    return apiUrl(game, 'GetPersonalStat', `&search=${searchValue}`)
+    return apiUrl(game, 'GetPersonalStat', `&search=${encodeURIComponent(searchValue)}`)
 }
 
 export function availableLeaderboardsUrl(game: Game): string {
