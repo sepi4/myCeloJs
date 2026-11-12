@@ -20,7 +20,7 @@ function UpdateBar() {
     const getText = useText()
 
     useEffect(() => {
-        window.electronAPI.updater.onStatus((status) => {
+        return window.electronAPI.updater.onStatus((status) => {
             if (status.status === 'available' && status.version) {
                 if (settings?.ignoreUntil === status.version) {
                     return
