@@ -1,24 +1,17 @@
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
 
-import { plainJsonStorage } from './plainJsonStorage'
+import getLocalStorage, { setLocalStorage } from '../functions/settings/getLocalStorage'
 
 interface AutoLogCheckingStore {
     autoLogChecking: boolean
     toggleAutoLogChecking: () => void
 }
 
-export const useAutoLogCheckingStore = create<AutoLogCheckingStore>()(
-    persist(
-        (set) => ({
-            autoLogChecking: true,
-            toggleAutoLogChecking: () =>
-                set((state) => ({ autoLogChecking: !state.autoLogChecking })),
+export const useAutoLogCheckingStore = create<AutoLogCheckingStore>((set) => ({
+    autoLogChecking: getLocalStorage('autoLogChecking', true),
+    toggleAutoLogChecking: () =>
+        set((state) => {
+            setLocalStorage('autoLogChecking', !state.autoLogChecking)
+            return { autoLogChecking: !state.autoLogChecking }
         }),
-        {
-            name: 'autoLogChecking',
-            storage: plainJsonStorage('autoLogChecking'),
-            partialize: ({ autoLogChecking }) => ({ autoLogChecking }),
-        }
-    )
-)
+}))

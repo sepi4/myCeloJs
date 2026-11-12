@@ -1,7 +1,7 @@
 import dayjs from 'dayjs'
 import { create } from 'zustand'
 
-import getLocalStorage from '../functions/settings/getLocalStorage'
+import getLocalStorage, { setLocalStorage } from '../functions/settings/getLocalStorage'
 
 export const HISTORY_PERIODS = ['week', 'month', 'year', 'all'] as const
 export type HistoryPeriod = (typeof HISTORY_PERIODS)[number]
@@ -12,7 +12,7 @@ interface HistoryPeriodStore {
 }
 
 function getStoredPeriod(): HistoryPeriod {
-    const stored = getLocalStorage({ key: 'historyPeriod', def: 'all' })
+    const stored = getLocalStorage<HistoryPeriod>('historyPeriod', 'all')
     return HISTORY_PERIODS.includes(stored) ? stored : 'all'
 }
 
@@ -26,7 +26,7 @@ export function isInPeriod(date: Date, period: HistoryPeriod, now = new Date()):
 export const useHistoryPeriodStore = create<HistoryPeriodStore>((set) => ({
     historyPeriod: getStoredPeriod(),
     setHistoryPeriod: (historyPeriod) => {
-        localStorage.setItem('historyPeriod', JSON.stringify(historyPeriod))
+        setLocalStorage('historyPeriod', historyPeriod)
         set({ historyPeriod })
     },
 }))

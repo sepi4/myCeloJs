@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-import getLocalStorage from '../functions/settings/getLocalStorage'
+import getLocalStorage, { setLocalStorage } from '../functions/settings/getLocalStorage'
 
 export interface NavButtons {
     all: boolean
@@ -20,10 +20,7 @@ export const useNavButtonsStore = create<NavButtonsStore>((set) => ({
         table: false,
         total: false,
         elo: false,
-        ...getLocalStorage({
-            key: 'navButtons',
-            def: { all: false, table: false, total: false },
-        }),
+        ...getLocalStorage<Partial<NavButtons>>('navButtons', {}),
     },
     toggleNavButton: (key) =>
         set((state) => {
@@ -31,7 +28,7 @@ export const useNavButtonsStore = create<NavButtonsStore>((set) => ({
                 ...state.navButtons,
                 [key]: !state.navButtons[key],
             }
-            localStorage.setItem('navButtons', JSON.stringify(updated))
+            setLocalStorage('navButtons', updated)
             return { navButtons: updated }
         }),
 }))

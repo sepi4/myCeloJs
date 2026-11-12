@@ -1,23 +1,15 @@
-interface NavButtons {
-    key: 'navButtons'
-    def: {
-        all: boolean
-        table: boolean
-        total: boolean
-    }
-}
-
-interface HistoryPeriod {
-    key: 'historyPeriod'
-    def: 'week' | 'month' | 'year' | 'all'
-}
-
-type Props = NavButtons | HistoryPeriod
-
-export default function getLocalStorage({ key, def }: Props) {
+export default function getLocalStorage<T>(key: string, def: T): T {
     const str = localStorage.getItem(key)
-    if (str !== undefined && str !== null) {
-        return JSON.parse(str)
+    if (str === null) {
+        return def
     }
-    return def
+    try {
+        return JSON.parse(str)
+    } catch {
+        return def
+    }
+}
+
+export function setLocalStorage(key: string, value: unknown) {
+    localStorage.setItem(key, JSON.stringify(value))
 }

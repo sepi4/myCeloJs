@@ -1,23 +1,16 @@
 import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
 
-import { plainJsonStorage } from './plainJsonStorage'
+import getLocalStorage, { setLocalStorage } from '../functions/settings/getLocalStorage'
 
 interface LogCheckIntervalStore {
     logCheckInterval: number
     setLogCheckInterval: (logCheckInterval: number) => void
 }
 
-export const useLogCheckIntervalStore = create<LogCheckIntervalStore>()(
-    persist(
-        (set) => ({
-            logCheckInterval: 3,
-            setLogCheckInterval: (logCheckInterval) => set({ logCheckInterval }),
-        }),
-        {
-            name: 'logCheckInterval',
-            storage: plainJsonStorage('logCheckInterval'),
-            partialize: ({ logCheckInterval }) => ({ logCheckInterval }),
-        }
-    )
-)
+export const useLogCheckIntervalStore = create<LogCheckIntervalStore>((set) => ({
+    logCheckInterval: getLocalStorage('logCheckInterval', 3),
+    setLogCheckInterval: (logCheckInterval) => {
+        setLocalStorage('logCheckInterval', logCheckInterval)
+        set({ logCheckInterval })
+    },
+}))
