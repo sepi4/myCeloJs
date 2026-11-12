@@ -12,25 +12,25 @@ export default function useProfileIdSync() {
     const { settings } = useSettingsStore()
 
     // COH3: the profile ID is in the log file
+    const logLocationCoh3 = settings?.logLocationCoh3
+    const savedProfileIdCoh3 = settings?.profileIdCoh3
     useEffect(() => {
-        const logLocation = settings?.logLocationCoh3
-        if (game !== 'coh3' || !logLocation) {
+        if (game !== 'coh3' || !logLocationCoh3) {
             return
         }
-        const savedProfileId = settings?.profileIdCoh3
         const updateCoh3ProfileId = async () => {
-            const data = await window.electronAPI.log.read(logLocation)
+            const data = await window.electronAPI.log.read(logLocationCoh3)
             if (!data) {
                 return
             }
             const info = getLocalUserInfoCoh3(data.split('\n'))
-            if (!info || info.profileId === savedProfileId) {
+            if (!info || info.profileId === savedProfileIdCoh3) {
                 return
             }
             updateSettings({ profileIdCoh3: info.profileId })
         }
         updateCoh3ProfileId()
-    }, [game, settings])
+    }, [game, logLocationCoh3, savedProfileIdCoh3])
 
     // COH2: the profile ID is fetched with the Steam ID
     useEffect(() => {
