@@ -12,6 +12,16 @@ export type Game = 'coh2' | 'coh3'
 
 export const GAMES: readonly Game[] = ['coh2', 'coh3']
 
+interface Faction {
+    /** Short code used in this app, for example in the rankings file. */
+    code: string
+    /** Faction name in the log file. */
+    logName: string
+    /** Faction name in leaderboard names such as `1v1Soviet`. */
+    leaderboardName: string
+    flag: string
+}
+
 interface GameConfig {
     apiBase: string
     /** Value of the `title` parameter in API requests. */
@@ -21,12 +31,10 @@ interface GameConfig {
     logLocationKey: 'logLocationCoh2' | 'logLocationCoh3'
     profileIdKey: 'profileIdCoh2' | 'profileIdCoh3'
     hasElo: boolean
-    /** Faction name in the log file → short faction code. */
-    factionCodes: Record<string, string>
+    /** In the order of the rank table. */
+    factions: Faction[]
     /** API race_id → short faction code. */
     factionCodesByRaceId: Record<number, string>
-    /** Short faction code → flag image. */
-    factionFlags: Record<string, string>
 }
 
 export const GAME_CONFIG: Record<Game, GameConfig> = {
@@ -37,26 +45,19 @@ export const GAME_CONFIG: Record<Game, GameConfig> = {
         logLocationKey: 'logLocationCoh2',
         profileIdKey: 'profileIdCoh2',
         hasElo: false,
-        factionCodes: {
-            british: 'uk',
-            aef: 'usa',
-            soviet: 'sov',
-            west_german: 'okw',
-            german: 'wer',
-        },
+        factions: [
+            { code: 'sov', logName: 'soviet', leaderboardName: 'Soviet', flag: flagSov },
+            { code: 'wer', logName: 'german', leaderboardName: 'German', flag: flagWer },
+            { code: 'usa', logName: 'aef', leaderboardName: 'AEF', flag: flagUsa },
+            { code: 'okw', logName: 'west_german', leaderboardName: 'WestGerman', flag: flagOkw },
+            { code: 'uk', logName: 'british', leaderboardName: 'British', flag: flagUk },
+        ],
         factionCodesByRaceId: {
             0: 'wer',
             1: 'sov',
             2: 'okw',
             3: 'usa',
             4: 'uk',
-        },
-        factionFlags: {
-            okw: flagOkw,
-            sov: flagSov,
-            uk: flagUk,
-            usa: flagUsa,
-            wer: flagWer,
         },
     },
     coh3: {
@@ -66,12 +67,17 @@ export const GAME_CONFIG: Record<Game, GameConfig> = {
         logLocationKey: 'logLocationCoh3',
         profileIdKey: 'profileIdCoh3',
         hasElo: true,
-        factionCodes: {
-            americans: 'usa',
-            afrika_korps: 'dak',
-            british_africa: 'uk',
-            germans: 'wer',
-        },
+        factions: [
+            { code: 'dak', logName: 'afrika_korps', leaderboardName: 'DAK', flag: flagAfrikaKorps },
+            { code: 'wer', logName: 'germans', leaderboardName: 'German', flag: flagGermans },
+            { code: 'usa', logName: 'americans', leaderboardName: 'American', flag: flagAmericans },
+            {
+                code: 'uk',
+                logName: 'british_africa',
+                leaderboardName: 'British',
+                flag: flagBritishAfrica,
+            },
+        ],
         // race_id values from coh3-api.reliclink.com/community/leaderboard/GetAvailableLeaderboards?title=coh3
         factionCodesByRaceId: {
             129494: 'usa',
@@ -79,12 +85,6 @@ export const GAME_CONFIG: Record<Game, GameConfig> = {
             197345: 'uk',
             198437: 'dak',
             203852: 'uk',
-        },
-        factionFlags: {
-            dak: flagAfrikaKorps,
-            usa: flagAmericans,
-            uk: flagBritishAfrica,
-            wer: flagGermans,
         },
     },
 }
@@ -94,7 +94,20 @@ export function otherGame(game: Game): Game {
 }
 
 export function getFactionCode(game: Game, logFaction: string): string {
-    return GAME_CONFIG[game].factionCodes[logFaction] ?? ''
+    return GAME_CONFIG[game].factions.find((f) => f.logName === logFaction)?.code ?? ''
+}
+
+export function getFactionCodeByLeaderboardName(
+    game: Game,
+    leaderboardName: string
+): string | undefined {
+    return GAME_CONFIG[game].factions.find((f) => f.leaderboardName === leaderboardName)?.code
+}
+
+/** Log faction names differ between the games, so the game is not needed. */
+export function getFactionLeaderboardName(logFaction: string): string {
+    const factions = GAMES.flatMap((game) => GAME_CONFIG[game].factions)
+    return factions.find((f) => f.logName === logFaction)?.leaderboardName ?? ''
 }
 
 export function getFactionCodeByRaceId(game: Game, raceId: number): string {
@@ -102,5 +115,5 @@ export function getFactionCodeByRaceId(game: Game, raceId: number): string {
 }
 
 export function getFactionFlag(game: Game, factionCode: string): string | undefined {
-    return GAME_CONFIG[game].factionFlags[factionCode]
+    return GAME_CONFIG[game].factions.find((f) => f.code === factionCode)?.flag
 }

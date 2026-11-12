@@ -1,4 +1,4 @@
-import { getFactionName } from '../../constants/factionMappings'
+import { getFactionLeaderboardName } from '../../constants/games'
 import { AvailableLeaderboard, PersonalStats, Player, StatGroup } from '../../types'
 import { formatToNums, separateTeams } from './simpleFunctions'
 
@@ -71,7 +71,7 @@ function getPlayerRank(
     stats: PersonalStats,
     leaderboards: AvailableLeaderboard
 ): RankResult {
-    const matchTypeName = `${team.length}v${team.length}${getFactionName(player.faction)}`
+    const matchTypeName = `${team.length}v${team.length}${getFactionLeaderboardName(player.faction)}`
     const leaderboardId = findLeaderboardId(matchTypeName, leaderboards)
 
     const playerSg = stats.statGroups.find(

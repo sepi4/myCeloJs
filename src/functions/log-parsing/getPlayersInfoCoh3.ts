@@ -1,4 +1,5 @@
 import { Player } from '../../types'
+import { splitPlayerData } from './splitPlayerData'
 
 type MatchStartedInfo = {
     profileId: number
@@ -61,41 +62,6 @@ function parseMatchStarted(data: string): MatchStartedInfo | undefined {
 }
 
 /**
- * Parses a player data string into a Player object.
- * Expected format: `<slot> <name...> <profileId> <teamSlot> <faction>`
- */
-function parsePlayer(
-    data: string,
-    time: string,
-    rankings: Record<string, MatchStartedInfo>
-): { slot: string; player: Player } | undefined {
-    const tokens = data.split(' ')
-    const slot = tokens.shift()
-    const faction = tokens.pop()
-    const teamSlot = tokens.pop()
-    const profileId = tokens.pop()
-    const name = tokens.join(' ')
-
-    if (!slot || !faction || !teamSlot || !profileId || !name) {
-        return undefined
-    }
-
-    const pid = Number(profileId)
-
-    return {
-        slot,
-        player: {
-            faction,
-            name,
-            profileId: profileId === undefined ? -1 : pid,
-            teamSlot: teamSlot === undefined ? -1 : Number(teamSlot),
-            time,
-            ranking: rankings[pid]?.ranking,
-        },
-    }
-}
-
-/**
  * Parses COH3 log lines into Player objects.
  * @param lines - log lines containing player data from warnings.log
  * @returns array of parsed players
@@ -118,9 +84,18 @@ export function getPlayersInfoCoh3(lines: string[]): Player[] {
 
     const players: Record<string, Player> = {}
     for (const data of playerDataStrings) {
-        const result = parsePlayer(data, time, rankings)
-        if (result) {
-            players[result.slot] = result.player
+        const fields = splitPlayerData(data)
+        if (!fields?.profileId || !fields.name) {
+            continue
+        }
+        const profileId = Number(fields.profileId)
+        players[fields.slot] = {
+            faction: fields.faction,
+            name: fields.name,
+            profileId,
+            teamSlot: Number(fields.teamSlot),
+            time,
+            ranking: rankings[profileId]?.ranking,
         }
     }
 

@@ -2,6 +2,8 @@ import { JSX } from 'react'
 
 import cross from '../../assets/img/cross.png'
 import star from '../../assets/img/star.png'
+import { getFactionCodeByLeaderboardName } from '../../constants/games'
+import { useDisplayGame } from '../../hooks/useDisplayGame'
 import useText from '../../hooks/useText'
 import { Rank as RankType } from '../../types'
 import { faCaretDown, faCaretRight } from '../icons'
@@ -17,32 +19,13 @@ interface Props {
 function Rank(props: Props) {
     const { rank } = props
     const getText = useText()
+    const game = useDisplayGame()
 
     const showMembers = props.open
-    function sw(x: string) {
-        switch (x) {
-            case 'Soviet':
-                return 'sov'
-            case 'German':
-                return 'wer'
-            case 'AEF':
-                return 'usa'
-            case 'British':
-                return 'uk'
-            case 'WestGerman':
-                return 'okw'
-            case 'American':
-                return 'usa'
-            case 'DAK':
-                return 'dak'
-            default:
-                return x
-        }
-    }
     function betterRankName(rn: string) {
         const m = rn.match(/^\dv\d/)
         rn = rn.replace(/^(\dv\d)/, '').replace('Unranked', '')
-        return m + ' ' + sw(rn)
+        return m + ' ' + (getFactionCodeByLeaderboardName(game, rn) ?? rn)
     }
     const arrow = (
         <SvgIcon

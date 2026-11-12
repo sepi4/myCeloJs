@@ -221,22 +221,7 @@ export type RecentMatchHistory = {
     profiles: Profile[]
 }
 
-export type Rank = {
-    disputes: number
-    drops: number
-    lastmatchdate: number
-    leaderboard_id: number
-    losses: number
-    rank: number
-    ranklevel: number
-    ranktotal: number
-    regionrank: number
-    regionranktotal: number
-    statgroup_id: number
-    streak: number
-    wins: number
-    rating?: number
-
+export type Rank = LeaderboardStat & {
     name: string
 
     isModeRanked?: number

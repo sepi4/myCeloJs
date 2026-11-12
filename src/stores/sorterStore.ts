@@ -1,18 +1,15 @@
 import { create } from 'zustand'
 
-interface Sorter {
-    name: 'byRank' | 'byWinRate' | 'byStreak' | 'byName' | 'byTotal' | 'byRating'
-    reversed: boolean
-}
+import { Sorter, SorterName } from '../functions/rankings/sorters'
 
 interface SorterStore {
     sorter: Sorter
-    setSorter: (name: Sorter['name']) => void
+    setSorter: (name: SorterName) => void
 }
 
 export const useSorterStore = create<SorterStore>((set) => ({
     sorter: { name: 'byRank', reversed: false },
-    setSorter: (name: Sorter['name']) =>
+    setSorter: (name) =>
         set((state) => ({
             sorter:
                 state.sorter.name === name

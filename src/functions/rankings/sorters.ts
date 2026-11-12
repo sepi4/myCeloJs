@@ -35,4 +35,13 @@ const byTotal = (a: Rank, b: Rank): number => {
 
 const byRating = (a: Rank, b: Rank): number => (b.rating ?? 0) - (a.rating ?? 0)
 
-export default { byRank, byWinRate, byStreak, byName, byTotal, byRating }
+const sorters = { byRank, byWinRate, byStreak, byName, byTotal, byRating }
+
+export type SorterName = keyof typeof sorters
+
+export type Sorter = {
+    name: SorterName
+    reversed: boolean
+}
+
+export default sorters

@@ -1,11 +1,10 @@
 import { CSSProperties, MouseEvent } from 'react'
 
 import { getFactionCodeByRaceId, getFactionFlag } from '../../constants/games'
-import { getExtraInfo } from '../../functions/api/getExtraInfo'
 import { getTimeAgo } from '../../functions/utils/time'
 import { useDisplayGame } from '../../hooks/useDisplayGame'
-import { useNavigationStore } from '../../stores/navigationStore'
-import { useSettingsStore } from '../../stores/settingsStore'
+import useLanguage from '../../hooks/useLanguage'
+import useOpenPlayerCard from '../../hooks/useOpenPlayerCard'
 import { MatchHistoryReportResult, MatchObject, NormalizedProfiles } from '../../types'
 import { faCaretDown, faCaretRight } from '../icons'
 import PlayerName from '../PlayerName'
@@ -22,10 +21,9 @@ interface Props {
 }
 
 export default function GameHistoryDiv(props: Props) {
-    const { settings } = useSettingsStore()
     const displayGame = useDisplayGame()
-    const lg = settings && settings.language ? settings.language : 'en'
-    const openPlayerCard = useNavigationStore((s) => s.openPlayerCard)
+    const language = useLanguage()
+    const openPlayerCard = useOpenPlayerCard()
 
     if (!props.game.result) {
         console.log('if return null')
@@ -44,7 +42,7 @@ export default function GameHistoryDiv(props: Props) {
 
     const rawName = props.game.matchType?.name ?? '???'
     const matchType = rawName.match(/^(\dv\d)/i)?.[1]?.toLowerCase() ?? rawName
-    const timeAgo = getTimeAgo(props.game.endGameTime, lg, true)
+    const timeAgo = getTimeAgo(props.game.endGameTime, language, true)
 
     const result = props.game.result
     const getFlag = (raceId: number) => {
@@ -60,18 +58,14 @@ export default function GameHistoryDiv(props: Props) {
         .concat(players.filter((p) => p.teamid === result.teamid && !isMe(p)))
     const opponents = players.filter((p) => p.teamid !== result.teamid)
 
-    const handleOpenPlayer = async (e: MouseEvent, p: MatchHistoryReportResult, name: string) => {
+    const handleOpenPlayer = (e: MouseEvent, p: MatchHistoryReportResult, name: string) => {
         // the row itself toggles the game details
         e.stopPropagation()
-        const x = await getExtraInfo(displayGame, [p.profile_id])
-        const ex = x?.result[p.profile_id]
-        if (ex) {
-            openPlayerCard(
-                { country: props.profiles[p.profile_id]?.country, name, profileId: p.profile_id },
-                ex,
-                displayGame
-            )
-        }
+        openPlayerCard({
+            country: props.profiles[p.profile_id]?.country,
+            name,
+            profileId: p.profile_id,
+        })
     }
 
     const renderTeam = (team: MatchHistoryReportResult[], className = '') => (

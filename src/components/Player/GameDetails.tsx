@@ -1,6 +1,6 @@
 import { getTime, getTimeRange } from '../../functions/utils/time'
+import useLanguage from '../../hooks/useLanguage'
 import useText from '../../hooks/useText'
-import { useSettingsStore } from '../../stores/settingsStore'
 import { MatchHistoryReportResult, MatchObject, NormalizedProfiles } from '../../types'
 import MatchTableBody from './MatchTableBody'
 import MatchTableHeaders from './MatchTableHeaders'
@@ -16,7 +16,7 @@ interface Props {
 function GameDetails(props: Props) {
     const getText = useText()
     const { game, players, profiles } = props
-    const language = useSettingsStore((state) => state.settings?.language) ?? 'en'
+    const language = useLanguage()
 
     const timeRange = getTimeRange(game.startGameTime, game.endGameTime, language)
     const durationTime = getTime(game.endGameTime.getTime() - game.startGameTime.getTime())

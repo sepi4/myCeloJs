@@ -1,12 +1,10 @@
-import { Game, GAME_CONFIG } from '../../constants/games'
+import { Game } from '../../constants/games'
 import { Member, StatGroup } from '../../types'
+import { personalStatSearchUrl } from './apiUrls'
 
 export default async function searchPlayers(game: Game, searchValue: string): Promise<Member[]> {
-    const { apiBase, apiTitle } = GAME_CONFIG[game]
-    const url = `${apiBase}/GetPersonalStat?title=${apiTitle}&search=${searchValue}`
-
     try {
-        const res = await fetch(url)
+        const res = await fetch(personalStatSearchUrl(game, searchValue))
         const data = await res.json()
         if (data.result.message === 'SUCCESS') {
             return data.statGroups

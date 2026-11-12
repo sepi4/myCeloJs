@@ -1,5 +1,6 @@
 import { GAME_CONFIG, GAMES } from '../../constants/games'
-import { getExtraInfo } from '../../functions/api/getExtraInfo'
+import { fetchPlayerExtraInfo } from '../../functions/api/getExtraInfo'
+import useNavbarPosition from '../../hooks/useNavbarPosition'
 import useText from '../../hooks/useText'
 import { useGameStore } from '../../stores/gameStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
@@ -8,7 +9,6 @@ import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { useSettingsViewStore } from '../../stores/settingsViewStore'
 import { useViewStore } from '../../stores/viewStore'
-import { Rank } from '../../types'
 import Choice from '../Choice'
 import { faArrowLeft, faArrowRight, faCogs, faSearch, faUserAlt } from '../icons'
 import CheckLogDiv from './CheckLogDiv'
@@ -16,6 +16,12 @@ import NavBarIcon from './NavbarIcon'
 import NavbarRow from './NavbarRow'
 
 import styles from './Navbar.module.css'
+
+const navbarClass = {
+    top: styles.navbarTop,
+    left: styles.navbarLeft,
+    right: styles.navbarRight,
+}
 
 interface Props {
     handleSetSettingsView: () => void
@@ -82,30 +88,20 @@ export default function Navbar(props: Props) {
     const activeProfileId = settings?.[GAME_CONFIG[game].profileIdKey]
 
     const handleOpenMyCard = async () => {
-        const id = activeProfileId
-        if (!id) {
+        if (!activeProfileId) {
             return
         }
-        const x = await getExtraInfo(game, [id])
-        if (!x) {
+        const extraInfo = await fetchPlayerExtraInfo(game, activeProfileId)
+        const profile = extraInfo?.ranks.find((r) => r.members?.length === 1)?.members?.[0]
+        if (!extraInfo || !profile) {
             return
         }
-        const result = x.result
-        const ex = result[id]
-        const rank = ex.ranks.find((r: Rank) => r.members?.length === 1)
-        if (!rank?.members) {
-            return
-        }
-        const profile = rank.members[0]
-        if (ex) {
-            const playerData = {
-                name: profile.alias,
-                profileId: profile.profile_id,
-                country: profile.country,
-            }
-            closeSettingsView()
-            openPlayerCard(playerData, ex, game)
-        }
+        closeSettingsView()
+        openPlayerCard(
+            { name: profile.alias, profileId: profile.profile_id, country: profile.country },
+            extraInfo,
+            game
+        )
     }
 
     const alreadyViewingMyCard =
@@ -158,18 +154,13 @@ export default function Navbar(props: Props) {
         />
     )
 
-    const isTop = settings?.navbarPosition !== 'left' && settings?.navbarPosition !== 'right'
-    const navbarVariant =
-        settings?.navbarPosition === 'right'
-            ? styles.navbarRight
-            : settings?.navbarPosition === 'left'
-              ? styles.navbarLeft
-              : styles.navbarTop
+    const navbarPosition = useNavbarPosition()
+    const isTop = navbarPosition === 'top'
 
     const sep = <div className={isTop ? styles.separatorV : styles.separatorH} />
 
     return (
-        <div data-testid="navbar" className={`${styles.navbarBase} ${navbarVariant}`}>
+        <div data-testid="navbar" className={`${styles.navbarBase} ${navbarClass[navbarPosition]}`}>
             <div className={`${styles.iconsBase} ${isTop ? styles.iconsTop : styles.icons}`}>
                 {backIcon}
                 {forwardIcon}

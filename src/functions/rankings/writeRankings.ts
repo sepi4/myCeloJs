@@ -1,31 +1,13 @@
 import stringWidth from 'string-width'
 
 import { Game, getFactionCode } from '../../constants/games'
-import countriesJson from '../../translations/countries.json'
+import { countries } from '../../translations/countryTranslations'
 import { Player, RankingsJson } from '../../types'
-
-interface Countries {
-    [key: string]: {
-        ['name']: string
-        ['alpha-2']: string
-        ['alpha-3']: string
-        ['country-code']: string
-        ['iso_3166-2']: string
-        ['region']: string
-        ['sub-region']: string
-        ['intermediate-region']: string
-        ['region-code']: string
-        ['sub-region-code']: string
-        ['intermediate-region-code']: string
-    }
-}
-
-const countries: Countries = countriesJson
 
 function countryText(s: string | undefined, left: boolean, n: number) {
     let x = ''
-    if (s && s.length > 0 && countries[s]) {
-        x = countries[s]['alpha-3']
+    if (s) {
+        x = countries[s]?.['alpha-3'] ?? ''
     }
     if (left) {
         x = x.padStart(n)

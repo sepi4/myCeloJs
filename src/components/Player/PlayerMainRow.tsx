@@ -2,12 +2,13 @@ import { MouseEvent, useEffect, useRef, useState } from 'react'
 
 import { GAME_CONFIG, getFactionCode, getFactionFlag } from '../../constants/games'
 import { getTotalGames } from '../../functions/rankings/simpleFunctions'
+import useLanguage from '../../hooks/useLanguage'
+import useNavbarPosition from '../../hooks/useNavbarPosition'
 import useText from '../../hooks/useText'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { useGameStore } from '../../stores/gameStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useNavigationStore } from '../../stores/navigationStore'
-import { useSettingsStore } from '../../stores/settingsStore'
 import { getCountryName } from '../../translations/countryTranslations'
 import { ExtraInfo, Player } from '../../types'
 import { faCaretDown, faCaretRight } from '../icons'
@@ -31,7 +32,8 @@ function PlayerMainRow(props: Props) {
         navButtons: { elo },
     } = useNavButtonsStore()
     const showElo = GAME_CONFIG[game].hasElo && elo
-    const { settings } = useSettingsStore()
+    const language = useLanguage()
+    const isTopNavbar = useNavbarPosition() === 'top'
     const { player, handleSetShowExtra, extraInfo, showExtra } = props
     let country: string | undefined
 
@@ -107,7 +109,7 @@ function PlayerMainRow(props: Props) {
                 }}
                 src={countryFlagLocation}
                 alt={country}
-                title={getCountryName(country, settings?.language)}
+                title={getCountryName(country, language)}
             />
         ) : null
 
@@ -154,7 +156,6 @@ function PlayerMainRow(props: Props) {
         }
     }, [showExtra])
 
-    const isTopNavbar = settings?.navbarPosition !== 'left' && settings?.navbarPosition !== 'right'
     const rowClass = [
         isRealPlayer && styles.toggleable,
         showExtra && styles.sticky,

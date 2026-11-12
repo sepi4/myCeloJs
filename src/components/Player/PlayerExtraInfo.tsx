@@ -1,3 +1,4 @@
+import { getTotalWinsAndLosses } from '../../functions/rankings/simpleFunctions'
 import useText from '../../hooks/useText'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { ExtraInfo, GameHistoryState, Player } from '../../types'
@@ -23,14 +24,7 @@ function PlayerExtraInfo(props: Props) {
         if (!navButtons.total) {
             return null
         }
-        let wins = 0
-        let losses = 0
-        for (const rankObj of ranksArr) {
-            if (rankObj?.isModeRanked === 1) {
-                wins += rankObj.wins
-                losses += rankObj.losses
-            }
-        }
+        const { wins, losses } = getTotalWinsAndLosses(ranksArr)
         return (
             <div data-testid="total-games" className={styles.total}>
                 <span title={`${wins} / ${losses}`}>

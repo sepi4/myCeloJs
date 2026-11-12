@@ -1,4 +1,5 @@
 import { Player } from '../../types'
+import { splitPlayerData } from './splitPlayerData'
 
 /**
  * Extracts the player data portion from a log line, stripping the timestamp/prefix.
@@ -34,36 +35,6 @@ function extractPlayerData(lines: string[]): {
 }
 
 /**
- * Parses a player data string into a Player object.
- *
- * Expected format: `<slot> <name...> <profileId> <teamSlot> <faction>`
- */
-function parsePlayer(data: string, time: string): { slot: string; player: Player } | undefined {
-    const tokens = data.split(' ')
-    const slot = tokens.shift()
-    const faction = tokens.pop()
-    const teamSlot = tokens.pop()
-    const profileId = tokens.pop()
-    const name = tokens.join(' ')
-
-    if (!slot || !faction || !teamSlot) {
-        return undefined
-    }
-
-    return {
-        slot,
-        player: {
-            faction,
-            name,
-            profileId: profileId === undefined ? -1 : Number(profileId),
-            teamSlot: teamSlot === undefined ? -1 : Number(teamSlot),
-            time,
-            ranking: -1,
-        },
-    }
-}
-
-/**
  * Parses COH2 log lines into Player objects.
  *
  * @param lines - log lines containing player data from warnings.log
@@ -79,9 +50,16 @@ export function getPlayersInfo(lines: string[]): Player[] {
     const players: Record<string, Player> = {}
 
     for (const data of playerDataStrings) {
-        const result = parsePlayer(data, time)
-        if (result) {
-            players[result.slot] = result.player
+        const fields = splitPlayerData(data)
+        if (fields) {
+            players[fields.slot] = {
+                faction: fields.faction,
+                name: fields.name,
+                profileId: fields.profileId === undefined ? -1 : Number(fields.profileId),
+                teamSlot: Number(fields.teamSlot),
+                time,
+                ranking: -1,
+            }
         }
     }
 

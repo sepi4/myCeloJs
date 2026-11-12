@@ -1,7 +1,4 @@
-import {
-    refactronTableInfo,
-    refactronTableInfoCoh3,
-} from '../../functions/rankings/refactorTableInfo'
+import { refactorTableInfo } from '../../functions/rankings/refactorTableInfo'
 import { useDisplayGame } from '../../hooks/useDisplayGame'
 import { Rank } from '../../types'
 import TableRanksDiv from './TableRanksDiv'
@@ -10,8 +7,7 @@ import styles from './TableDiv.module.css'
 
 function TableDiv({ playerRanks }: { playerRanks: Rank[] }) {
     const game = useDisplayGame()
-    const [ranks, factionNames] =
-        game === 'coh3' ? refactronTableInfoCoh3(playerRanks) : refactronTableInfo(playerRanks)
+    const [ranks, factionNames] = refactorTableInfo(game, playerRanks)
     const lastRowSize = factionNames.length % 2 === 0 ? 2 : 1
     const factionGrids = factionNames.map((faction, factionIndex) => {
         const startIndex = factionIndex * 4
