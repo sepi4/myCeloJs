@@ -19,7 +19,7 @@ type ParsedHistory = {
 function toMatchObject(
     match: MatchHistoryStat,
     matchTypes: MatchType[],
-    player: Player
+    player: Pick<Player, 'profileId'>
 ): MatchObject | null {
     const players = match.matchhistoryreportresults.map((report) => ({
         ...report,
@@ -53,7 +53,10 @@ function normalizeProfiles(profiles: RecentMatchHistory['profiles']): Normalized
     return normalized
 }
 
-export function parseHistoryData(result: HistoryResult, player: Player): ParsedHistory {
+export function parseHistoryData(
+    result: HistoryResult,
+    player: Pick<Player, 'profileId'>
+): ParsedHistory {
     const { matchHistoryStats, profiles = [] } = result[0]
     const { matchTypes } = result[1]
 

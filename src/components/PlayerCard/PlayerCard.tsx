@@ -15,7 +15,6 @@ import useSteamAvatar from '../../hooks/useSteamAvatar'
 import useText from '../../hooks/useText'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { getCountryName } from '../../translations/countryTranslations'
-import { Player } from '../../types'
 import Choice from '../Choice'
 import PlayerExtraInfo from '../Player/PlayerExtraInfo'
 import PlayerName from '../PlayerName'
@@ -329,8 +328,7 @@ export default function PlayerCard() {
 
     const card = extraInfo && (
         <PlayerExtraInfo
-            // player is a partial Player used only for display
-            player={player as Player}
+            player={player}
             extraInfo={extraInfo}
             gameHistory={gameHistory}
             updateGameHistory={updateGameHistory}
