@@ -3,6 +3,7 @@ import { getTimeAgo } from '../../functions/utils/time'
 import useLanguage from '../../hooks/useLanguage'
 import useSteamAvatar from '../../hooks/useSteamAvatar'
 import useText from '../../hooks/useText'
+import { getCountryName } from '../../translations/countryTranslations'
 import { SearchResult } from '../../types'
 import PlayerName from '../PlayerName'
 
@@ -36,6 +37,7 @@ export default function FoundPlayer(props: Props) {
                 className={styles.flagImage}
                 src={countryFlags[props.player.country]}
                 alt={`${props.player.country}`}
+                title={getCountryName(props.player.country, language)}
             />
             <span className={styles.alias}>
                 <PlayerName name={props.player.alias} />
