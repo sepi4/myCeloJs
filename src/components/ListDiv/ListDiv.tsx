@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { ranksArrFilter, ranksArrSort } from '../../functions/rankings/ranksArrFuns'
+import { filterRanks, sortRanks } from '../../functions/rankings/filterAndSortRanks'
 import { anyKeyOpen, toggleKey, toggleKeys } from '../../functions/utils/openKeys'
 import { useDisplayGame } from '../../hooks/useDisplayGame'
 import useText from '../../hooks/useText'
@@ -26,8 +26,8 @@ function ListDiv({ ranksArr }: { ranksArr: Rank[] }) {
     // keys of the team ranks whose members are shown
     const [openRanks, setOpenRanks] = useState<string[]>([])
 
-    ranksArr = ranksArrFilter(ranksArr, tableView, showAll)
-    ranksArr = ranksArrSort(ranksArr, sorter)
+    ranksArr = filterRanks(ranksArr, tableView, showAll)
+    ranksArr = sortRanks(ranksArr, sorter)
 
     if (ranksArr && sorter.reversed) {
         ranksArr = ranksArr.reverse()

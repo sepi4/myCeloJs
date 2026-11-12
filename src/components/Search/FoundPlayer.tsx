@@ -10,7 +10,7 @@ import styles from './FoundPlayer.module.css'
 
 interface Props {
     player: Member
-    clickFun: () => void
+    onClick: () => void
 }
 
 export default function FoundPlayer(props: Props) {
@@ -44,7 +44,7 @@ export default function FoundPlayer(props: Props) {
     )
 
     return (
-        <div data-testid="found-player" className={styles.container} onClick={props.clickFun}>
+        <div data-testid="found-player" className={styles.container} onClick={props.onClick}>
             {name}
             <span className={styles.stat}>
                 <span className={styles.label}>{getText('mp_games')}:</span>

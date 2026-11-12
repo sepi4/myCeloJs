@@ -4,27 +4,19 @@ import { Game, getFactionCode } from '../../constants/games'
 import { countries } from '../../translations/countryTranslations'
 import { Player, RankingsJson } from '../../types'
 
-function countryText(s: string | undefined, left: boolean, n: number) {
-    let x = ''
-    if (s) {
-        x = countries[s]?.['alpha-3'] ?? ''
-    }
-    if (left) {
-        x = x.padStart(n)
-    } else {
-        x = x.padEnd(n)
-    }
-    return x
+function countryText(country: string | undefined, padLeft: boolean, width: number) {
+    const code = country ? (countries[country]?.['alpha-3'] ?? '') : ''
+    return padLeft ? code.padStart(width) : code.padEnd(width)
 }
 
 function getLimitedWord(str: string, limit: number, padLeft: boolean) {
     let sum = 0
     let newStr = ''
-    for (const x of str) {
-        const sw = stringWidth(x)
-        if (sum + sw <= limit) {
-            sum += sw
-            newStr += x
+    for (const char of str) {
+        const charWidth = stringWidth(char)
+        if (sum + charWidth <= limit) {
+            sum += charWidth
+            newStr += char
         } else {
             break
         }

@@ -19,18 +19,18 @@ function IntervalInput() {
         e: React.FocusEvent<HTMLInputElement> | React.KeyboardEvent<HTMLInputElement>
     ) => {
         setError(false)
-        const x = parseInt(e.currentTarget.value)
-        if (!isNaN(x) && x > 0 && x < 1000 && x !== logCheckInterval) {
-            setLogCheckInterval(x)
+        const seconds = parseInt(e.currentTarget.value)
+        if (!isNaN(seconds) && seconds > 0 && seconds < 1000 && seconds !== logCheckInterval) {
+            setLogCheckInterval(seconds)
             if (refInputElement?.current) {
-                refInputElement.current.value = x + ''
+                refInputElement.current.value = seconds + ''
             }
             e.currentTarget.blur()
         } else {
             if (refInputElement?.current) {
                 refInputElement.current.value = logCheckInterval + ''
             }
-            if (x !== logCheckInterval) {
+            if (seconds !== logCheckInterval) {
                 setError(true)
                 setTimeout(() => setError(false), 5000)
             }

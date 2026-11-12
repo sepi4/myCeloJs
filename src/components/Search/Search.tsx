@@ -2,7 +2,7 @@ import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react'
 
 import { getExtraInfo } from '../../functions/api/getExtraInfo'
 import searchPlayers from '../../functions/api/searchPlayers'
-import { getTotalGames } from '../../functions/rankings/simpleFunctions'
+import { getTotalGames } from '../../functions/rankings/totalGames'
 import getLastPlayedGame from '../../functions/utils/getLastPlayedGame'
 import useText from '../../hooks/useText'
 import { useFoundPlayersStore } from '../../stores/foundPlayersStore'
@@ -48,9 +48,9 @@ export default function Search() {
                     ids.push(p.profileId)
                 }
             }
-            const x = await getExtraInfo(game, ids)
-            if (x) {
-                const result = x.result
+            const fetched = await getExtraInfo(game, ids)
+            if (fetched) {
+                const result = fetched.result
                 const newPlayers = res
                     .map((p) => {
                         if (result[p.profile_id]) {
@@ -94,7 +94,7 @@ export default function Search() {
             <FoundPlayer
                 key={p.profile_id}
                 player={p}
-                clickFun={() => {
+                onClick={() => {
                     handlePlayerCardOn(p)
                 }}
             />

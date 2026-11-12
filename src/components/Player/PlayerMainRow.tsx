@@ -2,7 +2,7 @@ import { MouseEvent, useEffect, useRef, useState } from 'react'
 
 import { countryFlags } from '../../constants/countryFlags'
 import { GAME_CONFIG, getFactionCode, getFactionFlag } from '../../constants/games'
-import { getTotalGames } from '../../functions/rankings/simpleFunctions'
+import { getTotalGames } from '../../functions/rankings/totalGames'
 import useLanguage from '../../hooks/useLanguage'
 import useNavbarPosition from '../../hooks/useNavbarPosition'
 import useText from '../../hooks/useText'
