@@ -6,7 +6,7 @@ import styles from './SvgIcon.module.css'
 
 export type IconSize = 'sm' | 'lg' | 'xl' | '2x'
 
-const sizeClasses: Record<IconSize, string> = {
+const sizeClasses: Record<IconSize, string | undefined> = {
     sm: styles.sm,
     lg: styles.lg,
     xl: styles.xl,

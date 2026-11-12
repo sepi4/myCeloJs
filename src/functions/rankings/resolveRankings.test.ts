@@ -117,13 +117,13 @@ describe('resolveRankings', () => {
 
         const [team0, team1] = resolveRankings(players, stats, coh2Leaderboards)
 
-        expect(team0[0].ranking).toBe(50)
-        expect(team0[0].country).toBe('de')
-        expect(team0[0].teamMarker).toBeUndefined()
+        expect(team0[0]?.ranking).toBe(50)
+        expect(team0[0]?.country).toBe('de')
+        expect(team0[0]?.teamMarker).toBeUndefined()
 
-        expect(team1[0].ranking).toBe(75)
-        expect(team1[0].country).toBe('ru')
-        expect(team1[0].teamMarker).toBeUndefined()
+        expect(team1[0]?.ranking).toBe(75)
+        expect(team1[0]?.country).toBe('ru')
+        expect(team1[0]?.teamMarker).toBeUndefined()
     })
 
     test('rank -1 from the API leaves ranking undefined', () => {
@@ -135,7 +135,7 @@ describe('resolveRankings', () => {
 
         const [team0] = resolveRankings(players, stats, coh2Leaderboards)
 
-        expect(team0[0].ranking).toBeUndefined()
+        expect(team0[0]?.ranking).toBeUndefined()
     })
 
     test('COH2 2v2 team — players get team ranking and markers', () => {
@@ -172,10 +172,10 @@ describe('resolveRankings', () => {
 
         const [team0] = resolveRankings(players, stats, coh2Leaderboards)
 
-        expect(team0[0].ranking).toBe(30)
-        expect(team0[0].teamMarker).toBe(' ¹')
-        expect(team0[1].ranking).toBe(30)
-        expect(team0[1].teamMarker).toBe(' ¹')
+        expect(team0[0]?.ranking).toBe(30)
+        expect(team0[0]?.teamMarker).toBe(' ¹')
+        expect(team0[1]?.ranking).toBe(30)
+        expect(team0[1]?.teamMarker).toBe(' ¹')
     })
 
     test('COH2 3v3 — player not in team stat group falls back to solo rank', () => {
@@ -233,14 +233,14 @@ describe('resolveRankings', () => {
         const [team0] = resolveRankings(players, stats, coh2Leaderboards)
 
         // P1 and P2 get team rank + marker
-        expect(team0[0].ranking).toBe(10)
-        expect(team0[0].teamMarker).toBe(' ¹')
-        expect(team0[1].ranking).toBe(10)
-        expect(team0[1].teamMarker).toBe(' ¹')
+        expect(team0[0]?.ranking).toBe(10)
+        expect(team0[0]?.teamMarker).toBe(' ¹')
+        expect(team0[1]?.ranking).toBe(10)
+        expect(team0[1]?.teamMarker).toBe(' ¹')
 
         // P3 falls back to solo 3v3German rank, no marker
-        expect(team0[2].ranking).toBe(200)
-        expect(team0[2].teamMarker).toBeUndefined()
+        expect(team0[2]?.ranking).toBe(200)
+        expect(team0[2]?.teamMarker).toBeUndefined()
     })
 
     test('COH3 1v1 — unranked fallback', () => {
@@ -284,7 +284,7 @@ describe('resolveRankings', () => {
 
         const [team0] = resolveRankings(players, stats, coh3Leaderboards)
 
-        expect(team0[0].ranking).toBe(500)
+        expect(team0[0]?.ranking).toBe(500)
     })
 
     test('No matching stats — ranking stays undefined', () => {
@@ -308,10 +308,10 @@ describe('resolveRankings', () => {
 
         const [team0, team1] = resolveRankings(players, stats, coh2Leaderboards)
 
-        expect(team0[0].ranking).toBeUndefined()
-        expect(team0[0].country).toBeUndefined()
-        expect(team1[0].ranking).toBeUndefined()
-        expect(team1[0].country).toBeUndefined()
+        expect(team0[0]?.ranking).toBeUndefined()
+        expect(team0[0]?.country).toBeUndefined()
+        expect(team1[0]?.ranking).toBeUndefined()
+        expect(team1[0]?.country).toBeUndefined()
     })
 
     test('COH2 2v2 — team stat group exists but unranked, falls back to solo rank and keeps team marker', () => {
@@ -364,12 +364,12 @@ describe('resolveRankings', () => {
         const [team0] = resolveRankings(players, stats, coh2Leaderboards)
 
         // Both fall back to individual 2v2German rankings
-        expect(team0[0].ranking).toBe(55)
-        expect(team0[1].ranking).toBe(88)
+        expect(team0[0]?.ranking).toBe(55)
+        expect(team0[1]?.ranking).toBe(88)
 
         // But they still share a teamMarker because they are in the same stat group
-        expect(team0[0].teamMarker).toBe(' ¹')
-        expect(team0[1].teamMarker).toBe(' ¹')
+        expect(team0[0]?.teamMarker).toBe(' ¹')
+        expect(team0[1]?.teamMarker).toBe(' ¹')
     })
 
     test('COH3 1v1 — player gets rating from leaderboard stat', () => {
@@ -419,10 +419,10 @@ describe('resolveRankings', () => {
 
         const [team0, team1] = resolveRankings(players, stats, coh3Leaderboards)
 
-        expect(team0[0].ranking).toBe(50)
-        expect(team0[0].rating).toBe(1523)
-        expect(team1[0].ranking).toBe(75)
-        expect(team1[0].rating).toBe(1400)
+        expect(team0[0]?.ranking).toBe(50)
+        expect(team0[0]?.rating).toBe(1523)
+        expect(team1[0]?.ranking).toBe(75)
+        expect(team1[0]?.rating).toBe(1400)
     })
 
     test('COH2 1v1 — rating stays undefined when not in API response', () => {
@@ -462,10 +462,10 @@ describe('resolveRankings', () => {
 
         const [team0, team1] = resolveRankings(players, stats, coh2Leaderboards)
 
-        expect(team0[0].ranking).toBe(50)
-        expect(team0[0].rating).toBeUndefined()
-        expect(team1[0].ranking).toBe(75)
-        expect(team1[0].rating).toBeUndefined()
+        expect(team0[0]?.ranking).toBe(50)
+        expect(team0[0]?.rating).toBeUndefined()
+        expect(team1[0]?.ranking).toBe(75)
+        expect(team1[0]?.rating).toBeUndefined()
     })
 
     test('COH3 1v1 — unranked fallback also resolves rating', () => {
@@ -510,8 +510,8 @@ describe('resolveRankings', () => {
 
         const [team0] = resolveRankings(players, stats, coh3Leaderboards)
 
-        expect(team0[0].ranking).toBe(500)
-        expect(team0[0].rating).toBe(1200)
+        expect(team0[0]?.ranking).toBe(500)
+        expect(team0[0]?.rating).toBe(1200)
     })
 
     test('Mixed factions in team — no team leaderboard, falls back to individual', () => {
@@ -555,9 +555,9 @@ describe('resolveRankings', () => {
 
         const [team0] = resolveRankings(players, stats, coh2Leaderboards)
 
-        expect(team0[0].ranking).toBe(150)
-        expect(team0[0].teamMarker).toBeUndefined()
-        expect(team0[1].ranking).toBe(250)
-        expect(team0[1].teamMarker).toBeUndefined()
+        expect(team0[0]?.ranking).toBe(150)
+        expect(team0[0]?.teamMarker).toBeUndefined()
+        expect(team0[1]?.ranking).toBe(250)
+        expect(team0[1]?.teamMarker).toBeUndefined()
     })
 })

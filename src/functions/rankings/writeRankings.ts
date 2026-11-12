@@ -44,16 +44,16 @@ export function buildRankings(
 
     const rowsLeft = []
     const rowsRight = []
-    for (let i = 0; i < players.length; i++) {
-        const country = players[i].country ? players[i].country : ''
-        const name = players[i].name
+    for (const player of players) {
+        const country = player.country ? player.country : ''
+        const name = player.name
 
-        const ranking = players[i].ranking?.toString() ?? '-'
+        const ranking = player.ranking?.toString() ?? '-'
 
-        const faction = players[i].faction
-        const teamSlot = players[i].teamSlot
+        const faction = player.faction
+        const teamSlot = player.teamSlot
         const ratingPad =
-            showElo && players[i].rating !== undefined ? `(${players[i].rating!})`.padEnd(7) : ''
+            showElo && player.rating !== undefined ? `(${player.rating!})`.padEnd(7) : ''
 
         const factionCode = getFactionCode(game, faction)
         const maxNameLength = 20
@@ -99,7 +99,7 @@ export function buildRankings(
             }
         }
 
-        const ratingValue = showElo ? players[i].rating : undefined
+        const ratingValue = showElo ? player.rating : undefined
         const teamEntry = {
             name,
             ranking,

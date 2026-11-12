@@ -43,7 +43,9 @@ function MatchTableBody(props: Props) {
 
                     {props.players.map((p) => (
                         <td key={`${p.profile_id} ${i}`}>
-                            {key === 'gt' ? getTime(p.counters[key] * 1000) : p.counters[key]}
+                            {key === 'gt'
+                                ? getTime((p.counters[key] ?? 0) * 1000)
+                                : p.counters[key]}
                         </td>
                     ))}
                 </tr>

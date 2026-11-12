@@ -124,8 +124,8 @@ describe('navigationStore', () => {
         }
         const { back } = nav()
         expect(back).toHaveLength(50)
-        expect(back[0].card?.player?.name).toBe('P9')
-        expect(back[49].card?.player?.name).toBe('P58')
+        expect(back[0]?.card?.player?.name).toBe('P9')
+        expect(back[49]?.card?.player?.name).toBe('P58')
     })
 
     test('resetNavigation shows the main view and forgets the history', () => {

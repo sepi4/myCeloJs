@@ -53,13 +53,14 @@ export default function Search() {
                 const result = fetched.result
                 const newPlayers = res
                     .map((p) => {
-                        if (result[p.profile_id]) {
-                            p.totalGames = getTotalGames(result[p.profile_id]?.ranks)
-                            p.lastGameTime = getLastPlayedGame(result[p.profile_id])
+                        const extraInfo = result[p.profile_id]
+                        if (extraInfo) {
+                            p.totalGames = getTotalGames(extraInfo.ranks)
+                            p.lastGameTime = getLastPlayedGame(extraInfo)
                         } else {
                             p.totalGames = 0
                         }
-                        p.extraInfo = result[p.profile_id]
+                        p.extraInfo = extraInfo
                         return p
                     })
                     .sort((a, b) => {

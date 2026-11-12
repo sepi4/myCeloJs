@@ -26,7 +26,7 @@ export function refactorData(
         const group = statGroupsById[stat.statgroup_id]
         const leaderboard = leaderboardsById[stat.leaderboard_id]
 
-        if (!leaderboard) {
+        if (!leaderboard || !group) {
             continue
         }
 
@@ -56,10 +56,11 @@ export function refactorData(
         }
     }
 
-    for (const id of Object.keys(players)) {
-        for (const rank of players[id].ranks) {
-            if (rank.members?.length === 1) {
-                players[id].steamId = rank.members[0].name.substring(STEAM_PREFIX.length)
+    for (const player of Object.values(players)) {
+        for (const rank of player.ranks) {
+            const onlyMember = rank.members?.length === 1 ? rank.members[0] : undefined
+            if (onlyMember) {
+                player.steamId = onlyMember.name.substring(STEAM_PREFIX.length)
                 break
             }
         }

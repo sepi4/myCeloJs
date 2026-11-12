@@ -19,15 +19,14 @@ function extractPlayerData(lines: string[]): {
             const parts = line.split(':')
             if (time === undefined) {
                 // Time is in the first three colon-separated segments: "HH:MM:SS.ms"
-                time = [parts[0], parts[1], parts[2].split('   ')[0]].join(':')
+                time = [parts[0], parts[1], parts[2]?.split('   ')[0]].join(':')
             }
 
             // Player data starts after "Player:" (index 3 onward)
             return parts.slice(3).join(':').trim()
         } else {
             // Non-player lines (e.g. Match Started): take the last colon-separated segment
-            const parts = line.split(':')
-            return parts[parts.length - 1].trim()
+            return line.slice(line.lastIndexOf(':') + 1).trim()
         }
     })
 

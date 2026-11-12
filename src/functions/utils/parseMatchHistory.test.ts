@@ -81,8 +81,8 @@ describe('parseHistoryData', () => {
 
         const parsed = parseHistoryData(result, makePlayer(100))
 
-        expect(parsed.matchHistoryStats[0].endGameTime.getTime()).toBeGreaterThan(
-            parsed.matchHistoryStats[1].endGameTime.getTime()
+        expect(parsed.matchHistoryStats[0]?.endGameTime.getTime()).toBeGreaterThan(
+            parsed.matchHistoryStats[1]?.endGameTime.getTime() ?? Infinity
         )
     })
 
@@ -92,8 +92,8 @@ describe('parseHistoryData', () => {
 
         const parsed = parseHistoryData(result, makePlayer(100))
 
-        expect(parsed.matchHistoryStats[0].startGameTime).toEqual(new Date(1000 * 1000))
-        expect(parsed.matchHistoryStats[0].endGameTime).toEqual(new Date(2000 * 1000))
+        expect(parsed.matchHistoryStats[0]?.startGameTime).toEqual(new Date(1000 * 1000))
+        expect(parsed.matchHistoryStats[0]?.endGameTime).toEqual(new Date(2000 * 1000))
     })
 
     it('parses counters from JSON string', () => {
@@ -104,7 +104,7 @@ describe('parseHistoryData', () => {
 
         const parsed = parseHistoryData(result, makePlayer(100))
 
-        expect(parsed.matchHistoryStats[0].players[0].counters).toEqual({ dmgdone: 500 })
+        expect(parsed.matchHistoryStats[0]?.players[0]?.counters).toEqual({ dmgdone: 500 })
     })
 
     it('finds the matching match type', () => {
@@ -114,7 +114,7 @@ describe('parseHistoryData', () => {
 
         const parsed = parseHistoryData(result, makePlayer(100))
 
-        expect(parsed.matchHistoryStats[0].matchType?.name).toBe('1v1')
+        expect(parsed.matchHistoryStats[0]?.matchType?.name).toBe('1v1')
     })
 
     it('finds the current player result by profileId', () => {
@@ -125,7 +125,7 @@ describe('parseHistoryData', () => {
 
         const parsed = parseHistoryData(result, makePlayer(100))
 
-        expect(parsed.matchHistoryStats[0].result?.profile_id).toBe(100)
+        expect(parsed.matchHistoryStats[0]?.result?.profile_id).toBe(100)
     })
 
     it('skips matches with no players', () => {
@@ -143,7 +143,7 @@ describe('parseHistoryData', () => {
 
         const parsed = parseHistoryData(result, makePlayer(100))
 
-        expect(parsed.profiles[100].name).toBe('player_100')
-        expect(parsed.profiles[200].name).toBe('player_200')
+        expect(parsed.profiles[100]?.name).toBe('player_100')
+        expect(parsed.profiles[200]?.name).toBe('player_200')
     })
 })
