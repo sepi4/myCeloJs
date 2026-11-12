@@ -1,8 +1,7 @@
-import getText from '../../functions/utils/getText'
 import { anyKeyOpen } from '../../functions/utils/openKeys'
+import useText from '../../hooks/useText'
 import { useExtraInfoStore } from '../../stores/extraInfoStore'
 import { useOpenInfosStore } from '../../stores/openInfosStore'
-import { useSettingsStore } from '../../stores/settingsStore'
 import { Player as PlayerType } from '../../types'
 import { faAngleDoubleDown, faAngleDoubleRight } from '../icons'
 import Player from '../Player/Player'
@@ -16,9 +15,9 @@ interface Props {
 }
 
 function Team(props: Props) {
+    const getText = useText()
     const { extraInfo } = useExtraInfoStore()
     const { openInfos, toggleOpenInfos } = useOpenInfosStore()
-    const { settings } = useSettingsStore()
 
     // only players with their own open arrow, so the team button matches the arrows
     const toggleableIds = props.players
@@ -32,9 +31,7 @@ function Team(props: Props) {
 
     const teamClass = props.teamIndex === 0 ? css.teamA : css.teamB
     const showToggleAll = toggleableIds.length > 1
-    const toggleTitle = anyOpen
-        ? getText('collapse_all_team', settings)
-        : getText('expand_all_team', settings)
+    const toggleTitle = anyOpen ? getText('collapse_all_team') : getText('expand_all_team')
 
     return (
         <div

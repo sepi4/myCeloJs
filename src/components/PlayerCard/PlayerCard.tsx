@@ -7,9 +7,9 @@ import { GAMES, otherGame } from '../../constants/games'
 import { COH2_ORG, COH2STATS_COM, COH3STATS_COM, STEAM } from '../../constants/urls'
 import { fetchProfileIdBySteamId } from '../../functions/api/fetchProfileIdBySteamId'
 import { getExtraInfo } from '../../functions/api/getExtraInfo'
-import getText from '../../functions/utils/getText'
 import { PlayerCardContext } from '../../hooks/useDisplayGame'
 import useSteamAvatar from '../../hooks/useSteamAvatar'
+import useText from '../../hooks/useText'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { useSettingsStore } from '../../stores/settingsStore'
@@ -22,6 +22,7 @@ import PlayerName from '../PlayerName'
 import styles from './PlayerCard.module.css'
 
 export default function PlayerCard() {
+    const getText = useText()
     const { countryFlags } = useCountryFlagsStore()
     const { settings } = useSettingsStore()
     const {
@@ -222,7 +223,7 @@ export default function PlayerCard() {
 
     const otherAvailable = otherGameChecked && otherPlayer !== null
     const noProfileTitle =
-        otherGameChecked && !otherPlayer ? getText('no_profile_for_game', settings) : undefined
+        otherGameChecked && !otherPlayer ? getText('no_profile_for_game') : undefined
 
     const gameRadio = (
         <div className={styles.gameRadio}>

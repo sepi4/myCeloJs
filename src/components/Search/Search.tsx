@@ -4,18 +4,17 @@ import { getExtraInfo } from '../../functions/api/getExtraInfo'
 import searchPlayers from '../../functions/api/searchPlayers'
 import { getTotalGames } from '../../functions/rankings/simpleFunctions'
 import getLastPlayedGame from '../../functions/utils/getLastPlayedGame'
-import getText from '../../functions/utils/getText'
+import useText from '../../hooks/useText'
 import { useFoundPlayersStore } from '../../stores/foundPlayersStore'
 import { useGameStore } from '../../stores/gameStore'
 import { useNavigationStore } from '../../stores/navigationStore'
-import { useSettingsStore } from '../../stores/settingsStore'
 import { Member } from '../../types'
 import FoundPlayer from './FoundPlayer'
 
 import styles from './Search.module.css'
 
 export default function Search() {
-    const { settings } = useSettingsStore()
+    const getText = useText()
     const inputRef = useRef<HTMLInputElement>(null)
 
     const [searchValue, setSearchValue] = useState('')
@@ -112,7 +111,7 @@ export default function Search() {
                     data-testid="search-input"
                     ref={inputRef}
                     className={styles.input}
-                    placeholder={getText('steam_alias_or_id', settings)}
+                    placeholder={getText('steam_alias_or_id')}
                     onChange={handleSearchInput}
                     onKeyUp={handleKeyUp}
                 />

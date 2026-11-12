@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { GITHUB_RELEASES_URL } from '../constants/urls'
 import { updateSettings } from '../functions/settings/writeSettings'
-import funGetText from '../functions/utils/getText'
+import useText from '../hooks/useText'
 import { useSettingsStore } from '../stores/settingsStore'
 
 import styles from './UpdateBar.module.css'
@@ -17,7 +17,7 @@ function UpdateBar() {
     const [update, setUpdate] = useState<UpdateState | null>(null)
     const { settings } = useSettingsStore()
 
-    const getText = (x: string) => funGetText(x, settings)
+    const getText = useText()
 
     useEffect(() => {
         window.electronAPI.updater.onStatus((status) => {

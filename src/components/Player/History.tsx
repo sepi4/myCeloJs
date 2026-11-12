@@ -1,12 +1,11 @@
 import { useCallback, useEffect, useState } from 'react'
 
 import { GAME_CONFIG } from '../../constants/games'
-import getText from '../../functions/utils/getText'
 import { parseHistoryData } from '../../functions/utils/parseMatchHistory'
 import { useDisplayGame } from '../../hooks/useDisplayGame'
+import useText from '../../hooks/useText'
 import { HISTORY_PERIODS, isInPeriod, useHistoryPeriodStore } from '../../stores/historyPeriodStore'
 import { EMPTY_GAME_HISTORY } from '../../stores/playerCardStore'
-import { useSettingsStore } from '../../stores/settingsStore'
 import { GameHistoryState, Player } from '../../types'
 import { faCaretDown, faCaretRight } from '../icons'
 import SvgIcon from '../SvgIcon'
@@ -26,7 +25,7 @@ interface Props {
 }
 
 export default function History(props: Props) {
-    const { settings } = useSettingsStore()
+    const getText = useText()
     const game = useDisplayGame()
     const { historyPeriod, setHistoryPeriod } = useHistoryPeriodStore()
 
@@ -108,7 +107,7 @@ export default function History(props: Props) {
                     onClick={handleToggle}
                 >
                     <SvgIcon icon={historyOpen ? faCaretDown : faCaretRight} size="lg" />
-                    {getText('game_history', settings)}
+                    {getText('game_history')}
                 </button>
                 {history && historyOpen && (
                     <div className={styles.periods}>
@@ -120,7 +119,7 @@ export default function History(props: Props) {
                                 className={styles.period}
                                 onClick={() => setHistoryPeriod(period)}
                             >
-                                {getText(`period_${period}`, settings)}
+                                {getText(`period_${period}`)}
                             </button>
                         ))}
                     </div>
@@ -151,7 +150,7 @@ export default function History(props: Props) {
                     })}
                     {games.length === 0 && (
                         <div data-testid="history-empty" className={styles.empty}>
-                            {getText('no_games_in_period', settings)}
+                            {getText('no_games_in_period')}
                         </div>
                     )}
                 </div>

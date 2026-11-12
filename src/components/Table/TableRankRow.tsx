@@ -1,5 +1,4 @@
-import getText from '../../functions/utils/getText'
-import { useSettingsStore } from '../../stores/settingsStore'
+import useText from '../../hooks/useText'
 
 import styles from './TableRankRow.module.css'
 
@@ -24,7 +23,7 @@ function TableRankRow({
     rankTotal,
     rating,
 }: Props) {
-    const { settings } = useSettingsStore()
+    const getText = useText()
     // prettier-ignore
     const streakColor = (
         Number(streak)
@@ -37,7 +36,7 @@ function TableRankRow({
     const streakDisplay = Number(streak) > 0 ? '+' + streak : streak
     const rankTitle =
         typeof rank === 'number' && rankTotal > 0
-            ? `${rank} ${getText('of', settings)} ${rankTotal}`
+            ? `${rank} ${getText('of')} ${rankTotal}`
             : undefined
     return (
         <div className={styles.container}>

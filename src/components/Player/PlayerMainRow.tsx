@@ -2,7 +2,7 @@ import { MouseEvent, useEffect, useRef, useState } from 'react'
 
 import { GAME_CONFIG, getFactionCode, getFactionFlag } from '../../constants/games'
 import { getTotalGames } from '../../functions/rankings/simpleFunctions'
-import getText from '../../functions/utils/getText'
+import useText from '../../hooks/useText'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { useGameStore } from '../../stores/gameStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
@@ -25,6 +25,7 @@ interface Props {
 }
 
 function PlayerMainRow(props: Props) {
+    const getText = useText()
     const { game } = useGameStore()
     const {
         navButtons: { elo },
@@ -85,8 +86,7 @@ function PlayerMainRow(props: Props) {
         player.ranking && player.ranking > 0
             ? (extraInfo?.ranks.find((r) => r.rank === player.ranking)?.ranktotal ?? 0)
             : 0
-    const rankTitle =
-        ranktotal > 0 ? `${player.ranking} ${getText('of', settings)} ${ranktotal}` : ''
+    const rankTitle = ranktotal > 0 ? `${player.ranking} ${getText('of')} ${ranktotal}` : ''
 
     const factionCode = getFactionCode(game, player.faction)
     const faction = (
@@ -118,7 +118,7 @@ function PlayerMainRow(props: Props) {
             className={isRealPlayer ? styles.name : undefined}
             title={
                 extraInfo && player.profileId
-                    ? getTotalGames(extraInfo.ranks) + ' ' + getText('games_played', settings)
+                    ? getTotalGames(extraInfo.ranks) + ' ' + getText('games_played')
                     : ''
             }
             onClick={isRealPlayer ? handlePlayerCardOn : undefined}

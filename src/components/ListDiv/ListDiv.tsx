@@ -1,11 +1,10 @@
 import { useState } from 'react'
 
 import { ranksArrFilter, ranksArrSort } from '../../functions/rankings/ranksArrFuns'
-import getText from '../../functions/utils/getText'
 import { anyKeyOpen, toggleKey, toggleKeys } from '../../functions/utils/openKeys'
 import { useDisplayGame } from '../../hooks/useDisplayGame'
+import useText from '../../hooks/useText'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
-import { useSettingsStore } from '../../stores/settingsStore'
 import { useSorterStore } from '../../stores/sorterStore'
 import { Rank } from '../../types'
 import { faAngleDoubleDown, faAngleDoubleRight } from '../icons'
@@ -17,12 +16,12 @@ import RanksListTitles from './RanksListTitles'
 import styles from './ListDiv.module.css'
 
 function ListDiv({ ranksArr }: { ranksArr: Rank[] }) {
+    const getText = useText()
     const {
         navButtons: { table: tableView, all: showAll },
     } = useNavButtonsStore()
     const game = useDisplayGame()
     const { sorter } = useSorterStore()
-    const { settings } = useSettingsStore()
 
     // keys of the team ranks whose members are shown
     const [openRanks, setOpenRanks] = useState<string[]>([])
@@ -54,10 +53,7 @@ function ListDiv({ ranksArr }: { ranksArr: Rank[] }) {
                                 onClick={() => setOpenRanks(toggleKeys(openRanks, expandableKeys))}
                             >
                                 <SvgIcon icon={allOpen ? faAngleDoubleDown : faAngleDoubleRight} />
-                                {getText(
-                                    allOpen ? 'collapse_all_team' : 'expand_all_team',
-                                    settings
-                                )}
+                                {getText(allOpen ? 'collapse_all_team' : 'expand_all_team')}
                             </button>
                         </Cell>
                         <Cell />
