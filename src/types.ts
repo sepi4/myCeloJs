@@ -175,6 +175,11 @@ export type MatchHistoryReportResult = {
     matchstartdate: number
 }
 
+/** A player's result as the API returns it: `counters` is a JSON string. */
+export type RawMatchHistoryReportResult = Omit<MatchHistoryReportResult, 'counters'> & {
+    counters: string
+}
+
 export type MatchHistoryStat = {
     completiontime: number
     creator_profile_id: number
@@ -191,9 +196,9 @@ export type MatchHistoryStat = {
         metadata: string
         profile_id: number
     }[]
-    matchhistoryreportresults: MatchHistoryReportResult[]
+    matchhistoryreportresults: RawMatchHistoryReportResult[]
     matchtype_id: number
-    matchurls: []
+    matchurls: unknown[]
     maxplayers: number
     observertotal: number
     options: string

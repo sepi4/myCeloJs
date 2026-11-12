@@ -1,5 +1,6 @@
 import {
     AvailableLeaderboard,
+    MatchHistoryReportResult,
     MatchHistoryStat,
     MatchObject,
     MatchType,
@@ -22,7 +23,7 @@ function toMatchObject(
 ): MatchObject | null {
     const players = match.matchhistoryreportresults.map((report) => ({
         ...report,
-        counters: JSON.parse(report.counters as unknown as string),
+        counters: JSON.parse(report.counters) as MatchHistoryReportResult['counters'],
     }))
 
     if (players.length === 0) {
