@@ -200,7 +200,7 @@ export type MatchHistoryStat = {
     }[]
     matchhistoryreportresults: RawMatchHistoryReportResult[]
     matchtype_id: number
-    matchurls: []
+    matchurls: unknown[]
     maxplayers: number
     observertotal: number
     options: string
