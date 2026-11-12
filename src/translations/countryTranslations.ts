@@ -1,11 +1,11 @@
-import countriesJson from './countries.json'
+import alpha3Json from './countries.json'
 
-type Country = (typeof countriesJson)[keyof typeof countriesJson]
+export const countryAlpha3: Record<string, string | undefined> = alpha3Json
 
-export const countries: Record<string, Country | undefined> = countriesJson
+const regionNamesEn = new Intl.DisplayNames(['en'], { type: 'region', fallback: 'none' })
 
 // Russian names for all countries, keyed by ISO 3166-1 alpha-2 code (lowercase)
-const countryNamesRu: { [key: string]: string } = {
+export const countryNamesRu: Record<string, string | undefined> = {
     af: 'Афганистан',
     ax: 'Аландские острова',
     al: 'Албания',
@@ -261,7 +261,8 @@ export function getCountryName(code: string | undefined, language: string | unde
     if (!code) {
         return ''
     }
-    const english = countries[code]?.name ?? ''
+    // Intl throws on a malformed code, so only known codes reach it.
+    const english = countryAlpha3[code] ? (regionNamesEn.of(code.toUpperCase()) ?? '') : ''
     if (language === 'ru') {
         return countryNamesRu[code] ?? english
     }
