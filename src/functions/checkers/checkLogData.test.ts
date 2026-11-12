@@ -1,5 +1,6 @@
 import { useExtraInfoStore } from '../../stores/extraInfoStore'
 import { useFromFileStore } from '../../stores/fromFileStore'
+import { useGameStore } from '../../stores/gameStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useOpenInfosStore } from '../../stores/openInfosStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
@@ -49,8 +50,9 @@ const settings = {
 function resetAllStores() {
     useFromFileStore.setState({ fromFile: null })
     useNavButtonsStore.setState({
-        navButtons: { all: true, table: true, total: true, coh3: false, elo: false },
+        navButtons: { all: true, table: true, total: true, elo: false },
     })
+    useGameStore.setState({ game: 'coh2' })
     useSettingsStore.setState({ settings: null })
     useExtraInfoStore.setState({ extraInfo: null })
     useOpenInfosStore.setState({ openInfos: [] })
@@ -88,7 +90,7 @@ describe('checkLogData', () => {
     it('clears extraInfo, openInfos, and playerCard on update', () => {
         useExtraInfoStore.setState({ extraInfo: { '1': {} as never } })
         useOpenInfosStore.setState({ openInfos: [1] })
-        usePlayerCardStore.getState().setPlayerCard({ name: 'Old' }, {} as never, false)
+        usePlayerCardStore.getState().setPlayerCard({ name: 'Old' }, {} as never, 'coh2')
 
         checkLogData({ data: [player1] })
 
@@ -102,18 +104,16 @@ describe('checkLogData', () => {
 
         checkLogData({ data: [player1] })
 
-        expect(mockWriteRankings).toHaveBeenCalledWith(false, [player1], true, false)
+        expect(mockWriteRankings).toHaveBeenCalledWith('coh2', [player1], true, false)
     })
 
-    it('passes coh3 nav button value to writeRankings', () => {
+    it('passes the selected game to writeRankings', () => {
         useSettingsStore.setState({ settings })
-        useNavButtonsStore.setState({
-            navButtons: { all: true, table: true, total: true, coh3: true, elo: false },
-        })
+        useGameStore.setState({ game: 'coh3' })
 
         checkLogData({ data: [player1] })
 
-        expect(mockWriteRankings).toHaveBeenCalledWith(true, [player1], true, false)
+        expect(mockWriteRankings).toHaveBeenCalledWith('coh3', [player1], true, false)
     })
 
     it('does not call writeRankings when settings are null', () => {

@@ -1,4 +1,5 @@
-import { useDisplayCoh3 } from '../../hooks/useDisplayCoh3'
+import { GAME_CONFIG } from '../../constants/games'
+import { useDisplayGame } from '../../hooks/useDisplayGame'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { Rank } from '../../types'
 import FactionIcon from './FactionIcon'
@@ -14,7 +15,7 @@ function TableRanksDiv({ ranks, startIndex, faction }: Props) {
     const {
         navButtons: { elo },
     } = useNavButtonsStore()
-    const coh3 = useDisplayCoh3()
+    const showElo = GAME_CONFIG[useDisplayGame()].hasElo && elo
     const rows = [0, 1, 2, 3].map((offset) => {
         const teamSize = offset + 1
         const rankData = ranks[startIndex + offset]
@@ -34,7 +35,7 @@ function TableRanksDiv({ ranks, startIndex, faction }: Props) {
             }
             streak = rankData.streak
         }
-        const rating = coh3 && elo ? (rankData?.rating ?? '-') : undefined
+        const rating = showElo ? (rankData?.rating ?? '-') : undefined
         return (
             <TableRankRow
                 key={offset + 'rank'}

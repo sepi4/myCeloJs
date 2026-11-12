@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 
+import { Game } from '../constants/games'
 import { ExtraInfo } from '../types'
 import {
     PlayerCardData,
@@ -25,7 +26,7 @@ interface NavigationStore {
     /** Places left with the back button, nearest last. Going somewhere new clears them. */
     forward: Location[]
     openView: (view: 'main' | 'search') => void
-    openPlayerCard: (player: PlayerCardData, extraInfo: ExtraInfo | null, coh3: boolean) => void
+    openPlayerCard: (player: PlayerCardData, extraInfo: ExtraInfo | null, game: Game) => void
     /** Escape and X: the player card returns to where it was opened from, other views to main. */
     closeView: () => void
     goBack: () => void
@@ -63,7 +64,7 @@ export const useNavigationStore = create<NavigationStore>((set, get) => {
             remember()
             useViewStore.getState().setView(view)
         },
-        openPlayerCard: (player, extraInfo, coh3) => {
+        openPlayerCard: (player, extraInfo, game) => {
             const shown = usePlayerCardStore.getState().player
             if (
                 useViewStore.getState().view === 'playerCard' &&
@@ -73,7 +74,7 @@ export const useNavigationStore = create<NavigationStore>((set, get) => {
                 return
             }
             remember()
-            usePlayerCardStore.getState().setPlayerCard(player, extraInfo, coh3)
+            usePlayerCardStore.getState().setPlayerCard(player, extraInfo, game)
             useViewStore.getState().setView('playerCard')
         },
         closeView: () => {

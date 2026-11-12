@@ -1,9 +1,10 @@
+import { GAME_CONFIG } from '../../constants/games'
 import setPlayersWithoutChecking from '../../functions/checkers/setPlayersWithoutChecking'
 import { readLog } from '../../functions/log-parsing/readLog'
 import getText from '../../functions/utils/getText'
 import { useAlertStore } from '../../stores/alertStore'
 import { useAutoLogCheckingStore } from '../../stores/autoLogCheckingStore'
-import { useNavButtonsStore } from '../../stores/navButtonsStore'
+import { useGameStore } from '../../stores/gameStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import Choice from '../Choice'
 
@@ -13,15 +14,9 @@ function CheckLogDiv() {
     const { settings } = useSettingsStore()
     const { alert, toggleAlert } = useAlertStore()
     const { autoLogChecking, toggleAutoLogChecking } = useAutoLogCheckingStore()
-    const {
-        navButtons: { coh3 },
-    } = useNavButtonsStore()
+    const { game } = useGameStore()
 
-    const activeLogLocation = settings
-        ? coh3
-            ? settings.logLocationCoh3
-            : settings.logLocationCoh2
-        : ''
+    const activeLogLocation = settings ? settings[GAME_CONFIG[game].logLocationKey] : ''
 
     const isTop = settings?.navbarPosition !== 'left' && settings?.navbarPosition !== 'right'
 
@@ -52,7 +47,7 @@ function CheckLogDiv() {
                 className={styles.btn}
                 title={getText('tooltip_check_log', settings)}
                 onClick={async () => {
-                    const data = await readLog(coh3, activeLogLocation)
+                    const data = await readLog(game, activeLogLocation)
                     if (data) {
                         setPlayersWithoutChecking(data)
                     }

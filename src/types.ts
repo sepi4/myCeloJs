@@ -26,8 +26,6 @@ export type Player = {
     time: string
 }
 
-export type FactionName = 'okw' | 'sov' | 'uk' | 'usa' | 'wer'
-
 export type Member = {
     alias: string
     country: string

@@ -1,13 +1,10 @@
 import { MouseEvent, useEffect, useRef, useState } from 'react'
 
-import { getFactionCodeCoh2, getFactionCodeCoh3 } from '../../constants/factionMappings'
+import { GAME_CONFIG, getFactionCode, getFactionFlag } from '../../constants/games'
 import { getTotalGames } from '../../functions/rankings/simpleFunctions'
-import {
-    getFactionFlagLocation,
-    getFactionFlagLocationCoh3,
-} from '../../functions/utils/getFactionFlagLocation'
 import getText from '../../functions/utils/getText'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
+import { useGameStore } from '../../stores/gameStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useNavigationStore } from '../../stores/navigationStore'
 import { useSettingsStore } from '../../stores/settingsStore'
@@ -28,9 +25,11 @@ interface Props {
 }
 
 function PlayerMainRow(props: Props) {
+    const { game } = useGameStore()
     const {
-        navButtons: { coh3, elo },
+        navButtons: { elo },
     } = useNavButtonsStore()
+    const showElo = GAME_CONFIG[game].hasElo && elo
     const { settings } = useSettingsStore()
     const { player, handleSetShowExtra, extraInfo, showExtra } = props
     let country: string | undefined
@@ -58,7 +57,7 @@ function PlayerMainRow(props: Props) {
     const handlePlayerCardOn = (e: MouseEvent) => {
         // the row itself toggles the extra info
         e.stopPropagation()
-        openPlayerCard(player, extraInfo, coh3)
+        openPlayerCard(player, extraInfo, game)
     }
 
     const { countryFlags } = useCountryFlagsStore()
@@ -89,15 +88,14 @@ function PlayerMainRow(props: Props) {
     const rankTitle =
         ranktotal > 0 ? `${player.ranking} ${getText('of', settings)} ${ranktotal}` : ''
 
-    const factionFlag = coh3
-        ? getFactionFlagLocationCoh3(player.faction)
-        : getFactionFlagLocation(getFactionCodeCoh2(player.faction))
-    const factionTitle = coh3
-        ? getFactionCodeCoh3(player.faction)
-        : getFactionCodeCoh2(player.faction)
+    const factionCode = getFactionCode(game, player.faction)
     const faction = (
-        <span title={factionTitle}>
-            <img className={styles.factionFlag} src={factionFlag} alt={player.faction} />
+        <span title={factionCode}>
+            <img
+                className={styles.factionFlag}
+                src={getFactionFlag(game, factionCode)}
+                alt={player.faction}
+            />
         </span>
     )
 
@@ -188,7 +186,7 @@ function PlayerMainRow(props: Props) {
                             </span>
                         </>
                     </MainRowSpan>
-                    {coh3 && elo && (
+                    {showElo && (
                         <MainRowSpan width="14%">
                             <span data-testid="player-elo" style={{ fontWeight: 300 }}>
                                 {player.rating ? `(${player.rating})` : '-'}
@@ -197,7 +195,7 @@ function PlayerMainRow(props: Props) {
                     )}
                     <MainRowSpan width="14%">{faction}</MainRowSpan>
                     <MainRowSpan width="14%">{countryFlag}</MainRowSpan>
-                    <MainRowSpan width={coh3 && elo ? '40%' : '54%'}>{alias}</MainRowSpan>
+                    <MainRowSpan width={showElo ? '40%' : '54%'}>{alias}</MainRowSpan>
                 </div>
             </div>
         </>

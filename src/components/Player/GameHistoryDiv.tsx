@@ -1,12 +1,9 @@
 import { CSSProperties, MouseEvent } from 'react'
 
-import { getFactionCodeCoh2ById, getFactionCodeCoh3ById } from '../../constants/factionMappings'
+import { getFactionCodeByRaceId, getFactionFlag } from '../../constants/games'
 import { getExtraInfo } from '../../functions/api/getExtraInfo'
-import {
-    getFactionFlagLocation,
-    getFactionFlagLocationCoh3,
-} from '../../functions/utils/getFactionFlagLocation'
 import { getTimeAgo } from '../../functions/utils/time'
+import { useDisplayGame } from '../../hooks/useDisplayGame'
 import { useNavigationStore } from '../../stores/navigationStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { MatchHistoryReportResult, MatchObject, NormalizedProfiles } from '../../types'
@@ -20,13 +17,13 @@ import styles from './GameHistoryDiv.module.css'
 interface Props {
     game: MatchObject
     profiles: NormalizedProfiles
-    coh3: boolean
     open: boolean
     onToggle: () => void
 }
 
 export default function GameHistoryDiv(props: Props) {
     const { settings } = useSettingsStore()
+    const displayGame = useDisplayGame()
     const lg = settings && settings.language ? settings.language : 'en'
     const openPlayerCard = useNavigationStore((s) => s.openPlayerCard)
 
@@ -51,8 +48,8 @@ export default function GameHistoryDiv(props: Props) {
 
     const result = props.game.result
     const getFlag = (raceId: number) => {
-        const code = props.coh3 ? getFactionCodeCoh3ById(raceId) : getFactionCodeCoh2ById(raceId)
-        const flag = props.coh3 ? getFactionFlagLocationCoh3(code) : getFactionFlagLocation(code)
+        const code = getFactionCodeByRaceId(displayGame, raceId)
+        const flag = getFactionFlag(displayGame, code)
         return { code, flag }
     }
 
@@ -66,13 +63,13 @@ export default function GameHistoryDiv(props: Props) {
     const handleOpenPlayer = async (e: MouseEvent, p: MatchHistoryReportResult, name: string) => {
         // the row itself toggles the game details
         e.stopPropagation()
-        const x = await getExtraInfo(props.coh3, [p.profile_id])
+        const x = await getExtraInfo(displayGame, [p.profile_id])
         const ex = x?.result[p.profile_id]
         if (ex) {
             openPlayerCard(
                 { country: props.profiles[p.profile_id]?.country, name, profileId: p.profile_id },
                 ex,
-                props.coh3
+                displayGame
             )
         }
     }

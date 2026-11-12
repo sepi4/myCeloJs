@@ -1,5 +1,7 @@
+import { GAME_CONFIG, GAMES } from '../../constants/games'
 import { getExtraInfo } from '../../functions/api/getExtraInfo'
 import getText from '../../functions/utils/getText'
+import { useGameStore } from '../../stores/gameStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useNavigationStore } from '../../stores/navigationStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
@@ -28,6 +30,7 @@ export default function Navbar(props: Props) {
         props.handleSetSettingsView()
     }
 
+    const { game, setGame } = useGameStore()
     const { navButtons, toggleNavButton } = useNavButtonsStore()
     const playerCardPlayer = usePlayerCardStore((s) => s.player)
     const { view } = useViewStore()
@@ -49,7 +52,7 @@ export default function Navbar(props: Props) {
         )
     }
 
-    const eloCheckBox = navButtons.coh3 ? (
+    const eloCheckBox = GAME_CONFIG[game].hasElo ? (
         <Choice
             key="elo"
             type="checkbox"
@@ -76,8 +79,8 @@ export default function Navbar(props: Props) {
     }
 
     const handleOpenMyCard = async () => {
-        const id = navButtons.coh3 ? settings!.profileIdCoh3 : settings!.profileIdCoh2
-        const x = await getExtraInfo(navButtons.coh3, [id])
+        const id = settings![GAME_CONFIG[game].profileIdKey]
+        const x = await getExtraInfo(game, [id])
         if (!x) {
             return
         }
@@ -95,11 +98,11 @@ export default function Navbar(props: Props) {
                 country: profile.country,
             }
             closeSettingsView()
-            openPlayerCard(playerData, ex, navButtons.coh3)
+            openPlayerCard(playerData, ex, game)
         }
     }
 
-    const activeProfileId = navButtons.coh3 ? settings?.profileIdCoh3 : settings?.profileIdCoh2
+    const activeProfileId = settings?.[GAME_CONFIG[game].profileIdKey]
     const alreadyViewingMyCard =
         view === 'playerCard' && playerCardPlayer?.profileId === activeProfileId
     const userIcon =
@@ -183,21 +186,18 @@ export default function Navbar(props: Props) {
 
                 <div className={isTop ? styles.columnTop : styles.column}>
                     <NavbarRow isTop={isTop}>
-                        {(['coh2', 'coh3'] as const).map((game) => {
-                            const logLocation =
-                                game === 'coh3'
-                                    ? settings?.logLocationCoh3
-                                    : settings?.logLocationCoh2
+                        {GAMES.map((option) => {
+                            const logLocation = settings?.[GAME_CONFIG[option].logLocationKey]
                             return (
                                 <Choice
-                                    key={game}
+                                    key={option}
                                     type="radio"
-                                    testId={`radio-${game}`}
-                                    label={game}
-                                    checked={navButtons.coh3 === (game === 'coh3')}
-                                    onChange={() => toggleNavButton('coh3')}
+                                    testId={`radio-${option}`}
+                                    label={option}
+                                    checked={game === option}
+                                    onChange={() => setGame(option)}
                                     disabled={!logLocation}
-                                    title={logLocation ? game : getText('log_not_set', settings)}
+                                    title={logLocation ? option : getText('log_not_set', settings)}
                                 />
                             )
                         })}

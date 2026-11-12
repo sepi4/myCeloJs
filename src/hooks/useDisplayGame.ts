@@ -1,14 +1,15 @@
 import { createContext, useContext } from 'react'
 
-import { useNavButtonsStore } from '../stores/navButtonsStore'
+import { Game } from '../constants/games'
+import { useGameStore } from '../stores/gameStore'
 import { usePlayerCardStore } from '../stores/playerCardStore'
 
 /** True inside the player card, which can show the other game than the navbar. */
 export const PlayerCardContext = createContext(false)
 
-export function useDisplayCoh3(): boolean {
+export function useDisplayGame(): Game {
     const inPlayerCard = useContext(PlayerCardContext)
-    const selectedCoh3 = usePlayerCardStore((s) => s.selectedCoh3)
-    const navCoh3 = useNavButtonsStore((s) => s.navButtons.coh3)
-    return inPlayerCard ? selectedCoh3 : navCoh3
+    const selectedGame = usePlayerCardStore((s) => s.selectedGame)
+    const navGame = useGameStore((s) => s.game)
+    return inPlayerCard ? selectedGame : navGame
 }

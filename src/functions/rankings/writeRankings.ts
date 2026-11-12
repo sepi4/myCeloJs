@@ -1,6 +1,6 @@
 import stringWidth from 'string-width'
 
-import { getFactionCodeCoh2, getFactionCodeCoh3 } from '../../constants/factionMappings'
+import { Game, getFactionCode } from '../../constants/games'
 import countriesJson from '../../translations/countries.json'
 import { Player, RankingsJson } from '../../types'
 
@@ -55,7 +55,7 @@ function getLimitedWord(str: string, limit: number, padLeft: boolean) {
 }
 
 export function buildRankings(
-    coh3: boolean,
+    game: Game,
     players: Player[],
     rankingsHorizontal: boolean,
     showElo: boolean = false
@@ -85,7 +85,7 @@ export function buildRankings(
         const ratingPad =
             showElo && players[i].rating !== undefined ? `(${players[i].rating!})`.padEnd(7) : ''
 
-        const nameFun = coh3 ? getFactionCodeCoh3 : getFactionCodeCoh2
+        const factionCode = getFactionCode(game, faction)
         const maxNameLength = 20
         if (rankingsHorizontal) {
             if (teamSlot % 2 === 0) {
@@ -97,11 +97,11 @@ export function buildRankings(
                     (ratingPad ? ratingPad.trimEnd().padStart(7) + ' ' : '') +
                     ranking.padStart(5) +
                     ' ' +
-                    nameFun(faction).padStart(5).toUpperCase()
+                    factionCode.padStart(5).toUpperCase()
                 rowsLeft.push(text)
             } else {
                 const text =
-                    nameFun(faction).padEnd(5).toUpperCase() +
+                    factionCode.padEnd(5).toUpperCase() +
                     ' ' +
                     ranking.padEnd(5) +
                     (ratingPad ? ' ' + ratingPad : '') +
@@ -113,7 +113,7 @@ export function buildRankings(
             }
         } else {
             const text =
-                nameFun(faction).padEnd(5).toUpperCase() +
+                factionCode.padEnd(5).toUpperCase() +
                 ' ' +
                 ranking.padEnd(5) +
                 (ratingPad ? ' ' + ratingPad : '') +
@@ -134,7 +134,8 @@ export function buildRankings(
             name,
             ranking,
             country,
-            faction: coh3 ? faction : getFactionCodeCoh2(faction),
+            // The overlay loads /img/<faction>.png, and the COH3 images are named by the log name.
+            faction: game === 'coh3' ? faction : factionCode,
             ...(ratingValue !== undefined ? { rating: ratingValue } : {}),
         }
         if (teamSlot % 2 === 0) {
@@ -165,11 +166,11 @@ export function buildRankings(
 }
 
 export function writeRankings(
-    coh3: boolean,
+    game: Game,
     players: Player[],
     rankingsHorizontal: boolean,
     showElo: boolean = false
 ): void {
-    const { json, text } = buildRankings(coh3, players, rankingsHorizontal, showElo)
+    const { json, text } = buildRankings(game, players, rankingsHorizontal, showElo)
     window.electronAPI.rankings.write(JSON.stringify(json, null, 4), text)
 }

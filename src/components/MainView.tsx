@@ -1,8 +1,9 @@
 import { JSX, useLayoutEffect } from 'react'
 
+import { GAME_CONFIG } from '../constants/games'
 import getText from '../functions/utils/getText'
 import useNavigationKeys from '../hooks/useNavigationKeys'
-import { useNavButtonsStore } from '../stores/navButtonsStore'
+import { useGameStore } from '../stores/gameStore'
 import { Location, useNavigationStore } from '../stores/navigationStore'
 import { usePlayersStore } from '../stores/playersStore'
 import { useSettingsStore } from '../stores/settingsStore'
@@ -28,18 +29,12 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
     const { settingsView } = useSettingsViewStore()
     const teams: Player[][] = [[], []]
     const { settings } = useSettingsStore()
-    const {
-        navButtons: { coh3 },
-    } = useNavButtonsStore()
+    const { game } = useGameStore()
     const { players } = usePlayersStore()
     const { view, cardReturnView } = useViewStore()
     // Search stays loaded while the history can return to it, so its results are kept.
     const searchInHistory = useNavigationStore((s) => [...s.back, ...s.forward].some(usesSearch))
-    const activeLogLocation = settings
-        ? coh3
-            ? settings.logLocationCoh3
-            : settings.logLocationCoh2
-        : ''
+    const activeLogLocation = settings ? settings[GAME_CONFIG[game].logLocationKey] : ''
 
     if (players) {
         players.forEach((p) => {

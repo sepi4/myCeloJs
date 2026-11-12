@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { ranksArrFilter, ranksArrSort } from '../../functions/rankings/ranksArrFuns'
 import getText from '../../functions/utils/getText'
 import { anyKeyOpen, toggleKey, toggleKeys } from '../../functions/utils/openKeys'
-import { useDisplayCoh3 } from '../../hooks/useDisplayCoh3'
+import { useDisplayGame } from '../../hooks/useDisplayGame'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { useSorterStore } from '../../stores/sorterStore'
@@ -20,7 +20,7 @@ function ListDiv({ ranksArr }: { ranksArr: Rank[] }) {
     const {
         navButtons: { table: tableView, all: showAll },
     } = useNavButtonsStore()
-    const coh3 = useDisplayCoh3()
+    const game = useDisplayGame()
     const { sorter } = useSorterStore()
     const { settings } = useSettingsStore()
 
@@ -42,7 +42,7 @@ function ListDiv({ ranksArr }: { ranksArr: Rank[] }) {
     return (
         ranksArr && (
             <div className={styles.container}>
-                {!coh3 && hasExpandable && (
+                {game === 'coh2' && hasExpandable && (
                     // same column widths as RanksList so the button sits above the row arrows
                     <div className={styles.row}>
                         <Cell />

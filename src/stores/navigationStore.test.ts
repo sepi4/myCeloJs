@@ -9,7 +9,7 @@ const view = () => useViewStore.getState().view
 const cardName = () => usePlayerCardStore.getState().player?.name
 
 function openCard(name: string, profileId?: number) {
-    nav().openPlayerCard({ name, profileId }, extraInfo(name), false)
+    nav().openPlayerCard({ name, profileId }, extraInfo(name), 'coh2')
 }
 
 beforeEach(() => {
@@ -143,14 +143,14 @@ describe('navigationStore', () => {
         openCard('A')
         const store = usePlayerCardStore.getState()
         store.setOtherGameData({ name: 'A3' }, extraInfo('A'))
-        store.setSelectedCoh3(true)
+        store.setSelectedGame('coh3')
         openCard('B')
 
         nav().goBack()
         const state = usePlayerCardStore.getState()
         expect(state.player?.name).toBe('A3')
-        expect(state.selectedCoh3).toBe(true)
-        expect(state.initialCoh3).toBe(false)
+        expect(state.selectedGame).toBe('coh3')
+        expect(state.initialGame).toBe('coh2')
         expect(state.otherPlayer?.name).toBe('A')
         expect(state.otherGameChecked).toBe(true)
     })

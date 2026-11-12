@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from 'react'
 
-import { RELIC_SERVER_BASE_COH2, RELIC_SERVER_BASE_COH3 } from '../../constants/urls'
+import { GAME_CONFIG } from '../../constants/games'
 import getText from '../../functions/utils/getText'
 import { parseHistoryData } from '../../functions/utils/parseMatchHistory'
-import { useDisplayCoh3 } from '../../hooks/useDisplayCoh3'
+import { useDisplayGame } from '../../hooks/useDisplayGame'
 import { HISTORY_PERIODS, isInPeriod, useHistoryPeriodStore } from '../../stores/historyPeriodStore'
 import { EMPTY_GAME_HISTORY } from '../../stores/playerCardStore'
 import { useSettingsStore } from '../../stores/settingsStore'
@@ -27,7 +27,7 @@ interface Props {
 
 export default function History(props: Props) {
     const { settings } = useSettingsStore()
-    const coh3 = useDisplayCoh3()
+    const game = useDisplayGame()
     const { historyPeriod, setHistoryPeriod } = useHistoryPeriodStore()
 
     const [localState, setLocalState] = useState<GameHistoryState>(EMPTY_GAME_HISTORY)
@@ -52,10 +52,9 @@ export default function History(props: Props) {
             async function fetchHistory() {
                 try {
                     const id = props.player.profileId
-                    const base = coh3 ? RELIC_SERVER_BASE_COH3 : RELIC_SERVER_BASE_COH2
-                    const title = coh3 ? 'coh3' : 'coh2'
-                    const url = `${base}/getRecentMatchHistoryByProfileId?title=${title}&profile_id=${id}`
-                    const url2 = `${base}/GetAvailableLeaderboards?title=${title}`
+                    const { apiBase, apiTitle } = GAME_CONFIG[game]
+                    const url = `${apiBase}/getRecentMatchHistoryByProfileId?title=${apiTitle}&profile_id=${id}`
+                    const url2 = `${apiBase}/GetAvailableLeaderboards?title=${apiTitle}`
                     const [r1, r2] = await Promise.all([
                         fetch(url).then((r) => r.json()),
                         fetch(url2).then((r) => r.json()),
@@ -79,7 +78,7 @@ export default function History(props: Props) {
         return () => {
             mounted = false
         }
-    }, [fetching, props.player, coh3, updateState])
+    }, [fetching, props.player, game, updateState])
 
     // The player card resets its own state when the player changes.
     useEffect(() => {
@@ -143,7 +142,6 @@ export default function History(props: Props) {
                                 key={id}
                                 game={m}
                                 profiles={history.profiles}
-                                coh3={coh3}
                                 open={openGame === id}
                                 onToggle={() =>
                                     updateState({ openGame: openGame === id ? null : id })
