@@ -1,8 +1,8 @@
+import { countryFlags } from '../../constants/countryFlags'
 import { getTimeAgo } from '../../functions/utils/time'
 import useLanguage from '../../hooks/useLanguage'
 import useSteamAvatar from '../../hooks/useSteamAvatar'
 import useText from '../../hooks/useText'
-import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { Member } from '../../types'
 import PlayerName from '../PlayerName'
 
@@ -15,7 +15,6 @@ interface Props {
 
 export default function FoundPlayer(props: Props) {
     const getText = useText()
-    const { countryFlags } = useCountryFlagsStore()
     const language = useLanguage()
 
     const timeAgo = props.player?.lastGameTime

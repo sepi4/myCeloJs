@@ -1,11 +1,11 @@
 import { MouseEvent, useEffect, useRef, useState } from 'react'
 
+import { countryFlags } from '../../constants/countryFlags'
 import { GAME_CONFIG, getFactionCode, getFactionFlag } from '../../constants/games'
 import { getTotalGames } from '../../functions/rankings/simpleFunctions'
 import useLanguage from '../../hooks/useLanguage'
 import useNavbarPosition from '../../hooks/useNavbarPosition'
 import useText from '../../hooks/useText'
-import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { useGameStore } from '../../stores/gameStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useNavigationStore } from '../../stores/navigationStore'
@@ -63,7 +63,6 @@ function PlayerMainRow(props: Props) {
         openPlayerCard(player, extraInfo, game)
     }
 
-    const { countryFlags } = useCountryFlagsStore()
     const countryFlagLocation = countryFlags[country ? country : '']
 
     const dropDownArrow = (

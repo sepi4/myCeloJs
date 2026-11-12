@@ -1,18 +1,23 @@
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
-import getLocalStorage from '../functions/settings/getLocalStorage'
+import { plainJsonStorage } from './plainJsonStorage'
 
 interface AlertStore {
     alert: boolean
     toggleAlert: () => void
 }
 
-export const useAlertStore = create<AlertStore>((set) => ({
-    alert: getLocalStorage({ key: 'alert', def: false }),
-    toggleAlert: () =>
-        set((state) => {
-            const next = !state.alert
-            localStorage.setItem('alert', JSON.stringify(next))
-            return { alert: next }
+export const useAlertStore = create<AlertStore>()(
+    persist(
+        (set) => ({
+            alert: false,
+            toggleAlert: () => set((state) => ({ alert: !state.alert })),
         }),
-}))
+        {
+            name: 'alert',
+            storage: plainJsonStorage('alert'),
+            partialize: ({ alert }) => ({ alert }),
+        }
+    )
+)

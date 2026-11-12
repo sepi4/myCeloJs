@@ -3,6 +3,7 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import logo_coh2 from '../../assets/img/logo_coh2.png'
 import logo_cohstats from '../../assets/img/logo_cohstats.png'
 import logo_steam from '../../assets/img/logo_steam.png'
+import { countryFlags } from '../../constants/countryFlags'
 import { GAMES, otherGame } from '../../constants/games'
 import { COH2_ORG, COH2STATS_COM, COH3STATS_COM, STEAM } from '../../constants/urls'
 import { fetchProfileIdBySteamId } from '../../functions/api/fetchProfileIdBySteamId'
@@ -12,7 +13,6 @@ import useLanguage from '../../hooks/useLanguage'
 import useNavbarPosition from '../../hooks/useNavbarPosition'
 import useSteamAvatar from '../../hooks/useSteamAvatar'
 import useText from '../../hooks/useText'
-import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { getCountryName } from '../../translations/countryTranslations'
 import { Player } from '../../types'
@@ -24,7 +24,6 @@ import styles from './PlayerCard.module.css'
 
 export default function PlayerCard() {
     const getText = useText()
-    const { countryFlags } = useCountryFlagsStore()
     const language = useLanguage()
     const isTopNavbar = useNavbarPosition() === 'top'
     const {

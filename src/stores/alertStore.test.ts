@@ -22,4 +22,10 @@ describe('alertStore', () => {
         useAlertStore.getState().toggleAlert()
         expect(JSON.parse(localStorage.getItem('alert')!)).toBe(true)
     })
+
+    test('reads the plain value saved by earlier app versions', async () => {
+        localStorage.setItem('alert', 'true')
+        await useAlertStore.persist.rehydrate()
+        expect(useAlertStore.getState().alert).toBe(true)
+    })
 })
