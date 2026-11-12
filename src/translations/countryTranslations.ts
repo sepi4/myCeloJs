@@ -1,3 +1,7 @@
+import countriesJson from './countries.json'
+
+const countries: { [key: string]: { name: string } | undefined } = countriesJson
+
 // Russian names for all countries, keyed by ISO 3166-1 alpha-2 code (lowercase)
 const countryNamesRu: { [key: string]: string } = {
     af: 'Афганистан',
@@ -251,9 +255,13 @@ const countryNamesRu: { [key: string]: string } = {
     zw: 'Зимбабве',
 }
 
-export function getCountryName(code: string, language: string): string {
-    if (language === 'ru') {
-        return countryNamesRu[code] ?? code
+export function getCountryName(code: string | undefined, language: string | undefined): string {
+    if (!code) {
+        return ''
     }
-    return ''
+    const english = countries[code]?.name ?? ''
+    if (language === 'ru') {
+        return countryNamesRu[code] ?? english
+    }
+    return english
 }

@@ -11,7 +11,6 @@ import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useNavigationStore } from '../../stores/navigationStore'
 import { useSettingsStore } from '../../stores/settingsStore'
-import countriesJson from '../../translations/countries.json'
 import { getCountryName } from '../../translations/countryTranslations'
 import { ExtraInfo, Player } from '../../types'
 import { faCaretDown, faCaretRight } from '../icons'
@@ -20,22 +19,6 @@ import SvgIcon from '../SvgIcon'
 import MainRowSpan from './MainRowSpan'
 
 import styles from './PlayerMainRow.module.css'
-
-const countries = countriesJson as {
-    [key: string]: {
-        name: string
-        'alpha-2': string
-        'alpha-3': string
-        'country-code': string
-        'iso_3166-2': string
-        region: string
-        'sub-region': string
-        'intermediate-region': string
-        'region-code': string
-        'sub-region-code': string
-        'intermediate-region-code': string
-    }
-}
 
 interface Props {
     player: Player
@@ -126,12 +109,7 @@ function PlayerMainRow(props: Props) {
                 }}
                 src={countryFlagLocation}
                 alt={country}
-                title={
-                    countries[country]
-                        ? getCountryName(country, settings?.language ?? '') ||
-                          countries[country]['name']
-                        : ''
-                }
+                title={getCountryName(country, settings?.language)}
             />
         ) : null
 

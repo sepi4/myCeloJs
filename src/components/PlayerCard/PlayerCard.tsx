@@ -12,6 +12,7 @@ import useSteamAvatar from '../../hooks/useSteamAvatar'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { useSettingsStore } from '../../stores/settingsStore'
+import { getCountryName } from '../../translations/countryTranslations'
 import { Player } from '../../types'
 import Choice from '../Choice'
 import PlayerExtraInfo from '../Player/PlayerExtraInfo'
@@ -137,7 +138,7 @@ export default function PlayerCard() {
                     <img
                         src={countryFlags[player.country ?? '']}
                         alt={`${player.country}`}
-                        title={`${player.country}`}
+                        title={getCountryName(player.country, settings?.language)}
                     />
                     <span className={styles.name}>
                         <PlayerName name={player.name} />
@@ -177,7 +178,7 @@ export default function PlayerCard() {
                 <img
                     src={countryFlags[player.country ?? '']}
                     alt={`${player.country}`}
-                    title={`${player.country}`}
+                    title={getCountryName(player.country, settings?.language)}
                 />
             </span>
             <span className={styles.name}>
@@ -208,7 +209,7 @@ export default function PlayerCard() {
             <img
                 src={countryFlags[player.country ?? '']}
                 alt={`${player.country}`}
-                title={`${player.country}`}
+                title={getCountryName(player.country, settings?.language)}
             />
             <span data-testid="player-card-name" className={styles.name}>
                 <PlayerName name={player.name} />
