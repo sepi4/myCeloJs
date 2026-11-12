@@ -49,16 +49,16 @@ export type CountryFlagsLocation = {
 export type Language = 'ru' | 'en'
 
 export type SettingsType = {
-    logLocationCoh2: string
-    logLocationCoh3: string
-    language: Language
+    logLocationCoh2?: string
+    logLocationCoh3?: string
+    language?: Language
     appLocation: string
-    rankingsHtml: boolean
-    rankingsPort: number
-    rankingsHorizontal: boolean
-    steamId: string
-    profileIdCoh2: number
-    profileIdCoh3: number
+    rankingsHtml?: boolean
+    rankingsPort?: number
+    rankingsHorizontal?: boolean
+    steamId?: string
+    profileIdCoh2?: number
+    profileIdCoh3?: number
     ignoreUntil?: string
     navbarPosition: NavbarPosition
     fontSize: FontSize

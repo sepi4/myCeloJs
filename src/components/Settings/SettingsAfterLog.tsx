@@ -1,7 +1,6 @@
-import writeSettings from '../../functions/settings/writeSettings'
+import { updateSettings } from '../../functions/settings/writeSettings'
 import getText from '../../functions/utils/getText'
 import { useSettingsStore } from '../../stores/settingsStore'
-import { SettingsType } from '../../types'
 import Choice from '../Choice'
 import CopyDiv from './CopyDiv'
 import RadioButtonsDiv from './RadioButtonsDiv'
@@ -12,31 +11,23 @@ export default function SettingsAfterLog() {
     const { settings } = useSettingsStore()
 
     const handleType = (format: 'html' | 'txt') => {
-        const newSettings = {
-            ...settings,
+        updateSettings({
             rankingsHtml: format === 'html',
             rankingsPort: window.electronAPI.overlayPort,
-        } as SettingsType
-        writeSettings(newSettings)
+        })
         window.electronAPI.rankings.setFormat(format)
     }
 
     const handleOrientation = (horizontal: boolean) => {
-        const newSettings = {
-            ...settings,
-            rankingsHorizontal: horizontal,
-        } as SettingsType
-        writeSettings(newSettings)
+        updateSettings({ rankingsHorizontal: horizontal })
     }
 
-    const overlayConfigured = !!(
-        settings &&
-        settings.rankingsPort !== undefined &&
+    const overlayConfigured =
+        settings?.rankingsPort !== undefined &&
         settings.rankingsHorizontal !== undefined &&
         settings.rankingsHtml !== undefined
-    )
 
-    const overlayUrl = overlayConfigured ? `http://localhost:${settings!.rankingsPort}` : undefined
+    const overlayUrl = overlayConfigured ? `http://localhost:${settings.rankingsPort}` : undefined
 
     if (settings && (settings.logLocationCoh2 || settings.logLocationCoh3)) {
         return (

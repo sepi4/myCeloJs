@@ -78,8 +78,13 @@ export default function Navbar(props: Props) {
         openView('search')
     }
 
+    const activeProfileId = settings?.[GAME_CONFIG[game].profileIdKey]
+
     const handleOpenMyCard = async () => {
-        const id = settings![GAME_CONFIG[game].profileIdKey]
+        const id = activeProfileId
+        if (!id) {
+            return
+        }
         const x = await getExtraInfo(game, [id])
         if (!x) {
             return
@@ -102,7 +107,6 @@ export default function Navbar(props: Props) {
         }
     }
 
-    const activeProfileId = settings?.[GAME_CONFIG[game].profileIdKey]
     const alreadyViewingMyCard =
         view === 'playerCard' && playerCardPlayer?.profileId === activeProfileId
     const userIcon =

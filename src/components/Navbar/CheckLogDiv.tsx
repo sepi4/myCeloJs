@@ -16,7 +16,7 @@ function CheckLogDiv() {
     const { autoLogChecking, toggleAutoLogChecking } = useAutoLogCheckingStore()
     const { game } = useGameStore()
 
-    const activeLogLocation = settings ? settings[GAME_CONFIG[game].logLocationKey] : ''
+    const activeLogLocation = settings?.[GAME_CONFIG[game].logLocationKey] ?? ''
 
     const isTop = settings?.navbarPosition !== 'left' && settings?.navbarPosition !== 'right'
 

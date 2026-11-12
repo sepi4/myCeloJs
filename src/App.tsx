@@ -15,9 +15,8 @@ import { resolveRankings } from './functions/rankings/resolveRankings'
 // functions
 import { writeRankings } from './functions/rankings/writeRankings'
 import { readSettings } from './functions/settings/readSettings'
-import writeSettings from './functions/settings/writeSettings'
+import writeSettings, { updateSettings } from './functions/settings/writeSettings'
 import { useAlertStore } from './stores/alertStore'
-import { useAppLocationStore } from './stores/appLocationStore'
 import { useAutoLogCheckingStore } from './stores/autoLogCheckingStore'
 import { useExtraInfoStore } from './stores/extraInfoStore'
 import { useGameStore } from './stores/gameStore'
@@ -25,11 +24,10 @@ import { useLogCheckIntervalStore } from './stores/logCheckIntervalStore'
 import { useNavButtonsStore } from './stores/navButtonsStore'
 import { usePlayersStore } from './stores/playersStore'
 import { useSettingsStore } from './stores/settingsStore'
-import { Player, SettingsType } from './types'
+import { Player } from './types'
 
 import styles from './App.module.css'
 const appVersion = window.electronAPI.appVersion
-const settingsDir = window.electronAPI.settingsDir
 
 document.title = 'myCelo ' + appVersion
 
@@ -37,7 +35,6 @@ const playAudio = () => new Audio(audioLocation).play()
 
 function App() {
     const { alert } = useAlertStore()
-    const { appLocation } = useAppLocationStore()
     const { autoLogChecking } = useAutoLogCheckingStore()
     const { extraInfo, setExtraInfo } = useExtraInfoStore()
     const { logCheckInterval } = useLogCheckIntervalStore()
@@ -47,7 +44,7 @@ function App() {
     } = useNavButtonsStore()
     const { players, setPlayers } = usePlayersStore()
     const { settings } = useSettingsStore()
-    const activeLogLocation = settings ? settings[GAME_CONFIG[game].logLocationKey] : ''
+    const activeLogLocation = settings?.[GAME_CONFIG[game].logLocationKey] ?? ''
 
     // Auto-select COH2/COH3 radio when only one log location is configured
     useEffect(() => {
@@ -68,28 +65,16 @@ function App() {
         if (settings !== null) {
             return
         }
-        readSettings(settingsDir + '/settings.json', (data) => {
-            if (!data) {
+        async function loadSettings() {
+            const savedSettings = await readSettings()
+            if (!savedSettings) {
                 return
             }
-
-            const newSettings = JSON.parse(data)
-            newSettings.navbarPosition ??= 'top'
-            newSettings.fontSize ??= 'small'
-            if (newSettings.theme !== 'dark' && newSettings.theme !== 'light') {
-                newSettings.theme = 'dark'
-            }
-            newSettings.appLocation = appLocation
-
-            // update overlay port for current session
-            if (newSettings.rankingsPort) {
-                newSettings.rankingsPort = window.electronAPI.overlayPort
-            }
-            // sync format to the overlay server
-            window.electronAPI.rankings.setFormat(newSettings.rankingsHtml ? 'html' : 'txt')
-            writeSettings(newSettings)
-        })
-    }, [settings, appLocation])
+            window.electronAPI.rankings.setFormat(savedSettings.rankingsHtml ? 'html' : 'txt')
+            writeSettings(savedSettings)
+        }
+        loadSettings()
+    }, [settings])
 
     // Fetch ranks and countries for the players read from the log
     useEffect(() => {
@@ -162,42 +147,38 @@ function App() {
 
     // Sync COH3 profile ID from log file into settings
     useEffect(() => {
-        if (game !== 'coh3' || !settings?.logLocationCoh3) {
+        const logLocation = settings?.logLocationCoh3
+        if (game !== 'coh3' || !logLocation) {
             return
         }
-        const currentSettings = settings
-        async function updateCoh3ProfileId() {
-            const data = await window.electronAPI.log.read(currentSettings.logLocationCoh3)
+        const savedProfileId = settings?.profileIdCoh3
+        const updateCoh3ProfileId = async () => {
+            const data = await window.electronAPI.log.read(logLocation)
             if (!data) {
                 return
             }
             const info = getLocalUserInfoCoh3(data.split('\n'))
-            if (!info) {
+            if (!info || info.profileId === savedProfileId) {
                 return
             }
-            if (currentSettings.profileIdCoh3 === info.profileId) {
-                return
-            }
-            writeSettings({
-                ...currentSettings,
-                profileIdCoh3: info.profileId,
-            } as SettingsType)
+            updateSettings({ profileIdCoh3: info.profileId })
         }
         updateCoh3ProfileId()
     }, [game, settings])
 
     // Fetch and sync COH2 profile ID from Steam ID
     useEffect(() => {
-        if (!settings?.steamId) {
+        const steamId = settings?.steamId
+        if (!steamId) {
             return
         }
-        const currentSettings = settings
-        async function updateCoh2ProfileId() {
-            const profileId = await fetchCoh2ProfileId(currentSettings.steamId)
-            if (!profileId || currentSettings.profileIdCoh2 === profileId) {
+        const savedProfileId = settings?.profileIdCoh2
+        const updateCoh2ProfileId = async () => {
+            const profileId = await fetchCoh2ProfileId(steamId)
+            if (!profileId || profileId === savedProfileId) {
                 return
             }
-            writeSettings({ ...currentSettings, profileIdCoh2: profileId })
+            updateSettings({ profileIdCoh2: profileId })
         }
         updateCoh2ProfileId()
     }, [settings])
