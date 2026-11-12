@@ -110,12 +110,38 @@
     cursor: default;
 }
 
-.positionOption {
+.radioGroups {
+    display: flex;
+    gap: 2em;
+    flex-wrap: wrap;
+}
+
+.positionOptions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.3em;
+    margin-top: 0.3em;
+    width: 10em;
+}
+
+.positionOptions > label {
     justify-content: center;
 }
 
-.fullRow {
+.positionOptions > label:first-child {
     grid-column: 1 / -1;
+}
+
+.confirmButtons {
+    display: flex;
+    gap: 1em;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+.resetRow {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .dangerText {
