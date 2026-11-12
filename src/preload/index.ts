@@ -1,4 +1,4 @@
-import { contextBridge, ipcRenderer } from 'electron'
+import { contextBridge, ipcRenderer, type IpcRendererEvent } from 'electron'
 
 const appInfo = ipcRenderer.sendSync('get-app-info') as {
     version: string
@@ -38,7 +38,12 @@ contextBridge.exposeInMainWorld('electronAPI', {
     },
     updater: {
         onStatus: (callback: (status: { status: string; version?: string }) => void) => {
-            ipcRenderer.on('updater:status', (_e, status) => callback(status))
+            const listener = (_e: IpcRendererEvent, status: { status: string; version?: string }) =>
+                callback(status)
+            ipcRenderer.on('updater:status', listener)
+            return () => {
+                ipcRenderer.removeListener('updater:status', listener)
+            }
         },
         download: () => ipcRenderer.invoke('updater:download'),
         install: () => ipcRenderer.invoke('updater:install'),

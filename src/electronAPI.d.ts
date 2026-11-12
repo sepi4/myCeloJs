@@ -33,7 +33,7 @@ interface ElectronAPI {
         setFormat(format: 'html' | 'txt'): Promise<void>
     }
     updater: {
-        onStatus(callback: (status: UpdateStatus) => void): void
+        onStatus(callback: (status: UpdateStatus) => void): () => void
         download(): Promise<void>
         install(): Promise<void>
     }
