@@ -8,7 +8,7 @@ import useText from '../../hooks/useText'
 import { useFoundPlayersStore } from '../../stores/foundPlayersStore'
 import { useGameStore } from '../../stores/gameStore'
 import { useNavigationStore } from '../../stores/navigationStore'
-import { Member } from '../../types'
+import { FoundMember } from '../../types'
 import FoundPlayer from './FoundPlayer'
 
 import styles from './Search.module.css'
@@ -51,30 +51,24 @@ export default function Search() {
             const fetched = await getExtraInfo(game, ids)
             if (fetched) {
                 const result = fetched.result
-                const newPlayers = res
+                const newPlayers: FoundMember[] = res
                     .map((p) => {
-                        if (result[p.profile_id]) {
-                            p.totalGames = getTotalGames(result[p.profile_id]?.ranks)
-                            p.lastGameTime = getLastPlayedGame(result[p.profile_id])
-                        } else {
-                            p.totalGames = 0
+                        const extraInfo = result[p.profile_id]
+                        return {
+                            ...p,
+                            totalGames: extraInfo ? getTotalGames(extraInfo.ranks) : 0,
+                            lastGameTime: extraInfo ? getLastPlayedGame(extraInfo) : undefined,
+                            extraInfo,
                         }
-                        p.extraInfo = result[p.profile_id]
-                        return p
                     })
-                    .sort((a, b) => {
-                        if (typeof a.totalGames === 'number' && typeof b.totalGames === 'number') {
-                            return b.totalGames - a.totalGames
-                        }
-                        return 0
-                    })
+                    .sort((a, b) => b.totalGames - a.totalGames)
 
                 setFoundPlayers(newPlayers)
             }
         }
     }
 
-    const handlePlayerCardOn = (player: Member) => {
+    const handlePlayerCardOn = (player: FoundMember) => {
         const playerData = {
             ...player,
             name: player.alias,

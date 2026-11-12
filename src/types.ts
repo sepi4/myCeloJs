@@ -35,9 +35,11 @@ export type Member = {
     personal_statgroup_id: number
     profile_id: number
     xp: number
+}
 
-    // TODO remove this maybe
-    totalGames?: number
+/** A player found by search, with stats from the extra info request. */
+export type FoundMember = Member & {
+    totalGames: number
     lastGameTime?: number
     extraInfo?: ExtraInfo
 }

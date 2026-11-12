@@ -3,13 +3,13 @@ import { getTimeAgo } from '../../functions/utils/time'
 import useLanguage from '../../hooks/useLanguage'
 import useSteamAvatar from '../../hooks/useSteamAvatar'
 import useText from '../../hooks/useText'
-import { Member } from '../../types'
+import { FoundMember } from '../../types'
 import PlayerName from '../PlayerName'
 
 import styles from './FoundPlayer.module.css'
 
 interface Props {
-    player: Member
+    player: FoundMember
     onClick: () => void
 }
 
