@@ -9,7 +9,7 @@ import History from './History'
 import styles from './PlayerExtraInfo.module.css'
 
 interface Props {
-    player: Player
+    player: Pick<Player, 'profileId'>
     extraInfo: ExtraInfo | null
     gameHistory?: GameHistoryState
     updateGameHistory?: (patch: Partial<GameHistoryState>) => void
