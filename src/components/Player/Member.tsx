@@ -1,5 +1,5 @@
+import { countryFlags } from '../../constants/countryFlags'
 import useOpenPlayerCard from '../../hooks/useOpenPlayerCard'
-import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { Member as MemberType } from '../../types'
 import PlayerName from '../PlayerName'
 
@@ -10,7 +10,6 @@ interface Props {
 }
 
 export default function Member(props: Props) {
-    const { countryFlags } = useCountryFlagsStore()
     const openPlayerCard = useOpenPlayerCard()
 
     const handlePlayerCardOn = (p: MemberType) =>
