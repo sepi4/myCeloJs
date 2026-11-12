@@ -174,8 +174,8 @@ describe('switchTeams', () => {
     it('does not swap when current user is not found', () => {
         const players = [makePlayer('alice', 0, 111), makePlayer('bob', 1, 222)]
         const result = switchTeams(players, 'unknown')
-        expect(result[0]?.teamSlot).toBe(0)
-        expect(result[1]?.teamSlot).toBe(1)
+        expect(result[0]!.teamSlot).toBe(0)
+        expect(result[1]!.teamSlot).toBe(1)
     })
 
     it('does not swap when current user has no profileId', () => {

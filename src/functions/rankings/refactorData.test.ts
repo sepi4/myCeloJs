@@ -77,8 +77,8 @@ describe('refactorData', () => {
 
         const result = refactorData(stats, titles, [100])
 
-        expect(result[100]?.ranks).toHaveLength(1)
-        expect(result[100]?.ranks[0]?.name).toBe('1v1 Soviet')
+        expect(result[100]!.ranks).toHaveLength(1)
+        expect(result[100]!.ranks[0]!.name).toBe('1v1 Soviet')
     })
 
     it('sets isModeRanked from leaderboard definition', () => {
@@ -88,7 +88,7 @@ describe('refactorData', () => {
 
         const result = refactorData(stats, titles, [100])
 
-        expect(result[100]?.ranks[0]?.isModeRanked).toBe(0)
+        expect(result[100]!.ranks[0]!.isModeRanked).toBe(0)
     })
 
     it('skips leaderboard stats with unknown leaderboard id', () => {
@@ -98,7 +98,7 @@ describe('refactorData', () => {
 
         const result = refactorData(stats, titles, [100])
 
-        expect(result[100]?.ranks).toHaveLength(0)
+        expect(result[100]!.ranks).toHaveLength(0)
     })
 
     it('skips players not in the ids list', () => {
@@ -111,7 +111,7 @@ describe('refactorData', () => {
 
         const result = refactorData(stats, titles, [100])
 
-        expect(result[100]?.ranks).toHaveLength(0)
+        expect(result[100]!.ranks).toHaveLength(0)
         expect(result[999]).toBeUndefined()
     })
 
@@ -126,7 +126,7 @@ describe('refactorData', () => {
 
         const result = refactorData(stats, titles, [100])
 
-        expect(result[100]?.ranks).toHaveLength(1)
+        expect(result[100]!.ranks).toHaveLength(1)
     })
 
     it('extracts steamId from single-member rank', () => {
@@ -139,7 +139,7 @@ describe('refactorData', () => {
 
         const result = refactorData(stats, titles, [100])
 
-        expect(result[100]?.steamId).toBe('76561198000000001')
+        expect(result[100]!.steamId).toBe('76561198000000001')
     })
 
     it('does not extract steamId from multi-member rank', () => {
@@ -153,7 +153,7 @@ describe('refactorData', () => {
 
         const result = refactorData(stats, titles, [100, 200])
 
-        expect(result[100]?.steamId).toBeUndefined()
+        expect(result[100]!.steamId).toBeUndefined()
     })
 
     it('skips a stat whose stat group is missing', () => {
@@ -166,7 +166,7 @@ describe('refactorData', () => {
 
         const result = refactorData(stats, titles, [100])
 
-        expect(result[100]?.ranks).toHaveLength(1)
-        expect(result[100]?.ranks[0]?.statgroup_id).toBe(1)
+        expect(result[100]!.ranks).toHaveLength(1)
+        expect(result[100]!.ranks[0]!.statgroup_id).toBe(1)
     })
 })
