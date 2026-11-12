@@ -1,11 +1,11 @@
 import { Player } from '../../types'
-import { splitPlayerData } from './splitPlayerData'
+import { parseProfileId, splitPlayerData } from './splitPlayerData'
 
 type MatchStartedInfo = {
     profileId: number
     steamId: string
     slot: number
-    ranking: number
+    ranking: number | undefined
 }
 
 /**
@@ -52,11 +52,13 @@ function parseMatchStarted(data: string): MatchStartedInfo | undefined {
         /Match Started - \[(\d+) \/steam\/(\d+)\], slot = +(\d+), ranking = +(-?\d+)/
     )
     if (match) {
+        const ranking = Number(match[4])
         return {
             profileId: Number(match[1]),
             steamId: match[2],
             slot: Number(match[3]),
-            ranking: Number(match[4]),
+            // -1 in the log means the player has no rank
+            ranking: ranking === -1 ? undefined : ranking,
         }
     }
 }
@@ -88,14 +90,14 @@ export function getPlayersInfoCoh3(lines: string[]): Player[] {
         if (!fields?.profileId || !fields.name) {
             continue
         }
-        const profileId = Number(fields.profileId)
+        const profileId = parseProfileId(fields.profileId)
         players[fields.slot] = {
             faction: fields.faction,
             name: fields.name,
             profileId,
             teamSlot: Number(fields.teamSlot),
             time,
-            ranking: rankings[profileId]?.ranking,
+            ranking: profileId === undefined ? undefined : rankings[profileId]?.ranking,
         }
     }
 

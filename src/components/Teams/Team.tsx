@@ -20,9 +20,7 @@ function Team(props: Props) {
     const { openInfos, toggleOpenInfos } = useOpenInfosStore()
 
     // only players with their own open arrow, so the team button matches the arrows
-    const toggleableIds = props.players
-        .map((p) => p.profileId)
-        .filter((id): id is number => id !== undefined && id > 0)
+    const toggleableIds = props.players.map((p) => p.profileId).filter((id) => id !== undefined)
     const anyOpen = anyKeyOpen(openInfos, toggleableIds)
 
     const handleToggleAll = () => {
@@ -52,7 +50,7 @@ function Team(props: Props) {
             )}
             {props.players.map((p, i) => (
                 <Player
-                    key={p.profileId && p.profileId > 0 ? p.profileId : `${props.teamIndex}-${i}`}
+                    key={p.profileId ?? `${props.teamIndex}-${i}`}
                     player={p}
                     extraInfo={extraInfo && p.profileId ? extraInfo[p.profileId] : null}
                 />

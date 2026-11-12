@@ -126,6 +126,18 @@ describe('resolveRankings', () => {
         expect(team1[0].teamMarker).toBeUndefined()
     })
 
+    test('rank -1 from the API leaves ranking undefined', () => {
+        const players: Player[] = [makePlayer({ faction: 'german', profileId: 1001 })]
+        const stats = makeStats(
+            [makeStatGroup({ id: 100, type: 1, members: [makeMember({ profile_id: 1001 })] })],
+            [makeLbStat({ leaderboard_id: 4, statgroup_id: 100, rank: -1 })] // 1v1German
+        )
+
+        const [team0] = resolveRankings(players, stats, coh2Leaderboards)
+
+        expect(team0[0].ranking).toBeUndefined()
+    })
+
     test('COH2 2v2 team — players get team ranking and markers', () => {
         const players: Player[] = [
             makePlayer({

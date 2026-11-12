@@ -65,9 +65,11 @@ function PlayerMainRow(props: Props) {
 
     const countryFlagLocation = countryFlags[country ? country : '']
 
+    const isRealPlayer = player.profileId !== undefined
+
     const dropDownArrow = (
         <span style={{ width: '2em' }}>
-            {Number(player.profileId) > 0 && (
+            {isRealPlayer && (
                 <SvgIcon
                     data-testid="player-toggle"
                     aria-expanded={showExtra}
@@ -80,11 +82,10 @@ function PlayerMainRow(props: Props) {
     )
 
     const teamMarker = player.teamMarker ? player.teamMarker : ''
-    const rankValue = player.ranking == null || player.ranking === -1 ? '-' : player.ranking
-    const rank = `${rankValue}${teamMarker}`
+    const rank = `${player.ranking ?? '-'}${teamMarker}`
 
     const ranktotal =
-        player.ranking && player.ranking > 0
+        player.ranking !== undefined
             ? (extraInfo?.ranks.find((r) => r.rank === player.ranking)?.ranktotal ?? 0)
             : 0
     const rankTitle = ranktotal > 0 ? `${player.ranking} ${getText('of')} ${ranktotal}` : ''
@@ -112,7 +113,6 @@ function PlayerMainRow(props: Props) {
             />
         ) : null
 
-    const isRealPlayer = Number(player.profileId) > 0
     const alias = (
         <span
             data-testid="player-name"
