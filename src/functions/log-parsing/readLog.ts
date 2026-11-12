@@ -46,17 +46,17 @@ export function getLines(lines: string[]): string[] {
         const line = lines[i]
 
         // skip this lines, this is relic bug in log files (probably temp)
-        if (line.match('GAME -- Human Player: 0  -2 (0|1) (frontend|americans)')) {
+        if (/GAME -- Human Player: 0  -2 (0|1) (frontend|americans)/.test(line)) {
             continue
         }
 
-        if (line.match('GAME --.* Player:')) {
+        if (/GAME --.* Player:/.test(line)) {
             foundPlayerLines = true
             if (foundPlayerLines && gapAfterPlayers) {
                 break
             }
             playerLines.push(line)
-        } else if (line.match('Match Started.*steam.*slot.*ranking')) {
+        } else if (/Match Started.*steam.*slot.*ranking/.test(line)) {
             hasMatchStarted = true
             playerLines.push(line)
         } else if (hasMatchStarted) {
