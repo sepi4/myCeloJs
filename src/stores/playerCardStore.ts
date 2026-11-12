@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 
+import { Game } from '../constants/games'
 import { ExtraInfo, GameHistoryState } from '../types'
 
 export const EMPTY_GAME_HISTORY: GameHistoryState = { data: null, open: false, openGame: null }
@@ -13,8 +14,8 @@ export interface PlayerCardData {
 export interface PlayerCardState {
     player: PlayerCardData | null
     extraInfo: ExtraInfo | null
-    initialCoh3: boolean
-    selectedCoh3: boolean
+    initialGame: Game
+    selectedGame: Game
     otherPlayer: PlayerCardData | null
     otherExtraInfo: ExtraInfo | null
     otherGameLoading: boolean
@@ -27,22 +28,22 @@ export interface PlayerCardState {
 interface PlayerCardStore extends PlayerCardState {
     /** Grows each time another card is shown, so the page knows when to restore `scrollY`. */
     navigation: number
-    setPlayerCard: (player: PlayerCardData, extraInfo: ExtraInfo | null, coh3: boolean) => void
+    setPlayerCard: (player: PlayerCardData, extraInfo: ExtraInfo | null, game: Game) => void
     setOtherGameData: (player: PlayerCardData | null, extraInfo: ExtraInfo | null) => void
     setOtherGameLoading: (loading: boolean) => void
-    setSelectedCoh3: (coh3: boolean) => void
+    setSelectedGame: (game: Game) => void
     updateGameHistory: (patch: Partial<GameHistoryState>) => void
     /** Shows a card saved earlier with `snapshotPlayerCard`. */
     restorePlayerCard: (card: PlayerCardState) => void
     resetPlayerCard: () => void
 }
 
-const initialState = {
+const initialState: PlayerCardState & { navigation: number } = {
     navigation: 0,
     player: null,
     extraInfo: null,
-    initialCoh3: false,
-    selectedCoh3: false,
+    initialGame: 'coh2',
+    selectedGame: 'coh2',
     otherPlayer: null,
     otherExtraInfo: null,
     otherGameLoading: false,
@@ -60,8 +61,8 @@ export function snapshotPlayerCard(): PlayerCardState {
     return {
         player: state.player,
         extraInfo: state.extraInfo,
-        initialCoh3: state.initialCoh3,
-        selectedCoh3: state.selectedCoh3,
+        initialGame: state.initialGame,
+        selectedGame: state.selectedGame,
         otherPlayer: state.otherPlayer,
         otherExtraInfo: state.otherExtraInfo,
         otherGameLoading: state.otherGameLoading,
@@ -73,13 +74,13 @@ export function snapshotPlayerCard(): PlayerCardState {
 
 export const usePlayerCardStore = create<PlayerCardStore>((set) => ({
     ...initialState,
-    setPlayerCard: (player, extraInfo, coh3) =>
+    setPlayerCard: (player, extraInfo, game) =>
         set((state) => ({
             navigation: state.navigation + 1,
             player,
             extraInfo,
-            initialCoh3: coh3,
-            selectedCoh3: coh3,
+            initialGame: game,
+            selectedGame: game,
             otherPlayer: null,
             otherExtraInfo: null,
             otherGameLoading: false,
@@ -95,9 +96,9 @@ export const usePlayerCardStore = create<PlayerCardStore>((set) => ({
             otherGameChecked: true,
         }),
     setOtherGameLoading: (otherGameLoading) => set({ otherGameLoading }),
-    setSelectedCoh3: (coh3) =>
+    setSelectedGame: (game) =>
         set((state) => {
-            if (coh3 === state.selectedCoh3) {
+            if (game === state.selectedGame) {
                 return state
             }
             return {
@@ -105,7 +106,7 @@ export const usePlayerCardStore = create<PlayerCardStore>((set) => ({
                 extraInfo: state.otherExtraInfo,
                 otherPlayer: state.player,
                 otherExtraInfo: state.extraInfo,
-                selectedCoh3: coh3,
+                selectedGame: game,
                 // The history belongs to the profile of one game, so start over.
                 gameHistory: EMPTY_GAME_HISTORY,
             }

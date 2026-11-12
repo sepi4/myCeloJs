@@ -1,5 +1,6 @@
+import { GAME_CONFIG } from '../../constants/games'
 import getText from '../../functions/utils/getText'
-import { useDisplayCoh3 } from '../../hooks/useDisplayCoh3'
+import { useDisplayGame } from '../../hooks/useDisplayGame'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { useSorterStore } from '../../stores/sorterStore'
@@ -16,7 +17,7 @@ function RanksListTitles({ ranksArr }: { ranksArr: Rank[] }) {
     const {
         navButtons: { elo },
     } = useNavButtonsStore()
-    const coh3 = useDisplayCoh3()
+    const showElo = GAME_CONFIG[useDisplayGame()].hasElo && elo
 
     const getSorter = (name: SorterName) => {
         return {
@@ -34,7 +35,7 @@ function RanksListTitles({ ranksArr }: { ranksArr: Rank[] }) {
                     <ColumnTitle {...getSorter('byName')} width="40%">
                         {getText('mode', settings)}
                     </ColumnTitle>
-                    {coh3 && elo && <ColumnTitle {...getSorter('byRating')}>ELO</ColumnTitle>}
+                    {showElo && <ColumnTitle {...getSorter('byRating')}>ELO</ColumnTitle>}
                     <ColumnTitle {...getSorter('byStreak')}>
                         {getText('streak', settings)}
                     </ColumnTitle>

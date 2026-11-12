@@ -6,7 +6,7 @@ import { getTotalGames } from '../../functions/rankings/simpleFunctions'
 import getLastPlayedGame from '../../functions/utils/getLastPlayedGame'
 import getText from '../../functions/utils/getText'
 import { useFoundPlayersStore } from '../../stores/foundPlayersStore'
-import { useNavButtonsStore } from '../../stores/navButtonsStore'
+import { useGameStore } from '../../stores/gameStore'
 import { useNavigationStore } from '../../stores/navigationStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { Member } from '../../types'
@@ -20,9 +20,7 @@ export default function Search() {
 
     const [searchValue, setSearchValue] = useState('')
     const { foundPlayers, setFoundPlayers } = useFoundPlayersStore()
-    const {
-        navButtons: { coh3 },
-    } = useNavButtonsStore()
+    const { game } = useGameStore()
     const openPlayerCard = useNavigationStore((s) => s.openPlayerCard)
 
     const handleSearchInput = (e: ChangeEvent<HTMLInputElement>) => {
@@ -31,7 +29,7 @@ export default function Search() {
 
     const handleKeyUp = async (e: KeyboardEvent) => {
         if (e.key === 'Enter' && searchValue.trim().length > 0) {
-            const res = await searchPlayers(coh3, searchValue)
+            const res = await searchPlayers(game, searchValue)
             const arrPlayers = res.map((p) => {
                 return {
                     country: p.country,
@@ -51,7 +49,7 @@ export default function Search() {
                     ids.push(p.profileId)
                 }
             }
-            const x = await getExtraInfo(coh3, ids)
+            const x = await getExtraInfo(game, ids)
             if (x) {
                 const result = x.result
                 const newPlayers = res
@@ -88,7 +86,7 @@ export default function Search() {
             ranks: player.extraInfo?.ranks ?? [],
             steamId: player.name.substring(7),
         }
-        openPlayerCard(playerData, extraInfoData, coh3)
+        openPlayerCard(playerData, extraInfoData, game)
     }
 
     const players =

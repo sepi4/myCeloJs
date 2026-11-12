@@ -1,10 +1,11 @@
+import { Game } from '../constants/games'
 import { ExtraInfo } from '../types'
 import { snapshotPlayerCard, usePlayerCardStore } from './playerCardStore'
 
 const extraInfo = (steamId: string) => ({ steamId, ranks: [] }) as unknown as ExtraInfo
 
-function openCard(name: string, coh3 = false) {
-    usePlayerCardStore.getState().setPlayerCard({ name }, extraInfo(name), coh3)
+function openCard(name: string, game: Game = 'coh2') {
+    usePlayerCardStore.getState().setPlayerCard({ name }, extraInfo(name), game)
 }
 
 beforeEach(() => {
@@ -52,7 +53,7 @@ describe('playerCardStore game history', () => {
         const store = usePlayerCardStore.getState()
         store.setOtherGameData({ name: 'A3' }, extraInfo('A'))
         store.updateGameHistory({ open: true, data })
-        store.setSelectedCoh3(true)
+        store.setSelectedGame('coh3')
         expect(usePlayerCardStore.getState().gameHistory.open).toBe(false)
         expect(usePlayerCardStore.getState().gameHistory.data).toBeNull()
     })

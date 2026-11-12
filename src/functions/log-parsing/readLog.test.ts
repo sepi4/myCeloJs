@@ -49,19 +49,19 @@ describe('getCurrentUserAliasCoh3', () => {
 })
 
 describe('checkGameVersionIsCorrect', () => {
-    it('matches COH2 log when coh3 is false', () => {
+    it('matches COH2 log when the game is coh2', () => {
         const lines = ['RELICCOH2 some log header']
-        expect(checkGameVersionIsCorrect(lines, false)).toBeTruthy()
+        expect(checkGameVersionIsCorrect(lines, 'coh2')).toBeTruthy()
     })
 
-    it('matches COH3 log when coh3 is true', () => {
+    it('matches COH3 log when the game is coh3', () => {
         const lines = ['RelicCoH3 some log header']
-        expect(checkGameVersionIsCorrect(lines, true)).toBeTruthy()
+        expect(checkGameVersionIsCorrect(lines, 'coh3')).toBeTruthy()
     })
 
     it('returns falsy for wrong game version', () => {
         const lines = ['RELICCOH2 some log header']
-        expect(checkGameVersionIsCorrect(lines, true)).toBeFalsy()
+        expect(checkGameVersionIsCorrect(lines, 'coh3')).toBeFalsy()
     })
 })
 

@@ -61,10 +61,10 @@ export function refactronTableInfo(ranksArr: Rank[]): Result {
 export function refactronTableInfoCoh3(ranksArr: Rank[]): Result {
     const ranksObj: RanksObj = {
         solo: {
-            afrika_korps: {},
-            americans: {},
-            british_africa: {},
-            germans: {},
+            dak: {},
+            usa: {},
+            uk: {},
+            wer: {},
         },
         team: [],
     }
@@ -74,19 +74,19 @@ export function refactronTableInfoCoh3(ranksArr: Rank[]): Result {
 
         if (groups) {
             if (groups[2] === 'DAK') {
-                ranksObj.solo.afrika_korps[+groups[1]] = r
+                ranksObj.solo.dak[+groups[1]] = r
             } else if (groups[2] === 'American') {
-                ranksObj.solo.americans[+groups[1]] = r
+                ranksObj.solo.usa[+groups[1]] = r
             } else if (groups[2] === 'British') {
-                ranksObj.solo.british_africa[+groups[1]] = r
+                ranksObj.solo.uk[+groups[1]] = r
             } else if (groups[2] === 'German') {
-                ranksObj.solo.germans[+groups[1]] = r
+                ranksObj.solo.wer[+groups[1]] = r
             }
         }
     }
 
     const solo: (Rank | undefined)[] = []
-    const names = ['afrika_korps', 'germans', 'americans', 'british_africa']
+    const names = ['dak', 'wer', 'usa', 'uk']
 
     names.forEach((key: string) => {
         for (let i = 1; i < 5; i++) {

@@ -1,8 +1,9 @@
-import { RELIC_SERVER_BASE_COH2, RELIC_SERVER_BASE_COH3 } from '../../constants/urls'
+import { Game, GAME_CONFIG } from '../../constants/games'
 import { Member, StatGroup } from '../../types'
 
-export default async function searchPlayers(coh3: boolean, searchValue: string): Promise<Member[]> {
-    const url = `${coh3 ? RELIC_SERVER_BASE_COH3 : RELIC_SERVER_BASE_COH2}/GetPersonalStat?title=coh${coh3 ? 3 : 2}&search=${searchValue}`
+export default async function searchPlayers(game: Game, searchValue: string): Promise<Member[]> {
+    const { apiBase, apiTitle } = GAME_CONFIG[game]
+    const url = `${apiBase}/GetPersonalStat?title=${apiTitle}&search=${searchValue}`
 
     try {
         const res = await fetch(url)

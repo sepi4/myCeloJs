@@ -1,5 +1,6 @@
+import { GAME_CONFIG } from '../../constants/games'
 import getText from '../../functions/utils/getText'
-import { useDisplayCoh3 } from '../../hooks/useDisplayCoh3'
+import { useDisplayGame } from '../../hooks/useDisplayGame'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { Rank as RankType } from '../../types'
@@ -24,7 +25,7 @@ function RanksList(props: Props) {
     const {
         navButtons: { elo },
     } = useNavButtonsStore()
-    const coh3 = useDisplayCoh3()
+    const showElo = GAME_CONFIG[useDisplayGame()].hasElo && elo
     const { ranksArr } = props
     return (
         <div>
@@ -53,7 +54,7 @@ function RanksList(props: Props) {
                                 onToggle={() => props.onToggleRank(rankKey(r))}
                             />
                         </Cell>
-                        {coh3 && elo && <Cell>{r.rating ? `(${r.rating})` : '-'}</Cell>}
+                        {showElo && <Cell>{r.rating ? `(${r.rating})` : '-'}</Cell>}
                         <Cell
                             color={positive ? 'var(--accent-positive)' : 'var(--accent-negative)'}
                         >

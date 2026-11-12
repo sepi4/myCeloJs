@@ -43,7 +43,7 @@ describe('refactronTableInfo (COH2)', () => {
 describe('refactronTableInfoCoh3', () => {
     test('returns 16 undefined slots for empty input', () => {
         const [solo, names] = refactronTableInfoCoh3([])
-        expect(names).toEqual(['afrika_korps', 'germans', 'americans', 'british_africa'])
+        expect(names).toEqual(['dak', 'wer', 'usa', 'uk'])
         expect(solo).toHaveLength(16)
         expect(solo.every((x) => x === undefined)).toBe(true)
     })

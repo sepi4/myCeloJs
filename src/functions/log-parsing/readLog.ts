@@ -1,3 +1,4 @@
+import { Game, GAME_CONFIG } from '../../constants/games'
 import { Player } from '../../types'
 import { getPlayersInfo } from './getPlayersInfo'
 import { getPlayersInfoCoh3 } from './getPlayersInfoCoh3'
@@ -20,11 +21,19 @@ export function getCurrentUserAliasCoh3(lines: string[]): string | undefined {
     }
 }
 
-export function checkGameVersionIsCorrect(lines: string[], coh3: boolean): RegExpMatchArray | null {
-    if (coh3) {
-        return lines[0].match(/RelicCoH3/)
+export function checkGameVersionIsCorrect(lines: string[], game: Game): RegExpMatchArray | null {
+    return lines[0].match(GAME_CONFIG[game].logHeader)
+}
+
+const logParsers: Record<
+    Game,
+    {
+        getCurrentUserAlias: (lines: string[]) => string | undefined
+        getPlayersInfo: (playerLines: string[]) => Player[]
     }
-    return lines[0].match(/RELICCOH2/)
+> = {
+    coh2: { getCurrentUserAlias, getPlayersInfo },
+    coh3: { getCurrentUserAlias: getCurrentUserAliasCoh3, getPlayersInfo: getPlayersInfoCoh3 },
 }
 
 export function getLines(lines: string[]): string[] {
@@ -77,7 +86,7 @@ export function switchTeams(players: Player[], currentUser: string): Player[] {
 }
 
 /* istanbul ignore next */
-export async function readLog(coh3: boolean, fileLocation: string) {
+export async function readLog(game: Game, fileLocation: string) {
     fileLocation = fileLocation.replace(/\\/, '\\\\')
     try {
         const data = await window.electronAPI.log.read(fileLocation)
@@ -87,14 +96,15 @@ export async function readLog(coh3: boolean, fileLocation: string) {
 
         const lines = data.split('\n')
 
-        if (!checkGameVersionIsCorrect(lines, coh3)) {
+        if (!checkGameVersionIsCorrect(lines, game)) {
             return []
         }
 
-        const currentUserAlias = coh3 ? getCurrentUserAliasCoh3(lines) : getCurrentUserAlias(lines)
+        const parser = logParsers[game]
+        const currentUserAlias = parser.getCurrentUserAlias(lines)
 
         const playerLines = getLines(lines)
-        let players = coh3 ? getPlayersInfoCoh3(playerLines) : getPlayersInfo(playerLines)
+        let players = parser.getPlayersInfo(playerLines)
 
         if (currentUserAlias) {
             players = switchTeams(players, currentUserAlias)

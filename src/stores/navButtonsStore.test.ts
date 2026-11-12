@@ -3,7 +3,7 @@ import { useNavButtonsStore } from './navButtonsStore'
 beforeEach(() => {
     localStorage.clear()
     useNavButtonsStore.setState({
-        navButtons: { all: false, table: false, total: false, coh3: false, elo: false },
+        navButtons: { all: false, table: false, total: false, elo: false },
     })
 })
 

@@ -1,5 +1,7 @@
+import { GAME_CONFIG } from '../../constants/games'
 import { useExtraInfoStore } from '../../stores/extraInfoStore'
 import { useFromFileStore } from '../../stores/fromFileStore'
+import { useGameStore } from '../../stores/gameStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useNavigationStore } from '../../stores/navigationStore'
 import { useOpenInfosStore } from '../../stores/openInfosStore'
@@ -13,12 +15,13 @@ export default function setPlayersWithoutChecking(data: Player[]) {
     useOpenInfosStore.getState().resetOpenInfos()
     usePlayersStore.getState().setPlayers(data)
     useNavigationStore.getState().resetNavigation()
+    const { game } = useGameStore.getState()
     const {
-        navButtons: { coh3, elo },
+        navButtons: { elo },
     } = useNavButtonsStore.getState()
     const { settings } = useSettingsStore.getState()
     useExtraInfoStore.getState().clearExtraInfo()
     if (settings) {
-        writeRankings(coh3, data, settings.rankingsHorizontal, coh3 && elo)
+        writeRankings(game, data, settings.rankingsHorizontal, GAME_CONFIG[game].hasElo && elo)
     }
 }

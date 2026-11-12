@@ -3,11 +3,12 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import logo_coh2 from '../../assets/img/logo_coh2.png'
 import logo_cohstats from '../../assets/img/logo_cohstats.png'
 import logo_steam from '../../assets/img/logo_steam.png'
+import { GAMES, otherGame } from '../../constants/games'
 import { COH2_ORG, COH2STATS_COM, COH3STATS_COM, STEAM } from '../../constants/urls'
 import { fetchProfileIdBySteamId } from '../../functions/api/fetchProfileIdBySteamId'
 import { getExtraInfo } from '../../functions/api/getExtraInfo'
 import getText from '../../functions/utils/getText'
-import { PlayerCardContext } from '../../hooks/useDisplayCoh3'
+import { PlayerCardContext } from '../../hooks/useDisplayGame'
 import useSteamAvatar from '../../hooks/useSteamAvatar'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
@@ -26,14 +27,14 @@ export default function PlayerCard() {
     const {
         player,
         extraInfo,
-        initialCoh3,
-        selectedCoh3,
+        initialGame,
+        selectedGame,
         otherGameLoading,
         otherGameChecked,
         otherPlayer,
         setOtherGameData,
         setOtherGameLoading,
-        setSelectedCoh3,
+        setSelectedGame,
         gameHistory,
         updateGameHistory,
         navigation,
@@ -73,20 +74,20 @@ export default function PlayerCard() {
         }
     }, [])
 
-    const steamIdForLookup = selectedCoh3 === initialCoh3 ? extraInfo?.steamId : null
+    const steamIdForLookup = selectedGame === initialGame ? extraInfo?.steamId : null
 
     useEffect(() => {
         // A card restored from the navigation history already knows its other-game profile.
         if (!steamIdForLookup || otherGameChecked) {
             return
         }
-        const otherCoh3 = !initialCoh3
+        const lookupGame = otherGame(initialGame)
 
         let cancelled = false
         setOtherGameLoading(true)
 
         async function lookup() {
-            const profileId = await fetchProfileIdBySteamId(otherCoh3, steamIdForLookup as string)
+            const profileId = await fetchProfileIdBySteamId(lookupGame, steamIdForLookup as string)
             if (cancelled) {
                 return
             }
@@ -94,7 +95,7 @@ export default function PlayerCard() {
                 setOtherGameData(null, null)
                 return
             }
-            const x = await getExtraInfo(otherCoh3, [profileId])
+            const x = await getExtraInfo(lookupGame, [profileId])
             if (cancelled) {
                 return
             }
@@ -120,7 +121,7 @@ export default function PlayerCard() {
         }
     }, [
         steamIdForLookup,
-        initialCoh3,
+        initialGame,
         player,
         otherGameChecked,
         setOtherGameData,
@@ -220,35 +221,27 @@ export default function PlayerCard() {
     const steamId = extraInfo.steamId
 
     const otherAvailable = otherGameChecked && otherPlayer !== null
-    const coh2Disabled = selectedCoh3 && (otherGameLoading || !otherAvailable)
-    const coh3Disabled = !selectedCoh3 && (otherGameLoading || !otherAvailable)
     const noProfileTitle =
         otherGameChecked && !otherPlayer ? getText('no_profile_for_game', settings) : undefined
-    const coh2Title = selectedCoh3 ? noProfileTitle : undefined
-    const coh3Title = !selectedCoh3 ? noProfileTitle : undefined
 
     const gameRadio = (
         <div className={styles.gameRadio}>
-            <Choice
-                type="radio"
-                testId="player-card-radio-coh2"
-                name="player-card-game"
-                label="coh2"
-                checked={!selectedCoh3}
-                disabled={coh2Disabled}
-                onChange={() => setSelectedCoh3(false)}
-                title={coh2Title}
-            />
-            <Choice
-                type="radio"
-                testId="player-card-radio-coh3"
-                name="player-card-game"
-                label="coh3"
-                checked={selectedCoh3}
-                disabled={coh3Disabled}
-                onChange={() => setSelectedCoh3(true)}
-                title={coh3Title}
-            />
+            {GAMES.map((game) => {
+                const selected = game === selectedGame
+                return (
+                    <Choice
+                        key={game}
+                        type="radio"
+                        testId={`player-card-radio-${game}`}
+                        name="player-card-game"
+                        label={game}
+                        checked={selected}
+                        disabled={!selected && (otherGameLoading || !otherAvailable)}
+                        onChange={() => setSelectedGame(game)}
+                        title={selected ? undefined : noProfileTitle}
+                    />
+                )
+            })}
         </div>
     )
 
@@ -272,61 +265,66 @@ export default function PlayerCard() {
     const linkSteam = STEAM + steamId
     const funSteam = () => (steamId ? window.electronAPI.shell.openExternal(linkSteam) : null)
 
-    const linkImages = selectedCoh3 ? (
-        <div className={styles.links}>
-            <img
-                data-testid="link-coh3stats"
-                data-url={COH3STATS_COM + player.profileId}
-                src={logo_cohstats}
-                alt="coh3stats"
-                title="coh3stats.com"
-                onClick={() =>
-                    player.profileId
-                        ? window.electronAPI.shell.openExternal(COH3STATS_COM + player.profileId)
-                        : null
-                }
-            />
-            <img
-                data-testid="link-steam"
-                data-url={linkSteam}
-                src={logo_steam}
-                alt="steam"
-                title="steam"
-                onClick={funSteam}
-            />
-        </div>
-    ) : (
-        <div className={styles.links}>
-            <img
-                data-testid="link-coh2stats"
-                data-url={COH2STATS_COM + steamId}
-                src={logo_cohstats}
-                alt="coh2stats"
-                title="coh2stats.com"
-                onClick={() =>
-                    steamId ? window.electronAPI.shell.openExternal(COH2STATS_COM + steamId) : null
-                }
-            />
-            <img
-                data-testid="link-coh2"
-                data-url={COH2_ORG + steamId}
-                src={logo_coh2}
-                alt="coh2"
-                title="coh2.org"
-                onClick={() =>
-                    steamId ? window.electronAPI.shell.openExternal(COH2_ORG + steamId) : null
-                }
-            />
-            <img
-                data-testid="link-steam"
-                data-url={linkSteam}
-                src={logo_steam}
-                alt="steam"
-                title="steam"
-                onClick={funSteam}
-            />
-        </div>
-    )
+    const linkImages =
+        selectedGame === 'coh3' ? (
+            <div className={styles.links}>
+                <img
+                    data-testid="link-coh3stats"
+                    data-url={COH3STATS_COM + player.profileId}
+                    src={logo_cohstats}
+                    alt="coh3stats"
+                    title="coh3stats.com"
+                    onClick={() =>
+                        player.profileId
+                            ? window.electronAPI.shell.openExternal(
+                                  COH3STATS_COM + player.profileId
+                              )
+                            : null
+                    }
+                />
+                <img
+                    data-testid="link-steam"
+                    data-url={linkSteam}
+                    src={logo_steam}
+                    alt="steam"
+                    title="steam"
+                    onClick={funSteam}
+                />
+            </div>
+        ) : (
+            <div className={styles.links}>
+                <img
+                    data-testid="link-coh2stats"
+                    data-url={COH2STATS_COM + steamId}
+                    src={logo_cohstats}
+                    alt="coh2stats"
+                    title="coh2stats.com"
+                    onClick={() =>
+                        steamId
+                            ? window.electronAPI.shell.openExternal(COH2STATS_COM + steamId)
+                            : null
+                    }
+                />
+                <img
+                    data-testid="link-coh2"
+                    data-url={COH2_ORG + steamId}
+                    src={logo_coh2}
+                    alt="coh2"
+                    title="coh2.org"
+                    onClick={() =>
+                        steamId ? window.electronAPI.shell.openExternal(COH2_ORG + steamId) : null
+                    }
+                />
+                <img
+                    data-testid="link-steam"
+                    data-url={linkSteam}
+                    src={logo_steam}
+                    alt="steam"
+                    title="steam"
+                    onClick={funSteam}
+                />
+            </div>
+        )
 
     const card = extraInfo && (
         <PlayerExtraInfo

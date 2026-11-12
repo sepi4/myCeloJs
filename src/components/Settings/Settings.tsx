@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 
+import { Game, GAME_CONFIG } from '../../constants/games'
 import { fetchCoh2ProfileId } from '../../functions/api/fetchCoh2ProfileId'
 import writeSettings from '../../functions/settings/writeSettings'
 import getText from '../../functions/utils/getText'
@@ -115,8 +116,8 @@ function Settings(props: Props) {
         }
     }
 
-    const clearLogLocation = (game: 'coh2' | 'coh3') => {
-        const key = game === 'coh2' ? 'logLocationCoh2' : 'logLocationCoh3'
+    const clearLogLocation = (game: Game) => {
+        const key = GAME_CONFIG[game].logLocationKey
         writeSettings({ ...settings!, [key]: undefined })
     }
 
@@ -130,7 +131,7 @@ function Settings(props: Props) {
         window.location.reload()
     }
 
-    const changeLogLocation = async (game: 'coh2' | 'coh3') => {
+    const changeLogLocation = async (game: Game) => {
         const file = await window.electronAPI.dialog.showOpenDialog({
             properties: ['openFile'],
             filters: [
@@ -139,7 +140,7 @@ function Settings(props: Props) {
             ],
         })
         if (file !== undefined && file.filePaths[0]) {
-            const key = game === 'coh2' ? 'logLocationCoh2' : 'logLocationCoh3'
+            const key = GAME_CONFIG[game].logLocationKey
             const newSettings = {
                 ...settings,
                 [key]: file.filePaths[0],

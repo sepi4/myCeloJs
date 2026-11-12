@@ -5,6 +5,7 @@ import MainView from './components/MainView'
 // components
 import Navbar from './components/Navbar/Navbar'
 import UpdateBar from './components/UpdateBar'
+import { GAME_CONFIG } from './constants/games'
 import { fetchCoh2ProfileId } from './functions/api/fetchCoh2ProfileId'
 import { getExtraInfo } from './functions/api/getExtraInfo'
 import checkLogData from './functions/checkers/checkLogData'
@@ -19,6 +20,7 @@ import { useAlertStore } from './stores/alertStore'
 import { useAppLocationStore } from './stores/appLocationStore'
 import { useAutoLogCheckingStore } from './stores/autoLogCheckingStore'
 import { useExtraInfoStore } from './stores/extraInfoStore'
+import { useGameStore } from './stores/gameStore'
 import { useLogCheckIntervalStore } from './stores/logCheckIntervalStore'
 import { useNavButtonsStore } from './stores/navButtonsStore'
 import { usePlayersStore } from './stores/playersStore'
@@ -39,17 +41,13 @@ function App() {
     const { autoLogChecking } = useAutoLogCheckingStore()
     const { extraInfo, setExtraInfo } = useExtraInfoStore()
     const { logCheckInterval } = useLogCheckIntervalStore()
+    const { game, setGame } = useGameStore()
     const {
-        navButtons: { coh3, elo },
-        toggleNavButton,
+        navButtons: { elo },
     } = useNavButtonsStore()
     const { players, setPlayers } = usePlayersStore()
     const { settings } = useSettingsStore()
-    const activeLogLocation = settings
-        ? coh3
-            ? settings.logLocationCoh3
-            : settings.logLocationCoh2
-        : ''
+    const activeLogLocation = settings ? settings[GAME_CONFIG[game].logLocationKey] : ''
 
     // Auto-select COH2/COH3 radio when only one log location is configured
     useEffect(() => {
@@ -58,12 +56,12 @@ function App() {
         }
         const hasCoh2 = !!settings.logLocationCoh2
         const hasCoh3 = !!settings.logLocationCoh3
-        if (hasCoh3 && !hasCoh2 && !coh3) {
-            toggleNavButton('coh3')
-        } else if (hasCoh2 && !hasCoh3 && coh3) {
-            toggleNavButton('coh3')
+        if (hasCoh3 && !hasCoh2) {
+            setGame('coh3')
+        } else if (hasCoh2 && !hasCoh3) {
+            setGame('coh2')
         }
-    }, [settings, coh3, toggleNavButton])
+    }, [settings, setGame])
 
     // Load settings from disk on startup
     useEffect(() => {
@@ -108,7 +106,7 @@ function App() {
         // The log may be re-read while the request is in flight
         let cancelled = false
         async function fetchExtraInfo(currentPlayers: Player[]) {
-            const x = await getExtraInfo(coh3, ids)
+            const x = await getExtraInfo(game, ids)
             if (!x || cancelled) {
                 return
             }
@@ -121,7 +119,7 @@ function App() {
         return () => {
             cancelled = true
         }
-    }, [coh3, players, extraInfo, setExtraInfo, setPlayers])
+    }, [game, players, extraInfo, setExtraInfo, setPlayers])
 
     // Poll the log on an interval
     useEffect(() => {
@@ -129,37 +127,42 @@ function App() {
             return
         }
         async function checkLog() {
-            const data = await readLog(coh3, activeLogLocation)
+            const data = await readLog(game, activeLogLocation)
             checkLogData({ data, playAudio: alert ? playAudio : undefined })
         }
         const intervalId = setInterval(checkLog, logCheckInterval * 1000)
 
         return () => clearInterval(intervalId)
-    }, [autoLogChecking, activeLogLocation, coh3, alert, logCheckInterval])
+    }, [autoLogChecking, activeLogLocation, game, alert, logCheckInterval])
 
     // Re-read log when game toggle or log location changes
     useEffect(() => {
         if (settings && activeLogLocation) {
             async function readLogOnChange() {
-                const data = await readLog(coh3, activeLogLocation)
+                const data = await readLog(game, activeLogLocation)
                 if (data) {
                     checkLogData({ data })
                 }
             }
             readLogOnChange()
         }
-    }, [coh3, settings, activeLogLocation])
+    }, [game, settings, activeLogLocation])
 
     // Re-write rankings overlay when orientation or game toggle changes
     useEffect(() => {
         if (settings && players && players.length > 0) {
-            writeRankings(coh3, players, settings.rankingsHorizontal, coh3 && elo)
+            writeRankings(
+                game,
+                players,
+                settings.rankingsHorizontal,
+                GAME_CONFIG[game].hasElo && elo
+            )
         }
-    }, [settings, elo, coh3, players])
+    }, [settings, elo, game, players])
 
     // Sync COH3 profile ID from log file into settings
     useEffect(() => {
-        if (!coh3 || !settings?.logLocationCoh3) {
+        if (game !== 'coh3' || !settings?.logLocationCoh3) {
             return
         }
         const currentSettings = settings
@@ -181,7 +184,7 @@ function App() {
             } as SettingsType)
         }
         updateCoh3ProfileId()
-    }, [coh3, settings])
+    }, [game, settings])
 
     // Fetch and sync COH2 profile ID from Steam ID
     useEffect(() => {
@@ -218,7 +221,7 @@ function App() {
             return
         }
         if (settings && activeLogLocation) {
-            const data = await readLog(coh3, activeLogLocation)
+            const data = await readLog(game, activeLogLocation)
             if (data) {
                 checkLogData({ data })
             }

@@ -1,9 +1,9 @@
-import { RELIC_SERVER_BASE_COH2, RELIC_SERVER_BASE_COH3 } from '../../constants/urls'
+import { Game, GAME_CONFIG } from '../../constants/games'
 import { AvailableLeaderboard, NormalizedExtraInfo, PersonalStats } from '../../types'
 import { refactorData } from '../rankings/refactorData'
 
 export async function getExtraInfo(
-    coh3: boolean,
+    game: Game,
     ids: number[]
 ): Promise<{
     result: NormalizedExtraInfo
@@ -13,8 +13,9 @@ export async function getExtraInfo(
     // TODO - get rid of unnessary calls to server on app start
 
     const strIds: string = ids.join(',')
-    const url = `${coh3 ? RELIC_SERVER_BASE_COH3 : RELIC_SERVER_BASE_COH2}/GetPersonalStat?title=coh${coh3 ? 3 : 2}&profile_ids=[${strIds}]`
-    const url2 = `${coh3 ? RELIC_SERVER_BASE_COH3 : RELIC_SERVER_BASE_COH2}/GetAvailableLeaderboards?title=coh${coh3 ? 3 : 2}`
+    const { apiBase, apiTitle } = GAME_CONFIG[game]
+    const url = `${apiBase}/GetPersonalStat?title=${apiTitle}&profile_ids=[${strIds}]`
+    const url2 = `${apiBase}/GetAvailableLeaderboards?title=${apiTitle}`
 
     try {
         const [personalStats, cohTitles] = await Promise.all([

@@ -2,17 +2,17 @@ import {
     refactronTableInfo,
     refactronTableInfoCoh3,
 } from '../../functions/rankings/refactorTableInfo'
-import { useDisplayCoh3 } from '../../hooks/useDisplayCoh3'
+import { useDisplayGame } from '../../hooks/useDisplayGame'
 import { Rank } from '../../types'
 import TableRanksDiv from './TableRanksDiv'
 
 import styles from './TableDiv.module.css'
 
 function TableDiv({ playerRanks }: { playerRanks: Rank[] }) {
-    const coh3 = useDisplayCoh3()
-    const [ranks, factionNames] = coh3
-        ? refactronTableInfoCoh3(playerRanks)
-        : refactronTableInfo(playerRanks)
+    const game = useDisplayGame()
+    const [ranks, factionNames] =
+        game === 'coh3' ? refactronTableInfoCoh3(playerRanks) : refactronTableInfo(playerRanks)
+    const lastRowSize = factionNames.length % 2 === 0 ? 2 : 1
     const factionGrids = factionNames.map((faction, factionIndex) => {
         const startIndex = factionIndex * 4
         return (
@@ -22,8 +22,7 @@ function TableDiv({ playerRanks }: { playerRanks: Rank[] }) {
                 style={{
                     borderRight: factionIndex % 2 === 0 ? '0.1em solid gray' : undefined,
                     borderBottom:
-                        factionIndex < factionNames.length - 1 &&
-                        (!coh3 || (coh3 && factionIndex < factionNames.length - 2))
+                        factionIndex < factionNames.length - lastRowSize
                             ? '0.1em solid gray'
                             : undefined,
                 }}
