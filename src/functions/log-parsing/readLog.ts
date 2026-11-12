@@ -36,6 +36,11 @@ const logParsers: Record<
     coh3: { getCurrentUserAlias: getCurrentUserAliasCoh3, getPlayersInfo: getPlayersInfoCoh3 },
 }
 
+// skip these lines, this is relic bug in log files (probably temp)
+const BROKEN_PLAYER_LINE = /GAME -- Human Player: 0  -2 (0|1) (frontend|americans)/
+const PLAYER_LINE = /GAME --.* Player:/
+const MATCH_STARTED_LINE = /Match Started.*steam.*slot.*ranking/
+
 export function getLines(lines: string[]): string[] {
     const playerLines: string[] = []
     let hasMatchStarted = false
@@ -45,18 +50,17 @@ export function getLines(lines: string[]): string[] {
     for (let i = lines.length - 1; i >= 0; i--) {
         const line = lines[i]
 
-        // skip this lines, this is relic bug in log files (probably temp)
-        if (line.match('GAME -- Human Player: 0  -2 (0|1) (frontend|americans)')) {
+        if (BROKEN_PLAYER_LINE.test(line)) {
             continue
         }
 
-        if (line.match('GAME --.* Player:')) {
+        if (PLAYER_LINE.test(line)) {
             foundPlayerLines = true
             if (foundPlayerLines && gapAfterPlayers) {
                 break
             }
             playerLines.push(line)
-        } else if (line.match('Match Started.*steam.*slot.*ranking')) {
+        } else if (MATCH_STARTED_LINE.test(line)) {
             hasMatchStarted = true
             playerLines.push(line)
         } else if (hasMatchStarted) {
