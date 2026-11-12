@@ -1,10 +1,9 @@
-import { Game, GAME_CONFIG } from '../../constants/games'
+import { Game } from '../../constants/games'
+import { personalStatBySteamIdUrl } from './apiUrls'
 
 export async function fetchProfileIdBySteamId(game: Game, steamId: string): Promise<number | null> {
-    const { apiBase, apiTitle } = GAME_CONFIG[game]
-    const url = `${apiBase}/GetPersonalStat?title=${apiTitle}&profile_names=[%22%2Fsteam%2F${steamId}%22]`
     try {
-        const res = await fetch(url)
+        const res = await fetch(personalStatBySteamIdUrl(game, steamId))
         const data = await res.json()
         if (data.result?.message !== 'SUCCESS') {
             return null

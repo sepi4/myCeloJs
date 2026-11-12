@@ -1,6 +1,8 @@
 import countriesJson from './countries.json'
 
-const countries: { [key: string]: { name: string } | undefined } = countriesJson
+type Country = (typeof countriesJson)[keyof typeof countriesJson]
+
+export const countries: Record<string, Country | undefined> = countriesJson
 
 // Russian names for all countries, keyed by ISO 3166-1 alpha-2 code (lowercase)
 const countryNamesRu: { [key: string]: string } = {

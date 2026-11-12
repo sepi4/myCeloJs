@@ -6,13 +6,14 @@ import logo_steam from '../../assets/img/logo_steam.png'
 import { GAMES, otherGame } from '../../constants/games'
 import { COH2_ORG, COH2STATS_COM, COH3STATS_COM, STEAM } from '../../constants/urls'
 import { fetchProfileIdBySteamId } from '../../functions/api/fetchProfileIdBySteamId'
-import { getExtraInfo } from '../../functions/api/getExtraInfo'
+import { fetchPlayerExtraInfo } from '../../functions/api/getExtraInfo'
 import { PlayerCardContext } from '../../hooks/useDisplayGame'
+import useLanguage from '../../hooks/useLanguage'
+import useNavbarPosition from '../../hooks/useNavbarPosition'
 import useSteamAvatar from '../../hooks/useSteamAvatar'
 import useText from '../../hooks/useText'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
-import { useSettingsStore } from '../../stores/settingsStore'
 import { getCountryName } from '../../translations/countryTranslations'
 import { Player } from '../../types'
 import Choice from '../Choice'
@@ -24,7 +25,8 @@ import styles from './PlayerCard.module.css'
 export default function PlayerCard() {
     const getText = useText()
     const { countryFlags } = useCountryFlagsStore()
-    const { settings } = useSettingsStore()
+    const language = useLanguage()
+    const isTopNavbar = useNavbarPosition() === 'top'
     const {
         player,
         extraInfo,
@@ -96,11 +98,10 @@ export default function PlayerCard() {
                 setOtherGameData(null, null)
                 return
             }
-            const x = await getExtraInfo(lookupGame, [profileId])
+            const ex = await fetchPlayerExtraInfo(lookupGame, profileId)
             if (cancelled) {
                 return
             }
-            const ex = x?.result[profileId]
             if (!ex || ex.ranks.length === 0) {
                 setOtherGameData(null, null)
                 return
@@ -140,7 +141,7 @@ export default function PlayerCard() {
                     <img
                         src={countryFlags[player.country ?? '']}
                         alt={`${player.country}`}
-                        title={getCountryName(player.country, settings?.language)}
+                        title={getCountryName(player.country, language)}
                     />
                     <span className={styles.name}>
                         <PlayerName name={player.name} />
@@ -180,7 +181,7 @@ export default function PlayerCard() {
                 <img
                     src={countryFlags[player.country ?? '']}
                     alt={`${player.country}`}
-                    title={getCountryName(player.country, settings?.language)}
+                    title={getCountryName(player.country, language)}
                 />
             </span>
             <span className={styles.name}>
@@ -188,8 +189,6 @@ export default function PlayerCard() {
             </span>
         </>
     )
-
-    const isTopNavbar = settings?.navbarPosition !== 'left' && settings?.navbarPosition !== 'right'
 
     const stickyBar = (
         <div
@@ -211,7 +210,7 @@ export default function PlayerCard() {
             <img
                 src={countryFlags[player.country ?? '']}
                 alt={`${player.country}`}
-                title={getCountryName(player.country, settings?.language)}
+                title={getCountryName(player.country, language)}
             />
             <span data-testid="player-card-name" className={styles.name}>
                 <PlayerName name={player.name} />

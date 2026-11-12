@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 
-import { GAME_CONFIG } from '../../constants/games'
-import { parseHistoryData } from '../../functions/utils/parseMatchHistory'
+import { fetchMatchHistory } from '../../functions/api/fetchMatchHistory'
 import { useDisplayGame } from '../../hooks/useDisplayGame'
 import useText from '../../hooks/useText'
 import { HISTORY_PERIODS, isInPeriod, useHistoryPeriodStore } from '../../stores/historyPeriodStore'
@@ -50,19 +49,9 @@ export default function History(props: Props) {
         if (fetching) {
             async function fetchHistory() {
                 try {
-                    const id = props.player.profileId
-                    const { apiBase, apiTitle } = GAME_CONFIG[game]
-                    const url = `${apiBase}/getRecentMatchHistoryByProfileId?title=${apiTitle}&profile_id=${id}`
-                    const url2 = `${apiBase}/GetAvailableLeaderboards?title=${apiTitle}`
-                    const [r1, r2] = await Promise.all([
-                        fetch(url).then((r) => r.json()),
-                        fetch(url2).then((r) => r.json()),
-                    ])
+                    const data = await fetchMatchHistory(game, props.player)
                     if (mounted) {
-                        updateState({
-                            data: parseHistoryData([r1, r2], props.player),
-                            openGame: null,
-                        })
+                        updateState({ data, openGame: null })
                     }
                 } catch (error) {
                     console.log('error get history:', error)

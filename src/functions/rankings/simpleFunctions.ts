@@ -1,13 +1,21 @@
 import { Player, Rank } from '../../types'
 
-export function getTotalGames(ranks: Rank[]): number {
-    let sum = 0
+/** Counts only ranked modes. */
+export function getTotalWinsAndLosses(ranks: Rank[]): { wins: number; losses: number } {
+    let wins = 0
+    let losses = 0
     for (const rank of ranks) {
         if (rank?.isModeRanked === 1) {
-            sum += rank.wins + rank.losses
+            wins += rank.wins
+            losses += rank.losses
         }
     }
-    return sum
+    return { wins, losses }
+}
+
+export function getTotalGames(ranks: Rank[]): number {
+    const { wins, losses } = getTotalWinsAndLosses(ranks)
+    return wins + losses
 }
 
 export function separateTeams(arr: Player[]): [Player[], Player[]] {

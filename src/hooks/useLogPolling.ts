@@ -1,13 +1,12 @@
 import { useEffect } from 'react'
 
 import audioLocation from '../assets/audio/bell.mp3'
-import { GAME_CONFIG } from '../constants/games'
 import readAndCheckLog from '../functions/checkers/readAndCheckLog'
 import { useAlertStore } from '../stores/alertStore'
 import { useAutoLogCheckingStore } from '../stores/autoLogCheckingStore'
 import { useGameStore } from '../stores/gameStore'
 import { useLogCheckIntervalStore } from '../stores/logCheckIntervalStore'
-import { useSettingsStore } from '../stores/settingsStore'
+import useActiveLogLocation from './useActiveLogLocation'
 
 const playAudio = () => new Audio(audioLocation).play()
 
@@ -17,9 +16,7 @@ export default function useLogPolling() {
     const { autoLogChecking } = useAutoLogCheckingStore()
     const { logCheckInterval } = useLogCheckIntervalStore()
     const { game } = useGameStore()
-    const activeLogLocation = useSettingsStore(
-        (state) => state.settings?.[GAME_CONFIG[game].logLocationKey]
-    )
+    const activeLogLocation = useActiveLogLocation()
 
     // Poll the log on an interval
     useEffect(() => {

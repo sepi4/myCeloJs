@@ -1,5 +1,5 @@
 import { Rank } from '../../types'
-import sorters from './sorters'
+import sorters, { Sorter } from './sorters'
 
 export function ranksArrFilter(ranksArr: Rank[], tableView: boolean, showAll: boolean): Rank[] {
     const namePattern = tableView ? /^Team/ : /^./
@@ -7,11 +7,6 @@ export function ranksArrFilter(ranksArr: Rank[], tableView: boolean, showAll: bo
     return ranksArr
         .filter((rank) => rank.name.match(namePattern))
         .filter((rank) => (rankedOnly ? rank.rank > 0 : true))
-}
-
-type Sorter = {
-    name: 'byRank' | 'byWinRate' | 'byStreak' | 'byName' | 'byTotal' | 'byRating'
-    reversed: boolean
 }
 
 function byTotalGames(a: Rank, b: Rank): number {

@@ -1,12 +1,10 @@
 import { JSX, useLayoutEffect } from 'react'
 
-import { GAME_CONFIG } from '../constants/games'
+import useActiveLogLocation from '../hooks/useActiveLogLocation'
 import useNavigationKeys from '../hooks/useNavigationKeys'
 import useText from '../hooks/useText'
-import { useGameStore } from '../stores/gameStore'
 import { Location, useNavigationStore } from '../stores/navigationStore'
 import { usePlayersStore } from '../stores/playersStore'
-import { useSettingsStore } from '../stores/settingsStore'
 import { useSettingsViewStore } from '../stores/settingsViewStore'
 import { useViewStore } from '../stores/viewStore'
 import { Player } from '../types'
@@ -29,13 +27,11 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
     const getText = useText()
     const { settingsView } = useSettingsViewStore()
     const teams: Player[][] = [[], []]
-    const { settings } = useSettingsStore()
-    const { game } = useGameStore()
     const { players } = usePlayersStore()
     const { view, cardReturnView } = useViewStore()
     // Search stays loaded while the history can return to it, so its results are kept.
     const searchInHistory = useNavigationStore((s) => [...s.back, ...s.forward].some(usesSearch))
-    const activeLogLocation = settings?.[GAME_CONFIG[game].logLocationKey] ?? ''
+    const activeLogLocation = useActiveLogLocation()
 
     if (players) {
         players.forEach((p) => {
@@ -56,7 +52,7 @@ function MainView(props: { handleSetSettingsView: () => void }): JSX.Element {
         return <Settings handleSetSettingsView={props.handleSetSettingsView} />
     }
     // haven't add log location
-    if (!settings || !activeLogLocation) {
+    if (!activeLogLocation) {
         return (
             <div className={styles.centered}>
                 <h2 data-testid="no-log-prompt">{getText('add_log_location')}</h2>

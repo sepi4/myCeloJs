@@ -1,103 +1,27 @@
+import { Game, GAME_CONFIG } from '../../constants/games'
 import { Rank } from '../../types'
 
-type ModeObj = {
-    [key: number]: Rank
-}
-type RanksObj = {
-    solo: {
-        [key: string]: ModeObj
-    }
-    team: []
-}
-type Result = [(Rank | undefined)[], string[]]
+const TEAM_SIZES = 4
 
-export function refactronTableInfo(ranksArr: Rank[]): Result {
-    const ranksObj: RanksObj = {
-        solo: {
-            sov: {},
-            usa: {},
-            uk: {},
-            wer: {},
-            okw: {},
-        },
-        team: [],
-    }
+/**
+ * Returns the solo ranks as a flat list of four team sizes per faction,
+ * and the faction codes in the same order.
+ */
+export function refactorTableInfo(game: Game, ranks: Rank[]): [(Rank | undefined)[], string[]] {
+    const { factions } = GAME_CONFIG[game]
+    const solo: (Rank | undefined)[] = Array(factions.length * TEAM_SIZES).fill(undefined)
 
-    for (const r of ranksArr) {
-        const groups = r.name.match(/^(\d)v\d(.+)/)
-
-        if (groups) {
-            if (groups[2] === 'Soviet') {
-                ranksObj.solo.sov[+groups[1]] = r
-            } else if (groups[2] === 'AEF') {
-                ranksObj.solo.usa[+groups[1]] = r
-            } else if (groups[2] === 'British') {
-                ranksObj.solo.uk[+groups[1]] = r
-            } else if (groups[2] === 'German') {
-                ranksObj.solo.wer[+groups[1]] = r
-            } else if (groups[2] === 'WestGerman') {
-                ranksObj.solo.okw[+groups[1]] = r
-            }
+    for (const rank of ranks) {
+        const match = rank.name.match(/^(\d)v\d(.+?)(Unranked)?$/)
+        if (!match) {
+            continue
+        }
+        const teamSize = Number(match[1])
+        const factionIndex = factions.findIndex((f) => f.leaderboardName === match[2])
+        if (factionIndex !== -1 && teamSize >= 1 && teamSize <= TEAM_SIZES) {
+            solo[factionIndex * TEAM_SIZES + teamSize - 1] = rank
         }
     }
 
-    const solo: (Rank | undefined)[] = []
-    const names = ['sov', 'wer', 'usa', 'okw', 'uk']
-
-    names.forEach((key: string) => {
-        for (let i = 1; i < 5; i++) {
-            const o: Rank = ranksObj.solo[key][i]
-            if (o) {
-                solo.push(o)
-            } else {
-                solo.push(undefined)
-            }
-        }
-    })
-
-    return [solo, names]
-}
-
-export function refactronTableInfoCoh3(ranksArr: Rank[]): Result {
-    const ranksObj: RanksObj = {
-        solo: {
-            dak: {},
-            usa: {},
-            uk: {},
-            wer: {},
-        },
-        team: [],
-    }
-
-    for (const r of ranksArr) {
-        const groups = r.name.match(/^(\d)v\d(DAK|American|British|German)/)
-
-        if (groups) {
-            if (groups[2] === 'DAK') {
-                ranksObj.solo.dak[+groups[1]] = r
-            } else if (groups[2] === 'American') {
-                ranksObj.solo.usa[+groups[1]] = r
-            } else if (groups[2] === 'British') {
-                ranksObj.solo.uk[+groups[1]] = r
-            } else if (groups[2] === 'German') {
-                ranksObj.solo.wer[+groups[1]] = r
-            }
-        }
-    }
-
-    const solo: (Rank | undefined)[] = []
-    const names = ['dak', 'wer', 'usa', 'uk']
-
-    names.forEach((key: string) => {
-        for (let i = 1; i < 5; i++) {
-            const o: Rank = ranksObj.solo[key][i]
-            if (o) {
-                solo.push(o)
-            } else {
-                solo.push(undefined)
-            }
-        }
-    })
-
-    return [solo, names]
+    return [solo, factions.map((f) => f.code)]
 }

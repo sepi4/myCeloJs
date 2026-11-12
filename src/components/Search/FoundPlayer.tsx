@@ -1,8 +1,8 @@
 import { getTimeAgo } from '../../functions/utils/time'
+import useLanguage from '../../hooks/useLanguage'
 import useSteamAvatar from '../../hooks/useSteamAvatar'
 import useText from '../../hooks/useText'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
-import { useSettingsStore } from '../../stores/settingsStore'
 import { Member } from '../../types'
 import PlayerName from '../PlayerName'
 
@@ -16,12 +16,10 @@ interface Props {
 export default function FoundPlayer(props: Props) {
     const getText = useText()
     const { countryFlags } = useCountryFlagsStore()
-    const { settings } = useSettingsStore()
-
-    const lg: string = settings?.language ? settings.language : 'en'
+    const language = useLanguage()
 
     const timeAgo = props.player?.lastGameTime
-        ? getTimeAgo(new Date(props.player.lastGameTime * 1000), lg)
+        ? getTimeAgo(new Date(props.player.lastGameTime * 1000), language)
         : '-'
 
     // alias: "Sepi"

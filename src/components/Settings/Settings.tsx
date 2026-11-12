@@ -4,6 +4,8 @@ import { Game, GAME_CONFIG } from '../../constants/games'
 import { fetchCoh2ProfileId } from '../../functions/api/fetchCoh2ProfileId'
 import { updateSettings } from '../../functions/settings/writeSettings'
 import useEsc from '../../hooks/useEsc'
+import useLanguage from '../../hooks/useLanguage'
+import useNavbarPosition from '../../hooks/useNavbarPosition'
 import useText from '../../hooks/useText'
 import useTimedBoolean from '../../hooks/useTimedBoolean'
 import { useSettingsStore } from '../../stores/settingsStore'
@@ -30,8 +32,8 @@ function Settings(props: Props) {
     const { settings } = useSettingsStore()
     const { closeSettingsView } = useSettingsViewStore()
 
-    const lg = settings && settings.language ? settings.language : 'en'
-    const navbarPosition = settings?.navbarPosition ?? 'top'
+    const language = useLanguage()
+    const navbarPosition = useNavbarPosition()
     const fontSize = settings?.fontSize ?? 'small'
     const theme = settings?.theme ?? 'dark'
 
@@ -190,7 +192,7 @@ function Settings(props: Props) {
                                     name="language"
                                     value={lang}
                                     label={lang.toUpperCase()}
-                                    checked={lg === lang}
+                                    checked={language === lang}
                                     onChange={() => handleLanguage(lang)}
                                 />
                             ))}

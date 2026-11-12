@@ -1,8 +1,7 @@
 import { getFactionCodeByRaceId, getFactionFlag } from '../../constants/games'
-import { getExtraInfo } from '../../functions/api/getExtraInfo'
 import { useDisplayGame } from '../../hooks/useDisplayGame'
+import useOpenPlayerCard from '../../hooks/useOpenPlayerCard'
 import useText from '../../hooks/useText'
-import { useNavigationStore } from '../../stores/navigationStore'
 import { MatchHistoryReportResult, NormalizedProfiles } from '../../types'
 import PlayerName from '../PlayerName'
 
@@ -16,7 +15,7 @@ interface Props {
 function MatchTableHeaders(props: Props) {
     const getText = useText()
     const game = useDisplayGame()
-    const openPlayerCard = useNavigationStore((s) => s.openPlayerCard)
+    const openPlayerCard = useOpenPlayerCard()
     return (
         <thead>
             <tr>
@@ -54,24 +53,13 @@ function MatchTableHeaders(props: Props) {
                             <a
                                 data-testid="game-details-player"
                                 title={pro?.alias ?? `${p.profile_id}`}
-                                onClick={async () => {
-                                    const x = await getExtraInfo(game, [p.profile_id])
-                                    if (!x) {
-                                        return
-                                    }
-                                    const newPlayer = {
+                                onClick={() =>
+                                    openPlayerCard({
                                         country: pro?.country,
                                         name: pro?.alias ?? `${p.profile_id}`,
                                         profileId: p.profile_id,
-                                    }
-                                    if (!newPlayer.profileId) {
-                                        return
-                                    }
-                                    const ex = x.result[newPlayer.profileId]
-                                    if (ex) {
-                                        openPlayerCard(newPlayer, ex, game)
-                                    }
-                                }}
+                                    })
+                                }
                             >
                                 <PlayerName name={pro?.alias ?? `${p.profile_id}`} />
                             </a>

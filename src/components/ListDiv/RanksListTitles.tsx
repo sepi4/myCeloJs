@@ -1,4 +1,5 @@
 import { GAME_CONFIG } from '../../constants/games'
+import { SorterName } from '../../functions/rankings/sorters'
 import { useDisplayGame } from '../../hooks/useDisplayGame'
 import useText from '../../hooks/useText'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
@@ -7,8 +8,6 @@ import { Rank } from '../../types'
 import ColumnTitle from './ColumnTitle'
 
 import styles from './ListDiv.module.css'
-
-type SorterName = 'byRank' | 'byWinRate' | 'byStreak' | 'byName' | 'byTotal' | 'byRating'
 
 function RanksListTitles({ ranksArr }: { ranksArr: Rank[] }) {
     const getText = useText()

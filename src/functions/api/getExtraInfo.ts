@@ -1,6 +1,7 @@
-import { Game, GAME_CONFIG } from '../../constants/games'
-import { AvailableLeaderboard, NormalizedExtraInfo, PersonalStats } from '../../types'
+import { Game } from '../../constants/games'
+import { AvailableLeaderboard, ExtraInfo, NormalizedExtraInfo, PersonalStats } from '../../types'
 import { refactorData } from '../rankings/refactorData'
+import { availableLeaderboardsUrl, personalStatByIdsUrl } from './apiUrls'
 
 export async function getExtraInfo(
     game: Game,
@@ -12,20 +13,15 @@ export async function getExtraInfo(
 } | null> {
     // TODO - get rid of unnessary calls to server on app start
 
-    const strIds: string = ids.join(',')
-    const { apiBase, apiTitle } = GAME_CONFIG[game]
-    const url = `${apiBase}/GetPersonalStat?title=${apiTitle}&profile_ids=[${strIds}]`
-    const url2 = `${apiBase}/GetAvailableLeaderboards?title=${apiTitle}`
-
     try {
         const [personalStats, cohTitles] = await Promise.all([
-            fetch(url).then((r) => {
+            fetch(personalStatByIdsUrl(game, ids)).then((r) => {
                 if (!r.ok) {
                     throw new Error(`${r.status}`)
                 }
                 return r.json() as Promise<PersonalStats>
             }),
-            fetch(url2).then((r) => {
+            fetch(availableLeaderboardsUrl(game)).then((r) => {
                 if (!r.ok) {
                     throw new Error(`${r.status}`)
                 }
@@ -37,4 +33,12 @@ export async function getExtraInfo(
         console.log(error)
         return null
     }
+}
+
+export async function fetchPlayerExtraInfo(
+    game: Game,
+    profileId: number
+): Promise<ExtraInfo | undefined> {
+    const fetched = await getExtraInfo(game, [profileId])
+    return fetched?.result[profileId]
 }

@@ -1,7 +1,5 @@
-import { getExtraInfo } from '../../functions/api/getExtraInfo'
-import { useDisplayGame } from '../../hooks/useDisplayGame'
+import useOpenPlayerCard from '../../hooks/useOpenPlayerCard'
 import { useCountryFlagsStore } from '../../stores/countryFlagsStore'
-import { useNavigationStore } from '../../stores/navigationStore'
 import { Member as MemberType } from '../../types'
 import PlayerName from '../PlayerName'
 
@@ -13,27 +11,10 @@ interface Props {
 
 export default function Member(props: Props) {
     const { countryFlags } = useCountryFlagsStore()
-    const game = useDisplayGame()
-    const openPlayerCard = useNavigationStore((s) => s.openPlayerCard)
+    const openPlayerCard = useOpenPlayerCard()
 
-    const handlePlayerCardOn = async (p: MemberType) => {
-        const newPlayer = {
-            country: p.country,
-            name: p.alias,
-            profileId: p.profile_id,
-        }
-        const x = await getExtraInfo(game, [p.profile_id])
-        if (!x) {
-            return
-        }
-        if (!newPlayer.profileId) {
-            return
-        }
-        const ex = x.result[newPlayer.profileId]
-        if (ex) {
-            openPlayerCard(newPlayer, ex, game)
-        }
-    }
+    const handlePlayerCardOn = (p: MemberType) =>
+        openPlayerCard({ country: p.country, name: p.alias, profileId: p.profile_id })
 
     return (
         <div
