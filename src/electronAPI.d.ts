@@ -1,48 +1,7 @@
-interface UpdateStatus {
-    status: 'available' | 'downloaded' | 'error'
-    version?: string
-}
-
-interface ElectronAPI {
-    appVersion: string
-    settingsDir: string
-    appLocation: string
-    pathSep: string
-    dialog: {
-        showOpenDialog(options: {
-            properties?: string[]
-            filters?: { name: string; extensions: string[] }[]
-        }): Promise<{ filePaths: string[]; canceled: boolean }>
-    }
-    shell: {
-        openExternal(url: string): Promise<void>
-    }
-    settings: {
-        read(filePath: string): Promise<string | null>
-        write(filePath: string, data: string): Promise<void>
-    }
-    log: {
-        read(filePath: string): Promise<string | null>
-    }
-    steam: {
-        fetchAvatar(steamId: string): Promise<string | null>
-    }
-    overlayPort: number
-    rankings: {
-        write(jsonContent: string, txtContent: string): Promise<void>
-        setFormat(format: 'html' | 'txt'): Promise<void>
-    }
-    updater: {
-        onStatus(callback: (status: UpdateStatus) => void): () => void
-        download(): Promise<void>
-        install(): Promise<void>
-    }
-}
+import type { ElectronAPI } from './preload'
 
 declare global {
     interface Window {
         electronAPI: ElectronAPI
     }
 }
-
-export {}
