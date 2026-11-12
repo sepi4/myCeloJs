@@ -14,7 +14,7 @@ import Loading from './Loading'
 import styles from './History.module.css'
 
 interface Props {
-    player: Player
+    player: Pick<Player, 'profileId'>
     /**
      * Keeps the state outside the component, so the player card can restore it
      * when moving back and forward. Without these the state is local.
