@@ -155,4 +155,18 @@ describe('refactorData', () => {
 
         expect(result[100].steamId).toBeUndefined()
     })
+
+    it('skips a stat whose stat group is missing', () => {
+        const member = makeMember(100)
+        const stats = makePersonalStats(
+            [makeStatGroup(1, [member])],
+            [makeLeaderboardStat(10, 2), makeLeaderboardStat(10, 1)]
+        )
+        const titles = makeCohTitles([{ id: 10, name: '1v1' }])
+
+        const result = refactorData(stats, titles, [100])
+
+        expect(result[100].ranks).toHaveLength(1)
+        expect(result[100].ranks[0].statgroup_id).toBe(1)
+    })
 })

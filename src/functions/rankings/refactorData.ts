@@ -12,12 +12,12 @@ export function refactorData(
         players[id] = { ranks: [] }
     }
 
-    const statGroupsById: Record<number, StatGroup> = {}
+    const statGroupsById: Partial<Record<number, StatGroup>> = {}
     for (const group of personalStats.statGroups) {
         statGroupsById[group.id] = group
     }
 
-    const leaderboardsById: Record<number, { name: string; isRanked: number }> = {}
+    const leaderboardsById: Partial<Record<number, { name: string; isRanked: number }>> = {}
     for (const lb of availableLeaderboards.leaderboards) {
         leaderboardsById[lb.id] = { name: lb.name, isRanked: lb.isranked }
     }
@@ -26,7 +26,7 @@ export function refactorData(
         const group = statGroupsById[stat.statgroup_id]
         const leaderboard = leaderboardsById[stat.leaderboard_id]
 
-        if (!leaderboard) {
+        if (!group || !leaderboard) {
             continue
         }
 
