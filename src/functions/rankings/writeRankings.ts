@@ -59,7 +59,7 @@ export function buildRankings(
         const ranking = players[i].ranking?.toString() ?? '-'
 
         const faction = players[i].faction
-        const teamSlot = Number(players[i].teamSlot)
+        const teamSlot = players[i].teamSlot
         const ratingPad =
             showElo && players[i].rating !== undefined ? `(${players[i].rating!})`.padEnd(7) : ''
 

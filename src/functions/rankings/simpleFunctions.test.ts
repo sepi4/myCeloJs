@@ -1,5 +1,5 @@
 import { Player, Rank } from '../../types'
-import { formatToNums, getTotalGames, separateTeams } from './simpleFunctions'
+import { getTotalGames, separateTeams } from './simpleFunctions'
 
 const makePlayer = (overrides: Partial<Player> = {}): Player => ({
     faction: 'soviet',
@@ -57,35 +57,6 @@ describe('simpleFunctions', () => {
             const [team0, team1] = separateTeams(players)
             expect(team0).toHaveLength(2)
             expect(team1).toHaveLength(0)
-        })
-    })
-
-    describe('formatToNums', () => {
-        it('converts string profileId to number', () => {
-            const players = [makePlayer({ profileId: '123' as unknown as number })]
-            const result = formatToNums(players)
-            expect(result[0].profileId).toBe(123)
-            expect(typeof result[0].profileId).toBe('number')
-        })
-
-        it('converts string teamSlot to number', () => {
-            const players = [makePlayer({ teamSlot: '1' as unknown as number })]
-            const result = formatToNums(players)
-            expect(result[0].teamSlot).toBe(1)
-            expect(typeof result[0].teamSlot).toBe('number')
-        })
-
-        it('leaves already-numeric values unchanged', () => {
-            const players = [makePlayer({ profileId: 123, teamSlot: 1 })]
-            const result = formatToNums(players)
-            expect(result[0].profileId).toBe(123)
-            expect(result[0].teamSlot).toBe(1)
-        })
-
-        it('mutates the original array', () => {
-            const players = [makePlayer({ profileId: '456' as unknown as number })]
-            const result = formatToNums(players)
-            expect(result).toBe(players)
         })
     })
 })

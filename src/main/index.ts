@@ -51,8 +51,9 @@ function createMainWindow() {
         center: true,
     })
 
-    if (process.env['ELECTRON_RENDERER_URL']) {
-        mainWindow.loadURL(process.env['ELECTRON_RENDERER_URL'])
+    const rendererUrl = process.env['ELECTRON_RENDERER_URL']
+    if (rendererUrl) {
+        mainWindow.loadURL(rendererUrl)
     } else {
         mainWindow.loadFile(path.join(__dirname, '../renderer/index.html'))
     }
@@ -61,12 +62,10 @@ function createMainWindow() {
 
     mainWindow.once('ready-to-show', () => {
         mainWindow!.show()
-        if (process.env['ELECTRON_RENDERER_URL']) {
+        if (isDev) {
             mainWindow!.webContents.openDevTools()
-            autoUpdater.checkForUpdates()
-        } else {
-            autoUpdater.checkForUpdates()
         }
+        autoUpdater.checkForUpdates()
     })
 
     mainWindow.webContents.on('before-input-event', (_event, input) => {

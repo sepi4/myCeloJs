@@ -22,10 +22,10 @@ function Rank(props: Props) {
     const game = useDisplayGame()
 
     const showMembers = props.open
-    function betterRankName(rn: string) {
-        const m = rn.match(/^\dv\d/)
-        rn = rn.replace(/^(\dv\d)/, '').replace('Unranked', '')
-        return m + ' ' + (getFactionCodeByLeaderboardName(game, rn) ?? rn)
+    function betterRankName(leaderboardName: string) {
+        const mode = leaderboardName.match(/^\dv\d/)?.[0] ?? ''
+        const faction = leaderboardName.slice(mode.length).replace('Unranked', '')
+        return `${mode} ${getFactionCodeByLeaderboardName(game, faction) ?? faction}`
     }
     const arrow = (
         <SvgIcon

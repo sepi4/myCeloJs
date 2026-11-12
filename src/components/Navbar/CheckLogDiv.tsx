@@ -46,10 +46,7 @@ function CheckLogDiv() {
                 className={styles.btn}
                 title={getText('tooltip_check_log')}
                 onClick={async () => {
-                    const data = await readLog(game, activeLogLocation)
-                    if (data) {
-                        setPlayersWithoutChecking(data)
-                    }
+                    setPlayersWithoutChecking(await readLog(game, activeLogLocation))
                 }}
             >
                 {getText('check_log_button')}

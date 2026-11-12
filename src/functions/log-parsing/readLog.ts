@@ -87,7 +87,6 @@ export function switchTeams(players: Player[], currentUser: string): Player[] {
 
 /* istanbul ignore next */
 export async function readLog(game: Game, fileLocation: string) {
-    fileLocation = fileLocation.replace(/\\/, '\\\\')
     try {
         const data = await window.electronAPI.log.read(fileLocation)
         if (!data) {

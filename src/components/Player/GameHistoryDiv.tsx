@@ -26,7 +26,6 @@ export default function GameHistoryDiv(props: Props) {
     const openPlayerCard = useOpenPlayerCard()
 
     if (!props.game.result) {
-        console.log('if return null')
         return null
     }
 
