@@ -37,7 +37,7 @@ export default function GameHistoryDiv(props: Props) {
         resultColor = 'var(--accent-negative)'
     }
 
-    const players = props.game.players.sort((a, b) => b.teamid - a.teamid)
+    const players = props.game.players.toSorted((a, b) => b.teamid - a.teamid)
 
     const rawName = props.game.matchType?.name ?? '???'
     const matchType = rawName.match(/^(\dv\d)/i)?.[1]?.toLowerCase() ?? rawName

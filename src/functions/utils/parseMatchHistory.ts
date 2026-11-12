@@ -56,7 +56,7 @@ export function parseHistoryData(result: HistoryResult, player: Player): ParsedH
     const { matchHistoryStats, profiles = [] } = result[0]
     const { matchTypes } = result[1]
 
-    const sortedMatches = matchHistoryStats.sort((a, b) => b.completiontime - a.completiontime)
+    const sortedMatches = matchHistoryStats.toSorted((a, b) => b.completiontime - a.completiontime)
 
     const matchObjects: MatchObject[] = []
     for (const match of sortedMatches) {
