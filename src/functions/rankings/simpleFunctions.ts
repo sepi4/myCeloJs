@@ -29,18 +29,3 @@ export function separateTeams(arr: Player[]): [Player[], Player[]] {
     }
     return teams
 }
-
-export function formatToNums(arr: Player[]): Player[] {
-    for (const player of arr) {
-        if (player.profileId != null) {
-            player.profileId = Number(player.profileId)
-        }
-        if (player.ranking != null) {
-            player.ranking = Number(player.ranking)
-        }
-        if (player.teamSlot != null) {
-            player.teamSlot = Number(player.teamSlot)
-        }
-    }
-    return arr
-}

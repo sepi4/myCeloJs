@@ -36,6 +36,8 @@ export function refactorData(
                 continue
             }
 
+            // The API returns a team's stat once for each requested member of the team.
+            // Each copy goes to the next member that does not have it yet.
             const isDuplicate = player.ranks.some(
                 (r) =>
                     r.statgroup_id === stat.statgroup_id && r.leaderboard_id === stat.leaderboard_id
@@ -55,10 +57,6 @@ export function refactorData(
     }
 
     for (const id of Object.keys(players)) {
-        if (players[id].steamId) {
-            break
-        }
-
         for (const rank of players[id].ranks) {
             if (rank.members?.length === 1) {
                 players[id].steamId = rank.members[0].name.substring(STEAM_PREFIX.length)

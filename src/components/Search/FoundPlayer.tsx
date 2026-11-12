@@ -21,15 +21,6 @@ export default function FoundPlayer(props: Props) {
         ? getTimeAgo(new Date(props.player.lastGameTime * 1000), language)
         : '-'
 
-    // alias: "Sepi"
-    // country: "de"
-    // leaderboardregion_id: 0
-    // level: 27
-    // name: "/steam/76561198002332458"
-    // personal_statgroup_id: 6874570
-    // profile_id: 4578968
-    // xp: 437372
-
     const steamId = props.player.name.startsWith('/steam/') ? props.player.name.substring(7) : null
     const avatarUrl = useSteamAvatar(steamId)
 
