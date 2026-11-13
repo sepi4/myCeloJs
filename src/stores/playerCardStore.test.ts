@@ -1,11 +1,11 @@
 import { Game } from '../constants/games'
-import { ExtraInfo } from '../types'
+import { PlayerRanks } from '../types'
 import { snapshotPlayerCard, usePlayerCardStore } from './playerCardStore'
 
-const extraInfo = (steamId: string) => ({ steamId, ranks: [] }) as unknown as ExtraInfo
+const playerRanks = (steamId: string) => ({ steamId, ranks: [] }) as unknown as PlayerRanks
 
 function openCard(name: string, game: Game = 'coh2') {
-    usePlayerCardStore.getState().setPlayerCard({ name }, extraInfo(name), game)
+    usePlayerCardStore.getState().setPlayerCard({ name }, playerRanks(name), game)
 }
 
 beforeEach(() => {
@@ -51,7 +51,7 @@ describe('playerCardStore game history', () => {
     test('switching between coh2 and coh3 resets the game history', () => {
         openCard('A')
         const store = usePlayerCardStore.getState()
-        store.setOtherGameData({ name: 'A3' }, extraInfo('A'))
+        store.setOtherGameData({ name: 'A3' }, playerRanks('A'))
         store.updateGameHistory({ open: true, data })
         store.setSelectedGame('coh3')
         expect(usePlayerCardStore.getState().gameHistory.open).toBe(false)

@@ -2,10 +2,10 @@ import MainView from './components/MainView'
 import Navbar from './components/Navbar/Navbar'
 import UpdateBar from './components/UpdateBar'
 import useAppearance from './hooks/useAppearance'
-import useExtraInfo from './hooks/useExtraInfo'
 import useLoadSettings from './hooks/useLoadSettings'
 import useLogPolling from './hooks/useLogPolling'
 import useNavbarPosition from './hooks/useNavbarPosition'
+import usePlayerRanks from './hooks/usePlayerRanks'
 import useProfileIdSync from './hooks/useProfileIdSync'
 import useRankingsFile from './hooks/useRankingsFile'
 import { useSettingsStore } from './stores/settingsStore'
@@ -27,7 +27,7 @@ function App() {
 
     useLoadSettings()
     const handleSetSettingsView = useLogPolling()
-    useExtraInfo()
+    usePlayerRanks()
     useRankingsFile()
     useProfileIdSync()
     useAppearance()

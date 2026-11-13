@@ -1,4 +1,4 @@
-import { fetchPlayerExtraInfo } from '../functions/api/getExtraInfo'
+import { fetchPlayerRanks } from '../functions/api/fetchPlayerRanks'
 import { useNavigationStore } from '../stores/navigationStore'
 import { PlayerCardData } from '../stores/playerCardStore'
 import { useDisplayGame } from './useDisplayGame'
@@ -9,9 +9,9 @@ export default function useOpenPlayerCard() {
     const openPlayerCard = useNavigationStore((state) => state.openPlayerCard)
 
     return async (player: PlayerCardData & { profileId: number }) => {
-        const extraInfo = await fetchPlayerExtraInfo(game, player.profileId)
-        if (extraInfo) {
-            openPlayerCard(player, extraInfo, game)
+        const playerRanks = await fetchPlayerRanks(game, player.profileId)
+        if (playerRanks) {
+            openPlayerCard(player, playerRanks, game)
         }
     }
 }

@@ -1,20 +1,20 @@
 import { useEffect } from 'react'
 
-import { getExtraInfo } from '../functions/api/getExtraInfo'
+import { fetchPlayerRanksByIds } from '../functions/api/fetchPlayerRanks'
 import { resolveRankings } from '../functions/rankings/resolveRankings'
-import { useExtraInfoStore } from '../stores/extraInfoStore'
 import { useGameStore } from '../stores/gameStore'
+import { usePlayerRanksStore } from '../stores/playerRanksStore'
 import { usePlayersStore } from '../stores/playersStore'
 import { Player } from '../types'
 
 /** Fetches ranks and countries for the players read from the log. */
-export default function useExtraInfo() {
-    const { extraInfo, setExtraInfo } = useExtraInfoStore()
+export default function usePlayerRanks() {
+    const { playerRanks, setPlayerRanks } = usePlayerRanksStore()
     const { game } = useGameStore()
     const { players, setPlayers } = usePlayersStore()
 
     useEffect(() => {
-        if (!players || players.length === 0 || extraInfo !== null) {
+        if (!players || players.length === 0 || playerRanks !== null) {
             return
         }
         const ids: number[] = []
@@ -26,19 +26,19 @@ export default function useExtraInfo() {
 
         // The log may be re-read while the request is in flight
         let cancelled = false
-        async function fetchExtraInfo(currentPlayers: Player[]) {
-            const fetched = await getExtraInfo(game, ids)
+        async function load(currentPlayers: Player[]) {
+            const fetched = await fetchPlayerRanksByIds(game, ids)
             if (!fetched || cancelled) {
                 return
             }
             const teams = resolveRankings(currentPlayers, fetched.personalStats, fetched.cohTitles)
-            setExtraInfo(fetched.result)
+            setPlayerRanks(fetched.result)
             setPlayers(teams.flat())
         }
-        fetchExtraInfo(players)
+        load(players)
 
         return () => {
             cancelled = true
         }
-    }, [game, players, extraInfo, setExtraInfo, setPlayers])
+    }, [game, players, playerRanks, setPlayerRanks, setPlayers])
 }

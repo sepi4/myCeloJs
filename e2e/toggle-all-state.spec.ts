@@ -42,22 +42,22 @@ test('team toggle shows closed after its players are closed one by one', async (
     for (let i = 0; i < count; i++) {
         await playerToggles.nth(i).click()
     }
-    await expect(team.getByTestId('player-extra-info')).toHaveCount(0)
+    await expect(team.getByTestId('player-details')).toHaveCount(0)
     await expect(teamToggle).toHaveAttribute('aria-expanded', 'false')
 
     // one click opens the team again
     await teamToggle.click()
-    await expect(team.getByTestId('player-extra-info')).toHaveCount(count)
+    await expect(team.getByTestId('player-details')).toHaveCount(count)
 
     await teamToggle.click()
-    await expect(team.getByTestId('player-extra-info')).toHaveCount(0)
+    await expect(team.getByTestId('player-details')).toHaveCount(0)
 })
 
 test('ranks toggle shows closed after its ranks are closed one by one', async () => {
     // open both teams and use the first player who has team ranks
     await app.teamToggles.nth(0).click()
     await app.teamToggles.nth(1).click()
-    const info = app.playerExtraInfos.filter({ has: page.getByTestId('ranks-toggle-all') }).first()
+    const info = app.playerDetails.filter({ has: page.getByTestId('ranks-toggle-all') }).first()
     const ranksToggle = info.getByTestId('ranks-toggle-all')
     const rankToggles = info.getByTestId('rank-toggle')
     await expect(ranksToggle).toBeVisible()

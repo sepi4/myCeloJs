@@ -5,7 +5,7 @@ import {
     PersonalStats,
     StatGroup,
 } from '../../types'
-import { refactorData } from './refactorData'
+import { normalizePersonalStats } from './normalizePersonalStats'
 
 // --- Helpers ---
 
@@ -59,12 +59,12 @@ const makeCohTitles = (
 
 // --- Tests ---
 
-describe('refactorData', () => {
+describe('normalizePersonalStats', () => {
     it('initializes empty ranks for each player id', () => {
         const stats = makePersonalStats([], [])
         const titles = makeCohTitles([])
 
-        const result = refactorData(stats, titles, [100, 200])
+        const result = normalizePersonalStats(stats, titles, [100, 200])
 
         expect(result[100]).toEqual({ ranks: [] })
         expect(result[200]).toEqual({ ranks: [] })
@@ -75,7 +75,7 @@ describe('refactorData', () => {
         const stats = makePersonalStats([makeStatGroup(1, [member])], [makeLeaderboardStat(10, 1)])
         const titles = makeCohTitles([{ id: 10, name: '1v1 Soviet' }])
 
-        const result = refactorData(stats, titles, [100])
+        const result = normalizePersonalStats(stats, titles, [100])
 
         expect(result[100]!.ranks).toHaveLength(1)
         expect(result[100]!.ranks[0]!.name).toBe('1v1 Soviet')
@@ -86,7 +86,7 @@ describe('refactorData', () => {
         const stats = makePersonalStats([makeStatGroup(1, [member])], [makeLeaderboardStat(10, 1)])
         const titles = makeCohTitles([{ id: 10, name: '1v1', isranked: 0 }])
 
-        const result = refactorData(stats, titles, [100])
+        const result = normalizePersonalStats(stats, titles, [100])
 
         expect(result[100]!.ranks[0]!.isModeRanked).toBe(0)
     })
@@ -96,7 +96,7 @@ describe('refactorData', () => {
         const stats = makePersonalStats([makeStatGroup(1, [member])], [makeLeaderboardStat(999, 1)])
         const titles = makeCohTitles([{ id: 10, name: '1v1' }])
 
-        const result = refactorData(stats, titles, [100])
+        const result = normalizePersonalStats(stats, titles, [100])
 
         expect(result[100]!.ranks).toHaveLength(0)
     })
@@ -109,7 +109,7 @@ describe('refactorData', () => {
         )
         const titles = makeCohTitles([{ id: 10, name: '1v1' }])
 
-        const result = refactorData(stats, titles, [100])
+        const result = normalizePersonalStats(stats, titles, [100])
 
         expect(result[100]!.ranks).toHaveLength(0)
         expect(result[999]).toBeUndefined()
@@ -124,7 +124,7 @@ describe('refactorData', () => {
         )
         const titles = makeCohTitles([{ id: 10, name: '1v1' }])
 
-        const result = refactorData(stats, titles, [100])
+        const result = normalizePersonalStats(stats, titles, [100])
 
         expect(result[100]!.ranks).toHaveLength(1)
     })
@@ -137,7 +137,7 @@ describe('refactorData', () => {
         )
         const titles = makeCohTitles([{ id: 10, name: '1v1' }])
 
-        const result = refactorData(stats, titles, [100])
+        const result = normalizePersonalStats(stats, titles, [100])
 
         expect(result[100]!.steamId).toBe('76561198000000001')
     })
@@ -151,7 +151,7 @@ describe('refactorData', () => {
         )
         const titles = makeCohTitles([{ id: 10, name: 'Team of 2' }])
 
-        const result = refactorData(stats, titles, [100, 200])
+        const result = normalizePersonalStats(stats, titles, [100, 200])
 
         expect(result[100]!.steamId).toBeUndefined()
     })
@@ -164,7 +164,7 @@ describe('refactorData', () => {
         )
         const titles = makeCohTitles([{ id: 10, name: '1v1' }])
 
-        const result = refactorData(stats, titles, [100])
+        const result = normalizePersonalStats(stats, titles, [100])
 
         expect(result[100]!.ranks).toHaveLength(1)
         expect(result[100]!.ranks[0]!.statgroup_id).toBe(1)

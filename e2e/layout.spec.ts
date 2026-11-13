@@ -34,18 +34,18 @@ test('team toggle expands and collapses all players in a team', async () => {
     // Ensure we are on the main view with players loaded
     await expect(app.teamContainers).toHaveCount(2)
 
-    // No player extra info should be visible initially
-    await expect(app.playerExtraInfos).toHaveCount(0)
+    // No player details should be visible initially
+    await expect(app.playerDetails).toHaveCount(0)
 
     // Click the first team's toggle — should expand all players in that team
     await app.teamToggles.first().click()
-    await expect(app.playerExtraInfos.first()).toBeVisible()
-    const expandedCount = await app.playerExtraInfos.count()
+    await expect(app.playerDetails.first()).toBeVisible()
+    const expandedCount = await app.playerDetails.count()
     expect(expandedCount).toBeGreaterThan(0)
 
     // Click the same toggle again — should collapse all players
     await app.teamToggles.first().click()
-    await expect(app.playerExtraInfos).toHaveCount(0)
+    await expect(app.playerDetails).toHaveCount(0)
 })
 
 test('navbar position changes navbar layout', async () => {

@@ -10,7 +10,7 @@ import { useGameStore } from '../../stores/gameStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useNavigationStore } from '../../stores/navigationStore'
 import { getCountryName } from '../../translations/countryTranslations'
-import { ExtraInfo, Player } from '../../types'
+import { PlayerRanks, Player } from '../../types'
 import { faCaretDown, faCaretRight } from '../icons'
 import PlayerName from '../PlayerName'
 import SvgIcon from '../SvgIcon'
@@ -20,7 +20,7 @@ import styles from './PlayerMainRow.module.css'
 
 interface Props {
     player: Player
-    extraInfo: ExtraInfo | null
+    playerRanks: PlayerRanks | null
     showExtra: boolean
     handleSetShowExtra: () => void
 }
@@ -34,11 +34,11 @@ function PlayerMainRow(props: Props) {
     const showElo = GAME_CONFIG[game].hasElo && elo
     const language = useLanguage()
     const isTopNavbar = useNavbarPosition() === 'top'
-    const { player, handleSetShowExtra, extraInfo, showExtra } = props
+    const { player, handleSetShowExtra, playerRanks, showExtra } = props
     let country: string | undefined
 
-    if (extraInfo && player.profileId) {
-        for (const rank of extraInfo.ranks) {
+    if (playerRanks && player.profileId) {
+        for (const rank of playerRanks.ranks) {
             if (!rank.members) {
                 continue
             }
@@ -58,9 +58,9 @@ function PlayerMainRow(props: Props) {
     const openPlayerCard = useNavigationStore((s) => s.openPlayerCard)
 
     const handlePlayerCardOn = (e: MouseEvent) => {
-        // the row itself toggles the extra info
+        // the row itself toggles the details
         e.stopPropagation()
-        openPlayerCard(player, extraInfo, game)
+        openPlayerCard(player, playerRanks, game)
     }
 
     const countryFlagLocation = countryFlags[country ? country : '']
@@ -86,7 +86,7 @@ function PlayerMainRow(props: Props) {
 
     const ranktotal =
         player.ranking !== undefined
-            ? (extraInfo?.ranks.find((r) => r.rank === player.ranking)?.ranktotal ?? 0)
+            ? (playerRanks?.ranks.find((r) => r.rank === player.ranking)?.ranktotal ?? 0)
             : 0
     const rankTitle = ranktotal > 0 ? `${player.ranking} ${getText('of')} ${ranktotal}` : ''
 
@@ -118,8 +118,8 @@ function PlayerMainRow(props: Props) {
             data-testid="player-name"
             className={isRealPlayer ? styles.name : undefined}
             title={
-                extraInfo && player.profileId
-                    ? getTotalGames(extraInfo.ranks) + ' ' + getText('games_played')
+                playerRanks && player.profileId
+                    ? getTotalGames(playerRanks.ranks) + ' ' + getText('games_played')
                     : ''
             }
             onClick={isRealPlayer ? handlePlayerCardOn : undefined}

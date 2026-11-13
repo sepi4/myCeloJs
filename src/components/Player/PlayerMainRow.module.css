@@ -19,18 +19,18 @@ div:first-of-type > .toggleable {
     padding-top: 0.5em;
 }
 
-/* an open last row reaches into the extra info's top padding instead */
+/* an open last row reaches into the details' top padding instead */
 div:last-of-type > .toggleable {
     margin-bottom: -0.5em;
     padding-bottom: 0.5em;
 }
 
-/* hovering the name opens the player card, not the extra info */
+/* hovering the name opens the player card, not the details */
 .toggleable:hover:not(:has(.name:hover)) {
     background-color: var(--bg-hover);
 }
 
-/* an open player's row stays in view while its extra info scrolls,
+/* an open player's row stays in view while its details scroll,
    until the next player's row pushes it out */
 .sticky {
     position: sticky;

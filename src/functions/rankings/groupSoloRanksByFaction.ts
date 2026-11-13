@@ -7,7 +7,10 @@ const TEAM_SIZES = 4
  * Returns the solo ranks as a flat list of four team sizes per faction,
  * and the faction codes in the same order.
  */
-export function refactorTableInfo(game: Game, ranks: Rank[]): [(Rank | undefined)[], string[]] {
+export function groupSoloRanksByFaction(
+    game: Game,
+    ranks: Rank[]
+): [(Rank | undefined)[], string[]] {
     const { factions } = GAME_CONFIG[game]
     const solo: (Rank | undefined)[] = Array(factions.length * TEAM_SIZES).fill(undefined)
 

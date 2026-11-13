@@ -1,14 +1,14 @@
 import { Game } from '../../constants/games'
-import { AvailableLeaderboard, ExtraInfo, NormalizedExtraInfo, PersonalStats } from '../../types'
-import { refactorData } from '../rankings/refactorData'
+import { AvailableLeaderboard, PlayerRanks, PlayerRanksById, PersonalStats } from '../../types'
+import { normalizePersonalStats } from '../rankings/normalizePersonalStats'
 import { personalStatByIdsUrl } from './apiUrls'
 import { fetchAvailableLeaderboards } from './fetchAvailableLeaderboards'
 
-export async function getExtraInfo(
+export async function fetchPlayerRanksByIds(
     game: Game,
     ids: number[]
 ): Promise<{
-    result: NormalizedExtraInfo
+    result: PlayerRanksById
     personalStats: PersonalStats
     cohTitles: AvailableLeaderboard
 } | null> {
@@ -22,17 +22,21 @@ export async function getExtraInfo(
             }),
             fetchAvailableLeaderboards(game),
         ])
-        return { result: refactorData(personalStats, cohTitles, ids), personalStats, cohTitles }
+        return {
+            result: normalizePersonalStats(personalStats, cohTitles, ids),
+            personalStats,
+            cohTitles,
+        }
     } catch (error) {
         console.log(error)
         return null
     }
 }
 
-export async function fetchPlayerExtraInfo(
+export async function fetchPlayerRanks(
     game: Game,
     profileId: number
-): Promise<ExtraInfo | undefined> {
-    const fetched = await getExtraInfo(game, [profileId])
+): Promise<PlayerRanks | undefined> {
+    const fetched = await fetchPlayerRanksByIds(game, [profileId])
     return fetched?.result[profileId]
 }

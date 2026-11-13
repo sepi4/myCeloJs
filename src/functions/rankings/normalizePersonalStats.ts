@@ -1,13 +1,13 @@
-import { AvailableLeaderboard, NormalizedExtraInfo, PersonalStats, StatGroup } from '../../types'
+import { AvailableLeaderboard, PlayerRanksById, PersonalStats, StatGroup } from '../../types'
 
 const STEAM_PREFIX = '/steam/'
 
-export function refactorData(
+export function normalizePersonalStats(
     personalStats: PersonalStats,
     availableLeaderboards: AvailableLeaderboard,
     ids: number[]
-): NormalizedExtraInfo {
-    const players: NormalizedExtraInfo = {}
+): PlayerRanksById {
+    const players: PlayerRanksById = {}
     for (const id of ids) {
         players[id] = { ranks: [] }
     }

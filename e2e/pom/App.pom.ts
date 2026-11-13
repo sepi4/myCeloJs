@@ -19,7 +19,7 @@ export class App {
 
     // Teams
     readonly teamToggles: Locator
-    readonly playerExtraInfos: Locator
+    readonly playerDetails: Locator
 
     // Navbar
     readonly navbar: Locator
@@ -63,7 +63,7 @@ export class App {
     readonly checkboxTotal: Locator
     readonly checkboxTable: Locator
     readonly checkboxElo: Locator
-    readonly playerRanks: Locator
+    readonly playerRankCells: Locator
     readonly playerRows: Locator
     readonly playerElos: Locator
 
@@ -123,7 +123,7 @@ export class App {
         this.playersContainer = page.getByTestId('players-container')
         this.teamContainers = page.getByTestId('team-container')
         this.teamToggles = page.getByTestId('team-toggle')
-        this.playerExtraInfos = page.getByTestId('player-extra-info')
+        this.playerDetails = page.getByTestId('player-details')
 
         this.navbar = page.getByTestId('navbar')
         this.settingsIcon = page.getByTestId('settings-icon')
@@ -181,7 +181,7 @@ export class App {
         this.checkboxTotal = page.getByTestId('checkbox-total')
         this.checkboxTable = page.getByTestId('checkbox-table')
         this.checkboxElo = page.getByTestId('checkbox-elo')
-        this.playerRanks = page.getByTestId('player-rank')
+        this.playerRankCells = page.getByTestId('player-rank')
         this.playerRows = page.getByTestId('player-row')
         this.playerElos = page.getByTestId('player-elo')
 
