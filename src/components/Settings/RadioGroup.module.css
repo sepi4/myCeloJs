@@ -8,3 +8,22 @@
     gap: 0.3em;
     margin-top: 0.3em;
 }
+
+.compactTitle {
+    font-size: var(--text-2xs);
+}
+
+.compactOptions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1em;
+    font-size: var(--text-sm);
+
+    padding: 0.2em 0;
+    margin: 0 0 0.5em 0;
+}
+
+.compactOptions > label:hover {
+    color: var(--text-primary);
+}
