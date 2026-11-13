@@ -1,5 +1,5 @@
-import setPlayersWithoutChecking from '../../functions/checkers/setPlayersWithoutChecking'
 import { readLog } from '../../functions/log-parsing/readLog'
+import applyLogPlayers from '../../functions/log-update/applyLogPlayers'
 import useActiveLogLocation from '../../hooks/useActiveLogLocation'
 import useNavbarPosition from '../../hooks/useNavbarPosition'
 import useText from '../../hooks/useText'
@@ -46,7 +46,7 @@ function CheckLogDiv() {
                 className={styles.btn}
                 title={getText('tooltip_check_log')}
                 onClick={async () => {
-                    setPlayersWithoutChecking(await readLog(game, activeLogLocation))
+                    applyLogPlayers(await readLog(game, activeLogLocation))
                 }}
             >
                 {getText('check_log_button')}

@@ -1,12 +1,12 @@
 import { Game } from '../../constants/games'
 import { readLog } from '../log-parsing/readLog'
-import checkLogData from './checkLogData'
+import applyLogIfChanged from './applyLogIfChanged'
 
-export default async function readAndCheckLog(
+export default async function readAndApplyLog(
     game: Game,
     logLocation: string,
     playAudio?: () => void
 ) {
     const data = await readLog(game, logLocation)
-    checkLogData({ data, playAudio })
+    applyLogIfChanged({ data, playAudio })
 }

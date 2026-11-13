@@ -7,7 +7,7 @@ import { usePlayersStore } from '../../stores/playersStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { useViewStore } from '../../stores/viewStore'
 import { Player } from '../../types'
-import checkLogData from './checkLogData'
+import applyLogIfChanged from './applyLogIfChanged'
 
 const player1: Player = {
     name: 'Player1',
@@ -41,11 +41,11 @@ beforeEach(() => {
     resetAllStores()
 })
 
-describe('checkLogData', () => {
+describe('applyLogIfChanged', () => {
     it('updates stores when data differs from lastLogPlayers', () => {
         const data = [player1, player2]
 
-        checkLogData({ data })
+        applyLogIfChanged({ data })
 
         expect(useLastLogPlayersStore.getState().lastLogPlayers).toEqual(data)
         expect(usePlayersStore.getState().players).toEqual(data)
@@ -56,7 +56,7 @@ describe('checkLogData', () => {
         const data = [player1]
         useLastLogPlayersStore.setState({ lastLogPlayers: [player1] })
 
-        checkLogData({ data })
+        applyLogIfChanged({ data })
 
         // players should remain null since no update happened
         expect(usePlayersStore.getState().players).toBeNull()
@@ -67,7 +67,7 @@ describe('checkLogData', () => {
         useOpenPlayerDetailsStore.setState({ openPlayers: [1] })
         usePlayerCardStore.getState().setPlayerCard({ name: 'Old' }, {} as never, 'coh2')
 
-        checkLogData({ data: [player1] })
+        applyLogIfChanged({ data: [player1] })
 
         expect(usePlayerRanksStore.getState().playerRanks).toBeNull()
         expect(useOpenPlayerDetailsStore.getState().openPlayers).toEqual([])
