@@ -1,4 +1,4 @@
-import { useFromFileStore } from '../../stores/fromFileStore'
+import { useLastLogPlayersStore } from '../../stores/lastLogPlayersStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { Player } from '../../types'
 import setPlayersWithoutChecking from './setPlayersWithoutChecking'
@@ -9,8 +9,8 @@ interface Props {
 }
 
 export default function checkLogData({ data, playAudio }: Props) {
-    const { fromFile } = useFromFileStore.getState()
-    if (JSON.stringify(fromFile) === JSON.stringify(data)) {
+    const { lastLogPlayers } = useLastLogPlayersStore.getState()
+    if (JSON.stringify(lastLogPlayers) === JSON.stringify(data)) {
         return
     }
     setPlayersWithoutChecking(data)
