@@ -1,9 +1,8 @@
 import { updateSettings } from '../../functions/settings/writeSettings'
 import useText from '../../hooks/useText'
 import { useSettingsStore } from '../../stores/settingsStore'
-import Choice from '../Choice'
 import CopyableText from './CopyableText'
-import RadioFieldset from './RadioFieldset'
+import RadioGroup from './RadioGroup'
 import SettingsLocation from './SettingsLocation'
 import SettingsSection from './SettingsSection'
 
@@ -34,38 +33,39 @@ export default function SettingsAfterLog() {
         return (
             <>
                 <SettingsSection title={getText('rankings_file_title')}>
-                    <RadioFieldset title={getText('format')}>
-                        <Choice
-                            type="radio"
-                            testId="radio-html"
-                            label="html"
-                            checked={settings.rankingsHtml === true}
-                            onChange={() => handleType('html')}
-                        />
-                        <Choice
-                            type="radio"
-                            testId="radio-txt"
-                            label="txt"
-                            checked={settings.rankingsHtml === false}
-                            onChange={() => handleType('txt')}
-                        />
-                    </RadioFieldset>
+                    <RadioGroup
+                        compact
+                        title={getText('format')}
+                        name="rankingsFormat"
+                        testIdPrefix="radio"
+                        options={['html', 'txt'] as const}
+                        selected={
+                            settings.rankingsHtml === undefined
+                                ? undefined
+                                : settings.rankingsHtml
+                                  ? 'html'
+                                  : 'txt'
+                        }
+                        getLabel={(format) => format}
+                        onChange={handleType}
+                    />
 
-                    <RadioFieldset title={getText('orientation')}>
-                        <Choice
-                            type="radio"
-                            testId="radio-horizontal"
-                            label={getText('horizontal')}
-                            checked={settings.rankingsHorizontal === true}
-                            onChange={() => handleOrientation(true)}
-                        />
-                        <Choice
-                            type="radio"
-                            label={getText('vertical')}
-                            checked={settings.rankingsHorizontal === false}
-                            onChange={() => handleOrientation(false)}
-                        />
-                    </RadioFieldset>
+                    <RadioGroup
+                        compact
+                        title={getText('orientation')}
+                        name="rankingsOrientation"
+                        testIdPrefix="radio"
+                        options={['horizontal', 'vertical'] as const}
+                        selected={
+                            settings.rankingsHorizontal === undefined
+                                ? undefined
+                                : settings.rankingsHorizontal
+                                  ? 'horizontal'
+                                  : 'vertical'
+                        }
+                        getLabel={(orientation) => getText(orientation)}
+                        onChange={(orientation) => handleOrientation(orientation === 'horizontal')}
+                    />
 
                     <CopyableText testId="copy-rankings" text={overlayUrl} />
                 </SettingsSection>

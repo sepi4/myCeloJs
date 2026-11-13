@@ -8,19 +8,29 @@ interface Props<T extends string> {
     name: string
     testIdPrefix: string
     options: readonly T[]
-    selected: T
+    selected: T | undefined
     getLabel: (option: T) => string
     onChange: (option: T) => void
     optionsClassName?: string
+    /** Small title with the options in one row. */
+    compact?: boolean
 }
 
 function RadioGroup<T extends string>(props: Props<T>) {
     return (
         <div>
-            <div className={styles.title} data-testid={props.titleTestId}>
+            <div
+                className={props.compact ? styles.compactTitle : styles.title}
+                data-testid={props.titleTestId}
+            >
                 {props.title}
             </div>
-            <div className={props.optionsClassName ?? styles.options}>
+            <div
+                className={
+                    props.optionsClassName ??
+                    (props.compact ? styles.compactOptions : styles.options)
+                }
+            >
                 {props.options.map((option) => (
                     <Choice
                         key={option}
