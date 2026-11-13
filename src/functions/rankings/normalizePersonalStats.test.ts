@@ -45,7 +45,7 @@ const makePersonalStats = (
     result: { code: 0, message: '' },
 })
 
-const makeCohTitles = (
+const makeAvailableLeaderboards = (
     leaderboards: { id: number; name: string; isranked?: number }[]
 ): AvailableLeaderboard =>
     ({
@@ -62,9 +62,9 @@ const makeCohTitles = (
 describe('normalizePersonalStats', () => {
     it('initializes empty ranks for each player id', () => {
         const stats = makePersonalStats([], [])
-        const titles = makeCohTitles([])
+        const leaderboards = makeAvailableLeaderboards([])
 
-        const result = normalizePersonalStats(stats, titles, [100, 200])
+        const result = normalizePersonalStats(stats, leaderboards, [100, 200])
 
         expect(result[100]).toEqual({ ranks: [] })
         expect(result[200]).toEqual({ ranks: [] })
@@ -73,9 +73,9 @@ describe('normalizePersonalStats', () => {
     it('assigns rank to the correct player', () => {
         const member = makeMember(100)
         const stats = makePersonalStats([makeStatGroup(1, [member])], [makeLeaderboardStat(10, 1)])
-        const titles = makeCohTitles([{ id: 10, name: '1v1 Soviet' }])
+        const leaderboards = makeAvailableLeaderboards([{ id: 10, name: '1v1 Soviet' }])
 
-        const result = normalizePersonalStats(stats, titles, [100])
+        const result = normalizePersonalStats(stats, leaderboards, [100])
 
         expect(result[100]!.ranks).toHaveLength(1)
         expect(result[100]!.ranks[0]!.name).toBe('1v1 Soviet')
@@ -84,9 +84,9 @@ describe('normalizePersonalStats', () => {
     it('sets isModeRanked from leaderboard definition', () => {
         const member = makeMember(100)
         const stats = makePersonalStats([makeStatGroup(1, [member])], [makeLeaderboardStat(10, 1)])
-        const titles = makeCohTitles([{ id: 10, name: '1v1', isranked: 0 }])
+        const leaderboards = makeAvailableLeaderboards([{ id: 10, name: '1v1', isranked: 0 }])
 
-        const result = normalizePersonalStats(stats, titles, [100])
+        const result = normalizePersonalStats(stats, leaderboards, [100])
 
         expect(result[100]!.ranks[0]!.isModeRanked).toBe(0)
     })
@@ -94,9 +94,9 @@ describe('normalizePersonalStats', () => {
     it('skips leaderboard stats with unknown leaderboard id', () => {
         const member = makeMember(100)
         const stats = makePersonalStats([makeStatGroup(1, [member])], [makeLeaderboardStat(999, 1)])
-        const titles = makeCohTitles([{ id: 10, name: '1v1' }])
+        const leaderboards = makeAvailableLeaderboards([{ id: 10, name: '1v1' }])
 
-        const result = normalizePersonalStats(stats, titles, [100])
+        const result = normalizePersonalStats(stats, leaderboards, [100])
 
         expect(result[100]!.ranks).toHaveLength(0)
     })
@@ -107,9 +107,9 @@ describe('normalizePersonalStats', () => {
             [makeStatGroup(1, [memberNotInIdsList])],
             [makeLeaderboardStat(10, 1)]
         )
-        const titles = makeCohTitles([{ id: 10, name: '1v1' }])
+        const leaderboards = makeAvailableLeaderboards([{ id: 10, name: '1v1' }])
 
-        const result = normalizePersonalStats(stats, titles, [100])
+        const result = normalizePersonalStats(stats, leaderboards, [100])
 
         expect(result[100]!.ranks).toHaveLength(0)
         expect(result[999]).toBeUndefined()
@@ -122,9 +122,9 @@ describe('normalizePersonalStats', () => {
             [group],
             [makeLeaderboardStat(10, 1), makeLeaderboardStat(10, 1)]
         )
-        const titles = makeCohTitles([{ id: 10, name: '1v1' }])
+        const leaderboards = makeAvailableLeaderboards([{ id: 10, name: '1v1' }])
 
-        const result = normalizePersonalStats(stats, titles, [100])
+        const result = normalizePersonalStats(stats, leaderboards, [100])
 
         expect(result[100]!.ranks).toHaveLength(1)
     })
@@ -135,9 +135,9 @@ describe('normalizePersonalStats', () => {
             [makeStatGroup(1, [soloMember])],
             [makeLeaderboardStat(10, 1)]
         )
-        const titles = makeCohTitles([{ id: 10, name: '1v1' }])
+        const leaderboards = makeAvailableLeaderboards([{ id: 10, name: '1v1' }])
 
-        const result = normalizePersonalStats(stats, titles, [100])
+        const result = normalizePersonalStats(stats, leaderboards, [100])
 
         expect(result[100]!.steamId).toBe('76561198000000001')
     })
@@ -149,9 +149,9 @@ describe('normalizePersonalStats', () => {
             [makeStatGroup(1, [teamMember1, teamMember2])],
             [makeLeaderboardStat(10, 1)]
         )
-        const titles = makeCohTitles([{ id: 10, name: 'Team of 2' }])
+        const leaderboards = makeAvailableLeaderboards([{ id: 10, name: 'Team of 2' }])
 
-        const result = normalizePersonalStats(stats, titles, [100, 200])
+        const result = normalizePersonalStats(stats, leaderboards, [100, 200])
 
         expect(result[100]!.steamId).toBeUndefined()
     })
@@ -162,9 +162,9 @@ describe('normalizePersonalStats', () => {
             [makeStatGroup(1, [member])],
             [makeLeaderboardStat(10, 2), makeLeaderboardStat(10, 1)]
         )
-        const titles = makeCohTitles([{ id: 10, name: '1v1' }])
+        const leaderboards = makeAvailableLeaderboards([{ id: 10, name: '1v1' }])
 
-        const result = normalizePersonalStats(stats, titles, [100])
+        const result = normalizePersonalStats(stats, leaderboards, [100])
 
         expect(result[100]!.ranks).toHaveLength(1)
         expect(result[100]!.ranks[0]!.statgroup_id).toBe(1)

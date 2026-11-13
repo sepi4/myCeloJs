@@ -10,10 +10,10 @@ export async function fetchPlayerRanksByIds(
 ): Promise<{
     result: PlayerRanksById
     personalStats: PersonalStats
-    cohTitles: AvailableLeaderboard
+    availableLeaderboards: AvailableLeaderboard
 } | null> {
     try {
-        const [personalStats, cohTitles] = await Promise.all([
+        const [personalStats, availableLeaderboards] = await Promise.all([
             fetch(personalStatByIdsUrl(game, ids)).then((r) => {
                 if (!r.ok) {
                     throw new Error(`${r.status}`)
@@ -23,9 +23,9 @@ export async function fetchPlayerRanksByIds(
             fetchAvailableLeaderboards(game),
         ])
         return {
-            result: normalizePersonalStats(personalStats, cohTitles, ids),
+            result: normalizePersonalStats(personalStats, availableLeaderboards, ids),
             personalStats,
-            cohTitles,
+            availableLeaderboards,
         }
     } catch (error) {
         console.log(error)

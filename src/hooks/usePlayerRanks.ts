@@ -31,7 +31,11 @@ export default function usePlayerRanks() {
             if (!fetched || cancelled) {
                 return
             }
-            const teams = resolveRankings(currentPlayers, fetched.personalStats, fetched.cohTitles)
+            const teams = resolveRankings(
+                currentPlayers,
+                fetched.personalStats,
+                fetched.availableLeaderboards
+            )
             setPlayerRanks(fetched.result)
             setPlayers(teams.flat())
         }
