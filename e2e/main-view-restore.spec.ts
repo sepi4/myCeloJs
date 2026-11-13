@@ -39,10 +39,10 @@ test('closing the player card keeps the main view as it was', async () => {
     const main = app.playersContainer
     await app.teamToggles.first().click()
     await expect(app.playerDetails.first()).toBeVisible()
-    await main.getByTestId('history-toggle').first().click()
-    const games = main.getByTestId('game-history-item')
+    await main.getByTestId('game-history-toggle').first().click()
+    const games = main.getByTestId('game-history-row')
     await expect(games.first()).toBeVisible()
-    await main.getByTestId('history-period-all').first().click()
+    await main.getByTestId('game-history-period-all').first().click()
     await games.last().click()
     await expect(main.getByTestId('game-details')).toBeVisible()
     expect(historyRequests).toHaveLength(1)

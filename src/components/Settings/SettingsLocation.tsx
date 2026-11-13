@@ -1,5 +1,5 @@
-import CopyDiv from './CopyDiv'
-import SettingsDiv from './SettingsDiv'
+import CopyableText from './CopyableText'
+import SettingsSection from './SettingsSection'
 
 interface Props {
     fileTypeSet: boolean
@@ -9,8 +9,8 @@ interface Props {
 export default function SettingsLocation(props: Props) {
     if (props.fileTypeSet) {
         return (
-            <SettingsDiv title={props.title}>
-                <CopyDiv
+            <SettingsSection title={props.title}>
+                <CopyableText
                     testId="copy-settings"
                     text={
                         window.electronAPI.settingsDir +
@@ -18,7 +18,7 @@ export default function SettingsLocation(props: Props) {
                         'settings.json'
                     }
                 />
-            </SettingsDiv>
+            </SettingsSection>
         )
     }
 

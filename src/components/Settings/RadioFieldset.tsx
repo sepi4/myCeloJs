@@ -1,12 +1,12 @@
 import { JSX } from 'react'
 
-import styles from './RadioButtonsDiv.module.css'
+import styles from './RadioFieldset.module.css'
 
 interface Props {
     title?: string
     children?: JSX.Element[]
 }
-function RadioButtonsDiv(props: Props) {
+function RadioFieldset(props: Props) {
     return (
         <>
             <div className={styles.title}>{props.title}</div>
@@ -16,4 +16,4 @@ function RadioButtonsDiv(props: Props) {
     )
 }
 
-export default RadioButtonsDiv
+export default RadioFieldset

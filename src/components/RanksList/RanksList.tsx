@@ -10,12 +10,12 @@ import { Rank } from '../../types'
 import { faAngleDoubleDown, faAngleDoubleRight } from '../icons'
 import SvgIcon from '../SvgIcon'
 import Cell from './Cell'
-import RanksList, { rankKey } from './RanksList'
+import RanksListRows, { rankKey } from './RanksListRows'
 import RanksListTitles from './RanksListTitles'
 
-import styles from './ListDiv.module.css'
+import styles from './RanksList.module.css'
 
-function ListDiv({ ranksArr }: { ranksArr: Rank[] }) {
+function RanksList({ ranksArr }: { ranksArr: Rank[] }) {
     const getText = useText()
     const {
         navButtons: { table: tableView, all: showAll },
@@ -42,7 +42,7 @@ function ListDiv({ ranksArr }: { ranksArr: Rank[] }) {
         ranksArr && (
             <div className={styles.container}>
                 {game === 'coh2' && hasExpandable && (
-                    // same column widths as RanksList so the button sits above the row arrows
+                    // same column widths as RanksListRows so the button sits above the row arrows
                     <div className={styles.row}>
                         <Cell />
                         <Cell width="40%" justifyContent="flex-start">
@@ -62,7 +62,7 @@ function ListDiv({ ranksArr }: { ranksArr: Rank[] }) {
                     </div>
                 )}
                 <RanksListTitles ranksArr={ranksArr} />
-                <RanksList
+                <RanksListRows
                     ranksArr={ranksArr}
                     openRanks={openRanks}
                     onToggleRank={(key) => setOpenRanks(toggleKey(openRanks, key))}
@@ -72,4 +72,4 @@ function ListDiv({ ranksArr }: { ranksArr: Rank[] }) {
     )
 }
 
-export default ListDiv
+export default RanksList

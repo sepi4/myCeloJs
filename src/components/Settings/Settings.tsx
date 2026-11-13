@@ -18,7 +18,7 @@ import IntervalInput from './IntervalInput'
 import LogLocationSetting from './LogLocationSetting'
 import RadioGroup from './RadioGroup'
 import SettingsAfterLog from './SettingsAfterLog'
-import SettingsDiv from './SettingsDiv'
+import SettingsSection from './SettingsSection'
 
 import styles from './Settings.module.css'
 
@@ -140,7 +140,7 @@ function Settings(props: Props) {
                 testId="close-button"
                 color="var(--text-on-surface)"
             />
-            <SettingsDiv>
+            <SettingsSection>
                 <div className={styles.radioGroups}>
                     <RadioGroup
                         title={getText('language')}
@@ -181,13 +181,13 @@ function Settings(props: Props) {
                         onChange={(t) => updateSettings({ theme: t })}
                     />
                 </div>
-            </SettingsDiv>
+            </SettingsSection>
 
             <LogLocationSetting game="coh2" askConfirm={askConfirm} />
 
             <LogLocationSetting game="coh3" askConfirm={askConfirm} />
 
-            <SettingsDiv title={getText('my_steam_id')}>
+            <SettingsSection title={getText('my_steam_id')}>
                 <>
                     <div className={styles.inputWrapper}>
                         <input
@@ -217,7 +217,7 @@ function Settings(props: Props) {
                     {errorDiv}
                     {savedDiv}
                 </>
-            </SettingsDiv>
+            </SettingsSection>
 
             <IntervalInput />
 
@@ -251,7 +251,7 @@ function Settings(props: Props) {
                 </div>
             </Modal>
 
-            <SettingsDiv>
+            <SettingsSection>
                 <div className={styles.resetRow}>
                     <button
                         className={styles.button}
@@ -264,7 +264,7 @@ function Settings(props: Props) {
                         {getText('reset_all_settings')}
                     </button>
                 </div>
-            </SettingsDiv>
+            </SettingsSection>
         </div>
     )
 }

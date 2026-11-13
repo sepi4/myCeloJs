@@ -1,11 +1,11 @@
 import { groupSoloRanksByFaction } from '../../functions/rankings/groupSoloRanksByFaction'
 import { useDisplayGame } from '../../hooks/useDisplayGame'
 import { Rank } from '../../types'
-import TableRanksDiv from './TableRanksDiv'
+import FactionRanks from './FactionRanks'
 
-import styles from './TableDiv.module.css'
+import styles from './RanksTable.module.css'
 
-function TableDiv({ ranks }: { ranks: Rank[] }) {
+function RanksTable({ ranks }: { ranks: Rank[] }) {
     const game = useDisplayGame()
     const [soloRanks, factionNames] = groupSoloRanksByFaction(game, ranks)
     const lastRowSize = factionNames.length % 2 === 0 ? 2 : 1
@@ -23,16 +23,16 @@ function TableDiv({ ranks }: { ranks: Rank[] }) {
                             : undefined,
                 }}
             >
-                <TableRanksDiv ranks={soloRanks} faction={faction} startIndex={startIndex} />
+                <FactionRanks ranks={soloRanks} faction={faction} startIndex={startIndex} />
             </div>
         )
     })
 
     return (
-        <div data-testid="table-view" className={styles.container}>
+        <div data-testid="ranks-table" className={styles.container}>
             {factionGrids}
         </div>
     )
 }
 
-export default TableDiv
+export default RanksTable

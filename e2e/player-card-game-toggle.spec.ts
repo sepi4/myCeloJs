@@ -58,8 +58,8 @@ test('toggles between COH2 and COH3 profile views inside player card', async () 
     await expect(app.linkCoh2).not.toBeVisible()
 
     // Table shows COH3 faction icons
-    await expect(app.tableView).toBeVisible()
-    const coh3Icons = app.tableView.locator('img')
+    await expect(app.ranksTable).toBeVisible()
+    const coh3Icons = app.ranksTable.locator('img')
     await expect(coh3Icons).toHaveCount(COH3_FACTION_TITLES.length)
     for (let i = 0; i < COH3_FACTION_TITLES.length; i++) {
         await expect(coh3Icons.nth(i)).toHaveAttribute('title', COH3_FACTION_TITLES[i])
@@ -82,7 +82,7 @@ test('toggles between COH2 and COH3 profile views inside player card', async () 
     )
 
     // Table now shows COH2 faction icons (5 factions vs 4 in COH3)
-    const coh2Icons = app.tableView.locator('img')
+    const coh2Icons = app.ranksTable.locator('img')
     await expect(coh2Icons).toHaveCount(COH2_FACTION_TITLES.length)
     for (let i = 0; i < COH2_FACTION_TITLES.length; i++) {
         await expect(coh2Icons.nth(i)).toHaveAttribute('title', COH2_FACTION_TITLES[i])
@@ -95,7 +95,7 @@ test('toggles between COH2 and COH3 profile views inside player card', async () 
     await expect(app.linkCoh3stats).toBeVisible()
     await expect(app.linkCoh2stats).not.toBeVisible()
     await expect(app.linkCoh2).not.toBeVisible()
-    await expect(app.tableView.locator('img')).toHaveCount(COH3_FACTION_TITLES.length)
+    await expect(app.ranksTable.locator('img')).toHaveCount(COH3_FACTION_TITLES.length)
 
     await app.closeButton.click()
 })

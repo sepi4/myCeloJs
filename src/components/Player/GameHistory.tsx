@@ -8,10 +8,10 @@ import { EMPTY_GAME_HISTORY } from '../../stores/playerCardStore'
 import { GameHistoryState, Player } from '../../types'
 import { faCaretDown, faCaretRight } from '../icons'
 import SvgIcon from '../SvgIcon'
-import GameHistoryDiv from './GameHistoryDiv'
+import GameHistoryRow from './GameHistoryRow'
 import Loading from './Loading'
 
-import styles from './History.module.css'
+import styles from './GameHistory.module.css'
 
 interface Props {
     player: Pick<Player, 'profileId'>
@@ -23,7 +23,7 @@ interface Props {
     updateState?: (patch: Partial<GameHistoryState>) => void
 }
 
-export default function History(props: Props) {
+export default function GameHistory(props: Props) {
     const getText = useText()
     const game = useDisplayGame()
     const { historyPeriod, setHistoryPeriod } = useHistoryPeriodStore()
@@ -91,7 +91,7 @@ export default function History(props: Props) {
         <>
             <div className={styles.header}>
                 <button
-                    data-testid="history-toggle"
+                    data-testid="game-history-toggle"
                     className={styles.toggle}
                     onClick={handleToggle}
                 >
@@ -103,7 +103,7 @@ export default function History(props: Props) {
                         {HISTORY_PERIODS.map((period) => (
                             <button
                                 key={period}
-                                data-testid={`history-period-${period}`}
+                                data-testid={`game-history-period-${period}`}
                                 aria-pressed={historyPeriod === period}
                                 className={styles.period}
                                 onClick={() => setHistoryPeriod(period)}
@@ -126,7 +126,7 @@ export default function History(props: Props) {
                     {games.map((m) => {
                         const id = m.all.id
                         return (
-                            <GameHistoryDiv
+                            <GameHistoryRow
                                 key={id}
                                 game={m}
                                 profiles={history.profiles}
@@ -138,7 +138,7 @@ export default function History(props: Props) {
                         )
                     })}
                     {games.length === 0 && (
-                        <div data-testid="history-empty" className={styles.empty}>
+                        <div data-testid="game-history-empty" className={styles.empty}>
                             {getText('no_games_in_period')}
                         </div>
                     )}

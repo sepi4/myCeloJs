@@ -45,8 +45,8 @@ test('moves back and forward between the main view and player cards', async () =
     await disabled(app.forwardButton)
     const myName = (await app.playerCardName.textContent()) ?? ''
 
-    await app.historyToggle.click()
-    await app.gameHistoryItems.first().click()
+    await app.gameHistoryToggle.click()
+    await app.gameHistoryRows.first().click()
     await expect(app.gameDetails).toBeVisible()
 
     // Opens another player's card from the game details
@@ -120,10 +120,10 @@ test('keeps the game history of a card when moving back and forward', async () =
     await app.userIcon.click()
     await expect(app.steamIdValue).toHaveText(STEAM_ID)
     const myName = (await app.playerCardName.textContent()) ?? ''
-    await app.historyToggle.click()
-    await expect(app.gameHistoryItems.first()).toBeVisible()
-    await app.historyPeriodAll.click()
-    await app.gameHistoryItems.last().click()
+    await app.gameHistoryToggle.click()
+    await expect(app.gameHistoryRows.first()).toBeVisible()
+    await app.gameHistoryPeriodAll.click()
+    await app.gameHistoryRows.last().click()
     await expect(app.gameDetails).toBeVisible()
     expect(historyRequests).toHaveLength(1)
 
@@ -151,8 +151,8 @@ test('keeps the game history of a card when moving back and forward', async () =
     await expect(app.gameHistory).not.toBeVisible()
 
     // Opening the other player's history fetches it once, going back and forward keeps it
-    await app.historyToggle.click()
-    await expect(app.gameHistoryItems.first()).toBeVisible()
+    await app.gameHistoryToggle.click()
+    await expect(app.gameHistoryRows.first()).toBeVisible()
     expect(historyRequests).toHaveLength(2)
     await app.backButton.click()
     await expect(app.steamIdValue).toHaveText(STEAM_ID)

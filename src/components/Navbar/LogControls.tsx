@@ -8,9 +8,9 @@ import { useAutoLogCheckingStore } from '../../stores/autoLogCheckingStore'
 import { useGameStore } from '../../stores/gameStore'
 import Choice from '../Choice'
 
-import styles from './CheckLogDiv.module.css'
+import styles from './LogControls.module.css'
 
-function CheckLogDiv() {
+function LogControls() {
     const getText = useText()
     const { alert, toggleAlert } = useAlertStore()
     const { autoLogChecking, toggleAutoLogChecking } = useAutoLogCheckingStore()
@@ -55,4 +55,4 @@ function CheckLogDiv() {
     )
 }
 
-export default CheckLogDiv
+export default LogControls

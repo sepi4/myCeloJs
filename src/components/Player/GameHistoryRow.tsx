@@ -11,7 +11,7 @@ import PlayerName from '../PlayerName'
 import SvgIcon from '../SvgIcon'
 import GameDetails from './GameDetails'
 
-import styles from './GameHistoryDiv.module.css'
+import styles from './GameHistoryRow.module.css'
 
 interface Props {
     game: MatchObject
@@ -20,7 +20,7 @@ interface Props {
     onToggle: () => void
 }
 
-export default function GameHistoryDiv(props: Props) {
+export default function GameHistoryRow(props: Props) {
     const displayGame = useDisplayGame()
     const language = useLanguage()
     const openPlayerCard = useOpenPlayerCard()
@@ -96,7 +96,7 @@ export default function GameHistoryDiv(props: Props) {
     return (
         <div className={props.open ? `${styles.entry} ${styles.entryOpen}` : styles.entry}>
             <div
-                data-testid="game-history-item"
+                data-testid="game-history-row"
                 className={styles.container}
                 style={{ '--result-color': resultColor } as CSSProperties}
                 onClick={props.onToggle}

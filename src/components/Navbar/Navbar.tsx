@@ -11,7 +11,7 @@ import { useSettingsViewStore } from '../../stores/settingsViewStore'
 import { useViewStore } from '../../stores/viewStore'
 import Choice from '../Choice'
 import { faArrowLeft, faArrowRight, faCogs, faSearch, faUserAlt } from '../icons'
-import CheckLogDiv from './CheckLogDiv'
+import LogControls from './LogControls'
 import NavBarIcon from './NavbarIcon'
 import NavbarRow from './NavbarRow'
 
@@ -203,7 +203,7 @@ export default function Navbar(props: Props) {
                 {sep}
 
                 <div className={isTop ? styles.columnTop : styles.column}>
-                    <CheckLogDiv />
+                    <LogControls />
                 </div>
             </div>
         </div>
