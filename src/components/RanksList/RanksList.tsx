@@ -4,7 +4,7 @@ import { filterRanks, sortRanks } from '../../functions/rankings/filterAndSortRa
 import { anyKeyOpen, toggleKey, toggleKeys } from '../../functions/utils/openKeys'
 import { useDisplayGame } from '../../hooks/useDisplayGame'
 import useText from '../../hooks/useText'
-import { useNavButtonsStore } from '../../stores/navButtonsStore'
+import { useDisplayOptionsStore } from '../../stores/displayOptionsStore'
 import { useSorterStore } from '../../stores/sorterStore'
 import { Rank } from '../../types'
 import { faAngleDoubleDown, faAngleDoubleRight } from '../icons'
@@ -18,8 +18,8 @@ import styles from './RanksList.module.css'
 function RanksList({ ranksArr }: { ranksArr: Rank[] }) {
     const getText = useText()
     const {
-        navButtons: { table: tableView, all: showAll },
-    } = useNavButtonsStore()
+        displayOptions: { tableView, showAll },
+    } = useDisplayOptionsStore()
     const game = useDisplayGame()
     const { sorter } = useSorterStore()
 

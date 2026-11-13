@@ -1,7 +1,7 @@
 import { GAME_CONFIG } from '../../constants/games'
 import { useDisplayGame } from '../../hooks/useDisplayGame'
 import useText from '../../hooks/useText'
-import { useNavButtonsStore } from '../../stores/navButtonsStore'
+import { useDisplayOptionsStore } from '../../stores/displayOptionsStore'
 import { Rank } from '../../types'
 import Cell from './Cell'
 import RankName from './RankName'
@@ -22,8 +22,8 @@ interface Props {
 function RanksListRows(props: Props) {
     const getText = useText()
     const {
-        navButtons: { elo },
-    } = useNavButtonsStore()
+        displayOptions: { showElo: elo },
+    } = useDisplayOptionsStore()
     const showElo = GAME_CONFIG[useDisplayGame()].hasElo && elo
     const { ranksArr } = props
     return (

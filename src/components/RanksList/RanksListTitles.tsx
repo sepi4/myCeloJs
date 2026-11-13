@@ -2,7 +2,7 @@ import { GAME_CONFIG } from '../../constants/games'
 import { SorterName } from '../../functions/rankings/sorters'
 import { useDisplayGame } from '../../hooks/useDisplayGame'
 import useText from '../../hooks/useText'
-import { useNavButtonsStore } from '../../stores/navButtonsStore'
+import { useDisplayOptionsStore } from '../../stores/displayOptionsStore'
 import { useSorterStore } from '../../stores/sorterStore'
 import { Rank } from '../../types'
 import ColumnTitle from './ColumnTitle'
@@ -13,8 +13,8 @@ function RanksListTitles({ ranksArr }: { ranksArr: Rank[] }) {
     const getText = useText()
     const { sorter, setSorter } = useSorterStore()
     const {
-        navButtons: { elo },
-    } = useNavButtonsStore()
+        displayOptions: { showElo: elo },
+    } = useDisplayOptionsStore()
     const showElo = GAME_CONFIG[useDisplayGame()].hasElo && elo
 
     const getSorter = (name: SorterName) => {

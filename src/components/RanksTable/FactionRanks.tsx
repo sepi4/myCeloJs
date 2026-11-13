@@ -1,6 +1,6 @@
 import { GAME_CONFIG } from '../../constants/games'
 import { useDisplayGame } from '../../hooks/useDisplayGame'
-import { useNavButtonsStore } from '../../stores/navButtonsStore'
+import { useDisplayOptionsStore } from '../../stores/displayOptionsStore'
 import { Rank } from '../../types'
 import FactionIcon from './FactionIcon'
 import TableRankRow from './TableRankRow'
@@ -13,8 +13,8 @@ interface Props {
 
 function FactionRanks({ ranks, startIndex, faction }: Props) {
     const {
-        navButtons: { elo },
-    } = useNavButtonsStore()
+        displayOptions: { showElo: elo },
+    } = useDisplayOptionsStore()
     const showElo = GAME_CONFIG[useDisplayGame()].hasElo && elo
     const rows = [0, 1, 2, 3].map((offset) => {
         const teamSize = offset + 1

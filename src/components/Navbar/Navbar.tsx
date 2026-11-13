@@ -2,8 +2,8 @@ import { GAME_CONFIG, GAMES } from '../../constants/games'
 import { fetchPlayerRanks } from '../../functions/api/fetchPlayerRanks'
 import useNavbarPosition from '../../hooks/useNavbarPosition'
 import useText from '../../hooks/useText'
+import { DisplayOptions, useDisplayOptionsStore } from '../../stores/displayOptionsStore'
 import { useGameStore } from '../../stores/gameStore'
-import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useNavigationStore } from '../../stores/navigationStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { useSettingsStore } from '../../stores/settingsStore'
@@ -38,22 +38,22 @@ export default function Navbar(props: Props) {
     }
 
     const { game, setGame } = useGameStore()
-    const { navButtons, toggleNavButton } = useNavButtonsStore()
+    const { displayOptions, toggleDisplayOption } = useDisplayOptionsStore()
     const playerCardPlayer = usePlayerCardStore((s) => s.player)
     const { view } = useViewStore()
     const { openView, openPlayerCard, goBack, goForward } = useNavigationStore()
     const canGoBack = useNavigationStore((s) => s.back.length > 0) && !settingsView
     const canGoForward = useNavigationStore((s) => s.forward.length > 0) && !settingsView
 
-    const getNavCheckBox = (text: 'all' | 'total' | 'table') => {
+    const getNavCheckBox = (text: 'all' | 'total' | 'table', option: keyof DisplayOptions) => {
         return (
             <Choice
                 key={text}
                 type="checkbox"
                 testId={`checkbox-${text}`}
                 label={getText(text)}
-                checked={navButtons[text]}
-                onChange={() => toggleNavButton(text)}
+                checked={displayOptions[option]}
+                onChange={() => toggleDisplayOption(option)}
                 title={getText(`tooltip_${text}`)}
             />
         )
@@ -65,17 +65,17 @@ export default function Navbar(props: Props) {
             type="checkbox"
             testId="checkbox-elo"
             label={getText('elo')}
-            checked={navButtons.elo}
-            onChange={() => toggleNavButton('elo')}
+            checked={displayOptions.showElo}
+            onChange={() => toggleDisplayOption('showElo')}
             title={getText('tooltip_elo')}
         />
     ) : null
 
     const buttons = (
         <>
-            {getNavCheckBox('all')}
-            {getNavCheckBox('total')}
-            {getNavCheckBox('table')}
+            {getNavCheckBox('all', 'showAll')}
+            {getNavCheckBox('total', 'showTotal')}
+            {getNavCheckBox('table', 'tableView')}
             {eloCheckBox}
         </>
     )

@@ -2,8 +2,8 @@ import { useEffect } from 'react'
 
 import { Game, GAME_CONFIG } from '../constants/games'
 import { writeRankings } from '../functions/rankings/writeRankings'
+import { useDisplayOptionsStore } from '../stores/displayOptionsStore'
 import { useGameStore } from '../stores/gameStore'
-import { useNavButtonsStore } from '../stores/navButtonsStore'
 import { usePlayersStore } from '../stores/playersStore'
 import { useSettingsStore } from '../stores/settingsStore'
 import { Player, SettingsType } from '../types'
@@ -24,8 +24,8 @@ export function writeRankingsFile(
 export default function useRankingsFile() {
     const { game } = useGameStore()
     const {
-        navButtons: { elo },
-    } = useNavButtonsStore()
+        displayOptions: { showElo: elo },
+    } = useDisplayOptionsStore()
     const { players } = usePlayersStore()
     const { settings } = useSettingsStore()
 

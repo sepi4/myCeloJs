@@ -1,5 +1,5 @@
+import { useDisplayOptionsStore } from '../../stores/displayOptionsStore'
 import { useLastLogPlayersStore } from '../../stores/lastLogPlayersStore'
-import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useOpenPlayerDetailsStore } from '../../stores/openPlayerDetailsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
 import { usePlayerRanksStore } from '../../stores/playerRanksStore'
@@ -25,8 +25,8 @@ const player2: Player = {
 
 function resetAllStores() {
     useLastLogPlayersStore.setState({ lastLogPlayers: null })
-    useNavButtonsStore.setState({
-        navButtons: { all: true, table: true, total: true, elo: false },
+    useDisplayOptionsStore.setState({
+        displayOptions: { showAll: true, tableView: true, showTotal: true, showElo: false },
     })
     useSettingsStore.setState({ settings: null })
     usePlayerRanksStore.setState({ playerRanks: null })

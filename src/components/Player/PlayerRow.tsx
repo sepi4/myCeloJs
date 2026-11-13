@@ -6,8 +6,8 @@ import { getTotalGames } from '../../functions/rankings/totalGames'
 import useLanguage from '../../hooks/useLanguage'
 import useNavbarPosition from '../../hooks/useNavbarPosition'
 import useText from '../../hooks/useText'
+import { useDisplayOptionsStore } from '../../stores/displayOptionsStore'
 import { useGameStore } from '../../stores/gameStore'
-import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useNavigationStore } from '../../stores/navigationStore'
 import { getCountryName } from '../../translations/countryTranslations'
 import { PlayerRanks, Player } from '../../types'
@@ -29,8 +29,8 @@ function PlayerRow(props: Props) {
     const getText = useText()
     const { game } = useGameStore()
     const {
-        navButtons: { elo },
-    } = useNavButtonsStore()
+        displayOptions: { showElo: elo },
+    } = useDisplayOptionsStore()
     const showElo = GAME_CONFIG[game].hasElo && elo
     const language = useLanguage()
     const isTopNavbar = useNavbarPosition() === 'top'

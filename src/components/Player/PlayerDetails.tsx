@@ -1,6 +1,6 @@
 import { getTotalWinsAndLosses } from '../../functions/rankings/totalGames'
 import useText from '../../hooks/useText'
-import { useNavButtonsStore } from '../../stores/navButtonsStore'
+import { useDisplayOptionsStore } from '../../stores/displayOptionsStore'
 import { PlayerRanks, GameHistoryState, Player } from '../../types'
 import GameHistory from '../GameHistory/GameHistory'
 import RanksList from '../RanksList/RanksList'
@@ -18,10 +18,10 @@ interface Props {
 function PlayerDetails(props: Props) {
     const getText = useText()
     let ranksArr = props.playerRanks?.ranks ?? []
-    const { navButtons } = useNavButtonsStore()
+    const { displayOptions } = useDisplayOptionsStore()
 
     const totalGames = (() => {
-        if (!navButtons.total) {
+        if (!displayOptions.showTotal) {
             return null
         }
         const { wins, losses } = getTotalWinsAndLosses(ranksArr)
@@ -36,7 +36,7 @@ function PlayerDetails(props: Props) {
 
     ranksArr = ranksArr.filter((r) => r.isModeRanked === 1)
 
-    const table = navButtons.table && ranksArr ? <RanksTable ranks={ranksArr} /> : null
+    const table = displayOptions.tableView && ranksArr ? <RanksTable ranks={ranksArr} /> : null
 
     return (
         <div data-testid="player-details" className={styles.container}>
