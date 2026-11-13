@@ -1,4 +1,4 @@
-.membersDiv {
+.member {
     margin-left: 1em;
     cursor: pointer;
     color: var(--text-muted);
@@ -9,7 +9,7 @@
     border-bottom: 0.08em solid transparent;
 }
 
-.membersDiv:hover .name {
+.member:hover .name {
     border-bottom-color: currentColor;
 }
 

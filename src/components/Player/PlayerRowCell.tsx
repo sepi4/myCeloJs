@@ -1,6 +1,6 @@
 import { JSX } from 'react'
 
-import styles from './MainRowSpan.module.css'
+import styles from './PlayerRowCell.module.css'
 
 interface Props {
     children: JSX.Element | null
@@ -8,7 +8,7 @@ interface Props {
     justifyContent?: string
 }
 
-function MainRowSpan(props: Props) {
+function PlayerRowCell(props: Props) {
     return (
         <span
             className={styles.span}
@@ -21,4 +21,4 @@ function MainRowSpan(props: Props) {
         </span>
     )
 }
-export default MainRowSpan
+export default PlayerRowCell

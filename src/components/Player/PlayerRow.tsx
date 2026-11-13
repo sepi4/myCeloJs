@@ -14,18 +14,18 @@ import { PlayerRanks, Player } from '../../types'
 import { faCaretDown, faCaretRight } from '../icons'
 import PlayerName from '../PlayerName'
 import SvgIcon from '../SvgIcon'
-import MainRowSpan from './MainRowSpan'
+import PlayerRowCell from './PlayerRowCell'
 
-import styles from './PlayerMainRow.module.css'
+import styles from './PlayerRow.module.css'
 
 interface Props {
     player: Player
     playerRanks: PlayerRanks | null
-    showExtra: boolean
-    handleSetShowExtra: () => void
+    showDetails: boolean
+    toggleDetails: () => void
 }
 
-function PlayerMainRow(props: Props) {
+function PlayerRow(props: Props) {
     const getText = useText()
     const { game } = useGameStore()
     const {
@@ -34,7 +34,7 @@ function PlayerMainRow(props: Props) {
     const showElo = GAME_CONFIG[game].hasElo && elo
     const language = useLanguage()
     const isTopNavbar = useNavbarPosition() === 'top'
-    const { player, handleSetShowExtra, playerRanks, showExtra } = props
+    const { player, toggleDetails, playerRanks, showDetails } = props
     let country: string | undefined
 
     if (playerRanks && player.profileId) {
@@ -72,8 +72,8 @@ function PlayerMainRow(props: Props) {
             {isRealPlayer && (
                 <SvgIcon
                     data-testid="player-toggle"
-                    aria-expanded={showExtra}
-                    icon={showExtra ? faCaretDown : faCaretRight}
+                    aria-expanded={showDetails}
+                    icon={showDetails ? faCaretDown : faCaretRight}
                     size="lg"
                     style={{ color: 'var(--text-primary)' }}
                 />
@@ -133,7 +133,7 @@ function PlayerMainRow(props: Props) {
     const [stuck, setStuck] = useState(false)
 
     useEffect(() => {
-        if (!showExtra) {
+        if (!showDetails) {
             setStuck(false)
             return
         }
@@ -153,13 +153,13 @@ function PlayerMainRow(props: Props) {
             window.removeEventListener('scroll', check)
             window.removeEventListener('resize', check)
         }
-    }, [showExtra])
+    }, [showDetails])
 
     const rowClass = [
         isRealPlayer && styles.toggleable,
-        showExtra && styles.sticky,
-        showExtra && isTopNavbar && styles.stickyBelowTopNavbar,
-        showExtra && stuck && styles.stuck,
+        showDetails && styles.sticky,
+        showDetails && isTopNavbar && styles.stickyBelowTopNavbar,
+        showDetails && stuck && styles.stuck,
     ]
         .filter(Boolean)
         .join(' ')
@@ -171,10 +171,10 @@ function PlayerMainRow(props: Props) {
                 ref={rowRef}
                 data-testid="player-row"
                 className={rowClass || undefined}
-                onClick={isRealPlayer ? handleSetShowExtra : undefined}
+                onClick={isRealPlayer ? toggleDetails : undefined}
             >
                 <div className={styles.content}>
-                    <MainRowSpan width="18%" justifyContent="flex-start">
+                    <PlayerRowCell width="18%" justifyContent="flex-start">
                         <>
                             {dropDownArrow}{' '}
                             <span
@@ -185,21 +185,21 @@ function PlayerMainRow(props: Props) {
                                 {rank}
                             </span>
                         </>
-                    </MainRowSpan>
+                    </PlayerRowCell>
                     {showElo && (
-                        <MainRowSpan width="14%">
+                        <PlayerRowCell width="14%">
                             <span data-testid="player-elo" style={{ fontWeight: 300 }}>
                                 {player.rating ? `(${player.rating})` : '-'}
                             </span>
-                        </MainRowSpan>
+                        </PlayerRowCell>
                     )}
-                    <MainRowSpan width="14%">{faction}</MainRowSpan>
-                    <MainRowSpan width="14%">{countryFlag}</MainRowSpan>
-                    <MainRowSpan width={showElo ? '40%' : '54%'}>{alias}</MainRowSpan>
+                    <PlayerRowCell width="14%">{faction}</PlayerRowCell>
+                    <PlayerRowCell width="14%">{countryFlag}</PlayerRowCell>
+                    <PlayerRowCell width={showElo ? '40%' : '54%'}>{alias}</PlayerRowCell>
                 </div>
             </div>
         </>
     )
 }
 
-export default PlayerMainRow
+export default PlayerRow

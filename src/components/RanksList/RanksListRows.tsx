@@ -2,19 +2,19 @@ import { GAME_CONFIG } from '../../constants/games'
 import { useDisplayGame } from '../../hooks/useDisplayGame'
 import useText from '../../hooks/useText'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
-import { Rank as RankType } from '../../types'
-import Rank from '../Player/Rank'
+import { Rank } from '../../types'
+import RankName from '../Player/RankName'
 import Cell from './Cell'
 
 import styles from './RanksList.module.css'
 
 /** Identifies a rank row: one team can have ranks in several leaderboards. */
-export function rankKey(r: RankType): string {
+export function rankKey(r: Rank): string {
     return `${r.statgroup_id}-${r.leaderboard_id}`
 }
 
 interface Props {
-    ranksArr: RankType[]
+    ranksArr: Rank[]
     openRanks: string[]
     onToggleRank: (key: string) => void
 }
@@ -47,7 +47,7 @@ function RanksListRows(props: Props) {
                             {rank}
                         </Cell>
                         <Cell width="40%" justifyContent="flex-start">
-                            <Rank
+                            <RankName
                                 rank={r}
                                 open={props.openRanks.includes(rankKey(r))}
                                 onToggle={() => props.onToggleRank(rankKey(r))}
