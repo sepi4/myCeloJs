@@ -1,36 +1,38 @@
-import { useOpenInfosStore } from '../../stores/openInfosStore'
-import { ExtraInfo, Player as PlayerType } from '../../types'
-import PlayerExtraInfo from './PlayerExtraInfo'
+import { useOpenPlayerDetailsStore } from '../../stores/openPlayerDetailsStore'
+import { PlayerRanks, Player as PlayerType } from '../../types'
+import PlayerDetails from './PlayerDetails'
 import PlayerMainRow from './PlayerMainRow'
 
 interface Props {
     player: PlayerType
-    extraInfo: ExtraInfo | null
+    playerRanks: PlayerRanks | null
 }
 
 function Player(props: Props) {
-    const { player, extraInfo } = props
+    const { player, playerRanks } = props
 
-    const { openInfos, toggleOpenInfo } = useOpenInfosStore()
+    const { openPlayers, toggleOpenPlayer } = useOpenPlayerDetailsStore()
 
     const handleSetShowExtra = () => {
         if (player.profileId) {
-            toggleOpenInfo(player.profileId)
+            toggleOpenPlayer(player.profileId)
         }
     }
 
-    const showExtra = player.profileId !== undefined && openInfos.includes(player.profileId)
+    const showExtra = player.profileId !== undefined && openPlayers.includes(player.profileId)
     return (
         <div>
             <PlayerMainRow
                 {...{
                     player,
                     handleSetShowExtra,
-                    extraInfo,
+                    playerRanks,
                     showExtra,
                 }}
             />
-            {showExtra && extraInfo && <PlayerExtraInfo player={player} extraInfo={extraInfo} />}
+            {showExtra && playerRanks && (
+                <PlayerDetails player={player} playerRanks={playerRanks} />
+            )}
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import { GAME_CONFIG, GAMES } from '../../constants/games'
-import { fetchPlayerExtraInfo } from '../../functions/api/getExtraInfo'
+import { fetchPlayerRanks } from '../../functions/api/fetchPlayerRanks'
 import useNavbarPosition from '../../hooks/useNavbarPosition'
 import useText from '../../hooks/useText'
 import { useGameStore } from '../../stores/gameStore'
@@ -91,15 +91,15 @@ export default function Navbar(props: Props) {
         if (!activeProfileId) {
             return
         }
-        const extraInfo = await fetchPlayerExtraInfo(game, activeProfileId)
-        const profile = extraInfo?.ranks.find((r) => r.members?.length === 1)?.members?.[0]
-        if (!extraInfo || !profile) {
+        const playerRanks = await fetchPlayerRanks(game, activeProfileId)
+        const profile = playerRanks?.ranks.find((r) => r.members?.length === 1)?.members?.[0]
+        if (!playerRanks || !profile) {
             return
         }
         closeSettingsView()
         openPlayerCard(
             { name: profile.alias, profileId: profile.profile_id, country: profile.country },
-            extraInfo,
+            playerRanks,
             game
         )
     }

@@ -1,6 +1,6 @@
 import { ChangeEvent, KeyboardEvent, useEffect, useRef, useState } from 'react'
 
-import { getExtraInfo } from '../../functions/api/getExtraInfo'
+import { fetchPlayerRanksByIds } from '../../functions/api/fetchPlayerRanks'
 import searchPlayers from '../../functions/api/searchPlayers'
 import { getTotalGames } from '../../functions/rankings/totalGames'
 import getLastPlayedGame from '../../functions/utils/getLastPlayedGame'
@@ -48,17 +48,17 @@ export default function Search() {
                     ids.push(p.profileId)
                 }
             }
-            const fetched = await getExtraInfo(game, ids)
+            const fetched = await fetchPlayerRanksByIds(game, ids)
             if (fetched) {
                 const result = fetched.result
                 const newPlayers = res
                     .map((p): SearchResult => {
-                        const extraInfo = result[p.profile_id]
+                        const playerRanks = result[p.profile_id]
                         return {
                             ...p,
-                            extraInfo,
-                            totalGames: extraInfo ? getTotalGames(extraInfo.ranks) : 0,
-                            lastGameTime: extraInfo && getLastPlayedGame(extraInfo),
+                            playerRanks,
+                            totalGames: playerRanks ? getTotalGames(playerRanks.ranks) : 0,
+                            lastGameTime: playerRanks && getLastPlayedGame(playerRanks),
                         }
                     })
                     .sort((a, b) => b.totalGames - a.totalGames)
@@ -75,11 +75,11 @@ export default function Search() {
             profileId: player.profile_id,
             country: player.country,
         }
-        const extraInfoData = {
-            ranks: player.extraInfo?.ranks ?? [],
+        const playerRanksData = {
+            ranks: player.playerRanks?.ranks ?? [],
             steamId: player.name.substring(7),
         }
-        openPlayerCard(playerData, extraInfoData, game)
+        openPlayerCard(playerData, playerRanksData, game)
     }
 
     const players =

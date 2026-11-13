@@ -1,15 +1,15 @@
-import { ExtraInfo } from '../types'
+import { PlayerRanks } from '../types'
 import { useNavigationStore } from './navigationStore'
 import { usePlayerCardStore } from './playerCardStore'
 import { useViewStore } from './viewStore'
 
-const extraInfo = (steamId: string) => ({ steamId, ranks: [] }) as unknown as ExtraInfo
+const playerRanks = (steamId: string) => ({ steamId, ranks: [] }) as unknown as PlayerRanks
 const nav = () => useNavigationStore.getState()
 const view = () => useViewStore.getState().view
 const cardName = () => usePlayerCardStore.getState().player?.name
 
 function openCard(name: string, profileId?: number) {
-    nav().openPlayerCard({ name, profileId }, extraInfo(name), 'coh2')
+    nav().openPlayerCard({ name, profileId }, playerRanks(name), 'coh2')
 }
 
 beforeEach(() => {
@@ -142,7 +142,7 @@ describe('navigationStore', () => {
     test('back restores the other-game state of the previous card', () => {
         openCard('A')
         const store = usePlayerCardStore.getState()
-        store.setOtherGameData({ name: 'A3' }, extraInfo('A'))
+        store.setOtherGameData({ name: 'A3' }, playerRanks('A'))
         store.setSelectedGame('coh3')
         openCard('B')
 

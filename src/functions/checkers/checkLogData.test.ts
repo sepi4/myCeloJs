@@ -1,8 +1,8 @@
-import { useExtraInfoStore } from '../../stores/extraInfoStore'
 import { useFromFileStore } from '../../stores/fromFileStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
-import { useOpenInfosStore } from '../../stores/openInfosStore'
+import { useOpenPlayerDetailsStore } from '../../stores/openPlayerDetailsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
+import { usePlayerRanksStore } from '../../stores/playerRanksStore'
 import { usePlayersStore } from '../../stores/playersStore'
 import { useSettingsStore } from '../../stores/settingsStore'
 import { useViewStore } from '../../stores/viewStore'
@@ -29,8 +29,8 @@ function resetAllStores() {
         navButtons: { all: true, table: true, total: true, elo: false },
     })
     useSettingsStore.setState({ settings: null })
-    useExtraInfoStore.setState({ extraInfo: null })
-    useOpenInfosStore.setState({ openInfos: [] })
+    usePlayerRanksStore.setState({ playerRanks: null })
+    useOpenPlayerDetailsStore.setState({ openPlayers: [] })
     usePlayerCardStore.getState().resetPlayerCard()
     usePlayersStore.setState({ players: null })
     useViewStore.setState({ view: 'main' })
@@ -62,15 +62,15 @@ describe('checkLogData', () => {
         expect(usePlayersStore.getState().players).toBeNull()
     })
 
-    it('clears extraInfo, openInfos, and playerCard on update', () => {
-        useExtraInfoStore.setState({ extraInfo: { '1': {} as never } })
-        useOpenInfosStore.setState({ openInfos: [1] })
+    it('clears playerRanks, openPlayers, and playerCard on update', () => {
+        usePlayerRanksStore.setState({ playerRanks: { '1': {} as never } })
+        useOpenPlayerDetailsStore.setState({ openPlayers: [1] })
         usePlayerCardStore.getState().setPlayerCard({ name: 'Old' }, {} as never, 'coh2')
 
         checkLogData({ data: [player1] })
 
-        expect(useExtraInfoStore.getState().extraInfo).toBeNull()
-        expect(useOpenInfosStore.getState().openInfos).toEqual([])
+        expect(usePlayerRanksStore.getState().playerRanks).toBeNull()
+        expect(useOpenPlayerDetailsStore.getState().openPlayers).toEqual([])
         expect(usePlayerCardStore.getState().player).toBeNull()
     })
 })

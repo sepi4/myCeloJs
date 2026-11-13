@@ -38,7 +38,7 @@ test.afterAll(async () => {
 
 test('a name with only invisible characters shows a placeholder in the row and the player card', async () => {
     const name = app.playerRows.getByTestId('player-name').filter({ hasText: '(no name)' })
-    // the card shows full details only when the extra info has loaded before the click
+    // the card shows full details only when the ranks have loaded before the click
     await expect(name).toHaveAttribute('title', /games played/)
     await name.click()
     await expect(app.playerCardName).toHaveText('(no name)')

@@ -52,7 +52,7 @@ test('steam id validation and player card', async () => {
     // User icon should appear on the navbar now that steamId is set
     await expect(app.userIcon).toBeVisible()
 
-    // Click it — triggers getExtraInfo API call, then opens player card
+    // Click it — triggers fetchPlayerRanksByIds API call, then opens player card
     await app.userIcon.click()
     await expect(app.steamIdValue).toHaveText(STEAM_ID)
 

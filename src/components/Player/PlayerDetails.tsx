@@ -1,23 +1,23 @@
 import { getTotalWinsAndLosses } from '../../functions/rankings/totalGames'
 import useText from '../../hooks/useText'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
-import { ExtraInfo, GameHistoryState, Player } from '../../types'
+import { PlayerRanks, GameHistoryState, Player } from '../../types'
 import ListDiv from '../ListDiv/ListDiv'
 import TableDiv from '../Table/TableDiv'
 import History from './History'
 
-import styles from './PlayerExtraInfo.module.css'
+import styles from './PlayerDetails.module.css'
 
 interface Props {
     player: Pick<Player, 'profileId'>
-    extraInfo: ExtraInfo | null
+    playerRanks: PlayerRanks | null
     gameHistory?: GameHistoryState
     updateGameHistory?: (patch: Partial<GameHistoryState>) => void
 }
 
-function PlayerExtraInfo(props: Props) {
+function PlayerDetails(props: Props) {
     const getText = useText()
-    let ranksArr = props.extraInfo?.ranks ?? []
+    let ranksArr = props.playerRanks?.ranks ?? []
     const { navButtons } = useNavButtonsStore()
 
     const totalGames = (() => {
@@ -36,10 +36,10 @@ function PlayerExtraInfo(props: Props) {
 
     ranksArr = ranksArr.filter((r) => r.isModeRanked === 1)
 
-    const table = navButtons.table && ranksArr ? <TableDiv playerRanks={ranksArr} /> : null
+    const table = navButtons.table && ranksArr ? <TableDiv ranks={ranksArr} /> : null
 
     return (
-        <div data-testid="player-extra-info" className={styles.container}>
+        <div data-testid="player-details" className={styles.container}>
             {totalGames}
             {table}
             <ListDiv ranksArr={ranksArr} />
@@ -52,4 +52,4 @@ function PlayerExtraInfo(props: Props) {
     )
 }
 
-export default PlayerExtraInfo
+export default PlayerDetails

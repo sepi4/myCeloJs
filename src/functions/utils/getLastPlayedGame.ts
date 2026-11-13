@@ -1,6 +1,6 @@
-import { ExtraInfo } from '../../types'
+import { PlayerRanks } from '../../types'
 
-export default function getLastPlayedGame(playerData: ExtraInfo) {
+export default function getLastPlayedGame(playerData: PlayerRanks) {
     let last
     for (const rank of playerData.ranks) {
         if (rank.lastmatchdate) {

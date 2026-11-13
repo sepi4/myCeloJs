@@ -5,7 +5,7 @@ import useNameScrolledAway from '../../hooks/useNameScrolledAway'
 import useOtherGameLookup from '../../hooks/useOtherGameLookup'
 import useSteamAvatar from '../../hooks/useSteamAvatar'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
-import PlayerExtraInfo from '../Player/PlayerExtraInfo'
+import PlayerDetails from '../Player/PlayerDetails'
 import PlayerCardGameRadio from './PlayerCardGameRadio'
 import PlayerCardLinks from './PlayerCardLinks'
 import PlayerCardName from './PlayerCardName'
@@ -14,7 +14,7 @@ import PlayerCardStickyName from './PlayerCardStickyName'
 import styles from './PlayerCard.module.css'
 
 export default function PlayerCard() {
-    const { player, extraInfo, selectedGame, gameHistory, updateGameHistory, navigation } =
+    const { player, playerRanks, selectedGame, gameHistory, updateGameHistory, navigation } =
         usePlayerCardStore()
 
     // Each newly shown card starts where it was left, or at the top if it is new.
@@ -24,7 +24,7 @@ export default function PlayerCard() {
         // oxlint-disable-next-line react/exhaustive-effect-dependencies
     }, [navigation])
 
-    const avatarUrl = useSteamAvatar(extraInfo?.steamId)
+    const avatarUrl = useSteamAvatar(playerRanks?.steamId)
     const { nameRef, stickyRef, nameScrolledAway } = useNameScrolledAway()
     useOtherGameLookup()
 
@@ -32,11 +32,11 @@ export default function PlayerCard() {
         return null
     }
 
-    if (!extraInfo) {
+    if (!playerRanks) {
         return <PlayerCardName player={player} />
     }
 
-    const steamId = extraInfo.steamId
+    const steamId = playerRanks.steamId
 
     return (
         <PlayerCardContext.Provider value={true}>
@@ -77,9 +77,9 @@ export default function PlayerCard() {
             </div>
             <PlayerCardGameRadio />
             <PlayerCardLinks game={selectedGame} steamId={steamId} profileId={player.profileId} />
-            <PlayerExtraInfo
+            <PlayerDetails
                 player={player}
-                extraInfo={extraInfo}
+                playerRanks={playerRanks}
                 gameHistory={gameHistory}
                 updateGameHistory={updateGameHistory}
             />

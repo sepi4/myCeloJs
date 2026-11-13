@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 
 import { Game } from '../constants/games'
-import { ExtraInfo, GameHistoryState } from '../types'
+import { PlayerRanks, GameHistoryState } from '../types'
 
 export const EMPTY_GAME_HISTORY: GameHistoryState = { data: null, open: false, openGame: null }
 
@@ -13,11 +13,11 @@ export interface PlayerCardData {
 
 export interface PlayerCardState {
     player: PlayerCardData | null
-    extraInfo: ExtraInfo | null
+    playerRanks: PlayerRanks | null
     initialGame: Game
     selectedGame: Game
     otherPlayer: PlayerCardData | null
-    otherExtraInfo: ExtraInfo | null
+    otherPlayerRanks: PlayerRanks | null
     otherGameLoading: boolean
     otherGameChecked: boolean
     gameHistory: GameHistoryState
@@ -28,8 +28,8 @@ export interface PlayerCardState {
 interface PlayerCardStore extends PlayerCardState {
     /** Grows each time another card is shown, so the page knows when to restore `scrollY`. */
     navigation: number
-    setPlayerCard: (player: PlayerCardData, extraInfo: ExtraInfo | null, game: Game) => void
-    setOtherGameData: (player: PlayerCardData | null, extraInfo: ExtraInfo | null) => void
+    setPlayerCard: (player: PlayerCardData, playerRanks: PlayerRanks | null, game: Game) => void
+    setOtherGameData: (player: PlayerCardData | null, playerRanks: PlayerRanks | null) => void
     setOtherGameLoading: (loading: boolean) => void
     setSelectedGame: (game: Game) => void
     updateGameHistory: (patch: Partial<GameHistoryState>) => void
@@ -41,11 +41,11 @@ interface PlayerCardStore extends PlayerCardState {
 const initialState: PlayerCardState & { navigation: number } = {
     navigation: 0,
     player: null,
-    extraInfo: null,
+    playerRanks: null,
     initialGame: 'coh2',
     selectedGame: 'coh2',
     otherPlayer: null,
-    otherExtraInfo: null,
+    otherPlayerRanks: null,
     otherGameLoading: false,
     otherGameChecked: false,
     gameHistory: EMPTY_GAME_HISTORY,
@@ -60,11 +60,11 @@ export function snapshotPlayerCard(): PlayerCardState {
     const state = usePlayerCardStore.getState()
     return {
         player: state.player,
-        extraInfo: state.extraInfo,
+        playerRanks: state.playerRanks,
         initialGame: state.initialGame,
         selectedGame: state.selectedGame,
         otherPlayer: state.otherPlayer,
-        otherExtraInfo: state.otherExtraInfo,
+        otherPlayerRanks: state.otherPlayerRanks,
         otherGameLoading: state.otherGameLoading,
         otherGameChecked: state.otherGameChecked,
         gameHistory: state.gameHistory,
@@ -74,24 +74,24 @@ export function snapshotPlayerCard(): PlayerCardState {
 
 export const usePlayerCardStore = create<PlayerCardStore>((set) => ({
     ...initialState,
-    setPlayerCard: (player, extraInfo, game) =>
+    setPlayerCard: (player, playerRanks, game) =>
         set((state) => ({
             navigation: state.navigation + 1,
             player,
-            extraInfo,
+            playerRanks,
             initialGame: game,
             selectedGame: game,
             otherPlayer: null,
-            otherExtraInfo: null,
+            otherPlayerRanks: null,
             otherGameLoading: false,
             otherGameChecked: false,
             gameHistory: EMPTY_GAME_HISTORY,
             scrollY: 0,
         })),
-    setOtherGameData: (otherPlayer, otherExtraInfo) =>
+    setOtherGameData: (otherPlayer, otherPlayerRanks) =>
         set({
             otherPlayer,
-            otherExtraInfo,
+            otherPlayerRanks,
             otherGameLoading: false,
             otherGameChecked: true,
         }),
@@ -103,9 +103,9 @@ export const usePlayerCardStore = create<PlayerCardStore>((set) => ({
             }
             return {
                 player: state.otherPlayer,
-                extraInfo: state.otherExtraInfo,
+                playerRanks: state.otherPlayerRanks,
                 otherPlayer: state.player,
-                otherExtraInfo: state.extraInfo,
+                otherPlayerRanks: state.playerRanks,
                 selectedGame: game,
                 // The history belongs to the profile of one game, so start over.
                 gameHistory: EMPTY_GAME_HISTORY,

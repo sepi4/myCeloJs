@@ -27,20 +27,20 @@ test.afterAll(async () => {
     await closeApp(electronApp, tempUserDataDir)
 })
 
-test('row click toggles the extra info, name click opens the player card', async () => {
+test('row click toggles the details, name click opens the player card', async () => {
     const row = app.playerRows.filter({ has: page.getByTestId('player-toggle') }).first()
-    const extraInfo = row.locator('..').getByTestId('player-extra-info')
-    await expect(extraInfo).toHaveCount(0)
+    const details = row.locator('..').getByTestId('player-details')
+    await expect(details).toHaveCount(0)
 
     // anywhere on the row outside the name, not only the arrow
     await row.getByTestId('player-rank').click()
-    await expect(extraInfo).toBeVisible()
+    await expect(details).toBeVisible()
     await row.getByTestId('player-rank').click()
-    await expect(extraInfo).toHaveCount(0)
+    await expect(details).toHaveCount(0)
 
     await row.getByTestId('player-name').click()
     await expect(app.playerCardName).toBeVisible()
     await page.keyboard.press('Escape')
     await expect(app.playersContainer).toBeVisible()
-    await expect(extraInfo).toHaveCount(0)
+    await expect(details).toHaveCount(0)
 })

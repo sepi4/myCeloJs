@@ -41,7 +41,7 @@ export type Member = {
 export type SearchResult = Member & {
     totalGames: number
     lastGameTime?: number
-    extraInfo?: ExtraInfo
+    playerRanks?: PlayerRanks
 }
 
 export type CountryFlagsLocation = {
@@ -235,13 +235,13 @@ export type Rank = LeaderboardStat & {
     members?: Member[]
 }
 
-export type ExtraInfo = {
+export type PlayerRanks = {
     ranks: Rank[]
     steamId?: string
 }
 
-export type NormalizedExtraInfo = {
-    [key: string]: ExtraInfo
+export type PlayerRanksById = {
+    [key: string]: PlayerRanks
 }
 
 /** Game history list of one player: fetched games, whether the list is open and which game is open. */

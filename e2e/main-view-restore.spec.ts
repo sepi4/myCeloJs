@@ -38,7 +38,7 @@ test('closing the player card keeps the main view as it was', async () => {
     // Open the first team, a player's game history and its last game
     const main = app.playersContainer
     await app.teamToggles.first().click()
-    await expect(app.playerExtraInfos.first()).toBeVisible()
+    await expect(app.playerDetails.first()).toBeVisible()
     await main.getByTestId('history-toggle').first().click()
     const games = main.getByTestId('game-history-item')
     await expect(games.first()).toBeVisible()
@@ -59,7 +59,7 @@ test('closing the player card keeps the main view as it was', async () => {
     await page.keyboard.press('Escape')
     await expect(app.steamIdValue).not.toBeVisible()
     await expect(main).toBeVisible()
-    await expect(app.playerExtraInfos.first()).toBeVisible()
+    await expect(app.playerDetails.first()).toBeVisible()
     await expect(main.getByTestId('game-details')).toBeVisible()
     await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(scrollBefore)
     expect(historyRequests).toHaveLength(1)
