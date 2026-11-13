@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 import audioLocation from '../assets/audio/bell.mp3'
-import readAndCheckLog from '../functions/checkers/readAndCheckLog'
+import readAndApplyLog from '../functions/log-update/readAndApplyLog'
 import { useAlertStore } from '../stores/alertStore'
 import { useAutoLogCheckingStore } from '../stores/autoLogCheckingStore'
 import { useGameStore } from '../stores/gameStore'
@@ -24,7 +24,7 @@ export default function useLogPolling() {
             return
         }
         const intervalId = setInterval(
-            () => readAndCheckLog(game, activeLogLocation, alert ? playAudio : undefined),
+            () => readAndApplyLog(game, activeLogLocation, alert ? playAudio : undefined),
             logCheckInterval * 1000
         )
 
@@ -34,13 +34,13 @@ export default function useLogPolling() {
     // Re-read log when game toggle or log location changes
     useEffect(() => {
         if (activeLogLocation) {
-            readAndCheckLog(game, activeLogLocation)
+            readAndApplyLog(game, activeLogLocation)
         }
     }, [game, activeLogLocation])
 
     return () => {
         if (autoLogChecking && activeLogLocation) {
-            readAndCheckLog(game, activeLogLocation)
+            readAndApplyLog(game, activeLogLocation)
         }
     }
 }
