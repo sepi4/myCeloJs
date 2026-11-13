@@ -1,8 +1,8 @@
 import { Game } from '../../constants/games'
 import { Player } from '../../types'
-import { parseHistoryData } from '../utils/parseMatchHistory'
 import { recentMatchHistoryUrl } from './apiUrls'
 import { fetchAvailableLeaderboards } from './fetchAvailableLeaderboards'
+import { parseHistoryData } from './parseMatchHistory'
 
 export async function fetchMatchHistory(game: Game, player: Pick<Player, 'profileId'>) {
     const [matchHistory, leaderboards] = await Promise.all([

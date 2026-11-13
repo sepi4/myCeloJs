@@ -1,4 +1,4 @@
-import getText from '../functions/utils/getText'
+import getText from '../translations/getText'
 import { TextKey } from '../translations/translation'
 import useLanguage from './useLanguage'
 
