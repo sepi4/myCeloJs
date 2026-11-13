@@ -2,25 +2,25 @@ import { countryFlags } from '../../constants/countryFlags'
 import useLanguage from '../../hooks/useLanguage'
 import useOpenPlayerCard from '../../hooks/useOpenPlayerCard'
 import { getCountryName } from '../../translations/countryTranslations'
-import { Member as MemberType } from '../../types'
+import { Member } from '../../types'
 import PlayerName from '../PlayerName'
 
-import styles from './Members.module.css'
+import styles from './RankMembers.module.css'
 
 interface Props {
-    member: MemberType
+    member: Member
 }
 
-export default function Member(props: Props) {
+export default function RankMember(props: Props) {
     const openPlayerCard = useOpenPlayerCard()
     const language = useLanguage()
 
-    const handlePlayerCardOn = (p: MemberType) =>
+    const handlePlayerCardOn = (p: Member) =>
         openPlayerCard({ country: p.country, name: p.alias, profileId: p.profile_id })
 
     return (
         <div
-            className={styles.membersDiv}
+            className={styles.member}
             key={props.member.name}
             onClick={() => handlePlayerCardOn(props.member)}
         >

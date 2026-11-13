@@ -1,6 +1,6 @@
 .container {
     color: var(--text-primary);
-    /* the open row's hover covers the top 0.5em (PlayerMainRow.module.css) */
+    /* the open row's hover covers the top 0.5em (PlayerRow.module.css) */
     padding: 1em 0 0.5em;
 }
 

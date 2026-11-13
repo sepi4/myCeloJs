@@ -5,18 +5,18 @@ import star from '../../assets/img/star.png'
 import { getFactionCodeByLeaderboardName } from '../../constants/games'
 import { useDisplayGame } from '../../hooks/useDisplayGame'
 import useText from '../../hooks/useText'
-import { Rank as RankType } from '../../types'
+import { Rank } from '../../types'
 import { faCaretDown, faCaretRight } from '../icons'
 import SvgIcon from '../SvgIcon'
-import Members from './Members'
+import RankMembers from './RankMembers'
 
 interface Props {
-    rank: RankType
+    rank: Rank
     open: boolean
     onToggle: () => void
 }
 
-function Rank(props: Props) {
+function RankName(props: Props) {
     const { rank } = props
     const getText = useText()
     const game = useDisplayGame()
@@ -69,7 +69,7 @@ function Rank(props: Props) {
                         {arrow}
                         {rankName}
                     </span>
-                    {showMembers && <Members members={rank.members} />}
+                    {showMembers && <RankMembers members={rank.members} />}
                 </div>
             ) : (
                 <div>{betterRankName(rank.name)}</div>
@@ -78,4 +78,4 @@ function Rank(props: Props) {
     )
 }
 
-export default Rank
+export default RankName

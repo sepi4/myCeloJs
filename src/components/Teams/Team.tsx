@@ -2,15 +2,15 @@ import { anyKeyOpen } from '../../functions/utils/openKeys'
 import useText from '../../hooks/useText'
 import { useOpenPlayerDetailsStore } from '../../stores/openPlayerDetailsStore'
 import { usePlayerRanksStore } from '../../stores/playerRanksStore'
-import { Player as PlayerType } from '../../types'
+import { Player } from '../../types'
 import { faAngleDoubleDown, faAngleDoubleRight } from '../icons'
-import Player from '../Player/Player'
+import PlayerEntry from '../Player/PlayerEntry'
 import SvgIcon from '../SvgIcon'
 
 import css from './Team.module.css'
 
 interface Props {
-    players: PlayerType[]
+    players: Player[]
     teamIndex: number
 }
 
@@ -49,7 +49,7 @@ function Team(props: Props) {
                 </button>
             )}
             {props.players.map((p, i) => (
-                <Player
+                <PlayerEntry
                     key={p.profileId ?? `${props.teamIndex}-${i}`}
                     player={p}
                     playerRanks={(p.profileId && playerRanks?.[p.profileId]) || null}
