@@ -11,7 +11,7 @@ import {
     renderRankingsBody,
     renderRankingsPage,
     renderRankingsTxtBody,
-} from './localhost/renderRankingsHtml'
+} from './overlayServer/renderRankingsHtml'
 import { fetchSteamAvatar } from './steamAvatar'
 
 const isDev = !!process.env['ELECTRON_RENDERER_URL']
