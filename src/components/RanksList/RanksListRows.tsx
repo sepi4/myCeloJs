@@ -6,7 +6,7 @@ import { Rank as RankType } from '../../types'
 import Rank from '../Player/Rank'
 import Cell from './Cell'
 
-import styles from './ListDiv.module.css'
+import styles from './RanksList.module.css'
 
 /** Identifies a rank row: one team can have ranks in several leaderboards. */
 export function rankKey(r: RankType): string {
@@ -19,7 +19,7 @@ interface Props {
     onToggleRank: (key: string) => void
 }
 
-function RanksList(props: Props) {
+function RanksListRows(props: Props) {
     const getText = useText()
     const {
         navButtons: { elo },
@@ -68,4 +68,4 @@ function RanksList(props: Props) {
     )
 }
 
-export default RanksList
+export default RanksListRows

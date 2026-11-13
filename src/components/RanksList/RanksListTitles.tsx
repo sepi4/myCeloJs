@@ -7,7 +7,7 @@ import { useSorterStore } from '../../stores/sorterStore'
 import { Rank } from '../../types'
 import ColumnTitle from './ColumnTitle'
 
-import styles from './ListDiv.module.css'
+import styles from './RanksList.module.css'
 
 function RanksListTitles({ ranksArr }: { ranksArr: Rank[] }) {
     const getText = useText()

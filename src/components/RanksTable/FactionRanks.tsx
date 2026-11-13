@@ -11,7 +11,7 @@ interface Props {
     faction: string
 }
 
-function TableRanksDiv({ ranks, startIndex, faction }: Props) {
+function FactionRanks({ ranks, startIndex, faction }: Props) {
     const {
         navButtons: { elo },
     } = useNavButtonsStore()
@@ -61,4 +61,4 @@ function TableRanksDiv({ ranks, startIndex, faction }: Props) {
     )
 }
 
-export default TableRanksDiv
+export default FactionRanks

@@ -2,10 +2,10 @@ import { updateSettings } from '../../functions/settings/writeSettings'
 import useText from '../../hooks/useText'
 import { useSettingsStore } from '../../stores/settingsStore'
 import Choice from '../Choice'
-import CopyDiv from './CopyDiv'
-import RadioButtonsDiv from './RadioButtonsDiv'
-import SettingsDiv from './SettingsDiv'
+import CopyableText from './CopyableText'
+import RadioFieldset from './RadioFieldset'
 import SettingsLocation from './SettingsLocation'
+import SettingsSection from './SettingsSection'
 
 export default function SettingsAfterLog() {
     const getText = useText()
@@ -33,8 +33,8 @@ export default function SettingsAfterLog() {
     if (settings && (settings.logLocationCoh2 || settings.logLocationCoh3)) {
         return (
             <>
-                <SettingsDiv title={getText('rankings_file_title')}>
-                    <RadioButtonsDiv title={getText('format')}>
+                <SettingsSection title={getText('rankings_file_title')}>
+                    <RadioFieldset title={getText('format')}>
                         <Choice
                             type="radio"
                             testId="radio-html"
@@ -49,9 +49,9 @@ export default function SettingsAfterLog() {
                             checked={settings.rankingsHtml === false}
                             onChange={() => handleType('txt')}
                         />
-                    </RadioButtonsDiv>
+                    </RadioFieldset>
 
-                    <RadioButtonsDiv title={getText('orientation')}>
+                    <RadioFieldset title={getText('orientation')}>
                         <Choice
                             type="radio"
                             testId="radio-horizontal"
@@ -65,10 +65,10 @@ export default function SettingsAfterLog() {
                             checked={settings.rankingsHorizontal === false}
                             onChange={() => handleOrientation(false)}
                         />
-                    </RadioButtonsDiv>
+                    </RadioFieldset>
 
-                    <CopyDiv testId="copy-rankings" text={overlayUrl} />
-                </SettingsDiv>
+                    <CopyableText testId="copy-rankings" text={overlayUrl} />
+                </SettingsSection>
 
                 <SettingsLocation
                     fileTypeSet={overlayConfigured}
@@ -80,8 +80,8 @@ export default function SettingsAfterLog() {
 
     // if log-file not set
     return (
-        <SettingsDiv title={getText('settings_file_location_title')}>
+        <SettingsSection title={getText('settings_file_location_title')}>
             <p style={{ color: 'var(--text-danger)' }}>{getText('log_location_first')}</p>
-        </SettingsDiv>
+        </SettingsSection>
     )
 }

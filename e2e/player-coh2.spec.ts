@@ -99,9 +99,9 @@ test('navbar checkboxes - table, total and all ', async () => {
 
     // Table toggle
     await app.checkboxTable.click()
-    await expect(app.tableView).toBeVisible()
+    await expect(app.ranksTable).toBeVisible()
     await app.checkboxTable.click()
-    await expect(app.tableView).not.toBeVisible()
+    await expect(app.ranksTable).not.toBeVisible()
 
     // Total toggle
     await app.checkboxTotal.click()

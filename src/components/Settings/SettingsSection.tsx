@@ -1,6 +1,6 @@
 import { JSX } from 'react'
 
-import styles from './SettingsDiv.module.css'
+import styles from './SettingsSection.module.css'
 
 interface Props {
     title?: string
@@ -8,17 +8,17 @@ interface Props {
     testId?: string
 }
 
-function SettingsDiv(props: Props) {
+function SettingsSection(props: Props) {
     return (
-        <div className={styles.settingsDiv}>
+        <div className={styles.section}>
             {props.title && (
                 <div data-testid={props.testId} className={styles.title}>
                     {props.title}
                 </div>
             )}
-            <div className={styles.contentDiv}>{props.children}</div>
+            <div className={styles.content}>{props.children}</div>
         </div>
     )
 }
 
-export default SettingsDiv
+export default SettingsSection

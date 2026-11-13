@@ -99,11 +99,11 @@ export class App {
 
     // Game history
     readonly gameHistory: Locator
-    readonly gameHistoryItems: Locator
+    readonly gameHistoryRows: Locator
     readonly gameHistoryPlayers: Locator
-    readonly historyToggle: Locator
-    readonly historyPeriodWeek: Locator
-    readonly historyPeriodAll: Locator
+    readonly gameHistoryToggle: Locator
+    readonly gameHistoryPeriodWeek: Locator
+    readonly gameHistoryPeriodAll: Locator
     readonly gameDetails: Locator
     readonly gameDetailsPlayers: Locator
 
@@ -112,7 +112,7 @@ export class App {
     readonly forwardButton: Locator
     readonly playerCardName: Locator
     readonly gameTime: Locator
-    readonly tableView: Locator
+    readonly ranksTable: Locator
     readonly totalGames: Locator
     readonly rankRows: Locator
 
@@ -195,18 +195,18 @@ export class App {
         this.playerCardRadioCoh3 = page.getByTestId('player-card-radio-coh3')
 
         this.gameHistory = page.getByTestId('game-history')
-        this.gameHistoryItems = page.getByTestId('game-history-item')
+        this.gameHistoryRows = page.getByTestId('game-history-row')
         this.gameHistoryPlayers = page.getByTestId('game-history-player')
-        this.historyToggle = page.getByTestId('history-toggle')
-        this.historyPeriodWeek = page.getByTestId('history-period-week')
-        this.historyPeriodAll = page.getByTestId('history-period-all')
+        this.gameHistoryToggle = page.getByTestId('game-history-toggle')
+        this.gameHistoryPeriodWeek = page.getByTestId('game-history-period-week')
+        this.gameHistoryPeriodAll = page.getByTestId('game-history-period-all')
         this.gameDetails = page.getByTestId('game-details')
         this.gameDetailsPlayers = page.getByTestId('game-details-player')
         this.backButton = page.getByTestId('back-button')
         this.forwardButton = page.getByTestId('forward-button')
         this.playerCardName = page.getByTestId('player-card-name')
         this.gameTime = page.getByTestId('game-time')
-        this.tableView = page.getByTestId('table-view')
+        this.ranksTable = page.getByTestId('ranks-table')
         this.totalGames = page.getByTestId('total-games')
         this.rankRows = page.getByTestId('rank-row')
     }

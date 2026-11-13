@@ -9,7 +9,7 @@ interface Props {
     testId?: string
 }
 
-function CopyDiv(props: Props) {
+function CopyableText(props: Props) {
     const getText = useText()
 
     const [timed, setTimed] = useTimedBoolean(1000)
@@ -48,4 +48,4 @@ function CopyDiv(props: Props) {
     )
 }
 
-export default CopyDiv
+export default CopyableText

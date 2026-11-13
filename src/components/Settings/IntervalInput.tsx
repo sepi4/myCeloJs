@@ -3,7 +3,7 @@ import React, { useRef, useState } from 'react'
 import useText from '../../hooks/useText'
 import { useLogCheckIntervalStore } from '../../stores/logCheckIntervalStore'
 import { useSettingsStore } from '../../stores/settingsStore'
-import SettingsDiv from './SettingsDiv'
+import SettingsSection from './SettingsSection'
 
 import styles from './Settings.module.css'
 
@@ -42,7 +42,7 @@ function IntervalInput() {
     }
 
     return (
-        <SettingsDiv title={getText('log_check_interval_title')}>
+        <SettingsSection title={getText('log_check_interval_title')}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
                 <input
                     data-testid="interval-input"
@@ -58,7 +58,7 @@ function IntervalInput() {
                 <span>{getText('sec')}</span>
                 {error && <span className={styles.error}>{getText('integer_error')}</span>}
             </div>
-        </SettingsDiv>
+        </SettingsSection>
     )
 }
 

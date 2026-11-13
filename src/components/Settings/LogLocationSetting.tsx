@@ -5,7 +5,7 @@ import useTimedBoolean from '../../hooks/useTimedBoolean'
 import { useSettingsStore } from '../../stores/settingsStore'
 import Notification from '../Notification'
 import ClearButton from './ClearButton'
-import SettingsDiv from './SettingsDiv'
+import SettingsSection from './SettingsSection'
 
 import styles from './Settings.module.css'
 
@@ -45,7 +45,7 @@ function LogLocationSetting({ game, askConfirm }: Props) {
     }
 
     return (
-        <SettingsDiv title={`${game.toUpperCase()} ${getText('log_location_title')}`}>
+        <SettingsSection title={`${game.toUpperCase()} ${getText('log_location_title')}`}>
             <div className={styles.textDiv}>
                 {logLocation ? (
                     <span className={styles.textDivText}>{logLocation}</span>
@@ -86,7 +86,7 @@ function LogLocationSetting({ game, askConfirm }: Props) {
                     </button>
                 )}
             </div>
-        </SettingsDiv>
+        </SettingsSection>
     )
 }
 

@@ -38,37 +38,37 @@ test.describe('COH2 game history', () => {
         await expect(app.steamIdValue).toBeVisible()
 
         // Click game history toggle — triggers API call
-        await expect(app.historyToggle).toBeVisible()
-        await app.historyToggle.click()
+        await expect(app.gameHistoryToggle).toBeVisible()
+        await app.gameHistoryToggle.click()
 
         // Game history items should load
         await expect(app.gameHistory).toBeVisible()
-        await expect(app.gameHistoryItems.first()).toBeVisible()
+        await expect(app.gameHistoryRows.first()).toBeVisible()
 
         // Period filter: week may hide every game, all shows them again
-        await app.historyPeriodWeek.click()
-        await expect(app.historyPeriodWeek).toHaveAttribute('aria-pressed', 'true')
-        await app.historyPeriodAll.click()
-        await expect(app.historyPeriodAll).toHaveAttribute('aria-pressed', 'true')
-        await expect(app.gameHistoryItems.first()).toBeVisible()
+        await app.gameHistoryPeriodWeek.click()
+        await expect(app.gameHistoryPeriodWeek).toHaveAttribute('aria-pressed', 'true')
+        await app.gameHistoryPeriodAll.click()
+        await expect(app.gameHistoryPeriodAll).toHaveAttribute('aria-pressed', 'true')
+        await expect(app.gameHistoryRows.first()).toBeVisible()
 
         // Toggle hides the history and shows it again
-        await app.historyToggle.click()
+        await app.gameHistoryToggle.click()
         await expect(app.gameHistory).not.toBeVisible()
-        await app.historyToggle.click()
-        await expect(app.gameHistoryItems.first()).toBeVisible()
+        await app.gameHistoryToggle.click()
+        await expect(app.gameHistoryRows.first()).toBeVisible()
 
         // Click the first game to open its details below the row
-        await app.gameHistoryItems.first().click()
+        await app.gameHistoryRows.first().click()
         await expect(app.gameDetails).toBeVisible()
         await expect(app.gameTime).toBeVisible()
 
         // Opening another game closes the previous one
-        await app.gameHistoryItems.nth(1).click()
+        await app.gameHistoryRows.nth(1).click()
         await expect(app.gameDetails).toHaveCount(1)
 
         // Clicking the same game again closes the details
-        await app.gameHistoryItems.nth(1).click()
+        await app.gameHistoryRows.nth(1).click()
         await expect(app.gameDetails).not.toBeVisible()
         await expect(app.steamIdValue).toBeVisible()
 
@@ -83,9 +83,9 @@ test.describe('COH2 game history', () => {
         await expect(app.steamIdValue).toHaveText(STEAM_ID)
         const myName = (await app.playerCardName.textContent()) ?? ''
         if (!(await app.gameHistory.isVisible())) {
-            await app.historyToggle.click()
+            await app.gameHistoryToggle.click()
         }
-        await expect(app.gameHistoryItems.first()).toBeVisible()
+        await expect(app.gameHistoryRows.first()).toBeVisible()
         await expect(app.gameDetails).not.toBeVisible()
 
         const otherPlayer = app.gameHistoryPlayers.filter({ hasNotText: myName }).first()
@@ -97,7 +97,7 @@ test.describe('COH2 game history', () => {
         // Back restores my card as it was: the name click did not open the game details
         await app.backButton.click()
         await expect(app.steamIdValue).toHaveText(STEAM_ID)
-        await expect(app.gameHistoryItems.first()).toBeVisible()
+        await expect(app.gameHistoryRows.first()).toBeVisible()
         await expect(app.gameDetails).not.toBeVisible()
 
         await page.keyboard.press('Escape')
@@ -136,24 +136,24 @@ test.describe('COH3 game history', () => {
         await expect(app.steamIdValue).toBeVisible()
 
         // Click game history toggle — triggers API call
-        await expect(app.historyToggle).toBeVisible()
-        await app.historyToggle.click()
+        await expect(app.gameHistoryToggle).toBeVisible()
+        await app.gameHistoryToggle.click()
 
         // Game history items should load
         await expect(app.gameHistory).toBeVisible()
-        await expect(app.gameHistoryItems.first()).toBeVisible()
+        await expect(app.gameHistoryRows.first()).toBeVisible()
 
         // Click the first game to open its details below the row
-        await app.gameHistoryItems.first().click()
+        await app.gameHistoryRows.first().click()
         await expect(app.gameDetails).toBeVisible()
         await expect(app.gameTime).toBeVisible()
 
         // Opening another game closes the previous one
-        await app.gameHistoryItems.nth(1).click()
+        await app.gameHistoryRows.nth(1).click()
         await expect(app.gameDetails).toHaveCount(1)
 
         // Clicking the same game again closes the details
-        await app.gameHistoryItems.nth(1).click()
+        await app.gameHistoryRows.nth(1).click()
         await expect(app.gameDetails).not.toBeVisible()
         await expect(app.steamIdValue).toBeVisible()
 

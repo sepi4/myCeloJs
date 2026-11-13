@@ -2,9 +2,9 @@ import { getTotalWinsAndLosses } from '../../functions/rankings/totalGames'
 import useText from '../../hooks/useText'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { PlayerRanks, GameHistoryState, Player } from '../../types'
-import ListDiv from '../ListDiv/ListDiv'
-import TableDiv from '../Table/TableDiv'
-import History from './History'
+import RanksList from '../RanksList/RanksList'
+import RanksTable from '../RanksTable/RanksTable'
+import GameHistory from './GameHistory'
 
 import styles from './PlayerDetails.module.css'
 
@@ -36,14 +36,14 @@ function PlayerDetails(props: Props) {
 
     ranksArr = ranksArr.filter((r) => r.isModeRanked === 1)
 
-    const table = navButtons.table && ranksArr ? <TableDiv ranks={ranksArr} /> : null
+    const table = navButtons.table && ranksArr ? <RanksTable ranks={ranksArr} /> : null
 
     return (
         <div data-testid="player-details" className={styles.container}>
             {totalGames}
             {table}
-            <ListDiv ranksArr={ranksArr} />
-            <History
+            <RanksList ranksArr={ranksArr} />
+            <GameHistory
                 player={props.player}
                 state={props.gameHistory}
                 updateState={props.updateGameHistory}
