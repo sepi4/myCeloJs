@@ -1,4 +1,4 @@
-import { useFromFileStore } from '../../stores/fromFileStore'
+import { useLastLogPlayersStore } from '../../stores/lastLogPlayersStore'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { useOpenPlayerDetailsStore } from '../../stores/openPlayerDetailsStore'
 import { usePlayerCardStore } from '../../stores/playerCardStore'
@@ -24,7 +24,7 @@ const player2: Player = {
 }
 
 function resetAllStores() {
-    useFromFileStore.setState({ fromFile: null })
+    useLastLogPlayersStore.setState({ lastLogPlayers: null })
     useNavButtonsStore.setState({
         navButtons: { all: true, table: true, total: true, elo: false },
     })
@@ -42,19 +42,19 @@ beforeEach(() => {
 })
 
 describe('checkLogData', () => {
-    it('updates stores when data differs from fromFile', () => {
+    it('updates stores when data differs from lastLogPlayers', () => {
         const data = [player1, player2]
 
         checkLogData({ data })
 
-        expect(useFromFileStore.getState().fromFile).toEqual(data)
+        expect(useLastLogPlayersStore.getState().lastLogPlayers).toEqual(data)
         expect(usePlayersStore.getState().players).toEqual(data)
         expect(useViewStore.getState().view).toBe('main')
     })
 
-    it('does nothing when data matches fromFile', () => {
+    it('does nothing when data matches lastLogPlayers', () => {
         const data = [player1]
-        useFromFileStore.setState({ fromFile: [player1] })
+        useLastLogPlayersStore.setState({ lastLogPlayers: [player1] })
 
         checkLogData({ data })
 
