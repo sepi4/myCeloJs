@@ -3,8 +3,8 @@ import { useDisplayGame } from '../../hooks/useDisplayGame'
 import useText from '../../hooks/useText'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { Rank } from '../../types'
-import RankName from '../Player/RankName'
 import Cell from './Cell'
+import RankName from './RankName'
 
 import styles from './RanksList.module.css'
 

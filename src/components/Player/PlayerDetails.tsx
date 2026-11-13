@@ -2,9 +2,9 @@ import { getTotalWinsAndLosses } from '../../functions/rankings/totalGames'
 import useText from '../../hooks/useText'
 import { useNavButtonsStore } from '../../stores/navButtonsStore'
 import { PlayerRanks, GameHistoryState, Player } from '../../types'
+import GameHistory from '../GameHistory/GameHistory'
 import RanksList from '../RanksList/RanksList'
 import RanksTable from '../RanksTable/RanksTable'
-import GameHistory from './GameHistory'
 
 import styles from './PlayerDetails.module.css'
 
