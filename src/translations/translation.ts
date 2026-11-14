@@ -37,6 +37,14 @@ const text = {
         en: 'vertical',
         ru: 'вертикально',
     },
+    overlay_preview: {
+        en: 'preview',
+        ru: 'предпросмотр',
+    },
+    overlay_preview_sample: {
+        en: 'sample players',
+        ru: 'пример игроков',
+    },
     copy: {
         en: 'copy',
         ru: 'копировать',

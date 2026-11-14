@@ -92,6 +92,19 @@ test('all images loaded successfully', async () => {
     }
 })
 
+test('settings preview shows the real players', async () => {
+    await app.settingsIcon.click()
+
+    await expect(app.overlayPreviewSample).not.toBeVisible()
+    const players = expectedPlayers()
+    await expect(app.overlayPreviewNames).toHaveCount(players.length)
+    for (const player of players) {
+        await expect(app.overlayPreviewNames.filter({ hasText: player.name })).toBeVisible()
+    }
+
+    await app.closeButton.click()
+})
+
 test('txt format renders a line per player', async () => {
     // Switch to txt format via the Electron app settings
     await app.settingsIcon.click()
