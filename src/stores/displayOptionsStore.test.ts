@@ -65,3 +65,20 @@ describe('displayOptionsStore — showElo toggle', () => {
         expect(useDisplayOptionsStore.getState().displayOptions.showElo).toBe(true)
     })
 })
+
+describe('displayOptionsStore — saving', () => {
+    test('saves only the option that was toggled', () => {
+        useDisplayOptionsStore.getState().toggleDisplayOption('showAll')
+        expect(JSON.parse(localStorage.getItem('displayOptions')!)).toEqual({ showAll: true })
+    })
+
+    test('keeps earlier saved options when another one is toggled', () => {
+        const { toggleDisplayOption } = useDisplayOptionsStore.getState()
+        toggleDisplayOption('showAll')
+        toggleDisplayOption('showElo')
+        expect(JSON.parse(localStorage.getItem('displayOptions')!)).toEqual({
+            showAll: true,
+            showElo: false,
+        })
+    })
+})

@@ -24,11 +24,12 @@ export const useDisplayOptionsStore = create<DisplayOptionsStore>((set) => ({
     },
     toggleDisplayOption: (key) =>
         set((state) => {
-            const updated = {
-                ...state.displayOptions,
-                [key]: !state.displayOptions[key],
-            }
-            setLocalStorage('displayOptions', updated)
-            return { displayOptions: updated }
+            const value = !state.displayOptions[key]
+            // Save only the options the user changed, so the others keep following the defaults.
+            setLocalStorage('displayOptions', {
+                ...getLocalStorage<Partial<DisplayOptions>>('displayOptions', {}),
+                [key]: value,
+            })
+            return { displayOptions: { ...state.displayOptions, [key]: value } }
         }),
 }))
