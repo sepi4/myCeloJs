@@ -17,9 +17,9 @@ interface DisplayOptionsStore {
 export const useDisplayOptionsStore = create<DisplayOptionsStore>((set) => ({
     displayOptions: {
         showAll: false,
-        tableView: false,
-        showTotal: false,
-        showElo: false,
+        tableView: true,
+        showTotal: true,
+        showElo: true,
         ...getLocalStorage<Partial<DisplayOptions>>('displayOptions', {}),
     },
     toggleDisplayOption: (key) =>

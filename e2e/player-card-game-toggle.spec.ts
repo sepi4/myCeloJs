@@ -38,9 +38,6 @@ const COH2_FACTION_TITLES = ['sov', 'wer', 'usa', 'okw', 'uk']
 const COH3_FACTION_TITLES = ['dak', 'wer', 'usa', 'uk']
 
 test('toggles between COH2 and COH3 profile views inside player card', async () => {
-    // Enable table mode so faction icons are rendered
-    await app.checkboxTable.click()
-
     // Start in COH3 mode and open the known player's card via search
     await app.radioCoh3.click()
     await app.searchIcon.click()

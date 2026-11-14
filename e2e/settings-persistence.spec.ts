@@ -65,7 +65,7 @@ test('set all settings to non-default values', async () => {
     // Alert: off → on
     await app.alertCheckbox.click()
 
-    // Navbar checkboxes: all off → on
+    // Navbar checkboxes: all off → on, total and table on → off
     await app.checkboxAll.click()
     await app.checkboxTotal.click()
     await app.checkboxTable.click()
@@ -98,10 +98,10 @@ test('settings persist after restart', async () => {
     // Alert checkbox should be checked
     await expect(app.alertCheckbox).toBeChecked()
 
-    // Navbar checkboxes should all be checked
+    // Navbar checkboxes: all checked, total and table unchecked
     await expect(app.checkboxAll).toBeChecked()
-    await expect(app.checkboxTotal).toBeChecked()
-    await expect(app.checkboxTable).toBeChecked()
+    await expect(app.checkboxTotal).not.toBeChecked()
+    await expect(app.checkboxTable).not.toBeChecked()
 
     // Both COH2 and COH3 radios should be enabled (both logs set)
     await expect(app.radioCoh2).toBeEnabled()

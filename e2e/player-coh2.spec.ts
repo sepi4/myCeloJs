@@ -99,16 +99,15 @@ test('navbar checkboxes - table, total and all ', async () => {
 
     // Table toggle
     await app.checkboxTable.click()
-    await expect(app.ranksTable).toBeVisible()
-    await app.checkboxTable.click()
     await expect(app.ranksTable).not.toBeVisible()
 
     // Total toggle
-    await app.checkboxTotal.click()
     await expect(app.totalGames).toBeVisible()
     await expect(app.totalGames.locator('[title]')).toHaveAttribute('title', /^\d+ \/ \d+$/)
     await app.checkboxTotal.click()
     await expect(app.totalGames).not.toBeVisible()
+    await app.checkboxTotal.click()
+    await expect(app.totalGames).toBeVisible()
 
     // All toggle — unranked rows are added when on, removed when off
     const rowCountBefore = await app.rankRows.count()
@@ -116,6 +115,9 @@ test('navbar checkboxes - table, total and all ', async () => {
     await expect(app.rankRows).not.toHaveCount(rowCountBefore)
     await app.checkboxAll.click()
     await expect(app.rankRows).toHaveCount(rowCountBefore)
+
+    await app.checkboxTable.click()
+    await expect(app.ranksTable).toBeVisible()
     await app.closeButton.click()
 })
 
