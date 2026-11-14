@@ -5,11 +5,23 @@ beforeEach(() => {
     useLogCheckIntervalStore.setState({ logCheckInterval: 3 })
 })
 
-describe('logCheckIntervalStore', () => {
-    test('defaults to 3', () => {
-        expect(useLogCheckIntervalStore.getState().logCheckInterval).toBe(3)
+async function loadStore() {
+    vi.resetModules()
+    return (await import('./logCheckIntervalStore')).useLogCheckIntervalStore
+}
+
+describe('logCheckIntervalStore on load', () => {
+    test('defaults to 3 when nothing is saved', async () => {
+        expect((await loadStore()).getState().logCheckInterval).toBe(3)
     })
 
+    test('uses the saved value', async () => {
+        localStorage.setItem('logCheckInterval', '7')
+        expect((await loadStore()).getState().logCheckInterval).toBe(7)
+    })
+})
+
+describe('logCheckIntervalStore', () => {
     test('setLogCheckInterval updates the value', () => {
         useLogCheckIntervalStore.getState().setLogCheckInterval(10)
         expect(useLogCheckIntervalStore.getState().logCheckInterval).toBe(10)

@@ -5,11 +5,28 @@ beforeEach(() => {
     useHistoryPeriodStore.setState({ historyPeriod: 'all' })
 })
 
-describe('historyPeriodStore', () => {
-    test('defaults to all', () => {
-        expect(useHistoryPeriodStore.getState().historyPeriod).toBe('all')
+async function loadStore() {
+    vi.resetModules()
+    return (await import('./historyPeriodStore')).useHistoryPeriodStore
+}
+
+describe('historyPeriodStore on load', () => {
+    test('defaults to all when nothing is saved', async () => {
+        expect((await loadStore()).getState().historyPeriod).toBe('all')
     })
 
+    test('uses the saved value', async () => {
+        localStorage.setItem('historyPeriod', '"week"')
+        expect((await loadStore()).getState().historyPeriod).toBe('week')
+    })
+
+    test('falls back to all when the saved value is unknown', async () => {
+        localStorage.setItem('historyPeriod', '"decade"')
+        expect((await loadStore()).getState().historyPeriod).toBe('all')
+    })
+})
+
+describe('historyPeriodStore', () => {
     test('setHistoryPeriod updates the value', () => {
         useHistoryPeriodStore.getState().setHistoryPeriod('month')
         expect(useHistoryPeriodStore.getState().historyPeriod).toBe('month')

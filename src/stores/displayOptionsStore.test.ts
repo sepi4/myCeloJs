@@ -7,12 +7,46 @@ beforeEach(() => {
     })
 })
 
-describe('displayOptionsStore — showElo toggle', () => {
-    test('showElo defaults to true', () => {
-        const { displayOptions } = useDisplayOptionsStore.getState()
-        expect(displayOptions.showElo).toBe(true)
+async function loadStore() {
+    vi.resetModules()
+    return (await import('./displayOptionsStore')).useDisplayOptionsStore
+}
+
+describe('displayOptionsStore on load', () => {
+    test('uses the defaults when nothing is saved', async () => {
+        expect((await loadStore()).getState().displayOptions).toEqual({
+            showAll: false,
+            tableView: true,
+            showTotal: true,
+            showElo: true,
+        })
     })
 
+    test('saved values override the defaults', async () => {
+        localStorage.setItem(
+            'displayOptions',
+            JSON.stringify({ showAll: true, tableView: false, showTotal: false, showElo: false })
+        )
+        expect((await loadStore()).getState().displayOptions).toEqual({
+            showAll: true,
+            tableView: false,
+            showTotal: false,
+            showElo: false,
+        })
+    })
+
+    test('keeps the defaults for options that were not saved', async () => {
+        localStorage.setItem('displayOptions', JSON.stringify({ tableView: false }))
+        expect((await loadStore()).getState().displayOptions).toEqual({
+            showAll: false,
+            tableView: false,
+            showTotal: true,
+            showElo: true,
+        })
+    })
+})
+
+describe('displayOptionsStore — showElo toggle', () => {
     test('toggleDisplayOption flips showElo to false', () => {
         useDisplayOptionsStore.getState().toggleDisplayOption('showElo')
         expect(useDisplayOptionsStore.getState().displayOptions.showElo).toBe(false)
