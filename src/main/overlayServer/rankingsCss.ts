@@ -6,6 +6,11 @@ export const RANKINGS_CSS = /* css */ `
     font-size: 16px;
     color: white;
 }
+/* OBS hides overflow in browser sources too, so a long line never shows a scrollbar. */
+html,
+body {
+    overflow: hidden;
+}
 .bodyStyleHorizontal {
     display: flex;
 }
