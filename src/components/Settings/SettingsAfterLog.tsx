@@ -2,9 +2,12 @@ import { updateSettings } from '../../functions/settings/writeSettings'
 import useText from '../../hooks/useText'
 import { useSettingsStore } from '../../stores/settingsStore'
 import CopyableText from './CopyableText'
+import OverlayPreview from './OverlayPreview'
 import RadioGroup from './RadioGroup'
 import SettingsLocation from './SettingsLocation'
 import SettingsSection from './SettingsSection'
+
+import styles from './Settings.module.css'
 
 export default function SettingsAfterLog() {
     const getText = useText()
@@ -33,41 +36,55 @@ export default function SettingsAfterLog() {
         return (
             <>
                 <SettingsSection title={getText('rankings_file_title')}>
-                    <RadioGroup
-                        compact
-                        title={getText('format')}
-                        name="rankingsFormat"
-                        testIdPrefix="radio"
-                        options={['html', 'txt'] as const}
-                        selected={
-                            settings.rankingsHtml === undefined
-                                ? undefined
-                                : settings.rankingsHtml
-                                  ? 'html'
-                                  : 'txt'
-                        }
-                        getLabel={(format) => format}
-                        onChange={handleType}
-                    />
+                    <div className={styles.overlayRow}>
+                        <div className={styles.overlayControls}>
+                            <RadioGroup
+                                compact
+                                title={getText('format')}
+                                name="rankingsFormat"
+                                testIdPrefix="radio"
+                                options={['html', 'txt'] as const}
+                                selected={
+                                    settings.rankingsHtml === undefined
+                                        ? undefined
+                                        : settings.rankingsHtml
+                                          ? 'html'
+                                          : 'txt'
+                                }
+                                getLabel={(format) => format}
+                                onChange={handleType}
+                            />
 
-                    <RadioGroup
-                        compact
-                        title={getText('orientation')}
-                        name="rankingsOrientation"
-                        testIdPrefix="radio"
-                        options={['horizontal', 'vertical'] as const}
-                        selected={
-                            settings.rankingsHorizontal === undefined
-                                ? undefined
-                                : settings.rankingsHorizontal
-                                  ? 'horizontal'
-                                  : 'vertical'
-                        }
-                        getLabel={(orientation) => getText(orientation)}
-                        onChange={(orientation) => handleOrientation(orientation === 'horizontal')}
-                    />
+                            <RadioGroup
+                                compact
+                                title={getText('orientation')}
+                                name="rankingsOrientation"
+                                testIdPrefix="radio"
+                                options={['horizontal', 'vertical'] as const}
+                                selected={
+                                    settings.rankingsHorizontal === undefined
+                                        ? undefined
+                                        : settings.rankingsHorizontal
+                                          ? 'horizontal'
+                                          : 'vertical'
+                                }
+                                getLabel={(orientation) => getText(orientation)}
+                                onChange={(orientation) =>
+                                    handleOrientation(orientation === 'horizontal')
+                                }
+                            />
 
-                    <CopyableText testId="copy-rankings" text={overlayUrl} />
+                            <CopyableText testId="copy-rankings" text={overlayUrl} />
+                        </div>
+
+                        {overlayUrl && (
+                            <OverlayPreview
+                                url={overlayUrl}
+                                horizontal={settings.rankingsHorizontal === true}
+                                html={settings.rankingsHtml === true}
+                            />
+                        )}
+                    </div>
                 </SettingsSection>
 
                 <SettingsLocation

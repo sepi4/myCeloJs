@@ -58,6 +58,7 @@ test('OBS studio settings - format, orientation and copy buttons', async () => {
     // Copy sections should not be visible before selecting format and orientation
     await expect(app.copyRankings).not.toBeVisible()
     await expect(app.copySettings).not.toBeVisible()
+    await expect(app.overlayPreview).not.toBeVisible()
 
     // Select HTML format and horizontal orientation
     await app.radioHtml.click()
@@ -66,6 +67,7 @@ test('OBS studio settings - format, orientation and copy buttons', async () => {
     // Both copy sections should now appear
     await expect(app.copyRankings).toBeVisible()
     await expect(app.copySettings).toBeVisible()
+    await expect(app.overlayPreview).toBeVisible()
 
     // Copy the rankings file path — notification should appear
     await app.copyRankingsButton.click()

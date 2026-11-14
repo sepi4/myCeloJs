@@ -4,6 +4,11 @@ import { type Page, type Locator, type ElectronApplication } from '@playwright/t
 
 export const COH2_LOG_PATH = path.join(__dirname, '../../dataExamples/coh2-warnings.log')
 export const COH2_LOG_PATH_2 = path.join(__dirname, '../../dataExamples/coh2-warnings2.log')
+// Only the log header, so the game has no players.
+export const COH2_EMPTY_LOG_PATH = path.join(
+    __dirname,
+    '../../dataExamples/coh2-warnings-empty.log'
+)
 export const COH2_AI_LOG_PATH = path.join(__dirname, '../../dataExamples/coh2-warnings-ai.log')
 export const COH3_LOG_PATH = path.join(__dirname, '../../dataExamples/coh3-warnings.log')
 export const COH3_AI_LOG_PATH = path.join(__dirname, '../../dataExamples/coh3-warnings-ai.log')
@@ -83,6 +88,9 @@ export class App {
     readonly copyRankings: Locator
     readonly copyRankingsButton: Locator
     readonly copyRankingsNotification: Locator
+    readonly overlayPreview: Locator
+    readonly overlayPreviewSample: Locator
+    readonly overlayPreviewNames: Locator
     readonly copySettings: Locator
     readonly copySettingsButton: Locator
     readonly copySettingsNotification: Locator
@@ -173,6 +181,9 @@ export class App {
         this.copyRankings = page.getByTestId('copy-rankings')
         this.copyRankingsButton = page.getByTestId('copy-rankings-button')
         this.copyRankingsNotification = page.getByTestId('copy-rankings-notification')
+        this.overlayPreview = page.getByTestId('overlay-preview')
+        this.overlayPreviewSample = page.getByTestId('overlay-preview-sample')
+        this.overlayPreviewNames = this.overlayPreview.frameLocator('iframe').getByTestId('name')
         this.copySettings = page.getByTestId('copy-settings')
         this.copySettingsButton = page.getByTestId('copy-settings-button')
         this.copySettingsNotification = page.getByTestId('copy-settings-notification')
