@@ -7,7 +7,12 @@ export default defineConfig({
         setupFiles: ['src/testSetup.ts'],
         coverage: {
             provider: 'v8',
-            include: ['src/functions/**/*.ts', 'src/stores/**/*.ts'],
+            include: [
+                'src/functions/**/*.ts',
+                'src/stores/**/*.ts',
+                'src/translations/getText.ts',
+                'src/components/Search/getLastPlayedGame.ts',
+            ],
             exclude: ['src/**/*.d.ts'],
             reporter: ['text', 'html'],
         },
