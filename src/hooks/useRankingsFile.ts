@@ -7,12 +7,14 @@ import { useGameStore } from '../stores/gameStore'
 import { usePlayersStore } from '../stores/playersStore'
 import { useSettingsStore } from '../stores/settingsStore'
 import { Player, SettingsType } from '../types'
+import useOverlayAvatars from './useOverlayAvatars'
 
 export function writeRankingsFile(
     game: Game,
     players: Player[] | null,
     settings: SettingsType | null,
-    elo: boolean
+    elo: boolean,
+    avatars: Record<number, string> = {}
 ) {
     // An empty list is written too, so the overlay is cleared when the game ends.
     if (settings && players) {
@@ -20,6 +22,8 @@ export function writeRankingsFile(
             horizontal: settings.rankingsHorizontal,
             showElo: GAME_CONFIG[game].hasElo && elo,
             showCountry: settings.rankingsShowCountry !== false,
+            showAvatar: settings.rankingsShowAvatar === true,
+            avatars,
         })
     }
 }
@@ -32,8 +36,9 @@ export default function useRankingsFile() {
     } = useDisplayOptionsStore()
     const { players } = usePlayersStore()
     const { settings } = useSettingsStore()
+    const avatars = useOverlayAvatars(settings?.rankingsShowAvatar === true)
 
     useEffect(() => {
-        writeRankingsFile(game, players, settings, elo)
-    }, [settings, elo, game, players])
+        writeRankingsFile(game, players, settings, elo, avatars)
+    }, [settings, elo, game, players, avatars])
 }

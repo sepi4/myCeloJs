@@ -4,6 +4,7 @@ type Team = {
     name: string
     ranking: string
     rating?: number
+    avatar?: string
 }
 
 export type RankingsJson = {
@@ -13,6 +14,7 @@ export type RankingsJson = {
     }
     horizontal: boolean
     showCountry: boolean
+    showAvatar: boolean
 }
 
 export type Player = {
@@ -61,6 +63,7 @@ export type SettingsType = {
     rankingsHorizontal?: boolean
     /** Missing means shown, as before this setting existed. */
     rankingsShowCountry?: boolean
+    rankingsShowAvatar?: boolean
     steamId?: string
     profileIdCoh2?: number
     profileIdCoh3?: number

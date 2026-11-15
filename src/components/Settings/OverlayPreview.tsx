@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 
 import { GAME_CONFIG } from '../../constants/games'
-import { samplePlayers } from '../../functions/rankings/samplePlayers'
+import { sampleAvatars, samplePlayers } from '../../functions/rankings/samplePlayers'
 import { buildRankings } from '../../functions/rankings/writeRankings'
 import useText from '../../hooks/useText'
 import { RANKINGS_CSS } from '../../main/overlayServer/rankingsCss'
@@ -34,6 +34,7 @@ interface Props {
     horizontal: boolean
     html: boolean
     showCountry: boolean
+    showAvatar: boolean
 }
 
 export default function OverlayPreview(props: Props) {
@@ -69,6 +70,8 @@ export default function OverlayPreview(props: Props) {
             horizontal: props.horizontal,
             showElo: GAME_CONFIG[game].hasElo && showElo,
             showCountry: props.showCountry,
+            showAvatar: props.showAvatar,
+            avatars: sampleAvatars(),
         })
         const body = props.html ? renderRankingsBody(json) : renderRankingsTxtBody(text)
         // The base makes the image paths load from the overlay server.

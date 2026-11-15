@@ -35,6 +35,8 @@ describe('writeRankingsFile', () => {
             horizontal: true,
             showElo: false,
             showCountry: true,
+            showAvatar: false,
+            avatars: {},
         })
     })
 
@@ -46,11 +48,15 @@ describe('writeRankingsFile', () => {
             horizontal: true,
             showElo: false,
             showCountry: true,
+            showAvatar: false,
+            avatars: {},
         })
         expect(mockWriteRankings).toHaveBeenNthCalledWith(2, 'coh3', [player], {
             horizontal: true,
             showElo: true,
             showCountry: true,
+            showAvatar: false,
+            avatars: {},
         })
     })
 
@@ -61,6 +67,8 @@ describe('writeRankingsFile', () => {
             horizontal: true,
             showElo: false,
             showCountry: true,
+            showAvatar: false,
+            avatars: {},
         })
     })
 
@@ -71,6 +79,27 @@ describe('writeRankingsFile', () => {
             horizontal: true,
             showElo: false,
             showCountry: false,
+            showAvatar: false,
+            avatars: {},
+        })
+    })
+
+    it('passes the avatars when the avatar setting is on', () => {
+        const avatars = { 1: 'https://example.com/a.jpg' }
+        writeRankingsFile(
+            'coh2',
+            [player],
+            { ...settings, rankingsShowAvatar: true },
+            false,
+            avatars
+        )
+
+        expect(mockWriteRankings).toHaveBeenCalledWith('coh2', [player], {
+            horizontal: true,
+            showElo: false,
+            showCountry: true,
+            showAvatar: true,
+            avatars,
         })
     })
 

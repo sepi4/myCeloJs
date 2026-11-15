@@ -93,6 +93,8 @@ export class App {
     readonly overlayPreviewNames: Locator
     readonly overlayPreviewCountries: Locator
     readonly overlayCountryCheckbox: Locator
+    readonly overlayAvatarCheckbox: Locator
+    readonly overlayPreviewAvatars: Locator
     readonly copySettings: Locator
     readonly copySettingsButton: Locator
     readonly copySettingsNotification: Locator
@@ -190,6 +192,10 @@ export class App {
             .frameLocator('iframe')
             .getByTestId('country')
         this.overlayCountryCheckbox = page.getByTestId('checkbox-overlay-country')
+        this.overlayAvatarCheckbox = page.getByTestId('checkbox-overlay-avatar')
+        this.overlayPreviewAvatars = this.overlayPreview
+            .frameLocator('iframe')
+            .getByTestId('avatar')
         this.copySettings = page.getByTestId('copy-settings')
         this.copySettingsButton = page.getByTestId('copy-settings-button')
         this.copySettingsNotification = page.getByTestId('copy-settings-notification')

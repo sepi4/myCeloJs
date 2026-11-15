@@ -7,6 +7,8 @@ interface Option {
     checked: boolean
     onChange: () => void
     testId: string
+    disabled?: boolean
+    title?: string
 }
 
 interface Props {
@@ -28,6 +30,8 @@ function CheckboxGroup(props: Props) {
                         label={option.label}
                         checked={option.checked}
                         onChange={option.onChange}
+                        disabled={option.disabled}
+                        title={option.title}
                     />
                 ))}
             </div>

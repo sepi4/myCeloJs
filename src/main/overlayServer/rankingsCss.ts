@@ -55,6 +55,16 @@ body {
     display: flex;
     align-items: center;
 }
+/* Smaller than the 1.6em row, so avatars in adjacent rows do not touch. */
+.avatarStyle {
+    width: 1.3em;
+    height: 1.3em;
+    min-width: 1.3em;
+    display: flex;
+}
+.avatarStyle img {
+    border-radius: 0.2em;
+}
 .nameStyle {
     white-space: nowrap;
     overflow: hidden;

@@ -32,6 +32,9 @@ export type RankingsOptions = {
     horizontal?: boolean
     showElo?: boolean
     showCountry?: boolean
+    showAvatar?: boolean
+    /** Steam avatar URLs by profile ID. */
+    avatars?: Record<number, string>
 }
 
 export function buildRankings(
@@ -41,6 +44,8 @@ export function buildRankings(
         horizontal: rankingsHorizontal = false,
         showElo = false,
         showCountry = true,
+        showAvatar = false,
+        avatars = {},
     }: RankingsOptions = {}
 ): { json: RankingsJson; text: string } {
     const json: RankingsJson = {
@@ -50,6 +55,7 @@ export function buildRankings(
         },
         horizontal: false,
         showCountry,
+        showAvatar,
     }
 
     const rowsLeft = []
@@ -109,6 +115,7 @@ export function buildRankings(
         }
 
         const ratingValue = showElo ? player.rating : undefined
+        const avatar = showAvatar && player.profileId ? avatars[player.profileId] : undefined
         const teamEntry = {
             name,
             ranking,
@@ -116,6 +123,7 @@ export function buildRankings(
             // The overlay loads /img/<faction>.png, and the COH3 images are named by the log name.
             faction: game === 'coh3' ? faction : factionCode,
             ...(ratingValue !== undefined ? { rating: ratingValue } : {}),
+            ...(avatar ? { avatar } : {}),
         }
         if (teamSlot % 2 === 0) {
             json.teams.team1.push(teamEntry)

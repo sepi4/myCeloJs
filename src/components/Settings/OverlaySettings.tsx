@@ -27,6 +27,7 @@ export default function OverlaySettings() {
     }
 
     const showCountry = settings?.rankingsShowCountry !== false
+    const showAvatar = settings?.rankingsShowAvatar === true
 
     const overlayUrl = isOverlayConfigured(settings)
         ? `http://localhost:${settings.rankingsPort}`
@@ -84,6 +85,17 @@ export default function OverlaySettings() {
                                     updateSettings({ rankingsShowCountry: !showCountry }),
                                 testId: 'checkbox-overlay-country',
                             },
+                            {
+                                label: getText('avatar'),
+                                checked: showAvatar,
+                                onChange: () => updateSettings({ rankingsShowAvatar: !showAvatar }),
+                                testId: 'checkbox-overlay-avatar',
+                                disabled: settings.rankingsHtml === false,
+                                title:
+                                    settings.rankingsHtml === false
+                                        ? getText('avatar_html_only')
+                                        : undefined,
+                            },
                         ]}
                     />
 
@@ -100,6 +112,7 @@ export default function OverlaySettings() {
                         horizontal={settings.rankingsHorizontal === true}
                         html={settings.rankingsHtml === true}
                         showCountry={showCountry}
+                        showAvatar={showAvatar}
                     />
                 )}
             </div>

@@ -45,6 +45,14 @@ const text = {
         en: 'country',
         ru: 'страна',
     },
+    avatar: {
+        en: 'avatar',
+        ru: 'аватар',
+    },
+    avatar_html_only: {
+        en: 'only in html format',
+        ru: 'только в формате html',
+    },
     overlay_url_title: {
         en: 'address for OBS',
         ru: 'адрес для OBS',

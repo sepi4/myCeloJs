@@ -163,4 +163,25 @@ describe('buildRankings', () => {
             }
         })
     })
+
+    describe('avatar output', () => {
+        const avatars = { 7: 'https://example.com/a.jpg' }
+
+        it('adds the avatar by profile ID when shown', () => {
+            const { json } = buildRankings('coh2', [player({ profileId: 7 })], {
+                showAvatar: true,
+                avatars,
+            })
+
+            expect(json.showAvatar).toBe(true)
+            expect(json.teams.team1[0]!.avatar).toBe('https://example.com/a.jpg')
+        })
+
+        it('leaves the avatar out by default', () => {
+            const { json } = buildRankings('coh2', [player({ profileId: 7 })], { avatars })
+
+            expect(json.showAvatar).toBe(false)
+            expect(json.teams.team1[0]!.avatar).toBeUndefined()
+        })
+    })
 })
