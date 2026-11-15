@@ -103,6 +103,21 @@ describe('writeRankingsFile', () => {
         })
     })
 
+    it('hides the avatars in txt format', () => {
+        writeRankingsFile(
+            'coh2',
+            [player],
+            { ...settings, rankingsShowAvatar: true, rankingsHtml: false },
+            false
+        )
+
+        expect(mockWriteRankings).toHaveBeenCalledWith(
+            'coh2',
+            [player],
+            expect.objectContaining({ showAvatar: false })
+        )
+    })
+
     it('does not write before the settings or players are loaded', () => {
         writeRankingsFile('coh2', [player], null, false)
         writeRankingsFile('coh2', null, settings, false)

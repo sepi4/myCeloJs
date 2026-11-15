@@ -106,15 +106,7 @@ export default function OverlaySettings() {
                     />
                 </div>
 
-                {overlayUrl && (
-                    <OverlayPreview
-                        url={overlayUrl}
-                        horizontal={settings.rankingsHorizontal === true}
-                        html={settings.rankingsHtml === true}
-                        showCountry={showCountry}
-                        showAvatar={showAvatar}
-                    />
-                )}
+                {overlayUrl && <OverlayPreview url={overlayUrl} settings={settings} />}
             </div>
         </SettingsSection>
     )
