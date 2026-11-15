@@ -28,12 +28,20 @@ function getLimitedWord(str: string, limit: number, padLeft: boolean) {
     return newStr + ' '.repeat(limit - sum)
 }
 
+export type RankingsOptions = {
+    horizontal?: boolean
+    showElo?: boolean
+    showCountry?: boolean
+}
+
 export function buildRankings(
     game: Game,
     players: Player[],
-    rankingsHorizontal: boolean,
-    showElo: boolean = false,
-    showCountry: boolean = true
+    {
+        horizontal: rankingsHorizontal = false,
+        showElo = false,
+        showCountry = true,
+    }: RankingsOptions = {}
 ): { json: RankingsJson; text: string } {
     const json: RankingsJson = {
         teams: {
@@ -136,13 +144,7 @@ export function buildRankings(
     return { json, text }
 }
 
-export function writeRankings(
-    game: Game,
-    players: Player[],
-    rankingsHorizontal = false,
-    showElo: boolean = false,
-    showCountry: boolean = true
-): void {
-    const { json, text } = buildRankings(game, players, rankingsHorizontal, showElo, showCountry)
+export function writeRankings(game: Game, players: Player[], options: RankingsOptions = {}): void {
+    const { json, text } = buildRankings(game, players, options)
     window.electronAPI.rankings.write(JSON.stringify(json, null, 4), text)
 }

@@ -21,34 +21,40 @@ describe('buildRankings', () => {
                 player({ name: 'D', teamSlot: 1 }),
             ]
 
-            const { json } = buildRankings('coh2', players, false)
+            const { json } = buildRankings('coh2', players, { horizontal: false })
 
             expect(json.teams.team1.map((t) => t.name)).toEqual(['A', 'C'])
             expect(json.teams.team2.map((t) => t.name)).toEqual(['B', 'D'])
         })
 
         it('maps faction via getFactionCode for coh2', () => {
-            const { json } = buildRankings('coh2', [player({ faction: 'german' })], false)
+            const { json } = buildRankings('coh2', [player({ faction: 'german' })], {
+                horizontal: false,
+            })
 
             expect(json.teams.team1[0]!.faction).toBe('wer')
         })
 
         it('keeps raw faction for coh3', () => {
-            const { json } = buildRankings('coh3', [player({ faction: 'germans' })], false)
+            const { json } = buildRankings('coh3', [player({ faction: 'germans' })], {
+                horizontal: false,
+            })
 
             expect(json.teams.team1[0]!.faction).toBe('germans')
         })
 
         it('sets horizontal flag', () => {
-            const { json: h } = buildRankings('coh2', [], true)
-            const { json: v } = buildRankings('coh2', [], false)
+            const { json: h } = buildRankings('coh2', [], { horizontal: true })
+            const { json: v } = buildRankings('coh2', [], { horizontal: false })
 
             expect(h.horizontal).toBe(true)
             expect(v.horizontal).toBe(false)
         })
 
         it('formats undefined ranking as dash', () => {
-            const { json } = buildRankings('coh2', [player({ ranking: undefined })], false)
+            const { json } = buildRankings('coh2', [player({ ranking: undefined })], {
+                horizontal: false,
+            })
 
             expect(json.teams.team1[0]!.ranking).toBe('-')
         })
@@ -61,7 +67,7 @@ describe('buildRankings', () => {
                 player({ name: 'Allies1', teamSlot: 1 }),
             ]
 
-            const { text } = buildRankings('coh2', players, false)
+            const { text } = buildRankings('coh2', players, { horizontal: false })
             const blocks = text.split('\n\n')
 
             expect(blocks).toHaveLength(2)
@@ -75,7 +81,7 @@ describe('buildRankings', () => {
                 player({ name: 'Right', teamSlot: 1 }),
             ]
 
-            const { text } = buildRankings('coh2', players, true)
+            const { text } = buildRankings('coh2', players, { horizontal: true })
             const lines = text.trim().split('\n')
 
             expect(lines).toHaveLength(1)
@@ -85,7 +91,9 @@ describe('buildRankings', () => {
 
         it('truncates long names to 20 characters', () => {
             const longName = 'A'.repeat(30)
-            const { text } = buildRankings('coh2', [player({ name: longName })], false)
+            const { text } = buildRankings('coh2', [player({ name: longName })], {
+                horizontal: false,
+            })
 
             expect(text).not.toContain(longName)
             expect(text).toContain('A'.repeat(20))
@@ -94,45 +102,33 @@ describe('buildRankings', () => {
 
     describe('rating output', () => {
         it('includes rating in json when showElo is true', () => {
-            const { json } = buildRankings(
-                'coh3',
-                [player({ faction: 'germans', rating: 1523 })],
-                false,
-                true
-            )
+            const { json } = buildRankings('coh3', [player({ faction: 'germans', rating: 1523 })], {
+                showElo: true,
+            })
 
             expect(json.teams.team1[0]!.rating).toBe(1523)
         })
 
         it('omits rating from json when showElo is false', () => {
-            const { json } = buildRankings(
-                'coh3',
-                [player({ faction: 'germans', rating: 1523 })],
-                false,
-                false
-            )
+            const { json } = buildRankings('coh3', [player({ faction: 'germans', rating: 1523 })], {
+                showElo: false,
+            })
 
             expect(json.teams.team1[0]!.rating).toBeUndefined()
         })
 
         it('includes rating in text output when showElo is true', () => {
-            const { text } = buildRankings(
-                'coh3',
-                [player({ faction: 'germans', rating: 1523 })],
-                false,
-                true
-            )
+            const { text } = buildRankings('coh3', [player({ faction: 'germans', rating: 1523 })], {
+                showElo: true,
+            })
 
             expect(text).toContain('(1523)')
         })
 
         it('does not include rating in text when showElo is false', () => {
-            const { text } = buildRankings(
-                'coh3',
-                [player({ faction: 'germans', rating: 1523 })],
-                false,
-                false
-            )
+            const { text } = buildRankings('coh3', [player({ faction: 'germans', rating: 1523 })], {
+                showElo: false,
+            })
 
             expect(text).not.toMatch(/\(\d+\)/)
         })
@@ -140,7 +136,9 @@ describe('buildRankings', () => {
 
     describe('country output', () => {
         it('keeps the country in json and text by default', () => {
-            const { json, text } = buildRankings('coh2', [player({ country: 'fi' })], false)
+            const { json, text } = buildRankings('coh2', [player({ country: 'fi' })], {
+                horizontal: false,
+            })
 
             expect(json.showCountry).toBe(true)
             expect(json.teams.team1[0]!.country).toBe('fi')
@@ -153,7 +151,10 @@ describe('buildRankings', () => {
                     player({ name: 'A', country: 'fi', teamSlot: 0 }),
                     player({ name: 'B', country: 'fi', teamSlot: 1 }),
                 ]
-                const { json, text } = buildRankings('coh2', players, horizontal, false, false)
+                const { json, text } = buildRankings('coh2', players, {
+                    horizontal,
+                    showCountry: false,
+                })
 
                 expect(json.showCountry).toBe(false)
                 expect(json.teams.team1[0]!.country).toBeUndefined()
