@@ -70,6 +70,8 @@ export class App {
     readonly checkboxElo: Locator
     readonly playerRankCells: Locator
     readonly playerRows: Locator
+    readonly playerCountries: Locator
+    readonly playerAvatars: Locator
     readonly playerElos: Locator
 
     // Font size
@@ -94,6 +96,8 @@ export class App {
     readonly overlayPreviewCountries: Locator
     readonly overlayCountryCheckbox: Locator
     readonly overlayAvatarCheckbox: Locator
+    readonly playerRowCountryCheckbox: Locator
+    readonly playerRowAvatarCheckbox: Locator
     readonly overlayPreviewAvatars: Locator
     readonly copySettings: Locator
     readonly copySettingsButton: Locator
@@ -193,6 +197,8 @@ export class App {
             .getByTestId('country')
         this.overlayCountryCheckbox = page.getByTestId('checkbox-overlay-country')
         this.overlayAvatarCheckbox = page.getByTestId('checkbox-overlay-avatar')
+        this.playerRowCountryCheckbox = page.getByTestId('checkbox-player-row-country')
+        this.playerRowAvatarCheckbox = page.getByTestId('checkbox-player-row-avatar')
         this.overlayPreviewAvatars = this.overlayPreview
             .frameLocator('iframe')
             .getByTestId('avatar')
@@ -206,6 +212,8 @@ export class App {
         this.checkboxElo = page.getByTestId('checkbox-elo')
         this.playerRankCells = page.getByTestId('player-rank')
         this.playerRows = page.getByTestId('player-row')
+        this.playerCountries = page.getByTestId('player-country')
+        this.playerAvatars = page.getByTestId('player-avatar')
         this.playerElos = page.getByTestId('player-elo')
 
         this.steamIdValue = page.getByTestId('steam-id-value')

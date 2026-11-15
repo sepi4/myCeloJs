@@ -5,10 +5,12 @@ import { GAME_CONFIG, getFactionCode, getFactionFlag } from '../../constants/gam
 import { getTotalGames } from '../../functions/rankings/totalGames'
 import useLanguage from '../../hooks/useLanguage'
 import useNavbarPosition from '../../hooks/useNavbarPosition'
+import useSteamAvatar from '../../hooks/useSteamAvatar'
 import useText from '../../hooks/useText'
 import { useDisplayOptionsStore } from '../../stores/displayOptionsStore'
 import { useGameStore } from '../../stores/gameStore'
 import { useNavigationStore } from '../../stores/navigationStore'
+import { useSettingsStore } from '../../stores/settingsStore'
 import { getCountryName } from '../../translations/countryTranslations'
 import { PlayerRanks, Player } from '../../types'
 import { faCaretDown, faCaretRight } from '../icons'
@@ -32,6 +34,9 @@ function PlayerRow(props: Props) {
         displayOptions: { showElo: elo },
     } = useDisplayOptionsStore()
     const showElo = GAME_CONFIG[game].hasElo && elo
+    const { settings } = useSettingsStore()
+    const showCountry = settings?.playerRowShowCountry !== false
+    const showAvatar = settings?.playerRowShowAvatar === true
     const language = useLanguage()
     const isTopNavbar = useNavbarPosition() === 'top'
     const { player, toggleDetails, playerRanks, showDetails } = props
@@ -62,6 +67,8 @@ function PlayerRow(props: Props) {
         e.stopPropagation()
         openPlayerCard(player, playerRanks, game)
     }
+
+    const avatarUrl = useSteamAvatar(showAvatar ? playerRanks?.steamId : undefined)
 
     const countryFlagLocation = countryFlags[country ? country : '']
 
@@ -104,6 +111,7 @@ function PlayerRow(props: Props) {
     const countryFlag =
         country !== undefined ? (
             <img
+                data-testid="player-country"
                 style={{
                     height: '1.2em',
                 }}
@@ -112,6 +120,16 @@ function PlayerRow(props: Props) {
                 title={getCountryName(country, language)}
             />
         ) : null
+
+    const avatar = (
+        // the empty box keeps rows from shifting while avatars load
+        <span data-testid="player-avatar" className={styles.avatar}>
+            {avatarUrl && <img src={avatarUrl} alt="steam avatar" />}
+        </span>
+    )
+
+    const nameWidth =
+        100 - 18 - 14 - (showElo ? 14 : 0) - (showCountry ? 14 : 0) - (showAvatar ? 10 : 0)
 
     const alias = (
         <span
@@ -194,8 +212,9 @@ function PlayerRow(props: Props) {
                         </PlayerRowCell>
                     )}
                     <PlayerRowCell width="14%">{faction}</PlayerRowCell>
-                    <PlayerRowCell width="14%">{countryFlag}</PlayerRowCell>
-                    <PlayerRowCell width={showElo ? '40%' : '54%'}>{alias}</PlayerRowCell>
+                    {showCountry && <PlayerRowCell width="14%">{countryFlag}</PlayerRowCell>}
+                    {showAvatar && <PlayerRowCell width="10%">{avatar}</PlayerRowCell>}
+                    <PlayerRowCell width={`${nameWidth}%`}>{alias}</PlayerRowCell>
                 </div>
             </div>
         </>
