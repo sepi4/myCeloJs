@@ -1,5 +1,25 @@
 # Changelog
 
+- **version 2.12.0.**
+    - Overlay preview in settings, with options to hide country and show Steam avatars
+    - Button to open the overlay in a browser
+    - Player row preview in settings, with options to hide country and show avatar
+    - Back and forward history works across all views
+    - Open a player card by clicking a name in game history
+    - Click a player row to show or hide extra info
+    - Keep the player name and the open player row visible while scrolling
+    - Show Steam avatars in search results and in the sticky name bar
+    - Overlay defaults to HTML and horizontal layout
+    - Show total, table and ELO by default
+    - Show a message when search finds no players
+    - Show a placeholder for invisible player names
+    - Upgrade Electron to 45
+    - Fix: overlay server accepts only local connections
+    - Fix: player search works with special characters
+    - Fix: overlay rows stay aligned when a player has no ELO
+    - Fix: country names in flag tooltips are common English names and also show on small flags
+    - Fix: overlay page shows no scrollbars
+    - UI improvements
 - **version 2.11.0.**
     - Show wins and losses when hovering game totals
     - Show game stats in a fixed, logical order
