@@ -9,6 +9,8 @@
 }
 
 .frame {
+    /* the row sizes its icons in em, so this scales them with the text */
+    font-size: var(--text-xs);
     padding: 0.3em 0;
     border: solid 0.05em var(--border-secondary);
 }
