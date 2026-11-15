@@ -20,25 +20,22 @@ export default function useOverlayAvatars(enabled: boolean): Record<number, stri
         : ''
 
     useEffect(() => {
+        if (!key) {
+            return
+        }
         let cancelled = false
-        const pairs = key ? key.split(',').map((pair) => pair.split(':') as [string, string]) : []
-        Promise.all(
-            pairs.map(async ([profileId, steamId]) => ({
-                profileId: Number(profileId),
-                url: await window.electronAPI.steam.fetchAvatar(steamId),
-            }))
-        ).then((results) => {
-            if (cancelled) {
-                return
-            }
-            const next: Record<number, string> = {}
-            for (const { profileId, url } of results) {
-                if (url) {
-                    next[profileId] = url
+        // Each avatar is added when it arrives, so one slow Steam profile does not hold back the
+        // others. Avatars from earlier games are kept, as they are looked up by profile ID.
+        for (const pair of key.split(',')) {
+            const [profileId, steamId] = pair.split(':') as [string, string]
+            const id = Number(profileId)
+            window.electronAPI.steam.fetchAvatar(steamId).then((url) => {
+                if (cancelled || !url) {
+                    return
                 }
-            }
-            setAvatars(next)
-        })
+                setAvatars((prev) => (prev[id] === url ? prev : { ...prev, [id]: url }))
+            })
+        }
         return () => {
             cancelled = true
         }

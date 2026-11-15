@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 
-import { Game, GAME_CONFIG } from '../constants/games'
+import { Game } from '../constants/games'
+import { rankingsOptions } from '../functions/rankings/rankingsOptions'
 import { writeRankings } from '../functions/rankings/writeRankings'
 import { useDisplayOptionsStore } from '../stores/displayOptionsStore'
 import { useGameStore } from '../stores/gameStore'
@@ -18,13 +19,7 @@ export function writeRankingsFile(
 ) {
     // An empty list is written too, so the overlay is cleared when the game ends.
     if (settings && players) {
-        writeRankings(game, players, {
-            horizontal: settings.rankingsHorizontal,
-            showElo: GAME_CONFIG[game].hasElo && elo,
-            showCountry: settings.rankingsShowCountry !== false,
-            showAvatar: settings.rankingsShowAvatar === true,
-            avatars,
-        })
+        writeRankings(game, players, { ...rankingsOptions(game, settings, elo), avatars })
     }
 }
 
@@ -36,7 +31,9 @@ export default function useRankingsFile() {
     } = useDisplayOptionsStore()
     const { players } = usePlayersStore()
     const { settings } = useSettingsStore()
-    const avatars = useOverlayAvatars(settings?.rankingsShowAvatar === true)
+    const avatars = useOverlayAvatars(
+        settings !== null && rankingsOptions(game, settings, elo).showAvatar
+    )
 
     useEffect(() => {
         writeRankingsFile(game, players, settings, elo, avatars)

@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 
-import { GAME_CONFIG } from '../../constants/games'
+import { rankingsOptions } from '../../functions/rankings/rankingsOptions'
 import { sampleAvatars, samplePlayers } from '../../functions/rankings/samplePlayers'
 import { buildRankings } from '../../functions/rankings/writeRankings'
 import useText from '../../hooks/useText'
@@ -12,6 +12,7 @@ import {
 import { useDisplayOptionsStore } from '../../stores/displayOptionsStore'
 import { useGameStore } from '../../stores/gameStore'
 import { usePlayersStore } from '../../stores/playersStore'
+import { SettingsType } from '../../types'
 
 import styles from './OverlayPreview.module.css'
 
@@ -31,10 +32,7 @@ const PAGE_SIZE = {
 
 interface Props {
     url: string
-    horizontal: boolean
-    html: boolean
-    showCountry: boolean
-    showAvatar: boolean
+    settings: SettingsType
 }
 
 export default function OverlayPreview(props: Props) {
@@ -47,8 +45,15 @@ export default function OverlayPreview(props: Props) {
     const frameRef = useRef<HTMLDivElement>(null)
     const [scale, setScale] = useState(0)
 
-    const sizes = props.html ? PAGE_SIZE.html : PAGE_SIZE.txt
-    const page = props.horizontal ? sizes.horizontal : sizes.vertical
+    const html = props.settings.rankingsHtml === true
+    const {
+        horizontal,
+        showElo: elo,
+        showCountry,
+        showAvatar,
+    } = rankingsOptions(game, props.settings, showElo)
+    const sizes = html ? PAGE_SIZE.html : PAGE_SIZE.txt
+    const page = horizontal ? sizes.horizontal : sizes.vertical
 
     useEffect(() => {
         const frame = frameRef.current
@@ -64,19 +69,21 @@ export default function OverlayPreview(props: Props) {
 
     const hasPlayers = players !== null && players.length > 0
 
-    let sampleDoc: string | undefined
-    if (!hasPlayers) {
+    const sampleDoc = useMemo(() => {
+        if (hasPlayers) {
+            return undefined
+        }
         const { json, text } = buildRankings(game, samplePlayers(game), {
-            horizontal: props.horizontal,
-            showElo: GAME_CONFIG[game].hasElo && showElo,
-            showCountry: props.showCountry,
-            showAvatar: props.showAvatar,
+            horizontal,
+            showElo: elo,
+            showCountry,
+            showAvatar,
             avatars: sampleAvatars(),
         })
-        const body = props.html ? renderRankingsBody(json) : renderRankingsTxtBody(text)
+        const body = html ? renderRankingsBody(json) : renderRankingsTxtBody(text)
         // The base makes the image paths load from the overlay server.
-        sampleDoc = `<!doctype html><html><head><base href="${props.url}/"><style>${RANKINGS_CSS}</style></head><body>${body}</body></html>`
-    }
+        return `<!doctype html><html><head><base href="${props.url}/"><style>${RANKINGS_CSS}</style></head><body>${body}</body></html>`
+    }, [hasPlayers, game, horizontal, elo, showCountry, showAvatar, html, props.url])
 
     return (
         <div className={styles.preview} data-testid="overlay-preview">
