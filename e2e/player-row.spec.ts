@@ -64,4 +64,10 @@ test('player row settings toggle the country flag and the avatar', async () => {
 
     await expect(app.playerCountries).toHaveCount(0)
     await expect(app.playerAvatars).toHaveCount(await app.playerRows.count())
+
+    await app.settingsIcon.click()
+    await app.playerRowCountryCheckbox.click()
+    await app.playerRowAvatarCheckbox.click()
+    await app.closeButton.click()
+    await expect(app.playerCountries.first()).toBeVisible()
 })
