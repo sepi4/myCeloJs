@@ -131,7 +131,7 @@
 }
 
 .overlayControls {
-    flex: 1 1 18em;
+    flex: 0 1 18em;
     min-width: 0;
 }
 
