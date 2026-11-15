@@ -14,6 +14,7 @@ const team = (overrides: Partial<RankingsJson['teams']['team1'][0]> = {}) => ({
 const rankings = (overrides: Partial<RankingsJson> = {}): RankingsJson => ({
     teams: { team1: [team()], team2: [team({ name: 'Enemy', faction: 'wer' })] },
     horizontal: false,
+    showCountry: true,
     ...overrides,
 })
 
@@ -44,6 +45,12 @@ describe('renderRankingsBody', () => {
         )
 
         expect(html).not.toContain('/img/countryFlags/')
+    })
+
+    it('leaves out the country column when the country is hidden', () => {
+        const html = renderRankingsBody(rankings({ showCountry: false }))
+
+        expect(html).not.toContain('data-testid="country"')
     })
 
     it('contains ranking values', () => {

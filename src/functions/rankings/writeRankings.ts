@@ -32,7 +32,8 @@ export function buildRankings(
     game: Game,
     players: Player[],
     rankingsHorizontal: boolean,
-    showElo: boolean = false
+    showElo: boolean = false,
+    showCountry: boolean = true
 ): { json: RankingsJson; text: string } {
     const json: RankingsJson = {
         teams: {
@@ -40,12 +41,15 @@ export function buildRankings(
             team2: [],
         },
         horizontal: false,
+        showCountry,
     }
 
     const rowsLeft = []
     const rowsRight = []
     for (const player of players) {
-        const country = player.country ? player.country : ''
+        const country = showCountry && player.country ? player.country : ''
+        const countryLeft = showCountry ? countryText(country, true, 5) + ' ' : ''
+        const countryRight = showCountry ? countryText(country, false, 5) + ' ' : ''
         const name = player.name
 
         const ranking = player.ranking?.toString() ?? '-'
@@ -62,8 +66,7 @@ export function buildRankings(
                 const text =
                     getLimitedWord(name, maxNameLength, true) +
                     ' ' +
-                    countryText(country, true, 5) +
-                    ' ' +
+                    countryLeft +
                     (ratingPad ? ratingPad.trimEnd().padStart(7) + ' ' : '') +
                     ranking.padStart(5) +
                     ' ' +
@@ -76,8 +79,7 @@ export function buildRankings(
                     ranking.padEnd(5) +
                     (ratingPad ? ' ' + ratingPad : '') +
                     ' ' +
-                    countryText(country, false, 5) +
-                    ' ' +
+                    countryRight +
                     getLimitedWord(name, maxNameLength, false)
                 rowsRight.push(text)
             }
@@ -88,8 +90,7 @@ export function buildRankings(
                 ranking.padEnd(5) +
                 (ratingPad ? ' ' + ratingPad : '') +
                 ' ' +
-                countryText(country, false, 5) +
-                ' ' +
+                countryRight +
                 getLimitedWord(name, maxNameLength, false)
 
             if (teamSlot % 2 === 0) {
@@ -103,7 +104,7 @@ export function buildRankings(
         const teamEntry = {
             name,
             ranking,
-            country,
+            ...(country ? { country } : {}),
             // The overlay loads /img/<faction>.png, and the COH3 images are named by the log name.
             faction: game === 'coh3' ? faction : factionCode,
             ...(ratingValue !== undefined ? { rating: ratingValue } : {}),
@@ -139,8 +140,9 @@ export function writeRankings(
     game: Game,
     players: Player[],
     rankingsHorizontal = false,
-    showElo: boolean = false
+    showElo: boolean = false,
+    showCountry: boolean = true
 ): void {
-    const { json, text } = buildRankings(game, players, rankingsHorizontal, showElo)
+    const { json, text } = buildRankings(game, players, rankingsHorizontal, showElo, showCountry)
     window.electronAPI.rankings.write(JSON.stringify(json, null, 4), text)
 }

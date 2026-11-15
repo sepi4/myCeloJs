@@ -37,6 +37,14 @@ const text = {
         en: 'vertical',
         ru: 'вертикально',
     },
+    overlay_show: {
+        en: 'show',
+        ru: 'показывать',
+    },
+    country: {
+        en: 'country',
+        ru: 'страна',
+    },
     overlay_preview: {
         en: 'preview',
         ru: 'предпросмотр',

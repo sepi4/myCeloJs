@@ -12,6 +12,7 @@ export type RankingsJson = {
         team2: Team[]
     }
     horizontal: boolean
+    showCountry: boolean
 }
 
 export type Player = {
@@ -58,6 +59,8 @@ export type SettingsType = {
     rankingsHtml?: boolean
     rankingsPort?: number
     rankingsHorizontal?: boolean
+    /** Missing means shown, as before this setting existed. */
+    rankingsShowCountry?: boolean
     steamId?: string
     profileIdCoh2?: number
     profileIdCoh3?: number
