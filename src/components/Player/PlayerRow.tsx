@@ -2,6 +2,7 @@ import { MouseEvent, useEffect, useRef, useState } from 'react'
 
 import { countryFlags } from '../../constants/countryFlags'
 import { GAME_CONFIG, getFactionCode, getFactionFlag } from '../../constants/games'
+import { PLACEHOLDER_AVATAR } from '../../constants/placeholderAvatar'
 import { getTotalGames } from '../../functions/rankings/totalGames'
 import { playerRowOptions } from '../../functions/settings/playerRowOptions'
 import useLanguage from '../../hooks/useLanguage'
@@ -70,7 +71,8 @@ function PlayerRow(props: Props) {
         openPlayerCard(player, playerRanks, game)
     }
 
-    const avatarUrl = useSteamAvatar(showAvatar ? playerRanks?.steamId : undefined)
+    const steamId = showAvatar ? playerRanks?.steamId : undefined
+    const avatarUrl = useSteamAvatar(steamId)
 
     const countryFlagLocation = countryFlags[country ? country : '']
 
@@ -123,10 +125,12 @@ function PlayerRow(props: Props) {
             />
         ) : null
 
+    // Only 1v1 ranks give a Steam ID, so many players never get an avatar.
+    const avatarSrc = steamId ? avatarUrl : PLACEHOLDER_AVATAR
     const avatar = (
         // the empty box keeps rows from shifting while avatars load
         <span data-testid="player-avatar" className={styles.avatar}>
-            {avatarUrl && <img src={avatarUrl} alt="steam avatar" />}
+            {avatarSrc && <img src={avatarSrc} alt="steam avatar" />}
         </span>
     )
 
