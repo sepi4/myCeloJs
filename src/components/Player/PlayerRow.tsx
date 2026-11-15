@@ -128,9 +128,6 @@ function PlayerRow(props: Props) {
         </span>
     )
 
-    const nameWidth =
-        100 - 18 - 14 - (showElo ? 14 : 0) - (showCountry ? 14 : 0) - (showAvatar ? 10 : 0)
-
     const alias = (
         <span
             data-testid="player-name"
@@ -145,6 +142,31 @@ function PlayerRow(props: Props) {
             <PlayerName name={player.name} />
         </span>
     )
+
+    const rankCell = (
+        <>
+            {dropDownArrow}{' '}
+            <span data-testid="player-rank" title={rankTitle} style={{ fontWeight: 600 }}>
+                {rank}
+            </span>
+        </>
+    )
+
+    const eloCell = (
+        <span data-testid="player-elo" style={{ fontWeight: 300 }}>
+            {player.rating ? `(${player.rating})` : '-'}
+        </span>
+    )
+
+    const columns = [
+        { key: 'rank', weight: 16, visible: true, content: rankCell, justifyContent: 'flex-start' },
+        { key: 'elo', weight: 14, visible: showElo, content: eloCell },
+        { key: 'faction', weight: 14, visible: true, content: faction },
+        { key: 'country', weight: 14, visible: showCountry, content: countryFlag },
+        { key: 'avatar', weight: 14, visible: showAvatar, content: avatar },
+        { key: 'name', weight: 42, visible: true, content: alias },
+    ].filter((column) => column.visible)
+    const totalWeight = columns.reduce((sum, column) => sum + column.weight, 0)
 
     const sentinelRef = useRef<HTMLDivElement>(null)
     const rowRef = useRef<HTMLDivElement>(null)
@@ -192,29 +214,15 @@ function PlayerRow(props: Props) {
                 onClick={isRealPlayer ? toggleDetails : undefined}
             >
                 <div className={styles.content}>
-                    <PlayerRowCell width="18%" justifyContent="flex-start">
-                        <>
-                            {dropDownArrow}{' '}
-                            <span
-                                data-testid="player-rank"
-                                title={rankTitle}
-                                style={{ fontWeight: 600 }}
-                            >
-                                {rank}
-                            </span>
-                        </>
-                    </PlayerRowCell>
-                    {showElo && (
-                        <PlayerRowCell width="14%">
-                            <span data-testid="player-elo" style={{ fontWeight: 300 }}>
-                                {player.rating ? `(${player.rating})` : '-'}
-                            </span>
+                    {columns.map((column) => (
+                        <PlayerRowCell
+                            key={column.key}
+                            width={`${(column.weight / totalWeight) * 100}%`}
+                            justifyContent={column.justifyContent}
+                        >
+                            {column.content}
                         </PlayerRowCell>
-                    )}
-                    <PlayerRowCell width="14%">{faction}</PlayerRowCell>
-                    {showCountry && <PlayerRowCell width="14%">{countryFlag}</PlayerRowCell>}
-                    {showAvatar && <PlayerRowCell width="10%">{avatar}</PlayerRowCell>}
-                    <PlayerRowCell width={`${nameWidth}%`}>{alias}</PlayerRowCell>
+                    ))}
                 </div>
             </div>
         </>
