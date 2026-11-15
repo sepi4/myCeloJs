@@ -16,8 +16,9 @@ import Notification from '../Notification'
 import ClearButton from './ClearButton'
 import IntervalInput from './IntervalInput'
 import LogLocationSetting from './LogLocationSetting'
+import OverlaySettings from './OverlaySettings'
 import RadioGroup from './RadioGroup'
-import SettingsAfterLog from './SettingsAfterLog'
+import SettingsLocation from './SettingsLocation'
 import SettingsSection from './SettingsSection'
 
 import styles from './Settings.module.css'
@@ -221,7 +222,9 @@ function Settings(props: Props) {
 
             <IntervalInput />
 
-            <SettingsAfterLog />
+            <OverlaySettings />
+
+            <SettingsLocation />
 
             <Modal
                 isOpen={confirm !== null}
