@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 
+import { isOverlayHtml } from '../functions/rankings/rankingsOptions'
 import { readSettings } from '../functions/settings/readSettings'
 import writeSettings from '../functions/settings/writeSettings'
 import { useGameStore } from '../stores/gameStore'
@@ -19,7 +20,7 @@ export default function useLoadSettings() {
             if (!savedSettings) {
                 return
             }
-            window.electronAPI.rankings.setFormat(savedSettings.rankingsHtml ? 'html' : 'txt')
+            window.electronAPI.rankings.setFormat(isOverlayHtml(savedSettings) ? 'html' : 'txt')
             writeSettings(savedSettings)
         }
         loadSettings()

@@ -103,6 +103,17 @@ describe('writeRankingsFile', () => {
         })
     })
 
+    it('uses html and horizontal when the format and orientation are not set', () => {
+        const { rankingsHorizontal: _, ...unset } = settings
+        writeRankingsFile('coh2', [player], { ...unset, rankingsShowAvatar: true }, false)
+
+        expect(mockWriteRankings).toHaveBeenCalledWith(
+            'coh2',
+            [player],
+            expect.objectContaining({ horizontal: true, showAvatar: true })
+        )
+    })
+
     it('hides the avatars in txt format', () => {
         writeRankingsFile(
             'coh2',

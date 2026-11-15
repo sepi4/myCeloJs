@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 
-import { rankingsOptions } from '../../functions/rankings/rankingsOptions'
+import { isOverlayHtml, rankingsOptions } from '../../functions/rankings/rankingsOptions'
 import { sampleAvatars, samplePlayers } from '../../functions/rankings/samplePlayers'
 import { buildRankings } from '../../functions/rankings/writeRankings'
 import useText from '../../hooks/useText'
@@ -45,7 +45,7 @@ export default function OverlayPreview(props: Props) {
     const frameRef = useRef<HTMLDivElement>(null)
     const [scale, setScale] = useState(0)
 
-    const html = props.settings.rankingsHtml === true
+    const html = isOverlayHtml(props.settings)
     const {
         horizontal,
         showElo: elo,

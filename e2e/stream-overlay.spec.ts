@@ -29,10 +29,6 @@ test.beforeAll(async () => {
     await app.mockFileDialog(electronApp, COH2_LOG_PATH)
     await app.logLocationButtonCoh2.click()
 
-    // Select HTML format and orientation so the overlay URL becomes available
-    await app.radioHtml.click()
-    await app.radioHorizontal.click()
-
     // Copy the overlay URL from the settings view
     await app.copyRankingsButton.click()
     await app.copyRankingsNotification.waitFor({ state: 'visible' })
