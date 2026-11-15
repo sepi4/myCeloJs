@@ -88,7 +88,7 @@ export default function OverlayPreview(props: Props) {
     return (
         <div className={styles.preview} data-testid="overlay-preview">
             <div className={styles.title}>
-                {getText('overlay_preview')}
+                {getText('preview')}
                 {!hasPlayers && (
                     <span className={styles.sample} data-testid="overlay-preview-sample">
                         {' '}
@@ -102,7 +102,7 @@ export default function OverlayPreview(props: Props) {
                     className={styles.iframe}
                     src={hasPlayers ? props.url : undefined}
                     srcDoc={sampleDoc}
-                    title={getText('overlay_preview')}
+                    title={getText('preview')}
                     tabIndex={-1}
                     sandbox="allow-scripts"
                     style={{

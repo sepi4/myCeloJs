@@ -61,7 +61,7 @@ const text = {
         en: 'address for OBS',
         ru: 'адрес для OBS',
     },
-    overlay_preview: {
+    preview: {
         en: 'preview',
         ru: 'предпросмотр',
     },

@@ -17,7 +17,7 @@ export default function PlayerRowPreview() {
 
     return (
         <div className={styles.preview} data-testid="player-row-preview">
-            <div className={styles.title}>{getText('overlay_preview')}</div>
+            <div className={styles.title}>{getText('preview')}</div>
             <div className={styles.frame}>
                 <PlayerRow
                     player={samplePlayer}
