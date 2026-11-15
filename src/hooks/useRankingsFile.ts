@@ -16,13 +16,11 @@ export function writeRankingsFile(
 ) {
     // An empty list is written too, so the overlay is cleared when the game ends.
     if (settings && players) {
-        writeRankings(
-            game,
-            players,
-            settings.rankingsHorizontal,
-            GAME_CONFIG[game].hasElo && elo,
-            settings.rankingsShowCountry !== false
-        )
+        writeRankings(game, players, {
+            horizontal: settings.rankingsHorizontal,
+            showElo: GAME_CONFIG[game].hasElo && elo,
+            showCountry: settings.rankingsShowCountry !== false,
+        })
     }
 }
 

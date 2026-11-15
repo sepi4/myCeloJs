@@ -65,13 +65,11 @@ export default function OverlayPreview(props: Props) {
 
     let sampleDoc: string | undefined
     if (!hasPlayers) {
-        const { json, text } = buildRankings(
-            game,
-            samplePlayers(game),
-            props.horizontal,
-            GAME_CONFIG[game].hasElo && showElo,
-            props.showCountry
-        )
+        const { json, text } = buildRankings(game, samplePlayers(game), {
+            horizontal: props.horizontal,
+            showElo: GAME_CONFIG[game].hasElo && showElo,
+            showCountry: props.showCountry,
+        })
         const body = props.html ? renderRankingsBody(json) : renderRankingsTxtBody(text)
         // The base makes the image paths load from the overlay server.
         sampleDoc = `<!doctype html><html><head><base href="${props.url}/"><style>${RANKINGS_CSS}</style></head><body>${body}</body></html>`
