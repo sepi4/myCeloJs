@@ -14,9 +14,9 @@ function img(src: string): string {
 }
 
 function renderPlayer(
-    player: { name: string; ranking: string; country?: string; faction: string; rating?: number },
+    player: RankingsJson['teams']['team1'][number],
     reversed: boolean,
-    showCountry: boolean
+    data: RankingsJson
 ): string {
     const faction = escapeHtml(player.faction)
     const name = escapeHtml(player.name)
@@ -36,9 +36,14 @@ function renderPlayer(
         player.rating !== undefined
             ? `<span class="eloStyle" data-testid="elo">(${player.rating})</span>`
             : ''
-    const countryDiv = showCountry
+    const countryDiv = data.showCountry
         ? `<div class="countryStyle" data-testid="country">
         ${country ? img(`/img/countryFlags/${country}.png`) : ''}
+    </div>`
+        : ''
+    const avatarDiv = data.showAvatar
+        ? `<div class="avatarStyle" data-testid="avatar">
+        ${player.avatar ? img(escapeHtml(player.avatar)) : ''}
     </div>`
         : ''
     const nameSpan = `<span class="nameStyle ${nameMargin}" data-testid="name">
@@ -46,8 +51,8 @@ function renderPlayer(
     </span>`
 
     const parts = reversed
-        ? [nameSpan, countryDiv, eloSpan, rankSpan, factionDiv]
-        : [factionDiv, rankSpan, eloSpan, countryDiv, nameSpan]
+        ? [nameSpan, avatarDiv, countryDiv, eloSpan, rankSpan, factionDiv]
+        : [factionDiv, rankSpan, eloSpan, countryDiv, avatarDiv, nameSpan]
 
     const cls = reversed ? 'playerStyle reversed' : 'playerStyle'
     return `<div class="${cls}" data-testid="player">${parts.join('')}</div>`
@@ -57,8 +62,8 @@ export function renderRankingsBody(data: RankingsJson): string {
     const h = data.horizontal
     const suffix = h ? 'Horizontal' : ''
 
-    const team1 = data.teams.team1.map((p) => renderPlayer(p, h, data.showCountry)).join('')
-    const team2 = data.teams.team2.map((p) => renderPlayer(p, false, data.showCountry)).join('')
+    const team1 = data.teams.team1.map((p) => renderPlayer(p, h, data)).join('')
+    const team2 = data.teams.team2.map((p) => renderPlayer(p, false, data)).join('')
 
     return [
         `<div class="bodyStyle${suffix}">`,

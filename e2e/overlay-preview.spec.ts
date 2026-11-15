@@ -45,3 +45,19 @@ test('country checkbox hides and shows the countries in the preview', async () =
     await app.overlayCountryCheckbox.click()
     await expect(app.overlayPreviewCountries).toHaveCount(8)
 })
+
+test('avatar checkbox shows avatars in the preview and works only with html', async () => {
+    await expect(app.overlayAvatarCheckbox).not.toBeChecked()
+    await expect(app.overlayPreviewAvatars).toHaveCount(0)
+
+    await app.overlayAvatarCheckbox.click()
+    await expect(app.overlayPreviewAvatars).toHaveCount(8)
+
+    await app.radioTxt.click()
+    await expect(app.overlayAvatarCheckbox).toBeDisabled()
+
+    await app.radioHtml.click()
+    await expect(app.overlayAvatarCheckbox).toBeEnabled()
+    await app.overlayAvatarCheckbox.click()
+    await expect(app.overlayPreviewAvatars).toHaveCount(0)
+})

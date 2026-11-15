@@ -15,6 +15,7 @@ const rankings = (overrides: Partial<RankingsJson> = {}): RankingsJson => ({
     teams: { team1: [team()], team2: [team({ name: 'Enemy', faction: 'wer' })] },
     horizontal: false,
     showCountry: true,
+    showAvatar: false,
     ...overrides,
 })
 
@@ -51,6 +52,24 @@ describe('renderRankingsBody', () => {
         const html = renderRankingsBody(rankings({ showCountry: false }))
 
         expect(html).not.toContain('data-testid="country"')
+    })
+
+    it('adds an avatar column with the image when avatars are shown', () => {
+        const html = renderRankingsBody(
+            rankings({
+                showAvatar: true,
+                teams: { team1: [team({ avatar: 'https://example.com/a.jpg' })], team2: [team()] },
+            })
+        )
+
+        expect(html.match(/data-testid="avatar"/g)).toHaveLength(2)
+        expect(html).toContain('src="https://example.com/a.jpg"')
+    })
+
+    it('leaves out the avatar column by default', () => {
+        const html = renderRankingsBody(rankings())
+
+        expect(html).not.toContain('data-testid="avatar"')
     })
 
     it('contains ranking values', () => {
