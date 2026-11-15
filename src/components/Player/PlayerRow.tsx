@@ -59,6 +59,8 @@ function PlayerRow(props: Props) {
             }
         }
     }
+    // Log players have no country of their own, but the settings preview passes one.
+    country ??= player.country
 
     const openPlayerCard = useNavigationStore((s) => s.openPlayerCard)
 

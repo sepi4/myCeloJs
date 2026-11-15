@@ -98,6 +98,7 @@ export class App {
     readonly overlayAvatarCheckbox: Locator
     readonly playerRowCountryCheckbox: Locator
     readonly playerRowAvatarCheckbox: Locator
+    readonly playerRowPreview: Locator
     readonly overlayPreviewAvatars: Locator
     readonly copySettings: Locator
     readonly copySettingsButton: Locator
@@ -199,6 +200,7 @@ export class App {
         this.overlayAvatarCheckbox = page.getByTestId('checkbox-overlay-avatar')
         this.playerRowCountryCheckbox = page.getByTestId('checkbox-player-row-country')
         this.playerRowAvatarCheckbox = page.getByTestId('checkbox-player-row-avatar')
+        this.playerRowPreview = page.getByTestId('player-row-preview')
         this.overlayPreviewAvatars = this.overlayPreview
             .frameLocator('iframe')
             .getByTestId('avatar')

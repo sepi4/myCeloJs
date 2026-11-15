@@ -52,8 +52,14 @@ test('player row settings toggle the country flag and the avatar', async () => {
     await app.settingsIcon.click()
     await expect(app.playerRowCountryCheckbox).toBeChecked()
     await expect(app.playerRowAvatarCheckbox).not.toBeChecked()
+    const preview = app.playerRowPreview
+    await expect(preview.getByTestId('player-country')).toBeVisible()
+    await expect(preview.getByTestId('player-avatar')).toHaveCount(0)
+
     await app.playerRowCountryCheckbox.click()
     await app.playerRowAvatarCheckbox.click()
+    await expect(preview.getByTestId('player-country')).toHaveCount(0)
+    await expect(preview.getByTestId('player-avatar')).toBeVisible()
     await app.closeButton.click()
 
     await expect(app.playerCountries).toHaveCount(0)
