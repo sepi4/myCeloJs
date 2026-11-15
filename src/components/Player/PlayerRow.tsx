@@ -3,6 +3,7 @@ import { MouseEvent, useEffect, useRef, useState } from 'react'
 import { countryFlags } from '../../constants/countryFlags'
 import { GAME_CONFIG, getFactionCode, getFactionFlag } from '../../constants/games'
 import { getTotalGames } from '../../functions/rankings/totalGames'
+import { playerRowOptions } from '../../functions/settings/playerRowOptions'
 import useLanguage from '../../hooks/useLanguage'
 import useNavbarPosition from '../../hooks/useNavbarPosition'
 import useSteamAvatar from '../../hooks/useSteamAvatar'
@@ -35,8 +36,7 @@ function PlayerRow(props: Props) {
     } = useDisplayOptionsStore()
     const showElo = GAME_CONFIG[game].hasElo && elo
     const { settings } = useSettingsStore()
-    const showCountry = settings?.playerRowShowCountry !== false
-    const showAvatar = settings?.playerRowShowAvatar === true
+    const { showCountry, showAvatar } = playerRowOptions(settings)
     const language = useLanguage()
     const isTopNavbar = useNavbarPosition() === 'top'
     const { player, toggleDetails, playerRanks, showDetails } = props

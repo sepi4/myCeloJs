@@ -1,3 +1,4 @@
+import { playerRowOptions } from '../../functions/settings/playerRowOptions'
 import { updateSettings } from '../../functions/settings/writeSettings'
 import useText from '../../hooks/useText'
 import { useSettingsStore } from '../../stores/settingsStore'
@@ -11,8 +12,7 @@ export default function PlayerRowSettings() {
     const getText = useText()
     const { settings } = useSettingsStore()
 
-    const showCountry = settings?.playerRowShowCountry !== false
-    const showAvatar = settings?.playerRowShowAvatar === true
+    const { showCountry, showAvatar } = playerRowOptions(settings)
 
     return (
         <SettingsSection title={getText('player_row_title')}>
