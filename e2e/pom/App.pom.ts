@@ -255,4 +255,20 @@ export class App {
             dialog.showOpenDialog = () => Promise.resolve({ canceled: false, filePaths: [fp] })
         }, filePath)
     }
+
+    /** Records the URL instead of opening a real browser. */
+    async mockOpenExternal(electronApp: ElectronApplication) {
+        await electronApp.evaluate(({ shell }) => {
+            shell.openExternal = (url: string) => {
+                ;(globalThis as { openedExternalUrl?: string }).openedExternalUrl = url
+                return Promise.resolve()
+            }
+        })
+    }
+
+    async openedExternalUrl(electronApp: ElectronApplication): Promise<string | undefined> {
+        return electronApp.evaluate(
+            () => (globalThis as { openedExternalUrl?: string }).openedExternalUrl
+        )
+    }
 }

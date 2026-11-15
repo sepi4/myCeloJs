@@ -29,15 +29,20 @@ test.beforeAll(async () => {
     await app.mockFileDialog(electronApp, COH2_LOG_PATH)
     await app.logLocationButtonCoh2.click()
 
-    // Copy the overlay URL from the settings view
+    // The browser button opens the overlay URL, and the copy button copies the same URL
+    await app.mockOpenExternal(electronApp)
+    await app.openOverlayButton.click()
+    await expect.poll(() => app.openedExternalUrl(electronApp)).toBeTruthy()
+    overlayUrl = (await app.openedExternalUrl(electronApp))!
+
     await app.copyRankingsButton.click()
     await app.copyRankingsNotification.waitFor({ state: 'visible' })
-    overlayUrl = await page.evaluate(() => navigator.clipboard.readText())
+    expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(overlayUrl)
 
     await app.closeButton.click()
     await expect(app.playersContainer).toBeVisible()
 
-    // Open overlay in a standalone browser (simulates OBS browser source)
+    // Open the overlay in a standalone browser, as the button or an OBS browser source would
     browser = await chromium.launch()
     overlayPage = await browser.newPage()
     await overlayPage.goto(overlayUrl)
