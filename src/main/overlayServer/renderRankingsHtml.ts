@@ -15,7 +15,8 @@ function img(src: string): string {
 
 function renderPlayer(
     player: { name: string; ranking: string; country?: string; faction: string; rating?: number },
-    reversed: boolean
+    reversed: boolean,
+    showCountry: boolean
 ): string {
     const faction = escapeHtml(player.faction)
     const name = escapeHtml(player.name)
@@ -35,9 +36,11 @@ function renderPlayer(
         player.rating !== undefined
             ? `<span class="eloStyle" data-testid="elo">(${player.rating})</span>`
             : ''
-    const countryDiv = `<div class="countryStyle" data-testid="country">
+    const countryDiv = showCountry
+        ? `<div class="countryStyle" data-testid="country">
         ${country ? img(`/img/countryFlags/${country}.png`) : ''}
     </div>`
+        : ''
     const nameSpan = `<span class="nameStyle ${nameMargin}" data-testid="name">
         ${name}
     </span>`
@@ -54,8 +57,8 @@ export function renderRankingsBody(data: RankingsJson): string {
     const h = data.horizontal
     const suffix = h ? 'Horizontal' : ''
 
-    const team1 = data.teams.team1.map((p) => renderPlayer(p, h)).join('')
-    const team2 = data.teams.team2.map((p) => renderPlayer(p, false)).join('')
+    const team1 = data.teams.team1.map((p) => renderPlayer(p, h, data.showCountry)).join('')
+    const team2 = data.teams.team2.map((p) => renderPlayer(p, false, data.showCountry)).join('')
 
     return [
         `<div class="bodyStyle${suffix}">`,

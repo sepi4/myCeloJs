@@ -31,21 +31,27 @@ describe('writeRankingsFile', () => {
     it('writes the players with the orientation from settings', () => {
         writeRankingsFile('coh2', [player], settings, false)
 
-        expect(mockWriteRankings).toHaveBeenCalledWith('coh2', [player], true, false)
+        expect(mockWriteRankings).toHaveBeenCalledWith('coh2', [player], true, false, true)
     })
 
     it('shows ELO only for a game that has it', () => {
         writeRankingsFile('coh2', [player], settings, true)
         writeRankingsFile('coh3', [player], settings, true)
 
-        expect(mockWriteRankings).toHaveBeenNthCalledWith(1, 'coh2', [player], true, false)
-        expect(mockWriteRankings).toHaveBeenNthCalledWith(2, 'coh3', [player], true, true)
+        expect(mockWriteRankings).toHaveBeenNthCalledWith(1, 'coh2', [player], true, false, true)
+        expect(mockWriteRankings).toHaveBeenNthCalledWith(2, 'coh3', [player], true, true, true)
     })
 
     it('writes an empty player list, so the overlay is cleared', () => {
         writeRankingsFile('coh2', [], settings, false)
 
-        expect(mockWriteRankings).toHaveBeenCalledWith('coh2', [], true, false)
+        expect(mockWriteRankings).toHaveBeenCalledWith('coh2', [], true, false, true)
+    })
+
+    it('hides the country only when the setting is off', () => {
+        writeRankingsFile('coh2', [player], { ...settings, rankingsShowCountry: false }, false)
+
+        expect(mockWriteRankings).toHaveBeenCalledWith('coh2', [player], true, false, false)
     })
 
     it('does not write before the settings or players are loaded', () => {

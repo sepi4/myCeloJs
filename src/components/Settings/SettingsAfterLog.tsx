@@ -1,6 +1,7 @@
 import { updateSettings } from '../../functions/settings/writeSettings'
 import useText from '../../hooks/useText'
 import { useSettingsStore } from '../../stores/settingsStore'
+import CheckboxGroup from './CheckboxGroup'
 import CopyableText from './CopyableText'
 import OverlayPreview from './OverlayPreview'
 import RadioGroup from './RadioGroup'
@@ -24,6 +25,8 @@ export default function SettingsAfterLog() {
     const handleOrientation = (horizontal: boolean) => {
         updateSettings({ rankingsHorizontal: horizontal })
     }
+
+    const showCountry = settings?.rankingsShowCountry !== false
 
     const overlayConfigured =
         settings?.rankingsPort !== undefined &&
@@ -74,6 +77,19 @@ export default function SettingsAfterLog() {
                                 }
                             />
 
+                            <CheckboxGroup
+                                title={getText('overlay_show')}
+                                options={[
+                                    {
+                                        label: getText('country'),
+                                        checked: showCountry,
+                                        onChange: () =>
+                                            updateSettings({ rankingsShowCountry: !showCountry }),
+                                        testId: 'checkbox-overlay-country',
+                                    },
+                                ]}
+                            />
+
                             <CopyableText testId="copy-rankings" text={overlayUrl} />
                         </div>
 
@@ -82,6 +98,7 @@ export default function SettingsAfterLog() {
                                 url={overlayUrl}
                                 horizontal={settings.rankingsHorizontal === true}
                                 html={settings.rankingsHtml === true}
+                                showCountry={showCountry}
                             />
                         )}
                     </div>

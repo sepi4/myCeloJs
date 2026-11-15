@@ -137,4 +137,29 @@ describe('buildRankings', () => {
             expect(text).not.toMatch(/\(\d+\)/)
         })
     })
+
+    describe('country output', () => {
+        it('keeps the country in json and text by default', () => {
+            const { json, text } = buildRankings('coh2', [player({ country: 'fi' })], false)
+
+            expect(json.showCountry).toBe(true)
+            expect(json.teams.team1[0]!.country).toBe('fi')
+            expect(text).toContain('FIN')
+        })
+
+        it('leaves the country out of json and text when the country is hidden', () => {
+            for (const horizontal of [false, true]) {
+                const players = [
+                    player({ name: 'A', country: 'fi', teamSlot: 0 }),
+                    player({ name: 'B', country: 'fi', teamSlot: 1 }),
+                ]
+                const { json, text } = buildRankings('coh2', players, horizontal, false, false)
+
+                expect(json.showCountry).toBe(false)
+                expect(json.teams.team1[0]!.country).toBeUndefined()
+                expect(json.teams.team2[0]!.country).toBeUndefined()
+                expect(text).not.toContain('FIN')
+            }
+        })
+    })
 })

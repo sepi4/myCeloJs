@@ -33,6 +33,7 @@ interface Props {
     url: string
     horizontal: boolean
     html: boolean
+    showCountry: boolean
 }
 
 export default function OverlayPreview(props: Props) {
@@ -68,7 +69,8 @@ export default function OverlayPreview(props: Props) {
             game,
             samplePlayers(game),
             props.horizontal,
-            GAME_CONFIG[game].hasElo && showElo
+            GAME_CONFIG[game].hasElo && showElo,
+            props.showCountry
         )
         const body = props.html ? renderRankingsBody(json) : renderRankingsTxtBody(text)
         // The base makes the image paths load from the overlay server.

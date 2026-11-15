@@ -8,6 +8,8 @@ let electronApp: ElectronApplication
 let app: App
 let tempUserDataDir: string
 
+test.describe.configure({ mode: 'serial' })
+
 test.beforeAll(async () => {
     const result = await launchApp()
     electronApp = result.electronApp
@@ -29,4 +31,17 @@ test('settings preview shows sample players when the game has no players', async
     await expect(app.overlayPreviewSample).toBeVisible()
     await expect(app.overlayPreviewNames).toHaveCount(8)
     await expect(app.overlayPreviewNames.first()).toHaveText('Player 1')
+})
+
+test('country checkbox hides and shows the countries in the preview', async () => {
+    await expect(app.overlayCountryCheckbox).toBeChecked()
+    await expect(app.overlayPreviewCountries).toHaveCount(8)
+
+    await app.overlayCountryCheckbox.click()
+    await expect(app.overlayCountryCheckbox).not.toBeChecked()
+    await expect(app.overlayPreviewCountries).toHaveCount(0)
+    await expect(app.overlayPreviewNames).toHaveCount(8)
+
+    await app.overlayCountryCheckbox.click()
+    await expect(app.overlayPreviewCountries).toHaveCount(8)
 })
