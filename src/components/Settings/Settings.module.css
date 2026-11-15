@@ -110,6 +110,14 @@
     cursor: default;
 }
 
+.button.danger {
+    background-color: var(--bg-danger-button);
+}
+
+.button.danger:hover:not(:disabled) {
+    background-color: var(--bg-danger-button-hover);
+}
+
 .radioGroups {
     display: flex;
     gap: 2em;

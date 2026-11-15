@@ -257,7 +257,7 @@ function Settings(props: Props) {
             <SettingsSection>
                 <div className={styles.resetRow}>
                     <button
-                        className={styles.button}
+                        className={`${styles.button} ${styles.danger}`}
                         data-testid="reset-settings-button"
                         disabled={isDefaultSettings}
                         onClick={() =>
