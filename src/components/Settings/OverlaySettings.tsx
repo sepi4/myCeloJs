@@ -88,7 +88,15 @@ export default function OverlaySettings() {
                         testId="copy-rankings"
                         title={getText('overlay_url_title')}
                         text={overlayUrl}
-                    />
+                    >
+                        <button
+                            className={styles.button}
+                            data-testid="open-overlay-button"
+                            onClick={() => window.electronAPI.shell.openExternal(overlayUrl)}
+                        >
+                            {getText('browser')}
+                        </button>
+                    </CopyableText>
                 </div>
 
                 <OverlayPreview url={overlayUrl} settings={settings} />

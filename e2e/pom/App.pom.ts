@@ -90,6 +90,7 @@ export class App {
     readonly copyRankings: Locator
     readonly copyRankingsButton: Locator
     readonly copyRankingsNotification: Locator
+    readonly openOverlayButton: Locator
     readonly overlayPreview: Locator
     readonly overlayPreviewSample: Locator
     readonly overlayPreviewNames: Locator
@@ -190,6 +191,7 @@ export class App {
         this.copyRankings = page.getByTestId('copy-rankings')
         this.copyRankingsButton = page.getByTestId('copy-rankings-button')
         this.copyRankingsNotification = page.getByTestId('copy-rankings-notification')
+        this.openOverlayButton = page.getByTestId('open-overlay-button')
         this.overlayPreview = page.getByTestId('overlay-preview')
         this.overlayPreviewSample = page.getByTestId('overlay-preview-sample')
         this.overlayPreviewNames = this.overlayPreview.frameLocator('iframe').getByTestId('name')

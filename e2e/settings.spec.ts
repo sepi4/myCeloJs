@@ -59,6 +59,7 @@ test('OBS studio settings - default format, orientation and copy buttons', async
     await expect(app.radioHtml).toBeChecked()
     await expect(app.radioHorizontal).toBeChecked()
     await expect(app.copyRankings).toBeVisible()
+    await expect(app.openOverlayButton).toBeVisible()
     await expect(app.copySettings).toBeVisible()
     await expect(app.overlayPreview).toBeVisible()
 

@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 import useText from '../../hooks/useText'
 import useTimedBoolean from '../../hooks/useTimedBoolean'
 import Notification from '../Notification'
@@ -10,6 +12,8 @@ interface Props {
     testId?: string
     /** Small title above the field, like a compact RadioGroup title. */
     title?: string
+    /** More buttons next to the copy button. */
+    children?: ReactNode
 }
 
 function CopyableText(props: Props) {
@@ -41,13 +45,16 @@ function CopyableText(props: Props) {
                 {notification}
             </div>
 
-            <button
-                className={styles.button}
-                data-testid={props.testId ? `${props.testId}-button` : undefined}
-                onClick={handleCopy}
-            >
-                {getText('copy')}
-            </button>
+            <div className={styles.buttonRow}>
+                <button
+                    className={styles.button}
+                    data-testid={props.testId ? `${props.testId}-button` : undefined}
+                    onClick={handleCopy}
+                >
+                    {getText('copy')}
+                </button>
+                {props.children}
+            </div>
         </div>
     )
 }

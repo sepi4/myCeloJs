@@ -77,6 +77,10 @@ const text = {
         en: 'copied',
         ru: 'скопировано',
     },
+    browser: {
+        en: 'browser',
+        ru: 'браузер',
+    },
 
     settings_file_location_title: {
         en: 'Settings file location',
