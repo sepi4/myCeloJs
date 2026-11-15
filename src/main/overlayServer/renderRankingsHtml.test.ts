@@ -14,12 +14,29 @@ const team = (overrides: Partial<RankingsJson['teams']['team1'][0]> = {}) => ({
 const rankings = (overrides: Partial<RankingsJson> = {}): RankingsJson => ({
     teams: { team1: [team()], team2: [team({ name: 'Enemy', faction: 'wer' })] },
     horizontal: false,
+    showElo: false,
     showCountry: true,
     showAvatar: false,
     ...overrides,
 })
 
 describe('renderRankingsBody', () => {
+    it('gives a player without a rating an empty ELO cell, so the rows stay aligned', () => {
+        const html = renderRankingsBody(
+            rankings({
+                showElo: true,
+                teams: { team1: [team({ rating: 1500 }), team({ name: 'Unrated' })], team2: [] },
+            })
+        )
+
+        expect(html.match(/data-testid="elo"/g)).toHaveLength(2)
+        expect(html).toContain('<span class="eloStyle" data-testid="elo"></span>')
+    })
+
+    it('has no ELO cells when ELO is off', () => {
+        expect(renderRankingsBody(rankings())).not.toContain('data-testid="elo"')
+    })
+
     it('contains player names', () => {
         const html = renderRankingsBody(rankings())
 
