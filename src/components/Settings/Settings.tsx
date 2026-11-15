@@ -17,6 +17,7 @@ import ClearButton from './ClearButton'
 import IntervalInput from './IntervalInput'
 import LogLocationSetting from './LogLocationSetting'
 import OverlaySettings from './OverlaySettings'
+import PlayerRowSettings from './PlayerRowSettings'
 import RadioGroup from './RadioGroup'
 import SettingsLocation from './SettingsLocation'
 import SettingsSection from './SettingsSection'
@@ -183,6 +184,8 @@ function Settings(props: Props) {
                     />
                 </div>
             </SettingsSection>
+
+            <PlayerRowSettings />
 
             <LogLocationSetting game="coh2" askConfirm={askConfirm} />
 

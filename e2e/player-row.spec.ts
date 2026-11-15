@@ -44,3 +44,18 @@ test('row click toggles the details, name click opens the player card', async ()
     await expect(app.playersContainer).toBeVisible()
     await expect(details).toHaveCount(0)
 })
+
+test('player row settings toggle the country flag and the avatar', async () => {
+    await expect(app.playerCountries.first()).toBeVisible()
+    await expect(app.playerAvatars).toHaveCount(0)
+
+    await app.settingsIcon.click()
+    await expect(app.playerRowCountryCheckbox).toBeChecked()
+    await expect(app.playerRowAvatarCheckbox).not.toBeChecked()
+    await app.playerRowCountryCheckbox.click()
+    await app.playerRowAvatarCheckbox.click()
+    await app.closeButton.click()
+
+    await expect(app.playerCountries).toHaveCount(0)
+    await expect(app.playerAvatars).toHaveCount(await app.playerRows.count())
+})

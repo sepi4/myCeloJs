@@ -37,6 +37,10 @@ const text = {
         en: 'vertical',
         ru: 'вертикально',
     },
+    player_row_title: {
+        en: 'Player row',
+        ru: 'Строка игрока',
+    },
     overlay_show: {
         en: 'show',
         ru: 'показывать',

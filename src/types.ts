@@ -65,6 +65,9 @@ export type SettingsType = {
     /** Missing means shown, as before this setting existed. */
     rankingsShowCountry?: boolean
     rankingsShowAvatar?: boolean
+    /** Missing means shown, as before this setting existed. */
+    playerRowShowCountry?: boolean
+    playerRowShowAvatar?: boolean
     steamId?: string
     profileIdCoh2?: number
     profileIdCoh3?: number
