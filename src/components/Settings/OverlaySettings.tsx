@@ -87,7 +87,11 @@ export default function OverlaySettings() {
                         ]}
                     />
 
-                    <CopyableText testId="copy-rankings" text={overlayUrl} />
+                    <CopyableText
+                        testId="copy-rankings"
+                        title={getText('overlay_url_title')}
+                        text={overlayUrl}
+                    />
                 </div>
 
                 {overlayUrl && (

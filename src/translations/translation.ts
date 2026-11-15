@@ -45,6 +45,10 @@ const text = {
         en: 'country',
         ru: 'страна',
     },
+    overlay_url_title: {
+        en: 'address for OBS',
+        ru: 'адрес для OBS',
+    },
     overlay_preview: {
         en: 'preview',
         ru: 'предпросмотр',
