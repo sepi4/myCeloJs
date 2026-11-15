@@ -50,21 +50,14 @@ test('switch language to Russian and back to English', async () => {
     await app.closeButton.click()
 })
 
-test('OBS studio settings - format, orientation and copy buttons', async () => {
+test('OBS studio settings - default format, orientation and copy buttons', async () => {
     // open settings
     await app.settingsIcon.click()
     await expect(app.languageSelectEn).toBeVisible()
 
-    // Copy sections should not be visible before selecting format and orientation
-    await expect(app.copyRankings).not.toBeVisible()
-    await expect(app.copySettings).not.toBeVisible()
-    await expect(app.overlayPreview).not.toBeVisible()
-
-    // Select HTML format and horizontal orientation
-    await app.radioHtml.click()
-    await app.radioHorizontal.click()
-
-    // Both copy sections should now appear
+    // html and horizontal are the defaults, so the copy sections show without a choice
+    await expect(app.radioHtml).toBeChecked()
+    await expect(app.radioHorizontal).toBeChecked()
     await expect(app.copyRankings).toBeVisible()
     await expect(app.copySettings).toBeVisible()
     await expect(app.overlayPreview).toBeVisible()

@@ -1,4 +1,4 @@
-import { isOverlayConfigured } from '../../functions/settings/isOverlayConfigured'
+import { isOverlayHorizontal, isOverlayHtml } from '../../functions/rankings/rankingsOptions'
 import { updateSettings } from '../../functions/settings/writeSettings'
 import useText from '../../hooks/useText'
 import { useSettingsStore } from '../../stores/settingsStore'
@@ -29,13 +29,11 @@ export default function OverlaySettings() {
     const showCountry = settings?.rankingsShowCountry !== false
     const showAvatar = settings?.rankingsShowAvatar === true
 
-    const overlayUrl = isOverlayConfigured(settings)
-        ? `http://localhost:${settings.rankingsPort}`
-        : undefined
-
     if (!settings?.logLocationCoh2 && !settings?.logLocationCoh3) {
         return null
     }
+
+    const overlayUrl = `http://localhost:${window.electronAPI.overlayPort}`
 
     return (
         <SettingsSection title={getText('rankings_file_title')}>
@@ -47,13 +45,7 @@ export default function OverlaySettings() {
                         name="rankingsFormat"
                         testIdPrefix="radio"
                         options={['html', 'txt'] as const}
-                        selected={
-                            settings.rankingsHtml === undefined
-                                ? undefined
-                                : settings.rankingsHtml
-                                  ? 'html'
-                                  : 'txt'
-                        }
+                        selected={isOverlayHtml(settings) ? 'html' : 'txt'}
                         getLabel={(format) => format}
                         onChange={handleType}
                     />
@@ -64,13 +56,7 @@ export default function OverlaySettings() {
                         name="rankingsOrientation"
                         testIdPrefix="radio"
                         options={['horizontal', 'vertical'] as const}
-                        selected={
-                            settings.rankingsHorizontal === undefined
-                                ? undefined
-                                : settings.rankingsHorizontal
-                                  ? 'horizontal'
-                                  : 'vertical'
-                        }
+                        selected={isOverlayHorizontal(settings) ? 'horizontal' : 'vertical'}
                         getLabel={(orientation) => getText(orientation)}
                         onChange={(orientation) => handleOrientation(orientation === 'horizontal')}
                     />
@@ -90,11 +76,10 @@ export default function OverlaySettings() {
                                 checked: showAvatar,
                                 onChange: () => updateSettings({ rankingsShowAvatar: !showAvatar }),
                                 testId: 'checkbox-overlay-avatar',
-                                disabled: settings.rankingsHtml === false,
-                                title:
-                                    settings.rankingsHtml === false
-                                        ? getText('avatar_html_only')
-                                        : undefined,
+                                disabled: !isOverlayHtml(settings),
+                                title: isOverlayHtml(settings)
+                                    ? undefined
+                                    : getText('avatar_html_only'),
                             },
                         ]}
                     />
@@ -106,7 +91,7 @@ export default function OverlaySettings() {
                     />
                 </div>
 
-                {overlayUrl && <OverlayPreview url={overlayUrl} settings={settings} />}
+                <OverlayPreview url={overlayUrl} settings={settings} />
             </div>
         </SettingsSection>
     )

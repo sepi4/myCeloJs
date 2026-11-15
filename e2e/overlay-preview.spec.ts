@@ -25,8 +25,6 @@ test('settings preview shows sample players when the game has no players', async
     await app.settingsIcon.click()
     await app.mockFileDialog(electronApp, COH2_EMPTY_LOG_PATH)
     await app.logLocationButtonCoh2.click()
-    await app.radioHtml.click()
-    await app.radioHorizontal.click()
 
     await expect(app.overlayPreviewSample).toBeVisible()
     await expect(app.overlayPreviewNames).toHaveCount(8)

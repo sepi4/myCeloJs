@@ -1,4 +1,3 @@
-import { isOverlayConfigured } from '../../functions/settings/isOverlayConfigured'
 import useText from '../../hooks/useText'
 import { useSettingsStore } from '../../stores/settingsStore'
 import CopyableText from './CopyableText'
@@ -14,10 +13,6 @@ export default function SettingsLocation() {
                 <p style={{ color: 'var(--text-danger)' }}>{getText('log_location_first')}</p>
             </SettingsSection>
         )
-    }
-
-    if (!isOverlayConfigured(settings)) {
-        return null
     }
 
     return (
