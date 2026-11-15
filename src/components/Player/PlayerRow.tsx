@@ -161,12 +161,12 @@ function PlayerRow(props: Props) {
     )
 
     const columns = [
-        { key: 'rank', weight: 16, visible: true, content: rankCell, justifyContent: 'flex-start' },
+        { key: 'rank', weight: 18, visible: true, content: rankCell, justifyContent: 'flex-start' },
         { key: 'elo', weight: 14, visible: showElo, content: eloCell },
         { key: 'faction', weight: 14, visible: true, content: faction },
         { key: 'country', weight: 14, visible: showCountry, content: countryFlag },
         { key: 'avatar', weight: 14, visible: showAvatar, content: avatar },
-        { key: 'name', weight: 42, visible: true, content: alias },
+        { key: 'name', weight: 40, visible: true, content: alias },
     ].filter((column) => column.visible)
     const totalWeight = columns.reduce((sum, column) => sum + column.weight, 0)
 
