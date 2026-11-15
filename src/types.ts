@@ -13,6 +13,7 @@ export type RankingsJson = {
         team2: Team[]
     }
     horizontal: boolean
+    showElo: boolean
     showCountry: boolean
     showAvatar: boolean
 }

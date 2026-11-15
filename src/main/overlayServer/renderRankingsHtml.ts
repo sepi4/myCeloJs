@@ -32,10 +32,9 @@ function renderPlayer(
     const rankSpan = `<span class="rankingStyle" data-testid="ranking">
         ${ranking}
     </span>`
-    const eloSpan =
-        player.rating !== undefined
-            ? `<span class="eloStyle" data-testid="elo">(${player.rating})</span>`
-            : ''
+    const eloSpan = data.showElo
+        ? `<span class="eloStyle" data-testid="elo">${player.rating !== undefined ? `(${player.rating})` : ''}</span>`
+        : ''
     const countryDiv = data.showCountry
         ? `<div class="countryStyle" data-testid="country">
         ${country ? img(`/img/countryFlags/${country}.png`) : ''}

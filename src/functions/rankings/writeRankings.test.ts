@@ -125,6 +125,19 @@ describe('buildRankings', () => {
             expect(text).toContain('(1523)')
         })
 
+        it('pads a player without a rating, so the text lines stay aligned', () => {
+            for (const horizontal of [false, true]) {
+                const players = [
+                    player({ faction: 'germans', rating: 1523, teamSlot: 0 }),
+                    player({ faction: 'germans', rating: undefined, teamSlot: 2 }),
+                ]
+                const { text } = buildRankings('coh3', players, { showElo: true, horizontal })
+                const [rated, unrated] = text.split('\n').filter((line) => line.trim())
+
+                expect(unrated!.length).toBe(rated!.length)
+            }
+        })
+
         it('does not include rating in text when showElo is false', () => {
             const { text } = buildRankings('coh3', [player({ faction: 'germans', rating: 1523 })], {
                 showElo: false,

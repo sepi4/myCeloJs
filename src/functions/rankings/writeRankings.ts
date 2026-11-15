@@ -54,6 +54,7 @@ export function buildRankings(
             team2: [],
         },
         horizontal: false,
+        showElo,
         showCountry,
         showAvatar,
     }
@@ -70,8 +71,10 @@ export function buildRankings(
 
         const faction = player.faction
         const teamSlot = player.teamSlot
-        const ratingPad =
-            showElo && player.rating !== undefined ? `(${player.rating!})`.padEnd(7) : ''
+        // A player without a rating gets blank space, so the columns stay aligned.
+        const ratingPad = showElo
+            ? (player.rating !== undefined ? `(${player.rating})` : '').padEnd(7)
+            : ''
 
         const factionCode = getFactionCode(game, faction)
         const maxNameLength = 20
