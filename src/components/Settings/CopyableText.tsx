@@ -2,11 +2,14 @@ import useText from '../../hooks/useText'
 import useTimedBoolean from '../../hooks/useTimedBoolean'
 import Notification from '../Notification'
 
+import radioStyles from './RadioGroup.module.css'
 import styles from './Settings.module.css'
 
 interface Props {
     text?: string
     testId?: string
+    /** Small title above the field, like a compact RadioGroup title. */
+    title?: string
 }
 
 function CopyableText(props: Props) {
@@ -32,6 +35,7 @@ function CopyableText(props: Props) {
 
     return (
         <div data-testid={props.testId}>
+            {props.title && <div className={radioStyles.compactTitle}>{props.title}</div>}
             <div className={styles.textDiv}>
                 {props.text}
                 {notification}
